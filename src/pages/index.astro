@@ -1,7 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/layout.astro";
 
-// TODO Better organize these styles; ordering? tailwind plugin?
 // TODO Add navigation
 // TODO wrap in links
 // TODO prototype data, stub in, see how it works
@@ -10,87 +9,87 @@ import Layout from "../layouts/Layout.astro";
 // TODO dark mode?
 
 interface Team {
-	tricode: string;
-	w: number;
-	l: number;
-	ou: number;
-	name: string;
-	emoji: string;
+  tricode: string;
+  w: number;
+  l: number;
+  ou: number;
+  name: string;
+  emoji: string;
 }
 
 const teams: Team[] = [
-	{
-		tricode: "BKN",
-		name: "Brooklyn Nets",
-		w: 11,
-		l: 17,
-		ou: 19.5,
-		emoji: "dragon",
-	},
-	{
-		tricode: "DET",
-		name: "Detroit Pistons",
-		w: 12,
-		l: 17,
-		ou: 24.5,
-		emoji: "racing-car",
-	},
-	{
-		tricode: "POR",
-		name: "Portland Trailblazers",
-		w: 9,
-		l: 19,
-		ou: 22.5,
-		emoji: "person-walking",
-	},
-	{
-		tricode: "CHI",
-		name: "Chicago Bulls",
-		w: 13,
-		l: 16,
-		ou: 27.5,
-		emoji: "ox",
-	},
-	{
-		tricode: "CHA",
-		name: "Charlotte Hornets",
-		w: 7,
-		l: 21,
-		ou: 29.5,
-		emoji: "honeybee",
-	},
-	{
-		tricode: "WAS",
-		name: "Washington Wizards",
-		w: 4,
-		l: 22,
-		ou: 20.5,
-		emoji: "mage",
-	},
-	{
-		tricode: "UTA",
-		name: "Utah Jazz",
-		w: 7,
-		l: 20,
-		ou: 29.5,
-		emoji: "saxophone",
-	}, // 29.5 seems way high for the jazz?
-	{
-		tricode: "ATL",
-		name: "Atlanta Hawks",
-		w: 14,
-		l: 15,
-		ou: 35.5,
-		emoji: "feather",
-	},
-	{
-		tricode: "TOR",
-		name: "Toronto Raptors",
-		w: 7,
-		l: 22,
-		ou: 30.5,
-		emoji: "t-rex",
-	},
+  {
+    tricode: "BKN",
+    name: "Brooklyn Nets",
+    w: 11,
+    l: 17,
+    ou: 19.5,
+    emoji: "dragon",
+  },
+  {
+    tricode: "DET",
+    name: "Detroit Pistons",
+    w: 12,
+    l: 17,
+    ou: 24.5,
+    emoji: "racing-car",
+  },
+  {
+    tricode: "POR",
+    name: "Portland Trailblazers",
+    w: 9,
+    l: 19,
+    ou: 22.5,
+    emoji: "person-walking",
+  },
+  {
+    tricode: "CHI",
+    name: "Chicago Bulls",
+    w: 13,
+    l: 16,
+    ou: 27.5,
+    emoji: "ox",
+  },
+  {
+    tricode: "CHA",
+    name: "Charlotte Hornets",
+    w: 7,
+    l: 21,
+    ou: 29.5,
+    emoji: "honeybee",
+  },
+  {
+    tricode: "WAS",
+    name: "Washington Wizards",
+    w: 4,
+    l: 22,
+    ou: 20.5,
+    emoji: "mage",
+  },
+  {
+    tricode: "UTA",
+    name: "Utah Jazz",
+    w: 7,
+    l: 20,
+    ou: 29.5,
+    emoji: "saxophone",
+  }, // 29.5 seems way high for the jazz?
+  {
+    tricode: "ATL",
+    name: "Atlanta Hawks",
+    w: 14,
+    l: 15,
+    ou: 35.5,
+    emoji: "feather",
+  },
+  {
+    tricode: "TOR",
+    name: "Toronto Raptors",
+    w: 7,
+    l: 22,
+    ou: 30.5,
+    emoji: "t-rex",
+  },
 ];
 
 /*
@@ -105,28 +104,28 @@ Wizards	20.5
 Raptors	30.5
 */
 
-interface TeamExt extends Team {
-	toSurprise: number;
-	projectedWins: number;
+interface TeamExtended extends Team {
+  toSurprise: number;
+  projectedWins: number;
 }
 
-const pace = (team: TeamExt) => {
-	return team.projectedWins - team.toSurprise;
+const pace = (team: TeamExtended) => {
+  return team.projectedWins - team.toSurprise;
 };
 
-const teamsExt: TeamExt[] = teams
-	.map((team) => {
-		const toSurprise = Math.ceil(team.ou + 10);
-		const currentWinPct = team.w / (team.w + team.l);
-		const projectedWins = Math.round(82 * currentWinPct); // TODO floor or round?
+const teamsExtended: TeamExtended[] = teams
+  .map((team) => {
+    const toSurprise = Math.ceil(team.ou + 10);
+    const currentWinPct = team.w / (team.w + team.l);
+    const projectedWins = Math.round(82 * currentWinPct); // TODO floor or round?
 
-		return {
-			...team,
-			toSurprise,
-			projectedWins,
-		};
-	})
-	.toSorted((a, b) => pace(b) - pace(a));
+    return {
+      ...team,
+      toSurprise,
+      projectedWins,
+    };
+  })
+  .toSorted((a, b) => pace(b) - pace(a));
 
 //  border-2 border-green-400 shadow-lg shadow-lime-400/50
 ---
@@ -157,7 +156,7 @@ const teamsExt: TeamExt[] = teams
       </thead>
       <tbody>
         {
-          teamsExt.map((team) => {
+          teamsExtended.map((team) => {
             return (
               <tr>
                 <th scope="row">
