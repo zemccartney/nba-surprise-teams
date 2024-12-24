@@ -1,7 +1,11 @@
 {
-    "editor.formatOnSave": true,
-    "prettier.documentSelectors": ["**/*.astro"],
-    "[astro]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome",
+	"[astro]": {
+		"editor.defaultFormatter": "astro-build.astro-vscode",
+		"multiFormatter.formatterList": [
+			"astro-build.astro-vscode",
+			"biomejs.biome"
+		]
+	}
 }
