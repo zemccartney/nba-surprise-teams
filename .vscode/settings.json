@@ -1,6 +1,8 @@
 {
-	"editor.formatOnSave": true,
+	// "editor.formatOnSave": true,
 	"editor.defaultFormatter": "biomejs.biome",
+	// TODO Will need to extend to jsx/tsx if using React (any source files leveraging tailwind)
+	"prettier.documentSelectors": ["src/**/*.astro"],
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode",
 		"multiFormatter.formatterList": [
