@@ -1,0 +1,195 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// TODO Better organize these styles; ordering? tailwind plugin?
+// TODO Add navigation
+// TODO wrap in links
+// TODO prototype data, stub in, see how it works
+// TODO mobile / responsive
+// todo breathe, slow down, practice good css (does tailwind discourage / limit css learning?)
+// TODO dark mode?
+
+interface Team {
+  tricode: string;
+  w: number;
+  l: number;
+  ou: number;
+  name: string;
+  emoji: string;
+}
+
+const teams: Team[] = [
+  {
+    tricode: "BKN",
+    name: "Brooklyn Nets",
+    w: 11,
+    l: 17,
+    ou: 19.5,
+    emoji: "dragon",
+  },
+  {
+    tricode: "DET",
+    name: "Detroit Pistons",
+    w: 12,
+    l: 17,
+    ou: 24.5,
+    emoji: "racing-car",
+  },
+  {
+    tricode: "POR",
+    name: "Portland Trailblazers",
+    w: 9,
+    l: 19,
+    ou: 22.5,
+    emoji: "person-walking",
+  },
+  {
+    tricode: "CHI",
+    name: "Chicago Bulls",
+    w: 13,
+    l: 16,
+    ou: 27.5,
+    emoji: "ox",
+  },
+  {
+    tricode: "CHA",
+    name: "Charlotte Hornets",
+    w: 7,
+    l: 21,
+    ou: 29.5,
+    emoji: "honeybee",
+  },
+  {
+    tricode: "WAS",
+    name: "Washington Wizards",
+    w: 4,
+    l: 22,
+    ou: 20.5,
+    emoji: "mage",
+  },
+  {
+    tricode: "UTA",
+    name: "Utah Jazz",
+    w: 7,
+    l: 20,
+    ou: 29.5,
+    emoji: "saxophone",
+  }, // 29.5 seems way high for the jazz?
+  {
+    tricode: "ATL",
+    name: "Atlanta Hawks",
+    w: 14,
+    l: 15,
+    ou: 35.5,
+    emoji: "feather",
+  },
+  {
+    tricode: "TOR",
+    name: "Toronto Raptors",
+    w: 7,
+    l: 22,
+    ou: 30.5,
+    emoji: "t-rex",
+  },
+];
+
+/*
+Nets	19.5
+Pistons	24.5
+Blazers	22.5
+Bulls	27.5
+Hornets	29.5
+Hawks	35.5
+Jazz	29.5
+Wizards	20.5
+Raptors	30.5
+*/
+
+interface TeamExt extends Team {
+  toSurprise: number;
+  projectedWins: number;
+}
+
+const pace = (team: TeamExt) => {
+  return team.projectedWins - team.toSurprise;
+};
+
+const teamsExt: TeamExt[] = teams
+  .map((team) => {
+    const toSurprise = Math.ceil(team.ou + 10);
+    const currentWinPct = team.w / (team.w + team.l);
+    const projectedWins = Math.round(82 * currentWinPct); // TODO floor or round?
+
+    return {
+      ...team,
+      toSurprise,
+      projectedWins,
+    };
+  })
+  .toSorted((a, b) => pace(b) - pace(a));
+
+const groups: {
+  contenders?: TeamExt[];
+  hunt?: TeamExt[];
+  eliminated?: TeamExt[];
+} = Object.groupBy(teamsExt, (team) => {
+  const gamesRemaining = 82 - (team.w + team.l);
+
+  if (team.projectedWins > team.toSurprise) {
+    return "contenders";
+  }
+
+  if (gamesRemaining < team.toSurprise - team.w) {
+    return "eliminated";
+  }
+
+  return "hunt";
+});
+
+//  border-2 border-green-400 shadow-lg shadow-lime-400/50
+---
+
+<style>
+  th,
+  td {
+    @apply p-6;
+  }
+
+  td {
+    @apply text-right;
+  }
+</style>
+
+<Layout>
+  <main class="p-8">
+    <h1 class="mb-16 text-center font-title text-7xl text-green-200">
+      NBA Surprise Teams Tracker
+    </h1>
+    <table class="mx-auto text-4xl text-green-200">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Over/Under</th>
+          <th>Pace</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          teamsExt.map((team) => {
+            return (
+              <tr>
+                <th scope="row">
+                  <i class:list={["twa", `twa-${team.emoji}`]} />
+                  <span class="sm:hidden md:inline">{team.name}</span>
+                  <span class="md:hidden">{team.tricode}</span>
+                </th>
+                <td>{team.ou}</td>
+                <td>{pace(team)}</td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </main>
+</Layout>

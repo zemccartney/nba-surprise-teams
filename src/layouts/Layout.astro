@@ -1,0 +1,46 @@
+---
+// Supports only weight 400
+// Supports only weight 400
+import "@fontsource-variable/sixtyfour/full.css"; // TODO File bug report
+import "@fontsource/space-mono";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>NBA Surprise Teams</title>
+  </head>
+  <body>
+    <div class="bg-dark-emerald min-h-full">
+      <div class="md:container mx-auto">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/SebastianAigner/twemoji-amazing/twemoji-amazing.css");
+
+  /* TODO Figure out if using font correctly (font-face); and ok to use bitmap version of font? What
+  is that? */
+  @font-face {
+    font-family: "ChicagoKare-Regular";
+    src:
+      url("/fonts/ChicagoKare-Regular.woff2") format("woff2"),
+      url("/fonts/ChicagoKare-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
