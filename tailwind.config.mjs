@@ -10,7 +10,6 @@ export default {
       },
       fontFamily: {
         sans: ["ChicagoKare-Regular", ...defaultTheme.fontFamily.sans],
-        mono: ["Space Mono", ...defaultTheme.fontFamily.mono],
         title: ["Sixtyfour Variable", ...defaultTheme.fontFamily.mono],
       },
     },
