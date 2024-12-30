@@ -29,7 +29,7 @@ export interface Season {
 export const SEASONS: readonly Season[] = [
   // TODO Does readonly do anything here?
   {
-    id: 1,
+    id: 2024,
     startDate: "2024-10-22",
     endDate: "2025-04-13",
   },
@@ -74,8 +74,9 @@ export const TEAMS: readonly Team[] = [
   },
 ] as const;
 
-interface TeamSeason {
+export interface TeamSeason {
   overUnder: number;
+  // TODO Should be teamId and seasonId; update and run check, sweep
   season: Season["id"];
   team: TeamCodeType;
 }
@@ -83,50 +84,58 @@ interface TeamSeason {
 export const TEAM_SEASONS: readonly TeamSeason[] = [
   {
     overUnder: 35.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.ATL,
   },
   {
     overUnder: 19.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.BKN,
   },
   {
     overUnder: 29.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.CHA,
   },
   {
     overUnder: 27.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.CHI,
   },
   {
     overUnder: 24.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.DET,
   },
   {
     overUnder: 22.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.POR,
   },
   {
     overUnder: 30.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.TOR,
   },
   {
     overUnder: 29.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.UTA,
   },
   {
     overUnder: 20.5,
-    season: 1,
+    season: 2024,
     team: TEAM_CODES.WAS,
   },
 ] as const;
+
+export interface Game {
+  date: string;
+  homeTeam: TeamCodeType;
+  awayTeam: TeamCodeType;
+  homeScore: number;
+  awayScore: number;
+}
 
 /* Service Methods */
 
@@ -134,3 +143,14 @@ export const getSeasonById = (id: Season["id"]) =>
   SEASONS.find((s) => s.id === id);
 
 export const getTeamById = (id: TeamCodeType) => TEAMS.find((t) => t.id === id);
+
+export const getTeamsInSeason = (id: Season["id"]): Team[] =>
+  TEAM_SEASONS.filter((ts) => ts.season === id)
+    .map((ts) =>
+      // TODO Consider creating id lookup tables a la normalizr to simplify access
+      TEAMS.find((t) => t.id === ts.team),
+    )
+    .filter(Boolean); // Make TS happy
+
+export const getTeamSeason = (teamId: TeamCodeType, seasonId: Season["id"]) =>
+  TEAM_SEASONS.find((ts) => ts.season === seasonId && ts.team === teamId);

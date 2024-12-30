@@ -1,0 +1,69 @@
+---
+import type { HTMLAttributes } from "astro/types";
+interface Props extends HTMLAttributes<"table"> {
+  class?: string;
+  children: any;
+  compact?: boolean;
+  stickyHeader?: boolean;
+}
+
+const {
+  class: classStr,
+  compact = false,
+  stickyHeader = false,
+  ...attrs
+} = Astro.props;
+---
+
+<style>
+  .NBASurpriseTracker-Table {
+    > thead th {
+      @apply text-right text-lime-400;
+    }
+
+    > tbody th,
+    > tbody td {
+      @apply text-green-200;
+    }
+
+    > tbody > tr {
+      &:nth-of-type(2n + 1) {
+        @apply bg-lime-950;
+      }
+    }
+  }
+</style>
+
+<table
+  class:list={[
+    "NBASurpriseTracker-Table border-collapse",
+    compact ? ["shadow-glow-sm"] : ["shadow-glow"],
+    { relative: stickyHeader },
+    classStr,
+  ]}
+  {...attrs}
+>
+  <thead
+    class:list={[
+      "bg-slate-950",
+      compact ? "[&_th]:p-3 [&_th]:text-2xl" : "[&_th]:p-6 [&_th]:text-4xl",
+      /* Unsure that z-index rule is right here, solved for ensuring header appeared above relatively-positioned links on standings-table */
+      stickyHeader &&
+        "[&_th]:sticky [&_th]:top-0 [&_th]:z-10 [&_th]:bg-slate-950 [&_th]:p-6 [&_th]:text-right [&_th]:text-4xl [&_th]:text-lime-400",
+    ]}
+  >
+    <slot name="head" />
+  </thead>
+  <tbody
+    class:list={[
+      compact
+        ? "[&_td]:px-4 [&_td]:py-4 [&_td]:text-2xl [&_th]:px-4 [&_th]:py-4 [&_th]:text-2xl"
+        : "[&_td]:px-4 [&_td]:py-8 [&_td]:text-4xl [&_th]:px-4 [&_th]:py-8 [&_th]:text-4xl",
+    ]}
+  >
+    <slot name="body" />
+  </tbody>
+  <tfoot class="bg-slate-950">
+    <slot name="foot" />
+  </tfoot>
+</table>

@@ -1,16 +1,8 @@
 import { defineAction, ActionError } from "astro:actions";
 import { z } from "astro:schema";
-import { TEAM_SEASONS, getSeasonById } from "../data";
-import type { TeamCodeType } from "../data";
+import { getSeasonById, getTeamsInSeason } from "../data";
+import type { Game } from "../data";
 import * as Utils from "../utils";
-
-interface Game {
-  date: string;
-  homeTeam: TeamCodeType;
-  awayTeam: TeamCodeType;
-  homeScore: number;
-  awayScore: number;
-}
 
 export const server = {
   getSeasonData: defineAction({
@@ -29,8 +21,7 @@ export const server = {
         });
       }
 
-      const seasonYear = season.startDate.substring(0, 4);
-
+      // TODO Document data management process / admin practices
       // TODO Fix this: intent
       /*
         - all past data, retrieved from db; minimize dependency on remote / uncontrolled data sources, assume will disappear at any moment
@@ -40,7 +31,7 @@ export const server = {
         - for 2025, will update this based on finding new source
         - for past data, will import directly to db
       */
-      if (seasonYear === "2024") {
+      if (season.id === 2024) {
         const res = await fetch(
           "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
           {
@@ -62,16 +53,13 @@ export const server = {
         //
 
         // codes of teams participating in this season
-        const TRICODES = TEAM_SEASONS.filter(
-          (ts) => ts.season === season.id,
-        ).map((ts) => ts.team);
+        const TRICODES = getTeamsInSeason(season.id).map((team) => team.id);
 
         // TODO Need to evaluate on workers deployment; what is the time zone there?
-        const currentDate = Utils.getCurrentDateEastern().split("T")[0]!; // TODO Possible to not need this assertion? Stricter TS linting?
-
         // game times are implicitly in EST
         // on fetching data, we want only the games scheduled through the current date i.e. possibly finished
         // so, we need the yyyy-mm-dd representation of the current data in EST, regardless of the server's time zone
+        const currentDate = Utils.getCurrentDateEastern().split("T")[0]!; // TODO Possible to not need this assertion? Stricter TS linting?
 
         for (const slate of result.leagueSchedule.gameDates) {
           // gameDate format: "10/04/2024 00:00:00"
@@ -79,17 +67,19 @@ export const server = {
           const [mm, dd, yyyy] = gameDate.split(" ")[0].split("/");
           const comp = `${yyyy}-${mm}-${dd}`;
 
+          // TODO: Doc known limitation of mistakenly including in-season tournament final game; data seems to give ways to ignore, just didn't deal with
+          // that, as no 2024 candidates made it to the cup final
+
           if (comp >= season.startDate && comp <= currentDate) {
             for (const game of slate.games) {
               const { awayTeam, homeTeam } = game;
+              // Taking for granted that presence of scores reliably indicates a game has finished and should be counted
+              const hasScore = homeTeam.score && awayTeam.score;
+              const includesCandidateTeam =
+                TRICODES.includes(awayTeam.teamTricode) ||
+                TRICODES.includes(homeTeam.teamTricode);
 
-              if (
-                // Taking for granted that presence of scores reliably indicates a game has finished and should be counted
-                homeTeam.score &&
-                awayTeam.score &&
-                (TRICODES.includes(awayTeam.teamTricode) ||
-                  TRICODES.includes(homeTeam.teamTricode))
-              ) {
+              if (hasScore && includesCandidateTeam) {
                 relevantGames.push({
                   date: comp,
                   // TODO Might need to stash game time here for caching i.e. calculate next game

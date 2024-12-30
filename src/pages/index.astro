@@ -1,17 +1,15 @@
 ---
-// TODO Add navigation
 // TODO Add current / off season detection logic to decide whether to load data; in table, handle absence of upcoming season data
 // TODO prototype data, stub in, see how it works
 // TODO mobile / responsive
 // todo breathe, slow down, practice good css (does tailwind discourage / limit css learning?)
-// TODO dark mode?
 // TODO Make table horizontally scrollable?
 // TODO What does scope attribute do on tr?
-// TODO Standardize link styles
 // TODO Standardize utility emojis (alt text)
 // TODO Fallback content?
 
 import Layout from "../layouts/layout.astro";
+import Link from "../components/link.astro";
 import StandingsTable from "../components/standings-table.astro";
 ---
 
@@ -21,11 +19,8 @@ import StandingsTable from "../components/standings-table.astro";
       NBA Surprise Teams Tracker
     </h1>
     <nav class="mb-20 mt-16 flex justify-center">
-      <a
-        class="text-4xl text-indigo-400 underline hover:text-indigo-100"
-        href="/info">What is this?</a
-      >
+      <Link href="/info">What is this?</Link>
     </nav>
-    <StandingsTable server:defer seasonId={1} />
+    <StandingsTable server:defer seasonId={2024} />
   </main>
 </Layout>

@@ -1,0 +1,140 @@
+---
+import { actions } from "astro:actions";
+import Image from "astro/components/Image.astro";
+import EliminatedEmoji from "../assets/images/emoji/skull-and-crossbones.svg";
+
+import PaceChart from "./pace-chart";
+import SurprisedEmoji from "../assets/images/emoji/hushed-face.svg";
+import Table from "./table.astro";
+import * as Utils from "../utils";
+import type { TeamSeason } from "../data";
+import type { TeamStats } from "../utils";
+
+interface Props {
+  teamSeason: TeamSeason;
+}
+
+const { teamSeason } = Astro.props;
+
+const stats: TeamStats = { w: 0, l: 0, overUnder: teamSeason.overUnder };
+
+// TODO What happens to errors here if thrown? How do those surface?
+const { error, data: games } = await Astro.callAction(actions.getSeasonData, {
+  seasonId: teamSeason.season,
+});
+
+if (!error) {
+  for (const game of games) {
+    if (
+      game.homeTeam === teamSeason.team ||
+      game.awayTeam === teamSeason.team
+    ) {
+      const homeWin = game.homeScore > game.awayScore;
+
+      if (teamSeason.team === game.homeTeam) {
+        stats[homeWin ? "w" : "l"] += 1;
+      } else {
+        stats[homeWin ? "l" : "w"] += 1;
+      }
+    }
+  }
+}
+
+// TODO Handle look up errors and action errors
+---
+
+<style>
+  .NBASurpriseTracker-TeamStats {
+    grid-template-columns: 3fr 2fr;
+
+    .NBASurpriseTracker-Table {
+      > thead {
+        @apply hidden;
+      }
+
+      > tbody th {
+        @apply border-b-2 border-b-slate-800 text-lime-400;
+      }
+
+      > tbody td {
+        @apply text-right;
+      }
+
+      > tbody th {
+        @apply bg-slate-950;
+      }
+    }
+  }
+</style>
+
+{
+  error ? (
+    // TODO Test
+    <div class="mx-auto text-4xl text-red-600">Something went wrong!</div>
+  ) : (
+    <div class="NBASurpriseTracker-TeamStats flex flex-col-reverse gap-16 lg:grid">
+      <PaceChart client:load games={games} teamSeason={teamSeason} />
+      <Table compact class="max-h-32">
+        <Fragment slot="head">
+          <tr>
+            <th scope="col" class="w-2/3" />
+            <th scope="col" class="w-1/3" />
+          </tr>
+        </Fragment>
+        <Fragment slot="body">
+          <tr>
+            <th scope="row">Record</th>
+            <td>{Utils.displayRecord(stats)}</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <span class="md:hidden">O/U</span>
+              <span class="hidden md:inline">Over/Under</span>
+            </th>
+            <td>{teamSeason.overUnder}</td>
+          </tr>
+          <tr>
+            <th scope="row">Wins Needed</th>
+            <td>{Utils.toSurprise(stats)}</td>
+          </tr>
+          <tr>
+            <th scope="row">Pace (Projected Record)</th>
+            <td>
+              {`${Utils.pace(stats)} (${Utils.projectedWins(stats)} - ${82 - Utils.projectedWins(stats)})`}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Surprise Have-to-Go</th>
+            <td>
+              {() => {
+                const recordRemaining = Utils.recordRemainingToSurprise(stats);
+
+                if (!recordRemaining) {
+                  return (
+                    <Image
+                      src={EliminatedEmoji}
+                      alt="Emoji indicating given team is eliminated from surprise team contention"
+                      width={20}
+                    />
+                  );
+                }
+
+                if (recordRemaining === true) {
+                  return (
+                    <Image
+                      src={SurprisedEmoji}
+                      alt="Emoji indicating team is a surprise team"
+                      width={20}
+                    />
+                  );
+                }
+
+                return Utils.displayRecord(recordRemaining);
+              }}
+            </td>
+          </tr>
+        </Fragment>
+      </Table>
+    </div>
+  )
+}
