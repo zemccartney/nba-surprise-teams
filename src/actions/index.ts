@@ -1,4 +1,5 @@
 import { defineAction, ActionError } from "astro:actions";
+import { SIM_FULL_SEASON } from "astro:env/server";
 import { z } from "astro:schema";
 import { getSeasonById, getTeamsInSeason } from "../data";
 import type { Game } from "../data";
@@ -70,24 +71,54 @@ export const server = {
           // TODO: Doc known limitation of mistakenly including in-season tournament final game; data seems to give ways to ignore, just didn't deal with
           // that, as no 2024 candidates made it to the cup final
 
-          if (comp >= season.startDate && comp <= currentDate) {
-            for (const game of slate.games) {
-              const { awayTeam, homeTeam } = game;
-              // Taking for granted that presence of scores reliably indicates a game has finished and should be counted
-              const hasScore = homeTeam.score && awayTeam.score;
-              const includesCandidateTeam =
-                TRICODES.includes(awayTeam.teamTricode) ||
-                TRICODES.includes(homeTeam.teamTricode);
+          if (import.meta.env.DEV && SIM_FULL_SEASON) {
+            // Simulates full season results, filling in future games with random scores
+            // Useful to see how UI handles a complete season
+            if (comp >= season.startDate && comp <= season.endDate) {
+              for (const game of slate.games) {
+                const { awayTeam, homeTeam } = game;
+                // Taking for granted that presence of scores reliably indicates a game has finished and should be counted
+                const hasScore = homeTeam.score && awayTeam.score;
+                const includesCandidateTeam =
+                  TRICODES.includes(awayTeam.teamTricode) ||
+                  TRICODES.includes(homeTeam.teamTricode);
 
-              if (hasScore && includesCandidateTeam) {
-                relevantGames.push({
-                  date: comp,
-                  // TODO Might need to stash game time here for caching i.e. calculate next game
-                  homeTeam: homeTeam.teamTricode,
-                  awayTeam: awayTeam.teamTricode,
-                  homeScore: homeTeam.score,
-                  awayScore: awayTeam.score,
-                });
+                if (includesCandidateTeam) {
+                  relevantGames.push({
+                    date: comp,
+                    // TODO Might need to stash game time here for caching i.e. calculate next game
+                    homeTeam: homeTeam.teamTricode,
+                    awayTeam: awayTeam.teamTricode,
+                    homeScore: hasScore
+                      ? homeTeam.score
+                      : Math.floor(Math.random() * (140 - 80 + 1) + 80),
+                    awayScore: hasScore
+                      ? awayTeam.score
+                      : Math.floor(Math.random() * (140 - 80 + 1) + 80),
+                  });
+                }
+              }
+            }
+          } else {
+            if (comp >= season.startDate && comp <= currentDate) {
+              for (const game of slate.games) {
+                const { awayTeam, homeTeam } = game;
+                // Taking for granted that presence of scores reliably indicates a game has finished and should be counted
+                const hasScore = homeTeam.score && awayTeam.score;
+                const includesCandidateTeam =
+                  TRICODES.includes(awayTeam.teamTricode) ||
+                  TRICODES.includes(homeTeam.teamTricode);
+
+                if (hasScore && includesCandidateTeam) {
+                  relevantGames.push({
+                    date: comp,
+                    // TODO Might need to stash game time here for caching i.e. calculate next game
+                    homeTeam: homeTeam.teamTricode,
+                    awayTeam: awayTeam.teamTricode,
+                    homeScore: homeTeam.score,
+                    awayScore: awayTeam.score,
+                  });
+                }
               }
             }
           }

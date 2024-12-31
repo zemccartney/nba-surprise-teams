@@ -49,6 +49,14 @@ export const pace = (team: TeamStats) => {
   return projectedWins(team) - toSurprise(team);
 };
 
+export const displayPace = (paceVal: ReturnType<typeof pace>): string => {
+  const fmt = new Intl.NumberFormat("en-US", {
+    signDisplay: "always",
+  });
+
+  return fmt.format(paceVal);
+};
+
 export const recordRemainingToSurprise = (
   team: TeamStats,
 ): TeamRecord | boolean => {

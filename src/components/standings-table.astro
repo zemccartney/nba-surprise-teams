@@ -97,7 +97,13 @@ if (!error) {
                   <span class="hidden md:inline">{team.name}</span>
                   <span class="md:hidden">{team.id}</span>
                   <span
-                    class={`absolute -right-${[Utils.isSurprise(team), Utils.isEliminated(team)].filter(Boolean).length * 8} -top-3 flex flex-row gap-2`}
+                    class:list={[
+                      "absolute -top-3 flex flex-row gap-2",
+                      {
+                        "-right-8":
+                          Utils.isSurprise(team) || Utils.isEliminated(team),
+                      },
+                    ]}
                   >
                     {Utils.isSurprise(team) && (
                       <Image
@@ -118,7 +124,7 @@ if (!error) {
               </div>
             </th>
             <td class="text-right">{team.overUnder}</td>
-            <td class="text-right">{Utils.pace(team)}</td>
+            <td class="text-right">{Utils.displayPace(Utils.pace(team))}</td>
           </tr>
         );
       })

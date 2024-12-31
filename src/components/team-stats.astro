@@ -72,69 +72,103 @@ if (!error) {
     // TODO Test
     <div class="mx-auto text-4xl text-red-600">Something went wrong!</div>
   ) : (
-    <div class="NBASurpriseTracker-TeamStats flex flex-col-reverse gap-16 lg:grid">
-      <PaceChart client:load games={games} teamSeason={teamSeason} />
-      <Table compact class="max-h-32">
-        <Fragment slot="head">
-          <tr>
-            <th scope="col" class="w-2/3" />
-            <th scope="col" class="w-1/3" />
-          </tr>
-        </Fragment>
-        <Fragment slot="body">
-          <tr>
-            <th scope="row">Record</th>
-            <td>{Utils.displayRecord(stats)}</td>
-          </tr>
-          <tr>
-            <th scope="row">
-              <span class="md:hidden">O/U</span>
-              <span class="hidden md:inline">Over/Under</span>
-            </th>
-            <td>{teamSeason.overUnder}</td>
-          </tr>
-          <tr>
-            <th scope="row">Wins Needed</th>
-            <td>{Utils.toSurprise(stats)}</td>
-          </tr>
-          <tr>
-            <th scope="row">Pace (Projected Record)</th>
-            <td>
-              {`${Utils.pace(stats)} (${Utils.projectedWins(stats)} - ${82 - Utils.projectedWins(stats)})`}
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Surprise Have-to-Go</th>
-            <td>
-              {() => {
-                const recordRemaining = Utils.recordRemainingToSurprise(stats);
+    <>
+      {(Utils.isSurprise(stats) || Utils.isEliminated(stats)) && (
+        <div class="-mt-4 mb-16 flex flex-row items-center justify-center gap-4">
+          {Utils.isSurprise(stats) && (
+            <>
+              <Image
+                alt="Emoji indicating team is a surprise team"
+                src={SurprisedEmoji}
+                width={36}
+              />
+              <p class="text-2xl text-green-200">
+                Surprised Team Accomplished!
+              </p>
+            </>
+          )}
+          {Utils.isEliminated(stats) && (
+            <>
+              <Image
+                alt="Emoji indicating given team is eliminated from surprise team contention"
+                src={EliminatedEmoji}
+                width={36}
+              />
+              <p class="text-2xl text-green-200">
+                Eliminated. No surprise this year
+              </p>
+            </>
+          )}
+        </div>
+      )}
 
-                if (!recordRemaining) {
-                  return (
-                    <Image
-                      src={EliminatedEmoji}
-                      alt="Emoji indicating given team is eliminated from surprise team contention"
-                      width={20}
-                    />
-                  );
-                }
+      <div class="NBASurpriseTracker-TeamStats flex flex-col-reverse gap-16 lg:grid">
+        <PaceChart client:load games={games} teamSeason={teamSeason} />
+        <Table compact class="max-h-32">
+          <Fragment slot="head">
+            <tr>
+              <th scope="col" class="w-2/3" />
+              <th scope="col" class="w-1/3" />
+            </tr>
+          </Fragment>
+          <Fragment slot="body">
+            <tr>
+              <th scope="row">Record</th>
+              <td>{Utils.displayRecord(stats)}</td>
+            </tr>
+            <tr>
+              <th scope="row">
+                <span class="md:hidden">O/U</span>
+                <span class="hidden md:inline">Over/Under</span>
+              </th>
+              <td>{teamSeason.overUnder}</td>
+            </tr>
+            <tr>
+              <th scope="row">Wins Needed</th>
+              <td>{Utils.toSurprise(stats)}</td>
+            </tr>
+            <tr>
+              <th scope="row">Pace (Projected Record)</th>
+              <td>
+                {`${Utils.displayPace(Utils.pace(stats))} (${Utils.projectedWins(stats)} - ${82 - Utils.projectedWins(stats)})`}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Surprise Have-to-Go</th>
+              <td>
+                {() => {
+                  const recordRemaining =
+                    Utils.recordRemainingToSurprise(stats);
 
-                if (recordRemaining === true) {
-                  return (
-                    <Image
-                      src={SurprisedEmoji}
-                      alt="Emoji indicating team is a surprise team"
-                      width={20}
-                    />
-                  );
-                }
+                  if (!recordRemaining) {
+                    return (
+                      <Image
+                        class="mx-auto"
+                        src={EliminatedEmoji}
+                        alt="Emoji indicating given team is eliminated from surprise team contention"
+                        width={20}
+                      />
+                    );
+                  }
 
-                return Utils.displayRecord(recordRemaining);
-              }}
-            </td>
-          </tr>
-        </Fragment>
-      </Table>
-    </div>
+                  if (recordRemaining === true) {
+                    return (
+                      <Image
+                        class="mx-auto"
+                        src={SurprisedEmoji}
+                        alt="Emoji indicating team is a surprise team"
+                        width={20}
+                      />
+                    );
+                  }
+
+                  return Utils.displayRecord(recordRemaining);
+                }}
+              </td>
+            </tr>
+          </Fragment>
+        </Table>
+      </div>
+    </>
   )
 }

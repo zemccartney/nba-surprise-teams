@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
@@ -14,4 +14,14 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  env: {
+    schema: {
+      SIM_FULL_SEASON: envField.boolean({
+        context: "server",
+        access: "public",
+        optional: true,
+        default: false,
+      }),
+    },
+  },
 });
