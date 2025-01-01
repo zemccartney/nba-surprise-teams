@@ -11,11 +11,8 @@ interface Props {
   height?: number;
 }
 
-// TODO How is class:list surfaced here?
 // width and height defaults are actual dimensions of svg files, downloaded via https://twemoji-cheatsheet.vercel.app/
 const { class: className, team, width = 36, height = 36 } = Astro.props;
-
-const TeamLogos = import.meta.glob("../assets/images/emoji/*");
 
 const emojiByTeam: Record<TeamCodeType, string> = {
   BKN: "dragon",
@@ -29,13 +26,16 @@ const emojiByTeam: Record<TeamCodeType, string> = {
   TOR: "t-rex",
 };
 
-const pathKey = `../assets/images/emoji/${emojiByTeam[team]}.svg`;
-// TODO Why is undefined check needed here? TeamLogos[pathKey] as a condition didn't narrow
-const emojiSrc =
-  emojiByTeam[team] && TeamLogos[pathKey] !== undefined
-    ? // https://docs.astro.build/en/reference/modules/astro-assets/#src-required
-      (TeamLogos[pathKey]() as Promise<{ default: ImageMetadata }>)
-    : QuestionEmoji;
+let emojiSrc;
+
+try {
+  emojiSrc = import(
+    `../assets/images/emoji/${emojiByTeam[team]}.svg`
+    // https://docs.astro.build/en/reference/modules/astro-assets/#src-required
+  ) as Promise<{ default: ImageMetadata }>;
+} catch {
+  emojiSrc = QuestionEmoji;
+}
 ---
 
 {/* TODO Possible to not use the ! assertion? */}

@@ -1,11 +1,10 @@
 ---
 import { actions } from "astro:actions";
-import Image from "astro/components/Image.astro";
 import Link from "./link.astro";
 import Logo from "./logo.astro";
+import Popover from "./popover";
+import ResultEmoji from "./result-emoji.astro";
 import Table from "./table.astro";
-import EliminatedEmoji from "../assets/images/emoji/skull-and-crossbones.svg";
-import SurprisedEmoji from "../assets/images/emoji/hushed-face.svg";
 import { TEAMS, getTeamSeason } from "../data";
 import type { TeamCodeType, Team } from "../data";
 import * as Utils from "../utils";
@@ -74,7 +73,28 @@ if (!error) {
 
 {/* TODO Handle error here somehow... or fine if empty? */}
 
-<Table class="w-[100%] max-w-4xl table-fixed md:mx-auto" stickyHeader>
+<script>
+  const mediaQueryList = globalThis.matchMedia(
+    "not all and (min-width: 640px)",
+  );
+
+  function handleOrientationChange(ev: MediaQueryList | MediaQueryListEvent) {
+    const table = document.querySelector("#standings");
+    if (ev.matches) {
+      table?.classList.add("compact");
+    } else {
+      table?.classList.remove("compact");
+    }
+  }
+
+  handleOrientationChange(mediaQueryList);
+  mediaQueryList.addEventListener("change", handleOrientationChange);
+</script>
+
+<Table
+  id="standings"
+  class="stickyHeader w-[100%] max-w-4xl table-fixed md:mx-auto"
+>
   <Fragment slot="head">
     <tr>
       <th scope="col" class="w-1/2"></th>
@@ -82,7 +102,16 @@ if (!error) {
         <span class="md:hidden">O/U</span>
         <span class="hidden md:inline">Over/Under</span>
       </th>
-      <th scope="col" class="text-right">Pace</th>
+      <th scope="col" class="relative text-right">
+        Pace
+        <Popover client:load>
+          <p class="mb-1 font-bold underline">Pace</p>
+          <p>
+            Current Wins - Wins needed to surprise (10 wins above a team's
+            preseason over/under (rounded up))
+          </p>
+        </Popover>
+      </th>
     </tr>
   </Fragment>
   <Fragment slot="body">
@@ -106,25 +135,17 @@ if (!error) {
                     ]}
                   >
                     {Utils.isSurprise(team) && (
-                      <Image
-                        src={SurprisedEmoji}
-                        alt="Emoji indicating team is a surprise team"
-                        width={20}
-                      />
+                      <ResultEmoji name="surprise" width={20} />
                     )}
                     {Utils.isEliminated(team) && (
-                      <Image
-                        src={EliminatedEmoji}
-                        alt="Emoji indicating given team is eliminated from surprise team contention"
-                        width={20}
-                      />
+                      <ResultEmoji name="eliminated" width={20} />
                     )}
                   </span>
                 </Link>
               </div>
             </th>
             <td class="text-right">{team.overUnder}</td>
-            <td class="text-right">{Utils.displayPace(Utils.pace(team))}</td>
+            <td class="text-right">{Utils.displayPace(Utils.pace(team))} </td>
           </tr>
         );
       })
@@ -134,19 +155,11 @@ if (!error) {
     <tr>
       <td colspan="3" class="space-y-2 px-4 py-4">
         <div class="flex flex-row gap-4">
-          <Image
-            src={SurprisedEmoji}
-            alt="Emoji indicating team is a surprise team"
-            width={16}
-          />
+          <ResultEmoji name="surprise" width={16} />
           <span class="text-xl italic text-lime-400">Surprise Team</span>
         </div>
         <div class="flex flex-row gap-4">
-          <Image
-            src={EliminatedEmoji}
-            alt="Emoji indicating given team is eliminated from surprise team contention"
-            width={16}
-          />
+          <ResultEmoji name="eliminated" width={16} />
           <span class="text-xl italic text-lime-400">Eliminated</span>
         </div>
       </td>

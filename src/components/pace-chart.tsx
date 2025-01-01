@@ -47,7 +47,7 @@ const TooltipContent = ({
   payload,
 }: {
   active: boolean;
-  payload: [{ payload: DataPoint }]; // I assume x and y?
+  payload: [{ payload: DataPoint }];
   label: string;
 }) => {
   if (active && payload && payload.length) {
@@ -147,9 +147,6 @@ export default function PaceChart({
   teamSeason: TeamSeason;
 }) {
   const data = useMemo<DataPoint[]>(() => {
-    // need to fill in non-game days?
-    // target line (# of surprise wins)
-    // for each game, calculate
     const points: DataPoint[] = [];
     const record: TeamRecord = {
       w: 0,
@@ -188,13 +185,12 @@ export default function PaceChart({
     <ResponsiveContainer
       width="100%"
       height={600}
-      // Align w/ top of table in team-stats ()
       style={{
+        paddingLeft: 8,
+        paddingRight: 8,
         // TODO Fix later, margin changes to align chart with table in team-stats; consider decoupling if chart used elsewhere
         // marginTop aligns with top of table in 2-column layout
         marginTop: "-4px",
-        // marginLeft centers graph underneath table in single-column layout, working around odd left empty space from recharts
-        marginLeft: "-24px",
       }}
     >
       <AreaChart
@@ -255,7 +251,7 @@ export default function PaceChart({
           dataKey="projectedWins"
           stroke={theme.colors.lime[500]}
           fill="url(#splitColor)"
-          baseValue={toSurprise} // Note to self: key to fixing issues, tho not sure why
+          baseValue={toSurprise} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
         />
         <ReferenceLine
           stroke={theme.colors.lime[500]}

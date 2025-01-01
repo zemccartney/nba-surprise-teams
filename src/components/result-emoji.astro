@@ -1,0 +1,63 @@
+---
+import Image from "astro/components/Image.astro";
+import type { ComponentProps } from "astro/types";
+import QuestionEmoji from "../assets/images/emoji/question.svg";
+
+type Props = {
+  name: "celebration" | "disappointed" | "eliminated" | "surprise";
+} & Partial<ComponentProps<typeof Image>>; // Partial given we're setting src and alt below
+
+const { name, ...attrs } = Astro.props;
+
+/*
+Note the below crashes if exported (fixable by writing type out on a separate line)
+
+export const emojiConf: Record<
+  Props["name"],
+  { fileName: string; alt: string }
+>
+(ended up not needing to export anyway)
+
+resulted in a crash with the following message: Expected ">" but found "$$ResultEmoji"
+
+TODO Report issue
+*/
+
+const emojiConf: Record<Props["name"], { fileName: string; alt: string }> = {
+  celebration: {
+    alt: "Party popper emoji, celebrating a team achieving surprise team status",
+    fileName: "party-popper",
+  },
+  disappointed: {
+    alt: "Sad-but-relieved-face emoji, bemoaning a team failing to achieve surprise team status",
+    fileName: "sad-but-relieved-face",
+  },
+  eliminated: {
+    alt: "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+    fileName: "skull-and-crossbones",
+  },
+  surprise: {
+    alt: "Hushed face emoji, indicating team is a surprise team",
+    fileName: "hushed-face",
+  },
+};
+
+let emojiSrc;
+
+try {
+  emojiSrc = import(
+    `../assets/images/emoji/${emojiConf[name].fileName}.svg`
+  ) as Promise<{ default: ImageMetadata }>;
+} catch {
+  emojiSrc = QuestionEmoji;
+}
+
+// Need to make TS happy, reassuring that src is always set (error due to spreading attrs, I believe)
+const props = {
+  alt: emojiConf[name].alt,
+  ...attrs,
+  src: emojiSrc,
+};
+---
+
+<Image {...props} />

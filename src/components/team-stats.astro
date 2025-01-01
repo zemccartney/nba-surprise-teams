@@ -1,10 +1,8 @@
 ---
 import { actions } from "astro:actions";
-import Image from "astro/components/Image.astro";
-import EliminatedEmoji from "../assets/images/emoji/skull-and-crossbones.svg";
-
 import PaceChart from "./pace-chart";
-import SurprisedEmoji from "../assets/images/emoji/hushed-face.svg";
+import Popover from "./popover";
+import ResultEmoji from "./result-emoji.astro";
 import Table from "./table.astro";
 import * as Utils from "../utils";
 import type { TeamSeason } from "../data";
@@ -77,26 +75,22 @@ if (!error) {
         <div class="-mt-4 mb-16 flex flex-row items-center justify-center gap-4">
           {Utils.isSurprise(stats) && (
             <>
-              <Image
-                alt="Emoji indicating team is a surprise team"
-                src={SurprisedEmoji}
-                width={36}
-              />
-              <p class="text-2xl text-green-200">
-                Surprised Team Accomplished!
+              <ResultEmoji name="surprise" width={32} />
+              <p class="text-center text-lg text-green-200 md:text-2xl">
+                Surprise Team!
               </p>
+              <ResultEmoji name="celebration" width={32} />
             </>
           )}
           {Utils.isEliminated(stats) && (
             <>
-              <Image
-                alt="Emoji indicating given team is eliminated from surprise team contention"
-                src={EliminatedEmoji}
-                width={36}
-              />
-              <p class="text-2xl text-green-200">
-                Eliminated. No surprise this year
+              <ResultEmoji name="eliminated" width={32} />
+              <p class="text-center text-lg text-green-200 md:text-2xl">
+                Eliminated.
+                <br />
+                No surprise this year
               </p>
+              <ResultEmoji name="disappointed" width={32} />
             </>
           )}
         </div>
@@ -104,7 +98,7 @@ if (!error) {
 
       <div class="NBASurpriseTracker-TeamStats flex flex-col-reverse gap-16 lg:grid">
         <PaceChart client:load games={games} teamSeason={teamSeason} />
-        <Table compact class="max-h-32">
+        <Table class="compact max-h-32">
           <Fragment slot="head">
             <tr>
               <th scope="col" class="w-2/3" />
@@ -124,17 +118,47 @@ if (!error) {
               <td>{teamSeason.overUnder}</td>
             </tr>
             <tr>
-              <th scope="row">Wins Needed</th>
+              <th scope="row" class="relative">
+                Wins Needed
+                <Popover client:load>
+                  <p class="mb-1 font-bold underline">Wins Needed</p>
+                  10 wins above a team's preseason over/under (rounded up)
+                </Popover>
+              </th>
               <td>{Utils.toSurprise(stats)}</td>
             </tr>
             <tr>
-              <th scope="row">Pace (Projected Record)</th>
+              <th scope="row" class="relative">
+                Pace (Projected Record)
+                <Popover client:load>
+                  <p class="mb-1 font-bold underline">Projected Record</p>
+                  <p class="mb-4">
+                    How many wins the team would have if their current winning
+                    percentage held for all 82 games.
+                  </p>
+                  <p class="mb-1 font-bold underline">Pace</p>
+                  <p>Current Wins - Wins Needed to surprise</p>
+                </Popover>
+              </th>
               <td>
                 {`${Utils.displayPace(Utils.pace(stats))} (${Utils.projectedWins(stats)} - ${82 - Utils.projectedWins(stats)})`}
               </td>
             </tr>
             <tr>
-              <th scope="row">Surprise Have-to-Go</th>
+              <th scope="row" class="relative">
+                Surprise Have-to-Go
+                <Popover client:load>
+                  <p class="mb-1 font-bold underline">Surprise Have-to-Go</p>
+                  <p class="mb-4">
+                    What would a team "have to go" the rest of the way to end up
+                    a surprise team? As in, the worst record over games
+                    remaining with which the team would still achieve surprise
+                    status.
+                  </p>
+                  <p class="mb-1 font-bold underline">Pace</p>
+                  <p>Current Wins - Wins Needed to surprise</p>
+                </Popover>
+              </th>
               <td>
                 {() => {
                   const recordRemaining =
@@ -142,10 +166,9 @@ if (!error) {
 
                   if (!recordRemaining) {
                     return (
-                      <Image
+                      <ResultEmoji
                         class="mx-auto"
-                        src={EliminatedEmoji}
-                        alt="Emoji indicating given team is eliminated from surprise team contention"
+                        name="eliminated"
                         width={20}
                       />
                     );
@@ -153,12 +176,7 @@ if (!error) {
 
                   if (recordRemaining === true) {
                     return (
-                      <Image
-                        class="mx-auto"
-                        src={SurprisedEmoji}
-                        alt="Emoji indicating team is a surprise team"
-                        width={20}
-                      />
+                      <ResultEmoji class="mx-auto" name="surprise" width={20} />
                     );
                   }
 

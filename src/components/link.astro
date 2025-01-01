@@ -7,7 +7,7 @@ const { href, class: classStr, ...attrs } = Astro.props;
 <a
   href={href}
   class:list={[
-    "text-4xl text-indigo-400 underline hover:text-indigo-100",
+    "text-2xl text-indigo-400 underline hover:text-indigo-100 md:text-4xl",
     classStr,
   ]}
   {...attrs}

@@ -17,13 +17,21 @@ const {
 
 <style>
   .NBASurpriseTracker-Table {
+    @apply shadow-glow border-collapse;
+
+    > thead,
+    > tfoot {
+      @apply bg-slate-950;
+    }
+
     > thead th {
-      @apply text-right text-lime-400;
+      /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
+      @apply p-6 pr-4 text-right text-4xl text-lime-400;
     }
 
     > tbody th,
     > tbody td {
-      @apply text-green-200;
+      @apply px-4 py-8 text-4xl text-green-200;
     }
 
     > tbody > tr {
@@ -31,39 +39,40 @@ const {
         @apply bg-lime-950;
       }
     }
+
+    &.compact {
+      /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
+      @apply shadow-glow-sm;
+
+      > thead th {
+        @apply p-3 pr-4 text-2xl;
+      }
+
+      > tbody th,
+      > tbody td {
+        @apply px-4 py-4 text-2xl text-green-200;
+      }
+    }
+
+    &.stickyHeader {
+      @apply relative;
+
+      > thead th {
+        /* Unsure that z-index rule is right here, solved for ensuring header appeared above relatively-positioned links on standings-table */
+        @apply sticky top-0 z-10 bg-slate-950;
+      }
+    }
   }
 </style>
 
-<table
-  class:list={[
-    "NBASurpriseTracker-Table border-collapse",
-    compact ? ["shadow-glow-sm"] : ["shadow-glow"],
-    { relative: stickyHeader },
-    classStr,
-  ]}
-  {...attrs}
->
-  <thead
-    class:list={[
-      "bg-slate-950",
-      compact ? "[&_th]:p-3 [&_th]:text-2xl" : "[&_th]:p-6 [&_th]:text-4xl",
-      /* Unsure that z-index rule is right here, solved for ensuring header appeared above relatively-positioned links on standings-table */
-      stickyHeader &&
-        "[&_th]:sticky [&_th]:top-0 [&_th]:z-10 [&_th]:bg-slate-950 [&_th]:p-6 [&_th]:text-right [&_th]:text-4xl [&_th]:text-lime-400",
-    ]}
-  >
+<table class:list={["NBASurpriseTracker-Table", classStr]} {...attrs}>
+  <thead>
     <slot name="head" />
   </thead>
-  <tbody
-    class:list={[
-      compact
-        ? "[&_td]:px-4 [&_td]:py-4 [&_td]:text-2xl [&_th]:px-4 [&_th]:py-4 [&_th]:text-2xl"
-        : "[&_td]:px-4 [&_td]:py-8 [&_td]:text-4xl [&_th]:px-4 [&_th]:py-8 [&_th]:text-4xl",
-    ]}
-  >
+  <tbody>
     <slot name="body" />
   </tbody>
-  <tfoot class="bg-slate-950">
+  <tfoot>
     <slot name="foot" />
   </tfoot>
 </table>
