@@ -4,9 +4,25 @@ type Props = HTMLAttributes<"a">;
 const { href, class: classStr, ...attrs } = Astro.props;
 ---
 
+<script>
+  const currentPath = globalThis.location.pathname;
+  // TODO I'm sure this is a naive check, but good enough for now; consider improving when not in a time crunch
+  const navLink = document.querySelector(`nav > a[href="${currentPath}"]`);
+  navLink?.classList.add("active");
+</script>
+
+<style>
+  .NBASurpriseTracker-Link {
+    &.active {
+      @apply pointer-events-none cursor-default text-indigo-100;
+    }
+  }
+</style>
+
 <a
   href={href}
   class:list={[
+    "NBASurpriseTracker-Link",
     "text-2xl text-indigo-400 underline hover:text-indigo-100 md:text-4xl",
     classStr,
   ]}

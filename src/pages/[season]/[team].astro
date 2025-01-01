@@ -1,6 +1,5 @@
 ---
-import Layout from "../../layouts/layout.astro";
-import Link from "../../components/link.astro";
+import SubpageLayout from "../../layouts/subpage.astro";
 import Logo from "../../components/logo.astro";
 import TeamStats from "../../components/team-stats.astro";
 import { TEAM_SEASONS, getTeamById, getTeamSeason } from "../../data";
@@ -23,20 +22,12 @@ const teamSeason = getTeamSeason(
 )!;
 ---
 
-<Layout>
-  <header class="p-8">
-    <nav class="mb-8 flex gap-8">
-      <Link class="text-2xl" href="/">Home</Link>
-      <Link class="text-2xl" href="/info">What is this?</Link>
-    </nav>
-    <div class="flex flex-col items-center justify-center gap-8 lg:flex-row">
-      <Logo team={team.id} class="w-[96px]" />
-      <h1 class="text-center font-title text-4xl text-lime-400">
-        {team.name}
-      </h1>
-    </div>
-  </header>
-  <main class="px-0 pb-16 md:p-8">
-    <TeamStats teamSeason={teamSeason} />
-  </main>
-</Layout>
+<SubpageLayout>
+  <div class="flex flex-col items-center justify-center gap-8 lg:flex-row">
+    <Logo team={team.id} class="w-[96px]" />
+    <h1 class="text-center font-title text-4xl text-lime-400">
+      {team.name}
+    </h1>
+  </div>
+  <TeamStats teamSeason={teamSeason} />
+</SubpageLayout>
