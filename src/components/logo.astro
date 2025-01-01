@@ -2,7 +2,6 @@
 import Image from "astro/components/Image.astro";
 import { getTeamById } from "../data";
 import type { TeamCodeType } from "../data";
-import QuestionEmoji from "../assets/images/emoji/question.svg";
 
 interface Props {
   class?: string;
@@ -34,7 +33,7 @@ try {
     // https://docs.astro.build/en/reference/modules/astro-assets/#src-required
   ) as Promise<{ default: ImageMetadata }>;
 } catch {
-  emojiSrc = QuestionEmoji;
+  emojiSrc = import("../assets/images/emoji/question.svg");
 }
 ---
 

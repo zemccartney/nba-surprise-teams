@@ -29,5 +29,5 @@ const teamSeason = getTeamSeason(
       {team.name}
     </h1>
   </div>
-  <TeamStats teamSeason={teamSeason} />
+  <TeamStats server:defer teamSeason={teamSeason} />
 </SubpageLayout>

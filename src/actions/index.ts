@@ -42,7 +42,6 @@ export const server = {
           },
         );
 
-        // TODO Document data shape
         const result = await res.json();
 
         const relevantGames: Game[] = [];
@@ -62,6 +61,8 @@ export const server = {
         // so, we need the yyyy-mm-dd representation of the current data in EST, regardless of the server's time zone
         const currentDate = Utils.getCurrentDateEastern().split("T")[0]!; // TODO Possible to not need this assertion? Stricter TS linting?
 
+        // TODO Document data shape, remove this ts-ignore
+        // @ts-ignore
         for (const slate of result.leagueSchedule.gameDates) {
           // gameDate format: "10/04/2024 00:00:00"
           const { gameDate } = slate;
