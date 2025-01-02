@@ -14,6 +14,18 @@ export default defineConfig({
     platformProxy: {
       enabled: true,
     },
+    routes: {
+      extend: {
+        // Works around an odd bug in astro@5.1.1 (at least) where builds don't add this pattern to include in the output _routes.json for cloudflare
+        // this path was automatically added in astro@5.0.5 (at least), so seems to be some sort of regression
+        // TODO Report issue
+        include: [
+          {
+            pattern: "/_server-islands/*",
+          },
+        ],
+      },
+    },
   }),
   env: {
     schema: {
