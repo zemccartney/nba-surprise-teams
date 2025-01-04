@@ -201,7 +201,8 @@ export const server = {
           replaysOnErrorSampleRate: 0.1,
         });
 
-        console.log(client, "DO WE HAVE A THING?");
+        // @ts-ignore
+        console.log(client!._options, "DO WE HAVE A THING?");
 
         client!.captureException(err);
         throw err;
