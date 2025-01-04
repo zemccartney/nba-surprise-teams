@@ -59,7 +59,9 @@ export const server = {
     input: z.object({
       seasonId: z.number(),
     }),
-    handler: async (input): Promise<Game[]> => {
+    handler: async (input, ctx): Promise<Game[]> => {
+      console.log(ctx, ctx.locals, "SENTYR HERE");
+
       try {
         const season = getSeasonById(input.seasonId);
 
