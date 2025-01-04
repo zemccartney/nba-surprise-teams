@@ -183,6 +183,7 @@ export const server = {
         if (import.meta.env.DEV) {
           // console.log(err);
         }
+        console.log(Sentry.getCurrentHub().getClient(), "IS INITIALIZED?");
         Sentry.captureException(err);
         throw err;
       }
