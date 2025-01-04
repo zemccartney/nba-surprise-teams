@@ -1,14 +1,41 @@
-// @ts-check
 import { defineConfig, envField } from "astro/config";
-
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-
 import cloudflare from "@astrojs/cloudflare";
+import sentry from "@sentry/astro";
+import { loadEnv } from "vite";
+const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN } = loadEnv(
+  process.env.NODE_ENV,
+  process.cwd(),
+  "",
+);
+
+// if running locally, no sentry
+// deploy env to determine sentry project / general environment
+// set site based on env
+const siteByEnv = {
+  preview: "https://dev.nba-surprise-teams.pages.dev",
+  production: "https://nba-surprise-teams.grepco.net",
+};
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), tailwind()],
+  ...(PUBLIC_DEPLOY_ENV && {
+    site: siteByEnv[PUBLIC_DEPLOY_ENV],
+  }),
+  integrations: [
+    react(),
+    tailwind(),
+    sentry({
+      dsn: PUBLIC_SENTRY_DSN,
+      sourceMapsUploadOptions: {
+        project: "nba-surprise-team-tracker",
+        ...(SENTRY_AUTH_TOKEN && {
+          authToken: SENTRY_AUTH_TOKEN,
+        }),
+      },
+    }),
+  ],
   experimental: {
     svg: true,
   },

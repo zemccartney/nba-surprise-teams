@@ -1,6 +1,7 @@
 import { defineAction, ActionError } from "astro:actions";
 import { SIM_FULL_SEASON } from "astro:env/server";
 import { z } from "astro:schema";
+import * as Sentry from "@sentry/astro";
 import { getSeasonById, getTeamsInSeason } from "../data";
 import type { Game, TeamCodeType } from "../data";
 import * as Utils from "../utils";
@@ -19,6 +20,7 @@ const SeasonDataSchema = z.object({
           z.object({
             awayTeam: TeamResultSchema,
             homeTeam: TeamResultSchema,
+            BIGSTINK: z.boolean(),
           }),
         ),
       }),
@@ -175,7 +177,10 @@ export const server = {
 
         return [];
       } catch (err) {
-        console.log(err);
+        if (import.meta.env.DEV) {
+          console.log(err);
+        }
+        Sentry.captureException(err);
         throw err;
       }
     },

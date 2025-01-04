@@ -17,6 +17,10 @@ import StandingsTable from "../components/standings-table.astro";
     <nav class="mb-10 mt-8 flex justify-center md:mb-20 md:mt-16">
       <Link href="/info">What is this?</Link>
     </nav>
+    <button
+      class="text-red-400"
+      onclick="throw new Error('This is a test error')">Throw test error</button
+    >
     <StandingsTable server:defer seasonId={2024}>
       <Loading slot="fallback" />
     </StandingsTable>
