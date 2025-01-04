@@ -1,4 +1,4 @@
-import * as SentryCF from "@sentry/cloudflare";
+import * as Sentry from "@sentry/astro";
 
 console.log(
   "IN OUR SENTRY SERVER CONF",
@@ -6,7 +6,7 @@ console.log(
   import.meta.env.PUBLIC_DEPLOY_ENV,
 );
 
-SentryCF.init({
+Sentry.init({
   dsn: import.meta.env.PUBLIC_SENTRY_DSN,
   environment: import.meta.env.PUBLIC_DEPLOY_ENV,
 
