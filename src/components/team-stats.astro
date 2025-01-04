@@ -1,5 +1,6 @@
 ---
 import { actions } from "astro:actions";
+import Error from "./error.astro";
 import PaceChart from "./pace-chart";
 import Popover from "./popover";
 import ResultEmoji from "./result-emoji.astro";
@@ -67,8 +68,7 @@ if (!error) {
 
 {
   error ? (
-    // TODO Test
-    <div class="mx-auto text-4xl text-red-600">Something went wrong!</div>
+    <Error />
   ) : (
     <>
       {(Utils.isSurprise(stats) || Utils.isEliminated(stats)) && (

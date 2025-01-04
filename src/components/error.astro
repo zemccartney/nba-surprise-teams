@@ -1,0 +1,27 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: classStr, ...attrs } = Astro.props;
+---
+
+<div
+  class:list={[
+    "mx-auto flex flex-col items-center p-8 md:max-w-[60%]",
+    classStr,
+  ]}
+  {...attrs}
+>
+  <p
+    class="text-center font-title text-4xl uppercase italic text-yellow-400 md:text-6xl"
+  >
+    Oof!
+  </p>
+  <p class="mb-4 text-center font-title text-2xl text-yellow-400 md:text-4xl">
+    Something blew up
+  </p>
+  <p class="text-center text-2xl text-yellow-200 lg:max-w-[60%]">
+    Sorry for the incovenience! Check back later; we'll have this fixed.
+  </p>
+</div>

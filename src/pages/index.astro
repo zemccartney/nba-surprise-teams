@@ -5,6 +5,7 @@ export const prerender = true;
 
 import Layout from "../layouts/layout.astro";
 import Link from "../components/link.astro";
+import Loading from "../components/loading.astro";
 import StandingsTable from "../components/standings-table.astro";
 ---
 
@@ -16,6 +17,8 @@ import StandingsTable from "../components/standings-table.astro";
     <nav class="mb-10 mt-8 flex justify-center md:mb-20 md:mt-16">
       <Link href="/info">What is this?</Link>
     </nav>
-    <StandingsTable server:defer seasonId={2024} />
+    <StandingsTable server:defer seasonId={2024}>
+      <Loading slot="fallback" />
+    </StandingsTable>
   </main>
 </Layout>
