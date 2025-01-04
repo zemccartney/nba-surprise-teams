@@ -188,6 +188,8 @@ export const server = {
         console.log(ctx.locals.__sentry_wrapped__);
 
         Sentry.captureException(err);
+        Sentry.captureException(new Error("KILL ME"));
+        console.log(Sentry.isInitialized(), "ARE WE INIT?");
         throw err;
       }
     },
