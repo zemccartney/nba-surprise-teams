@@ -84,6 +84,7 @@ export default defineConfig({
         "diagnostics_channel",
         "events",
         "module",
+        "node:async_hooks",
         "node:child_process",
         "node:diagnostics_channel",
         "node:fs",
