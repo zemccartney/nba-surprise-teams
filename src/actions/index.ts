@@ -1,7 +1,7 @@
 import { defineAction, ActionError } from "astro:actions";
 import { SIM_FULL_SEASON } from "astro:env/server";
 import { z } from "astro:schema";
-import * as Sentry from "@sentry/astro";
+import * as SentryCF from "@sentry/cloudflare";
 import { getSeasonById, getTeamsInSeason } from "../data";
 import type { Game, TeamCodeType } from "../data";
 import * as Utils from "../utils";
@@ -59,9 +59,7 @@ export const server = {
     input: z.object({
       seasonId: z.number(),
     }),
-    handler: async (input, ctx): Promise<Game[]> => {
-      console.log(ctx, ctx.locals, "SENTYR HERE");
-
+    handler: async (input): Promise<Game[]> => {
       try {
         const season = getSeasonById(input.seasonId);
 
@@ -185,8 +183,7 @@ export const server = {
         if (import.meta.env.DEV) {
           // console.log(err);
         }
-        console.log(Sentry.getCurrentHub().getClient(), "IS INITIALIZED?");
-        Sentry.captureException(err);
+        SentryCF.captureException(err);
         throw err;
       }
     },

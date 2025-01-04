@@ -1,7 +1,5 @@
 import * as Sentry from "@sentry/cloudflare";
 
-console.log(process.env, "WHAT THE FUCK");
-
 export const onRequest = Sentry.sentryPagesPlugin({
   dsn: process.env.PUBLIC_SENTRY_DSN,
   environment: process.env.PUBLIC_DEPLOY_ENV,
