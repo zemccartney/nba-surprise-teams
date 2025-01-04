@@ -1,7 +1,7 @@
 import { defineAction, ActionError } from "astro:actions";
 import { SIM_FULL_SEASON } from "astro:env/server";
 import { z } from "astro:schema";
-import * as SentryCF from "@sentry/cloudflare";
+import * as Sentry from "@sentry/astro";
 import { getSeasonById, getTeamsInSeason } from "../data";
 import type { Game, TeamCodeType } from "../data";
 import * as Utils from "../utils";
@@ -183,7 +183,7 @@ export const server = {
         if (import.meta.env.DEV) {
           // console.log(err);
         }
-        SentryCF.captureException(err);
+        Sentry.captureException(err);
         throw err;
       }
     },
