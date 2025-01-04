@@ -185,7 +185,7 @@ export const server = {
         }
 
         // Very not good but I just need something to work please
-        Sentry.init({
+        const client = Sentry.init({
           dsn: import.meta.env.PUBLIC_SENTRY_DSN,
           environment: import.meta.env.PUBLIC_DEPLOY_ENV,
           // Define how likely traces are sampled. Adjust this value in production,
@@ -201,7 +201,9 @@ export const server = {
           replaysOnErrorSampleRate: 0.1,
         });
 
-        Sentry.captureException(err);
+        console.log(client, "DO WE HAVE A THING?");
+
+        client!.captureException(err);
         throw err;
       }
     },
