@@ -20,6 +20,7 @@ const siteByEnv = {
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server", // TODO better explain, Bug: https://github.com/getsentry/sentry-javascript/blob/3fdab049623555bf89c72a3d3d8f9efacf208a07/packages/astro/src/integration/index.ts#L124
   ...(PUBLIC_DEPLOY_ENV && {
     site: siteByEnv[PUBLIC_DEPLOY_ENV],
   }),
@@ -75,6 +76,34 @@ export default defineConfig({
       alias: import.meta.env.PROD && {
         "react-dom/server": "react-dom/server.edge",
       },
+    },
+    ssr: {
+      // Does this list mean "Don't bundle, will be resolvable from the host env?"
+      external: [
+        "async_hooks",
+        "diagnostics_channel",
+        "events",
+        "module",
+        "node:child_process",
+        "node:diagnostics_channel",
+        "node:fs",
+        "node:http",
+        "node:https",
+        "node:inspector",
+        "node:net",
+        "node:os",
+        "node:path",
+        "node:readline",
+        "node:stream",
+        "node:tls",
+        "node:util",
+        "node:worker_threads",
+        "node:zlib",
+        "worker_threads",
+        "path",
+        "url",
+        "util",
+      ],
     },
   },
 });
