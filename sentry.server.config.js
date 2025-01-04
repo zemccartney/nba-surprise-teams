@@ -1,6 +1,10 @@
 import * as Sentry from "@sentry/astro";
 
-console.log("IN OUR SENTRY SERVER CONF");
+console.log(
+  "IN OUR SENTRY SERVER CONF",
+  import.meta.env.PUBLIC_SENTRY_DSN,
+  import.meta.env.PUBLIC_DEPLOY_ENV,
+);
 
 Sentry.init({
   dsn: import.meta.env.PUBLIC_SENTRY_DSN,
