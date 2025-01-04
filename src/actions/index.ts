@@ -178,10 +178,10 @@ export const server = {
         return [];
       } catch (err) {
         console.log("BLOWING UP HERE, DO THESE SHOW UP IN CF?");
-        console.log(err);
+        // console.log(err);
 
         if (import.meta.env.DEV) {
-          console.log(err);
+          // console.log(err);
         }
         Sentry.captureException(err);
         throw err;
