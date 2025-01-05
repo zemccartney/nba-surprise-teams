@@ -1,5 +1,12 @@
 ---
 import "@fontsource-variable/sixtyfour/full.css"; // TODO File bug report (shouldn't need to use full.css path)
+
+interface Props {
+  description?: string;
+  title?: string;
+}
+
+const { description, title } = Astro.props;
 ---
 
 <!doctype html>
@@ -8,9 +15,13 @@ import "@fontsource-variable/sixtyfour/full.css"; // TODO File bug report (shoul
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>NBA Surprise Teams</title>
 
-    <!-- TODO Add meta description / other meta tags, apply / allow customizing on all subpage -->
+    <title>{title ? `${title} - NBASTT` : "NBA Surprise Teams Tracker"}</title>
+    <meta
+      name="description"
+      content={description ||
+        "Tracking if NBA teams exceed their low preseason expectations"}
+    />
   </head>
   <body>
     <div class="min-h-full bg-dark-emerald">

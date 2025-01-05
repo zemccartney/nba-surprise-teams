@@ -3,7 +3,7 @@ import Layout from "./layout.astro";
 import Link from "../components/link.astro";
 ---
 
-<Layout>
+<Layout {...Astro.props}>
   <header class="p-8">
     <nav class="flex flex-row items-center gap-16">
       <a href="/" class="font-title text-sm text-lime-400 md:text-2xl">
