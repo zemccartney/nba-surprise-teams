@@ -25,11 +25,6 @@ const { error, data: games } = await Astro.callAction(actions.getSeasonData, {
   seasonId,
 });
 
-if (error) {
-  console.log("DOES SENTRY DO SHIT ABOUT THIS?");
-  throw error;
-}
-
 if (!error) {
   // TODO Need to handle lookup errors?
   const teams = TEAMS.map((team) => {

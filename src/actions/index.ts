@@ -1,7 +1,7 @@
 import { defineAction, ActionError } from "astro:actions";
 import { SIM_FULL_SEASON } from "astro:env/server";
 import { z } from "astro:schema";
-import * as SentryCF from "@sentry/cloudflare";
+import * as Sentry from "@sentry/astro";
 import { getSeasonById, getTeamsInSeason } from "../data";
 import type { Game, TeamCodeType } from "../data";
 import * as Utils from "../utils";
@@ -185,11 +185,9 @@ export const server = {
         }
 
         // @ts-ignore
-        console.log(ctx.locals.__sentry_wrapped__);
+        console.log(ctx.locals.runtime, "WHAT IS IN OUR RUNTIME?");
 
-        SentryCF.captureException(err);
-        SentryCF.captureException(new Error("KILL ME"));
-        console.log(SentryCF.isInitialized(), "ARE WE INIT?");
+        Sentry.captureException(err);
         throw err;
       }
     },
