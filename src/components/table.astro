@@ -17,14 +17,15 @@ const {
 
 <style>
   .NBASurpriseTracker-Table {
-    @apply shadow-glow border-collapse;
+    @apply border-collapse shadow-glow;
 
     > thead,
     > tfoot {
       @apply bg-slate-950;
     }
 
-    > thead th {
+    > thead th,
+    > thead td {
       /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
       @apply p-6 pr-4 text-right text-4xl text-lime-400;
     }
@@ -44,7 +45,8 @@ const {
       /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
       @apply shadow-glow-sm;
 
-      > thead th {
+      > thead th,
+      > thead td {
         @apply p-3 pr-4 text-2xl;
       }
 
@@ -57,7 +59,8 @@ const {
     &.stickyHeader {
       @apply relative;
 
-      > thead th {
+      > thead th,
+      > thead td {
         /* Unsure that z-index rule is right here, solved for ensuring header appeared above relatively-positioned links on standings-table */
         @apply sticky top-0 z-10 bg-slate-950;
       }
