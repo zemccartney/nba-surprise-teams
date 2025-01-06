@@ -21,7 +21,7 @@ const { seasonId } = Astro.props;
 
 const teamRows: TeamRow[] = [];
 
-const { error, data: games } = await Astro.callAction(actions.getSeasonData, {
+const { error, data } = await Astro.callAction(actions.getSeasonData, {
   seasonId,
 });
 
@@ -52,6 +52,8 @@ if (!error) {
     };
   }
 
+  const { games, expiresOn } = data;
+
   for (const game of games) {
     const homeWin = game.homeScore > game.awayScore;
 
@@ -69,6 +71,14 @@ if (!error) {
   teamRows.push(
     ...Object.values(records).toSorted((a, b) => Utils.pace(b) - Utils.pace(a)),
   );
+
+  // Standings table only ever used on home page i.e. single URL, so single cache entry
+  if (expiresOn) {
+    Astro.response.headers.set(
+      "Cache-Control",
+      `public, max-age=${Math.round((expiresOn - Date.now()) / 1000)}, must-revalidate`,
+    );
+  }
 }
 ---
 

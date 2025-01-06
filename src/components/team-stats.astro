@@ -17,12 +17,12 @@ const { teamSeason } = Astro.props;
 
 const stats: TeamStats = { w: 0, l: 0, overUnder: teamSeason.overUnder };
 
-// TODO What happens to errors here if thrown? How do those surface?
-const { error, data: games } = await Astro.callAction(actions.getSeasonData, {
+const { error, data } = await Astro.callAction(actions.getSeasonData, {
   seasonId: teamSeason.season,
 });
 
 if (!error) {
+  const { games, expiresOn } = data;
   for (const game of games) {
     if (
       game.homeTeam === teamSeason.team ||
@@ -37,9 +37,16 @@ if (!error) {
       }
     }
   }
-}
 
-// TODO Handle look up errors and action errors
+  if (expiresOn) {
+    Astro.response.headers.set(
+      "Cache-Control",
+      `public, max-age=${Math.round((expiresOn - Date.now()) / 1000)}, must-revalidate`,
+    );
+    // Vary by referer, so we generate separate cache entries per team / season subpage
+    Astro.response.headers.set("Vary", "Referer");
+  }
+}
 ---
 
 <style>
@@ -97,7 +104,7 @@ if (!error) {
       )}
 
       <div class="NBASurpriseTracker-TeamStats flex flex-col-reverse gap-16 lg:grid">
-        <PaceChart client:load games={games} teamSeason={teamSeason} />
+        <PaceChart client:load games={data.games} teamSeason={teamSeason} />
         <Table class="compact max-h-32">
           <Fragment slot="head">
             <tr>
@@ -119,13 +126,14 @@ if (!error) {
             </tr>
             <tr>
               <th scope="row" class="relative">
-                Wins Needed
+                Record Needed
                 <Popover client:load>
-                  <p class="mb-1 font-bold underline">Wins Needed</p>
-                  10 wins above a team's preseason over/under (rounded up)
+                  <p class="mb-1 font-bold underline">Record Needed</p>
+                  Record needed to qualify as a Surprise Team i.e. 10 wins above
+                  a team's preseason over/under (rounded up)
                 </Popover>
               </th>
-              <td>{Utils.toSurprise(stats)}</td>
+              <td>{`${Utils.toSurprise(stats)} - ${82 - Utils.toSurprise(stats)}`}</td>
             </tr>
             <tr>
               <th scope="row" class="relative">

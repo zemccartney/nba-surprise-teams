@@ -38,7 +38,7 @@ export const currentWinPct = (record: TeamRecord) =>
   record.w / (record.w + record.l);
 
 export const projectedWins = (record: TeamRecord) =>
-  Math.floor(82 * currentWinPct(record)); // TODO Is floor correct here? I think we want to take a pessimistic view here?
+  Math.floor(82 * currentWinPct(record)); // Math.floor = partial wins don't count, need to absolutely exceed
 
 export const isSurprise = (team: TeamStats) => team.w >= toSurprise(team);
 
