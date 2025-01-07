@@ -17,6 +17,10 @@ export const getCurrentDateEastern = () => {
   return new Date(d).toISOString();
 };
 
+export const getCurrentEasternYYYYMMDD = () => {
+  return getCurrentDateEastern().split("T")[0]!; // TODO Possible to not need this assertion? Stricter TS linting?
+};
+
 export const getTheme = () => resolveConfig(tailwindConfig).theme;
 
 // TeamRecord and TeamStats are utility types, conventions for formatting game data and coalescing w/ team / season
@@ -76,3 +80,5 @@ export const recordRemainingToSurprise = (
     l: gamesRemaining - winsRemaining,
   };
 };
+
+export const minToMs = (min: number) => min * 60 * 1000;

@@ -169,7 +169,7 @@ export default function PaceChart({
 
         points.push({
           projectedWins: Utils.projectedWins(record),
-          date: game.date,
+          date: game.playedOn,
           _stats: { ...record, ...teamSeason },
         });
       }

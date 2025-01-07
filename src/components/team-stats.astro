@@ -22,7 +22,7 @@ const { error, data } = await Astro.callAction(actions.getSeasonData, {
 });
 
 if (!error) {
-  const { games, expiresOn } = data;
+  const { games, expiresAt } = data;
   for (const game of games) {
     if (
       game.homeTeam === teamSeason.team ||
@@ -38,10 +38,10 @@ if (!error) {
     }
   }
 
-  if (expiresOn) {
+  if (expiresAt) {
     Astro.response.headers.set(
       "Cache-Control",
-      `public, max-age=${Math.round((expiresOn - Date.now()) / 1000)}, must-revalidate`,
+      `public, max-age=${Math.round((expiresAt - Date.now()) / 1000)}, must-revalidate`,
     );
     // Vary by referer, so we generate separate cache entries per team / season subpage
     Astro.response.headers.set("Vary", "Referer");

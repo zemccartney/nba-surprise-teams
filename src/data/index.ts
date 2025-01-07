@@ -129,12 +129,15 @@ export const TEAM_SEASONS: readonly TeamSeason[] = [
   },
 ] as const;
 
+// TODO Possible to not duplicate db schema here?
 export interface Game {
-  date: string;
+  season: Season["id"];
   homeTeam: TeamCodeType;
   awayTeam: TeamCodeType;
   homeScore: number;
   awayScore: number;
+  playedOn: string; // YYYY-MM-DD of game date, implicitly in eastern time
+  playedAt: number; // ISO string of start time
 }
 
 /* Service Methods */
@@ -154,3 +157,10 @@ export const getTeamsInSeason = (id: Season["id"]): Team[] =>
 
 export const getTeamSeason = (teamId: TeamCodeType, seasonId: Season["id"]) =>
   TEAM_SEASONS.find((ts) => ts.season === seasonId && ts.team === teamId);
+
+/* Loader Utils */
+
+export type Loader = () => Promise<{
+  games: Game[];
+  expiresAt?: number;
+}>;

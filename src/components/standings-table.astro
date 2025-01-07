@@ -52,7 +52,7 @@ if (!error) {
     };
   }
 
-  const { games, expiresOn } = data;
+  const { games, expiresAt } = data;
 
   for (const game of games) {
     const homeWin = game.homeScore > game.awayScore;
@@ -73,10 +73,10 @@ if (!error) {
   );
 
   // Standings table only ever used on home page i.e. single URL, so single cache entry
-  if (expiresOn) {
+  if (expiresAt) {
     Astro.response.headers.set(
       "Cache-Control",
-      `public, max-age=${Math.round((expiresOn - Date.now()) / 1000)}, must-revalidate`,
+      `public, max-age=${Math.round((expiresAt - Date.now()) / 1000)}, must-revalidate`,
     );
   }
 }
