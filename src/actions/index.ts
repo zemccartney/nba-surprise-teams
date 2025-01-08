@@ -23,7 +23,7 @@ export const server = {
       try {
         const dbClient = Db({
           url: TURSO_URL,
-          authToken: TURSO_AUTH_TOKEN,
+          ...(TURSO_AUTH_TOKEN && { authToken: TURSO_AUTH_TOKEN }),
         });
 
         const season = getSeasonById(input.seasonId);

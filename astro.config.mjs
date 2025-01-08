@@ -28,6 +28,7 @@ export default defineConfig({
     tailwind(),
     sentry({
       dsn: PUBLIC_SENTRY_DSN,
+      environment: PUBLIC_DEPLOY_ENV,
       ...(SENTRY_AUTH_TOKEN && {
         sourceMapsUploadOptions: {
           project: "nba-surprise-team-tracker",
