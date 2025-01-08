@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "fmt": "prettier . --write",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:migrate:local": "drizzle-kit migrate",
+    "db:migrate": "tsx drizzle.migrator.ts",
     "db:studio": "drizzle-kit studio",
     "db:local": "turso dev"
   },
