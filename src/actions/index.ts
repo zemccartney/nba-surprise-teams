@@ -21,7 +21,10 @@ export const server = {
       ctx,
     ): Promise<{ games: Game[]; expiresAt?: number }> => {
       try {
-        throw new Error("BOOM");
+        if (import.meta.env.PROD) {
+          console.log("EXPLODING NOW");
+          throw new Error("BOOM");
+        }
 
         const dbClient = Db({
           url: TURSO_URL,
