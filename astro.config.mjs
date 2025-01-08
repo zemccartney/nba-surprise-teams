@@ -58,6 +58,13 @@ export default defineConfig({
   }),
   env: {
     schema: {
+      PUBLIC_DEPLOY_ENV: envField.enum({
+        context: "client",
+        access: "public",
+        values: ["local", "preview", "production"],
+        optional: false,
+        default: "local",
+      }),
       PUBLIC_SENTRY_DSN: envField.string({
         context: "client",
         access: "public",

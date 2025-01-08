@@ -1,5 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
-import { PUBLIC_SENTRY_DSN } from "astro:env/client";
+import { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN } from "astro:env/client";
 import { Toucan } from "toucan-js";
 
 export const onRequest = defineMiddleware((ctx, next) => {
@@ -12,9 +12,8 @@ export const onRequest = defineMiddleware((ctx, next) => {
       // @ts-ignore
       context: ctx.locals.runtime.ctx,
       request: ctx.request,
+      environment: PUBLIC_DEPLOY_ENV,
     });
-
-    console.log(Sentry, "DID SENTRY INIT");
 
     // @ts-ignore
     ctx.locals.Sentry = Sentry;

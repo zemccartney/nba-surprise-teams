@@ -131,7 +131,12 @@ export const server = {
             games: refreshed.games,
           };
         } catch (err) {
-          // TODO Still report to Sentry even if serving fallback
+          // Serve our copy of data as a fallback, but report error for remediation
+          // Better to keep site visibly working, even if data outdated
+          if (import.meta.env.PROD) {
+            // @ts-ignore
+            ctx.locals.Sentry?.captureException?.(err);
+          }
 
           return {
             // don't surface expiresAt, don't support caching here; on the one hand, end users
