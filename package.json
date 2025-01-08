@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "npm run db:migrate && astro dev",
+    "dev": "npm run db:migrate:local && astro dev",
     "build:base": "astro check && astro build",
-    "build": "npm run build:base && tsx drizzle.migrator.ts",
+    "build": "npm run build:base && npm run db:migrate",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
