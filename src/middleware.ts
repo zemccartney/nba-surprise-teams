@@ -3,8 +3,8 @@ import { PUBLIC_SENTRY_DSN } from "astro:env/client";
 import { Toucan } from "toucan-js";
 
 export const onRequest = defineMiddleware((ctx, next) => {
-  if (import.meta.env.PROD) {
-    console.log(ctx, ctx.locals, "IN OUR MIDDLEWARE");
+  if (import.meta.env.PROD && import.meta.env.SSR) {
+    console.log(ctx.locals, "IN OUR MIDDLEWARE");
 
     const Sentry = new Toucan({
       dsn: PUBLIC_SENTRY_DSN!,
