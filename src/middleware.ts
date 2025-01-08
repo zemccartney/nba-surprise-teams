@@ -14,8 +14,10 @@ export const onRequest = defineMiddleware((ctx, next) => {
       request: ctx.request,
     });
 
+    console.log(Sentry, "DID SENTRY INIT");
+
     // @ts-ignore
-    context.locals.Sentry = Sentry;
+    ctx.locals.Sentry = Sentry;
   }
 
   return next();
