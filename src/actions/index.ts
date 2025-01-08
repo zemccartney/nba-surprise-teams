@@ -1,3 +1,4 @@
+console.log("FOREVER");
 import { defineAction, ActionError } from "astro:actions";
 import { z } from "astro:schema";
 // TODO Investigate; astro clipped these from drizzle-orm's export, no idea why
@@ -16,6 +17,8 @@ export const server = {
       seasonId: z.number(),
     }),
     handler: async (input): Promise<{ games: Game[]; expiresAt?: number }> => {
+      console.log("GETTING TO OUR ACTION?");
+
       try {
         const season = getSeasonById(input.seasonId);
 
@@ -135,6 +138,8 @@ export const server = {
           };
         }
       } catch (err) {
+        console.log("LOGS ACTUALLY WORKING?");
+
         if (import.meta.env.DEV) {
           console.log(err);
         }
