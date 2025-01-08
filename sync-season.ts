@@ -39,6 +39,7 @@ const tpl = `
     export default ${games.map(({ id, ...g }) => g)};
   `;
 
-await Fs.writeFile(`../seasons/${currentSeason.id}/games.ts`, tpl, {
+// TODO correct path resolution
+await Fs.writeFile(`./src/data/seasons/${currentSeason.id}/games.ts`, tpl, {
   encoding: "utf8",
 });

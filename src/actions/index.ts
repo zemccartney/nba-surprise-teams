@@ -16,9 +16,13 @@ export const server = {
     input: z.object({
       seasonId: z.number(),
     }),
-    handler: async (input): Promise<{ games: Game[]; expiresAt?: number }> => {
+    handler: async (
+      input,
+      ctx,
+    ): Promise<{ games: Game[]; expiresAt?: number }> => {
       try {
-        console.log(TURSO_URL, TURSO_AUTH_TOKEN, "IN OUR ACTION");
+        throw new Error("BOOM");
+
         const dbClient = Db({
           url: TURSO_URL,
           authToken: TURSO_AUTH_TOKEN,
@@ -148,6 +152,14 @@ export const server = {
       } catch (err) {
         if (import.meta.env.DEV) {
           console.log(err);
+        }
+
+        if (import.meta.env.PROD) {
+          console.log("ATTEMPTING TO CAPTURE ERR");
+          // @ts-ignore
+          console.log(ctx.locals.Sentry);
+          // @ts-ignore
+          ctx.locals.Sentry?.captureException?.(err);
         }
 
         throw err;
