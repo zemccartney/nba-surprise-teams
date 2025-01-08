@@ -10,12 +10,6 @@ const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN } = loadEnv(
   "",
 );
 
-console.log(
-  PUBLIC_DEPLOY_ENV,
-  process.env.NODE_ENV,
-  "SHOWING CORRECTLY IN BUILD YEA?",
-);
-
 // if running locally, no sentry
 // deploy env to determine sentry project / general environment
 // set site based on env

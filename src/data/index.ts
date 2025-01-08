@@ -131,7 +131,7 @@ export const TEAM_SEASONS: readonly TeamSeason[] = [
   },
 ] as const;
 
-export type Game = Omit<typeof Games.$inferInsert, "id">;
+export type Game = Omit<typeof Games.$inferSelect, "id">;
 
 /* Service Methods */
 

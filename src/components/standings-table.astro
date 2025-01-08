@@ -60,11 +60,11 @@ if (!error) {
     // TODO Possible to not have to resort to ! here?
 
     if (game.homeTeam in records) {
-      records[game.homeTeam]![homeWin ? "w" : "l"] += 1;
+      records[game.homeTeam as TeamCodeType]![homeWin ? "w" : "l"] += 1;
     }
 
     if (game.awayTeam in records) {
-      records[game.awayTeam]![homeWin ? "l" : "w"] += 1;
+      records[game.awayTeam as TeamCodeType]![homeWin ? "l" : "w"] += 1;
     }
   }
 

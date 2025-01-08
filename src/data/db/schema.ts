@@ -15,14 +15,17 @@ export const SeasonCaches = table("SeasonCaches", {
 export const Games = table("Games", {
   id: t.int().primaryKey(),
   // Might not be needed? Theoretical integrity, likely never storing multiple seasons in the db at once
-  season: t.int().references(() => SeasonCaches.id),
-  homeTeam: t.text(), // in practice, TeamCodeType, but not worrying about unknown team codes
-  awayTeam: t.text(), // in practice, TeamCodeType, but not worrying about unknown team codes
-  homeScore: t.int(),
-  awayScore: t.int(),
+  season: t
+    .int()
+    .references(() => SeasonCaches.id)
+    .notNull(),
+  homeTeam: t.text().notNull(), // in practice, TeamCodeType, but not worrying about unknown team codes
+  awayTeam: t.text().notNull(), // in practice, TeamCodeType, but not worrying about unknown team codes
+  homeScore: t.int().notNull().default(0),
+  awayScore: t.int().notNull().default(0),
   // Yes, playedOn is redundant / less info; including both for ease of use; in practice, we use playedOn
   // far more often (UI), with playedAt relevant only for SeasonCache.expiresAt calculation, and we're not keeping these in sync,
   // so figured convenience at no real cost
-  playedOn: t.text(), // YYYY-MM-DD of game date, implicitly in eastern time
-  playedAt: t.int(), // ISO string of start time
+  playedOn: t.text().notNull(), // YYYY-MM-DD of game date, implicitly in eastern time
+  playedAt: t.int().notNull(), // ISO string of start time
 });
