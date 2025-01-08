@@ -4,8 +4,6 @@ import { Toucan } from "toucan-js";
 
 export const onRequest = defineMiddleware((ctx, next) => {
   if (import.meta.env.PROD && !ctx.isPrerendered) {
-    console.log(ctx.locals, "IN OUR MIDDLEWARE");
-
     const Sentry = new Toucan({
       dsn: PUBLIC_SENTRY_DSN!,
       // CF execution context: https://github.com/withastro/adapters/blob/83cedad780bf7a23ae9f6ca0c44a7b7f1c1767e1/packages/cloudflare/src/entrypoints/server.ts

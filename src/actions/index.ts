@@ -21,11 +21,6 @@ export const server = {
       ctx,
     ): Promise<{ games: Game[]; expiresAt?: number }> => {
       try {
-        if (import.meta.env.PROD) {
-          console.log("EXPLODING NOW");
-          throw new Error("BOOM");
-        }
-
         const dbClient = Db({
           url: TURSO_URL,
           authToken: TURSO_AUTH_TOKEN,
@@ -163,9 +158,6 @@ export const server = {
         }
 
         if (import.meta.env.PROD) {
-          console.log("ATTEMPTING TO CAPTURE ERR");
-          // @ts-ignore
-          console.log(ctx.locals.Sentry);
           // @ts-ignore
           ctx.locals.Sentry?.captureException?.(err);
         }
