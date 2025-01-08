@@ -4,11 +4,16 @@ import tailwind from "@astrojs/tailwind";
 import cloudflare from "@astrojs/cloudflare";
 import sentry from "@sentry/astro";
 import { loadEnv } from "vite";
-import db from "@astrojs/db";
 const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
   "",
+);
+
+console.log(
+  PUBLIC_DEPLOY_ENV,
+  process.env.NODE_ENV,
+  "SHOWING CORRECTLY IN BUILD YEA?",
 );
 
 // if running locally, no sentry
@@ -24,15 +29,19 @@ export default defineConfig({
   ...(PUBLIC_DEPLOY_ENV && {
     site: siteByEnv[PUBLIC_DEPLOY_ENV],
   }),
-  integrations: [react(), tailwind(), sentry({
-    dsn: PUBLIC_SENTRY_DSN,
-    ...(SENTRY_AUTH_TOKEN && {
-      sourceMapsUploadOptions: {
-        project: "nba-surprise-team-tracker",
-        authToken: SENTRY_AUTH_TOKEN,
-      },
+  integrations: [
+    react(),
+    tailwind(),
+    sentry({
+      dsn: PUBLIC_SENTRY_DSN,
+      ...(SENTRY_AUTH_TOKEN && {
+        sourceMapsUploadOptions: {
+          project: "nba-surprise-team-tracker",
+          authToken: SENTRY_AUTH_TOKEN,
+        },
+      }),
     }),
-  }), db()],
+  ],
   experimental: {
     svg: true,
   },

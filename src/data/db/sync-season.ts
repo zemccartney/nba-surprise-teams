@@ -1,14 +1,16 @@
-import { asDrizzleTable } from "@astrojs/db/utils";
-import { db, eq } from "astro:db";
-import { Games } from "./config";
 import Fs from "node:fs/promises";
-import { SEASONS } from "../src/data";
-import * as Utils from "../src/utils";
+// TODO Investigate; astro clipped these from drizzle-orm's export, no idea why
+import { eq } from "drizzle-orm/expressions";
+import { SEASONS } from "..";
+import * as Utils from "../../utils";
+import Db from ".";
+import { Games } from "./schema";
 
 // TODO untested
 // TODO Document WHEN to run (as part of cron?)
 
-// astro db execute db/sync-season --remote
+// TODO Might need to manually recreate db client?
+// npx tsx ./src/db/sync-season
 // Overwrites our constants with db copy
 // Will need to prettify, assume happens elsewhere (manually or as part of script)
 
@@ -23,11 +25,9 @@ export default async () => {
     throw new Error("Not currently in-season, no game results to refresh");
   }
 
-  const GT = asDrizzleTable("Games", Games);
-  const games = await db
-    .select()
-    .from(GT)
-    .where(eq(GT.season, currentSeason.id));
+  const games = await Db.select()
+    .from(Games)
+    .where(eq(Games.season, currentSeason.id));
 
   const tpl = `
     import type { Game } from "../..";

@@ -1,3 +1,5 @@
+import { Games } from "./db/schema";
+
 // https://stackoverflow.com/a/55505556
 // unique three-letter code
 export const TEAM_CODES = {
@@ -129,16 +131,7 @@ export const TEAM_SEASONS: readonly TeamSeason[] = [
   },
 ] as const;
 
-// TODO Possible to not duplicate db schema here?
-export interface Game {
-  season: Season["id"];
-  homeTeam: TeamCodeType;
-  awayTeam: TeamCodeType;
-  homeScore: number;
-  awayScore: number;
-  playedOn: string; // YYYY-MM-DD of game date, implicitly in eastern time
-  playedAt: number; // ISO string of start time
-}
+export type Game = Omit<typeof Games.$inferInsert, "id">;
 
 /* Service Methods */
 
