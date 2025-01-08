@@ -1,13 +1,12 @@
 import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client/web";
 
-console.log(import.meta.env, process?.env, "WHAT THE HELL IS GOING ON HERE");
+/*
+  Must be factored as a factory due to Cloudflare's model, per https://docs.astro.build/en/guides/environment-variables/#limitations
+  "@astrojs/cloudflare is a bit different than other adapters. Environment variables are scoped to the request, unlike Node.js where it’s global."
+*/
+export default (...args: Parameters<typeof createClient>) => {
+  const turso = createClient(...args);
 
-const turso = createClient({
-  url: import.meta.env.TURSO_URL!,
-  authToken: import.meta.env.TURSO_AUTH_TOKEN,
-});
-
-const db = drizzle(turso);
-
-export default db;
+  return drizzle(turso);
+};

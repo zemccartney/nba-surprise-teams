@@ -1,10 +1,9 @@
 import "dotenv/config";
 import Fs from "node:fs/promises";
 import { eq } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client/web";
 import { SEASONS } from "./src/data";
 import * as Utils from "./src/utils";
+import Db from "./src/data/db";
 import { Games } from "./src/data/db/schema";
 
 // TODO untested
@@ -14,12 +13,10 @@ import { Games } from "./src/data/db/schema";
 // Overwrites our constants with db copy
 // Will need to prettify, assume happens elsewhere (manually or as part of script)
 
-const turso = createClient({
+const dbClient = Db({
   url: process.env.TURSO_URL!,
   authToken: process.env.TURSO_AUTH_TOKEN!,
 });
-
-const Db = drizzle(turso);
 
 const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
 const currentSeason = SEASONS.find(
@@ -31,7 +28,8 @@ if (!currentSeason) {
   throw new Error("Not currently in-season, no game results to refresh");
 }
 
-const games = await Db.select()
+const games = await dbClient
+  .select()
   .from(Games)
   .where(eq(Games.season, currentSeason.id));
 

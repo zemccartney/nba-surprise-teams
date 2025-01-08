@@ -58,11 +58,26 @@ export default defineConfig({
   }),
   env: {
     schema: {
+      PUBLIC_SENTRY_DSN: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
       SIM_FULL_SEASON: envField.boolean({
         context: "server",
         access: "public",
         optional: true,
         default: false,
+      }),
+      TURSO_URL: envField.string({
+        context: "server",
+        access: "secret",
+        optional: false,
+      }),
+      TURSO_AUTH_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+        optional: process.env.NODE_ENV !== "production",
       }),
     },
   },

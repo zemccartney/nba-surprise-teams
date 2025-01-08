@@ -1,6 +1,6 @@
-console.log("FOREVER");
 import { defineAction, ActionError } from "astro:actions";
 import { z } from "astro:schema";
+import { TURSO_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
 // TODO Investigate; astro clipped these from drizzle-orm's export, no idea why
 import { lte, gte, eq, and } from "drizzle-orm/expressions";
 import Db from "../data/db";
@@ -17,9 +17,13 @@ export const server = {
       seasonId: z.number(),
     }),
     handler: async (input): Promise<{ games: Game[]; expiresAt?: number }> => {
-      console.log("GETTING TO OUR ACTION?");
-
       try {
+        console.log(TURSO_URL, TURSO_AUTH_TOKEN, "IN OUR ACTION");
+        const dbClient = Db({
+          url: TURSO_URL,
+          authToken: TURSO_AUTH_TOKEN,
+        });
+
         const season = getSeasonById(input.seasonId);
 
         if (!season) {
@@ -56,7 +60,8 @@ export const server = {
         }
 
         const seasonCache = (
-          await Db.select()
+          await dbClient
+            .select()
             .from(SeasonCaches)
             .where(eq(SeasonCaches.id, season.id))
         )[0];
@@ -67,7 +72,8 @@ export const server = {
         if (prevExpiresAt && prevExpiresAt > now) {
           return {
             expiresAt: prevExpiresAt,
-            games: await Db.select()
+            games: await dbClient
+              .select()
               .from(Games)
               .where(
                 and(
@@ -93,8 +99,9 @@ export const server = {
           // No next expiresAt means no more upcoming relevant games this season
           const nextExpiresAt = refreshed.expiresAt ?? now + WEEK_IN_MS; // mark as cacheable for a while, arbitrarily a week; TODO revisit, do something actually smart; data is constant now
 
-          await Db.batch([
-            Db.insert(SeasonCaches)
+          await dbClient.batch([
+            dbClient
+              .insert(SeasonCaches)
               .values([
                 {
                   id: season.id,
@@ -108,8 +115,8 @@ export const server = {
               }),
             // Yes, this is pretty gross, but didn't feel like dealing with an upsert; data's not that precious,
             // opted to keep simple and do a "hard refresh"
-            Db.delete(Games).where(eq(Games.season, season.id)),
-            Db.insert(Games).values(refreshed.games),
+            dbClient.delete(Games).where(eq(Games.season, season.id)),
+            dbClient.insert(Games).values(refreshed.games),
           ]);
 
           return {
@@ -123,7 +130,8 @@ export const server = {
             // don't surface expiresAt, don't support caching here; on the one hand, end users
             // will continue to trigger errors; on the other, end users will receive fresh data
             // ASAP from using the site. Does this work out in practice?
-            games: await Db.select()
+            games: await dbClient
+              .select()
               .from(Games)
               .where(
                 and(
@@ -138,8 +146,6 @@ export const server = {
           };
         }
       } catch (err) {
-        console.log("LOGS ACTUALLY WORKING?");
-
         if (import.meta.env.DEV) {
           console.log(err);
         }
