@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import cloudflare from "@astrojs/cloudflare";
 import sentry from "@sentry/astro";
 import { loadEnv } from "vite";
+import inoxToolswhen from "@inox-tools/astro-when";
 const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
@@ -36,6 +37,7 @@ export default defineConfig({
         },
       }),
     }),
+    inoxToolswhen(),
   ],
   experimental: {
     svg: true,

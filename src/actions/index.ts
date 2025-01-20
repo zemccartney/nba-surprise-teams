@@ -1,8 +1,12 @@
+// @ts-nocheck
+
 import { defineAction, ActionError } from "astro:actions";
+import { whenAmI, When } from "@it-astro:when";
 import { z } from "astro:schema";
 import { TURSO_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
 // TODO Investigate; astro clipped these from drizzle-orm's export, no idea why
 import { lte, gte, eq, and } from "drizzle-orm/expressions";
+import * as Sentry from "@sentry/cloudflare";
 import Db from "../data/db";
 import { SeasonCaches, Games } from "../data/db/schema";
 import { getSeasonById } from "../data";
@@ -16,11 +20,10 @@ export const server = {
     input: z.object({
       seasonId: z.number(),
     }),
-    handler: async (
-      input,
-      ctx,
-    ): Promise<{ games: Game[]; expiresAt?: number }> => {
+    handler: async (input): Promise<{ games: Game[]; expiresAt?: number }> => {
       try {
+        throw new Error("BOOM");
+
         const dbClient = Db({
           url: TURSO_URL,
           ...(TURSO_AUTH_TOKEN && { authToken: TURSO_AUTH_TOKEN }),
@@ -128,9 +131,8 @@ export const server = {
         } catch (err) {
           // Serve our copy of data as a fallback, but report error for remediation
           // Better to keep site visibly working, even if data outdated
-          if (import.meta.env.PROD) {
-            // @ts-ignore
-            ctx.locals.Sentry?.captureException?.(err);
+          if (whenAmI === When.Server) {
+            Sentry?.captureException?.(err);
           }
 
           return {
@@ -153,13 +155,14 @@ export const server = {
           };
         }
       } catch (err) {
-        if (import.meta.env.DEV) {
+        console.log(err.message, "EXPLODED", whenAmI, "WHEN AM I IN ACTION");
+
+        if (whenAmI === When.DevServer) {
           console.log(err);
         }
 
-        if (import.meta.env.PROD) {
-          // @ts-ignore
-          ctx.locals.Sentry?.captureException?.(err);
+        if (whenAmI === When.Server) {
+          Sentry.captureException?.(err);
         }
 
         throw err;
