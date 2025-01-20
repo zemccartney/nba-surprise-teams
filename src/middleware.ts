@@ -1,12 +1,11 @@
 import { defineMiddleware } from "astro:middleware";
-import { whenAmI, When } from "@it-astro:when";
 import { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN } from "astro:env/client";
 import * as Sentry from "@sentry/cloudflare";
 
 export const onRequest = defineMiddleware((ctx, next) => {
-  console.log("IN OUR MIDDLEWARE", whenAmI);
+  const whenServer = import.meta.env.PROD && !ctx.isPrerendered;
 
-  if (whenAmI !== When.Server) {
+  if (!whenServer) {
     return next();
   }
   const requestHandlerOptions = {

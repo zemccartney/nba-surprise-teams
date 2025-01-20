@@ -1,7 +1,5 @@
 // @ts-nocheck
-
 import { defineAction, ActionError } from "astro:actions";
-import { whenAmI, When } from "@it-astro:when";
 import { z } from "astro:schema";
 import { TURSO_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
 // TODO Investigate; astro clipped these from drizzle-orm's export, no idea why
@@ -131,7 +129,7 @@ export const server = {
         } catch (err) {
           // Serve our copy of data as a fallback, but report error for remediation
           // Better to keep site visibly working, even if data outdated
-          if (whenAmI === When.Server) {
+          if (import.meta.env.PROD) {
             Sentry?.captureException?.(err);
           }
 
@@ -155,13 +153,11 @@ export const server = {
           };
         }
       } catch (err) {
-        console.log(err.message, "EXPLODED", whenAmI, "WHEN AM I IN ACTION");
-
-        if (whenAmI === When.DevServer) {
+        if (import.meta.env.DEV) {
           console.log(err);
         }
 
-        if (whenAmI === When.Server) {
+        if (import.meta.env.PROD) {
           Sentry.captureException?.(err);
         }
 
