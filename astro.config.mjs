@@ -85,6 +85,7 @@ export default defineConfig({
       },
     },
     ssr: {
+      // needed for sentry cloudflare
       external: ["node:async_hooks"],
     },
   },
