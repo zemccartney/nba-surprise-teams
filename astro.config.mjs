@@ -101,5 +101,8 @@ export default defineConfig({
         "react-dom/server": "react-dom/server.edge",
       },
     },
+    ssr: {
+      external: ["node:async_hooks"],
+    },
   },
 });
