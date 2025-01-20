@@ -3,6 +3,8 @@ import { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN } from "astro:env/client";
 import * as Sentry from "@sentry/cloudflare";
 
 export const onRequest = defineMiddleware((ctx, next) => {
+  // middleware are called during static page generation, too; since building occurs in a node
+  // env and we wouldn't need sentry at buildtime anyway, we passthrough if prerendering
   const whenServer = import.meta.env.PROD && !ctx.isPrerendered;
 
   if (!whenServer) {
