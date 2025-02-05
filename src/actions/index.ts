@@ -1,10 +1,10 @@
 import { defineAction, ActionError } from "astro:actions";
 import { z } from "astro:schema";
 import { TURSO_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
+import { drizzle } from "drizzle-orm/libsql/web";
 // TODO Investigate; astro clipped these from drizzle-orm's export, no idea why
 import { lte, gte, eq, and } from "drizzle-orm/expressions";
 import * as Sentry from "@sentry/cloudflare";
-import Db from "../data/db";
 import { SeasonCaches, Games } from "../data/db/schema";
 import { getSeasonById } from "../data";
 import type { Game, Loader } from "../data";
@@ -19,9 +19,11 @@ export const server = {
     }),
     handler: async (input): Promise<{ games: Game[]; expiresAt?: number }> => {
       try {
-        const dbClient = Db({
-          url: TURSO_URL,
-          ...(TURSO_AUTH_TOKEN && { authToken: TURSO_AUTH_TOKEN }),
+        const dbClient = drizzle({
+          connection: {
+            url: TURSO_URL,
+            ...(TURSO_AUTH_TOKEN && { authToken: TURSO_AUTH_TOKEN }),
+          },
         });
 
         const season = getSeasonById(input.seasonId);

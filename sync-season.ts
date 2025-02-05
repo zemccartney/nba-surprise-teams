@@ -1,9 +1,9 @@
 import "dotenv/config";
 import Fs from "node:fs/promises";
+import { drizzle } from "drizzle-orm/libsql/web";
 import { eq } from "drizzle-orm";
 import { SEASONS } from "./src/data";
 import * as Utils from "./src/utils";
-import Db from "./src/data/db";
 import { Games } from "./src/data/db/schema";
 
 // TODO untested
@@ -13,9 +13,11 @@ import { Games } from "./src/data/db/schema";
 // Overwrites our constants with db copy
 // Will need to prettify, assume happens elsewhere (manually or as part of script)
 
-const dbClient = Db({
-  url: process.env.TURSO_URL!,
-  authToken: process.env.TURSO_AUTH_TOKEN!,
+const dbClient = drizzle({
+  connection: {
+    url: process.env.TURSO_URL!,
+    authToken: process.env.TURSO_AUTH_TOKEN!,
+  },
 });
 
 const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();

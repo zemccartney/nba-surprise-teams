@@ -4,11 +4,10 @@ import tailwind from "@astrojs/tailwind";
 import cloudflare from "@astrojs/cloudflare";
 import sentry from "@sentry/astro";
 import { loadEnv } from "vite";
-const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN } = loadEnv(
-  process.env.NODE_ENV,
-  process.cwd(),
-  "",
-);
+const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN, TURSO_URL } =
+  loadEnv(process.env.NODE_ENV, process.cwd(), "");
+
+import tursoPatch from "./db-int";
 
 const siteByEnv = {
   preview: "https://dev.nba-surprise-teams.pages.dev",
@@ -23,16 +22,32 @@ export default defineConfig({
   integrations: [
     react(),
     tailwind(),
-    sentry({
-      dsn: PUBLIC_SENTRY_DSN,
-      environment: PUBLIC_DEPLOY_ENV,
-      ...(SENTRY_AUTH_TOKEN && {
-        sourceMapsUploadOptions: {
-          project: "nba-surprise-team-tracker",
-          authToken: SENTRY_AUTH_TOKEN,
-        },
-      }),
-    }),
+    ...(SENTRY_AUTH_TOKEN
+      ? [
+          sentry({
+            dsn: PUBLIC_SENTRY_DSN,
+            environment: PUBLIC_DEPLOY_ENV,
+            sourceMapsUploadOptions: {
+              project: "nba-surprise-team-tracker",
+              authToken: SENTRY_AUTH_TOKEN,
+            },
+          }),
+        ]
+      : []),
+    ...(process.env.NODE_ENV === "development"
+      ? [
+          tursoPatch({
+            migrateOnStart: true,
+            dbConfig: {
+              connection: {
+                // TODO expects http://127.0.0.1:8080; ideally integration could set? Unclear how
+                // Possible with env middleware?
+                url: TURSO_URL,
+              },
+            },
+          }),
+        ]
+      : []),
   ],
   experimental: {
     svg: true,
