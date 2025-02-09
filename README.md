@@ -34,6 +34,13 @@ To run locally:
   - recolored as needed
 - Hourglass icon from https://phosphoricons.com/
 
+### Cloudflare
+
+- Semi-regularly review and update node compatibility date: https://developers.cloudflare.com/workers/configuration/compatibility-flags/#setting-compatibility-flags
+  - Setting in CF dashboard, work build settings
+
+**TODO: Figure out how wrangler file used for Pages config... is it? Had been seeing build log ignoring file, reporting as invalid toml even though json?**
+
 ## Dependencies
 
 TODO Figure out sensible, repeatable practice
