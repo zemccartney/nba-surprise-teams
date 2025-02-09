@@ -18,7 +18,11 @@ export const getCurrentDateEastern = () => {
 };
 
 export const getCurrentEasternYYYYMMDD = () => {
-  return getCurrentDateEastern().split("T")[0]!; // TODO Possible to not need this assertion? Stricter TS linting?
+  // non-null b/c taking for granted that getCurrentDateEastern will always
+  // return a string containing a T such that 0th-indexed item will always be a value
+  // ISO string upholds this contract
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return getCurrentDateEastern().split("T")[0]!;
 };
 
 export const getTheme = () => resolveConfig(tailwindConfig).theme;
@@ -47,6 +51,7 @@ export const projectedWins = (record: TeamRecord) =>
 export const isSurprise = (team: TeamStats) => team.w >= toSurprise(team);
 
 export const isEliminated = (team: TeamStats) =>
+  // number of wins team still needs is greater than the number of games they have left
   toSurprise(team) - team.w > 82 - (team.w + team.l);
 
 export const pace = (team: TeamStats) => {

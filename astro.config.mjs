@@ -4,10 +4,11 @@ import tailwind from "@astrojs/tailwind";
 import cloudflare from "@astrojs/cloudflare";
 import sentry from "@sentry/astro";
 import { loadEnv } from "vite";
-const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN, TURSO_URL } =
-  loadEnv(process.env.NODE_ENV, process.cwd(), "");
-
-import tursoPatch from "./db-int";
+const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN } = loadEnv(
+  process.env.NODE_ENV,
+  process.cwd(),
+  "",
+);
 
 const siteByEnv = {
   preview: "https://dev.nba-surprise-teams.pages.dev",
@@ -30,20 +31,6 @@ export default defineConfig({
             sourceMapsUploadOptions: {
               project: "nba-surprise-team-tracker",
               authToken: SENTRY_AUTH_TOKEN,
-            },
-          }),
-        ]
-      : []),
-    ...(process.env.NODE_ENV === "development"
-      ? [
-          tursoPatch({
-            migrateOnStart: true,
-            dbConfig: {
-              connection: {
-                // TODO expects http://127.0.0.1:8080; ideally integration could set? Unclear how
-                // Possible with env middleware?
-                url: TURSO_URL,
-              },
             },
           }),
         ]
@@ -94,7 +81,6 @@ export default defineConfig({
       // https://github.com/withastro/adapters/pull/436#issuecomment-2525190557
       // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
       // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
-      // @ts-ignore
       alias: import.meta.env.PROD && {
         "react-dom/server": "react-dom/server.edge",
       },

@@ -70,12 +70,8 @@
           "name": "Games_season_SeasonCaches_id_fk",
           "tableFrom": "Games",
           "tableTo": "SeasonCaches",
-          "columnsFrom": [
-            "season"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["season"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

@@ -52,21 +52,20 @@ export const server = {
         // in pulling data from external sources
         if (currentYYYYMMDD > season.endDate) {
           // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
-          const staticGames = (await import(`../data/${season.id}/games.ts`))
-            .default as Game[];
+          const { default: staticGames } = await import(
+            `../data/${season.id}/games.ts`
+          );
 
           return {
-            expiresAt: now + WEEK_IN_MS, // mark as cacheable for a while, arbitrarily a week; TODO revisit, do something actually smart; data is constant now
+            expiresAt: now + WEEK_IN_MS, // TODO revisit; data is static at this point; can cache forever? year?
             games: staticGames,
           };
         }
 
-        const seasonCache = (
-          await dbClient
-            .select()
-            .from(SeasonCaches)
-            .where(eq(SeasonCaches.id, season.id))
-        )[0];
+        const [seasonCache] = await dbClient
+          .select()
+          .from(SeasonCaches)
+          .where(eq(SeasonCaches.id, season.id));
 
         const prevExpiresAt = seasonCache?.expiresAt;
 
@@ -92,11 +91,12 @@ export const server = {
         // No set cache expiration or our backup of remote data is expired; refresh
 
         // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
-        const loader = (await import(`../data/seasons/${season.id}/loader.ts`))
-          .default as Loader;
+        const { default: loader } = await import(
+          `../data/seasons/${season.id}/loader.ts`
+        );
 
         try {
-          const refreshed = await loader();
+          const refreshed = await (loader as Loader)();
 
           // No next expiresAt means no more upcoming relevant games this season
           const nextExpiresAt = refreshed.expiresAt ?? now + WEEK_IN_MS; // mark as cacheable for a while, arbitrarily a week; TODO revisit, do something actually smart; data is constant now
@@ -125,11 +125,11 @@ export const server = {
             expiresAt: nextExpiresAt,
             games: refreshed.games,
           };
-        } catch (err) {
+        } catch (error) {
           // Serve our copy of data as a fallback, but report error for remediation
           // Better to keep site visibly working, even if data outdated
           if (import.meta.env.PROD) {
-            Sentry?.captureException?.(err);
+            Sentry?.captureException?.(error);
           }
 
           return {
@@ -143,7 +143,6 @@ export const server = {
                 and(
                   eq(Games.season, season.id),
                   and(
-                    // TODO Does YYYY-MM-DD comparison still work w/ libsql?
                     gte(Games.playedOn, season.startDate),
                     lte(Games.playedOn, season.startDate),
                   ),
@@ -151,16 +150,16 @@ export const server = {
               ),
           };
         }
-      } catch (err) {
+      } catch (error) {
         if (import.meta.env.DEV) {
-          console.log(err);
+          console.log(error);
         }
 
         if (import.meta.env.PROD) {
-          Sentry.captureException?.(err);
+          Sentry.captureException?.(error);
         }
 
-        throw err;
+        throw error;
       }
     },
   }),

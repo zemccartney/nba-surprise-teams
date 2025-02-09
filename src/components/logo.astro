@@ -1,19 +1,22 @@
 ---
+import type { ImageMetadata } from "astro";
+import type { TeamCode } from "../data";
+
 import Image from "astro/components/Image.astro";
 import { getTeamById } from "../data";
-import type { TeamCodeType } from "../data";
 
 interface Props {
   class?: string;
-  team: TeamCodeType;
+  teamCode: TeamCode;
   width?: number;
   height?: number;
 }
 
+// TODO Rename team to teamId?
 // width and height defaults are actual dimensions of svg files, downloaded via https://twemoji-cheatsheet.vercel.app/
-const { class: className, team, width = 36, height = 36 } = Astro.props;
+const { class: className, teamCode, width = 36, height = 36 } = Astro.props;
 
-const emojiByTeam: Record<TeamCodeType, string> = {
+const emojiByTeam: Record<TeamCode, string> = {
   BKN: "dragon",
   DET: "racing-car",
   POR: "hiking-boot",
@@ -29,19 +32,20 @@ let emojiSrc;
 
 try {
   emojiSrc = import(
-    `../assets/images/emoji/${emojiByTeam[team]}.svg`
+    `../assets/images/emoji/${emojiByTeam[teamCode]}.svg`
     // https://docs.astro.build/en/reference/modules/astro-assets/#src-required
   ) as Promise<{ default: ImageMetadata }>;
 } catch {
   emojiSrc = import("../assets/images/emoji/question.svg");
 }
----
 
-{/* TODO Possible to not use the ! assertion? */}
+const t = getTeamById(teamCode);
+const alt = t ? `Logo for ${t.name}` : `Question mark logo`;
+---
 
 <Image
   src={emojiSrc}
-  alt={`Logo for ${getTeamById(team)!.name}`}
+  alt={alt}
   class:list={[className]}
   width={width}
   height={height}

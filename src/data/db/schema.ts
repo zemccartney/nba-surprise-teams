@@ -19,8 +19,8 @@ export const Games = table("Games", {
     .int()
     .references(() => SeasonCaches.id)
     .notNull(),
-  homeTeam: t.text().notNull(), // in practice, TeamCodeType, but not worrying about unknown team codes
-  awayTeam: t.text().notNull(), // in practice, TeamCodeType, but not worrying about unknown team codes
+  homeTeam: t.text().notNull(), // in practice, TeamCode, but not worrying about unknown team codes
+  awayTeam: t.text().notNull(), // in practice, TeamCode, but not worrying about unknown team codes
   homeScore: t.int().notNull().default(0),
   awayScore: t.int().notNull().default(0),
   // Yes, playedOn is redundant / less info; including both for ease of use; in practice, we use playedOn

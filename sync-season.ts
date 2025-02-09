@@ -15,7 +15,9 @@ import { Games } from "./src/data/db/schema";
 
 const dbClient = drizzle({
   connection: {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     url: process.env.TURSO_URL!,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     authToken: process.env.TURSO_AUTH_TOKEN!,
   },
 });
@@ -38,7 +40,13 @@ const games = await dbClient
 const tpl = `
     import type { Game } from "../..";
 
-    export default ${games.map(({ id, ...g }) => g)};
+    export default ${games.map(
+      ({
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        id,
+        ...g
+      }) => g,
+    )};
   `;
 
 // TODO correct path resolution

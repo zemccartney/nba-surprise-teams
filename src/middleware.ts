@@ -12,16 +12,16 @@ export const onRequest = defineMiddleware((ctx, next) => {
   }
   const requestHandlerOptions = {
     options: {
-      dsn: PUBLIC_SENTRY_DSN!,
+      dsn: PUBLIC_SENTRY_DSN,
       tracesSampleRate: 0.1,
       environment: PUBLIC_DEPLOY_ENV,
     },
-    // CF execution context: https://github.com/withastro/adapters/blob/83cedad780bf7a23ae9f6ca0c44a7b7f1c1767e1/packages/cloudflare/src/entrypoints/server.ts
-    // @ts-ignore
+
+    // @ts-expect-error : "Property 'runtime' does not exist on type 'Locals'" ; provided by CF execution context: https://github.com/withastro/adapters/blob/83cedad780bf7a23ae9f6ca0c44a7b7f1c1767e1/packages/cloudflare/src/entrypoints/server.ts
     context: ctx.locals.runtime.ctx,
     request: ctx.request,
   };
 
-  // @ts-ignore
+  // @ts-expect-error : Not sure viable to tell Typescript that requestHandlerOptions will be correctly typed in a Cloudflare environment
   return Sentry.wrapRequestHandler(requestHandlerOptions, () => next());
 });

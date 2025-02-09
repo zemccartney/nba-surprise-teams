@@ -50,7 +50,7 @@ const TooltipContent = ({
   payload: [{ payload: DataPoint }];
   label: string;
 }) => {
-  if (active && payload && payload.length) {
+  if (active && payload && payload.length > 0) {
     const point = payload[0].payload;
 
     return (
@@ -80,8 +80,6 @@ const TooltipContent = ({
       </div>
     );
   }
-
-  return null;
 };
 
 const ReferenceLabel = ({ toSurprise, ...rest }: { toSurprise: number }) => {
@@ -153,7 +151,7 @@ export default function PaceChart({
       l: 0,
     };
 
-    games.forEach((game) => {
+    for (const game of games) {
       // TODO Abstract this check? Used twice, essentially same pattern in our action, too
       if (
         game.homeTeam === teamSeason.team ||
@@ -173,7 +171,7 @@ export default function PaceChart({
           _stats: { ...record, ...teamSeason },
         });
       }
-    });
+    }
 
     return points;
   }, [games, teamSeason]);
@@ -220,7 +218,7 @@ export default function PaceChart({
           axisLine={false}
           dataKey="projectedWins"
           domain={[0, 82]}
-          // @ts-ignore - necessary b/c label expects an element, but passes props for you under the hood
+          // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<YAxisLabel />}
           tick={{
             fill: theme.colors.lime[500],
@@ -230,7 +228,7 @@ export default function PaceChart({
           tickLine={{ stroke: theme.colors.lime[200] }}
           tickMargin={12}
         />
-        {/* @ts-ignore - necessary b/c Tooltip expects an element, but passes props for you under the hood */}
+        {/* @ts-expect-error - necessary b/c Tooltip expects an element, but passes props for you under the hood */}
         <Tooltip content={<TooltipContent />} cursor={false} />
         <defs>
           <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">

@@ -6,7 +6,6 @@ const { href, class: classStr, ...attrs } = Astro.props;
 
 <script>
   const currentPath = globalThis.location.pathname;
-  // TODO I'm sure this is a naive check, but good enough for now; consider improving when not in a time crunch
   const navLink = document.querySelector(`nav > a[href="${currentPath}"]`);
   navLink?.classList.add("active");
 </script>
