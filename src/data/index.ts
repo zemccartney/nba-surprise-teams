@@ -15,10 +15,10 @@ export const TEAM_CODES = {
 } as const;
 
 // https://www.totaltypescript.com/books/total-typescript-essentials/deriving-types#using-as-const-for-javascript-style-enums
-export type TeamCodeType = (typeof TEAM_CODES)[keyof typeof TEAM_CODES];
+export type TeamCode = (typeof TEAM_CODES)[keyof typeof TEAM_CODES];
 
 export interface Team {
-  id: TeamCodeType;
+  id: TeamCode;
   name: string;
 }
 
@@ -80,7 +80,7 @@ export interface TeamSeason {
   overUnder: number;
   // TODO Should be teamId and seasonId; update and run check, sweep
   season: Season["id"];
-  team: TeamCodeType;
+  team: TeamCode;
 }
 
 export const TEAM_SEASONS: readonly TeamSeason[] = [
@@ -138,7 +138,7 @@ export type Game = Omit<typeof Games.$inferSelect, "id">;
 export const getSeasonById = (id: Season["id"]) =>
   SEASONS.find((s) => s.id === id);
 
-export const getTeamById = (id: TeamCodeType) => TEAMS.find((t) => t.id === id);
+export const getTeamById = (id: TeamCode) => TEAMS.find((t) => t.id === id);
 
 export const getTeamsInSeason = (id: Season["id"]): Team[] =>
   TEAM_SEASONS.filter((ts) => ts.season === id)
@@ -148,7 +148,7 @@ export const getTeamsInSeason = (id: Season["id"]): Team[] =>
     )
     .filter(Boolean); // Make TS happy
 
-export const getTeamSeason = (teamId: TeamCodeType, seasonId: Season["id"]) =>
+export const getTeamSeason = (teamId: TeamCode, seasonId: Season["id"]) =>
   TEAM_SEASONS.find((ts) => ts.season === seasonId && ts.team === teamId);
 
 /* Loader Utils */

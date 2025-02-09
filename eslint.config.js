@@ -1,13 +1,34 @@
+import Path from "node:path";
+import Url from "node:url";
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import eslintPluginReact from "eslint-plugin-react";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { includeIgnoreFile } from "@eslint/compat";
 
-export default [
+const __filename = Url.fileURLToPath(import.meta.url);
+const __dirname = Path.dirname(__filename);
+const gitignorePath = Path.resolve(__dirname, ".gitignore");
+
+export default tseslint.config(
+  includeIgnoreFile(gitignorePath),
+  eslint.configs.recommended,
+  tseslint.configs.strict,
+  tseslint.configs.stylistic,
   ...eslintPluginAstro.configs.recommended,
   ...eslintPluginAstro.configs["jsx-a11y-strict"],
-  eslintPluginUnicorn.configs["flat/all"],
+  eslintPluginUnicorn.configs["flat/recommended"],
+  {
+    files: ["*.{js,ts,mjs}"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
   {
     rules: {
       "unicorn/prevent-abbreviations": ["off"],
@@ -27,4 +48,4 @@ export default [
     ...eslintPluginReact.configs.flat.recommended,
   },
   eslintConfigPrettier,
-];
+);

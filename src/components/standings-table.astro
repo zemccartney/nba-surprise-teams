@@ -7,7 +7,7 @@ import Popover from "./popover";
 import ResultEmoji from "./result-emoji.astro";
 import Table from "./table.astro";
 import { TEAMS, getTeamSeason } from "../data";
-import type { TeamCodeType, Team } from "../data";
+import type { TeamCode, Team } from "../data";
 import * as Utils from "../utils";
 import type { TeamStats } from "../utils";
 
@@ -26,7 +26,6 @@ const { error, data } = await Astro.callAction(actions.getSeasonData, {
 });
 
 if (!error) {
-  // TODO Need to handle lookup errors?
   const teams = TEAMS.map((team) => {
     const inSeason = getTeamSeason(team.id, seasonId);
 
@@ -40,9 +39,7 @@ if (!error) {
     return false;
   }).filter(Boolean);
 
-  const records: {
-    [key in TeamCodeType]?: TeamRow;
-  } = {};
+  const records: Partial<Record<TeamCode, TeamRow>> = {};
 
   for (const team of teams) {
     records[team.id] = {
@@ -57,14 +54,17 @@ if (!error) {
   for (const game of games) {
     const homeWin = game.homeScore > game.awayScore;
 
-    // TODO Possible to not have to resort to ! here?
+    // Some games here will have team codes outside the ones we've stored in the app so far.
+    // That's fine; TS doesn't need to care, will gradually add in codes as seasons call for them
 
     if (game.homeTeam in records) {
-      records[game.homeTeam as TeamCodeType]![homeWin ? "w" : "l"] += 1;
+      // @ts-expect-error : Getting "Object possibly undefined" error; game.homeTeam as TeamCode yields TeamRow | undefined, not sure why
+      records[game.homeTeam as TeamCode][homeWin ? "w" : "l"] += 1;
     }
 
     if (game.awayTeam in records) {
-      records[game.awayTeam as TeamCodeType]![homeWin ? "l" : "w"] += 1;
+      // @ts-expect-error : Getting "Object possibly undefined" error; game.homeTeam as TeamCode yields TeamRow | undefined, not sure why
+      records[game.awayTeam as TeamCode][homeWin ? "l" : "w"] += 1;
     }
   }
 
@@ -120,8 +120,8 @@ if (!error) {
             <Popover client:load>
               <p class="mb-1 font-bold underline">Pace</p>
               <p>
-                Current Projected Wins - Wins needed to surprise (10 wins above a team's
-                preseason over/under (rounded up))
+                Current Projected Wins - Wins needed to surprise (10 wins above
+                a team's preseason over/under (rounded up))
               </p>
             </Popover>
           </th>
@@ -133,7 +133,7 @@ if (!error) {
             <tr>
               <th scope="row">
                 <div class="flex flex-row items-center gap-4">
-                  <Logo team={team.id} />
+                  <Logo teamCode={team.id} />
                   <Link class="relative" href={`/${seasonId}/${team.id}`}>
                     <span class="hidden md:inline">{team.name}</span>
                     <span class="md:hidden">{team.id}</span>

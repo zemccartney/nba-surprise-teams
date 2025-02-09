@@ -1,1 +1,9 @@
 package-lock.json
+
+# build output
+dist/
+
+# generated types
+.astro/
+
+.wrangler/

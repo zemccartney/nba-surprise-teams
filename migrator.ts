@@ -9,10 +9,14 @@ import Config from "./drizzle.config";
 
 const db = drizzle({
   connection: {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     url: process.env.TURSO_URL!,
-    authToken: process.env.TURSO_AUTH_TOKEN!,
+    ...(process.env.TURSO_AUTH_TOKEN && {
+      authToken: process.env.TURSO_AUTH_TOKEN,
+    }),
   },
 });
+
 await migrate(db, {
   migrationsFolder: Config.out,
 });

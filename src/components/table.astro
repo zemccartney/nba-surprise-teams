@@ -2,15 +2,22 @@
 import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"table"> {
   class?: string;
+  // Disabling per following Astro's pattern for requiring passing children to default slot: https://docs.astro.build/en/guides/typescript/#common-prop-type-patterns
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: any;
   compact?: boolean;
   stickyHeader?: boolean;
 }
 
 const {
+  /*
+    Classes available:
+    - compact: tightens dimensions of table
+    - stickyHeader: makes header row sticky
+
+    TODO: Try cva here, might simplify / make API more explicit?
+  */
   class: classStr,
-  compact = false,
-  stickyHeader = false,
   ...attrs
 } = Astro.props;
 ---

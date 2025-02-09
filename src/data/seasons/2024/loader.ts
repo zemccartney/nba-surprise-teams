@@ -1,7 +1,7 @@
 import { z } from "astro:schema";
 import { SIM_FULL_SEASON } from "astro:env/server";
 import { getSeasonById, getTeamsInSeason } from "../..";
-import type { Game, Loader, TeamCodeType } from "../..";
+import type { Game, Loader, TeamCode } from "../..";
 import * as Utils from "../../../utils";
 
 const TeamResultSchema = z.object({
@@ -32,15 +32,15 @@ const hasScore = (game: z.infer<typeof GameResultSchema>) =>
 
 const includesCandidateTeam = (
   game: z.infer<typeof GameResultSchema>,
-  tricodes: TeamCodeType[],
+  tricodes: TeamCode[],
 ) =>
   tricodes.includes(game.awayTeam.teamTricode) ||
   tricodes.includes(game.homeTeam.teamTricode);
 
 // gameDate format: "10/04/2024 00:00:00"
 const toYYYYMMDD = (gameDate: string) => {
-  // TODO Possible to avoid non-null assertion here? Not sure why index type of split result is string | undefined
-  const [mm, dd, yyyy] = gameDate.split(" ")[0]!.split("/");
+  // @ts-expect-error : "Object possibly undefined" Not sure why index type of split result is string | undefined
+  const [mm, dd, yyyy] = gameDate.split(" ")[0].split("/");
   return `${yyyy}-${mm}-${dd}`;
 };
 
@@ -58,7 +58,7 @@ const loader: Loader = async () => {
         Accept: "application/json",
       },
       // Timeout maybe too high, potentially revisit. Intuition: don't make user wait too long if response hanging, but enough leeway to account for uncertain latency
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(10_000),
     },
   );
 
@@ -123,12 +123,12 @@ const loader: Loader = async () => {
             playedOn: gameYYYYMMDD,
             playedAt: new Date(game.gameDateTimeUTC).getTime(),
             /* 
-              Lying a bit here, casting as TeamCodeType; don't want to worry about correctly tracking and parsing all possible
+              Lying a bit here, casting as TeamCode; don't want to worry about correctly tracking and parsing all possible
               team codes, in case source data has unexpected codes; enough to say that as long as at least one of the tricodes
               here is expected, we can work with this game data
             */
-            homeTeam: homeTeam.teamTricode as TeamCodeType,
-            awayTeam: awayTeam.teamTricode as TeamCodeType,
+            homeTeam: homeTeam.teamTricode as TeamCode,
+            awayTeam: awayTeam.teamTricode as TeamCode,
             homeScore: gameComplete
               ? homeTeam.score
               : Math.floor(Math.random() * (140 - 80 + 1) + 80),
@@ -145,7 +145,7 @@ const loader: Loader = async () => {
       return yyyymmdd === currentYYYYMMDD;
     });
 
-    // TODO handle if false i.e. querying w/ date outside season or season missing data, unexpectedly ... error here? report (if Sentry ends up working)
+    // TODO handle if false i.e. querying w/ date outside season or season missing data, unexpectedly ... error here? report?
     // Do once we have off-season logic in place? When we know if we get here, data's missing (Error), not just off-season (handleable)
     // TODO Factor into SIM_SEASON
     if (todayInd) {
@@ -209,12 +209,12 @@ const loader: Loader = async () => {
               playedOn: gameYYYYMMDD,
               playedAt: new Date(game.gameDateTimeUTC).getTime(),
               /* 
-                Lying a bit here, casting as TeamCodeType; don't want to worry about correctly tracking and parsing all possible
+                Lying a bit here, casting as TeamCode; don't want to worry about correctly tracking and parsing all possible
                 team codes, in case source data has unexpected codes; enough to say that as long as at least one of the tricodes
                 here is expected, we can work with this game data
               */
-              homeTeam: homeTeam.teamTricode as TeamCodeType,
-              awayTeam: awayTeam.teamTricode as TeamCodeType,
+              homeTeam: homeTeam.teamTricode as TeamCode,
+              awayTeam: awayTeam.teamTricode as TeamCode,
               homeScore: homeTeam.score,
               awayScore: awayTeam.score,
             });
