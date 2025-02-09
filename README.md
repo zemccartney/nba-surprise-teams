@@ -34,10 +34,6 @@ To run locally:
   - recolored as needed
 - Hourglass icon from https://phosphoricons.com/
 
-### Cloudflare
-
-- Semi-regularly review and update wrangler compatibility date: https://developers.cloudflare.com/workers/configuration/compatibility-flags/#setting-compatibility-flags
-
 ## Dependencies
 
 TODO Figure out sensible, repeatable practice
