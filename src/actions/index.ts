@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { defineAction, ActionError } from "astro:actions";
 import { z } from "astro:schema";
 import { TURSO_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
@@ -19,6 +21,8 @@ export const server = {
     }),
     handler: async (input): Promise<{ games: Game[]; expiresAt?: number }> => {
       try {
+        throw new Error("BOOM");
+
         const dbClient = drizzle({
           connection: {
             url: TURSO_URL,
