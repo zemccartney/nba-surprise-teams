@@ -23,7 +23,8 @@
     "fmt:check": "prettier . --check",
     "lint": "eslint .",
     "preview": "astro preview",
-    "typewatch": "astro check --watch --preserveWatchOutput"
+    "typewatch": "astro check --watch --preserveWatchOutput",
+    "wip": "git commit -m \"[CF-Pages-Skip] WIP\" && git push"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

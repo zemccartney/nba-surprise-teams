@@ -78,3 +78,8 @@ TODO
 
 - when to prep for new season
 - what to do with the db? clear once all data is stored on file?
+
+## Lifecycle
+
+- schedule release: ~mid August (August 15 for 2024, August 18 for 2023)
+- odds release: ~mid September (Slam n' Jam pod intro for 2024 surprise teams on Sept. 20)

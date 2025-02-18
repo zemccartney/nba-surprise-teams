@@ -41,12 +41,14 @@ export const server = {
         const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
         const now = Date.now();
 
+        // TODO Document; needed to handle when season-in-waiting i.e. season and over/unders for upcoming set, but season not started (see home page)
         if (currentYYYYMMDD < season.startDate) {
           return {
             games: [],
           };
         }
 
+        // TODO Remove
         // All past seasons must have data saved on file
         // Once season is over, data is constant, ink is dry, no sense
         // in pulling data from external sources
