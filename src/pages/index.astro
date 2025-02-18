@@ -4,9 +4,10 @@ import Link from "../components/link.astro";
 import Loading from "../components/loading.astro";
 import StandingsTable from "../components/standings-table.astro";
 import { getCurrentEasternYYYYMMDD } from "../utils";
-import { SEASONS } from "../data";
+import { SEASONS, getTeamsInSeason } from "../data";
 import type { Season } from "../data";
 
+// TODO rename to current, match actions
 const todayYYYYMMDD = getCurrentEasternYYYYMMDD();
 
 let currentSeason;
@@ -65,8 +66,31 @@ if (!currentSeason) {
   throw new Error("HUH?");
 }
 
-/* 
+let isWithinPostSeasonGracePeriod = false;
+let data;
+if (isSeasonBefore(todayYYYYMMDD, currentSeason)) {
+  try {
+    // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
+    const { default: staticGames } = await import(
+      `../data/${currentSeason.id}/games.ts`
+    );
 
+    data = staticGames;
+  } catch (err) {
+    // TODO throw if no file here? Testing is paramount here, so hard
+    // TODO Capture if within grace period
+
+    isWithinPostSeasonGracePeriod = true;
+  }
+}
+
+const isSeasonReady = getTeamsInSeason(currentSeason.id).length > 0;
+
+if (isSeasonAfter(todayYYYYMMDD, currentSeason)) {
+  // TODO What is the predicate to say team season data exists?
+}
+
+/* 
 
 
 server island if on-demand needed, static if fulfillable at build time
@@ -100,8 +124,22 @@ team detail (id'd by season)
     <nav class="mb-10 mt-8 flex justify-center md:mb-20 md:mt-16">
       <Link href="/info">What is this?</Link>
     </nav>
-    <StandingsTable server:defer seasonId={2024}>
-      <Loading slot="fallback" />
-    </StandingsTable>
+    {
+      (isWithinSeason(todayYYYYMMDD, currentSeason) ||
+        (isSeasonAfter(todayYYYYMMDD, currentSeason) && isSeasonReady) ||
+        (isSeasonBefore(todayYYYYMMDD, currentSeason) &&
+          !data &&
+          isWithinPostSeasonGracePeriod)) && (
+        <StandingsTable server:defer seasonId={2024}>
+          <Loading slot="fallback" />
+        </StandingsTable>
+      )
+    }
+    {isSeasonAfter(todayYYYYMMDD, currentSeason) && <p />}
+    {
+      isSeasonBefore(todayYYYYMMDD, currentSeason) && (
+        <StandingsTable games={data} /> // TODO Need to decouple table UI from data fetching to support here
+      )
+    }
   </main>
 </Layout>
