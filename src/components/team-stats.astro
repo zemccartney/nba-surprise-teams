@@ -9,6 +9,11 @@ import * as Utils from "../utils";
 import type { TeamSeason } from "../data";
 import type { TeamStats } from "../utils";
 
+// todo call out that component is intended as an island i.e. not built for static use?
+// enclose that concern in a component wrapper? same for client islands? internalive directives...
+// node APIs usable in astro components? Or CF runtime globals... but won't be available in client
+// components... but they can live side by side in code? Use linter to call out somehow?
+
 interface Props {
   teamSeason: TeamSeason;
 }
