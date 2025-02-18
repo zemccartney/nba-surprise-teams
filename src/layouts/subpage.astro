@@ -3,17 +3,33 @@ import Layout from "./layout.astro";
 import Link from "../components/link.astro";
 ---
 
+<script>
+  const currentPath = globalThis.location.pathname;
+  const navLink = document.querySelector(
+    `nav .NBASTT-Link[href="${currentPath}"]`,
+  );
+  navLink?.classList.add("active");
+</script>
+
 <Layout {...Astro.props}>
-  <header class="p-8">
-    <nav class="flex flex-row items-center gap-16">
+  <Fragment slot="header">
+    <nav class="flex flex-col items-center gap-8 lg:flex-row lg:gap-20">
       <a href="/" class="font-title text-sm text-lime-400 md:text-2xl">
         {/* TODO Better way to do this? br and nbsps feels hacky */}
         NBA&nbsp;Surprise<br />Teams&nbsp;Tracker
       </a>
-      <Link class="text-xl md:text-2xl" href="/info">What is this?</Link>
+      <div class="flex flex-row gap-8">
+        {/* TODO Fix this important overriding somehow */}
+        <Link class="text-xl md:!text-2xl lg:!text-4xl" href="/info"
+          >What is this?</Link
+        >
+        <Link class="text-xl md:!text-2xl lg:!text-4xl" href="/archive"
+          >Archive</Link
+        >
+      </div>
     </nav>
-  </header>
-  <main class="space-y-12 pb-16">
+  </Fragment>
+  <main class="pb-24 md:mt-16">
     <slot />
   </main>
 </Layout>

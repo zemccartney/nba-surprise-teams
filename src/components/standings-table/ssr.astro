@@ -1,0 +1,52 @@
+---
+import { actions } from "astro:actions";
+import Crash from "../crash.astro";
+import UI from "./ui.astro";
+import { getSeasonById } from "../../data";
+import * as Utils from "../../utils";
+
+interface Props {
+  seasonId: number;
+}
+
+const { seasonId } = Astro.props;
+
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const season = getSeasonById(seasonId)!;
+
+const { error, data } = await Astro.callAction(actions.getSeasonData, {
+  seasonId,
+});
+
+if (!error && data.expiresAt) {
+  Astro.response.headers.set(
+    "Cache-Control",
+    `public, max-age=${Math.round((data.expiresAt - Date.now()) / 1000)}, must-revalidate`,
+  );
+}
+
+const title = `${Utils.abbreviateSeasonRange(season, { compact: true })} Season`;
+/*
+TODO Implicit assumption: this component will only ever be used to render the current season, on the home page
+Intent: show this title only on pages where we don't want to show some other prominent title, which currently is only
+the home page (we show an in-layout title on subpages); constraining to passing only mission-critical props to server 
+islands, per this note from the caching docs as of 3/2/2025:
+
+"However, the browser limits URLs to a maximum length of 2048 bytes for practical reasons and to avoid causing
+denial-of-service problems. If your query string causes your URL to exceed this limit, Astro will instead send a 
+POST request that contains all props in the body.
+
+POST requests are not cached by browsers because they are used
+to submit data, and could cause data integrity or security issues. Therefore, any existing caching logic in your
+project will break. Whenever possible, pass only necessary props to your server islands and avoid sending entire
+data objects and arrays to keep your query small"    
+*/
+---
+
+{
+  error ? (
+    <Crash />
+  ) : (
+    <UI seasonId={seasonId} games={data.games} title={title} />
+  )
+}

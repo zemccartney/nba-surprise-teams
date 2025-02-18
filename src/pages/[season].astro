@@ -1,13 +1,36 @@
 ---
-import { SEASONS } from "../data";
+import Subpage from "../layouts/subpage.astro";
+import StandingsTable from "../components/standings-table/index.astro";
+import { SEASONS, getTeamsInSeason, getSeasonById } from "../data";
+import * as Utils from "../utils";
 
-export function getStaticPaths() {
-  return SEASONS.map((season) => ({
-    params: { season: season.id },
-  }));
+export async function getStaticPaths() {
+  return SEASONS.filter((season) => getTeamsInSeason(season.id).length > 0).map(
+    (season) => ({
+      params: { season: season.id },
+    }),
+  );
 }
 
-// TODO Fill in archive page
-// TODO meta tags
-return Astro.redirect("/");
+// TODO Test to prove this will never be false instead of throwing, guarantee
+// of using static paths derived from static data. Or possible to enforce
+// that utility fns only accept expected constant values, re-type accordingly?
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const season = getSeasonById(
+  // TODO File bug? param mistyped; typed as a number in IDE, but actually a string
+  // @ts-expect-error : "Argument of type 'number' is not assignable to parameter of type 'string'"
+  Number.parseInt(Astro.params.season, 10),
+)!;
 ---
+
+{/* TODO Add meta attributes */}
+<Subpage>
+  <div class="px-0 md:px-8">
+    <h1
+      class="mb-12 text-center font-title text-2xl text-lime-400 sm:mb-24 md:text-4xl"
+    >
+      {`${Utils.abbreviateSeasonRange(season, { compact: true })} Season`}
+    </h1>
+    <StandingsTable seasonId={season.id} title={false} />
+  </div>
+</Subpage>

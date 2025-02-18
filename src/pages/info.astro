@@ -1,40 +1,14 @@
 ---
-import SubpageLayout from "../layouts/subpage.astro";
+import Subpage from "../layouts/subpage.astro";
+import Typography from "../layouts/typography.astro";
 import Link from "../components/link.astro";
 ---
 
-<style>
-  .TypoBox {
-    p,
-    ul {
-      @apply text-2xl text-green-200;
-    }
-
-    * + h1,
-    * + h2 {
-      @apply mb-[1em] mt-[1.5em];
-    }
-
-    * + p {
-      @apply my-[1em];
-    }
-
-    p,
-    ul {
-      @apply mx-auto lg:max-w-[75%];
-    }
-
-    ul {
-      @apply my-[0.5em] list-inside list-disc ps-[1em] md:ps-[2em];
-    }
-  }
-</style>
-
-<SubpageLayout
+<Subpage
   title="Info"
   description="A brief rundown of the what, why, and who of the NBA Surprise Teams Tracker"
 >
-  <div class="TypoBox mx-auto px-4 md:mt-16 lg:max-w-[60%]">
+  <Typography class="mx-auto px-4 lg:max-w-[60%]">
     <h1 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
       What is the NBA Surprise Teams Tracker?
     </h1>
@@ -57,7 +31,7 @@ import Link from "../components/link.astro";
     <p>
       If you're short on time, though, a team qualifies as a Surprise Team if:
     </p>
-    <ul class="!-mt-4">
+    <ul>
       <li>Their preseason over/under is below 36 wins</li>
       <li>They beat their over/under by at least 10 games</li>
     </ul>
@@ -65,7 +39,7 @@ import Link from "../components/link.astro";
       This site just keeps track of how well the current season's Surprise Team
       candidates are doing at, well, surprising us.
     </p>
-    <h2 class="mt-16 text-center font-title text-2xl text-lime-400 md:text-4xl">
+    <h2 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
       Who are you?
     </h2>
     <p>
@@ -83,5 +57,5 @@ import Link from "../components/link.astro";
         >https://www.grepco.net</Link
       >
     </p>
-  </div>
-</SubpageLayout>
+  </Typography>
+</Subpage>

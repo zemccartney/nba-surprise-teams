@@ -1,10 +1,10 @@
 ---
-import SubpageLayout from "../../layouts/subpage.astro";
-import Loading from "../../components/loading.astro";
+import Subpage from "../../layouts/subpage.astro";
 import Logo from "../../components/logo.astro";
-import TeamStats from "../../components/team-stats.astro";
-import { TEAM_SEASONS, getTeamById, getTeamSeason } from "../../data";
+import TeamStats from "../../components/team-stats/index.astro";
+import { TEAM_SEASONS, getTeamById, getSeasonById } from "../../data";
 import type { TeamCode } from "../../data";
+import * as Utils from "../../utils";
 
 export function getStaticPaths() {
   return TEAM_SEASONS.map((ts) => ({
@@ -12,33 +12,39 @@ export function getStaticPaths() {
   }));
 }
 
-// non-null assertion here as we're taking for granted that I didn't fuck up our constants and
-// that TEAM_SEASONS has "referential integrity"
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-const team = getTeamById(Astro.params.team as TeamCode)!;
-const teamSeason = getTeamSeason(
-  Astro.params.team,
-  // TODO File bug? param mistyped; typed as a number in IDE, but actually a string
-  // @ts-expect-error : "Argument of type 'number' is not assignable to parameter of type 'string'"
-  Number.parseInt(Astro.params.season, 10),
-)!;
-/* eslint-enable @typescript-eslint/no-non-null-assertion */
+// TODO File bug? param mistyped; typed as a number in IDE, but actually a string
+// @ts-expect-error : "Argument of type 'number' is not assignable to parameter of type 'string'"
+const seasonId = Number.parseInt(Astro.params.season, 10);
 
-const fmtSeason = `${teamSeason.season}-${(teamSeason.season + 1).toString().slice(2)}`;
-const fmtSeasonShort = `'${teamSeason.season.toString().slice(2)}-${(teamSeason.season + 1).toString().slice(2)}`;
+const team = getTeamById(Astro.params.team as TeamCode);
+const season = getSeasonById(seasonId);
+
+// Making TS happy; TODO maybe a better way to do this / workaround? constant data queries
+// should be guaranteed to return results, given paths from which query params are derived are
+// derived from those same constants
+if (!team) {
+  throw new Error(`[Page: team.astro] Team ${Astro.params.team} not found`);
+}
+
+if (!season) {
+  throw new Error(`[Page: team.astro] Season ${Astro.params.season} not found`);
+}
+
+const fmtSeason = Utils.abbreviateSeasonRange(season, { compact: true });
 ---
 
-<SubpageLayout
-  title={`${team.id} ${fmtSeasonShort}`}
+<Subpage
+  title={`${team.id} ${fmtSeason}`}
   description={`${fmtSeason} Season Results for the ${team.name}`}
 >
-  <div class="flex flex-col items-center justify-center gap-8 lg:flex-row">
+  <div
+    class="mb-12 flex flex-col items-center justify-center gap-8 sm:px-8 lg:flex-row"
+  >
     <Logo teamCode={team.id} class="w-[96px]" />
     <h1 class="text-center font-title text-4xl text-lime-400">
+      {fmtSeason}
       {team.name}
     </h1>
   </div>
-  <TeamStats server:defer teamSeason={teamSeason}>
-    <Loading slot="fallback" />
-  </TeamStats>
-</SubpageLayout>
+  <TeamStats seasonId={season.id} teamId={team.id} />
+</Subpage>

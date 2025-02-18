@@ -12,19 +12,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro -- --help` | Get help using the Astro CLI                 |
 | `npm run deps`            | Helper to check and update dependencies      |
 
-## Local dev
-
-**Prerequisites**
-
-- Turso CLI
-  - see https://docs.turso.tech/sdk/ts/orm/drizzle
-
-To run locally:
-
-1. In one terminal tab/window: `turso dev` (starts db server)
-2. `echo 'TURSO_URL=http://127.0.0.1:8080' > .env` (config to talk to db server)
-3. `npm run dev`
-
 ## Maintenance Considerations
 
 ### Icon sourcing
@@ -54,11 +41,11 @@ Account for:
 
 ### Data
 
-- DB hosted in Turso account (prod and dev dbs)
+- data stored in KV
 - Intuition: Reach out to a source with live data only when monitoring game results in real-time; when there's no possibility of new
   data (out-of-season, but more commonly, in-season and we can tell by looking at the schedule that there haven't been
   new results since last poll), be self-reliant
-  - Purpose of db: be self-reliant as possible while collecting season in-progress
+  - Purpose of KV: be self-reliant as possible while collecting season in-progress
     - reduce dependency on API (assume unreliable source; endpoint I stumbled on by observing network activity on stats.nba.com;
       gets me the data I want, but no contract with this service)
     - immediately store results in real time, so we have some backup of live results; use this backup instead of calling out to the API
@@ -69,7 +56,7 @@ Account for:
     as static files within the application, serve directly
   - set caching headers based on approximate calculation of time remaining until new results in data (when games finish)
     - reduce load times for end user, reduce round trips to server to render view based on db call (or API call, depending on if data fresh)
-    - also, saves on Turso usage; fewer db calls since cache headers tell browser: only results on server won't change for x time, so don't
+    - also, saves on KV usage; fewer calls since cache headers tell browser: only results on server won't change for x time, so don't
       bother re-querying
 
 ## Off-season
@@ -77,4 +64,9 @@ Account for:
 TODO
 
 - when to prep for new season
-- what to do with the db? clear once all data is stored on file?
+- what to do with KV? clear once all data is stored on file?
+
+## Lifecycle
+
+- schedule release: ~mid August (August 15 for 2024, August 18 for 2023)
+- odds release: ~mid September (Slam n' Jam pod intro for 2024 surprise teams on Sept. 20)

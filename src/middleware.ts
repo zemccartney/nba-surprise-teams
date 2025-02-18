@@ -4,8 +4,8 @@ import * as Sentry from "@sentry/cloudflare";
 
 export const onRequest = defineMiddleware((ctx, next) => {
   // middleware are called during static page generation, too; since building occurs in a node
-  // env and we wouldn't need sentry at buildtime anyway, we passthrough if prerendering
-  const whenServer = import.meta.env.PROD && !ctx.isPrerendered;
+  // env (not a cf env) and we wouldn't need sentry at buildtime anyway, we passthrough if prerendering
+  const whenServer = !ctx.isPrerendered;
 
   if (!whenServer) {
     return next();
@@ -17,7 +17,6 @@ export const onRequest = defineMiddleware((ctx, next) => {
       environment: PUBLIC_DEPLOY_ENV,
     },
 
-    // @ts-expect-error : "Property 'runtime' does not exist on type 'Locals'" ; provided by CF execution context: https://github.com/withastro/adapters/blob/83cedad780bf7a23ae9f6ca0c44a7b7f1c1767e1/packages/cloudflare/src/entrypoints/server.ts
     context: ctx.locals.runtime.ctx,
     request: ctx.request,
   };

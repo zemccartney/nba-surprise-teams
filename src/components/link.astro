@@ -4,14 +4,8 @@ type Props = HTMLAttributes<"a">;
 const { href, class: classStr, ...attrs } = Astro.props;
 ---
 
-<script>
-  const currentPath = globalThis.location.pathname;
-  const navLink = document.querySelector(`nav > a[href="${currentPath}"]`);
-  navLink?.classList.add("active");
-</script>
-
 <style>
-  .NBASurpriseTracker-Link {
+  .NBASTT-Link {
     &.active {
       @apply pointer-events-none cursor-default text-indigo-100;
     }
@@ -21,7 +15,7 @@ const { href, class: classStr, ...attrs } = Astro.props;
 <a
   href={href}
   class:list={[
-    "NBASurpriseTracker-Link",
+    "NBASTT-Link",
     "text-2xl text-indigo-400 underline hover:text-indigo-100 md:text-4xl",
     classStr,
   ]}

@@ -1,0 +1,9 @@
+# Settings are solely for local dev
+
+name = "nbastt"
+
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2025-03-21"
+
+# Do I use the id of my kv 
+kv_namespaces = [ { binding = "GAMES_KV", id = "123456" } ]

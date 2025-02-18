@@ -1,5 +1,3 @@
-import { Games } from "./db/schema";
-
 // https://stackoverflow.com/a/55505556
 // unique three-letter code
 export const TEAM_CODES = {
@@ -16,6 +14,8 @@ export const TEAM_CODES = {
 
 // https://www.totaltypescript.com/books/total-typescript-essentials/deriving-types#using-as-const-for-javascript-style-enums
 export type TeamCode = (typeof TEAM_CODES)[keyof typeof TEAM_CODES];
+
+// TODO Create a SeasonId type, derive from Seasons, use to constrain wherever passing season ids?
 
 export interface Team {
   id: TeamCode;
@@ -86,6 +86,7 @@ export interface TeamSeason {
 export const TEAM_SEASONS: readonly TeamSeason[] = [
   {
     overUnder: 35.5,
+    // TODO Name these properly: seasonId and teamId
     season: 2024,
     team: TEAM_CODES.ATL,
   },
@@ -131,7 +132,15 @@ export const TEAM_SEASONS: readonly TeamSeason[] = [
   },
 ] as const;
 
-export type Game = Omit<typeof Games.$inferSelect, "id">;
+export interface Game {
+  season: number;
+  homeTeam: string;
+  awayTeam: string;
+  homeScore: number;
+  awayScore: number;
+  playedOn: string;
+  playedAt: number;
+}
 
 /* Service Methods */
 
@@ -153,7 +162,9 @@ export const getTeamSeason = (teamId: TeamCode, seasonId: Season["id"]) =>
 
 /* Loader Utils */
 
-export type Loader = () => Promise<{
+export interface LoaderResponse {
   games: Game[];
   expiresAt?: number;
-}>;
+}
+
+export type Loader = () => Promise<LoaderResponse>;

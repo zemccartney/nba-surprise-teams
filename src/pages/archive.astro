@@ -1,0 +1,36 @@
+---
+import Subpage from "../layouts/subpage.astro";
+import Typography from "../layouts/typography.astro";
+import Link from "../components/link.astro";
+import * as Utils from "../utils";
+
+/*
+TODO
+Build assumption: archive season only once past
+- fine to show just-past season in archive and home page at the same time 
+- if preferred to change, could always filter out top item, i.e. picking off
+same item selected on the home page
+*/
+
+const archivedSeasons = await Utils.getArchivedSeasons();
+---
+
+<Subpage
+  title="Archive"
+  description="Listing of seasons tracked for surprise teams so far"
+>
+  <Typography class="mx-auto px-4 lg:max-w-[60%]">
+    <h1 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
+      Archive
+    </h1>
+    <div class="!mt-12 flex flex-col items-center gap-4 md:gap-8">
+      {
+        archivedSeasons.map((season) => (
+          <Link href={`/${season.id}`}>
+            {Utils.abbreviateSeasonRange(season)}
+          </Link>
+        ))
+      }
+    </div>
+  </Typography>
+</Subpage>

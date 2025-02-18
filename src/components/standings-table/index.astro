@@ -1,0 +1,53 @@
+---
+import UI from "./ui.astro";
+import StandingsTable from "./ssr.astro"; // component name used in requests (dev tools, network tab); for easier id in debugging
+import Loading from "../loading.astro";
+import { getSeasonById } from "../../data";
+import * as Utils from "../../utils";
+
+interface Props {
+  seasonId: number; // TODO Restrict this to seasons on file?
+  title?: string | boolean;
+}
+
+const { seasonId, title } = Astro.props;
+
+const season = getSeasonById(seasonId);
+
+if (!season) {
+  // TODO Better way to do this? Need to clarify what ideal outcome here even is
+  throw new Error("[standings-table] Season not found");
+}
+
+let staticGames;
+try {
+  // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
+  const { default: games } = await import(
+    `../../data/seasons/${season.id}/games.json`
+  );
+  staticGames = games;
+} catch {
+  if (import.meta.env.DEV) {
+    console.log(
+      `[standings-table] Static games data unavailable for season ${season.id}; will try to render data via server island`,
+    );
+  }
+}
+
+let resolvedTitle = `${Utils.abbreviateSeasonRange(season, { compact: true })} Season`;
+if (title === false) {
+  resolvedTitle = "";
+} else if (typeof title === "string") {
+  resolvedTitle = title;
+}
+---
+
+{
+  staticGames ? (
+    <UI seasonId={season.id} games={staticGames} title={resolvedTitle} />
+  ) : (
+    <StandingsTable server:defer seasonId={season.id}>
+      <Loading slot="fallback" />
+    </StandingsTable>
+  )
+}

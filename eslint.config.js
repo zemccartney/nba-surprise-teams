@@ -47,5 +47,9 @@ export default tseslint.config(
     files: ["**/*.{tsx}"],
     ...eslintPluginReact.configs.flat.recommended,
   },
+  {
+    // auto-generated, no sense in linting
+    ignores: ["worker-configuration.d.ts"],
+  },
   eslintConfigPrettier,
 );

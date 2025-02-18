@@ -1,55 +1,43 @@
 import "dotenv/config";
 import Fs from "node:fs/promises";
-import { drizzle } from "drizzle-orm/libsql/web";
-import { eq } from "drizzle-orm";
-import { SEASONS } from "./src/data";
+import Path from "node:path";
+import Url from "node:url";
+import * as Data from "./src/data";
 import * as Utils from "./src/utils";
-import { Games } from "./src/data/db/schema";
+import type { Loader } from "./src/data";
 
-// TODO untested
-// TODO Document WHEN to run (as part of cron?)
+// npx tsx sync-season <seasonId> (defaults to current season)
 
-// npx tsx sync-season
-// Overwrites our constants with db copy
-// Will need to prettify, assume happens elsewhere (manually or as part of script)
+const __filename = Url.fileURLToPath(import.meta.url);
+const projectRoot = Path.dirname(__filename);
 
-const dbClient = drizzle({
-  connection: {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    url: process.env.TURSO_URL!,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    authToken: process.env.TURSO_AUTH_TOKEN!,
-  },
-});
+const seasonId = process.argv[2];
 
-const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
-const currentSeason = SEASONS.find(
-  (season) =>
-    season.startDate <= currentYYYYMMDD && season.endDate >= currentYYYYMMDD,
-);
-
-if (!currentSeason) {
-  throw new Error("Not currently in-season, no game results to refresh");
+let season;
+if (seasonId) {
+  season = Data.getSeasonById(Number.parseInt(seasonId, 10));
+} else {
+  const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
+  season = Data.SEASONS.find(
+    (season) =>
+      season.startDate <= currentYYYYMMDD && season.endDate >= currentYYYYMMDD,
+  );
 }
 
-const games = await dbClient
-  .select()
-  .from(Games)
-  .where(eq(Games.season, currentSeason.id));
+if (!season) {
+  throw new Error("Could not resolve a season for which to save data");
+}
 
-const tpl = `
-    import type { Game } from "../..";
+// not suitable for running on retroactively added seasons, which may or may not have a loader
+// file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
+const { default: loader } = await import(
+  Path.join(projectRoot, `src/data/seasons/${season.id}/loader.ts?env=node`)
+);
 
-    export default ${games.map(
-      ({
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        id,
-        ...g
-      }) => g,
-    )};
-  `;
+const { games } = await (loader as Loader)();
 
-// TODO correct path resolution
-await Fs.writeFile(`./src/data/seasons/${currentSeason.id}/games.ts`, tpl, {
+const dest = Path.join(projectRoot, `src/data/seasons/${season.id}/games.json`);
+
+await Fs.writeFile(dest, JSON.stringify(games), {
   encoding: "utf8",
 });

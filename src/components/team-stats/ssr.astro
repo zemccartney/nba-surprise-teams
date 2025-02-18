@@ -1,0 +1,40 @@
+---
+import { actions } from "astro:actions";
+import UI from "./ui.astro";
+import Crash from "../crash.astro";
+import * as Data from "../../data";
+import type { TeamCode } from "../../data";
+
+interface Props {
+  teamId: TeamCode;
+  seasonId: number;
+}
+
+const { teamId, seasonId } = Astro.props;
+
+// TODO Need to parse to string, given input is query param?
+const teamSeason = Data.getTeamSeason(teamId, seasonId);
+
+if (!teamSeason) {
+  throw new Error(
+    `[team-stats] season ${Astro.params.season} record for team ${Astro.params.team} not found`,
+  );
+}
+
+const { error, data } = await Astro.callAction(actions.getSeasonData, {
+  seasonId: teamSeason.season,
+});
+
+if (!error) {
+  const { expiresAt } = data;
+
+  if (expiresAt) {
+    Astro.response.headers.set(
+      "Cache-Control",
+      `public, max-age=${Math.round((expiresAt - Date.now()) / 1000)}, must-revalidate`,
+    );
+  }
+}
+---
+
+{error ? <Crash /> : <UI teamSeason={teamSeason} games={data.games} />}
