@@ -1,0 +1,25 @@
+---
+import { actions } from "astro:actions";
+import Crash from "./crash.astro";
+import StandingsTable from "./standings-table.astro";
+
+interface Props {
+  seasonId: number;
+}
+
+const { seasonId } = Astro.props;
+
+const { error, data } = await Astro.callAction(actions.getSeasonData, {
+  seasonId,
+});
+
+if (!error && data.expiresAt) {
+  // Standings table only ever used on home page i.e. single URL, so single cache entry, no need to Vary
+  Astro.response.headers.set(
+    "Cache-Control",
+    `public, max-age=${Math.round((data.expiresAt - Date.now()) / 1000)}, must-revalidate`,
+  );
+}
+---
+
+{error ? <Crash /> : <StandingsTable seasonId={seasonId} games={data.games} />}

@@ -3,8 +3,14 @@ import SubpageLayout from "../../layouts/subpage.astro";
 import Loading from "../../components/loading.astro";
 import Logo from "../../components/logo.astro";
 import TeamStats from "../../components/team-stats.astro";
-import { TEAM_SEASONS, getTeamById, getTeamSeason } from "../../data";
+import {
+  TEAM_SEASONS,
+  getTeamById,
+  getTeamSeason,
+  getSeasonById,
+} from "../../data";
 import type { TeamCode } from "../../data";
+import * as Utils from "../../utils";
 
 export function getStaticPaths() {
   return TEAM_SEASONS.map((ts) => ({
@@ -13,7 +19,9 @@ export function getStaticPaths() {
 }
 
 // non-null assertion here as we're taking for granted that I didn't fuck up our constants and
-// that TEAM_SEASONS has "referential integrity"
+// that TEAM_SEASONS has "referential integrity" i.e. don't throw here, as constant data queries
+// should be guaranteed to return results, given paths from which query params are derived are
+// derived from those same constants
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 const team = getTeamById(Astro.params.team as TeamCode)!;
 const teamSeason = getTeamSeason(
@@ -24,17 +32,20 @@ const teamSeason = getTeamSeason(
 )!;
 /* eslint-enable @typescript-eslint/no-non-null-assertion */
 
-const fmtSeason = `${teamSeason.season}-${(teamSeason.season + 1).toString().slice(2)}`;
-const fmtSeasonShort = `'${teamSeason.season.toString().slice(2)}-${(teamSeason.season + 1).toString().slice(2)}`;
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+const season = getSeasonById(teamSeason.season)!;
+
+const fmtSeason = Utils.abbreviateSeasonRange(season);
 ---
 
 <SubpageLayout
-  title={`${team.id} ${fmtSeasonShort}`}
+  title={`${team.id} ${fmtSeason}`}
   description={`${fmtSeason} Season Results for the ${team.name}`}
 >
   <div class="flex flex-col items-center justify-center gap-8 lg:flex-row">
     <Logo teamCode={team.id} class="w-[96px]" />
     <h1 class="text-center font-title text-4xl text-lime-400">
+      {fmtSeason}
       {team.name}
     </h1>
   </div>

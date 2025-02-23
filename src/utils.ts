@@ -1,6 +1,6 @@
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config.mjs";
-import type { TeamSeason } from "./data";
+import type { Season, TeamSeason } from "./data";
 
 /*
     Returns an ISO String representing the current time in the US Eastern timezone
@@ -23,6 +23,11 @@ export const getCurrentEasternYYYYMMDD = () => {
   // ISO string upholds this contract
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return getCurrentDateEastern().split("T")[0]!;
+};
+
+export const abbreviateSeasonRange = (season: Season) => {
+  // @ts-expect-error: Object is possibly 'undefined' ; taking for granted that all registered seasons have dates set as YYYY-MM-DD
+  return `'${season.startDate.split("-")[0].slice(2)}-${season.endDate.split("-")[0].slice(2)}`;
 };
 
 export const getTheme = () => resolveConfig(tailwindConfig).theme;

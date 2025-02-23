@@ -48,7 +48,7 @@ export const server = {
           };
         }
 
-        // TODO Remove
+        // TODO Remove... or.. no? Keep in place for sake of testing arbitrary past dates via query param?
         // All past seasons must have data saved on file
         // Once season is over, data is constant, ink is dry, no sense
         // in pulling data from external sources
@@ -101,6 +101,7 @@ export const server = {
           const refreshed = await (loader as Loader)();
 
           // No next expiresAt means no more upcoming relevant games this season
+          // TODO Still needed? Comment still relevant?
           const nextExpiresAt = refreshed.expiresAt ?? now + WEEK_IN_MS; // mark as cacheable for a while, arbitrarily a week; TODO revisit, do something actually smart; data is constant now
 
           await dbClient.batch([

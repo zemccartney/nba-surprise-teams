@@ -1,6 +1,6 @@
 ---
 import { actions } from "astro:actions";
-import Error from "./error.astro";
+import Crash from "./crash.astro";
 import PaceChart from "./pace-chart";
 import Popover from "./popover";
 import ResultEmoji from "./result-emoji.astro";
@@ -80,7 +80,7 @@ if (!error) {
 
 {
   error ? (
-    <Error />
+    <Crash />
   ) : (
     <>
       {(Utils.isSurprise(stats) || Utils.isEliminated(stats)) && (

@@ -3,117 +3,36 @@ import Layout from "../layouts/layout.astro";
 import Link from "../components/link.astro";
 import Loading from "../components/loading.astro";
 import StandingsTable from "../components/standings-table.astro";
-import { getCurrentEasternYYYYMMDD } from "../utils";
+import StandingsTableSSR from "../components/standings-table-ssr.astro";
 import { SEASONS, getTeamsInSeason } from "../data";
-import type { Season } from "../data";
+import * as Utils from "../utils";
 
-// TODO rename to current, match actions
-const todayYYYYMMDD = getCurrentEasternYYYYMMDD();
+const latestSeason = SEASONS.toSorted((a, b) =>
+  a.endDate > b.endDate ? -1 : a.endDate < b.endDate ? 1 : 0,
+)[0];
 
-let currentSeason;
-
-const isWithinSeason = (yyyymmdd: string, season: Season) =>
-  yyyymmdd >= season.startDate && yyyymmdd <= season.endDate;
-const isSeasonAfter = (yyyymmdd: string, season: Season) =>
-  season.startDate > yyyymmdd;
-const isSeasonBefore = (yyyymmdd: string, season: Season) =>
-  season.endDate < yyyymmdd;
-
-/* 
-Given current date, find relevant season
-
-Priority:
-
-1. current
-2. next future
-3. most recent past
-
-overengineered, but makes no assumptions about season data
-could be any order; any number of seasons in future and past
-tho must be true that there's only ever one season that the date isWithin
-
-TODO Less verbose way to do this? Feels... clunky? But perf of 0 concern here, wrote for maintainability / ease of reading, not elegance
-*/
-
-currentSeason = SEASONS.find((season) => {
-  if (isWithinSeason(todayYYYYMMDD, season)) {
-    return season;
-  }
-});
-
-if (!currentSeason) {
-  currentSeason = SEASONS.filter((season) =>
-    isSeasonAfter(todayYYYYMMDD, season),
-  )
-    // start date ascending
-    .toSorted((a, b) =>
-      a.startDate < b.startDate ? -1 : a.startDate > b.startDate ? 1 : 0,
-    )[0];
-
-  if (!currentSeason) {
-    currentSeason = SEASONS.filter((season) =>
-      isSeasonBefore(todayYYYYMMDD, season),
-    )
-      // end date descending
-      .toSorted((a, b) =>
-        a.endDate > b.endDate ? -1 : a.endDate < b.endDate ? 1 : 0,
-      )[0];
-  }
+if (!latestSeason) {
+  // TODO Build error
+  throw new Error("Insufficient season data");
 }
 
-// TODO Does this make sense
-if (!currentSeason) {
-  throw new Error("HUH?");
-}
+const isSeasonReady = getTeamsInSeason(latestSeason.id).length > 0;
+let staticGames;
 
-let isWithinPostSeasonGracePeriod = false;
-let data;
-if (isSeasonBefore(todayYYYYMMDD, currentSeason)) {
+if (isSeasonReady) {
   try {
     // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
-    const { default: staticGames } = await import(
-      `../data/${currentSeason.id}/games.ts`
+    const { default: games } = await import(
+      `../data/${latestSeason.id}/games.json`
     );
 
-    data = staticGames;
-  } catch (err) {
-    // TODO throw if no file here? Testing is paramount here, so hard
-    // TODO Capture if within grace period
-
-    isWithinPostSeasonGracePeriod = true;
+    staticGames = games;
+  } catch {
+    console.log(
+      `[home page] Static games data unavailable for season ${latestSeason.id}; will try to render data via server island`,
+    );
   }
 }
-
-const isSeasonReady = getTeamsInSeason(currentSeason.id).length > 0;
-
-if (isSeasonAfter(todayYYYYMMDD, currentSeason)) {
-  // TODO What is the predicate to say team season data exists?
-}
-
-/* 
-
-
-server island if on-demand needed, static if fulfillable at build time
-
-what data should we load?
-What's the "current season"?
-  - in range OR within grace period
-  - using server action is a fact of rendering, collocate with component
-
-// render home page on demand, always, given want to automatically adapt to off-season message while waiting
-// for next season data? change to next when rebuilt with:
-// - new teams (no reason to add next season if no odds) DOCUMENT IN LIFECYCLE, THEORY OF UPLOADING / CALENDAR
-// Or.. could show countdown message when season schedule released, prompt to check back closer to s
-// slam n' jam did surprise teams on sept. 20 (check around mid-september?)
-----
-
-team detail (id'd by season)
-   - render statically at build time if data available, otherwise, server island
-   - no, commit to no API support for past seasons; limit external deps as much as possible
-   - but don't want site to explode at 12am on last day of current season, if I didn't manage to upload data, assume will be manual
-   - 
-
-*/
 ---
 
 <Layout>
@@ -121,24 +40,35 @@ team detail (id'd by season)
     <h1 class="text-center font-title text-3xl text-lime-400 md:text-7xl">
       NBA Surprise Teams Tracker
     </h1>
-    <nav class="mb-10 mt-8 flex justify-center md:mb-20 md:mt-16">
+    <nav
+      class="mb-10 mt-8 flex flex-row justify-center gap-16 md:mb-20 md:mt-16"
+    >
       <Link href="/info">What is this?</Link>
+      <Link href="/archive">Archive</Link>
     </nav>
     {
-      (isWithinSeason(todayYYYYMMDD, currentSeason) ||
-        (isSeasonAfter(todayYYYYMMDD, currentSeason) && isSeasonReady) ||
-        (isSeasonBefore(todayYYYYMMDD, currentSeason) &&
-          !data &&
-          isWithinPostSeasonGracePeriod)) && (
-        <StandingsTable server:defer seasonId={2024}>
-          <Loading slot="fallback" />
-        </StandingsTable>
-      )
+      isSeasonReady &&
+        (staticGames ? (
+          <StandingsTable seasonId={latestSeason.id} games={staticGames} />
+        ) : (
+          <StandingsTableSSR server:defer seasonId={latestSeason.id}>
+            <Loading slot="fallback" />
+          </StandingsTableSSR>
+        ))
     }
-    {isSeasonAfter(todayYYYYMMDD, currentSeason) && <p />}
     {
-      isSeasonBefore(todayYYYYMMDD, currentSeason) && (
-        <StandingsTable games={data} /> // TODO Need to decouple table UI from data fetching to support here
+      !isSeasonReady && (
+        <div>
+          <h2 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
+            Countdown to the {Utils.abbreviateSeasonRange(latestSeason)} season
+          </h2>
+          <p>
+            Next season kicks off on{" "}
+            {new Date(latestSeason.startDate).toLocaleDateString()}. Pre-season
+            over/unders are typically posted mid-September. Till then, check out
+            how <a href="/archive">past years</a> shook out.
+          </p>
+        </div>
       )
     }
   </main>
