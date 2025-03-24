@@ -4,9 +4,10 @@ import type { ComponentProps } from "astro/types";
 
 import Image from "astro/components/Image.astro";
 
-type Props = {
+// Partial given we're setting src and alt below
+type Props = Partial<ComponentProps<typeof Image>> & {
   name: "celebration" | "disappointed" | "eliminated" | "surprise";
-} & Partial<ComponentProps<typeof Image>>; // Partial given we're setting src and alt below
+};
 
 const { name, ...attrs } = Astro.props;
 
@@ -24,7 +25,7 @@ resulted in a crash with the following message: Expected ">" but found "$$Result
 TODO Report issue
 */
 
-const emojiConf: Record<Props["name"], { fileName: string; alt: string }> = {
+const emojiConf: Record<Props["name"], { alt: string; fileName: string }> = {
   celebration: {
     alt: "Party popper emoji, celebrating a team achieving surprise team status",
     fileName: "party-popper",

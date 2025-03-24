@@ -1,34 +1,37 @@
 import { useMemo } from "react";
 import {
-  AreaChart,
   Area,
+  AreaChart,
   CartesianGrid,
   Label,
-  ResponsiveContainer,
   ReferenceLine,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import { styles as PopoverStyles } from "./popover";
-import * as Utils from "../utils";
-import SurprisedEmoji from "../assets/images/emoji/hushed-face.svg";
-import type { Game, TeamSeason } from "../data";
-import type { TeamRecord, TeamStats } from "../utils";
+
+import type { Game, TeamRecord, TeamSeason, TeamStats } from "../../data/types";
+
+import SurprisedEmoji from "../../assets/images/emoji/hushed-face.svg";
+import * as SeasonUtils from "../../data/seasons";
+import * as Utils from "../../utils";
+import { styles as PopoverStyles } from "../popover";
 
 // Essentially copied from https://recharts.org/en-US/examples/AreaChartFillByValue
 
+// TODO make consistent with other charts i.e. move data formatting outside component
 interface DataPoint {
-  projectedWins: number;
+  _stats: Required<TeamStats>; // Marks TeamStats.record as required; data points exist only if games have been played
   date: string;
-  _stats: TeamStats;
+  projectedWins: number;
 }
 
 // TODO Acknowledge claude usage / actually understand how this shit works
 // Calculate the gradient offset based on y-axis threshold
 const getGradientOffset = (
   data: DataPoint[],
-  toSurprise: ReturnType<typeof Utils.toSurprise>,
+  toSurprise: ReturnType<typeof SeasonUtils.toSurprise>,
 ) => {
   const dataMax = Math.max(...data.map((i) => i.projectedWins));
   const dataMin = Math.min(...data.map((i) => i.projectedWins));
@@ -47,8 +50,8 @@ const TooltipContent = ({
   payload,
 }: {
   active: boolean;
-  payload: [{ payload: DataPoint }];
   label: string;
+  payload: [{ payload: DataPoint }];
 }) => {
   if (active && payload && payload.length > 0) {
     const point = payload[0].payload;
@@ -57,25 +60,27 @@ const TooltipContent = ({
       <div className={PopoverStyles.body}>
         <p className="mb-1 font-bold underline">{point.date}</p>
         <p>
-          <label htmlFor="record" className="mr-4 inline-block font-bold">
+          <label className="mr-4 inline-block font-bold" htmlFor="record">
             Record:
           </label>
-          <span id="record">{Utils.displayRecord(point._stats)}</span>
+          <span id="record">
+            {SeasonUtils.formatRecord(point._stats.record)}
+          </span>
         </p>
         <p>
           <label
-            htmlFor="projectedWins"
             className="mr-4 inline-block font-bold"
+            htmlFor="projectedWins"
           >
             Projected Wins:
           </label>
           <span id="projectedWins">{point.projectedWins}</span>
         </p>
         <p>
-          <label htmlFor="pace" className="mr-4 inline-block font-bold">
+          <label className="mr-4 inline-block font-bold" htmlFor="pace">
             Pace:
           </label>
-          <span id="pace">{Utils.displayPace(Utils.pace(point._stats))}</span>
+          <span id="pace">{SeasonUtils.formatPace(point._stats)}</span>
         </p>
       </div>
     );
@@ -101,8 +106,8 @@ const ReferenceLabel = ({ toSurprise, ...rest }: { toSurprise: number }) => {
 
   return (
     <>
-      <image x={x - 24} y={y - 8} width={16} href={SurprisedEmoji.src} />
-      <text x={x - 24 - 20} y={y + 4} className="fill-lime-500 stroke-lime-500">
+      <image href={SurprisedEmoji.src} width={16} x={x - 24} y={y - 8} />
+      <text className="fill-lime-500 stroke-lime-500" x={x - 24 - 20} y={y + 4}>
         {toSurprise}
       </text>
     </>
@@ -114,12 +119,12 @@ const YAxisLabel = ({
   viewBox,
 }: {
   viewBox: {
+    height: number;
     x: number;
     y: number;
-    height: number;
   };
 }) => {
-  const { x, y, height } = viewBox;
+  const { height, x, y } = viewBox;
 
   // TODO Actually understand what's going on here, all these additions
   // were pure guesses, stumbled onto approximately ok-looking positioning
@@ -128,16 +133,16 @@ const YAxisLabel = ({
 
   return (
     <text
-      y={cy + 16}
+      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
       transform={`rotate(${rot})`}
-      className="fill-lime-500 stroke-lime-500"
+      y={cy + 8}
     >
       Projected Wins
     </text>
   );
 };
 
-export default function PaceChart({
+export default function TeamSeasonPaceChart({
   games,
   teamSeason,
 }: {
@@ -147,28 +152,31 @@ export default function PaceChart({
   const data = useMemo<DataPoint[]>(() => {
     const points: DataPoint[] = [];
     const record: TeamRecord = {
-      w: 0,
       l: 0,
+      w: 0,
     };
 
     for (const game of games) {
-      // TODO Abstract this check? Used twice, essentially same pattern in our action, too
-      if (
-        game.homeTeam === teamSeason.team ||
-        game.awayTeam === teamSeason.team
-      ) {
-        const homeWin = game.homeScore > game.awayScore;
+      // TODO Abstract this check? Used in standings table and team stats, too
+      const [teamA, teamZ] = game.teams;
 
-        if (teamSeason.team === game.homeTeam) {
-          record[homeWin ? "w" : "l"] += 1;
+      if (
+        teamA.teamId === teamSeason.teamId ||
+        teamZ.teamId === teamSeason.teamId
+      ) {
+        if (teamSeason.teamId === teamA.teamId) {
+          record[teamA.score > teamZ.score ? "w" : "l"] += 1;
         } else {
-          record[homeWin ? "l" : "w"] += 1;
+          record[teamZ.score > teamA.score ? "w" : "l"] += 1;
         }
 
+        // spread = snapshot of record after current game
+        const _stats = { record: { ...record }, ...teamSeason };
+
         points.push({
-          projectedWins: Utils.projectedWins(record),
+          _stats,
           date: game.playedOn,
-          _stats: { ...record, ...teamSeason },
+          projectedWins: SeasonUtils.projectedWins(_stats),
         });
       }
     }
@@ -176,25 +184,19 @@ export default function PaceChart({
     return points;
   }, [games, teamSeason]);
 
-  const toSurprise = Utils.toSurprise(teamSeason);
+  const toSurprise = SeasonUtils.toSurprise(teamSeason);
   const offset = getGradientOffset(data, toSurprise);
+  const surpriseRules = SeasonUtils.getSeasonSurpriseRules(teamSeason.seasonId);
 
   return (
-    <ResponsiveContainer
-      width="100%"
-      height={600}
-      style={{
-        paddingLeft: 8,
-        paddingRight: 8,
-        // TODO Fix later, margin changes to align chart with table in team-stats; consider decoupling if chart used elsewhere
-        // marginTop aligns with top of table in 2-column layout
-        marginTop: "-4px",
-      }}
-    >
+    <ResponsiveContainer height={600} width="100%">
       <AreaChart
         // https://github.com/recharts/recharts/blob/8341516709e6042d27733f3e37b63af19d366a56/storybook/stories/API/Accessibility.mdx#L10
         accessibilityLayer
         data={data}
+        margin={{
+          left: 24,
+        }}
         width={400}
       >
         <CartesianGrid
@@ -217,7 +219,7 @@ export default function PaceChart({
         <YAxis
           axisLine={false}
           dataKey="projectedWins"
-          domain={[0, 82]}
+          domain={[0, surpriseRules.numGames]}
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<YAxisLabel />}
           tick={{
@@ -231,7 +233,7 @@ export default function PaceChart({
         {/* @ts-expect-error - necessary b/c Tooltip expects an element, but passes props for you under the hood */}
         <Tooltip content={<TooltipContent />} cursor={false} />
         <defs>
-          <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="splitColor" x1="0" x2="0" y1="0" y2="1">
             <stop
               offset={offset}
               stopColor={theme.colors.green[700]}
@@ -245,11 +247,11 @@ export default function PaceChart({
           </linearGradient>
         </defs>
         <Area
-          type="monotone"
-          dataKey="projectedWins"
-          stroke={theme.colors.lime[500]}
-          fill="url(#splitColor)"
           baseValue={toSurprise} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
+          dataKey="projectedWins"
+          fill="url(#splitColor)"
+          stroke={theme.colors.lime[500]}
+          type="monotone"
         />
         <ReferenceLine
           stroke={theme.colors.lime[500]}

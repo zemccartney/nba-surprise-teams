@@ -1,6 +1,8 @@
 ---
-import Layout from "./layout.astro";
 import Link from "../components/link.astro";
+import Layout from "./layout.astro";
+
+const { class: className, ...layoutProps } = Astro.props;
 ---
 
 <script>
@@ -11,25 +13,24 @@ import Link from "../components/link.astro";
   navLink?.classList.add("active");
 </script>
 
-<Layout {...Astro.props}>
+<Layout {...layoutProps}>
   <Fragment slot="header">
     <nav class="flex flex-col items-center gap-8 lg:flex-row lg:gap-20">
-      <a href="/" class="font-title text-sm text-lime-400 md:text-2xl">
+      <a class="font-title text-sm text-lime-400 md:text-2xl" href="/">
         {/* TODO Better way to do this? br and nbsps feels hacky */}
         NBA&nbsp;Surprise<br />Teams&nbsp;Tracker
       </a>
       <div class="flex flex-row gap-8">
-        {/* TODO Fix this important overriding somehow */}
-        <Link class="text-xl md:!text-2xl lg:!text-4xl" href="/info"
+        <Link class="text-xl md:text-2xl lg:text-4xl" href="/info"
           >What is this?</Link
         >
-        <Link class="text-xl md:!text-2xl lg:!text-4xl" href="/archive"
+        <Link class="text-xl md:text-2xl lg:text-4xl" href="/archive"
           >Archive</Link
         >
       </div>
     </nav>
   </Fragment>
-  <main class="pb-24 md:mt-16">
+  <main class:list={["pb-24 md:mt-16", className]}>
     <slot />
   </main>
 </Layout>

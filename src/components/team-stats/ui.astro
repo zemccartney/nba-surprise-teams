@@ -1,32 +1,42 @@
 ---
-import PaceChart from "../pace-chart";
+import type { Game, TeamSeason, TeamStats } from "../../data/types";
+
+import * as SeasonUtils from "../../data/seasons";
+import TeamSeasonPaceChart from "../charts/team-season-pace";
 import Popover from "../popover";
 import ResultEmoji from "../result-emoji.astro";
 import Table from "../table.astro";
-import * as Utils from "../../utils";
-import type { Game, TeamSeason } from "../../data";
-import type { TeamStats } from "../../utils";
 
 interface Props {
   games: Game[];
   teamSeason: TeamSeason;
 }
 
-const { teamSeason, games } = Astro.props;
+const { games, teamSeason } = Astro.props;
 
-const stats: TeamStats = { w: 0, l: 0, overUnder: teamSeason.overUnder };
+const teamStats: TeamStats = {
+  ...teamSeason,
+  record: { l: 0, w: 0 },
+};
 
 for (const game of games) {
-  if (game.homeTeam === teamSeason.team || game.awayTeam === teamSeason.team) {
-    const homeWin = game.homeScore > game.awayScore;
+  const [teamA, teamZ] = game.teams;
 
-    if (teamSeason.team === game.homeTeam) {
-      stats[homeWin ? "w" : "l"] += 1;
-    } else {
-      stats[homeWin ? "l" : "w"] += 1;
+  if (
+    teamA.teamId === teamSeason.teamId ||
+    teamZ.teamId === teamSeason.teamId
+  ) {
+    if (teamSeason.teamId === teamA.teamId) {
+      teamStats.record[teamA.score > teamZ.score ? "w" : "l"] += 1;
+    } else if (teamSeason.teamId === teamZ.teamId) {
+      teamStats.record[teamZ.score > teamA.score ? "w" : "l"] += 1;
     }
   }
 }
+
+const season = SeasonUtils.getSeasonById(teamSeason.seasonId);
+const surpriseRules = SeasonUtils.getSeasonSurpriseRules(teamSeason.seasonId);
+const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
 ---
 
 <style>
@@ -55,9 +65,10 @@ for (const game of games) {
 
 <>
   {
-    (Utils.isSurprise(stats) || Utils.isEliminated(stats)) && (
-      <div class="mb-16 flex flex-row items-center justify-center gap-4">
-        {Utils.isSurprise(stats) && (
+    (SeasonUtils.isSurprise(teamStats) ||
+      SeasonUtils.isEliminated(teamStats)) && (
+      <div class="flex flex-row items-center justify-center gap-4">
+        {SeasonUtils.isSurprise(teamStats) && (
           <>
             <ResultEmoji name="surprise" width={32} />
             <h2 class="text-center text-lg text-green-200 md:text-2xl">
@@ -66,7 +77,7 @@ for (const game of games) {
             <ResultEmoji name="celebration" width={32} />
           </>
         )}
-        {Utils.isEliminated(stats) && (
+        {SeasonUtils.isEliminated(teamStats) && (
           <>
             <ResultEmoji name="eliminated" width={32} />
             <p class="text-center text-lg text-green-200 md:text-2xl">
@@ -81,11 +92,64 @@ for (const game of games) {
     )
   }
 
+  {
+    season.shortened && (
+      <h2 class="relative mr-12 mt-8 w-80 text-lg text-yellow-400 max-lg:mx-auto lg:ml-auto lg:mt-4">
+        Stats here have been adjusted to reflect the shortened {fmtSeason}{" "}
+        season
+        <Popover
+          classes={{
+            body: "max-w-80",
+            trigger: "!-top-4 !-right-3",
+          }}
+          client:load
+        >
+          <p class="mb-4 pr-4">{season.shortened.reason}</p>
+          <table class="table-fixed border-collapse">
+            <thead>
+              <tr>
+                <td class="w-1/2" />
+                <td class="w-1/2" />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2">
+                  <span class="mr-4 font-bold underline">Games Played:</span>
+                </td>
+                <td class="p-2">{season.shortened.numGames}</td>
+              </tr>
+              <tr>
+                <td class="p-2">
+                  <span class="mr-4 font-bold underline">
+                    Over/Under Cutoff:
+                  </span>
+                </td>
+                <td class="p-2">
+                  {surpriseRules.overUnderCutoff.toPrecision(3)}
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2">
+                  <span class="mr-4 font-bold underline">
+                    Surprise Team Pace Cutoff:
+                  </span>
+                </td>
+                <td class="p-2">
+                  {SeasonUtils.signedFormatter.format(surpriseRules.paceTarget)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </Popover>
+      </h2>
+    )
+  }
   <div
-    class="NBASurpriseTracker-TeamStats flex flex-col-reverse gap-16 lg:grid"
+    class="NBASurpriseTracker-TeamStats mt-12 flex flex-col-reverse gap-16 px-2 lg:grid"
   >
-    <PaceChart client:load games={games} teamSeason={teamSeason} />
-    <Table class="compact max-h-32">
+    <TeamSeasonPaceChart client:load games={games} teamSeason={teamSeason} />
+    <Table class="compact max-h-32 max-md:-mx-2">
       <Fragment slot="head">
         <tr>
           <td class="w-2/3"></td>
@@ -95,7 +159,9 @@ for (const game of games) {
       <Fragment slot="body">
         <tr>
           <th scope="row">Record</th>
-          <td>{Utils.displayRecord(stats)}</td>
+          <td
+            >{SeasonUtils.formatRecord(teamStats?.record || { l: 0, w: 0 })}</td
+          >
         </tr>
         <tr>
           <th scope="row">
@@ -105,22 +171,23 @@ for (const game of games) {
           <td>{teamSeason.overUnder}</td>
         </tr>
         <tr>
-          <th scope="row" class="relative">
+          <th class="relative" scope="row">
             Record Needed
             <Popover client:load>
               <p class="mb-1 font-bold underline">Record Needed</p>
-              Record needed to qualify as a Surprise Team i.e. 10 wins above a team's
-              preseason over/under (rounded up)
+              Record needed to qualify as a Surprise Team i.e. {
+                surpriseRules.paceTarget
+              } wins above a team's preseason over/under (rounded up)
             </Popover>
           </th>
           <td
             >{
-              `${Utils.toSurprise(stats)} - ${82 - Utils.toSurprise(stats)}`
+              `${SeasonUtils.toSurprise(teamStats)} - ${surpriseRules.numGames - SeasonUtils.toSurprise(teamStats)}`
             }</td
           >
         </tr>
         <tr>
-          <th scope="row" class="relative">
+          <th class="relative" scope="row">
             Pace (Projected Record)
             <Popover client:load>
               <p class="mb-1 font-bold underline">Pace</p>
@@ -130,18 +197,18 @@ for (const game of games) {
               <p class="mb-1 font-bold underline">Projected Record</p>
               <p>
                 How many wins the team would have if their current winning
-                percentage held for all 82 games.
+                percentage held for all {surpriseRules.numGames} games.
               </p>
             </Popover>
           </th>
           <td>
             {
-              `${Utils.displayPace(Utils.pace(stats))} (${Utils.projectedWins(stats)} - ${82 - Utils.projectedWins(stats)})`
+              `${SeasonUtils.formatPace(teamStats)}${teamStats.record ? ` (${SeasonUtils.projectedWins(teamStats)} - ${surpriseRules.numGames - SeasonUtils.projectedWins(teamStats)})` : ""}`
             }
           </td>
         </tr>
         <tr>
-          <th scope="row" class="relative">
+          <th class="relative" scope="row">
             Surprise Have-to-Go
             <Popover client:load>
               <p class="mb-1 font-bold underline">Surprise Have-to-Go</p>
@@ -155,21 +222,21 @@ for (const game of games) {
           <td>
             {
               () => {
-                const recordRemaining = Utils.recordRemainingToSurprise(stats);
-
-                if (!recordRemaining) {
+                if (SeasonUtils.isEliminated(teamStats)) {
                   return (
                     <ResultEmoji class="mx-auto" name="eliminated" width={20} />
                   );
                 }
 
-                if (recordRemaining === true) {
+                if (SeasonUtils.isSurprise(teamStats)) {
                   return (
                     <ResultEmoji class="mx-auto" name="surprise" width={20} />
                   );
                 }
 
-                return Utils.displayRecord(recordRemaining);
+                return SeasonUtils.formatRecord(
+                  SeasonUtils.recordRemainingToSurprise(teamStats),
+                );
               }
             }
           </td>

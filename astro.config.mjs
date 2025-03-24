@@ -1,10 +1,10 @@
-import { defineConfig, envField } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import cloudflare from "@astrojs/cloudflare";
 import sentry from "@sentry/astro";
+import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
-const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN, PUBLIC_SENTRY_DSN } = loadEnv(
+const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
   "",
@@ -20,6 +20,30 @@ export default defineConfig({
   ...(PUBLIC_DEPLOY_ENV && {
     site: siteByEnv[PUBLIC_DEPLOY_ENV],
   }),
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+  }),
+  env: {
+    schema: {
+      PUBLIC_DEPLOY_ENV: envField.enum({
+        access: "public",
+        context: "client",
+        default: "local",
+        optional: false,
+        values: ["local", "preview", "production"],
+      }),
+      PUBLIC_SENTRY_DSN: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
+    },
+  },
+  experimental: {
+    svg: true,
+  },
   integrations: [
     react(),
     tailwind(),
@@ -29,37 +53,13 @@ export default defineConfig({
             dsn: PUBLIC_SENTRY_DSN,
             environment: PUBLIC_DEPLOY_ENV,
             sourceMapsUploadOptions: {
-              project: "nba-surprise-team-tracker",
               authToken: SENTRY_AUTH_TOKEN,
+              project: "nba-surprise-team-tracker",
             },
           }),
         ]
       : []),
   ],
-  experimental: {
-    svg: true,
-  },
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
-  }),
-  env: {
-    schema: {
-      PUBLIC_DEPLOY_ENV: envField.enum({
-        context: "client",
-        access: "public",
-        values: ["local", "preview", "production"],
-        optional: false,
-        default: "local",
-      }),
-      PUBLIC_SENTRY_DSN: envField.string({
-        context: "client",
-        access: "public",
-        optional: true,
-      }),
-    },
-  },
   vite: {
     resolve: {
       // https://github.com/withastro/adapters/pull/436#issuecomment-2525190557

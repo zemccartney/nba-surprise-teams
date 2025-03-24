@@ -1,6 +1,6 @@
-import { defineMiddleware } from "astro:middleware";
-import { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN } from "astro:env/client";
 import * as Sentry from "@sentry/cloudflare";
+import { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN } from "astro:env/client";
+import { defineMiddleware } from "astro:middleware";
 
 export const onRequest = defineMiddleware((ctx, next) => {
   // middleware are called during static page generation, too; since building occurs in a node
@@ -11,13 +11,13 @@ export const onRequest = defineMiddleware((ctx, next) => {
     return next();
   }
   const requestHandlerOptions = {
+    context: ctx.locals.runtime.ctx,
+
     options: {
       dsn: PUBLIC_SENTRY_DSN,
-      tracesSampleRate: 0.1,
       environment: PUBLIC_DEPLOY_ENV,
+      tracesSampleRate: 0.1,
     },
-
-    context: ctx.locals.runtime.ctx,
     request: ctx.request,
   };
 

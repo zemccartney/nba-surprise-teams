@@ -1,4 +1,6 @@
 ---
+import "@fontsource/iosevka-curly/400.css";
+import "@fontsource/iosevka-curly/700.css";
 import "@fontsource-variable/sixtyfour/full.css";
 
 interface Props {
@@ -13,14 +15,14 @@ const { description, title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta content="width=device-width" name="viewport" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
 
     <title>{title ? `${title} - NBASTT` : "NBA Surprise Teams Tracker"}</title>
     <meta
-      name="description"
       content={description ||
         "Tracking if NBA teams exceed their low preseason expectations"}
+      name="description"
     />
   </head>
   <body>

@@ -1,49 +1,36 @@
 ---
-import UI from "./ui.astro";
-import TeamStats from "./ssr.astro";
+import type { SeasonId, TeamCode } from "../../data/types";
+
+import * as SeasonUtils from "../../data/seasons";
 import Loading from "../loading.astro";
-import * as Data from "../../data";
-import type { TeamCode } from "../../data";
+import TeamStats from "./ssr.astro";
+import UI from "./ui.astro";
 
 interface Props {
+  seasonId: SeasonId;
   teamId: TeamCode;
-  seasonId: number;
 }
 
-const { teamId, seasonId } = Astro.props;
+const { seasonId, teamId } = Astro.props;
 
-const teamSeason = Data.getTeamSeason(teamId, seasonId);
+const teamSeason = SeasonUtils.getTeamSeason(seasonId, teamId);
 
-if (!teamSeason) {
-  throw new Error(
-    `[team-stats] season ${Astro.params.season} record for team ${Astro.params.team} not found`,
+const staticGames = await SeasonUtils.getSeasonArchive(seasonId);
+if (import.meta.env.DEV && !staticGames) {
+  console.log(
+    `[team-stats] Static games data unavailable for season ${teamSeason.seasonId}; will try to render data via server island`,
   );
-}
-
-let staticGames;
-try {
-  // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
-  const { default: games } = await import(
-    `../../data/seasons/${teamSeason.season}/games.json`
-  );
-  staticGames = games;
-} catch {
-  if (import.meta.env.DEV) {
-    console.log(
-      `[team-stats] Static games data unavailable for season ${teamSeason.season}; will try to render data via server island`,
-    );
-  }
 }
 ---
 
 {
   staticGames ? (
-    <UI teamSeason={teamSeason} games={staticGames} />
+    <UI games={staticGames} teamSeason={teamSeason} />
   ) : (
     <TeamStats
+      seasonId={teamSeason.seasonId}
       server:defer
-      seasonId={teamSeason.season}
-      teamId={teamSeason.team}
+      teamId={teamSeason.teamId}
     >
       <Loading slot="fallback" />
     </TeamStats>

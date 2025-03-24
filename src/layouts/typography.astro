@@ -1,6 +1,6 @@
 ---
 import type { HTMLTag } from "astro/types";
-import type { ClassValue } from "clsx"; // transitive dep; included by astro
+import type { ClassValue } from "clsx";
 
 interface Props {
   class?: ClassValue;
@@ -19,9 +19,15 @@ const Element = element;
       @apply list-inside list-disc ps-[1em] md:ps-[2em];
     }
 
-    p,
+    ol {
+      @apply list-inside list-decimal ps-[1em] md:ps-[2em];
+    }
+
+    ol,
     ul {
-      @apply text-2xl text-green-200;
+      li {
+        @apply mt-[.5em];
+      }
     }
 
     /*
@@ -29,21 +35,19 @@ const Element = element;
         will more often than not want to be responsible for spacing/laying out their own children
       */
     & > * {
-      & + h1,
-      & + h2 {
-        @apply mb-[1em] mt-[1.5em];
-      }
-
       & + * {
         @apply mt-[1em];
       }
 
-      & + ul {
-        @apply mt-[0.5em];
+      & + h1,
+      & + h2,
+      & + h3 {
+        @apply mb-[1em] mt-[1.5em];
       }
 
-      &:is(p, ul) {
-        @apply mx-auto lg:max-w-[75%];
+      & + ul,
+      & + ol {
+        @apply mt-[0.5em];
       }
     }
   }

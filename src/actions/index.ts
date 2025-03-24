@@ -1,18 +1,29 @@
-import { defineAction, ActionError } from "astro:actions";
-import { z } from "astro:schema";
 import * as Sentry from "@sentry/cloudflare";
-import { getSeasonById } from "../data";
-import type { Loader, LoaderResponse } from "../data";
+import { ActionError, defineAction } from "astro:actions";
+import { z } from "astro:schema";
+
+import type { LoaderResponse, SeasonId } from "../data/types";
+
+import LiveLoader from "../data/loaders/live";
+import * as SeasonUtils from "../data/seasons";
 import * as Utils from "../utils";
+
+// TODO Explain / Document as part of updating process
+const SCHEMA_ID = "fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0"; // :) https://everyuuid.com/
 
 export const server = {
   getSeasonData: defineAction({
     input: z.object({
-      seasonId: z.number(),
+      seasonId: z.custom<SeasonId>((val) =>
+        SeasonUtils.getAllSeasons()
+          .map((season) => season.id)
+          .includes(val),
+      ),
     }),
+    // eslint-disable-next-line perfectionist/sort-objects
     handler: async (input, astroCtx): Promise<LoaderResponse> => {
       try {
-        const season = getSeasonById(input.seasonId);
+        const season = SeasonUtils.getSeasonById(input.seasonId);
 
         if (!season) {
           throw new ActionError({
@@ -37,14 +48,18 @@ export const server = {
           };
         }
 
-        const gamesCache =
-          await astroCtx.locals.runtime.env.GAMES_KV.get<LoaderResponse>(
-            season.id.toString(),
-            "json",
-          );
+        const gamesCache = await astroCtx.locals.runtime.env.GAMES_KV.get<{
+          data: LoaderResponse;
+          id: string;
+        }>(season.id.toString(), "json");
 
-        if (gamesCache?.games) {
-          const { expiresAt, games } = gamesCache;
+        if (
+          // Does it look like KV contains well-formed data?
+          gamesCache?.id === SCHEMA_ID &&
+          gamesCache?.data?.games.length &&
+          Object.hasOwn(gamesCache.data, "expiresAt")
+        ) {
+          const { expiresAt, games } = gamesCache.data;
 
           // No next expiresAt means no more upcoming relevant games this season means no new writes
           if (!expiresAt) {
@@ -55,24 +70,23 @@ export const server = {
 
           // Our backup of remote data is still fresh; serve
           if (expiresAt > now) {
-            return gamesCache;
+            return gamesCache.data;
           }
         }
 
         // Cache is empty (no games) or stale (expiresAt <= now); refresh
-
-        const { default: loader } = await import(
-          // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
-          `../data/seasons/${season.id}/loader.ts`
-        );
+        // TODO Refresh in the background if stale results via waitUntil? Review catbox settings
 
         try {
-          const refreshed = await (loader as Loader)();
+          const refreshed = await LiveLoader();
 
           // expiration without eviction: keep data around as a fallback,
           await astroCtx.locals.runtime.env.GAMES_KV.put(
             season.id.toString(),
-            JSON.stringify(refreshed),
+            JSON.stringify({
+              data: refreshed,
+              id: SCHEMA_ID,
+            }),
           );
 
           return refreshed;
@@ -83,8 +97,15 @@ export const server = {
             Sentry?.captureException?.(error);
           }
 
+          if (gamesCache?.id !== SCHEMA_ID) {
+            throw new ActionError({
+              code: "INTERNAL_SERVER_ERROR", // TODO Report bug? says not available? code: 'SERVICE_UNAVAILABLE',
+              message: "Unable to resolve working games data",
+            });
+          }
+
           return {
-            games: gamesCache?.games ?? [],
+            games: gamesCache?.data?.games ?? [],
           };
         }
       } catch (error) {

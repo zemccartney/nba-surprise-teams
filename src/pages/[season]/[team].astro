@@ -1,50 +1,62 @@
 ---
-import Subpage from "../../layouts/subpage.astro";
+import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
+
+import Link from "../../components/link.astro";
 import Logo from "../../components/logo.astro";
 import TeamStats from "../../components/team-stats/index.astro";
-import { TEAM_SEASONS, getTeamById, getSeasonById } from "../../data";
-import type { TeamCode } from "../../data";
-import * as Utils from "../../utils";
+import * as SeasonUtils from "../../data/seasons";
+import * as TeamUtils from "../../data/teams";
+import Subpage from "../../layouts/subpage.astro";
 
-export function getStaticPaths() {
-  return TEAM_SEASONS.map((ts) => ({
-    params: { season: ts.season, team: ts.team },
+export const getStaticPaths = (() => {
+  return SeasonUtils.getAllTeamSeasons().map((ts) => ({
+    params: { season: ts.seasonId, team: ts.teamId },
   }));
-}
+}) satisfies GetStaticPaths;
 
-// TODO File bug? param mistyped; typed as a number in IDE, but actually a string
-// @ts-expect-error : "Argument of type 'number' is not assignable to parameter of type 'string'"
-const seasonId = Number.parseInt(Astro.params.season, 10);
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 
-const team = getTeamById(Astro.params.team as TeamCode);
-const season = getSeasonById(seasonId);
+const { season: seasonId, team: teamId } = Astro.params as Params;
 
-// Making TS happy; TODO maybe a better way to do this / workaround? constant data queries
-// should be guaranteed to return results, given paths from which query params are derived are
-// derived from those same constants
-if (!team) {
-  throw new Error(`[Page: team.astro] Team ${Astro.params.team} not found`);
-}
+const team = TeamUtils.getTeamById(teamId);
+const season = SeasonUtils.getSeasonById(
+  // TODO File bug? param mistyped; typed as a number in IDE, but actually a string
+  // @ts-expect-error : "Argument of type 'number' is not assignable to parameter of type 'string'"
+  Number.parseInt(seasonId, 10),
+);
 
-if (!season) {
-  throw new Error(`[Page: team.astro] Season ${Astro.params.season} not found`);
-}
-
-const fmtSeason = Utils.abbreviateSeasonRange(season, { compact: true });
+const hasArchive = await SeasonUtils.getSeasonArchive(season.id);
+const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
 ---
 
 <Subpage
-  title={`${team.id} ${fmtSeason}`}
   description={`${fmtSeason} Season Results for the ${team.name}`}
+  title={`${team.id} ${fmtSeason}`}
 >
+  {
+    hasArchive && (
+      <div class="mb-12 text-center md:-mt-6">
+        <Link class="text-lg md:text-xl lg:text-2xl" href={`/${season.id}`}>
+          Back to {fmtSeason} Season
+        </Link>
+      </div>
+    )
+  }
+
   <div
     class="mb-12 flex flex-col items-center justify-center gap-8 sm:px-8 lg:flex-row"
   >
-    <Logo teamCode={team.id} class="w-[96px]" />
-    <h1 class="text-center font-title text-4xl text-lime-400">
-      {fmtSeason}
-      {team.name}
+    <Logo class="w-[96px]" seasonId={season.id} teamId={team.id} />
+    <h1 class="text-balance text-center font-title text-4xl text-lime-400">
+      {TeamUtils.resolveTeamName(season.id, team.id)}
     </h1>
+    {
+      hasArchive && (
+        <p class="whitespace-nowrap font-title text-4xl text-lime-400">
+          {fmtSeason}
+        </p>
+      )
+    }
   </div>
   <TeamStats seasonId={season.id} teamId={team.id} />
 </Subpage>

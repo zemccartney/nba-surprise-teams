@@ -1,13 +1,14 @@
-import Path from "node:path";
-import Url from "node:url";
+import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
-import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import eslintPerfectionist from "eslint-plugin-perfectionist";
 import eslintPluginReact from "eslint-plugin-react";
+import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import globals from "globals";
+import Path from "node:path";
+import Url from "node:url";
 import tseslint from "typescript-eslint";
-import { includeIgnoreFile } from "@eslint/compat";
 
 const __filename = Url.fileURLToPath(import.meta.url);
 const __dirname = Path.dirname(__filename);
@@ -31,8 +32,8 @@ export default tseslint.config(
   },
   {
     rules: {
-      "unicorn/prevent-abbreviations": ["off"],
       "unicorn/no-keyword-prefix": ["off"],
+      "unicorn/prevent-abbreviations": ["off"],
     },
   },
   {
@@ -49,7 +50,8 @@ export default tseslint.config(
   },
   {
     // auto-generated, no sense in linting
-    ignores: ["worker-configuration.d.ts"],
+    ignores: ["worker-configuration.d.ts", "scratchpad.js"],
   },
+  eslintPerfectionist.configs["recommended-natural"],
   eslintConfigPrettier,
 );
