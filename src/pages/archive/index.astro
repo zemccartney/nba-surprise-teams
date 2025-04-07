@@ -18,17 +18,13 @@ const archivedSeasons = await SeasonUtils.getArchivedSeasons();
     <div
       class="mx-auto mb-4 flex flex-row justify-center gap-32 p-8 text-center md:mb-12"
     >
-      <Link class="text-xl md:text-2xl lg:text-4xl" href="/archive/stats"
-        >Stats</Link
-      >
-      <Link class="text-xl md:text-2xl lg:text-4xl" href="/archive/sources"
-        >Sources</Link
-      >
+      <Link class="text-4xl" href="/archive/stats">Stats</Link>
+      <Link class="text-4xl" href="/archive/sources">Sources</Link>
     </div>
-    <div class="flex flex-col items-center gap-4 md:gap-8">
+    <div class="flex flex-col items-center gap-6 md:gap-12">
       {
         archivedSeasons.map((season) => (
-          <Link class="text-xl md:text-2xl lg:text-4xl" href={`/${season.id}`}>
+          <Link class="text-4xl" href={`/${season.id}`}>
             {SeasonUtils.abbreviateSeasonRange(season)}
           </Link>
         ))

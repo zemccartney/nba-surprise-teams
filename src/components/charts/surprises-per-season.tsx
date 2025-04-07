@@ -85,7 +85,7 @@ const TooltipContent = ({
     const point = payload[0].payload;
 
     return (
-      <div className={`${PopoverStyles.body} max-w-80 pb-4`}>
+      <div className={`${PopoverStyles.body} pb-4 md:max-w-80`}>
         <h3 className="mb-1 text-center font-bold">
           {SeasonUtils.abbreviateSeasonRange(
             SeasonUtils.getSeasonById(point.seasonId),
@@ -119,7 +119,7 @@ const TooltipContent = ({
 
 const Cursor = ({
   height,
-  payload,
+  // payload,
   width,
   x,
   y,
@@ -130,7 +130,7 @@ const Cursor = ({
   x: number;
   y: number;
 }) => {
-  const point = payload[0].payload;
+  // const point = payload[0].payload;
 
   return (
     <path
@@ -138,11 +138,11 @@ const Cursor = ({
       d={`M ${x},${y} h ${width} v ${height} h -${width} Z`}
       fill={theme.colors.slate[400]}
       fillOpacity={0.5}
-      onClick={() => {
+      /* onClick={() => {
         window.open(`/${point.seasonId}`, "_blank");
-      }}
+      }} 
       role="link"
-      tabIndex={0}
+      tabIndex={0} */
     />
   );
 };
@@ -203,18 +203,18 @@ export default function SurprisesPerSeasonChart({
         {/* @ts-expect-error - necessary b/c custom elements expect props, but  can't grok that recharts passes props for you under the hood */}
         <Tooltip content={<TooltipContent />} cursor={<Cursor />} />
         <Bar
-          activeBar={{ fill: theme.colors.indigo[400] }}
+          // activeBar={{ fill: theme.colors.indigo[400] }}
           barSize={40}
           dataKey="numSurprises"
           minPointSize={10}
         >
-          {data.map((point, i) => (
+          {data.map((_, i) => (
             <Cell
               fill={i % 2 ? theme.colors.lime[200] : theme.colors.green[700]}
               key={i}
-              onClick={() => {
+              /* onClick={() => {
                 window.open(`/${point.seasonId}`, "_blank");
-              }}
+              }} */
               role="link"
               tabIndex={0}
             />

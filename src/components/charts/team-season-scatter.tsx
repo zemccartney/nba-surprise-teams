@@ -82,7 +82,7 @@ const TooltipContent = ({
     const point = payload[0].payload;
 
     return (
-      <div className={`${PopoverStyles.body} max-w-fit pb-4`}>
+      <div className={`${PopoverStyles.body} pb-4 md:max-w-fit`}>
         <h3 className="mb-1 text-center font-bold">
           <img
             className="mr-2 inline contrast-150 drop-shadow-lg"
@@ -180,18 +180,19 @@ export default function TeamSeasonScatterplot({
         <Scatter data={data}>
           {data.map((point, i) => (
             <Cell
-              className="hover:fill-indigo-400"
               fill={
                 point.isSurpriseTeam
                   ? theme.colors.lime[500]
                   : theme.colors.red[700]
               }
               key={i}
+              /* 
+              className="hover:fill-indigo-400"
               onClick={() => {
                 window.open(`/${point.seasonId}/${point.teamId}`, "_blank");
               }}
               role="link"
-              tabIndex={0}
+              tabIndex={0} */
             />
           ))}
         </Scatter>

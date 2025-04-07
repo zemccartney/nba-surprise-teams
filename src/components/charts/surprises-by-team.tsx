@@ -97,7 +97,7 @@ const TooltipContent = ({
 
     if ("history" in point) {
       return (
-        <div className={Clsx([PopoverStyles.body, "max-w-fit"])}>
+        <div className={Clsx([PopoverStyles.body, "md:max-w-fit"])}>
           <h3 className="mb-1 text-center font-bold">
             {TeamUtils.getTeamById(point.teamId).name}
           </h3>
