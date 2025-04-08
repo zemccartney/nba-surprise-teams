@@ -1,32 +1,29 @@
-import { defineAction, ActionError } from "astro:actions";
-import { z } from "astro:schema";
-import { TURSO_URL, TURSO_AUTH_TOKEN } from "astro:env/server";
-import { drizzle } from "drizzle-orm/libsql/web";
-// TODO Investigate; astro clipped these from drizzle-orm's export, no idea why
-import { lte, gte, eq, and } from "drizzle-orm/expressions";
 import * as Sentry from "@sentry/cloudflare";
-import { SeasonCaches, Games } from "../data/db/schema";
-import { getSeasonById } from "../data";
-import type { Game, Loader } from "../data";
+import { ActionError, defineAction } from "astro:actions";
+import { z } from "astro:schema";
+
+import type { LoaderResponse, SeasonId } from "../data/types";
+
+import LiveLoader from "../data/loaders/live";
+import * as SeasonUtils from "../data/seasons";
 import * as Utils from "../utils";
 
-const WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000;
+// TODO Explain / Document as part of updating process
+const SCHEMA_ID = "fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0"; // :) https://everyuuid.com/
 
 export const server = {
   getSeasonData: defineAction({
     input: z.object({
-      seasonId: z.number(),
+      seasonId: z.custom<SeasonId>((val) =>
+        SeasonUtils.getAllSeasons()
+          .map((season) => season.id)
+          .includes(val),
+      ),
     }),
-    handler: async (input): Promise<{ games: Game[]; expiresAt?: number }> => {
+    // eslint-disable-next-line perfectionist/sort-objects
+    handler: async (input, astroCtx): Promise<LoaderResponse> => {
       try {
-        const dbClient = drizzle({
-          connection: {
-            url: TURSO_URL,
-            ...(TURSO_AUTH_TOKEN && { authToken: TURSO_AUTH_TOKEN }),
-          },
-        });
-
-        const season = getSeasonById(input.seasonId);
+        const season = SeasonUtils.getSeasonById(input.seasonId);
 
         if (!season) {
           throw new ActionError({
@@ -41,90 +38,58 @@ export const server = {
         const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
         const now = Date.now();
 
+        // TODO Document; needed to handle when season-in-waiting i.e. season and over/unders for upcoming set, but season not started (see home page)
+        // Build assumption: allowable / expected that season will be ready data-wise prior to season start date, given
+        // expected data release schedule; past season end not factored here i.e. previous route, pull from static if past season
+        // end, as we don't solve for missing data programmatically; solve for material problems with material
         if (currentYYYYMMDD < season.startDate) {
           return {
             games: [],
           };
         }
 
-        // All past seasons must have data saved on file
-        // Once season is over, data is constant, ink is dry, no sense
-        // in pulling data from external sources
-        if (currentYYYYMMDD > season.endDate) {
-          // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
-          const { default: staticGames } = await import(
-            `../data/${season.id}/games.ts`
-          );
+        const gamesCache = await astroCtx.locals.runtime.env.GAMES_KV.get<{
+          data: LoaderResponse;
+          id: string;
+        }>(season.id.toString(), "json");
 
-          return {
-            expiresAt: now + WEEK_IN_MS, // TODO revisit; data is static at this point; can cache forever? year?
-            games: staticGames,
-          };
+        if (
+          // Does it look like KV contains well-formed data?
+          gamesCache?.id === SCHEMA_ID &&
+          gamesCache?.data?.games.length &&
+          Object.hasOwn(gamesCache.data, "expiresAt")
+        ) {
+          const { expiresAt, games } = gamesCache.data;
+
+          // No next expiresAt means no more upcoming relevant games this season means no new writes
+          if (!expiresAt) {
+            // TODO Is there a way to force-clear server island caches? Or does that happen on deployment, due to, I assume, changing the params encryption key?
+            // Don't send caching information to the browser
+            return { games };
+          }
+
+          // Our backup of remote data is still fresh; serve
+          if (expiresAt > now) {
+            return gamesCache.data;
+          }
         }
 
-        const [seasonCache] = await dbClient
-          .select()
-          .from(SeasonCaches)
-          .where(eq(SeasonCaches.id, season.id));
-
-        const prevExpiresAt = seasonCache?.expiresAt;
-
-        // Our backup of remote data is still fresh; serve
-        if (prevExpiresAt && prevExpiresAt > now) {
-          return {
-            expiresAt: prevExpiresAt,
-            games: await dbClient
-              .select()
-              .from(Games)
-              .where(
-                and(
-                  eq(Games.season, season.id),
-                  and(
-                    gte(Games.playedOn, season.startDate),
-                    lte(Games.playedOn, season.endDate),
-                  ),
-                ),
-              ),
-          };
-        }
-
-        // No set cache expiration or our backup of remote data is expired; refresh
-
-        // file extension needed on dynamic import per https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations
-        const { default: loader } = await import(
-          `../data/seasons/${season.id}/loader.ts`
-        );
+        // Cache is empty (no games) or stale (expiresAt <= now); refresh
+        // TODO Refresh in the background if stale results via waitUntil? Review catbox settings
 
         try {
-          const refreshed = await (loader as Loader)();
+          const refreshed = await LiveLoader();
 
-          // No next expiresAt means no more upcoming relevant games this season
-          const nextExpiresAt = refreshed.expiresAt ?? now + WEEK_IN_MS; // mark as cacheable for a while, arbitrarily a week; TODO revisit, do something actually smart; data is constant now
+          // expiration without eviction: keep data around as a fallback,
+          await astroCtx.locals.runtime.env.GAMES_KV.put(
+            season.id.toString(),
+            JSON.stringify({
+              data: refreshed,
+              id: SCHEMA_ID,
+            }),
+          );
 
-          await dbClient.batch([
-            dbClient
-              .insert(SeasonCaches)
-              .values([
-                {
-                  id: season.id,
-                  expiresAt: nextExpiresAt,
-                  updatedAt: now,
-                },
-              ])
-              .onConflictDoUpdate({
-                target: SeasonCaches.id,
-                set: { expiresAt: nextExpiresAt, updatedAt: now },
-              }),
-            // Yes, this is pretty gross, but didn't feel like dealing with an upsert; data's not that precious,
-            // opted to keep simple and do a "hard refresh"
-            dbClient.delete(Games).where(eq(Games.season, season.id)),
-            dbClient.insert(Games).values(refreshed.games),
-          ]);
-
-          return {
-            expiresAt: nextExpiresAt,
-            games: refreshed.games,
-          };
+          return refreshed;
         } catch (error) {
           // Serve our copy of data as a fallback, but report error for remediation
           // Better to keep site visibly working, even if data outdated
@@ -132,22 +97,15 @@ export const server = {
             Sentry?.captureException?.(error);
           }
 
+          if (gamesCache?.id !== SCHEMA_ID) {
+            throw new ActionError({
+              code: "INTERNAL_SERVER_ERROR", // TODO Report bug? says not available? code: 'SERVICE_UNAVAILABLE',
+              message: "Unable to resolve working games data",
+            });
+          }
+
           return {
-            // don't surface expiresAt, don't support caching here; on the one hand, end users
-            // will continue to trigger errors; on the other, end users will receive fresh data
-            // ASAP from using the site. Does this work out in practice?
-            games: await dbClient
-              .select()
-              .from(Games)
-              .where(
-                and(
-                  eq(Games.season, season.id),
-                  and(
-                    gte(Games.playedOn, season.startDate),
-                    lte(Games.playedOn, season.startDate),
-                  ),
-                ),
-              ),
+            games: gamesCache?.data?.games ?? [],
           };
         }
       } catch (error) {
@@ -155,9 +113,7 @@ export const server = {
           console.log(error);
         }
 
-        if (import.meta.env.PROD) {
-          Sentry.captureException?.(error);
-        }
+        Sentry.captureException?.(error);
 
         throw error;
       }

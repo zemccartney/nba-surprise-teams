@@ -1,10 +1,10 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"table"> {
-  class?: string;
   // Disabling per following Astro's pattern for requiring passing children to default slot: https://docs.astro.build/en/guides/typescript/#common-prop-type-patterns
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: any;
+  class?: string;
   compact?: boolean;
   stickyHeader?: boolean;
 }
@@ -24,7 +24,7 @@ const {
 
 <style>
   .NBASurpriseTracker-Table {
-    @apply border-collapse shadow-glow;
+    @apply table-fixed border-collapse shadow-glow;
 
     > thead,
     > tfoot {
@@ -49,11 +49,11 @@ const {
     }
 
     &.compact {
-      /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
       @apply shadow-glow-sm;
 
       > thead th,
       > thead td {
+        /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
         @apply p-3 pr-4 text-2xl;
       }
 

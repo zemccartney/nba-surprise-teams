@@ -1,22 +1,60 @@
 ---
-// TODO Add current / off season detection logic to decide whether to load data; in table, handle absence of upcoming season data
-
-import Layout from "../layouts/layout.astro";
 import Link from "../components/link.astro";
-import Loading from "../components/loading.astro";
-import StandingsTable from "../components/standings-table.astro";
+import StandingsTable from "../components/standings-table/index.astro";
+import * as SeasonUtils from "../data/seasons";
+import Layout from "../layouts/layout.astro";
+import Typography from "../layouts/typography.astro";
+
+const latestSeason = SeasonUtils.sortSeasonsByDate(
+  SeasonUtils.getAllSeasons(),
+)[0];
+
+// TODO Remove on adding test-suite, on top of typing, to check that this sort of error is impossible
+if (!latestSeason) {
+  // TODO Build error; doc assumption of state we need to meet (data/build contract, not ... API / interface contract?
+  // is that a helpful / non-gibberish distinction?
+  // TODO Remove this error, centralize build contract elsewhere... tests? i.e. what data conditions do we need to meet
+  // such that the site will build into an acceptable state?
+  throw new Error("Insufficient season data");
+}
+
+const isSeasonReady = SeasonUtils.getTeamsInSeason(latestSeason.id).length > 0;
 ---
 
 <Layout>
-  <main class="p-8 px-0 pb-24 md:px-8">
+  <Fragment slot="header">
     <h1 class="text-center font-title text-3xl text-lime-400 md:text-7xl">
       NBA Surprise Teams Tracker
     </h1>
-    <nav class="mb-10 mt-8 flex justify-center md:mb-20 md:mt-16">
-      <Link href="/info">What is this?</Link>
+    <nav class="mt-8 flex flex-row justify-center gap-16 md:mt-16">
+      <Link class="text-2xl lg:text-4xl" href="/info">About</Link>
+      <Link class="text-2xl lg:text-4xl" href="/archive">Archive</Link>
+      <Link class="text-2xl lg:text-4xl" href="/stats">Stats</Link>
+      <Link class="text-2xl lg:text-4xl" href="/sources">Sources</Link>
     </nav>
-    <StandingsTable server:defer seasonId={2024}>
-      <Loading slot="fallback" />
-    </StandingsTable>
+  </Fragment>
+  <main class="mt-4 pb-24 sm:mt-16 md:px-8">
+    {isSeasonReady && <StandingsTable seasonId={latestSeason.id} />}
+    {
+      !isSeasonReady && (
+        <Typography class="mx-auto px-4 lg:max-w-[60%]">
+          <h2 class="text-balance text-center font-title text-2xl text-lime-400 md:text-4xl">
+            Countdown to the{" "}
+            <span class="whitespace-nowrap">
+              {SeasonUtils.abbreviateSeasonRange(latestSeason, {
+                compact: true,
+              })}
+            </span>{" "}
+            season
+          </h2>
+          <p class="text-2xl text-green-200">
+            Next season kicks off on{" "}
+            {new Date(latestSeason.startDate).toLocaleDateString()}. Pre-season
+            over/unders are typically posted mid-September. Till then, check out
+            how <Link href="/archive">past years</Link> shook out.
+          </p>
+        </Typography>
+      )
+    }
   </main>
 </Layout>

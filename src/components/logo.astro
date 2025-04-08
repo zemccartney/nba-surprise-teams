@@ -1,52 +1,46 @@
 ---
-import type { ImageMetadata } from "astro";
-import type { TeamCode } from "../data";
+import type { HTMLAttributes } from "astro/types";
 
 import Image from "astro/components/Image.astro";
-import { getTeamById } from "../data";
 
-interface Props {
+import type { SeasonId, TeamCode } from "../data/types";
+
+import { TEAM_CODES } from "../data/constants";
+import * as TeamUtils from "../data/teams";
+
+type Props = Pick<HTMLAttributes<"img">, "loading"> & {
   class?: string;
-  teamCode: TeamCode;
-  width?: number;
   height?: number;
-}
-
-// TODO Rename team to teamId?
-// width and height defaults are actual dimensions of svg files, downloaded via https://twemoji-cheatsheet.vercel.app/
-const { class: className, teamCode, width = 36, height = 36 } = Astro.props;
-
-const emojiByTeam: Record<TeamCode, string> = {
-  BKN: "dragon",
-  DET: "racing-car",
-  POR: "hiking-boot",
-  CHI: "bull", // ox emoji, re-colored
-  CHA: "hornet", // honeybee emoji, re-colored
-  WAS: "wizard", // mage emoji, re-colored
-  UTA: "saxophone",
-  ATL: "feather",
-  TOR: "raptor", // t-rex emoji, re-colored
+  seasonId: SeasonId;
+  teamId: TeamCode;
+  width?: number;
 };
 
-let emojiSrc;
+const {
+  class: className,
+  height = 36,
+  seasonId,
+  teamId,
+  width = 36,
+  ...props
+} = Astro.props;
 
-try {
-  emojiSrc = import(
-    `../assets/images/emoji/${emojiByTeam[teamCode]}.svg`
-    // https://docs.astro.build/en/reference/modules/astro-assets/#src-required
-  ) as Promise<{ default: ImageMetadata }>;
-} catch {
-  emojiSrc = import("../assets/images/emoji/question.svg");
-}
-
-const t = getTeamById(teamCode);
+const t = TeamUtils.getTeamById(teamId);
 const alt = t ? `Logo for ${t.name}` : `Question mark logo`;
+
+const emojiSrc = TeamUtils.getTeamSeasonLogo(seasonId, teamId);
 ---
 
 <Image
-  src={emojiSrc}
   alt={alt}
-  class:list={[className]}
-  width={width}
+  class={className}
+  src={emojiSrc}
+  {...teamId === TEAM_CODES.DET && {
+    // tweak to slightly improve contrast
+    style:
+      "filter: drop-shadow(-1rem -1rem 1rem #016270) drop-shadow(1rem 1rem 1rem #016271);",
+  }}
   height={height}
+  width={width}
+  {...props}
 />

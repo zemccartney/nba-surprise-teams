@@ -1,0 +1,38 @@
+---
+import type { SeasonId, TeamCode } from "../../data/types";
+
+import * as SeasonUtils from "../../data/seasons";
+import Loading from "../loading.astro";
+import TeamStats from "./ssr.astro";
+import UI from "./ui.astro";
+
+interface Props {
+  seasonId: SeasonId;
+  teamId: TeamCode;
+}
+
+const { seasonId, teamId } = Astro.props;
+
+const teamSeason = SeasonUtils.getTeamSeason(seasonId, teamId);
+
+const staticGames = await SeasonUtils.getSeasonArchive(seasonId);
+if (import.meta.env.DEV && !staticGames) {
+  console.log(
+    `[team-stats] Static games data unavailable for season ${teamSeason.seasonId}; will try to render data via server island`,
+  );
+}
+---
+
+{
+  staticGames ? (
+    <UI games={staticGames} teamSeason={teamSeason} />
+  ) : (
+    <TeamStats
+      seasonId={teamSeason.seasonId}
+      server:defer
+      teamId={teamSeason.teamId}
+    >
+      <Loading slot="fallback" />
+    </TeamStats>
+  )
+}

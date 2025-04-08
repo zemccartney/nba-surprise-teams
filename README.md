@@ -12,19 +12,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro -- --help` | Get help using the Astro CLI                 |
 | `npm run deps`            | Helper to check and update dependencies      |
 
-## Local dev
-
-**Prerequisites**
-
-- Turso CLI
-  - see https://docs.turso.tech/sdk/ts/orm/drizzle
-
-To run locally:
-
-1. In one terminal tab/window: `turso dev` (starts db server)
-2. `echo 'TURSO_URL=http://127.0.0.1:8080' > .env` (config to talk to db server)
-3. `npm run dev`
-
 ## Maintenance Considerations
 
 ### Icon sourcing
@@ -41,7 +28,7 @@ To run locally:
 
 **TODO: Figure out how wrangler file used for Pages config... is it? Had been seeing build log ignoring file, reporting as invalid toml even though json?**
 
-## Dependencies
+### Dependencies
 
 TODO Figure out sensible, repeatable practice
 
@@ -54,11 +41,11 @@ Account for:
 
 ### Data
 
-- DB hosted in Turso account (prod and dev dbs)
+- data stored in KV
 - Intuition: Reach out to a source with live data only when monitoring game results in real-time; when there's no possibility of new
   data (out-of-season, but more commonly, in-season and we can tell by looking at the schedule that there haven't been
   new results since last poll), be self-reliant
-  - Purpose of db: be self-reliant as possible while collecting season in-progress
+  - Purpose of KV: be self-reliant as possible while collecting season in-progress
     - reduce dependency on API (assume unreliable source; endpoint I stumbled on by observing network activity on stats.nba.com;
       gets me the data I want, but no contract with this service)
     - immediately store results in real time, so we have some backup of live results; use this backup instead of calling out to the API
@@ -69,12 +56,65 @@ Account for:
     as static files within the application, serve directly
   - set caching headers based on approximate calculation of time remaining until new results in data (when games finish)
     - reduce load times for end user, reduce round trips to server to render view based on db call (or API call, depending on if data fresh)
-    - also, saves on Turso usage; fewer db calls since cache headers tell browser: only results on server won't change for x time, so don't
+    - also, saves on KV usage; fewer calls since cache headers tell browser: only results on server won't change for x time, so don't
       bother re-querying
 
-## Off-season
+#### Off-season
 
 TODO
 
 - when to prep for new season
-- what to do with the db? clear once all data is stored on file?
+- what to do with KV? clear once all data is stored on file?
+
+#### Lifecycle
+
+- schedule release: ~mid August (August 15 for 2024, August 18 for 2023)
+- odds release: ~mid September (Slam n' Jam pod intro for 2024 surprise teams on Sept. 20)
+
+#### Adding Data
+
+**TODO Fill in**
+
+1. Add season id to consts
+2. Add any new teams to consts
+
+These steps will trigger typescript errors in the data/teams file
+
+3. Add a branch to `SeasonData` (`src/data/types`), documenting the teams participating in the new season
+4. Add a new folder, named by the id of the new season, under `src/data/seasons`
+5. Add a `data.ts` file, define data about the season and candidate teams
+6. Import to `src/data/seasons/index.ts` and register on the `normalized` map.
+
+TS intuition:
+
+- Define and expand types to describe allowable space of data, such that data entry is constrained to those
+  types, that you see type errors while adding data
+- Structuring data as lookup tables allows restricting allowable "queries" i.e. season ids or team ids within a season. The
+  entity ids used as keys set the literal values allowable for keying into ("searching") our data
+
+<!--
+
+**TODO: Cleanup**
+
+// type errors if data defined incorrectly (correct seasonId associations)
+// error if I try to write / mutate any data (normalized or base)
+// methods for getting data a.) flag error if given non-existent entity b.) return type is guaranteed given correctly typed input (no | undefined in return types)
+// so callers don't have to confirm correct value given back
+
+/// define atomic facts (seasons, team codes)
+// then, fill in details about those facts w/ records
+// records should be immutable
+/// as const on innter data to expose literal types, then freeze
+
+## UPDATING
+
+- Review final season episode ref on over/under section of sources
+- Review hardcoded limits on graphs; new data still fits?
+- Review insights leaderboard; does slicing still work? Way to automate this? (e.g. if items past 10th
+  are same number, collapse into single row listing their count)
+- ADDING PISTONS FROM THIS YEAR WILL BREAK LAST ROW IN top 10 leaderboard table:
+  teams that surprised by +6; 10th row will no longer be +6
+  (MAKE A CHECKLIST FOR RETIRING SEASONS / MAKE CHARTS LESS FRAGILE)
+- if changes to shape of data stored in KV, update cache key
+
+-->

@@ -1,0 +1,9 @@
+# Settings are solely for local dev
+
+name = "nbastt"
+
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2025-03-21"
+
+# fake id, given this file is leveraged only locally
+kv_namespaces = [ { binding = "GAMES_KV", id = "123456" } ]

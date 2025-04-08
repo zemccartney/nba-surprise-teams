@@ -1,19 +1,44 @@
 ---
-import Layout from "./layout.astro";
 import Link from "../components/link.astro";
+import Layout from "./layout.astro";
+
+const { class: className, ...layoutProps } = Astro.props;
 ---
 
-<Layout {...Astro.props}>
-  <header class="p-8">
-    <nav class="flex flex-row items-center gap-16">
-      <a href="/" class="font-title text-sm text-lime-400 md:text-2xl">
+<script>
+  const currentPath = globalThis.location.pathname;
+  const navLink = document.querySelector(
+    `nav .NBASTT-Link[href="${currentPath}"]`,
+  );
+  navLink?.classList.add("active");
+</script>
+
+<Layout {...layoutProps}>
+  <Fragment slot="header">
+    <nav class="flex flex-col items-center gap-8 lg:flex-row lg:gap-20">
+      <a class="font-title text-sm text-lime-400 md:text-2xl" href="/">
         {/* TODO Better way to do this? br and nbsps feels hacky */}
         NBA&nbsp;Surprise<br />Teams&nbsp;Tracker
       </a>
-      <Link class="text-xl md:text-2xl" href="/info">What is this?</Link>
+      <div class="flex flex-row gap-4 md:gap-12">
+        <Link class="text-center text-xl md:text-2xl lg:text-4xl" href="/info"
+          >About</Link
+        >
+        <Link
+          class="text-center text-xl md:text-2xl lg:text-4xl"
+          href="/archive">Archive</Link
+        >
+        <Link class="text-center text-xl md:text-2xl lg:text-4xl" href="/stats"
+          >Stats</Link
+        >
+        <Link
+          class="text-center text-xl md:text-2xl lg:text-4xl"
+          href="/sources">Sources</Link
+        >
+      </div>
     </nav>
-  </header>
-  <main class="space-y-12 pb-16">
+  </Fragment>
+  <main class:list={["pb-24 md:mt-16", className]}>
     <slot />
   </main>
 </Layout>

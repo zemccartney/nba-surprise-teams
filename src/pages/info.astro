@@ -1,87 +1,63 @@
 ---
-import SubpageLayout from "../layouts/subpage.astro";
 import Link from "../components/link.astro";
+import Subpage from "../layouts/subpage.astro";
+import Typography from "../layouts/typography.astro";
 ---
 
-<style>
-  .TypoBox {
-    p,
-    ul {
-      @apply text-2xl text-green-200;
-    }
-
-    * + h1,
-    * + h2 {
-      @apply mb-[1em] mt-[1.5em];
-    }
-
-    * + p {
-      @apply my-[1em];
-    }
-
-    p,
-    ul {
-      @apply mx-auto lg:max-w-[75%];
-    }
-
-    ul {
-      @apply my-[0.5em] list-inside list-disc ps-[1em] md:ps-[2em];
-    }
-  }
-</style>
-
-<SubpageLayout
-  title="Info"
+<Subpage
   description="A brief rundown of the what, why, and who of the NBA Surprise Teams Tracker"
+  title="Info"
 >
-  <div class="TypoBox mx-auto px-4 md:mt-16 lg:max-w-[60%]">
+  <Typography class="mx-auto px-4 lg:max-w-[60%]">
     <h1 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
       What is the NBA Surprise Teams Tracker?
     </h1>
-    <p>
-      Alex Speers and Andrew Schlecht host "The Saturday Slam N' Jam," the
-      Saturday episode of the Athletic's NBA podcast. Each year, they run a
-      segment called Surprise Teams. If you want to get up to speed straight
-      from the source, here's the introductory episode for the 2024-2025 season
-      (segment starts at the 8:15 mark):
+    <p class="text-2xl text-green-200">
+      Alex Speers and Andrew Schlecht host <span class="italic"
+        >The Saturday Slam N' Jam,</span
+      > the Saturday episode of <span class="italic">The Athletic's</span> NBA podcast.
+      Each year, they run a segment called Surprise Teams. If you want to get up
+      to speed straight from the source, here's the introductory episode for the
+      2024-2025 season (segment starts at the 8:15 mark):
     </p>
     <iframe
-      class="mx-auto"
-      title="The Athletic NBA Daily podcast, 9/20/2024 — Embiid Extension + Surprise Teams + Pelicans Preview"
       allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+      class="!my-16 mx-auto"
       height="175"
-      style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
       sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
       src="https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000670194276"
+      style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
+      title="The Athletic NBA Daily podcast, 9/20/2024 — Embiid Extension + Surprise Teams + Pelicans Preview"
     ></iframe>
-    <p>
+    <p class="text-2xl text-green-200">
       If you're short on time, though, a team qualifies as a Surprise Team if:
     </p>
-    <ul class="!-mt-4">
+    <ul class="text-2xl text-green-200">
       <li>Their preseason over/under is below 36 wins</li>
       <li>They beat their over/under by at least 10 games</li>
     </ul>
-    <p>
+    <p class="text-2xl text-green-200">
       This site just keeps track of how well the current season's Surprise Team
       candidates are doing at, well, surprising us.
     </p>
-    <h2 class="mt-16 text-center font-title text-2xl text-lime-400 md:text-4xl">
+    <h2 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
       Who are you?
     </h2>
-    <p>
+    <p class="text-2xl text-green-200">
       My name's Zack McCartney. I'm a web programmer and basketball fan with a
       possibly troubling amount of time on my hands. Thanks for stopping by!
     </p>
-    <p class="italic">
+    <p class="text-2xl italic text-green-200">
       (And to be totally clear: entirely unaffiliated with Alex, Andrew, the
       Athletic / NYT, and the NBA; random guy working solo.)
     </p>
-    <p class="flex flex-col items-center justify-center gap-4 md:flex-row">
-      <Link class="!text-xl" href="mailto:zack@grepco.net">zack@grepco.net</Link
-      >
-      <Link class="!text-xl" href="https://www.grepco.net" target="_blank"
+    <p
+      class="flex flex-col items-center justify-center gap-4 text-2xl text-green-200 md:flex-row"
+    >
+      <Link class="text-xl" href="mailto:zack@grepco.net">zack@grepco.net</Link>
+      <Link class="text-xl" href="https://www.grepco.net" target="_blank"
         >https://www.grepco.net</Link
       >
     </p>
-  </div>
-</SubpageLayout>
+  </Typography>
+</Subpage>

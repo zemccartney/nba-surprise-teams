@@ -1,0 +1,41 @@
+---
+import type { SeasonId } from "../../data/types";
+
+import * as SeasonUtils from "../../data/seasons";
+import Loading from "../loading.astro";
+import StandingsTable from "./ssr.astro"; // component name used in requests (dev tools, network tab); for easier id in debugging
+import UI from "./ui.astro";
+
+interface Props {
+  seasonId: SeasonId;
+  title?: boolean | string;
+}
+
+const { seasonId, title } = Astro.props;
+
+const season = SeasonUtils.getSeasonById(seasonId);
+
+const staticGames = await SeasonUtils.getSeasonArchive(seasonId);
+if (import.meta.env.DEV && !staticGames) {
+  console.log(
+    `[standings-table] Static games data unavailable for season ${seasonId}; will try to render data via server island`,
+  );
+}
+
+let resolvedTitle = `${SeasonUtils.abbreviateSeasonRange(season, { compact: true })} Season`;
+if (title === false) {
+  resolvedTitle = "";
+} else if (typeof title === "string") {
+  resolvedTitle = title;
+}
+---
+
+{
+  staticGames ? (
+    <UI games={staticGames} seasonId={season.id} title={resolvedTitle} />
+  ) : (
+    <StandingsTable seasonId={season.id} server:defer>
+      <Loading slot="fallback" />
+    </StandingsTable>
+  )
+}

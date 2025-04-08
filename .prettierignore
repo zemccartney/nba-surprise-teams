@@ -7,3 +7,9 @@ dist/
 .astro/
 
 .wrangler/
+
+# game data files
+src/data/seasons/*/games.json
+
+# auto-generated
+worker-configuration.d.ts

@@ -1,0 +1,27 @@
+---
+import { actions } from "astro:actions";
+
+import type { SeasonId } from "../../data/types";
+
+import Crash from "../crash.astro";
+import UI from "./ui.astro";
+
+interface Props {
+  seasonId: SeasonId;
+}
+
+const { seasonId } = Astro.props;
+
+const { data, error } = await Astro.callAction(actions.getSeasonData, {
+  seasonId,
+});
+
+if (!error && data.expiresAt) {
+  Astro.response.headers.set(
+    "Cache-Control",
+    `public, max-age=${Math.round((data.expiresAt - Date.now()) / 1000)}`,
+  );
+}
+---
+
+{error ? <Crash /> : <UI games={data.games} seasonId={seasonId} />}

@@ -1,0 +1,28 @@
+---
+import Link from "../components/link.astro";
+import * as SeasonUtils from "../data/seasons";
+import Subpage from "../layouts/subpage.astro";
+import Typography from "../layouts/typography.astro";
+
+const archivedSeasons = await SeasonUtils.getArchivedSeasons();
+---
+
+<Subpage
+  description="Listing of seasons tracked for surprise teams so far"
+  title="Archive"
+>
+  <Typography class="mx-auto px-4 lg:max-w-[60%]">
+    <h1 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
+      Archive
+    </h1>
+    <div class="!mt-6 flex flex-col items-center gap-6 md:!mt-12 md:gap-12">
+      {
+        archivedSeasons.map((season) => (
+          <Link class="text-4xl" href={`/${season.id}`}>
+            {SeasonUtils.abbreviateSeasonRange(season)}
+          </Link>
+        ))
+      }
+    </div>
+  </Typography>
+</Subpage>

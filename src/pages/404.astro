@@ -1,15 +1,15 @@
 ---
-import SubpageLayout from "../layouts/subpage.astro";
 import Link from "../components/link.astro";
-
-// TODO Setup a typography component, apply theming via Tailwind? How to override tho? Does Tailwind actually complicate overriding or are you confused?
+import Subpage from "../layouts/subpage.astro";
 ---
 
-<SubpageLayout title="404!">
+<Subpage title="404!">
   <h1
-    class="mt-[20%] text-center font-title text-4xl italic text-yellow-400 md:text-6xl"
+    class="mt-[20%] text-center font-title text-4xl italic !leading-snug text-yellow-400 md:text-6xl"
   >
     Page Not Found
   </h1>
-  <Link class="mt-8 block text-center" href="/">Return home</Link>
-</SubpageLayout>
+  <Link class="mt-8 block text-center text-lg md:text-xl lg:text-2xl" href="/"
+    >Return home</Link
+  >
+</Subpage>

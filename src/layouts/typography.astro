@@ -1,0 +1,58 @@
+---
+import type { HTMLTag } from "astro/types";
+import type { ClassValue } from "clsx";
+
+interface Props {
+  class?: ClassValue;
+  element?: HTMLTag;
+}
+
+const { class: classVal, element = "div" } = Astro.props;
+
+const Element = element;
+---
+
+<style>
+  .TypoBox {
+    /* General rules, apply to all instances of elements, wherever they appear in tree */
+    ul {
+      @apply list-inside list-disc ps-[1em] md:ps-[2em];
+    }
+
+    ol {
+      @apply list-inside list-decimal ps-[1em] md:ps-[2em];
+    }
+
+    ol,
+    ul {
+      li {
+        @apply mt-[.5em];
+      }
+    }
+
+    /*
+        Layout rules, assume only relevant to top level of layout, that container elements
+        will more often than not want to be responsible for spacing/laying out their own children
+      */
+    & > * {
+      & + * {
+        @apply mt-[1em];
+      }
+
+      & + h1,
+      & + h2,
+      & + h3 {
+        @apply mb-[1em] mt-[1.5em];
+      }
+
+      & + ul,
+      & + ol {
+        @apply mt-[0.5em];
+      }
+    }
+  }
+</style>
+
+<Element class:list={["TypoBox", classVal]}>
+  <slot />
+</Element>
