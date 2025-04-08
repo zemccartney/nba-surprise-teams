@@ -20,12 +20,20 @@ const { class: className, ...layoutProps } = Astro.props;
         {/* TODO Better way to do this? br and nbsps feels hacky */}
         NBA&nbsp;Surprise<br />Teams&nbsp;Tracker
       </a>
-      <div class="flex flex-row gap-8">
-        <Link class="text-xl md:text-2xl lg:text-4xl" href="/info"
-          >What is this?</Link
+      <div class="flex flex-row gap-4 md:gap-12">
+        <Link class="text-center text-xl md:text-2xl lg:text-4xl" href="/info"
+          >About</Link
         >
-        <Link class="text-xl md:text-2xl lg:text-4xl" href="/archive"
-          >Archive</Link
+        <Link
+          class="text-center text-xl md:text-2xl lg:text-4xl"
+          href="/archive">Archive</Link
+        >
+        <Link class="text-center text-xl md:text-2xl lg:text-4xl" href="/stats"
+          >Stats</Link
+        >
+        <Link
+          class="text-center text-xl md:text-2xl lg:text-4xl"
+          href="/sources">Sources</Link
         >
       </div>
     </nav>

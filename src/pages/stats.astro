@@ -1,21 +1,21 @@
 ---
 import { getImage } from "astro:assets";
 
-import type { SurprisesByTeamChartDatapoint } from "../../components/charts/surprises-by-team";
-import type { SurprisesPerSeasonChartDatapoint } from "../../components/charts/surprises-per-season";
-import type { TeamCode, TeamStats } from "../../data/types";
+import type { SurprisesByTeamChartDatapoint } from "../components/charts/surprises-by-team";
+import type { SurprisesPerSeasonChartDatapoint } from "../components/charts/surprises-per-season";
+import type { TeamCode, TeamStats } from "../data/types";
 
-import SurprisesByTeamChart from "../../components/charts/surprises-by-team";
-import SurprisesPerSeasonChart from "../../components/charts/surprises-per-season";
-import TeamSeasonScatterPlot from "../../components/charts/team-season-scatter";
-import Link from "../../components/link.astro";
-import Logo from "../../components/logo.astro";
-import Popover from "../../components/popover";
-import Table from "../../components/table.astro";
-import * as SeasonUtils from "../../data/seasons";
-import * as TeamUtils from "../../data/teams";
-import Subpage from "../../layouts/subpage.astro";
-import * as Utils from "../../utils";
+import SurprisesByTeamChart from "../components/charts/surprises-by-team";
+import SurprisesPerSeasonChart from "../components/charts/surprises-per-season";
+import TeamSeasonScatterPlot from "../components/charts/team-season-scatter";
+import Link from "../components/link.astro";
+import Logo from "../components/logo.astro";
+import Popover from "../components/popover";
+import Table from "../components/table.astro";
+import * as SeasonUtils from "../data/seasons";
+import * as TeamUtils from "../data/teams";
+import Subpage from "../layouts/subpage.astro";
+import * as Utils from "../utils";
 
 // TODO Review, clean up, make more efficient
 
