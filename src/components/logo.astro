@@ -1,4 +1,6 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
 import Image from "astro/components/Image.astro";
 
 import type { SeasonId, TeamCode } from "../data/types";
@@ -6,13 +8,13 @@ import type { SeasonId, TeamCode } from "../data/types";
 import { TEAM_CODES } from "../data/constants";
 import * as TeamUtils from "../data/teams";
 
-interface Props {
+type Props = Pick<HTMLAttributes<"img">, "loading"> & {
   class?: string;
   height?: number;
   seasonId: SeasonId;
   teamId: TeamCode;
   width?: number;
-}
+};
 
 const {
   class: className,
@@ -20,6 +22,7 @@ const {
   seasonId,
   teamId,
   width = 36,
+  ...props
 } = Astro.props;
 
 const t = TeamUtils.getTeamById(teamId);
@@ -30,7 +33,7 @@ const emojiSrc = TeamUtils.getTeamSeasonLogo(seasonId, teamId);
 
 <Image
   alt={alt}
-  class:list={[className, teamId === TEAM_CODES.DET && ""]}
+  class={className}
   src={emojiSrc}
   {...teamId === TEAM_CODES.DET && {
     // tweak to slightly improve contrast
@@ -39,4 +42,5 @@ const emojiSrc = TeamUtils.getTeamSeasonLogo(seasonId, teamId);
   }}
   height={height}
   width={width}
+  {...props}
 />

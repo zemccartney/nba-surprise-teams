@@ -112,6 +112,7 @@ const TooltipContent = ({
               <li className="mt-4" key={`${hist.teamId}-${hist.duration[0]}`}>
                 <img
                   className="inline contrast-150 drop-shadow-lg"
+                  loading="lazy"
                   src={hist.logoSrc}
                   width={32}
                 />{" "}
@@ -129,6 +130,7 @@ const TooltipContent = ({
         <h3 className="mb-1 text-center font-bold">
           <img
             className="inline contrast-150 drop-shadow-lg"
+            loading="lazy"
             src={point.logoSrc}
             width={30}
           />{" "}

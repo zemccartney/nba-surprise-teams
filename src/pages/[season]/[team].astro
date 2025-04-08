@@ -46,13 +46,20 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
   <div
     class="mb-12 flex flex-col items-center justify-center gap-8 sm:px-8 lg:flex-row"
   >
-    <Logo class="w-[96px]" seasonId={season.id} teamId={team.id} />
-    <h1 class="text-balance text-center font-title text-4xl text-lime-400">
+    <Logo
+      class="w-[96px]"
+      loading="eager"
+      seasonId={season.id}
+      teamId={team.id}
+    />
+    <h1
+      class="text-balance text-center font-title text-2xl text-lime-400 md:text-4xl"
+    >
       {TeamUtils.resolveTeamName(season.id, team.id)}
     </h1>
     {
       hasArchive && (
-        <p class="whitespace-nowrap font-title text-4xl text-lime-400">
+        <p class="whitespace-nowrap font-title text-2xl text-lime-400 md:text-4xl">
           {fmtSeason}
         </p>
       )

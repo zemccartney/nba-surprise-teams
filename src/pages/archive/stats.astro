@@ -228,22 +228,32 @@ for (const point of datapoints) {
                   <tr>
                     <th scope="row">
                       <div class="flex flex-row items-center gap-4">
-                        <Logo seasonId={point.seasonId} teamId={point.teamId} />
+                        <Logo
+                          loading="eager"
+                          seasonId={point.seasonId}
+                          teamId={point.teamId}
+                        />
                         <Link
                           class="relative"
                           href={`/${point.seasonId}/${point.teamId}`}
                         >
                           <span class="hidden md:inline">
-                            {SeasonUtils.abbreviateSeasonRange(
-                              SeasonUtils.getSeasonById(point.seasonId),
-                              { compact: true },
-                            )}
                             {TeamUtils.resolveTeamName(
                               point.seasonId,
                               point.teamId,
                             )}
+                            {SeasonUtils.abbreviateSeasonRange(
+                              SeasonUtils.getSeasonById(point.seasonId),
+                              { compact: true },
+                            )}
                           </span>
-                          <span class="md:hidden">{point.teamId}</span>
+                          <span class="md:hidden">
+                            {point.teamId}
+                            {SeasonUtils.abbreviateSeasonRange(
+                              SeasonUtils.getSeasonById(point.seasonId),
+                              { compact: true },
+                            )}
+                          </span>
                         </Link>
                       </div>
                     </th>
@@ -267,14 +277,17 @@ for (const point of datapoints) {
       <h2 class="mb-8 text-center font-title text-lg text-lime-400 md:text-xl">
         Surprises x Teams
       </h2>
-      <SurprisesByTeamChart client:load data={Object.values(surprisesByTeam)} />
+      <SurprisesByTeamChart
+        client:visible
+        data={Object.values(surprisesByTeam)}
+      />
     </section>
 
     <section class="order-4">
       <h2 class="mb-8 text-center font-title text-lg text-lime-400 md:text-xl">
         Pace x Over/Under
       </h2>
-      <TeamSeasonScatterPlot client:load data={datapoints} />
+      <TeamSeasonScatterPlot client:visible data={datapoints} />
     </section>
   </div>
 </Subpage>

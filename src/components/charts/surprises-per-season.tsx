@@ -214,9 +214,10 @@ export default function SurprisesPerSeasonChart({
               key={i}
               /* onClick={() => {
                 window.open(`/${point.seasonId}`, "_blank");
-              }} */
+              }} 
               role="link"
               tabIndex={0}
+              */
             />
           ))}
         </Bar>

@@ -86,6 +86,7 @@ const TooltipContent = ({
         <h3 className="mb-1 text-center font-bold">
           <img
             className="mr-2 inline contrast-150 drop-shadow-lg"
+            loading="lazy"
             src={point.logoSrc}
             width={30}
           />
