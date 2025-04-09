@@ -117,7 +117,15 @@ const TooltipContent = ({
                   width={32}
                 />{" "}
                 {hist.name} (
-                {`${hist.duration[0]} - ${hist.duration[1] || "present"}`})
+                {/*
+                  Inc end season id to represent year of end date of that season,
+                  as ranges of a team name's existence are usually written not in terms
+                  of our season id concept, but strictly as the range of years during which the
+                  team existed, which would mean the year in which the last season in which
+                  the team existed ended
+                */}
+                {`${hist.duration[0]} - ${hist.duration[1] ? hist.duration[1] + 1 : "present"}`}
+                )
               </li>
             ))}
           </ul>

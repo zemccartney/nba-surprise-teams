@@ -47,7 +47,7 @@ const teams = Utils.deepFreeze({
   [TEAM_CODES.BOS]: { id: TEAM_CODES.BOS, name: "Boston Celtics" },
   [TEAM_CODES.CHA]: {
     alternativeNames: [
-      { duration: [2004, 2014], logo: "bobcat", name: "Charlotte Bobcats" },
+      { duration: [2004, 2013], logo: "bobcat", name: "Charlotte Bobcats" },
     ],
     id: TEAM_CODES.CHA,
     name: "Charlotte Hornets",
@@ -104,7 +104,7 @@ export const getTeamHistory = (teamId: TeamCode) => {
   if ([TEAM_CODES.BKN, TEAM_CODES.NJN].includes(teamId)) {
     return Utils.deepFreeze([
       {
-        duration: [1977, 2012],
+        duration: [1977, 2011],
         logo: emojiByTeam[TEAM_CODES.NJN],
         name: teams[TEAM_CODES.NJN].name,
         teamId: TEAM_CODES.NJN,
@@ -121,7 +121,7 @@ export const getTeamHistory = (teamId: TeamCode) => {
   if ([TEAM_CODES.OKC, TEAM_CODES.SEA].includes(teamId)) {
     return Utils.deepFreeze([
       {
-        duration: [1967, 2008],
+        duration: [1967, 2007],
         logo: emojiByTeam[TEAM_CODES.SEA],
         name: teams[TEAM_CODES.SEA].name,
         teamId: TEAM_CODES.SEA,
@@ -138,7 +138,7 @@ export const getTeamHistory = (teamId: TeamCode) => {
   if ([TEAM_CODES.MEM, TEAM_CODES.VAN].includes(teamId)) {
     return Utils.deepFreeze([
       {
-        duration: [1995, 2001],
+        duration: [1995, 2000],
         logo: emojiByTeam[TEAM_CODES.VAN],
         name: teams[TEAM_CODES.VAN].name,
         teamId: TEAM_CODES.VAN,
@@ -155,7 +155,7 @@ export const getTeamHistory = (teamId: TeamCode) => {
   if (teamId === TEAM_CODES.CHA) {
     return Utils.deepFreeze([
       {
-        duration: [1988, 2002],
+        duration: [1988, 2001],
         logo: emojiByTeam[TEAM_CODES.CHA],
         name: teams[TEAM_CODES.CHA].name,
         teamId: TEAM_CODES.CHA,
@@ -187,19 +187,19 @@ export const getTeamHistory = (teamId: TeamCode) => {
   if ([TEAM_CODES.NOH, TEAM_CODES.NOK, TEAM_CODES.NOP].includes(teamId)) {
     return Utils.deepFreeze([
       {
-        duration: [2002, 2005],
+        duration: [2002, 2004],
         logo: emojiByTeam[TEAM_CODES.NOH],
         name: teams[TEAM_CODES.NOH].name,
         teamId: TEAM_CODES.NOH,
       },
       {
-        duration: [2005, 2007],
+        duration: [2005, 2006],
         logo: emojiByTeam[TEAM_CODES.NOK],
         name: teams[TEAM_CODES.NOK].name,
         teamId: TEAM_CODES.NOK,
       },
       {
-        duration: [2007, 2013],
+        duration: [2007, 2012],
         logo: emojiByTeam[TEAM_CODES.NOH],
         name: teams[TEAM_CODES.NOH].name,
         teamId: TEAM_CODES.NOH,
