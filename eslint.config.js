@@ -21,7 +21,7 @@ export default tseslint.config(
   tseslint.configs.stylistic,
   ...eslintPluginAstro.configs.recommended,
   ...eslintPluginAstro.configs["jsx-a11y-strict"],
-  eslintPluginUnicorn.configs["flat/recommended"],
+  eslintPluginUnicorn.configs.recommended,
   {
     files: ["*.{js,ts,mjs}"],
     languageOptions: {

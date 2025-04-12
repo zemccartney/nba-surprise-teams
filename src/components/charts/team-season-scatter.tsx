@@ -13,7 +13,6 @@ import type { TeamStats } from "../../data/types";
 
 import * as SeasonUtils from "../../data/seasons";
 import * as TeamUtils from "../../data/teams";
-import * as Utils from "../../utils";
 import { styles as PopoverStyles } from "../popover";
 
 interface TeamSeasonScatterplotDatapoint extends TeamStats {
@@ -117,8 +116,6 @@ const TooltipContent = ({
   }
 };
 
-const theme = Utils.getTheme();
-
 export default function TeamSeasonScatterplot({
   data,
 }: {
@@ -133,8 +130,8 @@ export default function TeamSeasonScatterplot({
         }}
       >
         <CartesianGrid
-          fill={theme.colors.slate[950]}
-          stroke={theme.colors.lime[200]}
+          fill="var(--color-slate-950)"
+          stroke="var(--color-lime-200)"
           strokeDasharray="3 3"
         />
         <XAxis
@@ -148,11 +145,11 @@ export default function TeamSeasonScatterplot({
           label={<XAxisLabel />}
           name="Over/Under"
           tick={{
-            fill: theme.colors.lime[500],
+            fill: "var(--color-lime-500)",
             fontSize: 16,
-            stroke: theme.colors.lime[500],
+            stroke: "var(--color-lime-500)",
           }}
-          tickLine={{ stroke: theme.colors.lime[200] }}
+          tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
           ticks={[15, 20, 25, 30, 35]}
           type="number"
@@ -168,11 +165,11 @@ export default function TeamSeasonScatterplot({
           label={<YAxisLabel />}
           name="Pace"
           tick={{
-            fill: theme.colors.lime[500],
+            fill: "var(--color-lime-500)",
             fontSize: 16,
-            stroke: theme.colors.lime[500],
+            stroke: "var(--color-lime-500)",
           }}
-          tickLine={{ stroke: theme.colors.lime[200] }}
+          tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
           type="number"
         />
@@ -183,8 +180,8 @@ export default function TeamSeasonScatterplot({
             <Cell
               fill={
                 point.isSurpriseTeam
-                  ? theme.colors.lime[500]
-                  : theme.colors.red[700]
+                  ? "var(--color-lime-500)"
+                  : "var(--color-red-700)"
               }
               key={i}
               /* 

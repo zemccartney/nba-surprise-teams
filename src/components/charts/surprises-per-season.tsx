@@ -13,10 +13,7 @@ import type { SeasonId, TeamSeason } from "../../data/types";
 
 import * as SeasonUtils from "../../data/seasons";
 import * as TeamUtils from "../../data/teams";
-import * as Utils from "../../utils";
 import { styles as PopoverStyles } from "../popover";
-
-const theme = Utils.getTheme();
 
 export interface SurprisesPerSeasonChartDatapoint {
   numSurprises: number;
@@ -136,7 +133,7 @@ const Cursor = ({
     <path
       className="recharts-rectangle recharts-tooltip-cursor"
       d={`M ${x},${y} h ${width} v ${height} h -${width} Z`}
-      fill={theme.colors.slate[400]}
+      fill="var(--color-slate-400)"
       fillOpacity={0.5}
       /* onClick={() => {
         window.open(`/${point.seasonId}`, "_blank");
@@ -166,8 +163,8 @@ export default function SurprisesPerSeasonChart({
         }}
       >
         <CartesianGrid
-          fill={theme.colors.slate[950]}
-          stroke={theme.colors.lime[200]}
+          fill="var(--color-slate-950)"
+          stroke="var(--color-lime-200)"
           strokeDasharray="3 3"
         />
         <XAxis
@@ -176,11 +173,11 @@ export default function SurprisesPerSeasonChart({
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<XAxisLabel />}
           tick={{
-            fill: theme.colors.lime[500],
+            fill: "var(--color-lime-500)",
             fontSize: 16,
-            stroke: theme.colors.lime[500],
+            stroke: "var(--color-lime-500)",
           }}
-          tickLine={{ stroke: theme.colors.lime[200] }}
+          tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
           ticks={Array.from(
             { length: Math.ceil((latestSeason.id + 1 - 1990) / 5) },
@@ -192,11 +189,11 @@ export default function SurprisesPerSeasonChart({
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<YAxisLabel />}
           tick={{
-            fill: theme.colors.lime[500],
+            fill: "var(--color-lime-500)",
             fontSize: 16,
-            stroke: theme.colors.lime[500],
+            stroke: "var(--color-lime-500)",
           }}
-          tickLine={{ stroke: theme.colors.lime[200] }}
+          tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
           type="number"
         />
@@ -210,7 +207,7 @@ export default function SurprisesPerSeasonChart({
         >
           {data.map((_, i) => (
             <Cell
-              fill={i % 2 ? theme.colors.lime[200] : theme.colors.green[700]}
+              fill={i % 2 ? "var(--color-lime-200)" : "var(--color-green-700)"}
               key={i}
               /* onClick={() => {
                 window.open(`/${point.seasonId}`, "_blank");

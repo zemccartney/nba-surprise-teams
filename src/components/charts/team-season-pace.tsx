@@ -15,7 +15,6 @@ import type { Game, TeamRecord, TeamSeason, TeamStats } from "../../data/types";
 
 import SurprisedEmoji from "../../assets/images/emoji/hushed-face.svg";
 import * as SeasonUtils from "../../data/seasons";
-import * as Utils from "../../utils";
 import { styles as PopoverStyles } from "../popover";
 
 // Essentially copied from https://recharts.org/en-US/examples/AreaChartFillByValue
@@ -41,8 +40,6 @@ const getGradientOffset = (
   // Note: We subtract from 1 because SVG gradients go from top (0) to bottom (1)
   return 1 - (toSurprise - dataMin) / totalHeight;
 };
-
-const theme = Utils.getTheme();
 
 // https://recharts.org/en-US/examples/CustomContentOfTooltip
 const TooltipContent = ({
@@ -200,8 +197,8 @@ export default function TeamSeasonPaceChart({
         width={400}
       >
         <CartesianGrid
-          fill={theme.colors.slate[950]}
-          stroke={theme.colors.lime[200]}
+          fill="var(--color-slate-950)"
+          stroke="var(--color-lime-200)"
           strokeDasharray="3 3"
         />
         <XAxis
@@ -209,11 +206,11 @@ export default function TeamSeasonPaceChart({
           dataKey="date"
           interval="equidistantPreserveStart"
           tick={{
-            fill: theme.colors.lime[500],
+            fill: "var(--color-lime-500)",
             fontSize: 16,
-            stroke: theme.colors.lime[500],
+            stroke: "var(--color-lime-500)",
           }}
-          tickLine={{ stroke: theme.colors.lime[200] }}
+          tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
         />
         <YAxis
@@ -223,11 +220,11 @@ export default function TeamSeasonPaceChart({
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<YAxisLabel />}
           tick={{
-            fill: theme.colors.lime[500],
+            fill: "var(--color-lime-500)",
             fontSize: 16,
-            stroke: theme.colors.lime[500],
+            stroke: "var(--color-lime-500)",
           }}
-          tickLine={{ stroke: theme.colors.lime[200] }}
+          tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
         />
         {/* @ts-expect-error - necessary b/c Tooltip expects an element, but passes props for you under the hood */}
@@ -236,12 +233,12 @@ export default function TeamSeasonPaceChart({
           <linearGradient id="splitColor" x1="0" x2="0" y1="0" y2="1">
             <stop
               offset={offset}
-              stopColor={theme.colors.green[700]}
+              stopColor="var(--color-green-700)"
               stopOpacity={1}
             />
             <stop
               offset={offset}
-              stopColor={theme.colors.red[700]}
+              stopColor="var(--color-green-700)"
               stopOpacity={1}
             />
           </linearGradient>
@@ -250,11 +247,11 @@ export default function TeamSeasonPaceChart({
           baseValue={toSurprise} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
           dataKey="projectedWins"
           fill="url(#splitColor)"
-          stroke={theme.colors.lime[500]}
+          stroke="var(--color-lime-500)"
           type="monotone"
         />
         <ReferenceLine
-          stroke={theme.colors.lime[500]}
+          stroke="var(--color-lime-500)"
           strokeWidth={4}
           y={toSurprise}
         >

@@ -3,6 +3,8 @@ import "@fontsource/iosevka-curly/400.css";
 import "@fontsource/iosevka-curly/700.css";
 import "@fontsource-variable/sixtyfour/full.css";
 
+import "../styles/global.css";
+
 interface Props {
   description?: string;
   title?: string;
@@ -26,7 +28,7 @@ const { description, title } = Astro.props;
     />
   </head>
   <body>
-    <div class="min-h-full bg-dark-emerald">
+    <div class="bg-dark-emerald min-h-full">
       <div class="mx-auto md:container">
         <header class="p-8">
           <slot name="header" />
@@ -38,17 +40,6 @@ const { description, title } = Astro.props;
 </html>
 
 <style>
-  /* TODO Figure out if using font correctly (font-face); and ok to use bitmap version of font? What is that? */
-  @font-face {
-    font-family: "ChicagoKare-Regular";
-    src:
-      url("/fonts/ChicagoKare-Regular.woff2") format("woff2"),
-      url("/fonts/ChicagoKare-Regular.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
   html,
   body {
     margin: 0;

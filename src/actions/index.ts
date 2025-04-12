@@ -8,6 +8,8 @@ import LiveLoader from "../data/loaders/live";
 import * as SeasonUtils from "../data/seasons";
 import * as Utils from "../utils";
 
+const sleep = (ms) => new Promise((res) => setTimeout(() => res(), ms));
+
 /*
 
 Used to prevent workers from returning outdated data from KV.
@@ -42,6 +44,8 @@ export const server = {
     handler: async (input, astroCtx): Promise<LoaderResponse> => {
       try {
         const season = SeasonUtils.getSeasonById(input.seasonId);
+
+        await sleep(4000);
 
         if (!season) {
           throw new ActionError({

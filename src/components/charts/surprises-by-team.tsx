@@ -13,10 +13,7 @@ import {
 import type { TeamCode } from "../../data/types";
 
 import * as TeamUtils from "../../data/teams";
-import * as Utils from "../../utils";
 import { styles as PopoverStyles } from "../popover";
-
-const theme = Utils.getTheme();
 
 export type SurprisesByTeamChartDatapoint = {
   numEliminated: number;
@@ -174,15 +171,11 @@ export default function SurprisesByTeamChart({
         stackOffset="sign"
       >
         <CartesianGrid
-          fill={theme.colors.slate[950]}
-          stroke={theme.colors.lime[200]}
+          fill="var(--color-slate-950)"
+          stroke="var(--color-lime-200)"
           strokeDasharray="3 3"
         />
-        <ReferenceLine
-          stroke={theme.colors.yellow[400]}
-          strokeWidth={4}
-          y={0}
-        />
+        <ReferenceLine stroke="var(--color-yellow-400)" strokeWidth={4} y={0} />
         <XAxis
           dataKey="teamId" // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<XAxisLabel />}
@@ -193,28 +186,28 @@ export default function SurprisesByTeamChart({
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<YAxisLabel />}
           tick={{
-            fill: theme.colors.lime[500],
+            fill: "var(--color-lime-500)",
             fontSize: 16,
-            stroke: theme.colors.lime[500],
+            stroke: "var(--color-lime-500)",
           }}
           tickFormatter={(value) => `${Math.abs(value)}`}
-          tickLine={{ stroke: theme.colors.lime[200] }}
+          tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
           type="number"
         />
         <Tooltip
           // @ts-expect-error - necessary b/c custom elements expect props, but  can't grok that recharts passes props for you under the hood
           content={<TooltipContent />}
-          cursor={{ fill: theme.colors.slate[400], fillOpacity: 0.5 }}
+          cursor={{ fill: "var(--color-slate-400)", fillOpacity: 0.5 }}
         />
         <Bar
           dataKey="numSurprised"
-          fill={theme.colors.green[700]}
+          fill="var(--color-green-700)"
           stackId="stack"
         />
         <Bar
           dataKey="numEliminated"
-          fill={theme.colors.red[700]}
+          fill="var(--color-red-700)"
           stackId="stack"
         />
       </BarChart>

@@ -5,6 +5,8 @@ const { class: classStr, href, ...attrs } = Astro.props;
 ---
 
 <style>
+  @reference "../styles/global.css";
+
   .NBASTT-Link.active {
     @apply pointer-events-none cursor-default text-indigo-100;
   }
