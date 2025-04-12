@@ -8,7 +8,25 @@ import LiveLoader from "../data/loaders/live";
 import * as SeasonUtils from "../data/seasons";
 import * as Utils from "../utils";
 
-// TODO Explain / Document as part of updating process
+/*
+
+Used to prevent workers from returning outdated data from KV.
+
+Given:
+- KV will cache results afer read at edge locations
+- If breaking changes made to shape of data at play (as output by loader / stored in KV),
+cached output could result in errors (data not matching consumer contract, unusable)
+- There's no way to force-clear all KV-cached results (letting alone this doesn't solve
+for continued usage repopulating caches)
+
+So, we need a real-time way to verify that KV matches consumer contract, so we "sign" / version the data in KV;
+this version id is a stand-in for the expected data shape i.e. if mismatched with one present on
+cached data, if any, then assume cache is invalid and force refresh
+
+TODO Thinking about it, could switch to parsing output of KV, using schema for expected shape
+Less performant, but more clearly expresses intent, less fragile / difficult to remember to update
+
+*/
 const SCHEMA_ID = "fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0"; // :) https://everyuuid.com/
 
 export const server = {
