@@ -173,12 +173,12 @@ for (const point of datapoints) {
   description="Stats and insights from surprise team history"
   title="Stats"
 >
-  <h1 class="text-center font-title text-2xl text-lime-400 md:text-4xl">
+  <h1 class="font-title text-center text-2xl text-lime-400 md:text-4xl">
     Stats
   </h1>
   <div class="mt-16 grid gap-24 px-4 xl:grid-cols-2">
     <section class="order-2 xl:order-1">
-      <h2 class="mb-8 text-center font-title text-lg text-lime-400 md:text-xl">
+      <h2 class="font-title mb-8 text-center text-lg text-lime-400 md:text-xl">
         Surprises x Season
       </h2>
       <SurprisesPerSeasonChart
@@ -194,7 +194,7 @@ for (const point of datapoints) {
     </section>
 
     <section class="order-1 max-md:-mx-4 xl:order-2">
-      <h2 class="mb-8 text-center font-title text-lg text-lime-400 md:text-xl">
+      <h2 class="font-title mb-8 text-center text-lg text-lime-400 md:text-xl">
         All-Time Top 10
       </h2>
       <Table class="w-full" id="top-10">
@@ -274,7 +274,7 @@ for (const point of datapoints) {
     </section>
 
     <section class="order-3">
-      <h2 class="mb-8 text-center font-title text-lg text-lime-400 md:text-xl">
+      <h2 class="font-title mb-8 text-center text-lg text-lime-400 md:text-xl">
         Surprises x Teams
       </h2>
       <SurprisesByTeamChart
@@ -284,7 +284,7 @@ for (const point of datapoints) {
     </section>
 
     <section class="order-4">
-      <h2 class="mb-8 text-center font-title text-lg text-lime-400 md:text-xl">
+      <h2 class="font-title mb-8 text-center text-lg text-lime-400 md:text-xl">
         Pace x Over/Under
       </h2>
       <TeamSeasonScatterPlot client:visible data={datapoints} />
