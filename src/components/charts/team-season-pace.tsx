@@ -238,7 +238,7 @@ export default function TeamSeasonPaceChart({
             />
             <stop
               offset={offset}
-              stopColor="var(--color-green-700)"
+              stopColor="var(--color-red-700)"
               stopOpacity={1}
             />
           </linearGradient>
