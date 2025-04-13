@@ -4,13 +4,40 @@ import type { ReactNode } from "react";
 import * as RadixPopover from "@radix-ui/react-popover";
 import Clsx from "clsx";
 
-export const styles = {
-  arrow: "fill-indigo-500",
-  body: "w-fit max-w-60 z-10 bg-cyan-500 p-2 font-mono text-md text-slate-950 ring-2 ring-indigo-500",
-  close:
-    "shadow-sm:hover absolute right-2 top-0 font-mono text-lg text-indigo-500 shadow-slate-950",
-  trigger:
-    "absolute right-2 top-0 font-mono text-base text-indigo-500 hover:text-indigo-300 md:text-lg",
+export const PopoverBody = ({
+  children,
+  className,
+  deRadix = false,
+}: {
+  children: ReactNode;
+  className?: ClassValue;
+  deRadix?: boolean;
+}) => {
+  if (deRadix) {
+    return (
+      <div
+        className={Clsx([
+          "text-md z-10 w-fit max-w-60 bg-cyan-500 p-2 font-mono text-slate-950 ring-2 ring-indigo-500",
+          className,
+        ])}
+      >
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <RadixPopover.Content
+      avoidCollisions
+      className={Clsx([
+        "text-md z-10 w-fit max-w-60 bg-cyan-500 p-2 font-mono text-slate-950 ring-2 ring-indigo-500",
+        className,
+      ])}
+      hideWhenDetached
+    >
+      {children}
+    </RadixPopover.Content>
+  );
 };
 
 export default function Popover({
@@ -18,32 +45,34 @@ export default function Popover({
   classes,
 }: {
   children: ReactNode;
-  classes?: Partial<Record<keyof typeof styles, ClassValue>>;
+  classes?: Partial<Record<"arrow" | "body" | "close" | "trigger", ClassValue>>;
 }) {
   return (
     <RadixPopover.Root>
       <RadixPopover.Trigger
-        className={Clsx([styles.trigger, classes?.trigger])}
+        className={Clsx([
+          "absolute top-0 right-2 cursor-pointer font-mono text-base text-indigo-500 hover:text-indigo-300 md:text-lg",
+          classes?.trigger,
+        ])}
       >
         ?
       </RadixPopover.Trigger>
       <RadixPopover.Portal>
-        <RadixPopover.Content
-          avoidCollisions
-          className={Clsx([styles.body, classes?.body])}
-          hideWhenDetached
-        >
+        <PopoverBody {...(classes?.body && { className: classes.body })}>
           {children}
           <RadixPopover.Close
             aria-label="Close"
-            className={Clsx([styles.close, classes?.close])}
+            className={Clsx([
+              "shadow-sm:hover absolute top-0 right-2 cursor-pointer font-mono text-lg text-indigo-500 shadow-slate-950",
+              classes?.close,
+            ])}
           >
             x
           </RadixPopover.Close>
           <RadixPopover.Arrow
-            className={Clsx([styles.arrow, classes?.arrow])}
+            className={Clsx(["fill-indigo-500", classes?.arrow])}
           />
-        </RadixPopover.Content>
+        </PopoverBody>
       </RadixPopover.Portal>
     </RadixPopover.Root>
   );

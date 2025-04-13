@@ -1,4 +1,3 @@
-import Clsx from "clsx";
 import {
   Bar,
   BarChart,
@@ -13,7 +12,7 @@ import {
 import type { TeamCode } from "../../data/types";
 
 import * as TeamUtils from "../../data/teams";
-import { styles as PopoverStyles } from "../popover";
+import { PopoverBody } from "../popover";
 
 export type SurprisesByTeamChartDatapoint = {
   numEliminated: number;
@@ -94,7 +93,7 @@ const TooltipContent = ({
 
     if ("history" in point) {
       return (
-        <div className={Clsx([PopoverStyles.body, "md:max-w-fit"])}>
+        <PopoverBody className="md:max-w-fit" deRadix>
           <h3 className="mb-1 text-center font-bold">
             {TeamUtils.getTeamById(point.teamId).name}
           </h3>
@@ -109,7 +108,6 @@ const TooltipContent = ({
               <li className="mt-4" key={`${hist.teamId}-${hist.duration[0]}`}>
                 <img
                   className="inline contrast-150 drop-shadow-lg"
-                  loading="lazy"
                   src={hist.logoSrc}
                   width={32}
                 />{" "}
@@ -126,16 +124,15 @@ const TooltipContent = ({
               </li>
             ))}
           </ul>
-        </div>
+        </PopoverBody>
       );
     }
 
     return (
-      <div className={Clsx([PopoverStyles.body, "max-w-fit"])}>
+      <PopoverBody className="md:max-w-fit" deRadix>
         <h3 className="mb-1 text-center font-bold">
           <img
             className="inline contrast-150 drop-shadow-lg"
-            loading="lazy"
             src={point.logoSrc}
             width={30}
           />{" "}
@@ -146,7 +143,7 @@ const TooltipContent = ({
           Surprise Record: {point.numSurprised} -{" "}
           {Math.abs(point.numEliminated)}
         </p>
-      </div>
+      </PopoverBody>
     );
   }
 };

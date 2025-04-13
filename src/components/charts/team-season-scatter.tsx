@@ -13,7 +13,7 @@ import type { TeamStats } from "../../data/types";
 
 import * as SeasonUtils from "../../data/seasons";
 import * as TeamUtils from "../../data/teams";
-import { styles as PopoverStyles } from "../popover";
+import { PopoverBody } from "../popover";
 
 interface TeamSeasonScatterplotDatapoint extends TeamStats {
   isSurpriseTeam: boolean;
@@ -81,11 +81,10 @@ const TooltipContent = ({
     const point = payload[0].payload;
 
     return (
-      <div className={`${PopoverStyles.body} pb-4 md:max-w-fit`}>
+      <PopoverBody className="pb-4 md:max-w-fit" deRadix>
         <h3 className="mb-1 text-center font-bold">
           <img
             className="mr-2 inline contrast-150 drop-shadow-lg"
-            loading="lazy"
             src={point.logoSrc}
             width={30}
           />
@@ -111,7 +110,7 @@ const TooltipContent = ({
           </label>
           <span id="overUnder">{point.overUnder}</span>
         </p>
-      </div>
+      </PopoverBody>
     );
   }
 };

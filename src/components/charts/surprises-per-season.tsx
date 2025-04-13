@@ -13,7 +13,7 @@ import type { SeasonId, TeamSeason } from "../../data/types";
 
 import * as SeasonUtils from "../../data/seasons";
 import * as TeamUtils from "../../data/teams";
-import { styles as PopoverStyles } from "../popover";
+import { PopoverBody } from "../popover";
 
 export interface SurprisesPerSeasonChartDatapoint {
   numSurprises: number;
@@ -82,7 +82,7 @@ const TooltipContent = ({
     const point = payload[0].payload;
 
     return (
-      <div className={`${PopoverStyles.body} pb-4 md:max-w-80`}>
+      <PopoverBody className="pb-4 md:max-w-80" deRadix>
         <h3 className="mb-1 text-center font-bold">
           {SeasonUtils.abbreviateSeasonRange(
             SeasonUtils.getSeasonById(point.seasonId),
@@ -109,7 +109,7 @@ const TooltipContent = ({
         )}
 
         {point.teamSeasons.length === 0 && <p>No surprises this year</p>}
-      </div>
+      </PopoverBody>
     );
   }
 };

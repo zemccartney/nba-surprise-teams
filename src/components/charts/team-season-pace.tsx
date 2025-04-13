@@ -15,7 +15,7 @@ import type { Game, TeamRecord, TeamSeason, TeamStats } from "../../data/types";
 
 import SurprisedEmoji from "../../assets/images/emoji/hushed-face.svg";
 import * as SeasonUtils from "../../data/seasons";
-import { styles as PopoverStyles } from "../popover";
+import { PopoverBody } from "../popover";
 
 // Essentially copied from https://recharts.org/en-US/examples/AreaChartFillByValue
 
@@ -54,7 +54,7 @@ const TooltipContent = ({
     const point = payload[0].payload;
 
     return (
-      <div className={PopoverStyles.body}>
+      <PopoverBody deRadix>
         <p className="mb-1 font-bold underline">{point.date}</p>
         <p>
           <label className="mr-4 inline-block font-bold" htmlFor="record">
@@ -79,7 +79,7 @@ const TooltipContent = ({
           </label>
           <span id="pace">{SeasonUtils.formatPace(point._stats)}</span>
         </p>
-      </div>
+      </PopoverBody>
     );
   }
 };
