@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* TODO Figure out if using font correctly (font-face); and ok to use bitmap version of font? What is that? */
+@font-face {
+  font-family: "ChicagoKare-Regular";
+  src:
+    url("/fonts/ChicagoKare-Regular.woff2") format("woff2"),
+    url("/fonts/ChicagoKare-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-dark-emerald: #032203;
+
+  --font-mono: "Iosevka Curly", monospace;
+  --font-sans: "ChicagoKare-Regular", sans-serif;
+  --font-title: "Sixtyfour Variable", monospace;
+
+  --shadow-glow: 0px 0px 80px 40px rgb(163 230 53 / 0.5); /* shadow-lime-400/50 */
+  --shadow-glow-sm: 0px 0px 40px 20px rgb(163 230 53 / 0.5);
+}

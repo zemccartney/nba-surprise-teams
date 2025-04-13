@@ -13,6 +13,8 @@ const Element = element;
 ---
 
 <style>
+  @reference "../styles/global.css";
+
   .TypoBox {
     /* General rules, apply to all instances of elements, wherever they appear in tree */
     ul {
@@ -42,7 +44,7 @@ const Element = element;
       & + h1,
       & + h2,
       & + h3 {
-        @apply mb-[1em] mt-[1.5em];
+        @apply mt-[1.5em] mb-[1em];
       }
 
       & + ul,

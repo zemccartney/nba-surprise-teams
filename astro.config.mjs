@@ -1,7 +1,7 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
 import sentry from "@sentry/astro";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
@@ -46,7 +46,6 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    tailwind(),
     ...(SENTRY_AUTH_TOKEN
       ? [
           sentry({
@@ -61,6 +60,7 @@ export default defineConfig({
       : []),
   ],
   vite: {
+    plugins: [tailwindcss()],
     resolve: {
       // https://github.com/withastro/adapters/pull/436#issuecomment-2525190557
       // Use react-dom/server.edge instead of react-dom/server.browser for React 19.

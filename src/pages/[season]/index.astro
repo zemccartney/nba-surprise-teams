@@ -84,7 +84,7 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
     }
     <h1
       class:list={[
-        "text-center font-title text-2xl text-lime-400 md:text-4xl",
+        "font-title text-center text-2xl text-lime-400 md:text-4xl",
         season.episodeUrl || season.shortened
           ? "mb-6 sm:mb-12"
           : "mb-12 sm:mb-24",
@@ -108,10 +108,10 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
     {
       season.shortened && (
         <section class="mb-12 flex flex-1 flex-col items-center px-4 text-xl text-yellow-200 sm:mb-24">
-          <h2 class="text-balance text-2xl text-yellow-400">
+          <h2 class="text-2xl text-balance text-yellow-400">
             Shortened season: {season.shortened.numGames} games played
           </h2>
-          <h3 class="text-balance text-center">{season.shortened.reason}</h3>
+          <h3 class="text-center text-balance">{season.shortened.reason}</h3>
           <h3 class="mt-4 underline">Adjustments</h3>
           <ul class="md:ps-[2em]; flex list-inside list-disc flex-col items-center ps-[1em]">
             {/* Consistent widths to align bullets while centering */}

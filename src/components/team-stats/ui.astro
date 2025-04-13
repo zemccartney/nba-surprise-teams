@@ -40,6 +40,8 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
 ---
 
 <style>
+  @reference "../../styles/global.css";
+
   .NBASurpriseTracker-TeamStats {
     grid-template-columns: 3fr 2fr;
 
@@ -94,7 +96,7 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
 
   {
     season.shortened && (
-      <h2 class="relative mr-12 mt-8 w-80 text-lg text-yellow-400 max-lg:mx-auto lg:ml-auto lg:mt-4">
+      <h2 class="relative mt-8 mr-12 w-80 text-lg text-yellow-400 max-lg:mx-auto lg:mt-4 lg:ml-auto">
         Stats here have been adjusted to reflect the shortened {fmtSeason}{" "}
         season
         <Popover

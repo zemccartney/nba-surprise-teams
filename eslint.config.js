@@ -4,6 +4,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
 import eslintPerfectionist from "eslint-plugin-perfectionist";
 import eslintPluginReact from "eslint-plugin-react";
+import eslintPluginReactRefresh from "eslint-plugin-react-refresh";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import globals from "globals";
 import Path from "node:path";
@@ -21,7 +22,7 @@ export default tseslint.config(
   tseslint.configs.stylistic,
   ...eslintPluginAstro.configs.recommended,
   ...eslintPluginAstro.configs["jsx-a11y-strict"],
-  eslintPluginUnicorn.configs["flat/recommended"],
+  eslintPluginUnicorn.configs.recommended,
   {
     files: ["*.{js,ts,mjs}"],
     languageOptions: {
@@ -48,6 +49,7 @@ export default tseslint.config(
     files: ["**/*.{tsx}"],
     ...eslintPluginReact.configs.flat.recommended,
   },
+  eslintPluginReactRefresh.configs.vite,
   {
     // auto-generated, no sense in linting
     ignores: ["worker-configuration.d.ts", "scratchpad.js"],

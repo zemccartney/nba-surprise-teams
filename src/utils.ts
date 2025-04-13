@@ -1,9 +1,5 @@
 import type { ImageMetadata } from "astro";
 
-import resolveConfig from "tailwindcss/resolveConfig";
-
-import tailwindConfig from "../tailwind.config.mjs";
-
 /***
  *
  * TYPES
@@ -62,8 +58,6 @@ export const getCurrentEasternYYYYMMDD = () => getEasternYYYYMMDD(new Date());
  * MISC
  *
  * ***/
-
-export const getTheme = () => resolveConfig(tailwindConfig).theme;
 
 // TODO Actually understand this; pulled in from Claude, didn't take time to process fully
 // Copied from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#deep_freezing
