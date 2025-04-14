@@ -74,8 +74,8 @@ export const server = {
         if (
           // Does it look like KV contains well-formed data?
           gamesCache?.id === SCHEMA_ID &&
-          gamesCache?.data?.games.length &&
-          Object.hasOwn(gamesCache.data, "expiresAt")
+          Object.hasOwn(gamesCache.data, "games") &&
+          gamesCache.data?.games.length
         ) {
           const { expiresAt, games } = gamesCache.data;
 
