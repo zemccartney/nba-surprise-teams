@@ -92,8 +92,6 @@ for (const datapoint of datapoints) {
   }
 }
 
-const paceVals = datapoints.map((d) => d.pace);
-
 // @ts-expect-error: Object not instantiated with every team id, filled in below
 const surprisesByTeam: Record<TeamCode, SurprisesByTeamChartDatapoint> = {};
 
@@ -222,7 +220,7 @@ for (const point of datapoints) {
           {
             datapoints
               .sort((a, b) => b.pace - a.pace)
-              .slice(0, 9)
+              .slice(0, 10)
               .map((point) => {
                 return (
                   <tr>
@@ -263,12 +261,6 @@ for (const point of datapoints) {
                 );
               })
           }
-          <tr>
-            <th class="text-center" colspan="3" scope="row">
-              {paceVals.filter((pace) => pace === 6).length} teams that surprised
-              by +6
-            </th>
-          </tr>
         </Fragment>
       </Table>
     </section>

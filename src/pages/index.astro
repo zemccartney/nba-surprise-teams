@@ -5,9 +5,7 @@ import * as SeasonUtils from "../data/seasons";
 import Layout from "../layouts/layout.astro";
 import Typography from "../layouts/typography.astro";
 
-const latestSeason = SeasonUtils.sortSeasonsByDate(
-  SeasonUtils.getAllSeasons(),
-)[0];
+const latestSeason = SeasonUtils.getLatestSeason();
 
 // TODO Remove on adding test-suite, on top of typing, to check that this sort of error is impossible
 if (!latestSeason) {

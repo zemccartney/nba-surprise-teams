@@ -1,7 +1,13 @@
 import Assert from "node:assert/strict";
 import { z } from "zod"; // using zod directly, instead of version exported by astro, so file is importable / executable in node (astro: protocol not supported)
 
-import type { Game, LoaderResponse, SeasonId, TeamCode } from "../types";
+import type {
+  Game,
+  LoaderResponse,
+  SeasonId,
+  TeamCode,
+  TeamScore,
+} from "../types";
 
 import { TEAM_CODES } from "../constants";
 import * as SeasonUtils from "../seasons";
@@ -66,6 +72,7 @@ const GamesSchema = z.array(
 );
 
 // Appear in NBA API data in '93 and '96 seasons
+// except for CHH, which appears through 2001 (end of original run of Charlotte Hornets franchise)
 const legacyTeamCodes = {
   CHH: TEAM_CODES.CHA,
   GOS: TEAM_CODES.GSW,
@@ -118,12 +125,6 @@ const loader = async (seasonId: SeasonId): Promise<LoaderResponse> => {
     (team) => team.id,
   );
 
-  const seasonLegacyTeamCodes = Object.fromEntries(
-    Object.entries(legacyTeamCodes).filter(([, tc]) =>
-      seasonTeamCodes.includes(tc),
-    ),
-  );
-
   const fIdx: Record<string, number> = {};
 
   for (let i = 0; i < parsed.resultSets[0].headers.length; i++) {
@@ -140,6 +141,7 @@ const loader = async (seasonId: SeasonId): Promise<LoaderResponse> => {
 
   const games: Record<string, Game> = {};
 
+  let totalGames = 0;
   let gameCounts: Partial<Record<TeamCode, number>> = {};
   for (const t of seasonTeamCodes) {
     gameCounts[t] = 0;
@@ -158,20 +160,27 @@ const loader = async (seasonId: SeasonId): Promise<LoaderResponse> => {
       // Good enough for matching the Game type; unclear there's a way to resolve this inexactitude with the type system
       .map((tc: string) => tc.trim()) as [TeamCode, "@" | "vs.", TeamCode];
 
+    const seasonLegacyTeamCodes = Object.fromEntries(
+      Object.entries(legacyTeamCodes).filter(([, tc]) =>
+        seasonTeamCodes.includes(tc),
+      ),
+    );
+
     if (
+      // Consider games only including at least one surprise team candidate
       seasonTeamCodes.includes(t1) ||
       seasonTeamCodes.includes(t2) ||
       t1 in seasonLegacyTeamCodes ||
       t2 in seasonLegacyTeamCodes
     ) {
       const teamOne = (
-        Object.hasOwn(seasonLegacyTeamCodes, t1)
-          ? seasonLegacyTeamCodes[t1]
+        Object.hasOwn(legacyTeamCodes, t1)
+          ? legacyTeamCodes[t1 as keyof typeof legacyTeamCodes]
           : t1
       ) as TeamCode;
       const teamTwo = (
-        Object.hasOwn(seasonLegacyTeamCodes, t2)
-          ? seasonLegacyTeamCodes[t2]
+        Object.hasOwn(legacyTeamCodes, t2)
+          ? legacyTeamCodes[t2 as keyof typeof legacyTeamCodes]
           : t2
       ) as TeamCode;
 
@@ -179,10 +188,14 @@ const loader = async (seasonId: SeasonId): Promise<LoaderResponse> => {
         playedOn: game[fieldIndices.GAME_DATE],
         points: game[fieldIndices.PTS],
         teamCode: Object.hasOwn(
-          seasonLegacyTeamCodes,
+          legacyTeamCodes,
           game[fieldIndices.TEAM_ABBREVIATION],
         )
-          ? seasonLegacyTeamCodes[game[fieldIndices.TEAM_ABBREVIATION]]
+          ? legacyTeamCodes[
+              game[
+                fieldIndices.TEAM_ABBREVIATION
+              ] as keyof typeof legacyTeamCodes
+            ]
           : game[fieldIndices.TEAM_ABBREVIATION],
       });
 
@@ -190,6 +203,12 @@ const loader = async (seasonId: SeasonId): Promise<LoaderResponse> => {
         playedOn: parsedGame.playedOn,
         teams: [teamOne, teamTwo],
       });
+
+      // We want to count each game only once
+      // Editing an existing game means a matchup between surprise teams i.e. should not be double-counted
+      if (!games[id]) {
+        totalGames += 1;
+      }
 
       games[id] ??= {
         id,
@@ -204,6 +223,11 @@ const loader = async (seasonId: SeasonId): Promise<LoaderResponse> => {
             score: 0,
             teamId: teamTwo,
           },
+        ]
+          // stabilize order so archiver is deterministic
+          .toSorted((a, b) => a.teamId.localeCompare(b.teamId)) as [
+          TeamScore,
+          TeamScore,
         ],
       };
 
@@ -223,13 +247,32 @@ const loader = async (seasonId: SeasonId): Promise<LoaderResponse> => {
 
   const expectedGames = SeasonUtils.getSeasonSurpriseRules(seasonId).numGames;
 
+  // Sanity checks
+
+  // Check that we got the right number of games for each team
   Assert.deepStrictEqual(
     Object.fromEntries(seasonTeamCodes.map((tc) => [tc, expectedGames])),
     gameCounts,
+    `[${season.id}] Expected ${expectedGames} games for each team, got ${JSON.stringify(
+      gameCounts,
+    )}`,
+  );
+
+  // Check that we got the right number of games overall
+  Assert.strictEqual(
+    totalGames,
+    Object.values(games).length,
+    `[${season.id}] Expected ${totalGames} games, got ${Object.values(games).length}`,
   );
 
   return {
-    games: GamesSchema.parse(Object.values(games)) as Game[],
+    // stabilize order so archiver is deterministic
+    // the nba api returns games in chronological order by day, but, apparently, random within days i.e.
+    // the same set of games on any given day will be returned in different orders on different runs,
+    // leading to unnecessary diffs in the output
+    games: GamesSchema.parse(Object.values(games)).toSorted((a, b) =>
+      a.id < b.id ? -1 : a.id > b.id ? 1 : 0,
+    ) as Game[],
   };
 };
 

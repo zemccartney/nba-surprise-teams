@@ -25,8 +25,6 @@ The day after the season ends:
 1. Create games archive for newly ended season: `npx tsx archiver.ts` --> should add `games.json` to `src/data/seasons` folder
 2. Review hardcoded limits on graphs; new data still fits? possible to make less fragile?
 3. Review states leaderboard; does slicing still work? Way to automate this? (e.g. if items past 10th are same number, collapse into single row listing their count)
-   a. for 2024, ADDING PISTONS WILL BREAK LAST ROW IN top 10 leaderboard table: teams that surprised by +6; 10th row will no longer be +6
-   (MAKE A CHECKLIST FOR RETIRING SEASONS / MAKE CHARTS LESS FRAGILE)
 
 EXPECT:
 
