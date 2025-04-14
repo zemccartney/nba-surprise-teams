@@ -78,9 +78,7 @@ export const getSeasonById = (id: SeasonId) => {
 };
 
 export const getLatestSeason = () => {
-  return getAllSeasons().toSorted((a, b) =>
-    a.endDate > b.endDate ? -1 : a.endDate < b.endDate ? 1 : 0,
-  )[0];
+  return sortSeasonsByDate(getAllSeasons())[0];
 };
 
 // TODO Figure out how to narrow to teams by given season id? Try repomix, through entire app into Claude, point at specific context?

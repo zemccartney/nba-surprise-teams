@@ -11,25 +11,31 @@ import * as Utils from "./src/utils.ts";
 const __filename = Url.fileURLToPath(import.meta.url);
 const projectRoot = Path.dirname(__filename);
 
+const latestOnly = process.argv[2] === "--latest";
+
 const seasonsDir = await Fs.readdir(Path.join(projectRoot, "src/data/seasons"));
 
 const today = Utils.getCurrentEasternYYYYMMDD();
-const seasons = seasonsDir
-  .filter((entry) => entry !== "index.ts")
-  .map((season) => Number.parseInt(season, 10) as SeasonId)
-  .filter((seasonId) => {
-    const season = SeasonUtils.getSeasonById(seasonId);
+const seasons = latestOnly
+  ? // TODO Don't feel like wrestling w/ TS over this
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    [SeasonUtils.getLatestSeason()!.id]
+  : seasonsDir
+      .filter((entry) => entry !== "index.ts")
+      .map((season) => Number.parseInt(season, 10) as SeasonId)
+      .filter((seasonId) => {
+        const season = SeasonUtils.getSeasonById(seasonId);
 
-    return !(
-      // Exclude any current season; do not archive, handled
-      // by live loader on demand via server action
-      (
-        (today >= season.startDate && today <= season.endDate) ||
-        // Exclude any future season; no data yet
-        today < season.startDate
-      )
-    );
-  });
+        return !(
+          // Exclude any current season; do not archive, handled
+          // by live loader on demand via server action
+          (
+            (today >= season.startDate && today <= season.endDate) ||
+            // Exclude any future season; no data yet
+            today < season.startDate
+          )
+        );
+      });
 
 const wr = async (seasonId: SeasonId) => {
   const res = await ArchiveLoader(seasonId);

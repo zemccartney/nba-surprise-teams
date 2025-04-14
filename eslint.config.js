@@ -11,6 +11,7 @@ import Path from "node:path";
 import Url from "node:url";
 import tseslint from "typescript-eslint";
 
+// TODO Switch to built-ins e.g. import.meta.dirname, circa node v20.11
 const __filename = Url.fileURLToPath(import.meta.url);
 const __dirname = Path.dirname(__filename);
 const gitignorePath = Path.resolve(__dirname, ".gitignore");
