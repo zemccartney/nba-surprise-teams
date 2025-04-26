@@ -452,6 +452,7 @@ export type SeasonData = (Season & {
           | typeof TEAM_CODES.CHA
           | typeof TEAM_CODES.CHI
           | typeof TEAM_CODES.DET
+          | typeof TEAM_CODES.LAC
           | typeof TEAM_CODES.POR
           | typeof TEAM_CODES.TOR
           | typeof TEAM_CODES.UTA

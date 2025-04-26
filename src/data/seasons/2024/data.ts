@@ -35,6 +35,11 @@ const seasonData = {
       seasonId: 2024,
       teamId: TEAM_CODES.DET,
     },
+    [TEAM_CODES.LAC]: {
+      overUnder: 35.5,
+      seasonId: 2024,
+      teamId: TEAM_CODES.LAC,
+    },
     [TEAM_CODES.POR]: {
       overUnder: 22.5,
       seasonId: 2024,
