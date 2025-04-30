@@ -41,9 +41,6 @@ export default defineConfig({
       }),
     },
   },
-  experimental: {
-    svg: true,
-  },
   integrations: [
     react(),
     ...(SENTRY_AUTH_TOKEN

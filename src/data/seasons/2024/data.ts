@@ -10,11 +10,6 @@ const seasonData = {
   id: 2024,
   startDate: "2024-10-22",
   teams: {
-    [TEAM_CODES.ATL]: {
-      overUnder: 35.5,
-      seasonId: 2024,
-      teamId: TEAM_CODES.ATL,
-    },
     [TEAM_CODES.BKN]: {
       overUnder: 19.5,
       seasonId: 2024,

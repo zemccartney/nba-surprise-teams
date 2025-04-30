@@ -447,7 +447,6 @@ export type SeasonData = (Season & {
     | {
         id: 2024;
         teams: Record<
-          | typeof TEAM_CODES.ATL
           | typeof TEAM_CODES.BKN
           | typeof TEAM_CODES.CHA
           | typeof TEAM_CODES.CHI
