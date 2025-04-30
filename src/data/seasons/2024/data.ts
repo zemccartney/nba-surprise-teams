@@ -16,17 +16,17 @@ const seasonData = {
       teamId: TEAM_CODES.BKN,
     },
     [TEAM_CODES.CHA]: {
-      overUnder: 29.5,
+      overUnder: 30.5,
       seasonId: 2024,
       teamId: TEAM_CODES.CHA,
     },
     [TEAM_CODES.CHI]: {
-      overUnder: 27.5,
+      overUnder: 28.5,
       seasonId: 2024,
       teamId: TEAM_CODES.CHI,
     },
     [TEAM_CODES.DET]: {
-      overUnder: 24.5,
+      overUnder: 25.5,
       seasonId: 2024,
       teamId: TEAM_CODES.DET,
     },
@@ -36,17 +36,17 @@ const seasonData = {
       teamId: TEAM_CODES.LAC,
     },
     [TEAM_CODES.POR]: {
-      overUnder: 22.5,
+      overUnder: 21.5,
       seasonId: 2024,
       teamId: TEAM_CODES.POR,
     },
     [TEAM_CODES.TOR]: {
-      overUnder: 30.5,
+      overUnder: 29.5,
       seasonId: 2024,
       teamId: TEAM_CODES.TOR,
     },
     [TEAM_CODES.UTA]: {
-      overUnder: 29.5,
+      overUnder: 28.5,
       seasonId: 2024,
       teamId: TEAM_CODES.UTA,
     },

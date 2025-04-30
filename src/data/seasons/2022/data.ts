@@ -46,7 +46,7 @@ const seasonData = {
       teamId: TEAM_CODES.SAS,
     },
     [TEAM_CODES.UTA]: {
-      overUnder: 25.5,
+      overUnder: 23.5,
       seasonId: 2022,
       teamId: TEAM_CODES.UTA,
     },
