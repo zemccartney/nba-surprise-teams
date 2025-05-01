@@ -6,7 +6,11 @@ const { class: className, ...layoutProps } = Astro.props;
 ---
 
 <script>
-  const currentPath = globalThis.location.pathname;
+  let currentPath = globalThis.location.pathname;
+  if (currentPath.endsWith("/")) {
+    // Normalize away trailing slash (Cloudflare 308s directory paths to trailing slash equiv e.g. /archive --> /archive/ )
+    currentPath = currentPath.slice(0, -1);
+  }
   const navLink = document.querySelector(
     `nav .NBASTT-Link[href="${currentPath}"]`,
   );

@@ -17,7 +17,7 @@ export const PopoverBody = ({
     return (
       <div
         className={Clsx([
-          "text-md z-10 w-fit max-w-60 bg-cyan-500 p-2 font-mono text-slate-950 ring-2 ring-indigo-500",
+          "shadow-popover z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
           className,
         ])}
       >
@@ -30,7 +30,7 @@ export const PopoverBody = ({
     <RadixPopover.Content
       avoidCollisions
       className={Clsx([
-        "text-md z-10 w-fit max-w-60 bg-cyan-500 p-2 font-mono text-slate-950 ring-2 ring-indigo-500",
+        "shadow-popover z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
         className,
       ])}
       hideWhenDetached

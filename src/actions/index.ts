@@ -82,7 +82,7 @@ export const server = {
           // No next expiresAt means no more upcoming relevant games this season means no new writes
           if (!expiresAt) {
             // TODO Is there a way to force-clear server island caches? Or does that happen on deployment, due to, I assume, changing the params encryption key?
-            // Don't send caching information to the browser
+            // Don't send caching information to the browser ... why? Lazy?
             return { games };
           }
 
