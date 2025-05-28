@@ -1,13 +1,11 @@
 ---
 import { actions } from "astro:actions";
 
-import type { SeasonId } from "../../data/types";
-
 import Crash from "../crash.astro";
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: SeasonId;
+  seasonId: number;
 }
 
 const { seasonId } = Astro.props;

@@ -1,35 +1,45 @@
 ---
 import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
 
-import type { Season } from "../../data/types";
+import type { SeasonsEntry } from "../../content/utils";
 
 import ArrowLeftSvg from "../../assets/images/arrow-line-left.svg";
 import ArrowRightSvg from "../../assets/images/arrow-line-right.svg";
 import Link from "../../components/link.astro";
 import StandingsTable from "../../components/standings-table/index.astro";
-import * as SeasonUtils from "../../data/seasons";
+import * as ContentUtils from "../../content/utils";
 import Subpage from "../../layouts/subpage.astro";
+import * as Utils from "../../utils";
 
 export const getStaticPaths = (async () => {
-  return SeasonUtils.getAllSeasons()
-    .filter((season) => SeasonUtils.getTeamsInSeason(season.id).length > 0)
-    .map((season) => ({
-      params: { season: season.id },
-    }));
+  const seasons = await ContentUtils.getSeasons();
+  const seasonsWithTeams = [];
+
+  for (const season of seasons) {
+    const teams = await ContentUtils.getTeamsInSeason(season.id);
+    if (teams.length > 0) {
+      seasonsWithTeams.push({
+        // TODO Need to do this to account for params stringified ... by astro?
+        params: { season: season.id.toString() },
+      });
+    }
+  }
+
+  return seasonsWithTeams;
 }) satisfies GetStaticPaths;
 
 type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 
 const { season: seasonId } = Astro.params as Params;
 
-const season = SeasonUtils.getSeasonById(
-  // TODO File bug? param mistyped; typed as a number in IDE, but actually a string
-  // @ts-expect-error : "Argument of type 'number' is not assignable to parameter of type 'string'"
-  Number.parseInt(seasonId, 10),
-);
+const season = await ContentUtils.getSeasonById(Number.parseInt(seasonId, 10));
+if (!season) {
+  throw new Error(`Season ${seasonId} not found`);
+}
 
-// eslint-disable-next-line unicorn/no-await-expression-member
-const archivedSeasons = (await SeasonUtils.getArchivedSeasons()).reverse();
+const archivedSeasons = await ContentUtils.getArchivedSeasons();
+archivedSeasons.reverse();
+
 const adjacent = (x: -1 | 1) => {
   const si = archivedSeasons.findIndex((s) => s.id === season.id) + x;
 
@@ -37,12 +47,12 @@ const adjacent = (x: -1 | 1) => {
     return false;
   }
 
-  return archivedSeasons.at(si) as Season;
+  return archivedSeasons.at(si);
 };
 
-const hasArchive = await SeasonUtils.getSeasonArchive(season.id);
-const surpriseRules = SeasonUtils.getSeasonSurpriseRules(season.id);
-const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
+const hasArchive = await ContentUtils.getSeasonArchive(season.id);
+const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season);
+const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
 ---
 
 <Subpage
@@ -56,13 +66,16 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
           {adjacent(-1) && (
             <a
               class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
-              href={`/${(adjacent(-1) as Season).id}`}
+              href={`/${(adjacent(-1) as unknown as SeasonsEntry).id}`}
             >
               <ArrowLeftSvg class="fill-current" />
               <span>
-                {SeasonUtils.abbreviateSeasonRange(adjacent(-1) as Season, {
-                  compact: true,
-                })}{" "}
+                {ContentUtils.abbreviateSeasonRange(
+                  adjacent(-1) as unknown as SeasonsEntry,
+                  {
+                    compact: true,
+                  },
+                )}{" "}
                 Season
               </span>
             </a>
@@ -70,11 +83,14 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
           {adjacent(1) && (
             <a
               class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
-              href={`/${(adjacent(1) as Season).id}`}
+              href={`/${(adjacent(1) as unknown as SeasonsEntry).id}`}
             >
-              {SeasonUtils.abbreviateSeasonRange(adjacent(1) as Season, {
-                compact: true,
-              })}{" "}
+              {ContentUtils.abbreviateSeasonRange(
+                adjacent(1) as unknown as SeasonsEntry,
+                {
+                  compact: true,
+                },
+              )}{" "}
               Season
               <ArrowRightSvg class="fill-current" />
             </a>
@@ -85,7 +101,7 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
     <h1
       class:list={[
         "font-title text-center text-2xl text-lime-400 md:text-4xl",
-        season.episodeUrl || season.shortened
+        season.data.episodeUrl || season.data.shortened
           ? "mb-6 sm:mb-12"
           : "mb-12 sm:mb-24",
       ]}
@@ -93,11 +109,11 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
       {`${fmtSeason} Season`}
     </h1>
     {
-      season.episodeUrl && (
+      season.data.episodeUrl && (
         <div class="mb-12 text-center sm:mb-24">
           <Link
             class="text-xl md:text-2xl lg:text-4xl"
-            href={season.episodeUrl}
+            href={season.data.episodeUrl}
             target="_blank"
           >
             <span class="italic">Slam N' Jam</span> Episode
@@ -106,12 +122,14 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
       )
     }
     {
-      season.shortened && (
+      season.data.shortened && (
         <section class="mb-12 flex flex-1 flex-col items-center px-4 text-xl text-yellow-200 sm:mb-24">
           <h2 class="text-2xl text-balance text-yellow-400">
-            Shortened season: {season.shortened.numGames} games played
+            Shortened season: {season.data.shortened.numGames} games played
           </h2>
-          <h3 class="text-center text-balance">{season.shortened.reason}</h3>
+          <h3 class="text-center text-balance">
+            {season.data.shortened.reason}
+          </h3>
           <h3 class="mt-4 underline">Adjustments</h3>
           <ul class="md:ps-[2em]; flex list-inside list-disc flex-col items-center ps-[1em]">
             {/* Consistent widths to align bullets while centering */}
@@ -124,7 +142,7 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
             <li class="w-96">
               Surprise Team Pace Cutoff:{" "}
               <span class="text-yellow-400">
-                {SeasonUtils.signedFormatter.format(surpriseRules.paceTarget)}
+                {Utils.signedFormatter.format(surpriseRules.paceTarget)}
               </span>
             </li>
           </ul>

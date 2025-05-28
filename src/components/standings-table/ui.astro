@@ -1,14 +1,13 @@
 ---
 import type {
-  Game,
-  SeasonId,
-  Team,
+  GameData,
+  SeasonsEntry,
   TeamCode,
-  TeamStats,
-} from "../../data/types";
+  TeamEntry,
+} from "../../data/content-utils";
+import type { TeamStats } from "../../data/types";
 
-import * as SeasonUtils from "../../data/seasons";
-import * as TeamUtils from "../../data/teams";
+import * as ContentUtils from "../../data/content-utils";
 import Link from "../link.astro";
 import Logo from "../logo.astro";
 import Popover from "../popover";
@@ -16,31 +15,35 @@ import ResultEmoji from "../result-emoji.astro";
 import Table from "../table.astro";
 
 interface Props {
-  games: Game[];
-  seasonId: SeasonId;
+  games: GameData[];
+  seasonId: SeasonsEntry["id"];
   title?: string;
 }
 
-type TeamRow = Team & TeamStats;
+type TeamRow = TeamEntry & TeamStats;
 
 const { games, seasonId, title } = Astro.props;
 
 const teamRows: TeamRow[] = [];
 
-const teams = SeasonUtils.getTeamsInSeason(seasonId).map((team) => ({
-  ...team,
-  ...SeasonUtils.getTeamSeason(seasonId, team.id),
-}));
+const teamsInSeason = await ContentUtils.getTeamsInSeason(seasonId);
 
 const partialRecords: Partial<Record<TeamCode, TeamRow>> = {};
 
-for (const team of teams) {
-  // @ts-expect-error: teams unassignable b/c WAS team record has an intentionally incorrectly typed duration year
+for (const team of teamsInSeason) {
   partialRecords[team.id] = {
     ...team,
     record: { l: 0, w: 0 },
   };
 }
+
+/*
+TODO Path to simplify:
+
+- utility for calculating record, given a set of games
+- stop merging data / using compound types, keep types separate, calculate specific data as needed
+
+*/
 
 // Workaround typescript complaining about initializing the following type to an empty object
 // TODO Possible to switch TeamCode back to SeasonData["teams"]? Is the issue that ts can't

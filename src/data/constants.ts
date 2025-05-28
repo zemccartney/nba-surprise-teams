@@ -1,6 +1,6 @@
 // https://stackoverflow.com/a/55505556
 // unique three-letter code
-export const TEAM_CODES = Object.freeze({
+export const TEAM_CODES = {
   ATL: "ATL",
   BKN: "BKN",
   BOS: "BOS",
@@ -36,4 +36,4 @@ export const TEAM_CODES = Object.freeze({
   UTA: "UTA",
   VAN: "VAN",
   WAS: "WAS",
-} as const);
+};

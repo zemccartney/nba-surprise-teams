@@ -2,10 +2,10 @@ import * as Sentry from "@sentry/cloudflare";
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 
-import type { LoaderResponse, SeasonId } from "../data/types";
+import type { LoaderResponse } from "../data/content-utils";
 
+import * as ContentUtils from "../data/content-utils";
 import LiveLoader from "../data/loaders/live";
-import * as SeasonUtils from "../data/seasons";
 import * as Utils from "../utils";
 
 /*
@@ -32,16 +32,12 @@ const SCHEMA_ID = "fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0"; // :) https://everyuui
 export const server = {
   getSeasonData: defineAction({
     input: z.object({
-      seasonId: z.custom<SeasonId>((val) =>
-        SeasonUtils.getAllSeasons()
-          .map((season) => season.id)
-          .includes(val),
-      ),
+      seasonId: z.number().int(),
     }),
     // eslint-disable-next-line perfectionist/sort-objects
     handler: async (input, astroCtx): Promise<LoaderResponse> => {
       try {
-        const season = SeasonUtils.getSeasonById(input.seasonId);
+        const season = await ContentUtils.getSeasonById(input.seasonId);
 
         if (!season) {
           throw new ActionError({
@@ -60,7 +56,7 @@ export const server = {
         // Build assumption: allowable / expected that season will be ready data-wise prior to season start date, given
         // expected data release schedule; past season end not factored here i.e. previous route, pull from static if past season
         // end, as we don't solve for missing data programmatically; solve for material problems with material
-        if (currentYYYYMMDD < season.startDate) {
+        if (currentYYYYMMDD < season.data.startDate) {
           return {
             games: [],
           };
@@ -69,7 +65,7 @@ export const server = {
         const gamesCache = await astroCtx.locals.runtime.env.GAMES_KV.get<{
           data: LoaderResponse;
           id: string;
-        }>(season.id.toString(), "json");
+        }>(season.data.id.toString(), "json");
 
         if (
           // Does it look like KV contains well-formed data?

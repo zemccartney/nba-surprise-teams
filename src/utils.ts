@@ -23,6 +23,10 @@ export type DeepReadonly<T> = T extends (infer R)[]
 
 export const minToMs = (min: number) => min * 60 * 1000;
 
+export const signedFormatter = new Intl.NumberFormat("en-US", {
+  signDisplay: "always",
+});
+
 const easternFormatter = new Intl.DateTimeFormat("en-US", {
   day: "2-digit",
   month: "2-digit",
@@ -83,14 +87,16 @@ export const deepFreeze = <T>(object: T): Readonly<DeepReadonly<T>> => {
 };
 
 export const getEmoji = (emoji: string) => {
-  const imgs = import.meta.glob("./assets/images/emoji/*.svg");
-  if (!imgs[`./assets/images/emoji/${emoji}.svg`]) {
-    emoji = "question";
+  const imgs = import.meta.glob<{ default: ImageMetadata }>(
+    "./assets/images/emoji/*.svg",
+  );
+
+  const matchedPath = imgs[`./assets/images/emoji/${emoji}.svg`];
+
+  if (!matchedPath) {
+    throw new Error("[getEmoji] emoji not found");
   }
 
-  return (
-    imgs[`./assets/images/emoji/${emoji}.svg`] as unknown as () => Promise<{
-      default: ImageMetadata;
-    }>
-  )();
+  // Unwrap so output is passable directly to Astro's Image component's src property
+  return matchedPath();
 };

@@ -9,11 +9,6 @@ export interface Game {
   teams: [TeamScore, TeamScore];
 }
 
-export interface LoaderResponse {
-  expiresAt?: number;
-  games: Game[];
-}
-
 export interface Season {
   endDate: string;
   episodeUrl?: string;

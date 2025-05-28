@@ -1,16 +1,18 @@
 ---
 import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
 
+import { getCollection } from "astro:content";
+
 import Link from "../../components/link.astro";
 import Logo from "../../components/logo.astro";
 import TeamStats from "../../components/team-stats/index.astro";
-import * as SeasonUtils from "../../data/seasons";
-import * as TeamUtils from "../../data/teams";
+import * as ContentUtils from "../../content/utils";
 import Subpage from "../../layouts/subpage.astro";
 
-export const getStaticPaths = (() => {
-  return SeasonUtils.getAllTeamSeasons().map((ts) => ({
-    params: { season: ts.seasonId, team: ts.teamId },
+export const getStaticPaths = (async () => {
+  const teamSeasons = await getCollection("teamSeasons");
+  return teamSeasons.map((ts) => ({
+    params: { season: ts.data.seasonId, team: ts.data.teamId },
   }));
 }) satisfies GetStaticPaths;
 
@@ -18,19 +20,25 @@ type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 
 const { season: seasonId, team: teamId } = Astro.params as Params;
 
-const team = TeamUtils.getTeamById(teamId);
-const season = SeasonUtils.getSeasonById(
-  // TODO File bug? param mistyped; typed as a number in IDE, but actually a string
-  // @ts-expect-error : "Argument of type 'number' is not assignable to parameter of type 'string'"
-  Number.parseInt(seasonId, 10),
+console.log(
+  seasonId,
+  typeof seasonId,
+  "NEED TO FORCE TO NUMBER, SINCE TYPED AS NUMBER BY PARAMS?",
 );
 
-const hasArchive = await SeasonUtils.getSeasonArchive(season.id);
-const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
+const team = await ContentUtils.getTeamById(teamId);
+const season = await ContentUtils.getSeasonById(seasonId);
+
+if (!(team && season)) {
+  throw new Error(`Team ${teamId} or season ${seasonId} not found`);
+}
+
+const hasArchive = await ContentUtils.getSeasonArchive(season.id);
+const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
 ---
 
 <Subpage
-  description={`${fmtSeason} Season Results for the ${team.name}`}
+  description={`${fmtSeason} Season Results for the ${team.data.name}`}
   title={`${team.id} ${fmtSeason}`}
 >
   {
@@ -46,16 +54,11 @@ const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
   <div
     class="mb-12 flex flex-col items-center justify-center gap-8 sm:px-8 lg:flex-row"
   >
-    <Logo
-      class="w-[96px]"
-      loading="eager"
-      seasonId={season.id}
-      teamId={team.id}
-    />
+    <Logo class="w-[96px]" loading="eager" seasonId={season.id} team={team} />
     <h1
       class="font-title text-center text-2xl text-balance text-lime-400 md:text-4xl"
     >
-      {TeamUtils.resolveTeamName(season.id, team.id)}
+      {ContentUtils.resolveTeamName(team, season.id)}
     </h1>
     {
       hasArchive && (

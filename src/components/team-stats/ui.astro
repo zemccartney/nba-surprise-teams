@@ -1,15 +1,15 @@
 ---
-import type { Game, TeamSeason, TeamStats } from "../../data/types";
+import type { GameData, TeamSeasonEntry } from "../../content/utils";
 
-import * as SeasonUtils from "../../data/seasons";
+import * as ContentUtils from "../../content/utils";
 import TeamSeasonPaceChart from "../charts/team-season-pace";
 import Popover from "../popover";
 import ResultEmoji from "../result-emoji.astro";
 import Table from "../table.astro";
 
 interface Props {
-  games: Game[];
-  teamSeason: TeamSeason;
+  games: GameData[];
+  teamSeason: TeamSeasonEntry;
 }
 
 const { games, teamSeason } = Astro.props;
@@ -34,8 +34,15 @@ for (const game of games) {
   }
 }
 
-const season = SeasonUtils.getSeasonById(teamSeason.seasonId);
-const surpriseRules = SeasonUtils.getSeasonSurpriseRules(teamSeason.seasonId);
+const season = ContentUtils.getSeasonById(teamSeason.data.seasonId);
+
+// TODO I don't think possible? Given that teamSeason.data.seasonId references season i.e. existence
+// of teamSeason implies existence of season
+if (!season) {
+  throw new Error(`[team-stats] ${teamSeason.data.seasonId} season not found`);
+}
+
+const surpriseRules = ContentUtils.getSeasonSurpriseRules(season);
 const fmtSeason = SeasonUtils.abbreviateSeasonRange(season, { compact: true });
 ---
 

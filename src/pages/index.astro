@@ -1,22 +1,18 @@
 ---
 import Link from "../components/link.astro";
 import StandingsTable from "../components/standings-table/index.astro";
-import * as SeasonUtils from "../data/seasons";
+import * as ContentUtils from "../content/utils";
 import Layout from "../layouts/layout.astro";
 import Typography from "../layouts/typography.astro";
 
-const latestSeason = SeasonUtils.getLatestSeason();
+const latestSeason = await ContentUtils.getLatestSeason();
 
-// TODO Remove on adding test-suite, on top of typing, to check that this sort of error is impossible
 if (!latestSeason) {
-  // TODO Build error; doc assumption of state we need to meet (data/build contract, not ... API / interface contract?
-  // is that a helpful / non-gibberish distinction?
-  // TODO Remove this error, centralize build contract elsewhere... tests? i.e. what data conditions do we need to meet
-  // such that the site will build into an acceptable state?
   throw new Error("Insufficient season data");
 }
 
-const isSeasonReady = SeasonUtils.getTeamsInSeason(latestSeason.id).length > 0;
+const teamsInSeason = await ContentUtils.getTeamsInSeason(latestSeason.id);
+const isSeasonReady = teamsInSeason.length > 0;
 ---
 
 <Layout>
@@ -38,7 +34,7 @@ const isSeasonReady = SeasonUtils.getTeamsInSeason(latestSeason.id).length > 0;
           <h2 class="font-title text-center text-2xl text-balance text-lime-400 md:text-4xl">
             Countdown to the{" "}
             <span class="whitespace-nowrap">
-              {SeasonUtils.abbreviateSeasonRange(latestSeason, {
+              {ContentUtils.abbreviateSeasonRange(latestSeason, {
                 compact: true,
               })}
             </span>{" "}
@@ -46,9 +42,10 @@ const isSeasonReady = SeasonUtils.getTeamsInSeason(latestSeason.id).length > 0;
           </h2>
           <p class="text-2xl text-green-200">
             Next season kicks off on{" "}
-            {new Date(latestSeason.startDate).toLocaleDateString()}. Pre-season
-            over/unders are typically posted mid-September. Till then, check out
-            how <Link href="/archive">past years</Link> shook out.
+            {new Date(latestSeason.data.startDate).toLocaleDateString()}.
+            Pre-season over/unders are typically posted mid-September. Till
+            then, check out how <Link href="/archive">past years</Link> shook
+            out.
           </p>
         </Typography>
       )

@@ -3,16 +3,15 @@ import type { HTMLAttributes } from "astro/types";
 
 import Image from "astro/components/Image.astro";
 
-import type { SeasonId, TeamCode } from "../data/types";
+import type { SeasonsEntry, TeamEntry } from "../content/utils";
 
-import { TEAM_CODES } from "../data/constants";
-import * as TeamUtils from "../data/teams";
+import * as ContentUtils from "../content/utils";
 
 type Props = Pick<HTMLAttributes<"img">, "loading"> & {
   class?: string;
   height?: number;
-  seasonId: SeasonId;
-  teamId: TeamCode;
+  seasonId: SeasonsEntry["id"];
+  team: TeamEntry;
   width?: number;
 };
 
@@ -20,22 +19,20 @@ const {
   class: className,
   height = 36,
   seasonId,
-  teamId,
+  team,
   width = 36,
   ...props
 } = Astro.props;
 
-const t = TeamUtils.getTeamById(teamId);
-const alt = t ? `Logo for ${t.name}` : `Question mark logo`;
-
-const emojiSrc = TeamUtils.getTeamSeasonLogo(seasonId, teamId);
+const alt = team ? `Logo for ${team.data.name}` : `Question mark logo`;
+const emojiSrc = ContentUtils.getTeamSeasonLogo(team, seasonId);
 ---
 
 <Image
   alt={alt}
   class={className}
   src={emojiSrc}
-  {...teamId === TEAM_CODES.DET && {
+  {...team.data.id === ContentUtils.TEAM_CODES.DET && {
     // tweak to slightly improve contrast
     style:
       "filter: drop-shadow(-1rem -1rem 1rem #016270) drop-shadow(1rem 1rem 1rem #016271);",

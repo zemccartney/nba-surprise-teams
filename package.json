@@ -28,7 +28,7 @@
     "@sentry/astro": "^9.22.0",
     "@sentry/cloudflare": "^9.22.0",
     "@tailwindcss/vite": "^4.1.7",
-    "@types/react": "^19.1.5",
+    "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "astro": "^5.8.0",
     "clsx": "^2.1.1",
@@ -38,14 +38,14 @@
     "recharts": "^2.15.3",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
-    "zod": "^3.25.28"
+    "zod": "^3.25.32"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.27.0",
     "@eslint/json": "^0.12.0",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@typescript-eslint/parser": "^8.32.1",
+    "@typescript-eslint/parser": "^8.33.0",
     "concurrently": "^9.1.2",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
@@ -62,7 +62,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tsx": "^4.19.4",
-    "typescript-eslint": "^8.32.1"
+    "typescript-eslint": "^8.33.0"
   },
   "engines": {
     "node": ">=22 <23"

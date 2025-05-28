@@ -1,9 +1,9 @@
 import { z } from "zod"; // using zod directly, instead of version exported by astro, so file is importable / executable in node (astro: protocol not supported)
 
-import type { Game, LoaderResponse, TeamCode } from "../types";
+import type { GameData, LoaderResponse, TeamCode } from "../content-utils";
 
 import * as Utils from "../../utils";
-import * as SeasonUtils from "../seasons";
+import * as ContentUtils from "../content-utils";
 
 const TeamResultSchema = z.object({
   score: z.number(),
@@ -48,13 +48,12 @@ const toYYYYMMDD = (gameDate: string) => {
 };
 
 const loader = async (): Promise<LoaderResponse> => {
-  // TODO Explain
   // Assumption: force this function to return
   // Don't solve for missing data; i.e. don't crash your site just b/c you haven't set data "on time"
   // If you don't update in time, then home page will break b/c nothing to do: no next season set, still thinking
   // in old season ... hmmm
   // TODO NOTE: Solving for past season / missing data addressed in action (review there)
-  const season = SeasonUtils.getLatestSeason();
+  const season = await ContentUtils.getLatestSeason();
 
   if (!season) {
     throw new Error("Missing season data");
@@ -101,17 +100,16 @@ const loader = async (): Promise<LoaderResponse> => {
       return (
         // Taking for granted that game and season dates are all in eastern timezone, hence comparable here
         // without time comparison
-        gameYYYYMMDD >= season.startDate && gameYYYYMMDD <= season.endDate // equal to b/c we want to include records on the final day
+        gameYYYYMMDD >= season.data.startDate &&
+        gameYYYYMMDD <= season.data.endDate // equal to b/c we want to include records on the final day
       );
     });
 
-  const relevantGames: Game[] = [];
+  const relevantGames: GameData[] = [];
   let expiresAt;
 
-  // codes of teams participating in this season
-  const TRICODES = SeasonUtils.getTeamsInSeason(season.id).map(
-    (team) => team.id,
-  );
+  const teams = await ContentUtils.getTeamsInSeason(season.id);
+  const TRICODES = teams.map((team) => team.id);
 
   // game times are implicitly in EST
   // on fetching data, we want only the games scheduled through the current date i.e. possibly finished
@@ -184,7 +182,7 @@ const loader = async (): Promise<LoaderResponse> => {
 
         if (hasScore(game) && includesCandidateTeam(game, TRICODES)) {
           relevantGames.push({
-            id: SeasonUtils.formatGameId({
+            id: ContentUtils.formatGameId({
               playedOn: gameYYYYMMDD,
               teams: [
                 awayTeam.teamTricode as TeamCode,
