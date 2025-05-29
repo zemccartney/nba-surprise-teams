@@ -2,7 +2,10 @@ import type { CollectionEntry } from "astro:content";
 
 import { getCollection, getEntry } from "astro:content";
 
-import type { TeamCode as _TeamCode } from "../content.config";
+import type {
+  SeasonId as _SeasonId,
+  TeamCode as _TeamCode,
+} from "../content.config";
 
 export type GameData = GameEntry["data"];
 
@@ -13,12 +16,16 @@ export interface LoaderResponse {
   games: GameData[];
 }
 
+// convenience
+export type SeasonId = _SeasonId;
+
 // TODO Explain
 export interface SeasonsEntry extends Omit<CollectionEntry<"seasons">, "id"> {
-  id: number;
+  id: SeasonId;
 }
 
-export type TeamCode = _TeamCode; // convenience
+// convenin
+export type TeamCode = _TeamCode;
 
 export interface TeamEntry extends Omit<CollectionEntry<"teams">, "id"> {
   id: TeamCode;

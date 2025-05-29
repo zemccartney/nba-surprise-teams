@@ -63,6 +63,7 @@ export default tseslint.config(
   },
   {
     rules: {
+      "unicorn/filename-case": ["off"],
       "unicorn/no-keyword-prefix": ["off"],
       "unicorn/prevent-abbreviations": ["off"],
     },

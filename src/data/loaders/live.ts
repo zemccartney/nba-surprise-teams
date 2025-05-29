@@ -1,9 +1,9 @@
 import { z } from "zod"; // using zod directly, instead of version exported by astro, so file is importable / executable in node (astro: protocol not supported)
 
-import type { GameData, LoaderResponse, TeamCode } from "../content-utils";
+import type { GameData, LoaderResponse, TeamCode } from "../../content/utils";
 
+import * as ContentUtils from "../../content/utils";
 import * as Utils from "../../utils";
-import * as ContentUtils from "../content-utils";
 
 const TeamResultSchema = z.object({
   score: z.number(),
@@ -51,8 +51,7 @@ const loader = async (): Promise<LoaderResponse> => {
   // Assumption: force this function to return
   // Don't solve for missing data; i.e. don't crash your site just b/c you haven't set data "on time"
   // If you don't update in time, then home page will break b/c nothing to do: no next season set, still thinking
-  // in old season ... hmmm
-  // TODO NOTE: Solving for past season / missing data addressed in action (review there)
+  // in old season
   const season = await ContentUtils.getLatestSeason();
 
   if (!season) {
@@ -109,7 +108,7 @@ const loader = async (): Promise<LoaderResponse> => {
   let expiresAt;
 
   const teams = await ContentUtils.getTeamsInSeason(season.id);
-  const TRICODES = teams.map((team) => team.id);
+  const TRICODES = teams.map((team) => team.id) as TeamCode[];
 
   // game times are implicitly in EST
   // on fetching data, we want only the games scheduled through the current date i.e. possibly finished

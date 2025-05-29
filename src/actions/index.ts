@@ -1,10 +1,10 @@
 import * as Sentry from "@sentry/cloudflare";
 import { ActionError, defineAction } from "astro:actions";
+import { getEntry } from "astro:content";
 import { z } from "astro:schema";
 
-import type { LoaderResponse } from "../data/content-utils";
+import type { LoaderResponse } from "../content/utils";
 
-import * as ContentUtils from "../data/content-utils";
 import LiveLoader from "../data/loaders/live";
 import * as Utils from "../utils";
 
@@ -32,12 +32,12 @@ const SCHEMA_ID = "fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0"; // :) https://everyuui
 export const server = {
   getSeasonData: defineAction({
     input: z.object({
-      seasonId: z.number().int(),
+      seasonId: z.string(),
     }),
     // eslint-disable-next-line perfectionist/sort-objects
     handler: async (input, astroCtx): Promise<LoaderResponse> => {
       try {
-        const season = await ContentUtils.getSeasonById(input.seasonId);
+        const season = await getEntry("seasons", input.seasonId);
 
         if (!season) {
           throw new ActionError({

@@ -1,23 +1,11 @@
 import type { CollectionEntry } from "astro:content";
 
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-export type GameData = GameEntry["data"];
-export type GameEntry = CollectionEntry<"games">;
-// TODO Explain
-export interface SeasonsEntry extends Omit<CollectionEntry<"seasons">, "id"> {
-  id: number;
-}
-
-import type { TeamCode as _TeamCode } from "../content.config";
+export type GameData = CollectionEntry<"games">["data"];
+import type { TeamCode } from "../content.config";
 
 import * as Utils from "../utils";
-
-export type TeamCode = _TeamCode; // convenience
-export interface TeamEntry extends Omit<CollectionEntry<"teams">, "id"> {
-  id: TeamCode;
-}
-export type TeamSeasonEntry = CollectionEntry<"teamSeasons">;
 
 const STANDARD_SEASON = {
   numGames: 82,
@@ -25,83 +13,50 @@ const STANDARD_SEASON = {
   paceTarget: 10,
 };
 
-// TODO Explain
-export const getSeasonById = async (id: SeasonsEntry["id"]) => {
-  const season = await getEntry("seasons", id.toString());
-  if (!season) {
-    return season;
-  }
-  return {
-    ...season,
-    id: Number.parseInt(season.id, 10),
-  };
-};
-
-// TODO Explain
-export const getSeasons = async (filter?: (arg: SeasonsEntry) => unknown) => {
-  const seasons = await getCollection(
-    "seasons",
-    ({ id, ...rest }) =>
-      console.log({ id }, typeof id, "GETTING SEASONS") ||
-      filter?.({ id: id as unknown as number, ...rest }),
-  );
-  return seasons.map((season) => ({
-    ...season,
-    id: Number.parseInt(season.id, 10),
-  }));
-};
-
-export const getTeams = async (filter?: (arg: TeamEntry) => unknown) => {
-  return (await getCollection("teams", ({ id, ...rest }) =>
-    filter?.({ id: id as TeamCode, ...rest }),
-  )) as TeamEntry[];
-};
-
-export const getTeamById = async (id: TeamEntry["id"]) => {
-  const team = await getEntry("teams", id);
-  return {
-    ...team,
-    id: id as TeamCode,
-  } as TeamEntry;
-};
+export interface LoaderResponse {
+  expiresAt?: number;
+  games: GameData[];
+}
 
 export const getLatestSeason = async () => {
-  const seasons = await getSeasons();
+  const seasons = await getCollection("seasons");
   return sortSeasons(seasons)[0];
 };
 
 // Based on season ids being years
 export const sortSeasons = (
-  seasons: SeasonsEntry[],
+  seasons: CollectionEntry<"seasons">[],
   {
     direction = "desc",
   }: {
     direction?: "asc" | "desc";
   } = {},
 ) => {
+  // parseInt downstream effect of astro not supporting non-string ids for json-loaded content
+  // localeCompare would have worked, too, but this felt more intentional(?)
   return seasons.toSorted((a, b) =>
-    (direction === "desc" ? a : b).data.id >
-    (direction === "desc" ? b : a).data.id
+    Number.parseInt((direction === "desc" ? a : b).data.id, 10) >
+    Number.parseInt((direction === "desc" ? b : a).data.id, 10)
       ? -1
-      : (direction === "desc" ? a : b).data.id <
-          (direction === "desc" ? b : a).data.id
+      : Number.parseInt((direction === "desc" ? a : b).data.id, 10) <
+          Number.parseInt((direction === "desc" ? b : a).data.id, 10)
         ? 1
         : 0,
   );
 };
 
 export const getTeamsInSeason = async (
-  seasonId: SeasonsEntry["id"],
-): Promise<TeamEntry[]> => {
+  seasonId: CollectionEntry<"seasons">["id"],
+): Promise<CollectionEntry<"teams">[]> => {
   const teamSeasons = await getCollection("teamSeasons", ({ data }) => {
-    return data.seasonId.id === seasonId;
+    return data.season.id === seasonId;
   });
-  const teamIds = new Set(teamSeasons.map((ts) => ts.data.teamId));
-  return await getTeams(({ id }) => teamIds.has(id));
+  const teamIds = new Set(teamSeasons.map((ts) => ts.data.team.id));
+  return await getCollection("teams", ({ id }) => teamIds.has(id));
 };
 
 export const abbreviateSeasonRange = (
-  season: SeasonsEntry,
+  season: CollectionEntry<"seasons">,
   { compact = false } = {},
 ) => {
   if (compact) {
@@ -115,20 +70,24 @@ export const abbreviateSeasonRange = (
 // archiving: games are present only in complete sets, only for complete seasons
 // so, this query assumes games are present only if a season is over and we've archived games
 // data from our live loader system
-export const getArchivedSeasons = async (): Promise<SeasonsEntry[]> => {
+export const getArchivedSeasons = async (): Promise<
+  CollectionEntry<"seasons">[]
+> => {
   const gamesEntries = await getCollection("games");
   const archivedSeasonIds = new Set(
     gamesEntries.map((entry) => entry.data.seasonId),
   );
 
-  const seasons = await getSeasons(({ id }) => {
+  const seasons = await getCollection("seasons", ({ id }) => {
     return archivedSeasonIds.has(id);
   });
 
   return sortSeasons(seasons);
 };
 
-export const getSeasonArchive = async (seasonId: SeasonsEntry["id"]) => {
+export const getSeasonArchive = async (
+  seasonId: CollectionEntry<"seasons">["id"],
+) => {
   const gamesEntries = await getCollection("games", ({ data }) => {
     return data.seasonId === seasonId;
   });
@@ -149,7 +108,9 @@ Actual results given seasons:
 2011: { overUnderCutoff: 29, paceTarget: 8 }
 
 */
-export const getSeasonSurpriseRules = async (season: SeasonsEntry) => {
+export const getSeasonSurpriseRules = async (
+  season: CollectionEntry<"seasons">,
+) => {
   if (season.data.shortened) {
     return {
       numGames: season.data.shortened.numGames,
@@ -175,8 +136,8 @@ export const getSeasonSurpriseRules = async (season: SeasonsEntry) => {
 };
 
 export const resolveTeamName = (
-  team: TeamEntry,
-  seasonId: SeasonsEntry["id"],
+  team: CollectionEntry<"teams">,
+  seasonId: CollectionEntry<"seasons">["id"],
 ) => {
   if (!team.data.alternativeNames) {
     return team.data.name;
@@ -184,7 +145,9 @@ export const resolveTeamName = (
 
   const altLookup = team.data.alternativeNames.find(
     (altName) =>
-      altName.duration[0] <= seasonId && altName.duration[1] >= seasonId,
+      // parseInt downstream effect of astro not supporting non-string ids for json-loaded content
+      altName.duration[0] <= Number.parseInt(seasonId, 10) &&
+      altName.duration[1] >= Number.parseInt(seasonId, 10),
   );
 
   return altLookup?.name || team.data.name;
@@ -195,8 +158,8 @@ export const getCurrentTeamLogo = (teamId: TeamCode) => {
 };
 
 export const getTeamSeasonLogo = (
-  team: TeamEntry,
-  seasonId: SeasonsEntry["id"],
+  team: CollectionEntry<"teams">,
+  seasonId: CollectionEntry<"seasons">["id"],
 ) => {
   if (!team.data.alternativeNames) {
     return getCurrentTeamLogo(team.data.id);
@@ -204,10 +167,43 @@ export const getTeamSeasonLogo = (
 
   const altLookup = team.data.alternativeNames.find(
     (altName) =>
-      altName.duration[0] <= seasonId && altName.duration[1] >= seasonId,
+      // parseInt downstream effect of astro not supporting non-string ids for json-loaded content
+      altName.duration[0] <= Number.parseInt(seasonId, 10) &&
+      altName.duration[1] >= Number.parseInt(seasonId, 10),
   );
 
   return Utils.getEmoji(altLookup?.logo || emojiByTeam[team.data.id]);
+};
+
+export const formatGameId = ({
+  playedOn,
+  teams,
+}: {
+  playedOn: GameData["playedOn"];
+  teams: [TeamCode, TeamCode];
+}) => {
+  return `${playedOn}/${teams.toSorted((t1, t2) => t1.localeCompare(t2)).join("__")}`;
+};
+
+export const calculateTeamRecord = (
+  teamId: CollectionEntry<"teams">["id"],
+  games: GameData[],
+) => {
+  const record = { l: 0, w: 0 };
+
+  for (const game of games) {
+    const [teamA, teamZ] = game.teams;
+
+    if (teamA.teamId === teamId || teamZ.teamId === teamId) {
+      if (teamId === teamA.teamId) {
+        record[teamA.score > teamZ.score ? "w" : "l"] += 1;
+      } else if (teamId === teamZ.teamId) {
+        record[teamZ.score > teamA.score ? "w" : "l"] += 1;
+      }
+    }
+  }
+
+  return record;
 };
 
 export const emojiByTeam: Record<TeamCode, string> = {
@@ -248,4 +244,6 @@ export const emojiByTeam: Record<TeamCode, string> = {
   WAS: "wizard", // mage emoji, re-colored
 };
 
+// convenience
 export { TEAM_CODES } from "../content.config";
+export type { TeamCode } from "../content.config";

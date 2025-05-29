@@ -48,6 +48,7 @@ const teams = defineCollection({
     alternativeNames: z
       .array(
         z.object({
+          // Should be season ids, but those are strings due to limitations in astro's typing
           duration: z.tuple([z.number().int(), z.number().int()]),
           logo: z.string(),
           name: z.string(),
@@ -65,7 +66,7 @@ const seasons = defineCollection({
   schema: z.object({
     endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     episodeUrl: z.string().url().optional(),
-    id: z.number().int(),
+    id: z.string(),
     shortened: z
       .object({
         numGames: z.number().int(),
@@ -79,26 +80,29 @@ const seasons = defineCollection({
 const teamSeasons = defineCollection({
   loader: file("src/content/teamSeasons.json"),
   schema: z.object({
+    cone: teamCodeSchema.optional(),
     overUnder: z.number(),
-    seasonId: reference("seasons"),
-    teamId: reference("teams"),
+    season: reference("seasons"),
+    team: reference("teams"),
   }),
 });
 
+// DO NOT USE REFERENCES; data must be compatible with lives game data
+// stored as "static" json in KV
 const games = defineCollection({
   loader: file("src/content/games.json"),
   schema: z.object({
     id: z.string(),
     playedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-    seasonId: reference("seasons"),
+    seasonId: z.string(),
     teams: z.tuple([
       z.object({
         score: z.number().int(),
-        teamId: reference("teams"),
+        teamId: teamCodeSchema,
       }),
       z.object({
         score: z.number().int(),
-        teamId: reference("teams"),
+        teamId: teamCodeSchema,
       }),
     ]),
   }),

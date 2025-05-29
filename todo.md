@@ -40,9 +40,4 @@ Stick to strings, see where that complicates things (probably very few places)
 
 SO:
 
-1. switch seasons.json to string seasonIds
-2. with references, related data loaded already; what does this unlock? teamSeasons have team and season
-   \*\*\*\* renames fields from nounId to just noun
-3. remove types / methods that workaround typing issues
-4. Fix component-level typing
-5. Keep moving through rest of app
+1. start w/ team-stats/ui, work through utility methods; figure out best chart handling

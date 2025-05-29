@@ -1,7 +1,5 @@
 ---
-import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
-
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 import Link from "../../components/link.astro";
 import Logo from "../../components/logo.astro";
@@ -9,29 +7,21 @@ import TeamStats from "../../components/team-stats/index.astro";
 import * as ContentUtils from "../../content/utils";
 import Subpage from "../../layouts/subpage.astro";
 
-export const getStaticPaths = (async () => {
+export const getStaticPaths = async () => {
   const teamSeasons = await getCollection("teamSeasons");
-  return teamSeasons.map((ts) => ({
-    params: { season: ts.data.seasonId, team: ts.data.teamId },
-  }));
-}) satisfies GetStaticPaths;
+  const paths = [];
+  for (const ts of teamSeasons) {
+    const team = await getEntry(ts.data.team);
+    const season = await getEntry(ts.data.season);
+    paths.push({
+      params: { seasonId: ts.data.season.id, teamId: ts.data.team.id },
+      props: { season, team },
+    });
+  }
+  return paths;
+};
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
-
-const { season: seasonId, team: teamId } = Astro.params as Params;
-
-console.log(
-  seasonId,
-  typeof seasonId,
-  "NEED TO FORCE TO NUMBER, SINCE TYPED AS NUMBER BY PARAMS?",
-);
-
-const team = await ContentUtils.getTeamById(teamId);
-const season = await ContentUtils.getSeasonById(seasonId);
-
-if (!(team && season)) {
-  throw new Error(`Team ${teamId} or season ${seasonId} not found`);
-}
+const { season, team } = Astro.props;
 
 const hasArchive = await ContentUtils.getSeasonArchive(season.id);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });

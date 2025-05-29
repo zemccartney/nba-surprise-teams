@@ -1,7 +1,7 @@
 ---
-import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-import type { SeasonsEntry, TeamCode } from "../../content/utils";
+import { getEntry } from "astro:content";
 
 import * as ContentUtils from "../../content/utils";
 import Loading from "../loading.astro";
@@ -9,8 +9,8 @@ import TeamStats from "./ssr.astro"; // component name used in requests (dev too
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: SeasonsEntry["id"];
-  teamId: TeamCode;
+  seasonId: CollectionEntry<"seasons">["id"];
+  teamId: CollectionEntry<"teams">["id"];
 }
 
 const { seasonId, teamId } = Astro.props;
@@ -26,7 +26,7 @@ if (!teamSeason) {
 const staticGames = await ContentUtils.getSeasonArchive(seasonId);
 if (import.meta.env.DEV && !staticGames) {
   console.log(
-    `[team-stats] Static games data unavailable for season ${teamSeason.data.seasonId}; will try to render data via server island`,
+    `[team-stats] Static games data unavailable for team ${teamSeason.data.team.id} in season ${teamSeason.data.season.id}; will try to render data via server island`,
   );
 }
 ---
@@ -39,9 +39,9 @@ if (import.meta.env.DEV && !staticGames) {
     />
   ) : (
     <TeamStats
-      seasonId={teamSeason.data.seasonId}
+      seasonId={teamSeason.data.season.id}
       server:defer
-      teamId={teamSeason.data.teamId}
+      teamId={teamSeason.data.team.id}
     >
       <Loading slot="fallback" />
     </TeamStats>

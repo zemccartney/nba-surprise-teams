@@ -1,7 +1,5 @@
 ---
-import type { GetStaticPaths, InferGetStaticParamsType } from "astro";
-
-import type { SeasonsEntry } from "../../content/utils";
+import { getCollection } from "astro:content";
 
 import ArrowLeftSvg from "../../assets/images/arrow-line-left.svg";
 import ArrowRightSvg from "../../assets/images/arrow-line-right.svg";
@@ -11,31 +9,24 @@ import * as ContentUtils from "../../content/utils";
 import Subpage from "../../layouts/subpage.astro";
 import * as Utils from "../../utils";
 
-export const getStaticPaths = (async () => {
-  const seasons = await ContentUtils.getSeasons();
+export const getStaticPaths = async () => {
+  const seasons = await getCollection("seasons");
   const seasonsWithTeams = [];
 
   for (const season of seasons) {
     const teams = await ContentUtils.getTeamsInSeason(season.id);
     if (teams.length > 0) {
       seasonsWithTeams.push({
-        // TODO Need to do this to account for params stringified ... by astro?
-        params: { season: season.id.toString() },
+        params: { seasonId: season.id },
+        props: { season },
       });
     }
   }
 
   return seasonsWithTeams;
-}) satisfies GetStaticPaths;
+};
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
-
-const { season: seasonId } = Astro.params as Params;
-
-const season = await ContentUtils.getSeasonById(Number.parseInt(seasonId, 10));
-if (!season) {
-  throw new Error(`Season ${seasonId} not found`);
-}
+const { season } = Astro.props;
 
 const archivedSeasons = await ContentUtils.getArchivedSeasons();
 archivedSeasons.reverse();
@@ -53,6 +44,9 @@ const adjacent = (x: -1 | 1) => {
 const hasArchive = await ContentUtils.getSeasonArchive(season.id);
 const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
+
+const seasonBefore = adjacent(-1);
+const seasonAfter = adjacent(1);
 ---
 
 <Subpage
@@ -63,34 +57,28 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
     {
       hasArchive && (
         <div class="mb-12 flex flex-row items-center justify-center gap-12 md:-mt-12">
-          {adjacent(-1) && (
+          {seasonBefore && (
             <a
               class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
-              href={`/${(adjacent(-1) as unknown as SeasonsEntry).id}`}
+              href={`/${seasonBefore.id}`}
             >
               <ArrowLeftSvg class="fill-current" />
               <span>
-                {ContentUtils.abbreviateSeasonRange(
-                  adjacent(-1) as unknown as SeasonsEntry,
-                  {
-                    compact: true,
-                  },
-                )}{" "}
+                {ContentUtils.abbreviateSeasonRange(seasonBefore, {
+                  compact: true,
+                })}{" "}
                 Season
               </span>
             </a>
           )}
-          {adjacent(1) && (
+          {seasonAfter && (
             <a
               class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
-              href={`/${(adjacent(1) as unknown as SeasonsEntry).id}`}
+              href={`/${seasonAfter.id}`}
             >
-              {ContentUtils.abbreviateSeasonRange(
-                adjacent(1) as unknown as SeasonsEntry,
-                {
-                  compact: true,
-                },
-              )}{" "}
+              {ContentUtils.abbreviateSeasonRange(seasonAfter, {
+                compact: true,
+              })}{" "}
               Season
               <ArrowRightSvg class="fill-current" />
             </a>
