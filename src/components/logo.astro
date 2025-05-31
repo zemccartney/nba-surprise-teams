@@ -1,17 +1,16 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import type { CollectionEntry } from "astro:content";
 
 import Image from "astro/components/Image.astro";
-
-import type { SeasonsEntry, TeamEntry } from "../content/utils";
 
 import * as ContentUtils from "../content/utils";
 
 type Props = Pick<HTMLAttributes<"img">, "loading"> & {
   class?: string;
   height?: number;
-  seasonId: SeasonsEntry["id"];
-  team: TeamEntry;
+  seasonId: CollectionEntry<"seasons">["id"];
+  team: CollectionEntry<"teams">;
   width?: number;
 };
 
@@ -24,7 +23,7 @@ const {
   ...props
 } = Astro.props;
 
-const alt = team ? `Logo for ${team.data.name}` : `Question mark logo`;
+const alt = `Logo for ${team.data.name}`;
 const emojiSrc = ContentUtils.getTeamSeasonLogo(team, seasonId);
 ---
 

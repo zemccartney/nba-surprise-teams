@@ -1,13 +1,12 @@
 ---
-import type {
-  GameData,
-  SeasonsEntry,
-  TeamCode,
-  TeamEntry,
-} from "../../data/content-utils";
-import type { TeamStats } from "../../data/types";
+import type { CollectionEntry } from "astro:content";
 
-import * as ContentUtils from "../../data/content-utils";
+import { getEntry } from "astro:content";
+
+import type { GameData } from "../../content/utils";
+
+import * as ContentUtils from "../../content/utils";
+import * as Utils from "../../utils";
 import Link from "../link.astro";
 import Logo from "../logo.astro";
 import Popover from "../popover";
@@ -16,62 +15,33 @@ import Table from "../table.astro";
 
 interface Props {
   games: GameData[];
-  seasonId: SeasonsEntry["id"];
+  seasonId: CollectionEntry<"seasons">["id"];
   title?: string;
 }
 
-type TeamRow = TeamEntry & TeamStats;
-
 const { games, seasonId, title } = Astro.props;
-
-const teamRows: TeamRow[] = [];
 
 const teamsInSeason = await ContentUtils.getTeamsInSeason(seasonId);
 
-const partialRecords: Partial<Record<TeamCode, TeamRow>> = {};
+const teamRows = [];
 
 for (const team of teamsInSeason) {
-  partialRecords[team.id] = {
-    ...team,
-    record: { l: 0, w: 0 },
-  };
+  const record = ContentUtils.calculateTeamRecord(team.id, games);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const teamSeason = await getEntry("teamSeasons", `${seasonId}/${team.id}`)!;
+
+  teamRows.push({
+    isEliminated: await ContentUtils.isEliminated(teamSeason, record),
+    isSurpriseTeam: await ContentUtils.isSurprise(teamSeason, record),
+    pace: await ContentUtils.pace(teamSeason, record),
+    team,
+    teamSeason,
+  });
 }
 
-/*
-TODO Path to simplify:
+teamRows.sort((a, b) => b.pace - a.pace);
 
-- utility for calculating record, given a set of games
-- stop merging data / using compound types, keep types separate, calculate specific data as needed
-
-*/
-
-// Workaround typescript complaining about initializing the following type to an empty object
-// TODO Possible to switch TeamCode back to SeasonData["teams"]? Is the issue that ts can't
-// narrow a discriminated union w/o explicitly checking the exact value? Have zod parse? generic?
-const records = partialRecords as Record<TeamCode, TeamRow>;
-
-for (const game of games) {
-  const [teamA, teamZ] = game.teams;
-
-  // Some games here will have team codes outside the ones we've stored in the app so far.
-  // That's fine; TS doesn't need to care, will gradually add in codes as seasons call for them
-
-  if (records[teamA.teamId]) {
-    records[teamA.teamId].record[teamA.score > teamZ.score ? "w" : "l"] += 1;
-  }
-
-  if (records[teamZ.teamId]) {
-    records[teamZ.teamId].record[teamZ.score > teamA.score ? "w" : "l"] += 1;
-  }
-}
-
-teamRows.push(
-  ...Object.values(records).toSorted(
-    (a, b) => SeasonUtils.pace(b) - SeasonUtils.pace(a),
-  ),
-);
-
-const surpriseRules = SeasonUtils.getSeasonSurpriseRules(seasonId);
+const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
 ---
 
 <script>
@@ -120,45 +90,43 @@ const surpriseRules = SeasonUtils.getSeasonSurpriseRules(seasonId);
           <tr>
             <th scope="row">
               <div class="flex flex-row items-center gap-4">
-                <Logo seasonId={teamRow.seasonId} teamId={teamRow.id} />
-                <Link href={`/${seasonId}/${teamRow.id}`} id="linky">
+                <Logo seasonId={seasonId} team={teamRow.team} />
+                <Link href={`/${seasonId}/${teamRow.team.id}`}>
                   <span class="relative hidden md:inline">
-                    {TeamUtils.resolveTeamName(seasonId, teamRow.id)}
+                    {ContentUtils.resolveTeamName(teamRow.team, seasonId)}
                     <span
                       class:list={[
                         "absolute",
                         {
                           "-right-8":
-                            SeasonUtils.isSurprise(teamRow) ||
-                            SeasonUtils.isEliminated(teamRow),
+                            teamRow.isSurpriseTeam || teamRow.isEliminated,
                         },
                       ]}
                     >
-                      {SeasonUtils.isSurprise(teamRow) && (
+                      {teamRow.isSurpriseTeam && (
                         <ResultEmoji name="surprise" width={20} />
                       )}
-                      {SeasonUtils.isEliminated(teamRow) && (
+                      {teamRow.isEliminated && (
                         <ResultEmoji name="eliminated" width={20} />
                       )}
                     </span>
                   </span>
 
                   <span class="relative md:hidden">
-                    {teamRow.id}
+                    {teamRow.team.id}
                     <span
                       class:list={[
                         "absolute",
                         {
                           "-right-8":
-                            SeasonUtils.isSurprise(teamRow) ||
-                            SeasonUtils.isEliminated(teamRow),
+                            teamRow.isSurpriseTeam || teamRow.isEliminated,
                         },
                       ]}
                     >
-                      {SeasonUtils.isSurprise(teamRow) && (
+                      {teamRow.isSurpriseTeam && (
                         <ResultEmoji name="surprise" width={20} />
                       )}
-                      {SeasonUtils.isEliminated(teamRow) && (
+                      {teamRow.isEliminated && (
                         <ResultEmoji name="eliminated" width={20} />
                       )}
                     </span>
@@ -166,8 +134,10 @@ const surpriseRules = SeasonUtils.getSeasonSurpriseRules(seasonId);
                 </Link>
               </div>
             </th>
-            <td class="text-right">{teamRow.overUnder}</td>
-            <td class="text-right">{SeasonUtils.formatPace(teamRow)} </td>
+            <td class="text-right">{teamRow.teamSeason.data.overUnder}</td>
+            <td class="text-right">
+              {Utils.signedFormatter.format(teamRow.pace)}{" "}
+            </td>
           </tr>
         );
       })

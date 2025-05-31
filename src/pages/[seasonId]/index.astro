@@ -42,7 +42,7 @@ const adjacent = (x: -1 | 1) => {
 };
 
 const hasArchive = await ContentUtils.getSeasonArchive(season.id);
-const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season);
+const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season.id);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
 
 const seasonBefore = adjacent(-1);

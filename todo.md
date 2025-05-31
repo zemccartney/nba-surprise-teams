@@ -25,19 +25,4 @@ types b.) switch data to astro's content layer, removing utility functions bette
 
 ## LEAVING OFF
 
-- need to write baseline query methods for other types, to handle seasonId coercion to number
-  - document that games.json and teamSeason.json files are incorrectly typed, working with
-    issue of content loader
-  - is it actually a hard constraint for season ids to be numbers? Not a hard constraint, but
-    it makes things easier re: comparing? can always do string comparison? feels like it shouldn't
-    be an issue, so live with it, see it out, then report findings back to Astro; THAT SAID, IF IT BECOMES SUCH
-    A PAIN TO GET NUMBER TYPING RIGHT, THEN BAIL.
--
-
-It's not worth it; you're doing a fuck ton of work to make TS happy / workaround Astro limitations;
-adding complexity to app for what? How are you helping yourself? SIMPLIFY
-Stick to strings, see where that complicates things (probably very few places)
-
-SO:
-
-1. start w/ team-stats/ui, work through utility methods; figure out best chart handling
+surprises by team chart; unclear how getTeamHistory was used, need to reinstitute somehow

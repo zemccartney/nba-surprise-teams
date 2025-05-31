@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import {
   Area,
   AreaChart,
@@ -11,26 +10,24 @@ import {
   YAxis,
 } from "recharts";
 
-import type { Game, TeamRecord, TeamSeason, TeamStats } from "../../data/types";
-
 import SurprisedEmoji from "../../assets/images/emoji/hushed-face.svg";
-import * as SeasonUtils from "../../data/seasons";
+import * as ContentUtils from "../../content/utils";
+import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
 
 // Essentially copied from https://recharts.org/en-US/examples/AreaChartFillByValue
 
-// TODO make consistent with other charts i.e. move data formatting outside component
-interface DataPoint {
-  _stats: Required<TeamStats>; // Marks TeamStats.record as required; data points exist only if games have been played
+export interface TeamSeasonPaceChartDatapoint {
   date: string;
+  pace: Awaited<ReturnType<typeof ContentUtils.pace>>;
   projectedWins: number;
+  record: ReturnType<typeof ContentUtils.calculateTeamRecord>;
 }
-
 // TODO Acknowledge claude usage / actually understand how this shit works
 // Calculate the gradient offset based on y-axis threshold
 const getGradientOffset = (
-  data: DataPoint[],
-  toSurprise: ReturnType<typeof SeasonUtils.toSurprise>,
+  data: TeamSeasonPaceChartDatapoint[],
+  toSurprise: Awaited<ReturnType<typeof ContentUtils.winsRemainingToSurprise>>,
 ) => {
   const dataMax = Math.max(...data.map((i) => i.projectedWins));
   const dataMin = Math.min(...data.map((i) => i.projectedWins));
@@ -48,7 +45,7 @@ const TooltipContent = ({
 }: {
   active: boolean;
   label: string;
-  payload: [{ payload: DataPoint }];
+  payload: [{ payload: TeamSeasonPaceChartDatapoint }];
 }) => {
   if (active && payload && payload.length > 0) {
     const point = payload[0].payload;
@@ -60,9 +57,7 @@ const TooltipContent = ({
           <label className="mr-4 inline-block font-bold" htmlFor="record">
             Record:
           </label>
-          <span id="record">
-            {SeasonUtils.formatRecord(point._stats.record)}
-          </span>
+          <span id="record">{ContentUtils.formatRecord(point.record)}</span>
         </p>
         <p>
           <label
@@ -77,7 +72,7 @@ const TooltipContent = ({
           <label className="mr-4 inline-block font-bold" htmlFor="pace">
             Pace:
           </label>
-          <span id="pace">{SeasonUtils.formatPace(point._stats)}</span>
+          <span id="pace">{Utils.signedFormatter.format(point.pace)}</span>
         </p>
       </PopoverBody>
     );
@@ -140,50 +135,19 @@ const YAxisLabel = ({
 };
 
 export default function TeamSeasonPaceChart({
-  games,
-  teamSeason,
+  data,
+  surpriseRules,
+  winsRemaining,
 }: {
-  games: Game[];
-  teamSeason: TeamSeason;
+  data: TeamSeasonPaceChartDatapoint[];
+  surpriseRules: Awaited<
+    ReturnType<typeof ContentUtils.getSeasonSurpriseRules>
+  >;
+  winsRemaining: Awaited<
+    ReturnType<typeof ContentUtils.winsRemainingToSurprise>
+  >;
 }) {
-  const data = useMemo<DataPoint[]>(() => {
-    const points: DataPoint[] = [];
-    const record: TeamRecord = {
-      l: 0,
-      w: 0,
-    };
-
-    for (const game of games) {
-      // TODO Abstract this check? Used in standings table and team stats, too
-      const [teamA, teamZ] = game.teams;
-
-      if (
-        teamA.teamId === teamSeason.teamId ||
-        teamZ.teamId === teamSeason.teamId
-      ) {
-        if (teamSeason.teamId === teamA.teamId) {
-          record[teamA.score > teamZ.score ? "w" : "l"] += 1;
-        } else {
-          record[teamZ.score > teamA.score ? "w" : "l"] += 1;
-        }
-
-        // spread = snapshot of record after current game
-        const _stats = { record: { ...record }, ...teamSeason };
-
-        points.push({
-          _stats,
-          date: game.playedOn,
-          projectedWins: SeasonUtils.projectedWins(_stats),
-        });
-      }
-    }
-
-    return points;
-  }, [games, teamSeason]);
-
-  const toSurprise = SeasonUtils.toSurprise(teamSeason);
-  const offset = getGradientOffset(data, toSurprise);
-  const surpriseRules = SeasonUtils.getSeasonSurpriseRules(teamSeason.seasonId);
+  const offset = getGradientOffset(data, winsRemaining);
 
   return (
     <ResponsiveContainer height={600} width="100%">
@@ -244,7 +208,7 @@ export default function TeamSeasonPaceChart({
           </linearGradient>
         </defs>
         <Area
-          baseValue={toSurprise} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
+          baseValue={winsRemaining} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
           dataKey="projectedWins"
           fill="url(#splitColor)"
           stroke="var(--color-lime-500)"
@@ -253,9 +217,9 @@ export default function TeamSeasonPaceChart({
         <ReferenceLine
           stroke="var(--color-lime-500)"
           strokeWidth={4}
-          y={toSurprise}
+          y={winsRemaining}
         >
-          <Label content={<ReferenceLabel toSurprise={toSurprise} />} />
+          <Label content={<ReferenceLabel toSurprise={winsRemaining} />} />
         </ReferenceLine>
       </AreaChart>
     </ResponsiveContainer>

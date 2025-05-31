@@ -1,4 +1,5 @@
 ---
+import type { ComponentProps } from "astro/types";
 import type { CollectionEntry } from "astro:content";
 
 import { getEntry } from "astro:content";
@@ -6,6 +7,7 @@ import { getEntry } from "astro:content";
 import type { GameData } from "../../content/utils";
 
 import * as ContentUtils from "../../content/utils";
+import * as Utils from "../../utils";
 import TeamSeasonPaceChart from "../charts/team-season-pace";
 import Popover from "../popover";
 import ResultEmoji from "../result-emoji.astro";
@@ -20,8 +22,42 @@ const { games, teamSeason } = Astro.props;
 
 const record = ContentUtils.calculateTeamRecord(teamSeason.data.team.id, games);
 const season = await getEntry(teamSeason.data.season);
-const surpriseRules = ContentUtils.getSeasonSurpriseRules(season);
+const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season.id);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
+const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
+const isEliminated = await ContentUtils.isEliminated(teamSeason, record);
+const winsRemaining = await ContentUtils.winsRemainingToSurprise(teamSeason);
+const pace = await ContentUtils.pace(teamSeason, record);
+const projectedWins = await ContentUtils.projectedWins(season.id, record);
+const recordToSurprise = await ContentUtils.recordRemainingToSurprise(
+  teamSeason,
+  record,
+);
+
+const datapoints: ComponentProps<typeof TeamSeasonPaceChart>["data"] = [];
+
+for (let i = 0; i < games.length; i++) {
+  const gamesToPoint = games.slice(0, i + 1);
+  const recordToPoint = ContentUtils.calculateTeamRecord(
+    teamSeason.data.team.id,
+    gamesToPoint,
+  );
+  const paceToPoint = await ContentUtils.pace(teamSeason, recordToPoint);
+  const projectedWinsToPoint = await ContentUtils.projectedWins(
+    season.id,
+    recordToPoint,
+  );
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const game = games[i]!;
+
+  datapoints.push({
+    date: game.playedOn,
+    pace: paceToPoint,
+    projectedWins: projectedWinsToPoint,
+    record: recordToPoint,
+  });
+}
 ---
 
 <style>
@@ -52,10 +88,9 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
 
 <>
   {
-    (SeasonUtils.isSurprise(teamStats) ||
-      SeasonUtils.isEliminated(teamStats)) && (
+    (isSurpriseTeam || isEliminated) && (
       <div class="flex flex-row items-center justify-center gap-4">
-        {SeasonUtils.isSurprise(teamStats) && (
+        {isSurpriseTeam && (
           <>
             <ResultEmoji name="surprise" width={32} />
             <h2 class="text-center text-lg text-green-200 md:text-2xl">
@@ -64,7 +99,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
             <ResultEmoji name="celebration" width={32} />
           </>
         )}
-        {SeasonUtils.isEliminated(teamStats) && (
+        {isEliminated && (
           <>
             <ResultEmoji name="eliminated" width={32} />
             <p class="text-center text-lg text-green-200 md:text-2xl">
@@ -80,7 +115,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
   }
 
   {
-    season.shortened && (
+    season.data.shortened && (
       <h2 class="relative mt-8 mr-12 w-80 text-lg text-yellow-400 max-lg:mx-auto lg:mt-4 lg:ml-auto">
         Stats here have been adjusted to reflect the shortened {fmtSeason}{" "}
         season
@@ -91,7 +126,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
           }}
           client:load
         >
-          <p class="mb-4 pr-4">{season.shortened.reason}</p>
+          <p class="mb-4 pr-4">{season.data.shortened.reason}</p>
           <table class="table-fixed border-collapse">
             <thead>
               <tr>
@@ -104,7 +139,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
                 <td class="p-2">
                   <span class="mr-4 font-bold underline">Games Played:</span>
                 </td>
-                <td class="p-2">{season.shortened.numGames}</td>
+                <td class="p-2">{season.data.shortened.numGames}</td>
               </tr>
               <tr>
                 <td class="p-2">
@@ -123,7 +158,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
                   </span>
                 </td>
                 <td class="p-2">
-                  {SeasonUtils.signedFormatter.format(surpriseRules.paceTarget)}
+                  {Utils.signedFormatter.format(surpriseRules.paceTarget)}
                 </td>
               </tr>
             </tbody>
@@ -135,7 +170,12 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
   <div
     class="NBASurpriseTracker-TeamStats mt-12 flex flex-col-reverse gap-16 px-2 lg:grid"
   >
-    <TeamSeasonPaceChart client:load games={games} teamSeason={teamSeason} />
+    <TeamSeasonPaceChart
+      client:load
+      data={datapoints}
+      surpriseRules={surpriseRules}
+      winsRemaining={winsRemaining}
+    />
     <Table class="compact max-h-32 max-md:-mx-2">
       <Fragment slot="head">
         <tr>
@@ -146,16 +186,14 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
       <Fragment slot="body">
         <tr>
           <th scope="row">Record</th>
-          <td
-            >{SeasonUtils.formatRecord(teamStats?.record || { l: 0, w: 0 })}</td
-          >
+          <td>{ContentUtils.formatRecord(record)}</td>
         </tr>
         <tr>
           <th scope="row">
             <span class="md:hidden">O/U</span>
             <span class="hidden md:inline">Over/Under</span>
           </th>
-          <td>{teamSeason.overUnder}</td>
+          <td>{teamSeason.data.overUnder}</td>
         </tr>
         <tr>
           <th class="relative" scope="row">
@@ -169,7 +207,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
           </th>
           <td
             >{
-              `${SeasonUtils.toSurprise(teamStats)} - ${surpriseRules.numGames - SeasonUtils.toSurprise(teamStats)}`
+              `${winsRemaining} - ${surpriseRules.numGames - winsRemaining}`
             }</td
           >
         </tr>
@@ -190,7 +228,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
           </th>
           <td>
             {
-              `${SeasonUtils.formatPace(teamStats)}${teamStats.record ? ` (${SeasonUtils.projectedWins(teamStats)} - ${surpriseRules.numGames - SeasonUtils.projectedWins(teamStats)})` : ""}`
+              `${Utils.signedFormatter.format(pace)}(${projectedWins} - ${surpriseRules.numGames - projectedWins})`
             }
           </td>
         </tr>
@@ -209,21 +247,19 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
           <td>
             {
               () => {
-                if (SeasonUtils.isEliminated(teamStats)) {
+                if (isEliminated) {
                   return (
                     <ResultEmoji class="mx-auto" name="eliminated" width={20} />
                   );
                 }
 
-                if (SeasonUtils.isSurprise(teamStats)) {
+                if (isSurpriseTeam) {
                   return (
                     <ResultEmoji class="mx-auto" name="surprise" width={20} />
                   );
                 }
 
-                return SeasonUtils.formatRecord(
-                  SeasonUtils.recordRemainingToSurprise(teamStats),
-                );
+                return ContentUtils.formatRecord(recordToSurprise);
               }
             }
           </td>

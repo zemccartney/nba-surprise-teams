@@ -1,6 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 export type GameData = CollectionEntry<"games">["data"];
 import type { TeamCode } from "../content.config";
@@ -109,8 +109,14 @@ Actual results given seasons:
 
 */
 export const getSeasonSurpriseRules = async (
-  season: CollectionEntry<"seasons">,
+  seasonId: CollectionEntry<"seasons">["id"],
 ) => {
+  const season = await getEntry("seasons", seasonId);
+
+  if (!season) {
+    throw new Error("[getSeasonSurpriseRules] season not found");
+  }
+
   if (season.data.shortened) {
     return {
       numGames: season.data.shortened.numGames,
@@ -204,6 +210,70 @@ export const calculateTeamRecord = (
   }
 
   return record;
+};
+
+export const formatRecord = (record: ReturnType<typeof calculateTeamRecord>) =>
+  `${record.w} - ${record.l}`;
+
+export const currentWinPct = (
+  record: ReturnType<typeof calculateTeamRecord>,
+) => {
+  const divisor = record.w + record.l;
+  return divisor ? record.w / divisor : 0;
+};
+
+export const projectedWins = async (
+  seasonId: CollectionEntry<"seasons">["id"],
+  record: ReturnType<typeof calculateTeamRecord>,
+) => {
+  const surpriseRules = await getSeasonSurpriseRules(seasonId);
+  return Math.floor(surpriseRules.numGames * currentWinPct(record)); // Math.floor = partial wins don't count, need to absolutely exceed
+};
+
+export const pace = async (
+  teamSeason: CollectionEntry<"teamSeasons">,
+  record: ReturnType<typeof calculateTeamRecord>,
+) =>
+  (await projectedWins(teamSeason.data.season.id, record)) -
+  (await winsRemainingToSurprise(teamSeason));
+
+export const winsRemainingToSurprise = async (
+  teamSeason: CollectionEntry<"teamSeasons">,
+) => {
+  const surpriseRules = await getSeasonSurpriseRules(teamSeason.data.season.id);
+  return Math.ceil(teamSeason.data.overUnder + surpriseRules.paceTarget); // ceil b/c all over unders are either integers or end in 0.5 (so round up)
+};
+
+export const isSurprise = async (
+  teamSeason: CollectionEntry<"teamSeasons">,
+  record: ReturnType<typeof calculateTeamRecord>,
+) => record.w >= (await winsRemainingToSurprise(teamSeason));
+
+export const isEliminated = async (
+  teamSeason: CollectionEntry<"teamSeasons">,
+  record: ReturnType<typeof calculateTeamRecord>,
+) => {
+  const surpriseRules = await getSeasonSurpriseRules(teamSeason.data.season.id);
+
+  // number of wins team still needs is greater than the number of games they have left
+  return (
+    (await winsRemainingToSurprise(teamSeason)) - record.w >
+    surpriseRules.numGames - (record.w + record.l)
+  );
+};
+
+export const recordRemainingToSurprise = async (
+  teamSeason: CollectionEntry<"teamSeasons">,
+  record: ReturnType<typeof calculateTeamRecord>,
+) => {
+  const surpriseRules = await getSeasonSurpriseRules(teamSeason.data.season.id);
+  const winsRemaining = (await winsRemainingToSurprise(teamSeason)) - record.w;
+  const gamesRemaining = surpriseRules.numGames - (record.w + record.l);
+
+  return {
+    l: gamesRemaining - winsRemaining,
+    w: winsRemaining,
+  };
 };
 
 export const emojiByTeam: Record<TeamCode, string> = {

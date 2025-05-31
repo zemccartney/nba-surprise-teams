@@ -17,8 +17,7 @@ interface Props {
 
 const { seasonId, teamId } = Astro.props;
 
-// redundant with index, but assume redundant validation won't hurt, or at least far
-// less than uncaught errors
+// redundant with index, but assume redundant validation won't hurt, or at least far less than uncaught errors?
 const teamSeason = await getEntry("teamSeasons", `${seasonId}/${teamId}`);
 
 if (!teamSeason) {
@@ -27,7 +26,6 @@ if (!teamSeason) {
   );
 }
 
-// TODO Output here is games data, not game records,
 const { data, error } = await Astro.callAction(actions.getSeasonData, {
   seasonId: teamSeason.data.season.id,
 });

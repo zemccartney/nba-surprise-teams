@@ -2,21 +2,6 @@ import type { ImageMetadata } from "astro";
 
 /***
  *
- * TYPES
- *
- * ***/
-
-export type DeepReadonly<T> = T extends (infer R)[]
-  ? readonly DeepReadonly<R>[]
-  : // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-    T extends Function
-    ? T
-    : T extends object
-      ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
-      : T;
-
-/***
- *
  * DATES & TIMES
  *
  * ***/
@@ -62,29 +47,6 @@ export const getCurrentEasternYYYYMMDD = () => getEasternYYYYMMDD(new Date());
  * MISC
  *
  * ***/
-
-// TODO Actually understand this; pulled in from Claude, didn't take time to process fully
-// Copied from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#deep_freezing
-export const deepFreeze = <T>(object: T): Readonly<DeepReadonly<T>> => {
-  if (!object || typeof object !== "object") {
-    throw new Error("non-object provided to deepFreeze");
-  }
-
-  // Retrieve the property names defined on object
-  const propNames = Reflect.ownKeys(object);
-
-  // Freeze properties before freezing self
-  for (const name of propNames) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const value = (object as any)[name];
-
-    if ((value && typeof value === "object") || typeof value === "function") {
-      deepFreeze(value);
-    }
-  }
-
-  return Object.freeze(object) as Readonly<DeepReadonly<T>>;
-};
 
 export const getEmoji = (emoji: string) => {
   const imgs = import.meta.glob<{ default: ImageMetadata }>(

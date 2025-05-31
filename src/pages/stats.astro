@@ -1,9 +1,11 @@
 ---
+import type { ComponentProps } from "astro/types";
+
 import { getImage } from "astro:assets";
+import { getCollection, getEntry } from "astro:content";
 
 import type { SurprisesByTeamChartDatapoint } from "../components/charts/surprises-by-team";
-import type { SurprisesPerSeasonChartDatapoint } from "../components/charts/surprises-per-season";
-import type { TeamCode } from "../data/types";
+import type { TeamCode } from "../content/utils";
 
 import SurprisesByTeamChart from "../components/charts/surprises-by-team";
 import SurprisesPerSeasonChart from "../components/charts/surprises-per-season";
@@ -12,10 +14,130 @@ import Link from "../components/link.astro";
 import Logo from "../components/logo.astro";
 import Popover from "../components/popover";
 import Table from "../components/table.astro";
-import * as ContentUtils from "../data/content-utils";
+import * as ContentUtils from "../content/utils";
 import Subpage from "../layouts/subpage.astro";
+import * as Utils from "../utils";
 
-// TODO Review, clean up, make more efficient
+/* All-time Top 10 Table */
+
+const teamSeasons = await getCollection("teamSeasons");
+const paceArchive = [];
+for (const teamSeason of teamSeasons) {
+  const gamesPlayed = await getCollection("games", ({ data }) => {
+    return (
+      data.seasonId === teamSeason.data.season.id &&
+      data.teams.map(({ teamId }) => teamId).includes(teamSeason.data.team.id)
+    );
+  });
+  const record = ContentUtils.calculateTeamRecord(
+    teamSeason.data.team.id,
+    gamesPlayed.map((g) => g.data),
+  );
+
+  paceArchive.push({
+    pace: await ContentUtils.pace(teamSeason, record),
+    record,
+    teamSeason,
+  });
+}
+
+const paceTop10 = paceArchive.toSorted((a, b) => b.pace - a.pace).slice(0, 10);
+const tableRows = [];
+for (const paceEntry of paceTop10) {
+  const team = await getEntry(paceEntry.teamSeason.data.team);
+
+  const img = await getImage({
+    src: ContentUtils.getTeamSeasonLogo(
+      team,
+      paceEntry.teamSeason.data.season.id,
+    ),
+  });
+
+  tableRows.push({
+    isSurpriseTeam: await ContentUtils.isSurprise(
+      paceEntry.teamSeason,
+      paceEntry.record,
+    ),
+    logoSrc: img.src,
+    pace: paceEntry.pace,
+    seasonRange: ContentUtils.abbreviateSeasonRange(
+      await getEntry(paceEntry.teamSeason.data.season),
+      {
+        compact: true,
+      },
+    ),
+    team,
+    teamName: ContentUtils.resolveTeamName(
+      team,
+      paceEntry.teamSeason.data.season.id,
+    ),
+    teamSeason: paceEntry.teamSeason,
+  });
+}
+
+/* END All-time Top 10 Table */
+
+/* Surprises per Season chart */
+
+const surprisesPerSeason: ComponentProps<
+  typeof SurprisesPerSeasonChart
+>["data"] = [];
+
+const seasons = await getCollection("seasons");
+
+for (const season of seasons) {
+  const gamesInSeason = await getCollection("games", ({ data }) => {
+    return data.seasonId === season.id;
+  });
+
+  const teamSeasonsInSeason = await getCollection("teamSeasons", ({ data }) => {
+    return data.season.id === season.id;
+  });
+
+  const datapoint = {
+    numSurprises: 0,
+    seasonId: season.id,
+    seasonRange: ContentUtils.abbreviateSeasonRange(season, {
+      compact: true,
+    }),
+    // TODO Why does this need to be typed? Why is it initialized to never[]?
+    surpriseTeams: [] as ComponentProps<
+      typeof SurprisesPerSeasonChart
+    >["data"][number]["surpriseTeams"],
+  };
+
+  for (const teamSeason of teamSeasonsInSeason) {
+    const record = ContentUtils.calculateTeamRecord(
+      teamSeason.data.team.id,
+      gamesInSeason.map((game) => game.data),
+    );
+    const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
+    if (isSurpriseTeam) {
+      const team = await getEntry(teamSeason.data.team);
+      const img = await getImage({
+        src: ContentUtils.getTeamSeasonLogo(team, teamSeason.data.season.id),
+      });
+
+      datapoint.numSurprises += 1;
+      datapoint.surpriseTeams.push({
+        logoSrc: img.src,
+        name: ContentUtils.resolveTeamName(team, team.id),
+        teamId: teamSeason.data.team.id as TeamCode,
+      });
+    }
+  }
+
+  datapoint.surpriseTeams.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const latestSeason = (await ContentUtils.getLatestSeason())!;
+
+/* END Surprises per Season chart */
+
+/* Surprises by Team chart */
+
+/* END Surprises by Team chart */
 
 interface Datapoint extends ContentUtils.TeamStats {
   formattedPace: string;
@@ -184,13 +306,8 @@ for (const point of datapoints) {
       </h2>
       <SurprisesPerSeasonChart
         client:load
-        data={[...surprisesBySeason.entries()].map(([seasonId, surps]) => {
-          return {
-            numSurprises: surps.length,
-            seasonId: seasonId,
-            teamSeasons: surps,
-          };
-        })}
+        data={surprisesPerSeason}
+        latestSeasonYear={Number.parseInt(latestSeason?.id, 10)}
       />
     </section>
 
@@ -221,39 +338,38 @@ for (const point of datapoints) {
         </Fragment>
         <Fragment slot="body">
           {
-            datapoints
-              .sort((a, b) => b.pace - a.pace)
-              .slice(0, 10)
-              .map((point) => {
-                return (
-                  <tr>
-                    <th scope="row">
-                      <div class="flex flex-row items-center gap-4">
-                        <Logo
-                          loading="eager"
-                          seasonId={point.data.seasonId}
-                          teamId={point.data.teamId}
-                        />
-                        <Link
-                          class="relative"
-                          href={`/${point.data.seasonId}/${point.data.teamId}`}
-                        >
-                          <span class="hidden md:inline">
-                            {point.teamName}
-                            {point.seasonRange}
-                          </span>
-                          <span class="md:hidden">
-                            {point.data.teamId}
-                            {point.seasonRange}
-                          </span>
-                        </Link>
-                      </div>
-                    </th>
-                    <td class="text-right">{point.data.overUnder}</td>
-                    <td class="text-right">{point.formattedPace} </td>
-                  </tr>
-                );
-              })
+            tableRows.map((row) => {
+              return (
+                <tr>
+                  <th scope="row">
+                    <div class="flex flex-row items-center gap-4">
+                      <Logo
+                        loading="eager"
+                        seasonId={row.teamSeason.data.season.id}
+                        team={row.team}
+                      />
+                      <Link
+                        class="relative"
+                        href={`/${row.teamSeason.data.season.id}/${row.team.id}`}
+                      >
+                        <span class="hidden md:inline">
+                          {row.teamName}
+                          {row.seasonRange}
+                        </span>
+                        <span class="md:hidden">
+                          {row.team.id}
+                          {row.seasonRange}
+                        </span>
+                      </Link>
+                    </div>
+                  </th>
+                  <td class="text-right">{row.teamSeason.data.overUnder}</td>
+                  <td class="text-right">
+                    {Utils.signedFormatter.format(row.pace)}{" "}
+                  </td>
+                </tr>
+              );
+            })
           }
         </Fragment>
       </Table>

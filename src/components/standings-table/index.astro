@@ -1,25 +1,27 @@
 ---
-import type { SeasonsEntry } from "../../data/content-utils";
+import type { CollectionEntry } from "astro:content";
 
-import * as ContentUtils from "../../data/content-utils";
+import { getEntry } from "astro:content";
+
+import * as ContentUtils from "../../content/utils";
 import Loading from "../loading.astro";
 import StandingsTable from "./ssr.astro"; // component name used in requests (dev tools, network tab); for easier id in debugging
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: SeasonsEntry["id"];
+  seasonId: CollectionEntry<"seasons">["id"];
   title?: boolean | string;
 }
 
 const { seasonId, title } = Astro.props;
 
-const season = await ContentUtils.getSeasonById(seasonId);
+const season = await getEntry("seasons", seasonId);
 
 if (!season) {
   throw new Error(`[standings-table] Season ${seasonId}`);
 }
 
-const staticGames = await ContentUtils.getGamesBySeason(season.data.id);
+const staticGames = await ContentUtils.getSeasonArchive(season.data.id);
 if (import.meta.env.DEV && !staticGames) {
   console.log(
     `[standings-table] Static games data unavailable for season ${seasonId}; will try to render data via server island`,

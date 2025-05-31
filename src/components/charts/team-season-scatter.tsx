@@ -1,3 +1,5 @@
+import type { CollectionEntry } from "astro:content";
+
 import {
   CartesianGrid,
   Cell,
@@ -9,16 +11,18 @@ import {
   YAxis,
 } from "recharts";
 
-import type { TeamStats } from "../../data/types";
-
-import * as SeasonUtils from "../../data/seasons";
-import * as TeamUtils from "../../data/teams";
+import * as ContentUtils from "../../content/utils";
+import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
 
-interface TeamSeasonScatterplotDatapoint extends TeamStats {
+interface TeamSeasonScatterplotDatapoint {
   isSurpriseTeam: boolean;
   logoSrc: string;
-  pace: ReturnType<typeof SeasonUtils.pace>;
+  overUnder: CollectionEntry<"teamSeasons">["data"]["overUnder"];
+  pace: Awaited<ReturnType<typeof ContentUtils.pace>>;
+  record: ReturnType<typeof ContentUtils.calculateTeamRecord>;
+  seasonRange: string; // SeasonUtils.abbreviateSeasonRange( SeasonUtils.getSeasonById(point.seasonId),{ compact: true }, )
+  teamName: ReturnType<typeof ContentUtils.resolveTeamName>; // TeamUtils.resolveTeamName(point.seasonId, point.teamId)
 }
 
 const YAxisLabel = ({
@@ -88,11 +92,7 @@ const TooltipContent = ({
             src={point.logoSrc}
             width={30}
           />
-          {SeasonUtils.abbreviateSeasonRange(
-            SeasonUtils.getSeasonById(point.seasonId),
-            { compact: true },
-          )}{" "}
-          {TeamUtils.resolveTeamName(point.seasonId, point.teamId)}
+          {point.seasonRange} {point.teamName}
         </h3>
 
         <p className="mt-4">
@@ -100,8 +100,8 @@ const TooltipContent = ({
             Pace (Record)
           </label>
           <span id="record">
-            {SeasonUtils.formatPace(point)} (
-            {SeasonUtils.formatRecord(point.record)})
+            {Utils.signedFormatter.format(point.pace)} (
+            {ContentUtils.formatRecord(point.record)})
           </span>
         </p>
         <p>
