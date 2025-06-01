@@ -137,7 +137,7 @@ const YAxisLabel = ({
 export default function TeamSeasonPaceChart({
   data,
   surpriseRules,
-  winsRemaining,
+  winsToSurprise,
 }: {
   data: TeamSeasonPaceChartDatapoint[];
   surpriseRules: {
@@ -145,9 +145,9 @@ export default function TeamSeasonPaceChart({
     overUnderCutoff: number;
     paceTarget: number;
   }; //Awaited<ReturnType<typeof ContentUtils.getSeasonSurpriseRules>>;
-  winsRemaining: number; // Awaited<ReturnType<typeof ContentUtils.winsRemainingToSurprise>>;
+  winsToSurprise: number; // Awaited<ReturnType<typeof ContentUtils.winsToSurprise>>;
 }) {
-  const offset = getGradientOffset(data, winsRemaining);
+  const offset = getGradientOffset(data, winsToSurprise);
 
   return (
     <ResponsiveContainer height={600} width="100%">
@@ -208,7 +208,7 @@ export default function TeamSeasonPaceChart({
           </linearGradient>
         </defs>
         <Area
-          baseValue={winsRemaining} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
+          baseValue={winsToSurprise} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
           dataKey="projectedWins"
           fill="url(#splitColor)"
           stroke="var(--color-lime-500)"
@@ -217,9 +217,9 @@ export default function TeamSeasonPaceChart({
         <ReferenceLine
           stroke="var(--color-lime-500)"
           strokeWidth={4}
-          y={winsRemaining}
+          y={winsToSurprise}
         >
-          <Label content={<ReferenceLabel toSurprise={winsRemaining} />} />
+          <Label content={<ReferenceLabel toSurprise={winsToSurprise} />} />
         </ReferenceLine>
       </AreaChart>
     </ResponsiveContainer>

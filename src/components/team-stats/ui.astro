@@ -26,7 +26,7 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season.id);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
 const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
 const isEliminated = await ContentUtils.isEliminated(teamSeason, record);
-const winsRemaining = await ContentUtils.winsRemainingToSurprise(teamSeason);
+const winsToSurprise = await ContentUtils.winsToSurprise(teamSeason);
 const pace = await ContentUtils.pace(teamSeason, record);
 const projectedWins = await ContentUtils.projectedWins(season.id, record);
 const recordToSurprise = await ContentUtils.recordRemainingToSurprise(
@@ -36,8 +36,12 @@ const recordToSurprise = await ContentUtils.recordRemainingToSurprise(
 
 const datapoints: ComponentProps<typeof TeamSeasonPaceChart>["data"] = [];
 
-for (let i = 0; i < games.length; i++) {
-  const gamesToPoint = games.slice(0, i + 1);
+const teamGames = games.filter(({ teams }) =>
+  teams.some(({ teamId }) => teamId === teamSeason.data.team.id),
+);
+
+for (let i = 0; i < teamGames.length; i++) {
+  const gamesToPoint = teamGames.slice(0, i + 1);
   const recordToPoint = ContentUtils.calculateTeamRecord(
     teamSeason.data.team.id,
     gamesToPoint,
@@ -49,7 +53,7 @@ for (let i = 0; i < games.length; i++) {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const game = games[i]!;
+  const game = teamGames[i]!;
 
   datapoints.push({
     date: game.playedOn,
@@ -92,22 +96,22 @@ for (let i = 0; i < games.length; i++) {
       <div class="flex flex-row items-center justify-center gap-4">
         {isSurpriseTeam && (
           <>
-            <ResultEmoji name="surprise" width={32} />
+            <ResultEmoji loading="eager" name="surprise" width={32} />
             <h2 class="text-center text-lg text-green-200 md:text-2xl">
               Surprise Team!
             </h2>
-            <ResultEmoji name="celebration" width={32} />
+            <ResultEmoji loading="eager" name="celebration" width={32} />
           </>
         )}
         {isEliminated && (
           <>
-            <ResultEmoji name="eliminated" width={32} />
+            <ResultEmoji loading="eager" name="eliminated" width={32} />
             <p class="text-center text-lg text-green-200 md:text-2xl">
               Eliminated.
               <br />
               No surprise this year
             </p>
-            <ResultEmoji name="disappointed" width={32} />
+            <ResultEmoji loading="eager" name="disappointed" width={32} />
           </>
         )}
       </div>
@@ -174,7 +178,7 @@ for (let i = 0; i < games.length; i++) {
       client:load
       data={datapoints}
       surpriseRules={surpriseRules}
-      winsRemaining={winsRemaining}
+      winsToSurprise={winsToSurprise}
     />
     <Table class="compact max-h-32 max-md:-mx-2">
       <Fragment slot="head">
@@ -207,7 +211,7 @@ for (let i = 0; i < games.length; i++) {
           </th>
           <td
             >{
-              `${winsRemaining} - ${surpriseRules.numGames - winsRemaining}`
+              `${winsToSurprise} - ${surpriseRules.numGames - winsToSurprise}`
             }</td
           >
         </tr>

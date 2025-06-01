@@ -240,9 +240,9 @@ export const pace = async (
   record: ReturnType<typeof calculateTeamRecord>,
 ) =>
   (await projectedWins(teamSeason.data.season.id, record)) -
-  (await winsRemainingToSurprise(teamSeason));
+  (await winsToSurprise(teamSeason));
 
-export const winsRemainingToSurprise = async (
+export const winsToSurprise = async (
   teamSeason: CollectionEntry<"teamSeasons">,
 ) => {
   const surpriseRules = await getSeasonSurpriseRules(teamSeason.data.season.id);
@@ -252,7 +252,7 @@ export const winsRemainingToSurprise = async (
 export const isSurprise = async (
   teamSeason: CollectionEntry<"teamSeasons">,
   record: ReturnType<typeof calculateTeamRecord>,
-) => record.w >= (await winsRemainingToSurprise(teamSeason));
+) => record.w >= (await winsToSurprise(teamSeason));
 
 export const isEliminated = async (
   teamSeason: CollectionEntry<"teamSeasons">,
@@ -262,7 +262,7 @@ export const isEliminated = async (
 
   // number of wins team still needs is greater than the number of games they have left
   return (
-    (await winsRemainingToSurprise(teamSeason)) - record.w >
+    (await winsToSurprise(teamSeason)) - record.w >
     surpriseRules.numGames - (record.w + record.l)
   );
 };
@@ -272,7 +272,7 @@ export const recordRemainingToSurprise = async (
   record: ReturnType<typeof calculateTeamRecord>,
 ) => {
   const surpriseRules = await getSeasonSurpriseRules(teamSeason.data.season.id);
-  const winsRemaining = (await winsRemainingToSurprise(teamSeason)) - record.w;
+  const winsRemaining = (await winsToSurprise(teamSeason)) - record.w;
   const gamesRemaining = surpriseRules.numGames - (record.w + record.l);
 
   return {
@@ -470,6 +470,5 @@ export const getTeamHistory = async (teamId: TeamCode) => {
 };
 
 // convenience
-// TODO Is TEAM_CODES used anywhere outside this file?
 export { TEAM_CODES } from "../content.config";
 export type { TeamCode } from "../content.config";
