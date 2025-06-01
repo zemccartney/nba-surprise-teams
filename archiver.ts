@@ -4,7 +4,7 @@ import Url from "node:url";
 
 import type { SeasonId } from "./src/data/types.ts";
 
-import ArchiveLoader from "./src/data/loaders/archive.ts";
+import ArchiveLoader from "./archive.ts";
 import * as SeasonUtils from "./src/data/seasons";
 import * as Utils from "./src/utils.ts";
 

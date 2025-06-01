@@ -11,7 +11,6 @@ import {
   YAxis,
 } from "recharts";
 
-import * as ContentUtils from "../../content/utils";
 import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
 
@@ -19,10 +18,10 @@ interface TeamSeasonScatterplotDatapoint {
   isSurpriseTeam: boolean;
   logoSrc: string;
   overUnder: CollectionEntry<"teamSeasons">["data"]["overUnder"];
-  pace: Awaited<ReturnType<typeof ContentUtils.pace>>;
-  record: ReturnType<typeof ContentUtils.calculateTeamRecord>;
-  seasonRange: string; // SeasonUtils.abbreviateSeasonRange( SeasonUtils.getSeasonById(point.seasonId),{ compact: true }, )
-  teamName: ReturnType<typeof ContentUtils.resolveTeamName>; // TeamUtils.resolveTeamName(point.seasonId, point.teamId)
+  pace: number; // Awaited<ReturnType<typeof ContentUtils.pace>>;
+  recordFmt: string; // ReturnType<typeof ContentUtils.formatRecord>;
+  seasonRange: string;
+  teamName: string; // ReturnType<typeof ContentUtils.resolveTeamName>;
 }
 
 const YAxisLabel = ({
@@ -100,8 +99,7 @@ const TooltipContent = ({
             Pace (Record)
           </label>
           <span id="record">
-            {Utils.signedFormatter.format(point.pace)} (
-            {ContentUtils.formatRecord(point.record)})
+            {Utils.signedFormatter.format(point.pace)} ({point.recordFmt})
           </span>
         </p>
         <p>

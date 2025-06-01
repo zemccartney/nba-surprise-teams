@@ -55,7 +55,7 @@ for (let i = 0; i < games.length; i++) {
     date: game.playedOn,
     pace: paceToPoint,
     projectedWins: projectedWinsToPoint,
-    record: recordToPoint,
+    recordFmt: ContentUtils.formatRecord(recordToPoint),
   });
 }
 ---
@@ -228,7 +228,7 @@ for (let i = 0; i < games.length; i++) {
           </th>
           <td>
             {
-              `${Utils.signedFormatter.format(pace)}(${projectedWins} - ${surpriseRules.numGames - projectedWins})`
+              `${Utils.signedFormatter.format(pace)} (${projectedWins} - ${surpriseRules.numGames - projectedWins})`
             }
           </td>
         </tr>

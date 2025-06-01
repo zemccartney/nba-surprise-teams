@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 import SurprisedEmoji from "../../assets/images/emoji/hushed-face.svg";
-import * as ContentUtils from "../../content/utils";
+// import * as ContentUtils from "../../content/utils";
 import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
 
@@ -19,15 +19,15 @@ import { PopoverBody } from "../popover";
 
 export interface TeamSeasonPaceChartDatapoint {
   date: string;
-  pace: Awaited<ReturnType<typeof ContentUtils.pace>>;
+  pace: number; // Awaited<ReturnType<typeof ContentUtils.pace>>;
   projectedWins: number;
-  record: ReturnType<typeof ContentUtils.calculateTeamRecord>;
+  recordFmt: string; // ReturnType<typeof ContentUtils.formatRecord>;
 }
 // TODO Acknowledge claude usage / actually understand how this shit works
 // Calculate the gradient offset based on y-axis threshold
 const getGradientOffset = (
   data: TeamSeasonPaceChartDatapoint[],
-  toSurprise: Awaited<ReturnType<typeof ContentUtils.winsRemainingToSurprise>>,
+  toSurprise: number, // Awaited<ReturnType<typeof ContentUtils.winsRemainingToSurprise>>,
 ) => {
   const dataMax = Math.max(...data.map((i) => i.projectedWins));
   const dataMin = Math.min(...data.map((i) => i.projectedWins));
@@ -57,7 +57,7 @@ const TooltipContent = ({
           <label className="mr-4 inline-block font-bold" htmlFor="record">
             Record:
           </label>
-          <span id="record">{ContentUtils.formatRecord(point.record)}</span>
+          <span id="record">{point.recordFmt}</span>
         </p>
         <p>
           <label
@@ -140,12 +140,12 @@ export default function TeamSeasonPaceChart({
   winsRemaining,
 }: {
   data: TeamSeasonPaceChartDatapoint[];
-  surpriseRules: Awaited<
-    ReturnType<typeof ContentUtils.getSeasonSurpriseRules>
-  >;
-  winsRemaining: Awaited<
-    ReturnType<typeof ContentUtils.winsRemainingToSurprise>
-  >;
+  surpriseRules: {
+    numGames: number;
+    overUnderCutoff: number;
+    paceTarget: number;
+  }; //Awaited<ReturnType<typeof ContentUtils.getSeasonSurpriseRules>>;
+  winsRemaining: number; // Awaited<ReturnType<typeof ContentUtils.winsRemainingToSurprise>>;
 }) {
   const offset = getGradientOffset(data, winsRemaining);
 

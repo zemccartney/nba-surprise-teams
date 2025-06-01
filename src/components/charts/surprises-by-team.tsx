@@ -9,22 +9,20 @@ import {
   YAxis,
 } from "recharts";
 
-import type { TeamCode } from "../../content/utils";
-
 import { PopoverBody } from "../popover";
 
-export type SurprisesByTeamChartDatapoint = {
+type SurprisesByTeamChartDatapoint = {
   name: string;
   numEliminated: number;
   numSurprised: number;
-  teamId: TeamCode;
+  teamId: string; // TeamCode;
 } & (
   | {
       history: {
         duration: [number, number?];
         logoSrc: string;
         name: string;
-        teamId: TeamCode;
+        teamId: string; // TeamCode;
       }[];
     }
   | {
@@ -98,7 +96,8 @@ const TooltipContent = ({
 
           <p className="text-center">
             Surprise Record: {point.numSurprised} -{" "}
-            {Math.abs(point.numEliminated)}
+            {Math.abs(point.numEliminated)}{" "}
+            {/* Math.abs to reverse negative scale coercion (see note in render, on mapping in passing to data prop) */}
           </p>
 
           <ul className="ps-[0.5em]">
@@ -158,7 +157,7 @@ export default function SurprisesByTeamChart({
           .toSorted((a, b) => a.teamId.localeCompare(b.teamId))
           .map((point) => ({
             ...point,
-            numEliminated: point.numEliminated / -1,
+            numEliminated: point.numEliminated / -1, // Coerce values to negative scale
           }))}
         margin={{
           bottom: 36,

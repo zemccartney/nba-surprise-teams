@@ -5,7 +5,7 @@ import { z } from "astro:schema";
 
 import type { LoaderResponse } from "../content/utils";
 
-import LiveLoader from "../data/loaders/live";
+import LiveLoader from "../loaders/live";
 import * as Utils from "../utils";
 
 /*

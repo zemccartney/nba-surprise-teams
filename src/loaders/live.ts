@@ -1,9 +1,9 @@
 import { z } from "zod"; // using zod directly, instead of version exported by astro, so file is importable / executable in node (astro: protocol not supported)
 
-import type { GameData, LoaderResponse, TeamCode } from "../../content/utils";
+import type { GameData, LoaderResponse, TeamCode } from "../content/utils";
 
-import * as ContentUtils from "../../content/utils";
-import * as Utils from "../../utils";
+import * as ContentUtils from "../content/utils";
+import * as Utils from "../utils";
 
 const TeamResultSchema = z.object({
   score: z.number(),

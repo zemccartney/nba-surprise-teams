@@ -1,5 +1,3 @@
-import type { CollectionEntry } from "astro:content";
-
 import {
   Bar,
   BarChart,
@@ -11,18 +9,16 @@ import {
   YAxis,
 } from "recharts";
 
-import type { TeamCode } from "../../content/utils";
-
 import { PopoverBody } from "../popover";
 
 interface SurprisesPerSeasonChartDatapoint {
   numSurprises: number;
-  seasonId: CollectionEntry<"seasons">["id"];
-  seasonRange: string; // SeasonUtils.abbreviateSeasonRange(SeasonUtils.getSeasonById(point.seasonId),)
+  seasonId: string; // CollectionEntry<"seasons">["id"];
+  seasonRange: string;
   surpriseTeams: {
-    logoSrc: string; // resolveTeamName(ts.seasonId, ts.teamId)
+    logoSrc: string;
     name: string;
-    teamId: TeamCode;
+    teamId: string; // TeamCode;
   }[];
 }
 

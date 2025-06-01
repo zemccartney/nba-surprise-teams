@@ -5,6 +5,7 @@ import { getCollection, getEntry } from "astro:content";
 export type GameData = CollectionEntry<"games">["data"];
 import type { TeamCode } from "../content.config";
 
+import { TEAM_CODES } from "../content.config";
 import * as Utils from "../utils";
 
 const STANDARD_SEASON = {
@@ -141,6 +142,8 @@ export const getSeasonSurpriseRules = async (
   return STANDARD_SEASON;
 };
 
+// Disambiguate team name in cases of the same team id being associated with multiple different teams over time,
+// as opposed to multiple, different team ids representing the same team entity over time e.g. memphis and vancouver grizzlies
 export const resolveTeamName = (
   team: CollectionEntry<"teams">,
   seasonId: CollectionEntry<"seasons">["id"],
@@ -159,16 +162,18 @@ export const resolveTeamName = (
   return altLookup?.name || team.data.name;
 };
 
-export const getCurrentTeamLogo = (teamId: TeamCode) => {
+export const getTeamLogo = (teamId: TeamCode) => {
   return Utils.getEmoji(emojiByTeam[teamId]);
 };
 
-export const getTeamSeasonLogo = (
+// Disambiguate team logo in cases of the same team id being associated with multiple different teams over time,
+// as opposed to multiple, different team ids representing the same team entity over time e.g. memphis and vancouver grizzlies
+export const getTeamSeasonLogo = async (
   team: CollectionEntry<"teams">,
   seasonId: CollectionEntry<"seasons">["id"],
 ) => {
   if (!team.data.alternativeNames) {
-    return getCurrentTeamLogo(team.data.id);
+    return getTeamLogo(team.data.id);
   }
 
   const altLookup = team.data.alternativeNames.find(
@@ -314,6 +319,157 @@ export const emojiByTeam: Record<TeamCode, string> = {
   WAS: "wizard", // mage emoji, re-colored
 };
 
+export const getTeamHistory = async (teamId: TeamCode) => {
+  if ([TEAM_CODES.BKN, TEAM_CODES.NJN].includes(teamId)) {
+    const [brooklyn, newJersey] = await Promise.all(
+      [TEAM_CODES.BKN, TEAM_CODES.NJN].map((tc) => getEntry("teams", tc)),
+    );
+
+    return [
+      {
+        duration: [1977, 2011],
+        logo: emojiByTeam[TEAM_CODES.NJN],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: brooklyn!.data.name,
+        teamId: TEAM_CODES.NJN,
+      },
+      {
+        duration: [2012],
+        logo: emojiByTeam[TEAM_CODES.BKN],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: newJersey!.data.name,
+        teamId: TEAM_CODES.BKN,
+      },
+    ];
+  }
+
+  if ([TEAM_CODES.OKC, TEAM_CODES.SEA].includes(teamId)) {
+    const [sonics, thunder] = await Promise.all(
+      [TEAM_CODES.SEA, TEAM_CODES.OKC].map((tc) => getEntry("teams", tc)),
+    );
+
+    return [
+      {
+        duration: [1967, 2007],
+        logo: emojiByTeam[TEAM_CODES.SEA],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: sonics!.data.name,
+        teamId: TEAM_CODES.SEA,
+      },
+      {
+        duration: [2008],
+        logo: emojiByTeam[TEAM_CODES.OKC],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: thunder!.data.name,
+        teamId: TEAM_CODES.OKC,
+      },
+    ];
+  }
+
+  if ([TEAM_CODES.MEM, TEAM_CODES.VAN].includes(teamId)) {
+    const [memphis, vancouver] = await Promise.all(
+      [TEAM_CODES.MEM, TEAM_CODES.VAN].map((tc) => getEntry("teams", tc)),
+    );
+
+    return [
+      {
+        duration: [1995, 2000],
+        logo: emojiByTeam[TEAM_CODES.VAN],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: vancouver!.data.name,
+        teamId: TEAM_CODES.VAN,
+      },
+      {
+        duration: [2001],
+        logo: emojiByTeam[TEAM_CODES.MEM],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: memphis!.data.name,
+        teamId: TEAM_CODES.MEM,
+      },
+    ];
+  }
+
+  if (teamId === TEAM_CODES.CHA) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const hornets = (await getEntry("teams", teamId))!;
+
+    return [
+      {
+        duration: [1988, 2001],
+        logo: emojiByTeam[TEAM_CODES.CHA],
+        name: hornets.data.name,
+        teamId: TEAM_CODES.CHA,
+      },
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      { ...hornets.data.alternativeNames![0]!, teamId: TEAM_CODES.CHA },
+      {
+        duration: [2014],
+        logo: emojiByTeam[TEAM_CODES.CHA],
+        name: hornets.data.name,
+        teamId: TEAM_CODES.CHA,
+      },
+    ];
+  }
+
+  if (teamId === TEAM_CODES.WAS) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const wizards = (await getEntry("teams", teamId))!;
+
+    return [
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      { ...wizards.data.alternativeNames![0]!, teamId: TEAM_CODES.WAS },
+      {
+        duration: [1997],
+        logo: emojiByTeam[TEAM_CODES.WAS],
+        name: wizards.data.name,
+        teamId: TEAM_CODES.WAS,
+      },
+    ];
+  }
+
+  if ([TEAM_CODES.NOH, TEAM_CODES.NOK, TEAM_CODES.NOP].includes(teamId)) {
+    const [nola, okc, pelicans] = await Promise.all(
+      [TEAM_CODES.NOH, TEAM_CODES.NOK, TEAM_CODES.NOP].map((tc) =>
+        getEntry("teams", tc),
+      ),
+    );
+
+    return [
+      {
+        duration: [2002, 2004],
+        logo: emojiByTeam[TEAM_CODES.NOH],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: nola!.data.name,
+        teamId: TEAM_CODES.NOH,
+      },
+      {
+        duration: [2005, 2006],
+        logo: emojiByTeam[TEAM_CODES.NOK],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: okc!.data.name,
+        teamId: TEAM_CODES.NOK,
+      },
+      {
+        duration: [2007, 2012],
+        logo: emojiByTeam[TEAM_CODES.NOH],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: nola!.data.name,
+        teamId: TEAM_CODES.NOH,
+      },
+      {
+        duration: [2013],
+        logo: emojiByTeam[TEAM_CODES.NOP],
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        name: pelicans!.data.name,
+        teamId: TEAM_CODES.NOP,
+      },
+    ];
+  }
+
+  return false;
+};
+
 // convenience
+// TODO Is TEAM_CODES used anywhere outside this file?
 export { TEAM_CODES } from "../content.config";
 export type { TeamCode } from "../content.config";
