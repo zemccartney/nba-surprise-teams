@@ -123,8 +123,6 @@ const loader = async (): Promise<LoaderResponse> => {
     return yyyymmdd === currentYYYYMMDD;
   });
 
-  // TODO handle if false i.e. querying w/ date outside season or season missing data, unexpectedly ... error here? report?
-  // Do once we have off-season logic in place? When we know if we get here, data's missing (Error), not just off-season (handleable)
   if (todayInd) {
     const nextRelevantDate = chronologicalSeason
       .slice(todayInd)

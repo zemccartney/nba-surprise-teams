@@ -14,6 +14,8 @@
     "fmt": "prettier . --write",
     "fmt:check": "prettier . --check",
     "info": "astro info",
+    "kv:destroy": "rm -rf .wrangler/state",
+    "kv:reset": "wrangler kv key delete $(node -e \"import fs from 'fs'; const seasons = JSON.parse(fs.readFileSync('src/content/seasons.json', 'utf8')); console.log(seasons.sort((a,b) => b.id.localeCompare(a.id))[0].id)\") --binding=GAMES_KV --local",
     "lint": "eslint .",
     "preview": "astro preview",
     "typewatch": "astro check --watch --preserveWatchOutput"
@@ -62,7 +64,8 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tsx": "^4.19.4",
-    "typescript-eslint": "^8.33.0"
+    "typescript-eslint": "^8.33.0",
+    "wrangler": "^4.19.1"
   },
   "engines": {
     "node": ">=22 <23"

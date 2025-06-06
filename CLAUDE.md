@@ -29,6 +29,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
+### Core Constraints
+
+- Per package.json, this is a module type project. Must use ESM, not CommonJS, as the module system
+
 ### Core Data Model
 
 This is an NBA "surprise teams" tracker that monitors teams performing above expectations based on over/under betting lines. The application has a hybrid static/dynamic architecture:

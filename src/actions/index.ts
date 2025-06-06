@@ -13,7 +13,7 @@ import * as Utils from "../utils";
 Used to prevent workers from returning outdated data from KV.
 
 Given:
-- KV will cache results afer read at edge locations
+- KV will cache results after read at edge locations
 - If breaking changes made to shape of data at play (as output by loader / stored in KV),
 cached output could result in errors (data not matching consumer contract, unusable)
 - There's no way to force-clear all KV-cached results (letting alone this doesn't solve
@@ -78,7 +78,6 @@ export const server = {
           // No next expiresAt means no more upcoming relevant games this season means no new writes
           if (!expiresAt) {
             // TODO Is there a way to force-clear server island caches? Or does that happen on deployment, due to, I assume, changing the params encryption key?
-            // Don't send caching information to the browser ... why? Lazy?
             return { games };
           }
 
