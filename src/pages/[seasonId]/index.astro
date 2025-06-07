@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import ArrowLeftSvg from "../../assets/images/arrow-line-left.svg";
 import ArrowRightSvg from "../../assets/images/arrow-line-right.svg";
 import Link from "../../components/link.astro";
+import Popover from "../../components/popover.tsx";
 import StandingsTable from "../../components/standings-table/index.astro";
 import * as ContentUtils from "../../content/utils";
 import Subpage from "../../layouts/subpage.astro";
@@ -98,14 +99,28 @@ const seasonAfter = adjacent(1);
     </h1>
     {
       season.data.episodeUrl && (
-        <div class="mb-12 text-center sm:mb-24">
+        <div class="relative mx-auto mb-12 w-fit sm:mb-24">
           <Link
-            class="text-xl md:text-2xl lg:text-4xl"
+            class="relative inline-block w-fit text-xl md:text-2xl lg:text-4xl"
             href={season.data.episodeUrl}
             target="_blank"
           >
             <span class="italic">Slam N' Jam</span> Episode
           </Link>
+          <Popover
+            classes={{
+              body: "p-4 !max-w-100",
+              trigger: "!-top-4 !-right-5",
+            }}
+            client:load
+          >
+            If the link's broken (grumbling about Apple...), you're looking for
+            the episode "{season.data.episodeTitle}" from
+            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+            {season.data.episodeDate!.split("-").slice(1).join("/")}/{""}
+            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+            {season.data.episodeDate!.split("-")[0]}
+          </Popover>
         </div>
       )
     }

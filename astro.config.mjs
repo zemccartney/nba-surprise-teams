@@ -4,6 +4,9 @@ import sentry from "@sentry/astro";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
+
+import archiver from "./archiver/integration.ts";
+
 const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
@@ -15,7 +18,6 @@ const siteByEnv = {
   production: "https://nbastt.grepco.net",
 };
 
-// https://astro.build/config
 export default defineConfig({
   ...(PUBLIC_DEPLOY_ENV && {
     site: siteByEnv[PUBLIC_DEPLOY_ENV],
@@ -55,6 +57,7 @@ export default defineConfig({
           }),
         ]
       : []),
+    archiver(),
   ],
   vite: {
     plugins: [tailwindcss()],

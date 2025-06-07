@@ -17,7 +17,7 @@ export const PopoverBody = ({
     return (
       <div
         className={Clsx([
-          "shadow-popover z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
+          "z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
           className,
         ])}
       >
@@ -30,7 +30,7 @@ export const PopoverBody = ({
     <RadixPopover.Content
       avoidCollisions
       className={Clsx([
-        "shadow-popover z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
+        "z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
         className,
       ])}
       hideWhenDetached
@@ -70,7 +70,7 @@ export default function Popover({
             x
           </RadixPopover.Close>
           <RadixPopover.Arrow
-            className={Clsx(["fill-indigo-500", classes?.arrow])}
+            className={Clsx(["fill-blue-200", classes?.arrow])}
           />
         </PopoverBody>
       </RadixPopover.Portal>

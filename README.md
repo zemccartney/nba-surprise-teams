@@ -14,52 +14,6 @@ All commands are run from the root of the project, from a terminal:
 
 ## Maintenance
 
-### Lifecycle
-
-Requirements for keeping the site current with NBA happenings
-
-#### End of season (~second week of April)
-
-The day after the season ends:
-
-1. Create games archive for newly ended season: `npx tsx archiver.ts` --> should add `games.json` to `src/data/seasons` folder
-2. Review hardcoded limits on graphs; new data still fits? possible to make less fragile?
-3. Review states leaderboard; does slicing still work? Way to automate this? (e.g. if items past 10th are same number, collapse into single row listing their count)
-
-EXPECT:
-
-- latest season's pages now converted to static output
-- latest season's data now shows up in archive and stats pages
-
-#### Schedule Release (~mid August (August 15 for 2024, August 18 for 2023))
-
-When the NBA releases their schedule:
-
-1. Add season id to [`SeasonId`](./src/data/types.ts#L465)
-2. Add new season
-   a. folder under `src/data/seasons`
-   b. add `data.ts` file, fill in with season id and data range
-   - might need to `@ts-ignore` data file for now, given won't be included in `SeasonData` type
-3. Register season in "store" i.e. add to [`normalized`](./src/data/seasons/index.ts#L43)
-
-EXPECT:
-
-- home page now shows countdown to next season
-
-#### Odds Release (~mid September (Slam n' Jam pod intro for 2024 surprise teams on Sept. 20))
-
-When surprise teams and their odds are announced:
-
-1. Add a branch to [`SeasonData`](./src/data/types.ts#L30), documenting the teams participating in the new season
-   a. add teams as needed (logos, to `data/teams.ts`)
-2. add team seasons to season in `data/seasons/{seasonId}/data.ts`; re-enable type checking, fill in, should
-   be no errors
-
-EXPECT:
-
-- home page now shows standings table for upcoming season, empty values for all record and pace displays
-  - pages rendered on-demand, no additional static output
-
 ### Additional Considerations
 
 #### KV Cache Key
@@ -94,9 +48,3 @@ Intuition: Reach out to a source with live data only when monitoring game result
   - reduce load times for end user, reduce round trips to server to render view based on network call (KV or API call, depending on if data fresh)
   - also, saves on KV usage; fewer calls since cache headers tell browser: only results on server won't change for x time, so don't
     bother re-querying
-
-### TS intuition
-
-- Define and expand types to describe allowable space of data, such that data entry is constrained to those
-  types, that you see type errors while adding data
-- Structuring data as lookup tables allows restricting allowable "queries" i.e. season ids or team ids within a season. The entity ids used as keys set the literal values allowable for keying into ("searching") our data

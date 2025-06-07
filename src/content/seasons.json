@@ -129,25 +129,33 @@
   },
   {
     "endDate": "2022-04-10",
-    "episodeUrl": "https://podcasts.apple.com/us/podcast/the-athletic-nba-daily/id1358187061?i=1000538054337",
+    "episodeDate": "2021-10-09",
+    "episodeTitle": "What NBA Teams will surprise? + Can the Magic get on track?",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/what-nba-teams-will-surprise-can-the-magic-get-on-track/id1358187061?i=1000706553405",
     "id": "2021",
     "startDate": "2021-10-19"
   },
   {
     "endDate": "2023-04-09",
-    "episodeUrl": "https://podcasts.apple.com/us/podcast/surprise-team-pacers-tanking/id1358187061?i=1000581134874",
+    "episodeDate": "2022-09-30",
+    "episodeTitle": "Surprise Team + Pacers Tanking?",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/surprise-team-pacers-tanking/id1358187061?i=1000706553222",
     "id": "2022",
     "startDate": "2022-10-18"
   },
   {
     "endDate": "2024-04-14",
-    "episodeUrl": "https://podcasts.apple.com/us/podcast/the-athletic-nba-daily/id1358187061?i=1000632020041",
+    "episodeDate": "2023-10-13",
+    "episodeTitle": "Wemby and the Knicks with Shea Serrano and Jason Concepcion",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/wemby-and-the-knicks-with-shea-serrano-and-jason-concepcion/id1358187061?i=1000706552680",
     "id": "2023",
     "startDate": "2023-10-24"
   },
   {
     "endDate": "2025-04-13",
-    "episodeUrl": "https://podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000670194276",
+    "episodeDate": "2024-09-20",
+    "episodeTitle": "Embiid Extension + Surprise Teams + Pelicans Preview",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555",
     "id": "2024",
     "startDate": "2024-10-22"
   }

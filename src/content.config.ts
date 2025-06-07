@@ -63,18 +63,30 @@ const teams = defineCollection({
 
 const seasons = defineCollection({
   loader: file("src/content/seasons.json"),
-  schema: z.object({
-    endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-    episodeUrl: z.string().url().optional(),
-    id: z.string(),
-    shortened: z
-      .object({
-        numGames: z.number().int(),
-        reason: z.string(),
-      })
-      .optional(),
-    startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  }),
+  schema: z
+    .object({
+      endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+      episodeDate: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2}$/)
+        .optional(),
+      episodeTitle: z.string().optional(),
+      episodeUrl: z.string().url().optional(),
+      id: z.string(),
+      shortened: z
+        .object({
+          numGames: z.number().int(),
+          reason: z.string(),
+        })
+        .optional(),
+      startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    })
+    .refine((season) => {
+      return (
+        (season.episodeDate && season.episodeTitle && season.episodeUrl) ||
+        !(season.episodeDate || season.episodeTitle || season.episodeUrl)
+      );
+    }),
 });
 
 const teamSeasons = defineCollection({
