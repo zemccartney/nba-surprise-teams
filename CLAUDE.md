@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Context
+
+- I (the prompter) am a senior engineer. My job is to provide whatever context you need to do the jobs I assign you well. I do not want you to guess at what I mean or try to appease me.
+- You are an LLM. You're job here is to facilitate maintenance of this site.
+
 ## Commands
 
 **Development:**

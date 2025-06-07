@@ -1,6 +1,8 @@
 # About the Data: Guide to site maintenance
 
-## Principles
+## Intuition and Principles
+
+Intuition: We can favor self-reliance, thereby reducing complexity and surface area for errors, because the data at play is eventually static (games end, seasons end, results are final, historical facts). When there's no possibility of new data (out-of-season, but more commonly, in-season and we can tell by looking at the schedule that there haven't been new results since last poll), serve the system's records of data
 
 As much of the site is static as possible; rely on external data sources i.e. take on complexity of maintaining a system for sourcing data on-demand only when no way to know data ahead of data. Specifically, results of games happening in real time. We're balancing the tradeoff currency and reliability / complexity management:
 
@@ -56,7 +58,7 @@ What does this look like in practice? Requirements for keeping the site current 
 
 The day after the season ends (or as close as possible):
 
-1. Create games archive for newly ended season: `npx tsx archiver.ts` --> should add `games.json` to `src/data/seasons` folder
+1. Create games archive for newly ended season: `npm run archive:latest` --> should add to end of `src/content/games.json`
 2. Review hardcoded limits on graphs; new data still fits? possible to make less fragile?
 3. Review states leaderboard; does slicing still work? Way to automate this? (e.g. if items past 10th are same number, collapse into single row listing their count)
 
@@ -107,3 +109,16 @@ When surprise teams and their odds are announced:
   - Title is above table, not in heading
 - **Team/Season detail:** Pages generated for season's teams, no data yet; data loaded via SSR (server island)
 - **Stats:** no effect
+
+## Infrastructural Points
+
+- Purpose of KV: be as self-reliant as possible while collecting season in-progress
+  - reduce dependency on API (assume unreliable source; endpoint I stumbled on by observing network activity on stats.nba.com; gets me the data I want, but no contract with this service)
+  - immediately store results in real time, so we have some backup of live results; use this backup instead of calling out to the API
+    if we know, based on schedule, that our copy of data is up to data (fetching data from API would be a no-op)
+    - fallback if unreliable API disappears; at least we have something to serve, could manually patch results while looking for
+      new source
+- set caching headers based on approximate calculation of time remaining until new results in data (when games finish)
+  - reduce load times for end user, reduce round trips to server to render view based on network call (KV or API call, depending on if data fresh)
+  - also, saves on KV usage; fewer calls since cache headers tell browser: only results on server won't change for x time, so don't
+    bother re-querying

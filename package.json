@@ -6,7 +6,7 @@
     "archive:all": "tsx archiver/script.ts",
     "archive:latest": "tsx archiver/script.ts --latest",
     "astro": "astro",
-    "build": "npm run check && astro build",
+    "build": "npm test && npm run check && astro build",
     "cf:wip": "git commit -m \"[CF-Pages-Skip] WIP\" && git push",
     "check": "astro check && npm run fmt:check && npm run lint",
     "deps": "ncu -i --format group",
@@ -18,6 +18,7 @@
     "kv:reset": "wrangler kv key delete $(node -e \"import fs from 'fs'; const seasons = JSON.parse(fs.readFileSync('src/content/seasons.json', 'utf8')); console.log(seasons.sort((a,b) => b.id.localeCompare(a.id))[0].id)\") --binding=GAMES_KV --local",
     "lint": "eslint .",
     "preview": "astro preview",
+    "test": "vitest",
     "typewatch": "astro check --watch --preserveWatchOutput"
   },
   "dependencies": {
@@ -64,6 +65,7 @@
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tsx": "^4.19.4",
     "typescript-eslint": "^8.33.1",
+    "vitest": "^3.2.2",
     "wrangler": "^4.19.1"
   },
   "engines": {

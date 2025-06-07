@@ -208,7 +208,7 @@ export default function TeamSeasonPaceChart({
           </linearGradient>
         </defs>
         <Area
-          baseValue={winsToSurprise} // Note to self: key to fixing area highlighting issues relative to slope, tho not sure why
+          baseValue={winsToSurprise} // key to fixing area highlighting issues relative to slope, tho not sure why
           dataKey="projectedWins"
           fill="url(#splitColor)"
           stroke="var(--color-lime-500)"
