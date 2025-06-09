@@ -6,8 +6,8 @@ const seasons = await getCollection("seasons");
 const teams = await getCollection("teams");
 const teamSeasons = await getCollection("teamSeasons");
 
-describe("Data Validation System", () => {
-  describe.only("Season Data Rules", async () => {
+describe("system validation", () => {
+  describe.only("season rules", async () => {
     test("past seasons must have complete static games data", () => {
       const today = new Date();
       const gracePeriodDays = 15;
@@ -17,34 +17,33 @@ describe("Data Validation System", () => {
         const daysSinceEnd =
           (today.getTime() - endDate.getTime()) / (1000 * 60 * 60 * 24);
 
-        // Skip if within grace period
         if (daysSinceEnd < gracePeriodDays) {
+          console.warn(
+            `${season.id} season is past and missing static games, but still within grace period; skipping`,
+          );
           continue;
         }
 
-        // Past seasons must have games data
-        if (daysSinceEnd >= gracePeriodDays) {
-          const seasonTeams = teamSeasons.filter(
-            (ts) => ts.data.season.id === season.id,
+        const seasonTeams = teamSeasons.filter(
+          (ts) => ts.data.season.id === season.id,
+        );
+
+        if (seasonTeams.length > 0 && games.length > 0) {
+          const seasonGames = games.filter(
+            (game) => game.data.seasonId === season.id,
           );
 
-          if (seasonTeams.length > 0 && games.length > 0) {
-            const seasonGames = games.filter(
-              (game) => game.data.seasonId === season.id,
+          // Each surprise team should have 82 games (or 66/72 for shortened seasons)
+          const expectedGames = season.data.shortened?.numGames || 82;
+
+          for (const teamSeason of seasonTeams) {
+            const teamGames = seasonGames.filter((game) =>
+              game.data.teams.some(
+                (team) => team.teamId === teamSeason.data.team.id,
+              ),
             );
 
-            // Each surprise team should have 82 games (or 66/72 for shortened seasons)
-            const expectedGames = season.data.shortened?.numGames || 82;
-
-            for (const teamSeason of seasonTeams) {
-              const teamGames = seasonGames.filter((game) =>
-                game.data.teams.some(
-                  (team) => team.teamId === teamSeason.data.team.id,
-                ),
-              );
-
-              expect(teamGames.length).toBe(expectedGames);
-            }
+            expect(teamGames.length).toBe(expectedGames);
           }
         }
       }
@@ -55,12 +54,10 @@ describe("Data Validation System", () => {
 
       for (const season of seasons) {
         const endDate = new Date(season.data.endDate);
-        const startDate = new Date(season.data.startDate);
 
-        // Current or upcoming seasons
-        if ((endDate >= today || startDate >= today) && games.length > 0) {
+        if (endDate > today && games.length > 0) {
           const seasonGames = games.filter(
-            (game: any) => game.data.seasonId === season.id,
+            (game) => game.data.seasonId === season.id,
           );
           expect(seasonGames.length).toBe(0);
         }
@@ -69,59 +66,49 @@ describe("Data Validation System", () => {
 
     test("only one current or upcoming season allowed", () => {
       const today = new Date();
-      let currentOrUpcomingCount = 0;
 
-      for (const season of seasons) {
+      const currentOrUpcoming = seasons.filter((season) => {
         const endDate = new Date(season.data.endDate);
+        return endDate > today;
+      });
 
-        if (endDate >= today) {
-          currentOrUpcomingCount++;
-        }
-      }
-
-      expect(currentOrUpcomingCount).toBeLessThanOrEqual(1);
+      expect(currentOrUpcoming.length).toBeLessThanOrEqual(1);
     });
 
     test("no overlapping season date ranges", () => {
+      // Don't use the sortSeasons util here, as that intentionally sorts by id for simplicity's sake,
+      // relying on the fact that date ranges are valid and correlated to id years such that id order
+      // implies correct start/end date order. This is blatant overthinking?
       const sortedSeasons = [...seasons].sort(
         (a, b) =>
           new Date(a.data.startDate).getTime() -
           new Date(b.data.startDate).getTime(),
       );
 
-      for (let i = 1; i < sortedSeasons.length; i++) {
-        const prevEnd = new Date(sortedSeasons[i - 1]?.data.endDate);
-        const currentStart = new Date(sortedSeasons[i]?.data.startDate);
+      for (let i = 0; i < sortedSeasons.length - 1; i++) {
+        // sanity checks
 
-        expect(currentStart.getTime()).toBeGreaterThan(prevEnd.getTime());
-      }
-    });
-  });
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const season = sortedSeasons[i]!;
 
-  describe("Convention Rules", () => {
-    test("grace period convention - most recently past season leniency", () => {
-      const today = new Date();
-      const gracePeriodDays = 15;
-
-      // Find most recently ended season
-      const pastSeasons = seasons
-        .filter((s) => new Date(s.data.endDate) < today)
-        .sort(
-          (a, b) =>
-            new Date(b.data.endDate).getTime() -
-            new Date(a.data.endDate).getTime(),
+        // TODO Way to fix non-null; ASK CLAUDE
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const year = Number.parseInt(season.id.split("-")![0]!, 10);
+        expect(season.data.startDate.startsWith(year.toString())).toEqual(true);
+        expect(season.data.endDate.startsWith((year + 1).toString())).toEqual(
+          true,
         );
 
-      if (pastSeasons.length > 0) {
-        const mostRecent = pastSeasons[0];
-        const daysSinceEnd =
-          (today.getTime() - new Date(mostRecent.data.endDate).getTime()) /
-          (1000 * 60 * 60 * 24);
+        const startMoment = new Date(season.data.startDate).getTime();
+        const endMoment = new Date(season.data.endDate).getTime();
 
-        if (daysSinceEnd < gracePeriodDays) {
-          // Within grace period - incomplete data is allowed
-          expect(true).toBe(true); // This test passes during grace period
-        }
+        expect(endMoment).toBeGreaterThan(startMoment);
+
+        // Now verify non-overlapping
+        const currentEnd = new Date(season.data.endDate);
+        const nextStart = new Date(sortedSeasons[i + 1].data.endDate);
+
+        expect(nextStart.getTime()).toBeGreaterThan(currentEnd.getTime());
       }
     });
 
@@ -143,44 +130,49 @@ describe("Data Validation System", () => {
     });
   });
 
-  describe("Referential Integrity", () => {
-    test("team IDs consistent across all files", () => {
-      const teamIds = teams.map((t) => t.data.id);
+  describe.only("referential integrity", () => {
+    test("all IDs unique within their respective files", () => {
+      const seasonIds = seasons.map((s) => s.data.id);
+      expect(new Set(seasonIds).size).toBe(seasonIds.length);
 
-      // Check teamSeasons references
+      const teamIds = teams.map((t) => t.data.id);
+      expect(new Set(teamIds).size).toBe(teamIds.length);
+
+      const teamSeasonIds = teamSeasons.map((ts) => ts.id);
+      expect(new Set(teamSeasonIds).size).toBe(teamSeasonIds.length);
+
+      const gameIds = games.map((g) => g.data.id);
+      expect(new Set(gameIds).size).toBe(gameIds.length);
+    });
+
+    test("team IDs consistent across all files", () => {
+      const teamIds = new Set(teams.map((t) => t.data.id));
+
       for (const teamSeason of teamSeasons) {
         expect(teamIds).toContain(teamSeason.data.team.id);
       }
 
-      // Check games references (if games exist)
-      if (games.length > 0) {
-        for (const game of games) {
-          for (const gameTeam of game.data.teams) {
-            expect(teamIds).toContain(gameTeam.teamId);
-          }
+      for (const game of games) {
+        for (const gameTeam of game.data.teams) {
+          expect(teamIds).toContain(gameTeam.teamId);
         }
       }
     });
 
     test("season IDs consistent across all files", () => {
-      const seasonIds = seasons.map((s) => s.data.id);
+      const seasonIds = new Set(seasons.map((s) => s.data.id));
 
-      // Check teamSeasons references
       for (const teamSeason of teamSeasons) {
         expect(seasonIds).toContain(teamSeason.data.season.id);
       }
 
-      // Check games references (if games exist)
-      if (games.length > 0) {
-        for (const game of games) {
-          expect(seasonIds).toContain(game.data.seasonId);
-        }
+      for (const game of games) {
+        expect(seasonIds).toContain(game.data.seasonId);
       }
     });
 
     test("game participants must be surprise team candidates", () => {
-      if (games.length === 0) return;
-
+      // TODO Possible to use content util here to simplify?
       for (const game of games) {
         const seasonTeamSeasons = teamSeasons.filter(
           (ts) => ts.data.season.id === game.data.seasonId,
@@ -189,39 +181,16 @@ describe("Data Validation System", () => {
           seasonTeamSeasons.map((ts) => ts.data.team.id),
         );
 
-        let hasSurpriseTeam = false;
-        for (const gameTeam of game.data.teams) {
-          if (surpriseTeamIds.has(gameTeam.teamId)) {
-            hasSurpriseTeam = true;
-            break;
-          }
-        }
+        const hasSurpriseTeam = game.data.teams.some((team) => {
+          return surpriseTeamIds.has(team.teamId);
+        });
 
         expect(hasSurpriseTeam).toBe(true);
       }
     });
-
-    test("all IDs unique within their respective files", () => {
-      // Check seasons
-      const seasonIds = seasons.map((s) => s.data.id);
-      expect(new Set(seasonIds).size).toBe(seasonIds.length);
-
-      // Check teams
-      const teamIds = teams.map((t) => t.data.id);
-      expect(new Set(teamIds).size).toBe(teamIds.length);
-
-      // Check teamSeasons
-      const teamSeasonIds = teamSeasons.map((ts) => ts.id);
-      expect(new Set(teamSeasonIds).size).toBe(teamSeasonIds.length);
-
-      // Check games (if they exist)
-      if (games.length > 0) {
-        const gameIds = games.map((g) => g.data.id);
-        expect(new Set(gameIds).size).toBe(gameIds.length);
-      }
-    });
   });
 
+  // TODO needs a lot of work
   describe("Chart Hardcoding Detection", () => {
     test("stats page top-10 table - no ties at cutoff", () => {
       if (games.length === 0) {
@@ -284,6 +253,7 @@ describe("Data Validation System", () => {
       }
     });
 
+    // TODO What the fuck...
     test("chart hardcoded values should be documented", () => {
       // This test documents that chart components contain hardcoded values
       // that should be reviewed when data changes significantly

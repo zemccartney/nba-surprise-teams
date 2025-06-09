@@ -25,6 +25,8 @@ export const getLatestSeason = async () => {
 };
 
 // Based on season ids being years
+// start/end date technically more accurate, but this is fine, easier to read,
+// data validity enforced by tests
 export const sortSeasons = (
   seasons: CollectionEntry<"seasons">[],
   {
