@@ -1,5 +1,7 @@
-import { getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import { describe, expect, test } from "vitest";
+
+import * as ContentUtils from "./src/content/utils";
 
 const games = await getCollection("games");
 const seasons = await getCollection("seasons");
@@ -7,7 +9,7 @@ const teams = await getCollection("teams");
 const teamSeasons = await getCollection("teamSeasons");
 
 describe("system validation", () => {
-  describe.only("season rules", async () => {
+  describe("season rules", async () => {
     test("past seasons must have complete static games data", () => {
       const today = new Date();
       const gracePeriodDays = 15;
@@ -78,7 +80,7 @@ describe("system validation", () => {
     test("no overlapping season date ranges", () => {
       // Don't use the sortSeasons util here, as that intentionally sorts by id for simplicity's sake,
       // relying on the fact that date ranges are valid and correlated to id years such that id order
-      // implies correct start/end date order. This is blatant overthinking?
+      // implies correct start/end date order, a fact we're verifying here. This is blatant overthinking?
       const sortedSeasons = [...seasons].sort(
         (a, b) =>
           new Date(a.data.startDate).getTime() -
@@ -91,7 +93,6 @@ describe("system validation", () => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const season = sortedSeasons[i]!;
 
-        // TODO Way to fix non-null; ASK CLAUDE
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const year = Number.parseInt(season.id.split("-")![0]!, 10);
         expect(season.data.startDate.startsWith(year.toString())).toEqual(true);
@@ -106,7 +107,8 @@ describe("system validation", () => {
 
         // Now verify non-overlapping
         const currentEnd = new Date(season.data.endDate);
-        const nextStart = new Date(sortedSeasons[i + 1].data.endDate);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const nextStart = new Date(sortedSeasons[i + 1]!.data.endDate);
 
         expect(nextStart.getTime()).toBeGreaterThan(currentEnd.getTime());
       }
@@ -130,7 +132,7 @@ describe("system validation", () => {
     });
   });
 
-  describe.only("referential integrity", () => {
+  describe("referential integrity", () => {
     test("all IDs unique within their respective files", () => {
       const seasonIds = seasons.map((s) => s.data.id);
       expect(new Set(seasonIds).size).toBe(seasonIds.length);
@@ -171,15 +173,23 @@ describe("system validation", () => {
       }
     });
 
-    test("game participants must be surprise team candidates", () => {
-      // TODO Possible to use content util here to simplify?
+    test("game participants must be surprise team candidates", async () => {
+      const surpriseTeamIdsBySeason = Object.fromEntries(
+        seasons.map(({ id }) => [
+          id,
+          new Set<CollectionEntry<"teams">["id"]>(),
+        ]),
+      );
+      for (const teamSeason of teamSeasons) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        surpriseTeamIdsBySeason[teamSeason.data.season.id]!.add(
+          teamSeason.data.team.id,
+        );
+      }
+
       for (const game of games) {
-        const seasonTeamSeasons = teamSeasons.filter(
-          (ts) => ts.data.season.id === game.data.seasonId,
-        );
-        const surpriseTeamIds = new Set(
-          seasonTeamSeasons.map((ts) => ts.data.team.id),
-        );
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const surpriseTeamIds = surpriseTeamIdsBySeason[game.data.seasonId]!;
 
         const hasSurpriseTeam = game.data.teams.some((team) => {
           return surpriseTeamIds.has(team.teamId);
@@ -190,83 +200,55 @@ describe("system validation", () => {
     });
   });
 
-  // TODO needs a lot of work
-  describe("Chart Hardcoding Detection", () => {
-    test("stats page top-10 table - no ties at cutoff", () => {
+  // Retire these tests as a programmatic way to adapt charts to different datasets becomes clear
+  // Didn't feel like burning time hashing that out
+  describe("chart hardcoding checks", () => {
+    test("stats page top-10 table - no ties at cutoff", async () => {
       if (games.length === 0) {
         console.warn("Skipping top-10 table test - no games data available");
         return;
       }
 
-      // Calculate pace for all team seasons (simplified version)
-      const paceData: { pace: number; teamSeason: (typeof teamSeasons)[0] }[] =
-        [];
-
+      // Use exact same calculation as stats.astro (lines 37-57)
+      const paceArchive = [];
       for (const teamSeason of teamSeasons) {
-        // Find games for this team in this season
-        const teamGames = games.filter(
-          (game) =>
-            game.data.seasonId === teamSeason.data.season.id &&
-            game.data.teams.some(
-              (team) => team.teamId === teamSeason.data.team.id,
-            ),
+        const gamesPlayed = games.filter(({ data }) => {
+          return (
+            data.seasonId === teamSeason.data.season.id &&
+            data.teams
+              .map(({ teamId }) => teamId)
+              .includes(teamSeason.data.team.id)
+          );
+        });
+        const record = ContentUtils.calculateTeamRecord(
+          teamSeason.data.team.id,
+          gamesPlayed.map((g) => g.data),
         );
 
-        if (teamGames.length > 0) {
-          // Calculate simple record
-          let wins = 0;
-          for (const game of teamGames) {
-            const teamData = game.data.teams.find(
-              (t) => t.teamId === teamSeason.data.team.id,
-            );
-            const opponentData = game.data.teams.find(
-              (t) => t.teamId !== teamSeason.data.team.id,
-            );
-
-            if (
-              teamData &&
-              opponentData &&
-              teamData.score > opponentData.score
-            ) {
-              wins++;
-            }
-          }
-
-          // Calculate pace (simplified: projected wins - surprise threshold)
-          const projectedWins =
-            teamGames.length > 0 ? (wins / teamGames.length) * 82 : 0;
-          const surpriseThreshold = Math.ceil(teamSeason.data.overUnder) + 10;
-          const pace = projectedWins - surpriseThreshold;
-
-          paceData.push({ pace, teamSeason });
-        }
+        paceArchive.push({
+          pace: await ContentUtils.pace(teamSeason, record),
+          record,
+          teamSeason,
+        });
       }
 
-      // Sort by pace and check for ties at position 10/11
-      const sortedByPace = paceData.sort((a, b) => b.pace - a.pace);
+      const paceArchiveDescending = paceArchive.toSorted(
+        (a, b) => b.pace - a.pace,
+      );
+      const paceTop10 = paceArchiveDescending.slice(0, 10);
 
-      if (sortedByPace.length >= 11) {
-        const tenthPlace = sortedByPace[9].pace;
-        const eleventhPlace = sortedByPace[10].pace;
+      // For each item in top 10, check that its pace value isn't repeated
+      // by more following items than 9 - n (where n is position)
+      for (const [n, element] of paceTop10.entries()) {
+        const currentPace = element.pace;
+        const maxAllowedRepeats = 9 - n;
 
-        expect(tenthPlace).not.toBe(eleventhPlace);
+        const followingRepeats = paceArchiveDescending
+          .slice(n + 1)
+          .filter((item) => item.pace === currentPace).length;
+
+        expect(followingRepeats).toBeLessThanOrEqual(maxAllowedRepeats);
       }
-    });
-
-    // TODO What the fuck...
-    test("chart hardcoded values should be documented", () => {
-      // This test documents that chart components contain hardcoded values
-      // that should be reviewed when data changes significantly
-
-      const chartFiles = [
-        "src/components/charts/team-season-scatter.tsx",
-        "src/components/charts/surprises-by-team.tsx",
-        "src/components/charts/surprises-per-season.tsx",
-        "src/pages/stats.astro",
-      ];
-
-      // For now, just ensure this test reminds us to check hardcodings
-      expect(chartFiles.length).toBeGreaterThan(0);
     });
   });
 });
