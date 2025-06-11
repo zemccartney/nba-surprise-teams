@@ -18,7 +18,7 @@
     "kv:reset": "wrangler kv key delete $(node -e \"import fs from 'fs'; const seasons = JSON.parse(fs.readFileSync('src/content/seasons.json', 'utf8')); console.log(seasons.sort((a,b) => b.id.localeCompare(a.id))[0].id)\") --binding=GAMES_KV --local",
     "lint": "eslint .",
     "preview": "astro preview",
-    "test": "vitest",
+    "test": "vitest run",
     "typewatch": "astro check --watch --preserveWatchOutput"
   },
   "dependencies": {
@@ -58,6 +58,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-unicorn": "^59.0.1",
+    "eslint-plugin-vitest": "^0.5.4",
     "globals": "^16.2.0",
     "npm-check-updates": "^18.0.1",
     "prettier": "^3.5.3",

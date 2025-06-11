@@ -8,6 +8,7 @@ import eslintPerfectionist from "eslint-plugin-perfectionist";
 import eslintPluginReact from "eslint-plugin-react";
 import eslintPluginReactRefresh from "eslint-plugin-react-refresh";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import eslintPluginVitest from "eslint-plugin-vitest";
 import globals from "globals";
 import Path from "node:path";
 import Url from "node:url";
@@ -88,11 +89,23 @@ export default tseslint.config(
     files: ["**/*.{tsx}"],
     ...eslintPluginReact.configs.flat.recommended,
   },
+  {
+    files: ["**/*.{tsx}"],
+    languageOptions: {
+      globals: {
+        ...globals.serviceworker,
+        ...globals.browser,
+      },
+    },
+  },
   eslintPluginReactRefresh.configs.vite,
   {
     // auto-generated, no sense in linting
     ignores: ["worker-configuration.d.ts", "scratchpad.js"],
   },
-
+  {
+    files: ["system.test.ts"],
+    ...eslintPluginVitest.configs.recommended,
+  },
   eslintConfigPrettier,
 );

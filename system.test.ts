@@ -9,7 +9,7 @@ const teams = await getCollection("teams");
 const teamSeasons = await getCollection("teamSeasons");
 
 describe("system validation", () => {
-  describe("season rules", async () => {
+  describe("season rules", () => {
     test("past seasons must have complete static games data", () => {
       const today = new Date();
       const gracePeriodDays = 15;
@@ -30,23 +30,23 @@ describe("system validation", () => {
           (ts) => ts.data.season.id === season.id,
         );
 
-        if (seasonTeams.length > 0 && games.length > 0) {
-          const seasonGames = games.filter(
-            (game) => game.data.seasonId === season.id,
+        expect(seasonTeams.length).toBeGreaterThanOrEqual(1);
+
+        const seasonGames = games.filter(
+          (game) => game.data.seasonId === season.id,
+        );
+
+        // Each surprise team should have 82 games (or 66/72 for shortened seasons)
+        const expectedGames = season.data.shortened?.numGames || 82;
+
+        for (const teamSeason of seasonTeams) {
+          const teamGames = seasonGames.filter((game) =>
+            game.data.teams.some(
+              (team) => team.teamId === teamSeason.data.team.id,
+            ),
           );
 
-          // Each surprise team should have 82 games (or 66/72 for shortened seasons)
-          const expectedGames = season.data.shortened?.numGames || 82;
-
-          for (const teamSeason of seasonTeams) {
-            const teamGames = seasonGames.filter((game) =>
-              game.data.teams.some(
-                (team) => team.teamId === teamSeason.data.team.id,
-              ),
-            );
-
-            expect(teamGames.length).toBe(expectedGames);
-          }
+          expect(teamGames.length).toBe(expectedGames);
         }
       }
     });
@@ -108,7 +108,7 @@ describe("system validation", () => {
         // Now verify non-overlapping
         const currentEnd = new Date(season.data.endDate);
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const nextStart = new Date(sortedSeasons[i + 1]!.data.endDate);
+        const nextStart = new Date(sortedSeasons[i + 1]!.data.startDate);
 
         expect(nextStart.getTime()).toBeGreaterThan(currentEnd.getTime());
       }
@@ -121,6 +121,8 @@ describe("system validation", () => {
       const futureSeasons = seasons.filter(
         (s) => new Date(s.data.startDate) > today,
       );
+
+      expect(futureSeasons.length).toBeLessThanOrEqual(1); // partially redundant with "only one current or upcoming season allowed" test (doesn't cover current case)
 
       for (const season of futureSeasons) {
         const startDate = new Date(season.data.startDate);
