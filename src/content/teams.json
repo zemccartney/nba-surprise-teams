@@ -1,0 +1,191 @@
+[
+  {
+    "emoji": "feather",
+    "id": "ATL",
+    "name": "Atlanta Hawks"
+  },
+  {
+    "emoji": "dragon",
+    "id": "BKN",
+    "name": "Brooklyn Nets"
+  },
+  {
+    "emoji": "shamrock",
+    "id": "BOS",
+    "name": "Boston Celtics"
+  },
+  {
+    "alternativeNames": [
+      {
+        "duration": [2004, 2013],
+        "logo": "bobcat",
+        "name": "Charlotte Bobcats"
+      }
+    ],
+    "emoji": "hornet",
+    "id": "CHA",
+    "name": "Charlotte Hornets"
+  },
+  {
+    "emoji": "bull",
+    "id": "CHI",
+    "name": "Chicago Bulls"
+  },
+  {
+    "emoji": "whammer",
+    "id": "CLE",
+    "name": "Cleveland Cavaliers"
+  },
+  {
+    "emoji": "mav",
+    "id": "DAL",
+    "name": "Dallas Mavericks"
+  },
+  {
+    "emoji": "nuggets",
+    "id": "DEN",
+    "name": "Denver Nuggets"
+  },
+  {
+    "emoji": "piston",
+    "id": "DET",
+    "name": "Detroit Pistons"
+  },
+  {
+    "emoji": "warriors",
+    "id": "GSW",
+    "name": "Golden State Warriors"
+  },
+  {
+    "emoji": "rocket",
+    "id": "HOU",
+    "name": "Houston Rockets"
+  },
+  {
+    "emoji": "pacer",
+    "id": "IND",
+    "name": "Indiana Pacers"
+  },
+  {
+    "emoji": "clipper",
+    "id": "LAC",
+    "name": "Los Angeles Clippers"
+  },
+  {
+    "emoji": "giraffe",
+    "id": "LAL",
+    "name": "Los Angeles Lakers"
+  },
+  {
+    "emoji": "grizzly",
+    "id": "MEM",
+    "name": "Memphis Grizzlies"
+  },
+  {
+    "emoji": "heat",
+    "id": "MIA",
+    "name": "Miami Heat"
+  },
+  {
+    "emoji": "deer",
+    "id": "MIL",
+    "name": "Milwaukee Bucks"
+  },
+  {
+    "emoji": "wolf",
+    "id": "MIN",
+    "name": "Minnesota Timberwolves"
+  },
+  {
+    "emoji": "nets",
+    "id": "NJN",
+    "name": "New Jersey Nets"
+  },
+  {
+    "emoji": "fleur-de-hornet",
+    "id": "NOH",
+    "name": "New Orleans Hornets"
+  },
+  {
+    "emoji": "fleur-de-hornet",
+    "id": "NOK",
+    "name": "New Orleans/Oklahoma City Hornets"
+  },
+  {
+    "emoji": "king-cake-baby",
+    "id": "NOP",
+    "name": "New Orleans Pelicans"
+  },
+  {
+    "emoji": "tophat",
+    "id": "NYK",
+    "name": "New York Knicks"
+  },
+  {
+    "emoji": "bison",
+    "id": "OKC",
+    "name": "Oklahoma City Thunder"
+  },
+  {
+    "emoji": "magic",
+    "id": "ORL",
+    "name": "Orlando Magic"
+  },
+  {
+    "emoji": "bell",
+    "id": "PHI",
+    "name": "Philadelphia 76ers"
+  },
+  {
+    "emoji": "sun",
+    "id": "PHX",
+    "name": "Phoenix Suns"
+  },
+  {
+    "emoji": "hiking-boot",
+    "id": "POR",
+    "name": "Portland Trail Blazers"
+  },
+  {
+    "emoji": "crown",
+    "id": "SAC",
+    "name": "Sacramento Kings"
+  },
+  {
+    "emoji": "saxophone",
+    "id": "SAS",
+    "name": "San Antonio Spurs"
+  },
+  {
+    "emoji": "space-needle",
+    "id": "SEA",
+    "name": "Seattle Supersonics"
+  },
+  {
+    "emoji": "raptor",
+    "id": "TOR",
+    "name": "Toronto Raptors"
+  },
+  {
+    "emoji": "question",
+    "id": "UTA",
+    "name": "Utah Jazz"
+  },
+  {
+    "emoji": "bear",
+    "id": "VAN",
+    "name": "Vancouver Grizzlies"
+  },
+  {
+    "alternativeNames": [
+      {
+        "duration": [1974, 1996],
+        "logo": "rebounding",
+        "name": "Washington Bullets"
+      }
+    ],
+    "emoji": "wizard",
+    "id": "WAS",
+    "name": "Washington Wizards"
+  }
+]

@@ -1,0 +1,157 @@
+---
+import { getCollection } from "astro:content";
+
+import ArrowLeftSvg from "../../assets/images/arrow-line-left.svg";
+import ArrowRightSvg from "../../assets/images/arrow-line-right.svg";
+import Link from "../../components/link.astro";
+import Popover from "../../components/popover.tsx";
+import StandingsTable from "../../components/standings-table/index.astro";
+import * as ContentUtils from "../../content-utils.ts";
+import Subpage from "../../layouts/subpage.astro";
+import * as Utils from "../../utils";
+
+export const getStaticPaths = async () => {
+  const seasons = await getCollection("seasons");
+  const seasonsWithTeams = [];
+
+  for (const season of seasons) {
+    const teams = await ContentUtils.getTeamsInSeason(season.id);
+    if (teams.length > 0) {
+      seasonsWithTeams.push({
+        params: { seasonId: season.id },
+        props: { season },
+      });
+    }
+  }
+
+  return seasonsWithTeams;
+};
+
+const { season } = Astro.props;
+
+const archivedSeasons = await ContentUtils.getArchivedSeasons();
+archivedSeasons.reverse();
+
+const adjacent = (x: -1 | 1) => {
+  const si = archivedSeasons.findIndex((s) => s.id === season.id) + x;
+
+  if (si === -1) {
+    return false;
+  }
+
+  return archivedSeasons.at(si);
+};
+
+const hasArchive = await ContentUtils.getSeasonArchive(season.id);
+const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season.id);
+const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
+
+const seasonBefore = adjacent(-1);
+const seasonAfter = adjacent(1);
+---
+
+<Subpage
+  description={`Results for the ${fmtSeason} season`}
+  title={`${fmtSeason} Season`}
+>
+  <div class="px-0 md:px-8">
+    {
+      hasArchive && (
+        <div class="mb-12 flex flex-row items-center justify-center gap-12 md:-mt-12">
+          {seasonBefore && (
+            <a
+              class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
+              href={`/${seasonBefore.id}`}
+            >
+              <ArrowLeftSvg class="fill-current" />
+              <span>
+                {ContentUtils.abbreviateSeasonRange(seasonBefore, {
+                  compact: true,
+                })}{" "}
+                Season
+              </span>
+            </a>
+          )}
+          {seasonAfter && (
+            <a
+              class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
+              href={`/${seasonAfter.id}`}
+            >
+              {ContentUtils.abbreviateSeasonRange(seasonAfter, {
+                compact: true,
+              })}{" "}
+              Season
+              <ArrowRightSvg class="fill-current" />
+            </a>
+          )}
+        </div>
+      )
+    }
+    <h1
+      class:list={[
+        "font-title text-center text-2xl text-lime-400 md:text-4xl",
+        season.data.episodeUrl || season.data.shortened
+          ? "mb-6 sm:mb-12"
+          : "mb-12 sm:mb-24",
+      ]}
+    >
+      {`${fmtSeason} Season`}
+    </h1>
+    {
+      season.data.episodeUrl && (
+        <div class="relative mx-auto mb-12 w-fit sm:mb-24">
+          <Link
+            class="relative inline-block w-fit text-xl md:text-2xl lg:text-4xl"
+            href={season.data.episodeUrl}
+            target="_blank"
+          >
+            <span class="italic">Slam N' Jam</span> Episode
+          </Link>
+          <Popover
+            classes={{
+              body: "p-4 !max-w-100",
+              trigger: "!-top-4 !-right-5",
+            }}
+            client:load
+          >
+            If the link's broken (grumbling about Apple...), you're looking for
+            the episode "{season.data.episodeTitle}" from
+            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+            {season.data.episodeDate!.split("-").slice(1).join("/")}/{""}
+            {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+            {season.data.episodeDate!.split("-")[0]}
+          </Popover>
+        </div>
+      )
+    }
+    {
+      season.data.shortened && (
+        <section class="mb-12 flex flex-1 flex-col items-center px-4 text-xl text-yellow-200 sm:mb-24">
+          <h2 class="text-2xl text-balance text-yellow-400">
+            Shortened season: {season.data.shortened.numGames} games played
+          </h2>
+          <h3 class="text-center text-balance">
+            {season.data.shortened.reason}
+          </h3>
+          <h3 class="mt-4 underline">Adjustments</h3>
+          <ul class="md:ps-[2em]; flex list-inside list-disc flex-col items-center ps-[1em]">
+            {/* Consistent widths to align bullets while centering */}
+            <li class="w-96">
+              Over/Under Cutoff:{" "}
+              <span class="text-yellow-400">
+                {surpriseRules.overUnderCutoff.toPrecision(3)}
+              </span>
+            </li>
+            <li class="w-96">
+              Surprise Team Pace Cutoff:{" "}
+              <span class="text-yellow-400">
+                {Utils.signedFormatter.format(surpriseRules.paceTarget)}
+              </span>
+            </li>
+          </ul>
+        </section>
+      )
+    }
+    <StandingsTable seasonId={season.id} title={false} />
+  </div>
+</Subpage>

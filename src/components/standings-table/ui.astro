@@ -1,14 +1,12 @@
 ---
-import type {
-  Game,
-  SeasonId,
-  Team,
-  TeamCode,
-  TeamStats,
-} from "../../data/types";
+import type { CollectionEntry } from "astro:content";
 
-import * as SeasonUtils from "../../data/seasons";
-import * as TeamUtils from "../../data/teams";
+import { getEntry } from "astro:content";
+
+import type { GameData } from "../../content-utils";
+
+import * as ContentUtils from "../../content-utils";
+import * as Utils from "../../utils";
 import Link from "../link.astro";
 import Logo from "../logo.astro";
 import Popover from "../popover";
@@ -16,59 +14,34 @@ import ResultEmoji from "../result-emoji.astro";
 import Table from "../table.astro";
 
 interface Props {
-  games: Game[];
-  seasonId: SeasonId;
+  games: GameData[];
+  seasonId: CollectionEntry<"seasons">["id"];
   title?: string;
 }
 
-type TeamRow = Team & TeamStats;
-
 const { games, seasonId, title } = Astro.props;
 
-const teamRows: TeamRow[] = [];
+const teamsInSeason = await ContentUtils.getTeamsInSeason(seasonId);
 
-const teams = SeasonUtils.getTeamsInSeason(seasonId).map((team) => ({
-  ...team,
-  ...SeasonUtils.getTeamSeason(seasonId, team.id),
-}));
+const teamRows = [];
 
-const partialRecords: Partial<Record<TeamCode, TeamRow>> = {};
+for (const team of teamsInSeason) {
+  const record = ContentUtils.calculateTeamRecord(team.id, games);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const teamSeason = await getEntry("teamSeasons", `${seasonId}/${team.id}`)!;
 
-for (const team of teams) {
-  // @ts-expect-error: teams unassignable b/c WAS team record has an intentionally incorrectly typed duration year
-  partialRecords[team.id] = {
-    ...team,
-    record: { l: 0, w: 0 },
-  };
+  teamRows.push({
+    isEliminated: await ContentUtils.isEliminated(teamSeason, record),
+    isSurpriseTeam: await ContentUtils.isSurprise(teamSeason, record),
+    pace: await ContentUtils.pace(teamSeason, record),
+    team,
+    teamSeason,
+  });
 }
 
-// Workaround typescript complaining about initializing the following type to an empty object
-// TODO Possible to switch TeamCode back to SeasonData["teams"]? Is the issue that ts can't
-// narrow a discriminated union w/o explicitly checking the exact value? Have zod parse? generic?
-const records = partialRecords as Record<TeamCode, TeamRow>;
+teamRows.sort((a, b) => b.pace - a.pace);
 
-for (const game of games) {
-  const [teamA, teamZ] = game.teams;
-
-  // Some games here will have team codes outside the ones we've stored in the app so far.
-  // That's fine; TS doesn't need to care, will gradually add in codes as seasons call for them
-
-  if (records[teamA.teamId]) {
-    records[teamA.teamId].record[teamA.score > teamZ.score ? "w" : "l"] += 1;
-  }
-
-  if (records[teamZ.teamId]) {
-    records[teamZ.teamId].record[teamZ.score > teamA.score ? "w" : "l"] += 1;
-  }
-}
-
-teamRows.push(
-  ...Object.values(records).toSorted(
-    (a, b) => SeasonUtils.pace(b) - SeasonUtils.pace(a),
-  ),
-);
-
-const surpriseRules = SeasonUtils.getSeasonSurpriseRules(seasonId);
+const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
 ---
 
 <script>
@@ -92,8 +65,8 @@ const surpriseRules = SeasonUtils.getSeasonSurpriseRules(seasonId);
 <Table class="stickyHeader w-full max-w-4xl md:mx-auto" id="standings">
   <Fragment slot="head">
     <tr>
-      <td class="w-1/2 !text-left">{title}</td>
-      <th class="md:w-1/3" scope="col">
+      <td class="w-1/2 !text-left lg:w-3/5">{title}</td>
+      <th class="w-1/3 lg:w-1/4" scope="col">
         <span class="md:hidden">O/U</span>
         <span class="hidden md:inline">Over/Under</span>
       </th>
@@ -117,45 +90,43 @@ const surpriseRules = SeasonUtils.getSeasonSurpriseRules(seasonId);
           <tr>
             <th scope="row">
               <div class="flex flex-row items-center gap-4">
-                <Logo seasonId={teamRow.seasonId} teamId={teamRow.id} />
-                <Link href={`/${seasonId}/${teamRow.id}`} id="linky">
+                <Logo seasonId={seasonId} team={teamRow.team} />
+                <Link href={`/${seasonId}/${teamRow.team.id}`}>
                   <span class="relative hidden md:inline">
-                    {TeamUtils.resolveTeamName(seasonId, teamRow.id)}
+                    {ContentUtils.resolveTeamName(teamRow.team, seasonId)}
                     <span
                       class:list={[
                         "absolute",
                         {
                           "-right-8":
-                            SeasonUtils.isSurprise(teamRow) ||
-                            SeasonUtils.isEliminated(teamRow),
+                            teamRow.isSurpriseTeam || teamRow.isEliminated,
                         },
                       ]}
                     >
-                      {SeasonUtils.isSurprise(teamRow) && (
+                      {teamRow.isSurpriseTeam && (
                         <ResultEmoji name="surprise" width={20} />
                       )}
-                      {SeasonUtils.isEliminated(teamRow) && (
+                      {teamRow.isEliminated && (
                         <ResultEmoji name="eliminated" width={20} />
                       )}
                     </span>
                   </span>
 
                   <span class="relative md:hidden">
-                    {teamRow.id}
+                    {teamRow.team.id}
                     <span
                       class:list={[
                         "absolute",
                         {
                           "-right-8":
-                            SeasonUtils.isSurprise(teamRow) ||
-                            SeasonUtils.isEliminated(teamRow),
+                            teamRow.isSurpriseTeam || teamRow.isEliminated,
                         },
                       ]}
                     >
-                      {SeasonUtils.isSurprise(teamRow) && (
+                      {teamRow.isSurpriseTeam && (
                         <ResultEmoji name="surprise" width={20} />
                       )}
-                      {SeasonUtils.isEliminated(teamRow) && (
+                      {teamRow.isEliminated && (
                         <ResultEmoji name="eliminated" width={20} />
                       )}
                     </span>
@@ -163,8 +134,10 @@ const surpriseRules = SeasonUtils.getSeasonSurpriseRules(seasonId);
                 </Link>
               </div>
             </th>
-            <td class="text-right">{teamRow.overUnder}</td>
-            <td class="text-right">{SeasonUtils.formatPace(teamRow)} </td>
+            <td class="text-right">{teamRow.teamSeason.data.overUnder}</td>
+            <td class="text-right">
+              {Utils.signedFormatter.format(teamRow.pace)}{" "}
+            </td>
           </tr>
         );
       })

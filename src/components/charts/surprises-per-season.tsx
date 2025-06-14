@@ -9,16 +9,17 @@ import {
   YAxis,
 } from "recharts";
 
-import type { SeasonId, TeamSeason } from "../../data/types";
-
-import * as SeasonUtils from "../../data/seasons";
-import * as TeamUtils from "../../data/teams";
 import { PopoverBody } from "../popover";
 
-export interface SurprisesPerSeasonChartDatapoint {
+interface SurprisesPerSeasonChartDatapoint {
   numSurprises: number;
-  seasonId: SeasonId;
-  teamSeasons: (TeamSeason & { logoSrc: string })[];
+  seasonId: string; // CollectionEntry<"seasons">["id"];
+  seasonRange: string;
+  surpriseTeams: {
+    logoSrc: string;
+    name: string;
+    teamId: string; // TeamCode;
+  }[];
 }
 
 const YAxisLabel = ({
@@ -84,31 +85,28 @@ const TooltipContent = ({
     return (
       <PopoverBody className="pb-4 md:max-w-80" deRadix>
         <h3 className="mb-1 text-center font-bold">
-          {SeasonUtils.abbreviateSeasonRange(
-            SeasonUtils.getSeasonById(point.seasonId),
-          )}{" "}
-          Season
+          {point.seasonRange} Season
         </h3>
 
-        {point.teamSeasons.length > 0 && (
+        {point.surpriseTeams.length > 0 && (
           <>
             <h4 className="mb-2">Surprise Teams:</h4>
             <ul className="ps-[0.5em]">
-              {point.teamSeasons.map((ts) => (
+              {point.surpriseTeams.map((ts) => (
                 <li className="mt-4" key={ts.teamId}>
                   <img
                     className="inline contrast-150 drop-shadow-lg"
                     src={ts.logoSrc}
                     width={30}
                   />{" "}
-                  {TeamUtils.resolveTeamName(ts.seasonId, ts.teamId)}
+                  {ts.name}
                 </li>
               ))}
             </ul>
           </>
         )}
 
-        {point.teamSeasons.length === 0 && <p>No surprises this year</p>}
+        {point.surpriseTeams.length === 0 && <p>No surprises this year</p>}
       </PopoverBody>
     );
   }
@@ -146,14 +144,11 @@ const Cursor = ({
 
 export default function SurprisesPerSeasonChart({
   data,
+  latestSeasonYear,
 }: {
   data: SurprisesPerSeasonChartDatapoint[];
+  latestSeasonYear: number; // SeasonUtils.sortSeasonsByDate( SeasonUtils.getAllSeasons(), )[0]!;
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const latestSeason = SeasonUtils.sortSeasonsByDate(
-    SeasonUtils.getAllSeasons(),
-  )[0]!;
-
   return (
     <ResponsiveContainer className="bigchart" height={600} width="100%">
       <BarChart
@@ -169,7 +164,7 @@ export default function SurprisesPerSeasonChart({
         />
         <XAxis
           dataKey="seasonId"
-          domain={[1990, latestSeason.id + 1]}
+          domain={[1990, latestSeasonYear + 1]}
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<XAxisLabel />}
           tick={{
@@ -180,7 +175,7 @@ export default function SurprisesPerSeasonChart({
           tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
           ticks={Array.from(
-            { length: Math.ceil((latestSeason.id + 1 - 1990) / 5) },
+            { length: Math.ceil((latestSeasonYear + 1 - 1990) / 5) },
             (_, i) => 1990 + i * 5,
           )}
           type="number"

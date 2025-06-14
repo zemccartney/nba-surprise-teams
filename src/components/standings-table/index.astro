@@ -1,28 +1,34 @@
 ---
-import type { SeasonId } from "../../data/types";
+import type { CollectionEntry } from "astro:content";
 
-import * as SeasonUtils from "../../data/seasons";
+import { getEntry } from "astro:content";
+
+import * as ContentUtils from "../../content-utils";
 import Loading from "../loading.astro";
 import StandingsTable from "./ssr.astro"; // component name used in requests (dev tools, network tab); for easier id in debugging
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: SeasonId;
+  seasonId: CollectionEntry<"seasons">["id"];
   title?: boolean | string;
 }
 
 const { seasonId, title } = Astro.props;
 
-const season = SeasonUtils.getSeasonById(seasonId);
+const season = await getEntry("seasons", seasonId);
 
-const staticGames = await SeasonUtils.getSeasonArchive(seasonId);
+if (!season) {
+  throw new Error(`[standings-table] Season ${seasonId}`);
+}
+
+const staticGames = await ContentUtils.getSeasonArchive(season.data.id);
 if (import.meta.env.DEV && !staticGames) {
   console.log(
     `[standings-table] Static games data unavailable for season ${seasonId}; will try to render data via server island`,
   );
 }
 
-let resolvedTitle = `${SeasonUtils.abbreviateSeasonRange(season, { compact: true })} Season`;
+let resolvedTitle = `${ContentUtils.abbreviateSeasonRange(season, { compact: true })} Season`;
 if (title === false) {
   resolvedTitle = "";
 } else if (typeof title === "string") {
@@ -32,7 +38,11 @@ if (title === false) {
 
 {
   staticGames ? (
-    <UI games={staticGames} seasonId={season.id} title={resolvedTitle} />
+    <UI
+      games={staticGames.map((entry) => entry.data)}
+      seasonId={season.id}
+      title={resolvedTitle}
+    />
   ) : (
     <StandingsTable seasonId={season.id} server:defer>
       <Loading slot="fallback" />

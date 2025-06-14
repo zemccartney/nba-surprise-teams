@@ -1,3 +1,5 @@
+import type { CollectionEntry } from "astro:content";
+
 import {
   CartesianGrid,
   Cell,
@@ -9,16 +11,17 @@ import {
   YAxis,
 } from "recharts";
 
-import type { TeamStats } from "../../data/types";
-
-import * as SeasonUtils from "../../data/seasons";
-import * as TeamUtils from "../../data/teams";
+import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
 
-interface TeamSeasonScatterplotDatapoint extends TeamStats {
+interface TeamSeasonScatterplotDatapoint {
   isSurpriseTeam: boolean;
   logoSrc: string;
-  pace: ReturnType<typeof SeasonUtils.pace>;
+  overUnder: CollectionEntry<"teamSeasons">["data"]["overUnder"];
+  pace: number; // Awaited<ReturnType<typeof ContentUtils.pace>>;
+  recordFmt: string; // ReturnType<typeof ContentUtils.formatRecord>;
+  seasonRange: string;
+  teamName: string; // ReturnType<typeof ContentUtils.resolveTeamName>;
 }
 
 const YAxisLabel = ({
@@ -88,11 +91,7 @@ const TooltipContent = ({
             src={point.logoSrc}
             width={30}
           />
-          {SeasonUtils.abbreviateSeasonRange(
-            SeasonUtils.getSeasonById(point.seasonId),
-            { compact: true },
-          )}{" "}
-          {TeamUtils.resolveTeamName(point.seasonId, point.teamId)}
+          {point.seasonRange} {point.teamName}
         </h3>
 
         <p className="mt-4">
@@ -100,8 +99,7 @@ const TooltipContent = ({
             Pace (Record)
           </label>
           <span id="record">
-            {SeasonUtils.formatPace(point)} (
-            {SeasonUtils.formatRecord(point.record)})
+            {Utils.signedFormatter.format(point.pace)} ({point.recordFmt})
           </span>
         </p>
         <p>
@@ -115,11 +113,45 @@ const TooltipContent = ({
   }
 };
 
+const roundToFive = (num: number, dir: "down" | "up"): number => {
+  const method =
+    Math.sign(num) === -1
+      ? dir === "up"
+        ? "floor"
+        : "ceil"
+      : dir === "up"
+        ? "ceil"
+        : "floor";
+  return Math.sign(num) * Math[method](Math.abs(num) / 5) * 5;
+};
+
 export default function TeamSeasonScatterplot({
   data,
 }: {
   data: TeamSeasonScatterplotDatapoint[];
 }) {
+  const ouMin = Math.min(...data.map(({ overUnder }) => overUnder));
+  const ouMax = Math.max(...data.map(({ overUnder }) => overUnder));
+  const xMin =
+    roundToFive(ouMin, "down") === ouMin
+      ? roundToFive(ouMin, "down") - 5
+      : roundToFive(ouMin, "down");
+  const xMax =
+    roundToFive(ouMax, "up") === ouMax
+      ? roundToFive(ouMax, "up") + 5
+      : roundToFive(ouMax, "up");
+
+  const paceMin = Math.min(...data.map(({ pace }) => pace));
+  const paceMax = Math.max(...data.map(({ pace }) => pace));
+  const yMin =
+    roundToFive(paceMin, "down") === paceMin
+      ? roundToFive(paceMin, "down") - 5
+      : roundToFive(paceMin, "down");
+  const yMax =
+    roundToFive(paceMax, "up") === paceMax
+      ? roundToFive(paceMax, "up") + 5
+      : roundToFive(paceMax, "up");
+
   return (
     <ResponsiveContainer height={600} width="100%">
       <ScatterChart
@@ -135,11 +167,7 @@ export default function TeamSeasonScatterplot({
         />
         <XAxis
           dataKey="overUnder"
-          domain={[
-            // TODO Smart way to fix hardcoding? At least explain
-            Math.min(...data.map(({ overUnder }) => overUnder)) - 6,
-            38,
-          ]}
+          domain={[xMin, xMax]}
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<XAxisLabel />}
           name="Over/Under"
@@ -150,16 +178,15 @@ export default function TeamSeasonScatterplot({
           }}
           tickLine={{ stroke: "var(--color-lime-200)" }}
           tickMargin={12}
-          ticks={[15, 20, 25, 30, 35]}
+          ticks={Array.from(
+            { length: Math.ceil(Math.abs(xMin - xMax) / 5) },
+            (_, i) => xMin + i * 5,
+          )}
           type="number"
         />
         <YAxis
           dataKey="pace"
-          domain={[
-            // TODO Smart way to fix hardcoding? At least explain
-            -30, // Math.min(...points.map(({ pace }) => pace)) - 2,
-            20, // Math.max(...points.map(({ pace }) => pace)) + 2,
-          ]}
+          domain={[yMin, yMax]}
           // @ts-expect-error - necessary b/c label expects an element, but passes props for you under the hood
           label={<YAxisLabel />}
           name="Pace"

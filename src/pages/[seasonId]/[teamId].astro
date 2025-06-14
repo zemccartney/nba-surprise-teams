@@ -1,0 +1,62 @@
+---
+import { getCollection, getEntry } from "astro:content";
+
+import Link from "../../components/link.astro";
+import Logo from "../../components/logo.astro";
+import TeamStats from "../../components/team-stats/index.astro";
+import * as ContentUtils from "../../content-utils";
+import Subpage from "../../layouts/subpage.astro";
+
+export const getStaticPaths = async () => {
+  const teamSeasons = await getCollection("teamSeasons");
+  const paths = [];
+  for (const ts of teamSeasons) {
+    const team = await getEntry(ts.data.team);
+    const season = await getEntry(ts.data.season);
+    paths.push({
+      params: { seasonId: ts.data.season.id, teamId: ts.data.team.id },
+      props: { season, team },
+    });
+  }
+  return paths;
+};
+
+const { season, team } = Astro.props;
+
+const hasArchive = await ContentUtils.getSeasonArchive(season.id);
+const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
+---
+
+<Subpage
+  description={`${fmtSeason} Season Results for the ${team.data.name}`}
+  title={`${team.id} ${fmtSeason}`}
+>
+  {
+    hasArchive && (
+      <div class="mb-12 text-center md:-mt-6">
+        <Link class="text-lg md:text-xl lg:text-2xl" href={`/${season.id}`}>
+          Back to {fmtSeason} Season
+        </Link>
+      </div>
+    )
+  }
+
+  <div
+    class="mb-12 flex flex-col items-center justify-center gap-8 sm:px-8 lg:flex-row"
+  >
+    <Logo class="w-[96px]" loading="eager" seasonId={season.id} team={team} />
+    <h1
+      class="font-title text-center text-2xl text-balance text-lime-400 md:text-4xl"
+    >
+      {ContentUtils.resolveTeamName(team, season.id)}
+    </h1>
+    {
+      hasArchive && (
+        <p class="font-title text-2xl whitespace-nowrap text-lime-400 md:text-4xl">
+          {fmtSeason}
+        </p>
+      )
+    }
+  </div>
+  <TeamStats seasonId={season.id} teamId={team.id} />
+</Subpage>
