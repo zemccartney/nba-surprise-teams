@@ -70,8 +70,17 @@ export default defineConfig({
       },
     },
     ssr: {
-      // needed for sentry cloudflare
-      external: ["node:async_hooks"],
+      external: [
+        // needed for sentry cloudflare
+        "node:async_hooks",
+        // used only by content loaders at build, not needed at runtime (i hope)
+        "node:fs/promises",
+        "node:path",
+        "node:fs",
+        "node:url",
+        "fs",
+        "path",
+      ],
     },
   },
 });

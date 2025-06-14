@@ -3,7 +3,7 @@ import { ActionError, defineAction } from "astro:actions";
 import { getEntry } from "astro:content";
 import { z } from "astro:schema";
 
-import type { LoaderResponse } from "../content/utils";
+import type { LoaderResponse } from "../content-utils";
 
 import LiveLoader from "../loaders/live";
 import * as Utils from "../utils";

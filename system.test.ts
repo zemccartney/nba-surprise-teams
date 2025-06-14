@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import Fs from "node:fs/promises";
 import { beforeAll, describe, expect, test } from "vitest";
 
-import * as ContentUtils from "./src/content/utils";
+import * as ContentUtils from "./src/content-utils";
 
 /*
   Warning: changes to content don't appear to surface automatically in tests,

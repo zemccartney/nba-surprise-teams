@@ -10,8 +10,8 @@ import { z } from "zod";
 
 import type { TeamCode } from "../src/content.config";
 
+import * as ContentUtils from "../src/content-utils";
 import { TEAM_CODES } from "../src/content.config";
-import * as ContentUtils from "../src/content/utils";
 import * as Utils from "../src/utils";
 
 /*

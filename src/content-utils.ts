@@ -3,10 +3,10 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection, getEntry } from "astro:content";
 
 export type GameData = CollectionEntry<"games">["data"];
-import type { TeamCode } from "../content.config";
+import type { TeamCode } from "./content.config";
 
-import { TEAM_CODES } from "../content.config";
-import * as Utils from "../utils";
+import { TEAM_CODES } from "./content.config";
+import * as Utils from "./utils";
 
 const STANDARD_SEASON = {
   numGames: 82,
@@ -472,5 +472,5 @@ export const getTeamHistory = async (teamId: TeamCode) => {
 };
 
 // convenience
-export { TEAM_CODES } from "../content.config";
-export type { TeamCode } from "../content.config";
+export { TEAM_CODES } from "./content.config";
+export type { TeamCode } from "./content.config";

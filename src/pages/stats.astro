@@ -4,7 +4,7 @@ import type { ComponentProps } from "astro/types";
 import { getImage } from "astro:assets";
 import { getCollection, getEntry } from "astro:content";
 
-import type { TeamCode } from "../content/utils";
+import type { TeamCode } from "../content-utils";
 
 import SurprisesByTeamChart from "../components/charts/surprises-by-team";
 import SurprisesPerSeasonChart from "../components/charts/surprises-per-season";
@@ -13,7 +13,7 @@ import Link from "../components/link.astro";
 import Logo from "../components/logo.astro";
 import Popover from "../components/popover";
 import Table from "../components/table.astro";
-import * as ContentUtils from "../content/utils";
+import * as ContentUtils from "../content-utils";
 import Subpage from "../layouts/subpage.astro";
 import * as Utils from "../utils";
 

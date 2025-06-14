@@ -13,3 +13,5 @@ src/content/games.json
 
 # auto-generated
 worker-configuration.d.ts
+
+.claude/
