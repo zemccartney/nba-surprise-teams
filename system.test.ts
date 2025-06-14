@@ -1,16 +1,22 @@
-import { type CollectionEntry, getCollection } from "astro:content";
-import { describe, expect, test } from "vitest";
+import type { CollectionEntry } from "astro:content";
+
+import { getCollection } from "astro:content";
+import Fs from "node:fs/promises";
+import { beforeAll, describe, expect, test } from "vitest";
 
 import * as ContentUtils from "./src/content/utils";
 
+/*
+  Warning: changes to content don't appear to surface automatically in tests,
+  required starting dev server to trigger a content sync. Unclear why yet
+*/
 const games = await getCollection("games");
 const seasons = await getCollection("seasons");
-const teams = await getCollection("teams");
 const teamSeasons = await getCollection("teamSeasons");
 
 describe("system validation", () => {
   describe("season rules", () => {
-    test("past seasons must have complete static games data", () => {
+    test("past seasons must have complete data (surprise teams and n (season length) games per team)", () => {
       const today = new Date();
       const gracePeriodDays = 15;
 
@@ -19,6 +25,7 @@ describe("system validation", () => {
         const daysSinceEnd =
           (today.getTime() - endDate.getTime()) / (1000 * 60 * 60 * 24);
 
+        // Allow hotfixing right after season's end, assuming i might lag with manually archiving latest season
         if (daysSinceEnd < gracePeriodDays) {
           console.warn(
             `${season.id} season is past and missing static games, but still within grace period; skipping`,
@@ -134,50 +141,90 @@ describe("system validation", () => {
     });
   });
 
-  describe("referential integrity", () => {
-    test("all IDs unique within their respective files", () => {
-      const seasonIds = seasons.map((s) => s.data.id);
+  describe("referential integrity and constraints", () => {
+    let rawSeasons: CollectionEntry<"seasons">["data"][];
+    let rawTeams: CollectionEntry<"teams">["data"][];
+    let rawTeamSeasons: CollectionEntry<"teamSeasons">["data"][];
+    let rawGames: CollectionEntry<"games">["data"][];
+
+    beforeAll(async () => {
+      /*
+        Why loading raw data? To work around how astro treats swallows duplicate ids, preserving
+        only the latest (source order) record of the duplicated id instead of erroring. Unclear why,
+        but prefer to guard against that
+
+        The idea is that these tests should verify the data on disk is referentially consistent. Ideally,
+        astro's representation of said data would match its physical representation or at least as far
+        as ref integrity goes, but since it's not, use raw data wherever we need to assert facts we need
+        to be true about the ids of said data
+      */
+
+      rawSeasons = JSON.parse(
+        await Fs.readFile("./src/content/seasons.json", { encoding: "utf8" }),
+      ) as unknown as CollectionEntry<"seasons">["data"][];
+
+      rawTeams = JSON.parse(
+        await Fs.readFile("./src/content/teams.json", { encoding: "utf8" }),
+      ) as unknown as CollectionEntry<"teams">["data"][];
+
+      rawTeamSeasons = JSON.parse(
+        await Fs.readFile("./src/content/teamSeasons.json", {
+          encoding: "utf8",
+        }),
+      ) as unknown as CollectionEntry<"teamSeasons">["data"][];
+
+      rawGames = JSON.parse(
+        await Fs.readFile("./src/content/games.json", { encoding: "utf8" }),
+      ) as unknown as CollectionEntry<"games">["data"][];
+    });
+
+    test("all IDs unique within their respective files", async () => {
+      const seasonIds = rawSeasons.map((s) => s.id);
       expect(new Set(seasonIds).size).toBe(seasonIds.length);
 
-      const teamIds = teams.map((t) => t.data.id);
+      const teamIds = rawTeams.map((t) => t.id);
       expect(new Set(teamIds).size).toBe(teamIds.length);
 
-      const teamSeasonIds = teamSeasons.map((ts) => ts.id);
+      const teamSeasonIds = rawTeamSeasons.map((ts) => ts.id);
       expect(new Set(teamSeasonIds).size).toBe(teamSeasonIds.length);
 
-      const gameIds = games.map((g) => g.data.id);
+      const gameIds = rawGames.map((g) => g.id);
       expect(new Set(gameIds).size).toBe(gameIds.length);
     });
 
     test("team IDs consistent across all files", () => {
-      const teamIds = new Set(teams.map((t) => t.data.id));
+      const teamIds = new Set(rawTeams.map((t) => t.id));
 
-      for (const teamSeason of teamSeasons) {
-        expect(teamIds).toContain(teamSeason.data.team.id);
+      for (const teamSeason of rawTeamSeasons) {
+        expect(teamIds).toContain(teamSeason.team);
+        const [, teamId] = teamSeason.id.split("/");
+        expect(teamIds).toContain(teamId);
       }
 
-      for (const game of games) {
-        for (const gameTeam of game.data.teams) {
+      for (const game of rawGames) {
+        for (const gameTeam of game.teams) {
           expect(teamIds).toContain(gameTeam.teamId);
         }
       }
     });
 
     test("season IDs consistent across all files", () => {
-      const seasonIds = new Set(seasons.map((s) => s.data.id));
+      const seasonIds = new Set(rawSeasons.map((s) => s.id));
 
-      for (const teamSeason of teamSeasons) {
-        expect(seasonIds).toContain(teamSeason.data.season.id);
+      for (const teamSeason of rawTeamSeasons) {
+        expect(seasonIds).toContain(teamSeason.season);
+        const [seasonId] = teamSeason.id.split("/");
+        expect(seasonIds).toContain(seasonId);
       }
 
-      for (const game of games) {
-        expect(seasonIds).toContain(game.data.seasonId);
+      for (const game of rawGames) {
+        expect(seasonIds).toContain(game.seasonId);
       }
     });
 
     test("game participants must be surprise team candidates", async () => {
       const surpriseTeamIdsBySeason = Object.fromEntries(
-        seasons.map(({ id }) => [
+        rawSeasons.map(({ id }) => [
           id,
           new Set<CollectionEntry<"teams">["id"]>(),
         ]),

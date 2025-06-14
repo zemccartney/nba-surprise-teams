@@ -44,6 +44,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    archiver(),
     react(),
     ...(SENTRY_AUTH_TOKEN
       ? [
@@ -57,7 +58,6 @@ export default defineConfig({
           }),
         ]
       : []),
-    archiver(),
   ],
   vite: {
     plugins: [tailwindcss()],

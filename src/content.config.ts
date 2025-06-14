@@ -92,6 +92,7 @@ const seasons = defineCollection({
 const teamSeasons = defineCollection({
   loader: file("src/content/teamSeasons.json"),
   schema: z.object({
+    id: z.string(),
     overUnder: z.number(),
     season: reference("seasons"),
     team: reference("teams"),

@@ -64,9 +64,6 @@ The day after the season ends (or as close as possible):
 
 **EXPECT:**
 
-- latest season's pages now converted to static output
-- latest season's data now shows up in archive and stats pages
-
 - **Home:** display unchanged, shows same season, but now static output, not server island
 - **Archive:** now includes latest season
 - **Season detail:** display unchanged, shows same season, but now static output, not server island
@@ -92,10 +89,12 @@ When the NBA releases their schedule:
 When surprise teams and their odds are announced:
 
 1. For any teams not yet registered i.e. never been a surprise team candidate:
-   a. create a logo, store under `src/assets/images/emoji`
-   b. register the emoji name in `src/content/utils.ts::emojiByTeam`
-   c. add team codes (3 letter identifier used in NBA API), to `src/content.config.ts::teamCodeSchema`
-   d. add teams to `src/content/teams.json`
+
+   - create a logo, store under `src/assets/images/emoji`
+   - register the emoji name in `src/content/utils.ts::emojiByTeam`
+   - add team codes (3 letter identifier used in NBA API), to `src/content.config.ts::teamCodeSchema`
+   - add teams to `src/content/teams.json`
+
 2. Add team seasons to `src/content/teamSeasons.json`
 
 **EXPECT:**

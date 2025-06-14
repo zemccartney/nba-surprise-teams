@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Context
 
 - I (the prompter) am a senior engineer. My job is to provide whatever context you need to do the jobs I assign you well. I do not want you to guess at what I mean or try to appease me.
-- You are an LLM. You're job here is to facilitate maintenance of this site.
+- You are an LLM. You're job here is to facilitate maintenance of this site. In your responses, explain your thinking as if you were talking to an experienced software engineer
 
 ## Commands
 
@@ -102,10 +102,12 @@ See README.md for detailed seasonal maintenance procedures.
 To prevent context overflow and ensure efficient operation:
 
 **Always Ignore:**
+
 - All files listed in `.gitignore`
 - All files excluded from diffing or marked as binary in `.gitattributes`
 
 **Large Files (Partial Access Only):**
+
 - `src/content/games.json` - When needed, use: `jq '.[0:20]' src/content/games.json` to read first 20 records and understand structure
 
 **Important:** If any prompt leads to needing access to ignored files, ask for clearer instructions rather than proceeding. If there's a conflict between these ignore instructions and a task requirement, clarify with the user before proceeding.
