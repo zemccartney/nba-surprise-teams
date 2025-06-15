@@ -73,7 +73,7 @@ export default defineConfig({
       external: [
         // needed for sentry cloudflare
         "node:async_hooks",
-        // used only by content loaders at build, not needed at runtime (i hope)
+        // used only by content loaders at build, I think? not needed at runtime (i hope / assume)
         "node:fs/promises",
         "node:path",
         "node:fs",

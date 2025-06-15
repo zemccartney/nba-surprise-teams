@@ -14,6 +14,8 @@ const games = await getCollection("games");
 const seasons = await getCollection("seasons");
 const teamSeasons = await getCollection("teamSeasons");
 
+console.log(seasons.length, games.length, teamSeasons.length, "PENGUIN");
+
 describe("system validation", () => {
   describe("season rules", () => {
     test("past seasons must have complete data (surprise teams and n (season length) games per team)", () => {
