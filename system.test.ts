@@ -7,14 +7,18 @@ import { beforeAll, describe, expect, test } from "vitest";
 import * as ContentUtils from "./src/content-utils";
 
 /*
-  Warning: changes to content don't appear to surface automatically in tests,
+  WARNINGS:
+  
+  - content does not load here when running during build on cloudflare, I assume due to 
+  runtime incompatibility? Rely on the precommit hook to verify build; seems feasible that one
+  day, CF's runtime will support fs operations such that test work as expected
+
+  - changes to content don't appear to surface automatically in tests,
   required starting dev server to trigger a content sync. Unclear why yet
 */
 const games = await getCollection("games");
 const seasons = await getCollection("seasons");
 const teamSeasons = await getCollection("teamSeasons");
-
-console.log(seasons.length, games.length, teamSeasons.length, "PENGUIN");
 
 describe("system validation", () => {
   describe("season rules", () => {
