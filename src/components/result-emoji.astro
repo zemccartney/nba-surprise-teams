@@ -44,15 +44,9 @@ const emojiConf: Record<Props["name"], { alt: string; fileName: string }> = {
   },
 };
 
-let emojiSrc;
-
-try {
-  emojiSrc = import(
-    `../assets/images/emoji/${emojiConf[name].fileName}.svg`
-  ) as Promise<{ default: ImageMetadata }>;
-} catch {
-  emojiSrc = import("../assets/images/emoji/question.svg");
-}
+const emojiSrc = import(
+  `../assets/images/emoji/${emojiConf[name].fileName}.svg`
+) as Promise<{ default: ImageMetadata }>;
 
 // Need to make TS happy, reassuring that src is always set (error due to spreading attrs, I believe)
 const props = {

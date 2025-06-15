@@ -1,23 +1,33 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 import { actions } from "astro:actions";
+import { getEntry } from "astro:content";
 
-import type { SeasonId, TeamCode } from "../../data/types";
-
-import * as SeasonUtils from "../../data/seasons";
 import Crash from "../crash.astro";
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: SeasonId;
-  teamId: TeamCode;
+  // for server islands, important to keep props size small, given used in request params, hence not a full team record
+  // Further, these props determine cache key (request URL) for server island i.e. we want different cache entries
+  // per team season
+  seasonId: CollectionEntry<"seasons">["id"];
+  teamId: CollectionEntry<"teams">["id"];
 }
 
 const { seasonId, teamId } = Astro.props;
 
-const teamSeason = SeasonUtils.getTeamSeason(seasonId, teamId);
+// redundant with index, but assume redundant validation won't hurt, or at least far less than uncaught errors?
+const teamSeason = await getEntry("teamSeasons", `${seasonId}/${teamId}`);
+
+if (!teamSeason) {
+  throw new Error(
+    `[team-stats:ssr] team ${teamId} not found for ${seasonId} season`,
+  );
+}
 
 const { data, error } = await Astro.callAction(actions.getSeasonData, {
-  seasonId: teamSeason.seasonId,
+  seasonId: teamSeason.data.season.id,
 });
 
 if (!error) {
