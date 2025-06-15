@@ -2,17 +2,17 @@
 
 ## Intuition and Principles
 
-Intuition: We can favor self-reliance, thereby reducing complexity and surface area for errors, because the data at play is eventually static (games end, seasons end, results are final, historical facts). When there's no possibility of new data (out-of-season, but more commonly, in-season and we can tell by looking at the schedule that there haven't been new results since last poll), serve the system's records of data
+Intuition: We can favor self-reliance, thereby reducing complexity and surface area for errors, because the data at play is eventually static (games end, seasons end, results are final, historical facts). When there's no possibility of new data (out-of-season, but more commonly, in-season and we can tell by looking at the schedule that there haven't been new results since last poll), serve the system's records of data.
 
-As much of the site is static as possible; rely on external data sources i.e. take on complexity of maintaining a system for sourcing data on-demand only when no way to know data ahead of data. Specifically, results of games happening in real time. We're balancing the tradeoff currency and reliability / complexity management:
+As much of the site is static as possible; rely on external data sources i.e. take on complexity of maintaining a system for sourcing data on-demand only when no way to know data ahead of time. Specifically, results of games happening in real time. We're balancing the tradeoff of currency and reliability / complexity management vs. stability / simplicity:
 
 - Show results as close to real-time as possible (rules out building as best tool for handling updates)
 - The more self-contained, the more reliable (fewer ways to fail outside my control)
 
-What, then, is the intuition for building in site’s maintenance?
+What, then, is the intuition for — literally, running `astro build` — in site’s maintenance?
 
 - As much as possible, maintain the site via build: If you want to publish new data, that's a rebuild; do not write logic for the site to adapt in real-time e.g. shift to next season by detecting date
-- Build process is a pure function: can reason about results solely from taking stock of state of seasons (their data / loaders); snapshot of filesystem at the point in time of building. Therefore, CANNOT use dates to make decisions, as date logic assumes rechecking overtime, which means surprising, inconsistent results from the build, depending on time of build. No surprises in building, always know what you’re launching based on data on disk
+- Build process is a pure function: can reason about results solely from taking stock of state of seasons (their data / loaders); snapshot of filesystem at the point in time of building. Therefore, CANNOT use dates to make decisions, as date logic assumes rechecking overtime, which means surprising, inconsistent results from the build, depending on time of build. That is, the build would vary depending on the date of building; non-data variances in build are unacceptable. No surprises in building, always know what you’re launching based on data on disk
 - Do not handle missing data; if the build detects insufficient data for rendering a page, throw and crash, fix by sourcing that data. Another way: if we don’t have the data to meet rendering expectations in our pages, then the site’s in an incomplete, un-presentable state and shouldn’t be published.
 
 ## Rules
@@ -43,7 +43,7 @@ of the NBA's machinery, how it only has one season running and publishes season 
   at request time, in static HTML files, whose date check will correspond to the moment in time of the build.
   - CONVENTION: I want the home page to show most recent, past season throughout the summer, until
     we're closer to the start of the next season. As in, build should fail if you add next season before that cutoff (if
-    season start date is greater than ~90 aways / however many days between typical schedule release and typical season
+    season start date is greater than ~90 days away / however many days between typical schedule release and typical season
     start)
 - No overlapping: start and end dates should be completely separate ranges of time across all seasons
 
@@ -119,5 +119,5 @@ When surprise teams and their odds are announced:
       new source
 - set caching headers based on approximate calculation of time remaining until new results in data (when games finish)
   - reduce load times for end user, reduce round trips to server to render view based on network call (KV or API call, depending on if data fresh)
-  - also, saves on KV usage; fewer calls since cache headers tell browser: only results on server won't change for x time, so don't
+  - also, saves on KV usage; fewer calls since cache headers tell browser: results on server won't change for x time, so don't
     bother re-querying

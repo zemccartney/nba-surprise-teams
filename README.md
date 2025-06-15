@@ -14,20 +14,22 @@ All commands are run from the root of the project, from a terminal:
 
 ## Maintenance
 
-### Additional Considerations
+see [MAINTENANCE](./MAINTENANCE.md)
 
-#### KV Cache Key
+## Additional Considerations
+
+### KV Cache Key
 
 Need to update our action's `SCHEMA_ID` if shape of data stored in KV ever changes
 
-#### Icon sourcing
+### Icon sourcing
 
 - Emojis are from Twitter's emoji set
   - Looked up and downloaded from https://twemoji-cheatsheet.vercel.app/
   - recolored as needed
 - Hourglass icon from https://phosphoricons.com/
 
-#### Cloudflare
+### Cloudflare
 
 - Semi-regularly review and update node compatibility date: https://developers.cloudflare.com/workers/configuration/compatibility-flags/#setting-compatibility-flags
-  - Setting in CF dashboard, work build settings
+  - Setting in CF dashboard
