@@ -9,7 +9,9 @@ dist/
 .wrangler/
 
 # game data files
-src/data/seasons/*/games.json
+src/content/games.json
 
 # auto-generated
 worker-configuration.d.ts
+
+.claude/

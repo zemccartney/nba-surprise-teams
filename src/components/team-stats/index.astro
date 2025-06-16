@@ -1,36 +1,47 @@
 ---
-import type { SeasonId, TeamCode } from "../../data/types";
+import type { CollectionEntry } from "astro:content";
 
-import * as SeasonUtils from "../../data/seasons";
+import { getEntry } from "astro:content";
+
+import * as ContentUtils from "../../content-utils";
 import Loading from "../loading.astro";
-import TeamStats from "./ssr.astro";
+import TeamStats from "./ssr.astro"; // component name used in requests (dev tools, network tab); for easier id in debugging
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: SeasonId;
-  teamId: TeamCode;
+  seasonId: CollectionEntry<"seasons">["id"];
+  teamId: CollectionEntry<"teams">["id"];
 }
 
 const { seasonId, teamId } = Astro.props;
 
-const teamSeason = SeasonUtils.getTeamSeason(seasonId, teamId);
+const teamSeason = await getEntry("teamSeasons", `${seasonId}/${teamId}`);
 
-const staticGames = await SeasonUtils.getSeasonArchive(seasonId);
+if (!teamSeason) {
+  throw new Error(
+    `[team-stats] team ${teamId} not found for ${seasonId} season`,
+  );
+}
+
+const staticGames = await ContentUtils.getSeasonArchive(seasonId);
 if (import.meta.env.DEV && !staticGames) {
   console.log(
-    `[team-stats] Static games data unavailable for season ${teamSeason.seasonId}; will try to render data via server island`,
+    `[team-stats] Static games data unavailable for team ${teamSeason.data.team.id} in season ${teamSeason.data.season.id}; will try to render data via server island`,
   );
 }
 ---
 
 {
   staticGames ? (
-    <UI games={staticGames} teamSeason={teamSeason} />
+    <UI
+      games={staticGames.map((gameEntry) => gameEntry.data)}
+      teamSeason={teamSeason}
+    />
   ) : (
     <TeamStats
-      seasonId={teamSeason.seasonId}
+      seasonId={teamSeason.data.season.id}
       server:defer
-      teamId={teamSeason.teamId}
+      teamId={teamSeason.data.team.id}
     >
       <Loading slot="fallback" />
     </TeamStats>

@@ -1,0 +1,162 @@
+[
+  {
+    "endDate": "1994-04-24",
+    "id": "1993",
+    "startDate": "1993-11-05"
+  },
+  {
+    "endDate": "1997-04-20",
+    "id": "1996",
+    "startDate": "1996-11-01"
+  },
+  {
+    "endDate": "1998-04-19",
+    "id": "1997",
+    "startDate": "1997-10-30"
+  },
+  {
+    "endDate": "2000-04-19",
+    "id": "1999",
+    "startDate": "1999-11-02"
+  },
+  {
+    "endDate": "2001-04-18",
+    "id": "2000",
+    "startDate": "2000-10-31"
+  },
+  {
+    "endDate": "2002-04-17",
+    "id": "2001",
+    "startDate": "2001-10-30"
+  },
+  {
+    "endDate": "2003-04-16",
+    "id": "2002",
+    "startDate": "2002-10-29"
+  },
+  {
+    "endDate": "2004-04-14",
+    "id": "2003",
+    "startDate": "2003-10-28"
+  },
+  {
+    "endDate": "2005-04-20",
+    "id": "2004",
+    "startDate": "2004-11-02"
+  },
+  {
+    "endDate": "2006-04-19",
+    "id": "2005",
+    "startDate": "2005-11-01"
+  },
+  {
+    "endDate": "2007-04-18",
+    "id": "2006",
+    "startDate": "2006-10-31"
+  },
+  {
+    "endDate": "2008-04-16",
+    "id": "2007",
+    "startDate": "2007-10-30"
+  },
+  {
+    "endDate": "2009-05-30",
+    "id": "2008",
+    "startDate": "2008-10-28"
+  },
+  {
+    "endDate": "2010-04-14",
+    "id": "2009",
+    "startDate": "2009-10-27"
+  },
+  {
+    "endDate": "2011-05-26",
+    "id": "2010",
+    "startDate": "2010-10-26"
+  },
+  {
+    "endDate": "2012-04-26",
+    "id": "2011",
+    "shortened": {
+      "numGames": 66,
+      "reason": "Shortened by lockout"
+    },
+    "startDate": "2011-12-25"
+  },
+  {
+    "endDate": "2013-04-17",
+    "id": "2012",
+    "startDate": "2012-10-30"
+  },
+  {
+    "endDate": "2014-04-16",
+    "id": "2013",
+    "startDate": "2013-10-29"
+  },
+  {
+    "endDate": "2015-04-15",
+    "id": "2014",
+    "startDate": "2014-10-28"
+  },
+  {
+    "endDate": "2016-04-13",
+    "id": "2015",
+    "startDate": "2015-10-27"
+  },
+  {
+    "endDate": "2017-04-12",
+    "id": "2016",
+    "startDate": "2016-10-25"
+  },
+  {
+    "endDate": "2018-04-11",
+    "id": "2017",
+    "startDate": "2017-10-17"
+  },
+  {
+    "endDate": "2019-04-10",
+    "id": "2018",
+    "startDate": "2018-10-16"
+  },
+  {
+    "endDate": "2021-05-16",
+    "id": "2020",
+    "shortened": {
+      "numGames": 72,
+      "reason": "Season pushed back and shortened as part of league's COVID response"
+    },
+    "startDate": "2020-12-22"
+  },
+  {
+    "endDate": "2022-04-10",
+    "episodeDate": "2021-10-09",
+    "episodeTitle": "What NBA Teams will surprise? + Can the Magic get on track?",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/what-nba-teams-will-surprise-can-the-magic-get-on-track/id1358187061?i=1000706553405",
+    "id": "2021",
+    "startDate": "2021-10-19"
+  },
+  {
+    "endDate": "2023-04-09",
+    "episodeDate": "2022-09-30",
+    "episodeTitle": "Surprise Team + Pacers Tanking?",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/surprise-team-pacers-tanking/id1358187061?i=1000706553222",
+    "id": "2022",
+    "startDate": "2022-10-18"
+  },
+  {
+    "endDate": "2024-04-14",
+    "episodeDate": "2023-10-13",
+    "episodeTitle": "Wemby and the Knicks with Shea Serrano and Jason Concepcion",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/wemby-and-the-knicks-with-shea-serrano-and-jason-concepcion/id1358187061?i=1000706552680",
+    "id": "2023",
+    "startDate": "2023-10-24"
+  },
+  {
+    "endDate": "2025-04-13",
+    "episodeDate": "2024-09-20",
+    "episodeTitle": "Embiid Extension + Surprise Teams + Pelicans Preview",
+    "episodeUrl": "https://podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555",
+    "id": "2024",
+    "startDate": "2024-10-22"
+  }
+]

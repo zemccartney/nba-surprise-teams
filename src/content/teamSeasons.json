@@ -1,0 +1,1562 @@
+[
+  {
+    "id": "1993/DAL",
+    "overUnder": 21.5,
+    "season": "1993",
+    "team": "DAL"
+  },
+  {
+    "id": "1993/MIL",
+    "overUnder": 31.5,
+    "season": "1993",
+    "team": "MIL"
+  },
+  {
+    "id": "1993/MIN",
+    "overUnder": 25.5,
+    "season": "1993",
+    "team": "MIN"
+  },
+  {
+    "id": "1993/PHI",
+    "overUnder": 30.5,
+    "season": "1993",
+    "team": "PHI"
+  },
+  {
+    "id": "1993/SAC",
+    "overUnder": 31,
+    "season": "1993",
+    "team": "SAC"
+  },
+  {
+    "id": "1993/WAS",
+    "overUnder": 30,
+    "season": "1993",
+    "team": "WAS"
+  },
+  {
+    "id": "1996/BOS",
+    "overUnder": 28.5,
+    "season": "1996",
+    "team": "BOS"
+  },
+  {
+    "id": "1996/DEN",
+    "overUnder": 34,
+    "season": "1996",
+    "team": "DEN"
+  },
+  {
+    "id": "1996/GSW",
+    "overUnder": 35.5,
+    "season": "1996",
+    "team": "GSW"
+  },
+  {
+    "id": "1996/LAC",
+    "overUnder": 25,
+    "season": "1996",
+    "team": "LAC"
+  },
+  {
+    "id": "1996/MIL",
+    "overUnder": 28.5,
+    "season": "1996",
+    "team": "MIL"
+  },
+  {
+    "id": "1996/MIN",
+    "overUnder": 26.5,
+    "season": "1996",
+    "team": "MIN"
+  },
+  {
+    "id": "1996/NJN",
+    "overUnder": 34,
+    "season": "1996",
+    "team": "NJN"
+  },
+  {
+    "id": "1996/PHI",
+    "overUnder": 23.5,
+    "season": "1996",
+    "team": "PHI"
+  },
+  {
+    "id": "1996/TOR",
+    "overUnder": 24,
+    "season": "1996",
+    "team": "TOR"
+  },
+  {
+    "id": "1996/VAN",
+    "overUnder": 18.5,
+    "season": "1996",
+    "team": "VAN"
+  },
+  {
+    "id": "1997/BOS",
+    "overUnder": 30.5,
+    "season": "1997",
+    "team": "BOS"
+  },
+  {
+    "id": "1997/DAL",
+    "overUnder": 23.5,
+    "season": "1997",
+    "team": "DAL"
+  },
+  {
+    "id": "1997/DEN",
+    "overUnder": 21.5,
+    "season": "1997",
+    "team": "DEN"
+  },
+  {
+    "id": "1997/GSW",
+    "overUnder": 25.5,
+    "season": "1997",
+    "team": "GSW"
+  },
+  {
+    "id": "1997/LAC",
+    "overUnder": 31.5,
+    "season": "1997",
+    "team": "LAC"
+  },
+  {
+    "id": "1997/NJN",
+    "overUnder": 22.5,
+    "season": "1997",
+    "team": "NJN"
+  },
+  {
+    "id": "1997/PHI",
+    "overUnder": 33.5,
+    "season": "1997",
+    "team": "PHI"
+  },
+  {
+    "id": "1997/SAC",
+    "overUnder": 24.5,
+    "season": "1997",
+    "team": "SAC"
+  },
+  {
+    "id": "1997/TOR",
+    "overUnder": 34.5,
+    "season": "1997",
+    "team": "TOR"
+  },
+  {
+    "id": "1997/VAN",
+    "overUnder": 20.5,
+    "season": "1997",
+    "team": "VAN"
+  },
+  {
+    "id": "1999/CHI",
+    "overUnder": 27.5,
+    "season": "1999",
+    "team": "CHI"
+  },
+  {
+    "id": "1999/DAL",
+    "overUnder": 30.5,
+    "season": "1999",
+    "team": "DAL"
+  },
+  {
+    "id": "1999/DEN",
+    "overUnder": 31.5,
+    "season": "1999",
+    "team": "DEN"
+  },
+  {
+    "id": "1999/LAC",
+    "overUnder": 25.5,
+    "season": "1999",
+    "team": "LAC"
+  },
+  {
+    "id": "1999/ORL",
+    "overUnder": 29.5,
+    "season": "1999",
+    "team": "ORL"
+  },
+  {
+    "id": "1999/SEA",
+    "overUnder": 34.5,
+    "season": "1999",
+    "team": "SEA"
+  },
+  {
+    "id": "1999/VAN",
+    "overUnder": 25.5,
+    "season": "1999",
+    "team": "VAN"
+  },
+  {
+    "id": "1999/WAS",
+    "overUnder": 35.5,
+    "season": "1999",
+    "team": "WAS"
+  },
+  {
+    "id": "2000/ATL",
+    "overUnder": 28.5,
+    "season": "2000",
+    "team": "ATL"
+  },
+  {
+    "id": "2000/BOS",
+    "overUnder": 34.5,
+    "season": "2000",
+    "team": "BOS"
+  },
+  {
+    "id": "2000/CHI",
+    "overUnder": 28.5,
+    "season": "2000",
+    "team": "CHI"
+  },
+  {
+    "id": "2000/CLE",
+    "overUnder": 34.5,
+    "season": "2000",
+    "team": "CLE"
+  },
+  {
+    "id": "2000/DEN",
+    "overUnder": 34.5,
+    "season": "2000",
+    "team": "DEN"
+  },
+  {
+    "id": "2000/DET",
+    "overUnder": 34.5,
+    "season": "2000",
+    "team": "DET"
+  },
+  {
+    "id": "2000/GSW",
+    "overUnder": 24.5,
+    "season": "2000",
+    "team": "GSW"
+  },
+  {
+    "id": "2000/LAC",
+    "overUnder": 19.5,
+    "season": "2000",
+    "team": "LAC"
+  },
+  {
+    "id": "2000/VAN",
+    "overUnder": 24.5,
+    "season": "2000",
+    "team": "VAN"
+  },
+  {
+    "id": "2000/WAS",
+    "overUnder": 29.5,
+    "season": "2000",
+    "team": "WAS"
+  },
+  {
+    "id": "2001/BOS",
+    "overUnder": 35.5,
+    "season": "2001",
+    "team": "BOS"
+  },
+  {
+    "id": "2001/CHI",
+    "overUnder": 18.5,
+    "season": "2001",
+    "team": "CHI"
+  },
+  {
+    "id": "2001/CLE",
+    "overUnder": 26.5,
+    "season": "2001",
+    "team": "CLE"
+  },
+  {
+    "id": "2001/DEN",
+    "overUnder": 27.5,
+    "season": "2001",
+    "team": "DEN"
+  },
+  {
+    "id": "2001/DET",
+    "overUnder": 30.5,
+    "season": "2001",
+    "team": "DET"
+  },
+  {
+    "id": "2001/GSW",
+    "overUnder": 23.5,
+    "season": "2001",
+    "team": "GSW"
+  },
+  {
+    "id": "2001/MEM",
+    "overUnder": 19.5,
+    "season": "2001",
+    "team": "MEM"
+  },
+  {
+    "id": "2001/NJN",
+    "overUnder": 35.5,
+    "season": "2001",
+    "team": "NJN"
+  },
+  {
+    "id": "2002/CHI",
+    "overUnder": 30,
+    "season": "2002",
+    "team": "CHI"
+  },
+  {
+    "id": "2002/CLE",
+    "overUnder": 23.5,
+    "season": "2002",
+    "team": "CLE"
+  },
+  {
+    "id": "2002/DEN",
+    "overUnder": 19.5,
+    "season": "2002",
+    "team": "DEN"
+  },
+  {
+    "id": "2002/GSW",
+    "overUnder": 25,
+    "season": "2002",
+    "team": "GSW"
+  },
+  {
+    "id": "2002/MEM",
+    "overUnder": 30,
+    "season": "2002",
+    "team": "MEM"
+  },
+  {
+    "id": "2002/MIA",
+    "overUnder": 35,
+    "season": "2002",
+    "team": "MIA"
+  },
+  {
+    "id": "2002/NYK",
+    "overUnder": 29.5,
+    "season": "2002",
+    "team": "NYK"
+  },
+  {
+    "id": "2002/PHX",
+    "overUnder": 35.5,
+    "season": "2002",
+    "team": "PHX"
+  },
+  {
+    "id": "2003/ATL",
+    "overUnder": 33,
+    "season": "2003",
+    "team": "ATL"
+  },
+  {
+    "id": "2003/CLE",
+    "overUnder": 29.5,
+    "season": "2003",
+    "team": "CLE"
+  },
+  {
+    "id": "2003/DEN",
+    "overUnder": 27.5,
+    "season": "2003",
+    "team": "DEN"
+  },
+  {
+    "id": "2003/GSW",
+    "overUnder": 31.5,
+    "season": "2003",
+    "team": "GSW"
+  },
+  {
+    "id": "2003/LAC",
+    "overUnder": 30.5,
+    "season": "2003",
+    "team": "LAC"
+  },
+  {
+    "id": "2003/MEM",
+    "overUnder": 31.5,
+    "season": "2003",
+    "team": "MEM"
+  },
+  {
+    "id": "2003/MIA",
+    "overUnder": 35,
+    "season": "2003",
+    "team": "MIA"
+  },
+  {
+    "id": "2003/MIL",
+    "overUnder": 31.5,
+    "season": "2003",
+    "team": "MIL"
+  },
+  {
+    "id": "2003/NYK",
+    "overUnder": 33.5,
+    "season": "2003",
+    "team": "NYK"
+  },
+  {
+    "id": "2003/UTA",
+    "overUnder": 25.5,
+    "season": "2003",
+    "team": "UTA"
+  },
+  {
+    "id": "2003/WAS",
+    "overUnder": 29.5,
+    "season": "2003",
+    "team": "WAS"
+  },
+  {
+    "id": "2004/ATL",
+    "overUnder": 27.5,
+    "season": "2004",
+    "team": "ATL"
+  },
+  {
+    "id": "2004/CHA",
+    "overUnder": 16.5,
+    "season": "2004",
+    "team": "CHA"
+  },
+  {
+    "id": "2004/CHI",
+    "overUnder": 32.5,
+    "season": "2004",
+    "team": "CHI"
+  },
+  {
+    "id": "2004/GSW",
+    "overUnder": 35.5,
+    "season": "2004",
+    "team": "GSW"
+  },
+  {
+    "id": "2004/LAC",
+    "overUnder": 32.5,
+    "season": "2004",
+    "team": "LAC"
+  },
+  {
+    "id": "2004/NOH",
+    "overUnder": 30.5,
+    "season": "2004",
+    "team": "NOH"
+  },
+  {
+    "id": "2004/ORL",
+    "overUnder": 34.5,
+    "season": "2004",
+    "team": "ORL"
+  },
+  {
+    "id": "2004/SEA",
+    "overUnder": 34.5,
+    "season": "2004",
+    "team": "SEA"
+  },
+  {
+    "id": "2004/TOR",
+    "overUnder": 34.5,
+    "season": "2004",
+    "team": "TOR"
+  },
+  {
+    "id": "2004/WAS",
+    "overUnder": 33.5,
+    "season": "2004",
+    "team": "WAS"
+  },
+  {
+    "id": "2005/ATL",
+    "overUnder": 21.5,
+    "season": "2005",
+    "team": "ATL"
+  },
+  {
+    "id": "2005/CHA",
+    "overUnder": 21,
+    "season": "2005",
+    "team": "CHA"
+  },
+  {
+    "id": "2005/MIL",
+    "overUnder": 35.5,
+    "season": "2005",
+    "team": "MIL"
+  },
+  {
+    "id": "2005/NOK",
+    "overUnder": 21.5,
+    "season": "2005",
+    "team": "NOK"
+  },
+  {
+    "id": "2005/ORL",
+    "overUnder": 34.5,
+    "season": "2005",
+    "team": "ORL"
+  },
+  {
+    "id": "2005/POR",
+    "overUnder": 28.5,
+    "season": "2005",
+    "team": "POR"
+  },
+  {
+    "id": "2005/TOR",
+    "overUnder": 28.5,
+    "season": "2005",
+    "team": "TOR"
+  },
+  {
+    "id": "2005/UTA",
+    "overUnder": 34,
+    "season": "2005",
+    "team": "UTA"
+  },
+  {
+    "id": "2006/ATL",
+    "overUnder": 28,
+    "season": "2006",
+    "team": "ATL"
+  },
+  {
+    "id": "2006/BOS",
+    "overUnder": 35,
+    "season": "2006",
+    "team": "BOS"
+  },
+  {
+    "id": "2006/CHA",
+    "overUnder": 32,
+    "season": "2006",
+    "team": "CHA"
+  },
+  {
+    "id": "2006/GSW",
+    "overUnder": 35,
+    "season": "2006",
+    "team": "GSW"
+  },
+  {
+    "id": "2006/NYK",
+    "overUnder": 30.5,
+    "season": "2006",
+    "team": "NYK"
+  },
+  {
+    "id": "2006/PHI",
+    "overUnder": 35.5,
+    "season": "2006",
+    "team": "PHI"
+  },
+  {
+    "id": "2006/POR",
+    "overUnder": 24,
+    "season": "2006",
+    "team": "POR"
+  },
+  {
+    "id": "2006/SEA",
+    "overUnder": 35.5,
+    "season": "2006",
+    "team": "SEA"
+  },
+  {
+    "id": "2006/TOR",
+    "overUnder": 32.5,
+    "season": "2006",
+    "team": "TOR"
+  },
+  {
+    "id": "2007/CHA",
+    "overUnder": 35.5,
+    "season": "2007",
+    "team": "CHA"
+  },
+  {
+    "id": "2007/IND",
+    "overUnder": 30.5,
+    "season": "2007",
+    "team": "IND"
+  },
+  {
+    "id": "2007/LAC",
+    "overUnder": 30.5,
+    "season": "2007",
+    "team": "LAC"
+  },
+  {
+    "id": "2007/MEM",
+    "overUnder": 32.5,
+    "season": "2007",
+    "team": "MEM"
+  },
+  {
+    "id": "2007/MIL",
+    "overUnder": 35.5,
+    "season": "2007",
+    "team": "MIL"
+  },
+  {
+    "id": "2007/MIN",
+    "overUnder": 19.5,
+    "season": "2007",
+    "team": "MIN"
+  },
+  {
+    "id": "2007/PHI",
+    "overUnder": 32.5,
+    "season": "2007",
+    "team": "PHI"
+  },
+  {
+    "id": "2007/POR",
+    "overUnder": 30.5,
+    "season": "2007",
+    "team": "POR"
+  },
+  {
+    "id": "2007/SAC",
+    "overUnder": 34.5,
+    "season": "2007",
+    "team": "SAC"
+  },
+  {
+    "id": "2007/SEA",
+    "overUnder": 27.5,
+    "season": "2007",
+    "team": "SEA"
+  },
+  {
+    "id": "2008/IND",
+    "overUnder": 35.5,
+    "season": "2008",
+    "team": "IND"
+  },
+  {
+    "id": "2008/LAC",
+    "overUnder": 34.5,
+    "season": "2008",
+    "team": "LAC"
+  },
+  {
+    "id": "2008/MEM",
+    "overUnder": 22.5,
+    "season": "2008",
+    "team": "MEM"
+  },
+  {
+    "id": "2008/MIL",
+    "overUnder": 30.5,
+    "season": "2008",
+    "team": "MIL"
+  },
+  {
+    "id": "2008/MIN",
+    "overUnder": 30.5,
+    "season": "2008",
+    "team": "MIN"
+  },
+  {
+    "id": "2008/NJN",
+    "overUnder": 27.5,
+    "season": "2008",
+    "team": "NJN"
+  },
+  {
+    "id": "2008/NYK",
+    "overUnder": 32.5,
+    "season": "2008",
+    "team": "NYK"
+  },
+  {
+    "id": "2008/OKC",
+    "overUnder": 25.5,
+    "season": "2008",
+    "team": "OKC"
+  },
+  {
+    "id": "2008/SAC",
+    "overUnder": 28.5,
+    "season": "2008",
+    "team": "SAC"
+  },
+  {
+    "id": "2009/GSW",
+    "overUnder": 34.5,
+    "season": "2009",
+    "team": "GSW"
+  },
+  {
+    "id": "2009/HOU",
+    "overUnder": 35.5,
+    "season": "2009",
+    "team": "HOU"
+  },
+  {
+    "id": "2009/IND",
+    "overUnder": 34.5,
+    "season": "2009",
+    "team": "IND"
+  },
+  {
+    "id": "2009/LAC",
+    "overUnder": 34.5,
+    "season": "2009",
+    "team": "LAC"
+  },
+  {
+    "id": "2009/MEM",
+    "overUnder": 27.5,
+    "season": "2009",
+    "team": "MEM"
+  },
+  {
+    "id": "2009/MIL",
+    "overUnder": 26.5,
+    "season": "2009",
+    "team": "MIL"
+  },
+  {
+    "id": "2009/MIN",
+    "overUnder": 26.5,
+    "season": "2009",
+    "team": "MIN"
+  },
+  {
+    "id": "2009/NJN",
+    "overUnder": 27.5,
+    "season": "2009",
+    "team": "NJN"
+  },
+  {
+    "id": "2009/NYK",
+    "overUnder": 31.5,
+    "season": "2009",
+    "team": "NYK"
+  },
+  {
+    "id": "2009/OKC",
+    "overUnder": 33.5,
+    "season": "2009",
+    "team": "OKC"
+  },
+  {
+    "id": "2009/SAC",
+    "overUnder": 24.5,
+    "season": "2009",
+    "team": "SAC"
+  },
+  {
+    "id": "2010/CLE",
+    "overUnder": 30.5,
+    "season": "2010",
+    "team": "CLE"
+  },
+  {
+    "id": "2010/DET",
+    "overUnder": 30.5,
+    "season": "2010",
+    "team": "DET"
+  },
+  {
+    "id": "2010/GSW",
+    "overUnder": 30.5,
+    "season": "2010",
+    "team": "GSW"
+  },
+  {
+    "id": "2010/IND",
+    "overUnder": 33.5,
+    "season": "2010",
+    "team": "IND"
+  },
+  {
+    "id": "2010/MIN",
+    "overUnder": 23.5,
+    "season": "2010",
+    "team": "MIN"
+  },
+  {
+    "id": "2010/NJN",
+    "overUnder": 24.5,
+    "season": "2010",
+    "team": "NJN"
+  },
+  {
+    "id": "2010/NYK",
+    "overUnder": 35.5,
+    "season": "2010",
+    "team": "NYK"
+  },
+  {
+    "id": "2010/PHI",
+    "overUnder": 34.5,
+    "season": "2010",
+    "team": "PHI"
+  },
+  {
+    "id": "2010/SAC",
+    "overUnder": 27.5,
+    "season": "2010",
+    "team": "SAC"
+  },
+  {
+    "id": "2010/TOR",
+    "overUnder": 26.5,
+    "season": "2010",
+    "team": "TOR"
+  },
+  {
+    "id": "2010/WAS",
+    "overUnder": 32.5,
+    "season": "2010",
+    "team": "WAS"
+  },
+  {
+    "id": "2011/CHA",
+    "overUnder": 19.5,
+    "season": "2011",
+    "team": "CHA"
+  },
+  {
+    "id": "2011/CLE",
+    "overUnder": 17.5,
+    "season": "2011",
+    "team": "CLE"
+  },
+  {
+    "id": "2011/DET",
+    "overUnder": 21.5,
+    "season": "2011",
+    "team": "DET"
+  },
+  {
+    "id": "2011/MIN",
+    "overUnder": 23.5,
+    "season": "2011",
+    "team": "MIN"
+  },
+  {
+    "id": "2011/NJN",
+    "overUnder": 27.5,
+    "season": "2011",
+    "team": "NJN"
+  },
+  {
+    "id": "2011/NOH",
+    "overUnder": 25.5,
+    "season": "2011",
+    "team": "NOH"
+  },
+  {
+    "id": "2011/SAC",
+    "overUnder": 20.5,
+    "season": "2011",
+    "team": "SAC"
+  },
+  {
+    "id": "2011/TOR",
+    "overUnder": 16.5,
+    "season": "2011",
+    "team": "TOR"
+  },
+  {
+    "id": "2011/UTA",
+    "overUnder": 25.5,
+    "season": "2011",
+    "team": "UTA"
+  },
+  {
+    "id": "2011/WAS",
+    "overUnder": 20.5,
+    "season": "2011",
+    "team": "WAS"
+  },
+  {
+    "id": "2012/CHA",
+    "overUnder": 19.5,
+    "season": "2012",
+    "team": "CHA"
+  },
+  {
+    "id": "2012/CLE",
+    "overUnder": 31.5,
+    "season": "2012",
+    "team": "CLE"
+  },
+  {
+    "id": "2012/DET",
+    "overUnder": 32.5,
+    "season": "2012",
+    "team": "DET"
+  },
+  {
+    "id": "2012/GSW",
+    "overUnder": 35.5,
+    "season": "2012",
+    "team": "GSW"
+  },
+  {
+    "id": "2012/HOU",
+    "overUnder": 31.5,
+    "season": "2012",
+    "team": "HOU"
+  },
+  {
+    "id": "2012/NOH",
+    "overUnder": 26.5,
+    "season": "2012",
+    "team": "NOH"
+  },
+  {
+    "id": "2012/ORL",
+    "overUnder": 23.5,
+    "season": "2012",
+    "team": "ORL"
+  },
+  {
+    "id": "2012/PHX",
+    "overUnder": 33.5,
+    "season": "2012",
+    "team": "PHX"
+  },
+  {
+    "id": "2012/POR",
+    "overUnder": 34.5,
+    "season": "2012",
+    "team": "POR"
+  },
+  {
+    "id": "2012/SAC",
+    "overUnder": 29.5,
+    "season": "2012",
+    "team": "SAC"
+  },
+  {
+    "id": "2012/TOR",
+    "overUnder": 32.5,
+    "season": "2012",
+    "team": "TOR"
+  },
+  {
+    "id": "2012/WAS",
+    "overUnder": 27.5,
+    "season": "2012",
+    "team": "WAS"
+  },
+  {
+    "id": "2013/BOS",
+    "overUnder": 28.5,
+    "season": "2013",
+    "team": "BOS"
+  },
+  {
+    "id": "2013/CHA",
+    "overUnder": 26,
+    "season": "2013",
+    "team": "CHA"
+  },
+  {
+    "id": "2013/MIL",
+    "overUnder": 28.5,
+    "season": "2013",
+    "team": "MIL"
+  },
+  {
+    "id": "2013/ORL",
+    "overUnder": 23.5,
+    "season": "2013",
+    "team": "ORL"
+  },
+  {
+    "id": "2013/PHI",
+    "overUnder": 16.5,
+    "season": "2013",
+    "team": "PHI"
+  },
+  {
+    "id": "2013/PHX",
+    "overUnder": 20.5,
+    "season": "2013",
+    "team": "PHX"
+  },
+  {
+    "id": "2013/SAC",
+    "overUnder": 31.5,
+    "season": "2013",
+    "team": "SAC"
+  },
+  {
+    "id": "2013/TOR",
+    "overUnder": 35.5,
+    "season": "2013",
+    "team": "TOR"
+  },
+  {
+    "id": "2013/UTA",
+    "overUnder": 26.5,
+    "season": "2013",
+    "team": "UTA"
+  },
+  {
+    "id": "2014/BOS",
+    "overUnder": 27,
+    "season": "2014",
+    "team": "BOS"
+  },
+  {
+    "id": "2014/IND",
+    "overUnder": 33.5,
+    "season": "2014",
+    "team": "IND"
+  },
+  {
+    "id": "2014/LAL",
+    "overUnder": 29,
+    "season": "2014",
+    "team": "LAL"
+  },
+  {
+    "id": "2014/MIL",
+    "overUnder": 24.5,
+    "season": "2014",
+    "team": "MIL"
+  },
+  {
+    "id": "2014/MIN",
+    "overUnder": 29,
+    "season": "2014",
+    "team": "MIN"
+  },
+  {
+    "id": "2014/ORL",
+    "overUnder": 26.5,
+    "season": "2014",
+    "team": "ORL"
+  },
+  {
+    "id": "2014/PHI",
+    "overUnder": 16,
+    "season": "2014",
+    "team": "PHI"
+  },
+  {
+    "id": "2014/SAC",
+    "overUnder": 29.5,
+    "season": "2014",
+    "team": "SAC"
+  },
+  {
+    "id": "2014/UTA",
+    "overUnder": 27,
+    "season": "2014",
+    "team": "UTA"
+  },
+  {
+    "id": "2015/BKN",
+    "overUnder": 27.5,
+    "season": "2015",
+    "team": "BKN"
+  },
+  {
+    "id": "2015/CHA",
+    "overUnder": 34,
+    "season": "2015",
+    "team": "CHA"
+  },
+  {
+    "id": "2015/DEN",
+    "overUnder": 27.5,
+    "season": "2015",
+    "team": "DEN"
+  },
+  {
+    "id": "2015/LAL",
+    "overUnder": 28.5,
+    "season": "2015",
+    "team": "LAL"
+  },
+  {
+    "id": "2015/MIN",
+    "overUnder": 27.5,
+    "season": "2015",
+    "team": "MIN"
+  },
+  {
+    "id": "2015/NYK",
+    "overUnder": 29.5,
+    "season": "2015",
+    "team": "NYK"
+  },
+  {
+    "id": "2015/ORL",
+    "overUnder": 34.5,
+    "season": "2015",
+    "team": "ORL"
+  },
+  {
+    "id": "2015/PHI",
+    "overUnder": 20.5,
+    "season": "2015",
+    "team": "PHI"
+  },
+  {
+    "id": "2015/POR",
+    "overUnder": 28.5,
+    "season": "2015",
+    "team": "POR"
+  },
+  {
+    "id": "2016/BKN",
+    "overUnder": 21.5,
+    "season": "2016",
+    "team": "BKN"
+  },
+  {
+    "id": "2016/LAL",
+    "overUnder": 24.5,
+    "season": "2016",
+    "team": "LAL"
+  },
+  {
+    "id": "2016/MIA",
+    "overUnder": 34.5,
+    "season": "2016",
+    "team": "MIA"
+  },
+  {
+    "id": "2016/MIL",
+    "overUnder": 34.5,
+    "season": "2016",
+    "team": "MIL"
+  },
+  {
+    "id": "2016/PHI",
+    "overUnder": 23.5,
+    "season": "2016",
+    "team": "PHI"
+  },
+  {
+    "id": "2016/PHX",
+    "overUnder": 29.5,
+    "season": "2016",
+    "team": "PHX"
+  },
+  {
+    "id": "2016/SAC",
+    "overUnder": 33.5,
+    "season": "2016",
+    "team": "SAC"
+  },
+  {
+    "id": "2017/ATL",
+    "overUnder": 25.5,
+    "season": "2017",
+    "team": "ATL"
+  },
+  {
+    "id": "2017/BKN",
+    "overUnder": 27.5,
+    "season": "2017",
+    "team": "BKN"
+  },
+  {
+    "id": "2017/CHI",
+    "overUnder": 22,
+    "season": "2017",
+    "team": "CHI"
+  },
+  {
+    "id": "2017/DAL",
+    "overUnder": 35.5,
+    "season": "2017",
+    "team": "DAL"
+  },
+  {
+    "id": "2017/IND",
+    "overUnder": 31.5,
+    "season": "2017",
+    "team": "IND"
+  },
+  {
+    "id": "2017/LAL",
+    "overUnder": 33.5,
+    "season": "2017",
+    "team": "LAL"
+  },
+  {
+    "id": "2017/NYK",
+    "overUnder": 30.5,
+    "season": "2017",
+    "team": "NYK"
+  },
+  {
+    "id": "2017/ORL",
+    "overUnder": 33.5,
+    "season": "2017",
+    "team": "ORL"
+  },
+  {
+    "id": "2017/PHX",
+    "overUnder": 28.5,
+    "season": "2017",
+    "team": "PHX"
+  },
+  {
+    "id": "2017/SAC",
+    "overUnder": 27.5,
+    "season": "2017",
+    "team": "SAC"
+  },
+  {
+    "id": "2018/ATL",
+    "overUnder": 23.5,
+    "season": "2018",
+    "team": "ATL"
+  },
+  {
+    "id": "2018/BKN",
+    "overUnder": 32,
+    "season": "2018",
+    "team": "BKN"
+  },
+  {
+    "id": "2018/CHA",
+    "overUnder": 35.5,
+    "season": "2018",
+    "team": "CHA"
+  },
+  {
+    "id": "2018/CHI",
+    "overUnder": 30,
+    "season": "2018",
+    "team": "CHI"
+  },
+  {
+    "id": "2018/CLE",
+    "overUnder": 30.5,
+    "season": "2018",
+    "team": "CLE"
+  },
+  {
+    "id": "2018/DAL",
+    "overUnder": 35.5,
+    "season": "2018",
+    "team": "DAL"
+  },
+  {
+    "id": "2018/MEM",
+    "overUnder": 34.5,
+    "season": "2018",
+    "team": "MEM"
+  },
+  {
+    "id": "2018/NYK",
+    "overUnder": 28.5,
+    "season": "2018",
+    "team": "NYK"
+  },
+  {
+    "id": "2018/ORL",
+    "overUnder": 31,
+    "season": "2018",
+    "team": "ORL"
+  },
+  {
+    "id": "2018/PHX",
+    "overUnder": 29,
+    "season": "2018",
+    "team": "PHX"
+  },
+  {
+    "id": "2018/SAC",
+    "overUnder": 26,
+    "season": "2018",
+    "team": "SAC"
+  },
+  {
+    "id": "2020/CHA",
+    "overUnder": 26.5,
+    "season": "2020",
+    "team": "CHA"
+  },
+  {
+    "id": "2020/CHI",
+    "overUnder": 29.5,
+    "season": "2020",
+    "team": "CHI"
+  },
+  {
+    "id": "2020/CLE",
+    "overUnder": 22.5,
+    "season": "2020",
+    "team": "CLE"
+  },
+  {
+    "id": "2020/DET",
+    "overUnder": 23.5,
+    "season": "2020",
+    "team": "DET"
+  },
+  {
+    "id": "2020/MEM",
+    "overUnder": 31.5,
+    "season": "2020",
+    "team": "MEM"
+  },
+  {
+    "id": "2020/MIN",
+    "overUnder": 29.5,
+    "season": "2020",
+    "team": "MIN"
+  },
+  {
+    "id": "2020/NYK",
+    "overUnder": 21.5,
+    "season": "2020",
+    "team": "NYK"
+  },
+  {
+    "id": "2020/OKC",
+    "overUnder": 22.5,
+    "season": "2020",
+    "team": "OKC"
+  },
+  {
+    "id": "2020/ORL",
+    "overUnder": 31.5,
+    "season": "2020",
+    "team": "ORL"
+  },
+  {
+    "id": "2020/SAC",
+    "overUnder": 28.5,
+    "season": "2020",
+    "team": "SAC"
+  },
+  {
+    "id": "2020/SAS",
+    "overUnder": 28.5,
+    "season": "2020",
+    "team": "SAS"
+  },
+  {
+    "id": "2021/CLE",
+    "overUnder": 26.5,
+    "season": "2021",
+    "team": "CLE"
+  },
+  {
+    "id": "2021/DET",
+    "overUnder": 24.5,
+    "season": "2021",
+    "team": "DET"
+  },
+  {
+    "id": "2021/HOU",
+    "overUnder": 27.5,
+    "season": "2021",
+    "team": "HOU"
+  },
+  {
+    "id": "2021/MIN",
+    "overUnder": 35.5,
+    "season": "2021",
+    "team": "MIN"
+  },
+  {
+    "id": "2021/OKC",
+    "overUnder": 23.5,
+    "season": "2021",
+    "team": "OKC"
+  },
+  {
+    "id": "2021/ORL",
+    "overUnder": 22.5,
+    "season": "2021",
+    "team": "ORL"
+  },
+  {
+    "id": "2021/SAS",
+    "overUnder": 28.5,
+    "season": "2021",
+    "team": "SAS"
+  },
+  {
+    "id": "2021/WAS",
+    "overUnder": 33.5,
+    "season": "2021",
+    "team": "WAS"
+  },
+  {
+    "id": "2022/DET",
+    "overUnder": 29.5,
+    "season": "2022",
+    "team": "DET"
+  },
+  {
+    "id": "2022/HOU",
+    "overUnder": 23.5,
+    "season": "2022",
+    "team": "HOU"
+  },
+  {
+    "id": "2022/IND",
+    "overUnder": 24.5,
+    "season": "2022",
+    "team": "IND"
+  },
+  {
+    "id": "2022/OKC",
+    "overUnder": 23.5,
+    "season": "2022",
+    "team": "OKC"
+  },
+  {
+    "id": "2022/ORL",
+    "overUnder": 26.5,
+    "season": "2022",
+    "team": "ORL"
+  },
+  {
+    "id": "2022/SAC",
+    "overUnder": 34.5,
+    "season": "2022",
+    "team": "SAC"
+  },
+  {
+    "id": "2022/SAS",
+    "overUnder": 22.5,
+    "season": "2022",
+    "team": "SAS"
+  },
+  {
+    "id": "2022/UTA",
+    "overUnder": 23.5,
+    "season": "2022",
+    "team": "UTA"
+  },
+  {
+    "id": "2022/WAS",
+    "overUnder": 35.5,
+    "season": "2022",
+    "team": "WAS"
+  },
+  {
+    "id": "2023/CHA",
+    "overUnder": 31.5,
+    "season": "2023",
+    "team": "CHA"
+  },
+  {
+    "id": "2023/DET",
+    "overUnder": 28.5,
+    "season": "2023",
+    "team": "DET"
+  },
+  {
+    "id": "2023/HOU",
+    "overUnder": 31.5,
+    "season": "2023",
+    "team": "HOU"
+  },
+  {
+    "id": "2023/POR",
+    "overUnder": 28.5,
+    "season": "2023",
+    "team": "POR"
+  },
+  {
+    "id": "2023/SAS",
+    "overUnder": 28.5,
+    "season": "2023",
+    "team": "SAS"
+  },
+  {
+    "id": "2023/UTA",
+    "overUnder": 35.5,
+    "season": "2023",
+    "team": "UTA"
+  },
+  {
+    "id": "2023/WAS",
+    "overUnder": 24.5,
+    "season": "2023",
+    "team": "WAS"
+  },
+  {
+    "id": "2024/BKN",
+    "overUnder": 19.5,
+    "season": "2024",
+    "team": "BKN"
+  },
+  {
+    "id": "2024/CHA",
+    "overUnder": 30.5,
+    "season": "2024",
+    "team": "CHA"
+  },
+  {
+    "id": "2024/CHI",
+    "overUnder": 28.5,
+    "season": "2024",
+    "team": "CHI"
+  },
+  {
+    "id": "2024/DET",
+    "overUnder": 25.5,
+    "season": "2024",
+    "team": "DET"
+  },
+  {
+    "id": "2024/LAC",
+    "overUnder": 35.5,
+    "season": "2024",
+    "team": "LAC"
+  },
+  {
+    "id": "2024/POR",
+    "overUnder": 21.5,
+    "season": "2024",
+    "team": "POR"
+  },
+  {
+    "id": "2024/TOR",
+    "overUnder": 29.5,
+    "season": "2024",
+    "team": "TOR"
+  },
+  {
+    "id": "2024/UTA",
+    "overUnder": 28.5,
+    "season": "2024",
+    "team": "UTA"
+  },
+  {
+    "id": "2024/WAS",
+    "overUnder": 20.5,
+    "season": "2024",
+    "team": "WAS"
+  }
+]

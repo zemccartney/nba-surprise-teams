@@ -1,11 +1,11 @@
 import * as Sentry from "@sentry/cloudflare";
 import { ActionError, defineAction } from "astro:actions";
+import { getEntry } from "astro:content";
 import { z } from "astro:schema";
 
-import type { LoaderResponse, SeasonId } from "../data/types";
+import type { LoaderResponse } from "../content-utils";
 
-import LiveLoader from "../data/loaders/live";
-import * as SeasonUtils from "../data/seasons";
+import LiveLoader from "../loaders/live";
 import * as Utils from "../utils";
 
 /*
@@ -13,7 +13,7 @@ import * as Utils from "../utils";
 Used to prevent workers from returning outdated data from KV.
 
 Given:
-- KV will cache results afer read at edge locations
+- KV will cache results after read at edge locations
 - If breaking changes made to shape of data at play (as output by loader / stored in KV),
 cached output could result in errors (data not matching consumer contract, unusable)
 - There's no way to force-clear all KV-cached results (letting alone this doesn't solve
@@ -32,16 +32,12 @@ const SCHEMA_ID = "fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0"; // :) https://everyuui
 export const server = {
   getSeasonData: defineAction({
     input: z.object({
-      seasonId: z.custom<SeasonId>((val) =>
-        SeasonUtils.getAllSeasons()
-          .map((season) => season.id)
-          .includes(val),
-      ),
+      seasonId: z.string(),
     }),
     // eslint-disable-next-line perfectionist/sort-objects
     handler: async (input, astroCtx): Promise<LoaderResponse> => {
       try {
-        const season = SeasonUtils.getSeasonById(input.seasonId);
+        const season = await getEntry("seasons", input.seasonId);
 
         if (!season) {
           throw new ActionError({
@@ -60,7 +56,7 @@ export const server = {
         // Build assumption: allowable / expected that season will be ready data-wise prior to season start date, given
         // expected data release schedule; past season end not factored here i.e. previous route, pull from static if past season
         // end, as we don't solve for missing data programmatically; solve for material problems with material
-        if (currentYYYYMMDD < season.startDate) {
+        if (currentYYYYMMDD < season.data.startDate) {
           return {
             games: [],
           };
@@ -69,7 +65,7 @@ export const server = {
         const gamesCache = await astroCtx.locals.runtime.env.GAMES_KV.get<{
           data: LoaderResponse;
           id: string;
-        }>(season.id.toString(), "json");
+        }>(season.data.id.toString(), "json");
 
         if (
           // Does it look like KV contains well-formed data?
@@ -82,7 +78,6 @@ export const server = {
           // No next expiresAt means no more upcoming relevant games this season means no new writes
           if (!expiresAt) {
             // TODO Is there a way to force-clear server island caches? Or does that happen on deployment, due to, I assume, changing the params encryption key?
-            // Don't send caching information to the browser ... why? Lazy?
             return { games };
           }
 

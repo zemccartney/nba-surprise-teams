@@ -4,6 +4,9 @@ import sentry from "@sentry/astro";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
+
+import archiver from "./archiver/integration.ts";
+
 const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
@@ -12,10 +15,9 @@ const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
 
 const siteByEnv = {
   preview: "https://dev.nba-surprise-teams.pages.dev",
-  production: "https://nba-surprise-teams.grepco.net",
+  production: "https://nbastt.grepco.net",
 };
 
-// https://astro.build/config
 export default defineConfig({
   ...(PUBLIC_DEPLOY_ENV && {
     site: siteByEnv[PUBLIC_DEPLOY_ENV],
@@ -42,6 +44,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    archiver(),
     react(),
     ...(SENTRY_AUTH_TOKEN
       ? [
@@ -67,8 +70,17 @@ export default defineConfig({
       },
     },
     ssr: {
-      // needed for sentry cloudflare
-      external: ["node:async_hooks"],
+      external: [
+        // needed for sentry cloudflare
+        "node:async_hooks",
+        // used only by content loaders at build, I think? not needed at runtime (i hope / assume)
+        "node:fs/promises",
+        "node:path",
+        "node:fs",
+        "node:url",
+        "fs",
+        "path",
+      ],
     },
   },
 });
