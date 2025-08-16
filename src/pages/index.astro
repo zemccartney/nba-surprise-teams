@@ -13,6 +13,8 @@ if (!latestSeason) {
 
 const teamsInSeason = await ContentUtils.getTeamsInSeason(latestSeason.id);
 const isSeasonReady = teamsInSeason.length > 0;
+
+const [, mm, dd] = latestSeason.data.startDate.split("-");
 ---
 
 <Layout>
@@ -45,11 +47,9 @@ const isSeasonReady = teamsInSeason.length > 0;
             season
           </h2>
           <p class="text-2xl text-green-200">
-            Next season kicks off on{" "}
-            {new Date(latestSeason.data.startDate).toLocaleDateString()}.
-            Pre-season over/unders are typically posted mid-September. Till
-            then, check out how <Link href="/archive">past years</Link> shook
-            out.
+            Next season kicks off on {`${mm}/${dd}`}! Pre-season over/unders are
+            typically posted mid-September. Till then, check out how{" "}
+            <Link href="/archive">past years</Link> shook out.
           </p>
         </Typography>
       )

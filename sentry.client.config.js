@@ -6,6 +6,7 @@ Sentry.init({
 
   integrations: [Sentry.browserTracingIntegration()],
 
+  sendDefaultPii: true,
   // Define how likely traces are sampled. Adjust this value in production,
   // or use tracesSampler for greater control.
   tracesSampleRate: 0.1,

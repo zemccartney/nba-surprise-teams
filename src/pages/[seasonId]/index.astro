@@ -50,6 +50,24 @@ const seasonBefore = adjacent(-1);
 const seasonAfter = adjacent(1);
 ---
 
+<script>
+  const mediaQueryList = globalThis.matchMedia(
+    "not all and (min-width: 640px)",
+  );
+
+  function handleOrientationChange(ev: MediaQueryList | MediaQueryListEvent) {
+    const seasonButtons = document.querySelectorAll(".SeasonArchiveButton");
+    if (ev.matches && seasonButtons?.length > 0) {
+      for (const button of seasonButtons) button.setAttribute("width", "24");
+    } else {
+      for (const button of seasonButtons) button.setAttribute("width", "32");
+    }
+  }
+
+  handleOrientationChange(mediaQueryList);
+  mediaQueryList.addEventListener("change", handleOrientationChange);
+</script>
+
 <Subpage
   description={`Results for the ${fmtSeason} season`}
   title={`${fmtSeason} Season`}
@@ -63,7 +81,10 @@ const seasonAfter = adjacent(1);
               class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
               href={`/${seasonBefore.id}`}
             >
-              <ArrowLeftSvg class="fill-current" />
+              <ArrowLeftSvg
+                class="SeasonArchiveButton fill-current"
+                width={24}
+              />
               <span>
                 {ContentUtils.abbreviateSeasonRange(seasonBefore, {
                   compact: true,
@@ -81,7 +102,10 @@ const seasonAfter = adjacent(1);
                 compact: true,
               })}{" "}
               Season
-              <ArrowRightSvg class="fill-current" />
+              <ArrowRightSvg
+                class="SeasonArchiveButton fill-current"
+                width={24}
+              />
             </a>
           )}
         </div>
@@ -126,23 +150,23 @@ const seasonAfter = adjacent(1);
     }
     {
       season.data.shortened && (
-        <section class="mb-12 flex flex-1 flex-col items-center px-4 text-xl text-yellow-200 sm:mb-24">
-          <h2 class="text-2xl text-balance text-yellow-400">
+        <section class="mb-12 px-4 text-xl text-yellow-200 sm:mb-24">
+          <h2 class="text-center text-2xl text-balance text-yellow-400">
             Shortened season: {season.data.shortened.numGames} games played
           </h2>
-          <h3 class="text-center text-balance">
+          <h3 class="mx-auto w-fit text-center text-balance">
             {season.data.shortened.reason}
           </h3>
-          <h3 class="mt-4 underline">Adjustments</h3>
-          <ul class="md:ps-[2em]; flex list-inside list-disc flex-col items-center ps-[1em]">
+          <h3 class="mt-4 text-center underline">Adjustments</h3>
+          <ul class="mx-auto w-fit list-inside list-disc">
             {/* Consistent widths to align bullets while centering */}
-            <li class="w-96">
+            <li>
               Over/Under Cutoff:{" "}
               <span class="text-yellow-400">
                 {surpriseRules.overUnderCutoff.toPrecision(3)}
               </span>
             </li>
-            <li class="w-96">
+            <li>
               Surprise Team Pace Cutoff:{" "}
               <span class="text-yellow-400">
                 {Utils.signedFormatter.format(surpriseRules.paceTarget)}

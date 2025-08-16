@@ -70,13 +70,6 @@ try {
   }
 
   console.log("\nArchive completed!");
-
-  // Appears to be an astro bug, devServer hangs after stop, appears that it doesn't shut down cloudflare's runtime,
-  // still listed as running
-  // eslint-disable-next-line unicorn/no-process-exit
-  process.exit(0);
 } finally {
-  console.log("STOPPING");
   await astroServer.stop();
-  console.log("stopped");
 }

@@ -99,6 +99,7 @@ const teamSeasons = defineCollection({
   }),
 });
 
+// TODO try live collections?
 // DO NOT USE REFERENCES; data must be compatible with lives game data
 // stored as "static" json in KV
 const games = defineCollection({

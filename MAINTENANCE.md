@@ -23,14 +23,12 @@ in render / at dev and build time. Some are conventions, my personal requirement
 All individual seasons MUST:
 
 - If in the past (end date is before today):
-
   - have a set of surprise team candidates (`teamSeasons`)
   - have static games (in `content/games.json`), representing the complete results of that season (82 games played per surprise team participating)
     - every game MUST have at least one surprise team participating
     - CONVENTION: Leniency for the most recently past season. Factor in grace period to allow for hot fixes, assuming I'll be slow to source data and store in repo, don't block the build during that time
 
 - If current or upcoming:
-
   - MUST NOT have static games; source games data on-demand (live loader). While technically possible to SSR in past e.g. call the nba api in our archiver, disallow in practice
     to follow the principle of preferring static output
 
@@ -89,7 +87,6 @@ When the NBA releases their schedule:
 When surprise teams and their odds are announced:
 
 1. For any teams not yet registered i.e. never been a surprise team candidate:
-
    - create a logo, store under `src/assets/images/emoji`
    - register the emoji name in `src/content/utils.ts::emojiByTeam`
    - add team codes (3 letter identifier used in NBA API), to `src/content.config.ts::teamCodeSchema`
