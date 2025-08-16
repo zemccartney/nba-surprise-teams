@@ -17,7 +17,7 @@ export const PopoverBody = ({
     return (
       <div
         className={Clsx([
-          "z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
+          "shadow-popover bg-dark-emerald z-10 w-fit max-w-80 p-7 font-mono text-xl text-lime-400",
           className,
         ])}
       >
@@ -30,7 +30,7 @@ export const PopoverBody = ({
     <RadixPopover.Content
       avoidCollisions
       className={Clsx([
-        "z-10 w-fit max-w-60 rounded-md bg-blue-200 p-2 font-mono text-lg text-slate-950",
+        "shadow-popover bg-dark-emerald z-10 w-fit max-w-80 p-7 font-mono text-xl text-lime-400",
         className,
       ])}
       hideWhenDetached
@@ -63,14 +63,14 @@ export default function Popover({
           <RadixPopover.Close
             aria-label="Close"
             className={Clsx([
-              "shadow-sm:hover absolute top-0 right-2 cursor-pointer font-mono text-lg text-indigo-500 shadow-slate-950",
+              "shadow-sm:hover absolute top-2 right-4 cursor-pointer font-mono text-2xl text-indigo-500 shadow-slate-950",
               classes?.close,
             ])}
           >
             x
           </RadixPopover.Close>
           <RadixPopover.Arrow
-            className={Clsx(["fill-blue-200", classes?.arrow])}
+            className={Clsx(["fill-dark-emerald", classes?.arrow])}
           />
         </PopoverBody>
       </RadixPopover.Portal>
