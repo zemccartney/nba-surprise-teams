@@ -1558,5 +1558,59 @@
     "overUnder": 20.5,
     "season": "2024",
     "team": "WAS"
+  },
+  {
+    "id": "2025/UTA",
+    "overUnder": 18.5,
+    "season": "2025",
+    "team": "UTA"
+  },
+  {
+    "id": "2025/BKN",
+    "overUnder": 20.5,
+    "season": "2025",
+    "team": "BKN"
+  },
+  {
+    "id": "2025/WAS",
+    "overUnder": 21.5,
+    "season": "2025",
+    "team": "WAS"
+  },
+  {
+    "id": "2025/CHA",
+    "overUnder": 27.5,
+    "season": "2025",
+    "team": "CHA"
+  },
+  {
+    "id": "2025/NOP",
+    "overUnder": 30.5,
+    "season": "2025",
+    "team": "NOP"
+  },
+  {
+    "id": "2025/PHX",
+    "overUnder": 31.5,
+    "season": "2025",
+    "team": "PHX"
+  },
+  {
+    "id": "2025/CHI",
+    "overUnder": 32.5,
+    "season": "2025",
+    "team": "CHI"
+  },
+  {
+    "id": "2025/POR",
+    "overUnder": 34.5,
+    "season": "2025",
+    "team": "POR"
+  },
+  {
+    "id": "2025/SAC",
+    "overUnder": 35.5,
+    "season": "2025",
+    "team": "SAC"
   }
 ]

@@ -34,11 +34,18 @@ for (const team of teamsInSeason) {
     isEliminated: await ContentUtils.isEliminated(teamSeason, record),
     isSurpriseTeam: await ContentUtils.isSurprise(teamSeason, record),
     pace: await ContentUtils.pace(teamSeason, record),
+    record,
     team,
     teamSeason,
   });
 }
 
+// if pre-season i.e. where all project records will be 0-82,
+// this sort order is the same as over/under ascending: the lower
+// a team's over/under, the fewer games they need to win to be a
+// surprise team, the smaller the discrepancy between that target
+// and their current 0 wins. Felt like a sensible enough default,
+// if not immediately apparent
 teamRows.sort((a, b) => b.pace - a.pace);
 
 const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
@@ -51,10 +58,8 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
 
   function handleOrientationChange(ev: MediaQueryList | MediaQueryListEvent) {
     const table = document.querySelector("#standings");
-    if (ev.matches) {
-      table?.classList.add("compact");
-    } else {
-      table?.classList.remove("compact");
+    if (table) {
+      table.classList.toggle("compact", ev.matches);
     }
   }
 
@@ -136,7 +141,9 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
             </th>
             <td class="text-right">{teamRow.teamSeason.data.overUnder}</td>
             <td class="text-right">
-              {Utils.signedFormatter.format(teamRow.pace)}{" "}
+              {teamRow.record.w + teamRow.record.l === 0
+                ? "—"
+                : Utils.signedFormatter.format(teamRow.pace)}{" "}
             </td>
           </tr>
         );

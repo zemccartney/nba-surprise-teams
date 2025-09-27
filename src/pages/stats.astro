@@ -301,10 +301,8 @@ for (const teamSeason of teamSeasons) {
 
   function handleOrientationChange(ev: MediaQueryList | MediaQueryListEvent) {
     const table = document.querySelector("#top-10");
-    if (ev.matches) {
-      table?.classList.remove("compact");
-    } else {
-      table?.classList.add("compact");
+    if (table) {
+      table.classList.toggle("compact", ev.matches);
     }
   }
 

@@ -7,7 +7,7 @@ import Clsx from "clsx";
 export const PopoverBody = ({
   children,
   className,
-  deRadix = false,
+  deRadix = false, // utilize same styles on non-radix componentry; was needed for use within recharts, tooltip context incompatibility IIRC
 }: {
   children: ReactNode;
   className?: ClassValue;
@@ -17,7 +17,7 @@ export const PopoverBody = ({
     return (
       <div
         className={Clsx([
-          "shadow-popover bg-dark-emerald z-10 w-fit max-w-80 p-7 font-mono text-xl text-lime-400",
+          "shadow-popover bg-blurple-glow z-10 w-fit max-w-80 p-7 font-mono text-xl text-green-200",
           className,
         ])}
       >
@@ -30,7 +30,7 @@ export const PopoverBody = ({
     <RadixPopover.Content
       avoidCollisions
       className={Clsx([
-        "shadow-popover bg-dark-emerald z-10 w-fit max-w-80 p-7 font-mono text-xl text-lime-400",
+        "shadow-popover bg-blurple-glow z-10 w-fit max-w-80 p-7 font-mono text-xl text-green-200",
         className,
       ])}
       hideWhenDetached
@@ -63,14 +63,14 @@ export default function Popover({
           <RadixPopover.Close
             aria-label="Close"
             className={Clsx([
-              "shadow-sm:hover absolute top-2 right-4 cursor-pointer font-mono text-2xl text-indigo-500 shadow-slate-950",
+              "shadow-sm:hover absolute top-2 right-4 cursor-pointer font-mono text-2xl text-lime-400 shadow-slate-950 hover:text-lime-600",
               classes?.close,
             ])}
           >
             x
           </RadixPopover.Close>
           <RadixPopover.Arrow
-            className={Clsx(["fill-dark-emerald", classes?.arrow])}
+            className={Clsx(["fill-blurple-glow", classes?.arrow])}
           />
         </PopoverBody>
       </RadixPopover.Portal>

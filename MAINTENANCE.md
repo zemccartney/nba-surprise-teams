@@ -96,7 +96,7 @@ When surprise teams and their odds are announced:
 
 **EXPECT:**
 
-- **Home:** Shows standings table for upcoming season,empty values for all record and pace displays
+- **Home:** Shows standings table for upcoming season, empty values for all record and pace displays
   - pages rendered on-demand, no additional static output
 - **Archive:** no effect
 - **Season detail:** Shows standings table for upcoming season,empty values for all record and pace displays

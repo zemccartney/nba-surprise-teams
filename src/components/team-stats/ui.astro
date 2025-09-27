@@ -232,7 +232,9 @@ for (let i = 0; i < teamGames.length; i++) {
           </th>
           <td>
             {
-              `${Utils.signedFormatter.format(pace)} (${projectedWins} - ${surpriseRules.numGames - projectedWins})`
+              record.w + record.l === 0
+                ? "—"
+                : `${Utils.signedFormatter.format(pace)} (${projectedWins} - ${surpriseRules.numGames - projectedWins})`
             }
           </td>
         </tr>

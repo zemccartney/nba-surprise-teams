@@ -1,14 +1,15 @@
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
-import eslintJson from "@eslint/json";
-import eslintConfigPrettier from "eslint-config-prettier";
-import eslintPluginAstro from "eslint-plugin-astro";
-import eslintPackageJson from "eslint-plugin-package-json";
-import eslintPerfectionist from "eslint-plugin-perfectionist";
-import eslintPluginReact from "eslint-plugin-react";
-import eslintPluginReactRefresh from "eslint-plugin-react-refresh";
-import eslintPluginUnicorn from "eslint-plugin-unicorn";
-import eslintPluginVitest from "eslint-plugin-vitest";
+import json from "@eslint/json";
+import vitest from "@vitest/eslint-plugin";
+import prettier from "eslint-config-prettier";
+import astro from "eslint-plugin-astro";
+import pkgJson from "eslint-plugin-package-json";
+import perfectionist from "eslint-plugin-perfectionist";
+import react from "eslint-plugin-react";
+import reactRefresh from "eslint-plugin-react-refresh";
+import unicorn from "eslint-plugin-unicorn";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import Path from "node:path";
 import Url from "node:url";
@@ -19,27 +20,27 @@ const __filename = Url.fileURLToPath(import.meta.url);
 const __dirname = Path.dirname(__filename);
 const gitignorePath = Path.resolve(__dirname, ".gitignore");
 
-export default tseslint.config(
+export default defineConfig([
   includeIgnoreFile(gitignorePath),
   {
-    extends: [eslintPackageJson.configs.recommended],
+    extends: [pkgJson.configs.recommended],
     rules: {
       "package-json/require-description": "off",
     },
   },
   {
+    extends: [json.configs.recommended],
     files: ["**/*.json"],
     ignores: ["package.json", "package-lock.json"],
     language: "json/json",
-    ...eslintJson.configs.recommended,
     rules: {
       "json/sort-keys": "error",
     },
   },
   {
+    extends: [json.configs.recommended],
     files: ["**/*.jsonc", ".vscode/*.json"],
     language: "json/jsonc",
-    ...eslintJson.configs.recommended,
     rules: {
       "json/sort-keys": "error",
     },
@@ -49,10 +50,15 @@ export default tseslint.config(
       eslint.configs.recommended,
       tseslint.configs.strict,
       tseslint.configs.stylistic,
-      eslintPluginUnicorn.configs.recommended,
-      eslintPerfectionist.configs["recommended-natural"],
+      unicorn.configs.recommended,
+      perfectionist.configs["recommended-natural"],
     ],
     files: ["**/*.{js,ts,tsx,jsx,astro,mjs}"],
+    rules: {
+      "unicorn/filename-case": ["off"],
+      "unicorn/no-keyword-prefix": ["off"],
+      "unicorn/prevent-abbreviations": ["off"],
+    },
   },
   {
     files: ["*.{js,ts,mjs}"],
@@ -62,21 +68,12 @@ export default tseslint.config(
       },
     },
   },
-  {
-    rules: {
-      "unicorn/filename-case": ["off"],
-      "unicorn/no-keyword-prefix": ["off"],
-      "unicorn/prevent-abbreviations": ["off"],
-    },
-  },
-  ...eslintPluginAstro.configs.recommended.filter((conf) => conf.files),
-  ...eslintPluginAstro.configs["jsx-a11y-strict"].filter((conf) => conf.files),
+  ...astro.configs.recommended.filter((conf) => conf.files),
+  ...astro.configs["jsx-a11y-strict"].filter((conf) => conf.files),
   {
     extends: [
-      ...eslintPluginAstro.configs.recommended.filter((conf) => !conf.files),
-      ...eslintPluginAstro.configs["jsx-a11y-strict"].filter(
-        (conf) => !conf.files,
-      ),
+      ...astro.configs.recommended.filter((conf) => !conf.files),
+      ...astro.configs["jsx-a11y-strict"].filter((conf) => !conf.files),
     ],
     files: ["**/*.astro"],
     rules: {
@@ -86,10 +83,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ["**/*.{tsx}"],
-    ...eslintPluginReact.configs.flat.recommended,
-  },
-  {
+    extends: [react.configs.flat.recommended, reactRefresh.configs.vite],
     files: ["**/*.{tsx}"],
     languageOptions: {
       globals: {
@@ -98,14 +92,13 @@ export default tseslint.config(
       },
     },
   },
-  eslintPluginReactRefresh.configs.vite,
   {
     // auto-generated, no sense in linting
     ignores: ["worker-configuration.d.ts", "scratchpad.js"],
   },
   {
+    extends: [vitest.configs.recommended],
     files: ["system.test.ts"],
-    ...eslintPluginVitest.configs.recommended,
   },
-  eslintConfigPrettier,
-);
+  prettier,
+]);

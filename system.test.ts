@@ -94,7 +94,7 @@ describe("system validation", () => {
       // Don't use the sortSeasons util here, as that intentionally sorts by id for simplicity's sake,
       // relying on the fact that date ranges are valid and correlated to id years such that id order
       // implies correct start/end date order, a fact we're verifying here. This is blatant overthinking?
-      const sortedSeasons = [...seasons].sort(
+      const sortedSeasons = [...seasons].toSorted(
         (a, b) =>
           new Date(a.data.startDate).getTime() -
           new Date(b.data.startDate).getTime(),

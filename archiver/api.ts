@@ -155,7 +155,7 @@ async function getAllArchivableSeasons(): Promise<
       return today > season.data.endDate;
     })
     .map((season) => season.data.id)
-    .sort((a, b) => a.localeCompare(b)); // Chronological order
+    .toSorted((a, b) => a.localeCompare(b)); // Chronological order
 }
 
 async function getLatestArchivableSeason(): Promise<
@@ -452,7 +452,7 @@ async function updateGamesFile(
   );
 
   // Combine existing games (minus processed seasons) with newly fetched games
-  const allGames = [...filteredGames, ...fetchedGames].sort((a, b) => {
+  const allGames = [...filteredGames, ...fetchedGames].toSorted((a, b) => {
     // Sort by playedOn date first, then by game ID for stability
     const dateCompare = a.playedOn.localeCompare(b.playedOn);
     return dateCompare === 0 ? a.id.localeCompare(b.id) : dateCompare;
