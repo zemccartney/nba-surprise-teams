@@ -1,12 +1,50 @@
 import type { CollectionEntry } from "astro:content";
 
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, z } from "astro:content";
 
 export type GameData = CollectionEntry<"games">["data"];
-import type { TeamCode } from "./content.config";
-
-import { TEAM_CODES } from "./content.config";
 import * as Utils from "./utils";
+
+export const teamCodeSchema = z.enum([
+  "ATL",
+  "BKN",
+  "BOS",
+  "CHA",
+  "CHI",
+  "CLE",
+  "DAL",
+  "DEN",
+  "DET",
+  "GSW",
+  "HOU",
+  "IND",
+  "LAC",
+  "LAL",
+  "MEM",
+  "MIA",
+  "MIL",
+  "MIN",
+  "NJN",
+  "NOH",
+  "NOK",
+  "NOP",
+  "NYK",
+  "OKC",
+  "ORL",
+  "PHI",
+  "PHX",
+  "POR",
+  "SAC",
+  "SAS",
+  "SEA",
+  "TOR",
+  "UTA",
+  "VAN",
+  "WAS",
+]);
+
+export const TEAM_CODES = teamCodeSchema.enum;
+export type TeamCode = z.infer<typeof teamCodeSchema>;
 
 const STANDARD_SEASON = {
   numGames: 82,
@@ -470,7 +508,3 @@ export const getTeamHistory = async (teamId: TeamCode) => {
 
   return false;
 };
-
-// convenience
-export { TEAM_CODES } from "./content.config";
-export type { TeamCode } from "./content.config";

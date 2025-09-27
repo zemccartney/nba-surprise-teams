@@ -8,10 +8,9 @@ import Path from "node:path";
 import Url from "node:url";
 import { z } from "zod";
 
-import type { TeamCode } from "../src/content.config";
+import type { TeamCode } from "../src/content-utils";
 
 import * as ContentUtils from "../src/content-utils";
-import { TEAM_CODES } from "../src/content.config";
 import * as Utils from "../src/utils";
 
 /*
@@ -61,11 +60,11 @@ const RowSetColsSchema = z.object({
 // Appear in NBA API data in '93 and '96 seasons
 // except for CHH, which appears through 2001 (end of original run of Charlotte Hornets franchise)
 const legacyTeamCodes = {
-  CHH: TEAM_CODES.CHA,
-  GOS: TEAM_CODES.GSW,
-  PHL: TEAM_CODES.PHI,
-  SAN: TEAM_CODES.SAS,
-  UTH: TEAM_CODES.UTA,
+  CHH: ContentUtils.TEAM_CODES.CHA,
+  GOS: ContentUtils.TEAM_CODES.GSW,
+  PHL: ContentUtils.TEAM_CODES.PHI,
+  SAN: ContentUtils.TEAM_CODES.SAS,
+  UTH: ContentUtils.TEAM_CODES.UTA,
 };
 
 export const GET: APIRoute = async ({ params }) => {

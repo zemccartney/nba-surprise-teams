@@ -1,46 +1,11 @@
 import { file } from "astro/loaders";
 import { defineCollection, reference, z } from "astro:content";
 
-const teamCodeSchema = z.enum([
-  "ATL",
-  "BKN",
-  "BOS",
-  "CHA",
-  "CHI",
-  "CLE",
-  "DAL",
-  "DEN",
-  "DET",
-  "GSW",
-  "HOU",
-  "IND",
-  "LAC",
-  "LAL",
-  "MEM",
-  "MIA",
-  "MIL",
-  "MIN",
-  "NJN",
-  "NOH",
-  "NOK",
-  "NOP",
-  "NYK",
-  "OKC",
-  "ORL",
-  "PHI",
-  "PHX",
-  "POR",
-  "SAC",
-  "SAS",
-  "SEA",
-  "TOR",
-  "UTA",
-  "VAN",
-  "WAS",
-]);
+import { teamCodeSchema } from "./content-utils";
 
-export const TEAM_CODES = teamCodeSchema.enum;
-export type TeamCode = z.infer<typeof teamCodeSchema>;
+// WARNING: cannot be imported by any files involved in server-side rendering
+// the file loader uses node's fs API, which is not supported on cloudflare,
+// the env in which server-side rendering executes
 
 const teams = defineCollection({
   loader: file("src/content/teams.json"),
