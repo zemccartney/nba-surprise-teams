@@ -18,6 +18,7 @@
     "kv:destroy": "rm -rf .wrangler/state",
     "kv:reset": "wrangler kv key delete $(node -e \"import fs from 'fs'; const seasons = JSON.parse(fs.readFileSync('src/content/seasons.json', 'utf8')); console.log(seasons.sort((a,b) => b.id.localeCompare(a.id))[0].id)\") --binding=GAMES_KV --local",
     "lint": "eslint .",
+    "lint:debug": "eslint --inspect-config",
     "preview": "astro preview",
     "test": "vitest",
     "typewatch": "astro check --watch --preserveWatchOutput"

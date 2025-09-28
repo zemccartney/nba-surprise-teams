@@ -68,13 +68,8 @@ export default defineConfig([
       },
     },
   },
-  ...astro.configs.recommended.filter((conf) => conf.files),
-  ...astro.configs["jsx-a11y-strict"].filter((conf) => conf.files),
   {
-    extends: [
-      ...astro.configs.recommended.filter((conf) => !conf.files),
-      ...astro.configs["jsx-a11y-strict"].filter((conf) => !conf.files),
-    ],
+    extends: [astro.configs.recommended, astro.configs["jsx-a11y-strict"]],
     files: ["**/*.astro"],
     rules: {
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v56.0.1/docs/rules/prefer-module.md
