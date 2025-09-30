@@ -30,7 +30,13 @@ if (!latestSeason) {
 }
 
 const games = await getCollection("games"); // querying games over and over was a nasty bottleneck, hence lifting up
-const teamSeasons = await getCollection("teamSeasons");
+const teamSeasons = await getCollection("teamSeasons", (entry) => {
+  if (
+    archivedSeasons.map((season) => season.id).includes(entry.data.season.id)
+  ) {
+    return entry;
+  }
+});
 
 /* All-time Top 10 Table */
 
@@ -96,9 +102,7 @@ const surprisesPerSeason: ComponentProps<
   typeof SurprisesPerSeasonChart
 >["data"] = [];
 
-const seasons = await getCollection("seasons");
-
-for (const season of seasons) {
+for (const season of archivedSeasons) {
   const gamesInSeason = games.filter(({ data }) => {
     return data.seasonId === season.id;
   });
@@ -292,24 +296,6 @@ for (const teamSeason of teamSeasons) {
 /* END Team Season scatterplot */
 ---
 
-<script>
-  // Enlarge table contents while in non-mobile, single-column layout
-
-  const mediaQueryList = globalThis.matchMedia(
-    "(min-width: 640px) and (max-width: 1279px)",
-  );
-
-  function handleOrientationChange(ev: MediaQueryList | MediaQueryListEvent) {
-    const table = document.querySelector("#top-10");
-    if (table) {
-      table.classList.toggle("compact", ev.matches);
-    }
-  }
-
-  handleOrientationChange(mediaQueryList);
-  mediaQueryList.addEventListener("change", handleOrientationChange);
-</script>
-
 <Subpage
   description="Stats and insights from surprise team history"
   title="Stats"
@@ -333,7 +319,7 @@ for (const teamSeason of teamSeasons) {
       <h2 class="font-title mb-8 text-center text-lg text-lime-400 md:text-xl">
         All-Time Top 10
       </h2>
-      <Table class="w-full" id="top-10">
+      <Table class="compact w-full" id="top-10">
         <Fragment slot="head">
           <tr>
             <td class="w-1/2"></td>
