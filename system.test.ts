@@ -6,6 +6,11 @@ import { beforeAll, describe, expect, test } from "vitest";
 
 import * as ContentUtils from "./src/content-utils";
 
+// TODO test to catch the sort of issues seen on stats page i.e. showing current data?
+// snapshot tests? something w/ astro? pattern for inspecting data passed to render? i.e.
+// architecting for headless / testing?
+// test to catch loader issues e.g. opening night '25?
+
 /*
   WARNINGS:
   

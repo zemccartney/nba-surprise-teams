@@ -118,36 +118,28 @@ const loader = async (): Promise<LoaderResponse> => {
   // TODO: Doc known limitation of mistakenly including in-season tournament final game; data seems to give ways to ignore,
   // just didn't deal with it in first run (2024)
 
-  const todayInd = chronologicalSeason.findIndex((slate) => {
-    const yyyymmdd = toYYYYMMDD(slate.gameDate);
-    return yyyymmdd === currentYYYYMMDD;
+  const nextRelevantDate = chronologicalSeason.find((slate) => {
+    // Find next game day with an incomplete game featuring at least one surprise team i.e. next point
+    // at which new, relevant data might be available
+    return slate.games.some(
+      (game) => !hasScore(game) && includesCandidateTeam(game, TRICODES),
+    );
   });
 
-  if (todayInd) {
-    const nextRelevantDate = chronologicalSeason
-      .slice(todayInd)
-      .find((slate) => {
-        // Find next game day with an incomplete game featuring at least one surprise team i.e. next point
-        // at which new, relevant data might be available
-        return slate.games.some(
+  if (nextRelevantDate) {
+    // When's the earliest incomplete game on the found relevant game date? We'll use this time to guess when new, relevant
+    // data might be available
+    const earliestUpcomingGameStartMs = Math.min(
+      ...nextRelevantDate.games
+        .filter(
           (game) => !hasScore(game) && includesCandidateTeam(game, TRICODES),
-        );
-      });
+        )
+        .map((game) => new Date(game.gameDateTimeUTC).getTime()),
+    );
 
-    if (nextRelevantDate) {
-      // When's the earliest incomplete game on the found relevant game date? We'll use this time to guess when new, relevant
-      // data might be available
-      const earliestUpcomingGameStartMs = Math.min(
-        ...nextRelevantDate.games
-          .filter(
-            (game) => !hasScore(game) && includesCandidateTeam(game, TRICODES),
-          )
-          .map((game) => new Date(game.gameDateTimeUTC).getTime()),
-      );
+    const now = Date.now();
 
-      const now = Date.now();
-
-      /*
+    /*
         Games are roughly 2.25 hours i.e. how long until a result might be in. Add 10 minutes to account for
         a.) uncertainty around how quickly data source is updated; anecdotally, seems near-real-time, so small fudge factor
         b.) uncertainty around game length; no guarantee games how long games will last
@@ -155,20 +147,19 @@ const loader = async (): Promise<LoaderResponse> => {
         In short, no guarantees around when new data will be available; so best effort to continuously cache, lessen
         reliance on external data source, while still trying my best to fetch updates as soon as they're available as possible
       */
-      const averageGameLengthMin = 2.25 * 60 + 10;
-      const endOfGame =
-        earliestUpcomingGameStartMs + Utils.minToMs(averageGameLengthMin);
+    const averageGameLengthMin = 2.25 * 60 + 10;
+    const endOfGame =
+      earliestUpcomingGameStartMs + Utils.minToMs(averageGameLengthMin);
 
-      /*
-        When might our copy of game data be outdated i.e. missing latest results (relative to timestamp calculated above)?
+    /*
+      When might our copy of game data be outdated i.e. missing latest results (relative to timestamp calculated above)?
 
-        If the game's not over yet, still good, wait till the end
-        If the game's finished and still no result, though, bump 5 minutes before checking again. 5 minutes is entirely arbitrary
-        Not actually a big deal to fetch data continuously, I don't think, likely being overly paranoid about lack of contract with
-        data source, wanting to lessen reliance / use "own" copy of data as much as possibile for reliability's sake
-      */
-      expiresAt = endOfGame > now ? endOfGame : now + Utils.minToMs(5);
-    }
+      If the game's not over yet, still good, wait till the end
+      If the game's finished and still no result, though, bump 5 minutes before checking again. 5 minutes is entirely arbitrary
+      Not actually a big deal to fetch data continuously, I don't think, likely being overly paranoid about lack of contract with
+      data source, wanting to lessen reliance / use "own" copy of data as much as possibile for reliability's sake
+    */
+    expiresAt = endOfGame > now ? endOfGame : now + Utils.minToMs(5);
   }
 
   for (const slate of chronologicalSeason) {

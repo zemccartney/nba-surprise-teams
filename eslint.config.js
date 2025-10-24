@@ -89,7 +89,7 @@ export default defineConfig([
   },
   {
     // auto-generated, no sense in linting
-    ignores: ["worker-configuration.d.ts", "scratchpad.js"],
+    ignores: ["scratchpad.js"],
   },
   {
     extends: [vitest.configs.recommended],

@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # local wrangler config
 .wrangler/
+worker-configuration.d.ts

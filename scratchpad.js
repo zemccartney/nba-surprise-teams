@@ -1,8 +1,6 @@
 /*
 
 Used for inspecting data, in case issues with parsing / storing
-Please don't judge me on this :) nothing here is written with quality in mind,
-solely for experimentation and evaluation
 
 */
 
