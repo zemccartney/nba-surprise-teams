@@ -35,7 +35,20 @@ const getGradientOffset = (
 
   // Convert the threshold to a percentage of the total height
   // Note: We subtract from 1 because SVG gradients go from top (0) to bottom (1)
-  return 1 - (toSurprise - dataMin) / totalHeight;
+  const offset = 1 - (toSurprise - dataMin) / totalHeight;
+
+  // Fix area colors for undefeated teams
+  // Without this, an undefeated team's area, the entire space above
+  // their threshold line given no losses, was red, not green
+  if (offset === Infinity) {
+    return 1;
+  }
+
+  if (offset === -Infinity) {
+    return -1;
+  }
+
+  return offset;
 };
 
 // https://recharts.org/en-US/examples/CustomContentOfTooltip

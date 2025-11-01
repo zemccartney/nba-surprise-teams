@@ -71,8 +71,8 @@ export const GET: APIRoute = async ({ params }) => {
   try {
     const seasonParam = params.seasonId;
     if (!seasonParam) {
-      return new Response(
-        JSON.stringify({ error: "Season parameter required" }),
+      return Response.json(
+        { error: "Season parameter required" },
         {
           headers: { "Content-Type": "application/json" },
           status: 400,
@@ -92,8 +92,8 @@ export const GET: APIRoute = async ({ params }) => {
     } else {
       const season = await getEntry("seasons", seasonParam);
       if (!season) {
-        return new Response(
-          JSON.stringify({ error: `Season ${seasonParam} not found` }),
+        return Response.json(
+          { error: `Season ${seasonParam} not found` },
           {
             headers: { "Content-Type": "application/json" },
             status: 404,
@@ -104,13 +104,13 @@ export const GET: APIRoute = async ({ params }) => {
     }
 
     if (seasonsToProcess.length === 0) {
-      return new Response(
-        JSON.stringify({
+      return Response.json(
+        {
           failed: [],
           message: "No seasons process: no archivable seasons matched",
           processed: [],
           totalGames: 0,
-        }),
+        },
         {
           headers: { "Content-Type": "application/json" },
           status: 200,
@@ -120,7 +120,7 @@ export const GET: APIRoute = async ({ params }) => {
 
     const results = await processSeasons(seasonsToProcess, 3);
 
-    return new Response(JSON.stringify(results), {
+    return Response.json(results, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -129,10 +129,13 @@ export const GET: APIRoute = async ({ params }) => {
   } catch (error) {
     console.error("[Archive API] Error:", error);
 
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      headers: { "Content-Type": "application/json" },
-      status: 500,
-    });
+    return Response.json(
+      { error: "Internal server error" },
+      {
+        headers: { "Content-Type": "application/json" },
+        status: 500,
+      },
+    );
   }
 };
 
