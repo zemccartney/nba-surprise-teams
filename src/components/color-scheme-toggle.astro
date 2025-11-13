@@ -1,0 +1,30 @@
+---
+import LightbulbIcon from "../assets/images/lightbulb-on.svg";
+
+// TODO What are the aria props?
+// How does localStorage.theme work? diff from getItem?
+---
+
+<script>
+  const colorSchemeToggle = document.querySelector(
+    "#NBASTT-Color-Scheme-Toggle",
+  ) as HTMLButtonElement;
+
+  colorSchemeToggle.addEventListener("click", () => {
+    localStorage.theme = localStorage.theme === "dark" ? "light" : "dark";
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark",
+    );
+  });
+</script>
+
+<button
+  aria-label="auto"
+  aria-live="polite"
+  class="w-8 text-yellow-400 md:w-10 lg:w-12"
+  id="NBASTT-Color-Scheme-Toggle"
+  title="Toggles light & dark"
+>
+  <LightbulbIcon fill="currentColor" role="img" />
+</button>

@@ -28,7 +28,7 @@ const { description, title } = Astro.props;
     />
   </head>
   <body>
-    <div class="bg-dark-emerald min-h-full">
+    <div class="dark:bg-dark-emerald bg-light-emerald min-h-full">
       <div class="mx-auto md:container">
         <header class="p-8">
           <slot name="header" />
@@ -47,3 +47,16 @@ const { description, title } = Astro.props;
     height: 100%;
   }
 </style>
+
+<script>
+  // TODO is this the right place for this?
+
+  // TODO localStorage typing? safe access?
+
+  document.documentElement.classList.toggle(
+    "dark",
+    localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        globalThis.matchMedia("(prefers-color-scheme: dark)").matches),
+  );
+</script>

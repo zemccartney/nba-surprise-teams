@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* TODO Figure out if using font correctly (font-face); and ok to use bitmap version of font? What is that? */
 @font-face {
   font-family: "ChicagoKare-Regular";
@@ -12,7 +14,8 @@
 }
 
 @theme {
-  --color-dark-emerald: #032203;
+  --color-light-emerald: oklch(0.9691 0.0099 142.86);
+  --color-dark-emerald: oklch(0.2205 0.0674 142.86);
   --color-blurple-glow: oklch(45.7% 0.24 277.023);
 
   --font-mono: "Iosevka Curly", monospace;
