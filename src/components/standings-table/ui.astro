@@ -96,7 +96,10 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
             <th scope="row">
               <div class="flex flex-row items-center gap-4">
                 <Logo seasonId={seasonId} team={teamRow.team} />
-                <Link href={`/${seasonId}/${teamRow.team.id}`}>
+                <Link
+                  class="font-normal"
+                  href={`/${seasonId}/${teamRow.team.id}`}
+                >
                   <span class="relative hidden md:inline">
                     {ContentUtils.resolveTeamName(teamRow.team, seasonId)}
                     <span
@@ -139,8 +142,10 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
                 </Link>
               </div>
             </th>
-            <td class="text-right">{teamRow.teamSeason.data.overUnder}</td>
-            <td class="text-right">
+            <td class="text-right font-bold dark:font-normal">
+              {teamRow.teamSeason.data.overUnder}
+            </td>
+            <td class="text-right font-bold dark:font-normal">
               {teamRow.record.w + teamRow.record.l === 0
                 ? "—"
                 : Utils.signedFormatter.format(teamRow.pace)}{" "}

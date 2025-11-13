@@ -26,7 +26,7 @@ const {
   @reference "../styles/global.css";
 
   .NBASurpriseTracker-Table {
-    @apply dark:shadow-glow table-fixed border-collapse;
+    @apply dark:shadow-glow table-fixed border-collapse outline-2 outline-slate-950 dark:outline-none;
 
     > thead,
     > tfoot {
@@ -41,12 +41,12 @@ const {
 
     > tbody th,
     > tbody td {
-      @apply px-4 py-8 text-3xl text-green-200 lg:text-4xl;
+      @apply px-4 py-8 text-3xl text-green-950 lg:text-4xl dark:text-green-200;
     }
 
     > tbody > tr {
       &:nth-of-type(2n + 1) {
-        @apply bg-lime-950;
+        @apply bg-slate-100 dark:bg-lime-950;
       }
     }
 
@@ -61,7 +61,7 @@ const {
 
       > tbody th,
       > tbody td {
-        @apply px-4 py-4 text-2xl text-green-200;
+        @apply px-4 py-4 text-2xl text-green-950 dark:text-green-200;
       }
     }
 
