@@ -1,5 +1,6 @@
 ---
-import LightbulbIcon from "../assets/images/lightbulb-on.svg";
+import LightbulbOffIcon from "../assets/images/lightbulb-off.svg";
+import LightbulbIcon from "../assets/images/lightbulb.svg";
 
 // TODO What are the aria props?
 // How does localStorage.theme work? diff from getItem?
@@ -22,9 +23,18 @@ import LightbulbIcon from "../assets/images/lightbulb-on.svg";
 <button
   aria-label="auto"
   aria-live="polite"
-  class="w-8 text-amber-600 md:w-10 lg:w-12"
+  class="w-8 rounded-full text-stone-100 lg:w-14 dark:text-yellow-200 dark:opacity-70"
   id="NBASTT-Color-Scheme-Toggle"
   title="Toggles light & dark"
 >
-  <LightbulbIcon fill="currentColor" role="img" />
+  <LightbulbIcon
+    class="hover:fill-dark-emerald shadow-lightbulb block rounded-full bg-radial from-yellow-200/50 from-20% to-yellow-100/50 hover:opacity-50 dark:hidden"
+    fill="currentColor"
+    role="img"
+  />
+  <LightbulbOffIcon
+    class="hover:shadow-lightbulb hidden rounded-full from-yellow-200/50 from-50% to-yellow-100/15 hover:bg-radial dark:block"
+    fill="currentColor"
+    role="img"
+  />
 </button>

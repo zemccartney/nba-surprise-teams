@@ -71,20 +71,27 @@ for (let i = 0; i < teamGames.length; i++) {
     grid-template-columns: 3fr 2fr;
 
     .NBASurpriseTracker-Table {
+      outline: none; /* undoes outline rules on base table */
+
       > thead {
         @apply hidden;
       }
 
       > tbody th {
-        @apply border-b-2 border-b-slate-800 text-lime-400;
+        @apply text-slate-950 dark:border-b-2 dark:border-b-slate-800 dark:text-lime-400;
       }
 
       > tbody td {
         @apply text-right;
       }
 
+      > tbody th,
+      td {
+        @apply border-2 border-slate-950;
+      }
+
       > tbody th {
-        @apply bg-slate-950;
+        @apply dark:bg-slate-950;
       }
     }
   }

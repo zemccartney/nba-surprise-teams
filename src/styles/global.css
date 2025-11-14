@@ -25,4 +25,5 @@
   --shadow-glow: 0px 0px 80px 40px rgb(163 230 53 / 0.5); /* shadow-lime-400/50 */
   --shadow-glow-sm: 0px 0px 40px 20px rgb(163 230 53 / 0.5);
   --shadow-popover: 0px 0px 12px 12px var(--color-blurple-glow);
+  --shadow-lightbulb: 0px 0px 30px 10px oklch(97.3% 0.071 103.193 / 0.5); /* yellow-100 */
 }
