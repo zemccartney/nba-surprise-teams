@@ -14,6 +14,7 @@ import SurprisedEmoji from "../../assets/images/emoji/hushed-face.svg";
 // import * as ContentUtils from "../../content/utils";
 import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
+import { useColorScheme } from "./hooks";
 
 // Essentially copied from https://recharts.org/en-US/examples/AreaChartFillByValue
 
@@ -160,7 +161,9 @@ export default function TeamSeasonPaceChart({
   }; //Awaited<ReturnType<typeof ContentUtils.getSeasonSurpriseRules>>;
   winsToSurprise: number; // Awaited<ReturnType<typeof ContentUtils.winsToSurprise>>;
 }) {
+  const colorScheme = useColorScheme();
   const offset = getGradientOffset(data, winsToSurprise);
+  console.log(colorScheme, "WHAT THE FUCK");
 
   return (
     <ResponsiveContainer height={600} width="100%">
@@ -174,7 +177,9 @@ export default function TeamSeasonPaceChart({
         width={400}
       >
         <CartesianGrid
-          fill="var(--color-slate-950)"
+          fill={
+            colorScheme === "dark" ? "var(--color-slate-950)" : "transparent"
+          }
           stroke="var(--color-lime-200)"
           strokeDasharray="3 3"
         />

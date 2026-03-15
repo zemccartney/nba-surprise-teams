@@ -60,6 +60,9 @@ export default defineConfig({
       : []),
   ],
   vite: {
+    optimizeDeps: {
+      include: ["react-use"],
+    },
     plugins: [tailwindcss()],
     resolve: {
       // https://github.com/withastro/adapters/pull/436#issuecomment-2525190557
@@ -81,6 +84,7 @@ export default defineConfig({
         "fs",
         "path",
       ],
+      noExternal: ["react-use"],
     },
   },
 });

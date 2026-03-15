@@ -9,10 +9,12 @@ import Typography from "../layouts/typography.astro";
   title="About"
 >
   <Typography class="mx-auto px-4 lg:max-w-[60%]">
-    <h1 class="font-title text-center text-2xl text-lime-400 md:text-4xl">
+    <h1
+      class="font-title text-center text-2xl text-slate-950 md:text-4xl dark:text-lime-400"
+    >
       What is the NBA Surprise Teams Tracker?
     </h1>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       Alex Speers and Andrew Schlecht host <span class="italic"
         >The Saturday Slam N' Jam,</span
       > the Saturday episode of <span class="italic">The Athletic's</span> NBA podcast.
@@ -22,38 +24,40 @@ import Typography from "../layouts/typography.astro";
     </p>
     <iframe
       allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-      class="mx-auto !my-16"
+      class="mx-auto my-16!"
       height="175"
       sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
       src="https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
       style="width:100%;max-width:660px;overflow:hidden;border-radius:10px;"
       title="The Athletic NBA Daily podcast, 9/20/2024 — Embiid Extension + Surprise Teams + Pelicans Preview"
     ></iframe>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       If you're short on time, though, a team qualifies as a Surprise Team if:
     </p>
-    <ul class="text-2xl text-green-200">
+    <ul class="text-2xl text-slate-950 dark:text-green-200">
       <li>Their preseason over/under is below 36 wins</li>
       <li>They beat their over/under by at least 10 games</li>
     </ul>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       This site just keeps track of how well the current season's Surprise Team
       candidates are doing at, well, surprising us.
     </p>
 
-    <h2 class="font-title text-center text-2xl text-lime-400 md:text-4xl">
+    <h2
+      class="font-title text-center text-2xl text-slate-950 md:text-4xl dark:text-lime-400"
+    >
       The Dataset
     </h2>
 
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       The dataset collected here covers from the earliest season for which we
       have preseason over/under data, 1993, to the present day.
     </p>
 
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       Over/under data was sourced as follows:
     </p>
-    <ol class="text-2xl text-green-200">
+    <ol class="text-2xl text-slate-950 dark:text-green-200">
       <li>
         From the numbers announced on the <span class="italic">Slam N' Jam</span
         > itself. This covers 2021 through, at the time of writing, 2024. Subject
@@ -74,28 +78,30 @@ import Typography from "../layouts/typography.astro";
     </ol>
     <div class="flex flex-row items-center gap-2">
       <span
-        class="font-title basis-1/4 self-center text-right text-xl text-lime-400 md:text-2xl"
+        class="font-title basis-1/4 self-center text-right text-xl text-slate-950 md:text-2xl dark:text-lime-400"
         >~</span
       >
-      <h3 class="font-title text-center text-xl text-lime-400 md:text-2xl">
+      <h3
+        class="font-title text-center text-xl text-slate-950 md:text-2xl dark:text-lime-400"
+      >
         Missing Seasons
       </h3>
       <span
-        class="font-title basis-1/4 self-center text-left text-xl text-lime-400 md:text-2xl"
+        class="font-title basis-1/4 self-center text-left text-xl text-slate-950 md:text-2xl dark:text-lime-400"
         >~</span
       >
     </div>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       4 seasons since 1993 are not represented in the dataset: 1994, 1995, 1998,
       and 2019.
     </p>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       Per <Link
         href="https://www.sportsoddshistory.com/nba-regular-season-win-total-results-by-team-1990s/"
         target="_blank">sportsoddshistory</Link
       >, we don't have data for those seasons from the '90s.
     </p>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       2019, of course, was the COVID year. Given the uneven number of games
       played across teams and the fact that <Link
         href="https://www.sportsoddshistory.com/nba-regular-season-win-total-results-by-team/"
@@ -106,49 +112,61 @@ import Typography from "../layouts/typography.astro";
     </p>
     <div class="flex flex-row justify-center gap-2">
       <span
-        class="font-title basis-1/4 self-center text-right text-xl text-lime-400 md:text-2xl"
+        class="font-title basis-1/4 self-center text-right text-xl text-slate-950 md:text-2xl dark:text-lime-400"
         >~</span
       >
-      <h3 class="font-title text-center text-xl text-lime-400 md:text-2xl">
+      <h3
+        class="font-title text-center text-xl text-slate-950 md:text-2xl dark:text-lime-400"
+      >
         Shortened Seasons
       </h3>
       <span
-        class="font-title basis-1/4 self-center text-left text-xl text-lime-400 md:text-2xl"
+        class="font-title basis-1/4 self-center text-left text-xl text-slate-950 md:text-2xl dark:text-lime-400"
         >~</span
       >
     </div>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       This dataset contains 2 seasons shortened from the standard 82 games: 2011
       and 2020.
     </p>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       For those seasons, the over/under (36 wins, preseason) and surprise (+10
       over preseason) cutoffs have been adjusted proportionately to the actual
       season lengths. Does this make sense? Not sure! I majored in English in
       college, please give me a shout if it turns out I'm bad at math.
     </p>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       So, taking the 2020 season for example, where only 72 games were played
       due to COVID-related scheduling adjustments:
     </p>
-    <p class="text-2xl text-green-200">
-      <span class="text-green-200 underline">Over/Under cutoff:</span>
-      <span class="font-mono text-lg text-yellow-400 italic"
+    <p class="text-2xl text-slate-950 dark:text-green-200">
+      <span class="text-slate-950 underline dark:text-green-200"
+        >Over/Under cutoff:</span
+      >
+      <span
+        class="font-mono text-lg text-yellow-700 italic dark:text-yellow-400"
         >(36 o/u / 82 games) * 72 = 32 (~31.61, rounded up)
       </span>
     </p>
-    <p class="text-2xl text-green-200">
-      <span class="text-green-200 underline">Surprise cutoff:</span>
-      <span class="inline-bloc font-mono text-lg text-yellow-400 italic"
+    <p class="text-2xl text-slate-950 dark:text-green-200">
+      <span class="text-slate-950 underline dark:text-green-200"
+        >Surprise cutoff:</span
+      >
+      <span
+        class="inline-bloc font-mono text-lg text-yellow-700 italic dark:text-yellow-400"
         >(10 pace / 82 games) * 72 = 9 (~8.78, rounded to nearest integer)</span
       >
     </p>
 
-    <h2 class="font-title text-center text-2xl text-lime-400 md:text-4xl">
+    <h2
+      class="font-title text-center text-2xl text-slate-950 md:text-4xl dark:text-lime-400"
+    >
       Icons
     </h2>
-    <p class="text-2xl text-green-200">Where did the goofy icons come from?</p>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
+      Where did the goofy icons come from?
+    </p>
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       Almost all are variations on or direct usage of emoji from <Link
         href="https://github.com/twitter/twemoji"
         target="_blank">Twitter's emoji font</Link
@@ -157,24 +175,26 @@ import Typography from "../layouts/typography.astro";
         >This app</Link
       > was surpremely useful for poking around and finding NBA-team-adjacent characters).
     </p>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       Almost, meaning all except the Sonics logo, which I painstakingly stapled
       together with my fine graphic design skills. It's the Space Needle! Cool!
     </p>
 
-    <h2 class="font-title text-center text-2xl text-lime-400 md:text-4xl">
+    <h2
+      class="font-title text-center text-2xl text-slate-950 md:text-4xl dark:text-lime-400"
+    >
       Who are you?
     </h2>
-    <p class="text-2xl text-green-200">
+    <p class="text-2xl text-slate-950 dark:text-green-200">
       My name's Zack McCartney. I'm a web programmer and basketball fan with a
       possibly troubling amount of time on my hands. Thanks for stopping by!
     </p>
-    <p class="text-2xl text-green-200 italic">
+    <p class="text-2xl text-slate-950 italic dark:text-green-200">
       (And to be totally clear: entirely unaffiliated with Alex, Andrew, the
       Athletic / NYT, and the NBA; random guy working solo.)
     </p>
     <p
-      class="flex flex-col items-center justify-center gap-4 text-2xl text-green-200 md:flex-row"
+      class="flex flex-col items-center justify-center gap-4 text-2xl text-slate-950 md:flex-row dark:text-green-200"
     >
       <Link class="text-xl" href="mailto:zack@grepco.net">zack@grepco.net</Link>
       <Link class="text-xl" href="https://www.grepco.net" target="_blank"

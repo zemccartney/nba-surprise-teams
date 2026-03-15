@@ -12,7 +12,12 @@ import LightbulbIcon from "../assets/images/lightbulb.svg";
   ) as HTMLButtonElement;
 
   colorSchemeToggle.addEventListener("click", () => {
-    localStorage.theme = localStorage.theme === "dark" ? "light" : "dark";
+    const currentTheme =
+      localStorage.theme ||
+      (globalThis.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+    localStorage.theme = currentTheme === "dark" ? "light" : "dark";
     document.documentElement.classList.toggle(
       "dark",
       localStorage.theme === "dark",

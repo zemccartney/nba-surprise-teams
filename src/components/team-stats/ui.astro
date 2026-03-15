@@ -104,7 +104,7 @@ for (let i = 0; i < teamGames.length; i++) {
         {isSurpriseTeam && (
           <>
             <ResultEmoji loading="eager" name="surprise" width={32} />
-            <h2 class="text-center text-lg text-green-200 md:text-2xl">
+            <h2 class="text-center text-lg text-green-700 md:text-2xl dark:text-green-200">
               Surprise Team!
             </h2>
             <ResultEmoji loading="eager" name="celebration" width={32} />
@@ -113,7 +113,7 @@ for (let i = 0; i < teamGames.length; i++) {
         {isEliminated && (
           <>
             <ResultEmoji loading="eager" name="eliminated" width={32} />
-            <p class="text-center text-lg text-green-200 md:text-2xl">
+            <p class="text-center text-lg text-green-700 md:text-2xl dark:text-green-200">
               Eliminated.
               <br />
               No surprise this year
@@ -127,7 +127,7 @@ for (let i = 0; i < teamGames.length; i++) {
 
   {
     season.data.shortened && (
-      <h2 class="relative mt-8 mr-12 w-80 text-lg text-yellow-400 max-lg:mx-auto lg:mt-4 lg:ml-auto">
+      <h2 class="relative mt-8 mr-12 w-80 text-lg text-yellow-700 max-lg:mx-auto lg:mt-4 lg:ml-auto dark:text-yellow-400">
         Stats here have been adjusted to reflect the shortened {fmtSeason}{" "}
         season
         <Popover
