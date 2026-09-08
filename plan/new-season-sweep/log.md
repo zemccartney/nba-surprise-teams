@@ -3,6 +3,52 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-07 — Step 3: pnpm 11, Node 26, lefthook
+
+**What changed.** npm → pnpm 11.26.0, pinned with its integrity hash in
+`packageManager`; the lockfile came from `pnpm import`, so every resolved
+version is what `package-lock.json` had (set-compared: only `pre-commit`'s
+subtree left and `lefthook`'s platform binaries arrived). Node 26 via
+`.node-version` and `engines`. `pre-commit` (last published 2017) → lefthook 2,
+installed by the `prepare` script, running types/format/lint/tests in parallel
+with the two linters scoped to staged files. pnpm settings with comments in
+`pnpm-workspace.yaml`. `plan/baseline/` got its own `pnpm-workspace.yaml` so
+it's a separate project rather than a workspace member. README gained
+Toolchain / Dependencies / Git hooks sections.
+
+**Found on the way:**
+
+1. `npm run build` ran check + test twice: npm runs `prebuild` as a lifecycle
+   hook and the `build` script called it again explicitly. Renamed to `verify`,
+   called once.
+2. `trustPolicy: no-downgrade` compares provenance by publish date. Two
+   legitimate backports trip it: `semver@6.3.1` (2023, via eslint-plugin-react)
+   and `vite@6.4.1` (2025-10 security backport). Kept the policy with
+   `trustPolicyIgnoreAfter` = 1 year and `vite@6.4.1` in `trustPolicyExclude`.
+3. `sharp` still has an install script (the research said otherwise); it needs
+   an `allowBuilds` entry like esbuild/workerd/@sentry/cli/lefthook. When a
+   build is unreviewed, pnpm writes a `set this to true or false` placeholder
+   into the workspace file.
+4. While `pnpm install` is failing, every `pnpm run`/`pnpm exec` fails too
+   (`verifyDepsBeforeRun` re-runs the install first).
+
+**Verification.** `pnpm run verify` green on Node 26.8.1. `astro build` output
+vs the same commit built with npm on Node 24: `dist/_astro/` (118 files) and
+all static output byte-identical; server chunks differ only in Astro's embedded
+module paths (`node_modules/.pnpm/...`) and Rollup export-name ordering. Runtime
+capture of both builds served by wrangler (`runs/2026-09-07-main-npm-local` vs
+`runs/2026-09-07-tooling-pnpm-local`): identical payloads on all 11 pages, 44/44
+screenshots pixel-identical, no console or request errors. One server-side
+delta: the pnpm build bundles a second copy of zod into
+`_worker.js/_astro-internal_actions.mjs` (7 KB → 136 KB; worker total
+6.42 → 6.55 MB). Nothing reaches the client and Astro 7 rechunks all of this,
+so it's noted, not chased.
+
+**Still to do by hand (Cloudflare Pages dashboard):** build command
+`pnpm run build`; delete `NODE_VERSION` (or set 26) so `.node-version` applies;
+`PNPM_VERSION` can stay unset — the image's pnpm 10 self-selects 11.26.0 from
+`packageManager`. The first preview build is the test.
+
 ## 2026-09-08 — Step 2: register the 2026-27 season
 
 `seasons.json` gains id `2026`, 2026-10-20 to 2027-04-11 (NBA schedule released
