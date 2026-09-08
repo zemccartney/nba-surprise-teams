@@ -3,6 +3,18 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-08 — Step 2: register the 2026-27 season
+
+`seasons.json` gains id `2026`, 2026-10-20 to 2027-04-11 (NBA schedule released
+2026-08-13). 43 days before opening night, inside the 90-day rule. Per the
+lifecycle in MAINTENANCE.md the home page now shows the countdown; `/2025` is
+still reachable directly. Episode fields and team seasons follow when the
+surprise-teams episode airs and odds are posted, expected late September.
+
+Also this round: the `tailwind-removal` branch deployed to a Pages preview and
+was captured as `runs/2026-09-08-preview-tailwind`; every diff against prod is
+data-driven (2025 archived) or the About embed, which captures now block.
+
 ## 2026-09-07 — Step 1: finish the Tailwind removal
 
 **Starting point.** The uncommitted March working tree already had Tailwind's
