@@ -19,34 +19,28 @@ const [, mm, dd] = latestSeason.data.startDate.split("-");
 
 <Layout>
   <Fragment slot="header">
-    <h1
-      class="font-title text-center text-3xl text-balance text-lime-400 md:text-5xl lg:text-7xl"
-    >
-      NBA Surprise Teams Tracker
-    </h1>
-    <nav class="mt-8 flex flex-row justify-center gap-4 md:mt-16 md:gap-12">
-      <Link class="text-2xl md:text-3xl lg:text-4xl" href="/archive"
-        >Archive</Link
-      >
-      <Link class="text-2xl md:text-3xl lg:text-4xl" href="/stats">Stats</Link>
-      <Link class="text-2xl md:text-3xl lg:text-4xl" href="/about">About</Link>
+    <h1 class="home-title">NBA Surprise Teams Tracker</h1>
+    <nav class="home-nav">
+      <Link class="home-nav-link" href="/archive">Archive</Link>
+      <Link class="home-nav-link" href="/stats">Stats</Link>
+      <Link class="home-nav-link" href="/about">About</Link>
     </nav>
   </Fragment>
-  <main class="mt-4 pb-24 sm:mt-16 md:px-8">
+  <main class="home-main">
     {isSeasonReady && <StandingsTable seasonId={latestSeason.id} />}
     {
       !isSeasonReady && (
-        <Typography class="mx-auto px-4 lg:max-w-[60%]">
-          <h2 class="font-title text-center text-2xl text-balance text-lime-400 md:text-4xl">
+        <Typography class="content-narrow">
+          <h2 class="section-title">
             Countdown to the{" "}
-            <span class="whitespace-nowrap">
+            <span class="nowrap">
               {ContentUtils.abbreviateSeasonRange(latestSeason, {
                 compact: true,
               })}
             </span>{" "}
             season
           </h2>
-          <p class="text-2xl text-green-200">
+          <p class="body-text">
             Next season kicks off on {`${mm}/${dd}`}! Pre-season over/unders are
             typically posted mid-September. Till then, check out how{" "}
             <Link href="/archive">past years</Link> shook out.
@@ -56,3 +50,116 @@ const [, mm, dd] = latestSeason.data.startDate.split("-");
     }
   </main>
 </Layout>
+
+<style>
+  .home-title {
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl--line-height);
+    text-wrap: balance;
+    color: var(--color-lime-400);
+  }
+
+  @media (min-width: 768px) {
+    .home-title {
+      font-size: var(--text-5xl);
+      line-height: var(--text-5xl--line-height);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-title {
+      font-size: var(--text-7xl);
+      line-height: var(--text-7xl--line-height);
+    }
+  }
+
+  .home-nav {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .home-nav {
+      margin-top: 4rem;
+      gap: 3rem;
+    }
+  }
+
+  .home-nav-link {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+  }
+
+  @media (min-width: 768px) {
+    .home-nav-link {
+      font-size: var(--text-3xl);
+      line-height: var(--text-3xl--line-height);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-nav-link {
+      font-size: var(--text-4xl);
+      line-height: var(--text-4xl--line-height);
+    }
+  }
+
+  .home-main {
+    margin-top: 1rem;
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 640px) {
+    .home-main {
+      margin-top: 4rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .home-main {
+      padding-inline: 2rem;
+    }
+  }
+
+  .content-narrow {
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .content-narrow {
+      max-width: 60%;
+    }
+  }
+
+  .section-title {
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    text-wrap: balance;
+    color: var(--color-lime-400);
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: var(--text-4xl);
+      line-height: var(--text-4xl--line-height);
+    }
+  }
+
+  .body-text {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    color: var(--color-green-200);
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+</style>

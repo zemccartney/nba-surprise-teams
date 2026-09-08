@@ -11,14 +11,12 @@ const archivedSeasons = await ContentUtils.getArchivedSeasons();
   description="Listing of seasons tracked for surprise teams so far"
   title="Archive"
 >
-  <Typography class="mx-auto px-4 lg:max-w-[60%]">
-    <h1 class="font-title text-center text-2xl text-lime-400 md:text-4xl">
-      Archive
-    </h1>
-    <div class="!mt-6 flex flex-col items-center gap-6 md:!mt-12 md:gap-12">
+  <Typography class="content-narrow">
+    <h1 class="page-title">Archive</h1>
+    <div class="archive-list">
       {
         archivedSeasons.map((season) => (
-          <Link class="text-4xl" href={`/${season.id}`}>
+          <Link class="archive-link" href={`/${season.id}`}>
             {ContentUtils.abbreviateSeasonRange(season)}
           </Link>
         ))
@@ -26,3 +24,51 @@ const archivedSeasons = await ContentUtils.getArchivedSeasons();
     </div>
   </Typography>
 </Subpage>
+
+<style>
+  .content-narrow {
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .content-narrow {
+      max-width: 60%;
+    }
+  }
+
+  .page-title {
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    color: var(--color-lime-400);
+  }
+
+  @media (min-width: 768px) {
+    .page-title {
+      font-size: var(--text-4xl);
+      line-height: var(--text-4xl--line-height);
+    }
+  }
+
+  .archive-list {
+    margin-top: 1.5rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .archive-list {
+      margin-top: 3rem !important;
+      gap: 3rem;
+    }
+  }
+
+  .archive-link {
+    font-size: var(--text-4xl);
+    line-height: var(--text-4xl--line-height);
+  }
+</style>

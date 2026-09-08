@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 import { PopoverBody } from "../popover";
+import "./charts.css";
 
 type SurprisesByTeamChartDatapoint = {
   name: string;
@@ -45,7 +46,7 @@ const YAxisLabel = ({
 
   return (
     <text
-      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
+      className="chart-axis-label"
       transform={`rotate(${rot})`}
       x={x - 48}
       y={cy + 24}
@@ -68,11 +69,7 @@ const XAxisLabel = ({
   const { height, width, y } = viewBox;
 
   return (
-    <text
-      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
-      x={width / 2}
-      y={height / 2 + y + 20}
-    >
+    <text className="chart-axis-label" x={width / 2} y={height / 2 + y + 20}>
       Team
     </text>
   );
@@ -91,23 +88,22 @@ const TooltipContent = ({
 
     if ("history" in point) {
       return (
-        <PopoverBody className="md:max-w-fit" deRadix>
-          <h3 className="mb-1 text-center font-bold">{point.name}</h3>
+        <PopoverBody className="popover-body-fit" deRadix>
+          <h3 className="tooltip-heading-centered">{point.name}</h3>
 
-          <p className="text-center">
+          <p className="tooltip-centered">
             Surprise Record: {point.numSurprised} -{" "}
             {Math.abs(point.numEliminated)}{" "}
             {/* Math.abs to reverse negative scale coercion (see note in render, on mapping in passing to data prop) */}
           </p>
 
-          <ul className="ps-[0.5em]">
+          <ul className="tooltip-list">
             {point.history.map((hist) => (
-              <li className="mt-4" key={`${hist.teamId}-${hist.duration[0]}`}>
-                <img
-                  className="inline contrast-150 drop-shadow-lg"
-                  src={hist.logoSrc}
-                  width={32}
-                />{" "}
+              <li
+                className="tooltip-list-item"
+                key={`${hist.teamId}-${hist.duration[0]}`}
+              >
+                <img className="tooltip-logo" src={hist.logoSrc} width={32} />{" "}
                 {hist.name} (
                 {/*
                   Inc end season id to represent year of end date of that season,
@@ -126,17 +122,13 @@ const TooltipContent = ({
     }
 
     return (
-      <PopoverBody className="md:max-w-fit" deRadix>
-        <h3 className="mb-1 text-center font-bold">
-          <img
-            className="inline contrast-150 drop-shadow-lg"
-            src={point.logoSrc}
-            width={30}
-          />{" "}
+      <PopoverBody className="popover-body-fit" deRadix>
+        <h3 className="tooltip-heading-centered">
+          <img className="tooltip-logo" src={point.logoSrc} width={30} />{" "}
           {point.name}
         </h3>
 
-        <p className="text-center">
+        <p className="tooltip-centered">
           Surprise Record: {point.numSurprised} -{" "}
           {Math.abs(point.numEliminated)}
         </p>

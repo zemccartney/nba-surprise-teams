@@ -1,0 +1,94 @@
+.popover-body {
+  box-shadow: var(--shadow-popover);
+  background-color: var(--color-blurple-glow);
+  z-index: 10;
+  width: fit-content;
+  max-width: 20rem;
+  padding: 1.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
+  color: var(--color-green-200);
+}
+
+.popover-trigger {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  color: var(--color-indigo-500);
+  background: none;
+  border: none;
+}
+
+.popover-trigger:hover {
+  color: var(--color-indigo-300);
+}
+
+@media (min-width: 768px) {
+  .popover-trigger {
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+  }
+}
+
+.popover-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl--line-height);
+  color: var(--color-lime-400);
+  background: none;
+  border: none;
+}
+
+.popover-close:hover {
+  color: var(--color-lime-600);
+}
+
+.popover-arrow {
+  fill: var(--color-blurple-glow);
+}
+
+/* Override variants used by consuming components */
+
+/* team-stats shortened-season popover */
+.popover-body-narrow {
+  max-width: 20rem;
+}
+
+.popover-trigger-offset-sm {
+  top: -1rem !important;
+  right: -0.75rem !important;
+}
+
+/* season page episode popover */
+.popover-episode-body {
+  padding: 1rem;
+  max-width: 25rem;
+}
+
+.popover-episode-trigger {
+  top: -1rem !important;
+  right: -1.25rem !important;
+}
+
+/* chart tooltip overrides */
+.popover-body-padded {
+  padding-bottom: 1rem;
+}
+
+.popover-body-fit {
+  max-width: fit-content;
+}
+
+.popover-body-md {
+  padding-bottom: 1rem;
+  max-width: 20rem;
+}

@@ -1,0 +1,58 @@
+/* Shared styles for Recharts SVG text labels */
+.chart-axis-label {
+  fill: var(--color-lime-500);
+  stroke: var(--color-lime-500);
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  line-height: var(--text-xl--line-height);
+  letter-spacing: 0.025em;
+}
+
+.chart-ref-label {
+  fill: var(--color-lime-500);
+  stroke: var(--color-lime-500);
+}
+
+/* Shared tooltip content styles */
+.tooltip-heading {
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.tooltip-heading-centered {
+  margin-bottom: 0.25rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.tooltip-label {
+  margin-right: 1rem;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.tooltip-logo {
+  display: inline;
+  filter: contrast(1.5) drop-shadow(0 4px 4px rgb(0 0 0 / 0.15));
+}
+
+.tooltip-centered {
+  text-align: center;
+}
+
+.tooltip-list {
+  padding-inline-start: 0.5em;
+}
+
+.tooltip-list-item {
+  margin-top: 1rem;
+}
+
+.tooltip-section-heading {
+  margin-bottom: 0.5rem;
+}
+
+.tooltip-para {
+  margin-top: 1rem;
+}

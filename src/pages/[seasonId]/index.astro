@@ -72,15 +72,12 @@ const seasonAfter = adjacent(1);
   description={`Results for the ${fmtSeason} season`}
   title={`${fmtSeason} Season`}
 >
-  <div class="px-0 md:px-8">
+  <div class="season-content">
     {
       hasArchive && (
-        <div class="mb-12 flex flex-row items-center justify-center gap-12 md:-mt-12">
+        <div class="season-nav">
           {seasonBefore && (
-            <a
-              class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
-              href={`/${seasonBefore.id}`}
-            >
+            <a class="season-button" href={`/${seasonBefore.id}`}>
               <ArrowLeftSvg
                 class="SeasonArchiveButton fill-current"
                 width={24}
@@ -94,10 +91,7 @@ const seasonAfter = adjacent(1);
             </a>
           )}
           {seasonAfter && (
-            <a
-              class="flex flex-row items-center justify-center gap-4 border-2 border-indigo-500 bg-slate-950 px-4 py-2 text-base text-lime-500 hover:border-slate-950 hover:bg-lime-500 hover:text-slate-950 md:text-xl"
-              href={`/${seasonAfter.id}`}
-            >
+            <a class="season-button" href={`/${seasonAfter.id}`}>
               {ContentUtils.abbreviateSeasonRange(seasonAfter, {
                 compact: true,
               })}{" "}
@@ -113,19 +107,19 @@ const seasonAfter = adjacent(1);
     }
     <h1
       class:list={[
-        "font-title text-center text-2xl text-lime-400 md:text-4xl",
+        "season-title",
         season.data.episodeUrl || season.data.shortened
-          ? "mb-6 sm:mb-12"
-          : "mb-12 sm:mb-24",
+          ? "spacing-sm"
+          : "spacing-lg",
       ]}
     >
       {`${fmtSeason} Season`}
     </h1>
     {
       season.data.episodeUrl && (
-        <div class="relative mx-auto mb-12 w-fit sm:mb-24">
+        <div class="episode-link-wrapper">
           <Link
-            class="relative inline-block w-fit text-xl md:text-2xl lg:text-4xl"
+            class="episode-link"
             href={season.data.episodeUrl}
             target="_blank"
           >
@@ -133,8 +127,8 @@ const seasonAfter = adjacent(1);
           </Link>
           <Popover
             classes={{
-              body: "p-4 !max-w-100",
-              trigger: "!-top-4 !-right-5",
+              body: "popover-episode-body",
+              trigger: "popover-episode-trigger",
             }}
             client:load
           >
@@ -150,25 +144,23 @@ const seasonAfter = adjacent(1);
     }
     {
       season.data.shortened && (
-        <section class="mb-12 px-4 text-xl text-yellow-200 sm:mb-24">
-          <h2 class="text-center text-2xl text-balance text-yellow-400">
+        <section class="shortened-section">
+          <h2 class="shortened-title">
             Shortened season: {season.data.shortened.numGames} games played
           </h2>
-          <h3 class="mx-auto w-fit text-center text-balance">
-            {season.data.shortened.reason}
-          </h3>
-          <h3 class="mt-4 text-center underline">Adjustments</h3>
-          <ul class="mx-auto w-fit list-inside list-disc">
+          <h3 class="shortened-reason">{season.data.shortened.reason}</h3>
+          <h3 class="shortened-adjustments">Adjustments</h3>
+          <ul class="shortened-list">
             {/* Consistent widths to align bullets while centering */}
             <li>
               Over/Under Cutoff:{" "}
-              <span class="text-yellow-400">
+              <span class="highlight">
                 {surpriseRules.overUnderCutoff.toPrecision(3)}
               </span>
             </li>
             <li>
               Surprise Team Pace Cutoff:{" "}
-              <span class="text-yellow-400">
+              <span class="highlight">
                 {Utils.signedFormatter.format(surpriseRules.paceTarget)}
               </span>
             </li>
@@ -179,3 +171,182 @@ const seasonAfter = adjacent(1);
     <StandingsTable seasonId={season.id} title={false} />
   </div>
 </Subpage>
+
+<style>
+  .season-content {
+    padding-inline: 0;
+  }
+
+  @media (min-width: 768px) {
+    .season-content {
+      padding-inline: 2rem;
+    }
+  }
+
+  .season-nav {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .season-nav {
+      margin-top: -3rem;
+    }
+  }
+
+  .season-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 2px solid var(--color-indigo-500);
+    background-color: var(--color-slate-950);
+    padding: 0.5rem 1rem;
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    color: var(--color-lime-500);
+    text-decoration: none;
+  }
+
+  .season-button:hover {
+    border-color: var(--color-slate-950);
+    background-color: var(--color-lime-500);
+    color: var(--color-slate-950);
+  }
+
+  @media (min-width: 768px) {
+    .season-button {
+      font-size: var(--text-xl);
+      line-height: var(--text-xl--line-height);
+    }
+  }
+
+  .fill-current {
+    fill: currentColor;
+  }
+
+  .season-title {
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    color: var(--color-lime-400);
+  }
+
+  @media (min-width: 768px) {
+    .season-title {
+      font-size: var(--text-4xl);
+      line-height: var(--text-4xl--line-height);
+    }
+  }
+
+  .spacing-sm {
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .spacing-sm {
+      margin-bottom: 3rem;
+    }
+  }
+
+  .spacing-lg {
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .spacing-lg {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .episode-link-wrapper {
+    position: relative;
+    margin-inline: auto;
+    margin-bottom: 3rem;
+    width: fit-content;
+  }
+
+  @media (min-width: 640px) {
+    .episode-link-wrapper {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .episode-link {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+  }
+
+  @media (min-width: 768px) {
+    .episode-link {
+      font-size: var(--text-2xl);
+      line-height: var(--text-2xl--line-height);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .episode-link {
+      font-size: var(--text-4xl);
+      line-height: var(--text-4xl--line-height);
+    }
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .shortened-section {
+    margin-bottom: 3rem;
+    padding-inline: 1rem;
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+    color: var(--color-yellow-200);
+  }
+
+  @media (min-width: 640px) {
+    .shortened-section {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .shortened-title {
+    text-align: center;
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+    text-wrap: balance;
+    color: var(--color-yellow-400);
+  }
+
+  .shortened-reason {
+    margin-inline: auto;
+    width: fit-content;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .shortened-adjustments {
+    margin-top: 1rem;
+    text-align: center;
+    text-decoration: underline;
+  }
+
+  .shortened-list {
+    margin-inline: auto;
+    width: fit-content;
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+
+  .highlight {
+    color: var(--color-yellow-400);
+  }
+</style>

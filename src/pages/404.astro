@@ -4,12 +4,46 @@ import Subpage from "../layouts/subpage.astro";
 ---
 
 <Subpage title="404!">
-  <h1
-    class="font-title mt-[20%] text-center text-4xl !leading-snug text-yellow-400 italic md:text-6xl"
-  >
-    Page Not Found
-  </h1>
-  <Link class="mt-8 block text-center text-lg md:text-xl lg:text-2xl" href="/"
-    >Return home</Link
-  >
+  <h1 class="not-found-title">Page Not Found</h1>
+  <Link class="return-link" href="/">Return home</Link>
 </Subpage>
+
+<style>
+  .not-found-title {
+    font-family: var(--font-title);
+    margin-top: 20%;
+    text-align: center;
+    font-size: var(--text-4xl);
+    line-height: 1.375; /* leading-snug */
+    color: var(--color-yellow-400);
+    font-style: italic;
+  }
+
+  @media (min-width: 768px) {
+    .not-found-title {
+      font-size: var(--text-6xl);
+    }
+  }
+
+  .return-link {
+    margin-top: 2rem;
+    display: block;
+    text-align: center;
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
+  }
+
+  @media (min-width: 768px) {
+    .return-link {
+      font-size: var(--text-xl);
+      line-height: var(--text-xl--line-height);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .return-link {
+      font-size: var(--text-2xl);
+      line-height: var(--text-2xl--line-height);
+    }
+  }
+</style>

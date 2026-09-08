@@ -19,26 +19,92 @@ const { class: className, ...layoutProps } = Astro.props;
 
 <Layout {...layoutProps}>
   <Fragment slot="header">
-    <nav class="flex flex-col items-center gap-8 lg:flex-row lg:gap-20">
-      <a class="font-title text-sm text-lime-400 md:text-2xl" href="/">
+    <nav class="nav">
+      <a class="site-title" href="/">
         {/* TODO Better way to do this? br and nbsps feels hacky */}
         NBA&nbsp;Surprise<br />Teams&nbsp;Tracker
       </a>
-      <div class="flex flex-row gap-4 md:gap-12">
-        <Link
-          class="text-center text-xl md:text-2xl lg:text-4xl"
-          href="/archive">Archive</Link
-        >
-        <Link class="text-center text-xl md:text-2xl lg:text-4xl" href="/stats"
-          >Stats</Link
-        >
-        <Link class="text-center text-xl md:text-2xl lg:text-4xl" href="/about"
-          >About</Link
-        >
+      <div class="nav-links">
+        <Link class="nav-link" href="/archive">Archive</Link>
+        <Link class="nav-link" href="/stats">Stats</Link>
+        <Link class="nav-link" href="/about">About</Link>
       </div>
     </nav>
   </Fragment>
-  <main class:list={["pb-24 md:mt-16", className]}>
+  <main class:list={["main", className]}>
     <slot />
   </main>
 </Layout>
+
+<style>
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .nav {
+      flex-direction: row;
+      gap: 5rem;
+    }
+  }
+
+  .site-title {
+    font-family: var(--font-title);
+    font-size: var(--text-sm);
+    line-height: var(--text-sm--line-height);
+    color: var(--color-lime-400);
+    text-decoration: none;
+  }
+
+  @media (min-width: 768px) {
+    .site-title {
+      font-size: var(--text-2xl);
+      line-height: var(--text-2xl--line-height);
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      gap: 3rem;
+    }
+  }
+
+  .nav-link {
+    text-align: center;
+    font-size: var(--text-xl);
+    line-height: var(--text-xl--line-height);
+  }
+
+  @media (min-width: 768px) {
+    .nav-link {
+      font-size: var(--text-2xl);
+      line-height: var(--text-2xl--line-height);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-link {
+      font-size: var(--text-4xl);
+      line-height: var(--text-4xl--line-height);
+    }
+  }
+
+  .main {
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .main {
+      margin-top: 4rem;
+    }
+  }
+</style>

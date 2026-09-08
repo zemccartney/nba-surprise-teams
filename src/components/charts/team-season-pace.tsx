@@ -14,6 +14,7 @@ import SurprisedEmoji from "../../assets/images/emoji/hushed-face.svg";
 // import * as ContentUtils from "../../content/utils";
 import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
+import "./charts.css";
 
 // Essentially copied from https://recharts.org/en-US/examples/AreaChartFillByValue
 
@@ -65,24 +66,21 @@ const TooltipContent = ({
 
     return (
       <PopoverBody deRadix>
-        <p className="mb-1 font-bold underline">{point.date}</p>
+        <p className="tooltip-heading">{point.date}</p>
         <p>
-          <label className="mr-4 inline-block font-bold" htmlFor="record">
+          <label className="tooltip-label" htmlFor="record">
             Record:
           </label>
           <span id="record">{point.recordFmt}</span>
         </p>
         <p>
-          <label
-            className="mr-4 inline-block font-bold"
-            htmlFor="projectedWins"
-          >
+          <label className="tooltip-label" htmlFor="projectedWins">
             Projected Wins:
           </label>
           <span id="projectedWins">{point.projectedWins}</span>
         </p>
         <p>
-          <label className="mr-4 inline-block font-bold" htmlFor="pace">
+          <label className="tooltip-label" htmlFor="pace">
             Pace:
           </label>
           <span id="pace">{Utils.signedFormatter.format(point.pace)}</span>
@@ -98,7 +96,7 @@ const ReferenceLabel = ({ toSurprise, ...rest }: { toSurprise: number }) => {
     viewBox: { x, y },
   } = rest as { viewBox: { x: number; y: number } };
 
-  /* 
+  /*
     Alignment calcs
     image:
       x - 24 - position outside left edge of graph
@@ -112,7 +110,7 @@ const ReferenceLabel = ({ toSurprise, ...rest }: { toSurprise: number }) => {
   return (
     <>
       <image href={SurprisedEmoji.src} width={16} x={x - 24} y={y - 8} />
-      <text className="fill-lime-500 stroke-lime-500" x={x - 24 - 20} y={y + 4}>
+      <text className="chart-ref-label" x={x - 24 - 20} y={y + 4}>
         {toSurprise}
       </text>
     </>
@@ -137,11 +135,7 @@ const YAxisLabel = ({
   const rot = `270 ${x + 12} ${cy + 20}`;
 
   return (
-    <text
-      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
-      transform={`rotate(${rot})`}
-      y={cy + 8}
-    >
+    <text className="chart-axis-label" transform={`rotate(${rot})`} y={cy + 8}>
       Projected Wins
     </text>
   );

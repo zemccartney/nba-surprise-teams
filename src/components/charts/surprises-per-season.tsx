@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 import { PopoverBody } from "../popover";
+import "./charts.css";
 
 interface SurprisesPerSeasonChartDatapoint {
   numSurprises: number;
@@ -37,7 +38,7 @@ const YAxisLabel = ({
 
   return (
     <text
-      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
+      className="chart-axis-label"
       transform={`rotate(${rot})`}
       x={x - 48}
       y={cy + 24}
@@ -60,11 +61,7 @@ const XAxisLabel = ({
   const { height, width, y } = viewBox;
 
   return (
-    <text
-      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
-      x={width / 2}
-      y={height / 2 + y + 50}
-    >
+    <text className="chart-axis-label" x={width / 2} y={height / 2 + y + 50}>
       Season
     </text>
   );
@@ -83,22 +80,16 @@ const TooltipContent = ({
     const point = payload[0].payload;
 
     return (
-      <PopoverBody className="pb-4 md:max-w-80" deRadix>
-        <h3 className="mb-1 text-center font-bold">
-          {point.seasonRange} Season
-        </h3>
+      <PopoverBody className="popover-body-md" deRadix>
+        <h3 className="tooltip-heading-centered">{point.seasonRange} Season</h3>
 
         {point.surpriseTeams.length > 0 && (
           <>
-            <h4 className="mb-2">Surprise Teams:</h4>
-            <ul className="ps-[0.5em]">
+            <h4 className="tooltip-section-heading">Surprise Teams:</h4>
+            <ul className="tooltip-list">
               {point.surpriseTeams.map((ts) => (
-                <li className="mt-4" key={ts.teamId}>
-                  <img
-                    className="inline contrast-150 drop-shadow-lg"
-                    src={ts.logoSrc}
-                    width={30}
-                  />{" "}
+                <li className="tooltip-list-item" key={ts.teamId}>
+                  <img className="tooltip-logo" src={ts.logoSrc} width={30} />{" "}
                   {ts.name}
                 </li>
               ))}
@@ -135,7 +126,7 @@ const Cursor = ({
       fillOpacity={0.5}
       /* onClick={() => {
         window.open(`/${point.seasonId}`, "_blank");
-      }} 
+      }}
       role="link"
       tabIndex={0} */
     />
@@ -150,7 +141,7 @@ export default function SurprisesPerSeasonChart({
   latestSeasonYear: number; // SeasonUtils.sortSeasonsByDate( SeasonUtils.getAllSeasons(), )[0]!;
 }) {
   return (
-    <ResponsiveContainer className="bigchart" height={600} width="100%">
+    <ResponsiveContainer height={600} width="100%">
       <BarChart
         data={data}
         margin={{
@@ -206,7 +197,7 @@ export default function SurprisesPerSeasonChart({
               key={i}
               /* onClick={() => {
                 window.open(`/${point.seasonId}`, "_blank");
-              }} 
+              }}
               role="link"
               tabIndex={0}
               */

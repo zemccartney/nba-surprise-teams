@@ -7,28 +7,39 @@ interface Props {
   element?: HTMLTag;
 }
 
-const { class: classVal, element = "div" } = Astro.props;
+// Rest props carry the parent's scoped-style attribute (data-astro-cid-*) when a
+// parent passes `class`; without spreading them, parent-scoped classes never match.
+const { class: classVal, element = "div", ...rest } = Astro.props;
 
 const Element = element;
 ---
 
 <style>
-  @reference "../styles/global.css";
-
   .TypoBox {
     /* General rules, apply to all instances of elements, wherever they appear in tree */
     ul {
-      @apply list-inside list-disc ps-[1em] md:ps-[2em];
+      list-style-type: disc;
+      list-style-position: inside;
+      padding-inline-start: 1em;
     }
 
     ol {
-      @apply list-inside list-decimal ps-[1em] md:ps-[2em];
+      list-style-type: decimal;
+      list-style-position: inside;
+      padding-inline-start: 1em;
+    }
+
+    @media (min-width: 768px) {
+      ul,
+      ol {
+        padding-inline-start: 2em;
+      }
     }
 
     ol,
     ul {
       li {
-        @apply mt-[.5em];
+        margin-top: 0.5em;
       }
     }
 
@@ -38,23 +49,24 @@ const Element = element;
       */
     & > * {
       & + * {
-        @apply mt-[1em];
+        margin-top: 1em;
       }
 
       & + h1,
       & + h2,
       & + h3 {
-        @apply mt-[1.5em] mb-[1em];
+        margin-top: 1.5em;
+        margin-bottom: 1em;
       }
 
       & + ul,
       & + ol {
-        @apply mt-[0.5em];
+        margin-top: 0.5em;
       }
     }
   }
 </style>
 
-<Element class:list={["TypoBox", classVal]}>
+<Element class:list={["TypoBox", classVal]} {...rest}>
   <slot />
 </Element>

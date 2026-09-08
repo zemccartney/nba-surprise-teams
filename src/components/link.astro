@@ -5,19 +5,20 @@ const { class: classStr, href, ...attrs } = Astro.props;
 ---
 
 <style>
-  @reference "../styles/global.css";
+  .NBASTT-Link {
+    color: var(--color-indigo-400);
+    text-decoration: underline;
 
-  .NBASTT-Link.active {
-    @apply pointer-events-none cursor-default text-indigo-100;
+    &:hover {
+      color: var(--color-indigo-100);
+    }
+
+    &.active {
+      pointer-events: none;
+      cursor: default;
+      color: var(--color-indigo-100);
+    }
   }
 </style>
 
-<a
-  class:list={[
-    "NBASTT-Link",
-    "text-indigo-400 underline hover:text-indigo-100",
-    classStr,
-  ]}
-  href={href}
-  {...attrs}><slot /></a
->
+<a class:list={["NBASTT-Link", classStr]} href={href} {...attrs}><slot /></a>

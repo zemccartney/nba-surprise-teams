@@ -13,6 +13,7 @@ import {
 
 import * as Utils from "../../utils";
 import { PopoverBody } from "../popover";
+import "./charts.css";
 
 interface TeamSeasonScatterplotDatapoint {
   isSurpriseTeam: boolean;
@@ -38,11 +39,7 @@ const YAxisLabel = ({
   const rot = `270 ${x + 12} ${cy + 20}`;
 
   return (
-    <text
-      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
-      transform={`rotate(${rot})`}
-      y={cy + 24}
-    >
+    <text className="chart-axis-label" transform={`rotate(${rot})`} y={cy + 24}>
       Pace
     </text>
   );
@@ -61,11 +58,7 @@ const XAxisLabel = ({
   const { height, width, y } = viewBox;
 
   return (
-    <text
-      className="fill-lime-500 stroke-lime-500 font-mono text-xl tracking-wide"
-      x={width / 2}
-      y={height / 2 + y + 50}
-    >
+    <text className="chart-axis-label" x={width / 2} y={height / 2 + y + 50}>
       Over/Under
     </text>
   );
@@ -84,18 +77,14 @@ const TooltipContent = ({
     const point = payload[0].payload;
 
     return (
-      <PopoverBody className="pb-4 md:max-w-fit" deRadix>
-        <h3 className="mb-1 text-center font-bold">
-          <img
-            className="mr-2 inline contrast-150 drop-shadow-lg"
-            src={point.logoSrc}
-            width={30}
-          />
+      <PopoverBody className="popover-body-fit" deRadix>
+        <h3 className="tooltip-heading-centered">
+          <img className="tooltip-logo" src={point.logoSrc} width={30} />
           {point.seasonRange} {point.teamName}
         </h3>
 
-        <p className="mt-4">
-          <label className="mr-4 inline-block font-bold" htmlFor="record">
+        <p className="tooltip-para">
+          <label className="tooltip-label" htmlFor="record">
             Pace (Record)
           </label>
           <span id="record">
@@ -103,7 +92,7 @@ const TooltipContent = ({
           </span>
         </p>
         <p>
-          <label className="mr-4 inline-block font-bold" htmlFor="overUnder">
+          <label className="tooltip-label" htmlFor="overUnder">
             Over/Under:
           </label>
           <span id="overUnder">{point.overUnder}</span>
@@ -210,7 +199,7 @@ export default function TeamSeasonScatterplot({
                   : "var(--color-red-700)"
               }
               key={i}
-              /* 
+              /*
               className="hover:fill-indigo-400"
               onClick={() => {
                 window.open(`/${point.seasonId}/${point.teamId}`, "_blank");

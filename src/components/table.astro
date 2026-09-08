@@ -23,55 +23,88 @@ const {
 ---
 
 <style>
-  @reference "../styles/global.css";
-
   .NBASurpriseTracker-Table {
-    @apply shadow-glow table-fixed border-collapse;
+    table-layout: fixed;
+    border-collapse: collapse;
+    box-shadow: var(--shadow-glow);
 
     > thead,
     > tfoot {
-      @apply bg-slate-950;
+      background-color: var(--color-slate-950);
     }
 
     > thead th,
     > thead td {
-      /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
-      @apply p-6 pr-4 text-right text-3xl text-lime-400 lg:text-4xl;
+      /* pr aligns right-edge of th text with td text in col (all cells right-aligned) */
+      padding: 1.5rem;
+      padding-right: 1rem;
+      text-align: right;
+      font-size: var(--text-3xl);
+      line-height: var(--text-3xl--line-height);
+      color: var(--color-lime-400);
+    }
+
+    @media (min-width: 1024px) {
+      > thead th,
+      > thead td {
+        font-size: var(--text-4xl);
+        line-height: var(--text-4xl--line-height);
+      }
     }
 
     > tbody th,
     > tbody td {
-      @apply px-4 py-8 text-3xl text-green-200 lg:text-4xl;
+      padding: 2rem 1rem;
+      font-size: var(--text-3xl);
+      line-height: var(--text-3xl--line-height);
+      color: var(--color-green-200);
+    }
+
+    @media (min-width: 1024px) {
+      > tbody th,
+      > tbody td {
+        font-size: var(--text-4xl);
+        line-height: var(--text-4xl--line-height);
+      }
     }
 
     > tbody > tr {
       &:nth-of-type(2n + 1) {
-        @apply bg-lime-950;
+        background-color: var(--color-lime-950);
       }
     }
 
     &.compact {
-      @apply shadow-glow-sm;
+      box-shadow: var(--shadow-glow-sm);
 
       > thead th,
       > thead td {
-        /* pr-4 aligns right-edge of th text with td text in col (all cells right-aligned) */
-        @apply p-3 pr-4 text-2xl;
+        /* pr aligns right-edge of th text with td text in col (all cells right-aligned) */
+        padding: 0.75rem;
+        padding-right: 1rem;
+        font-size: var(--text-2xl);
+        line-height: var(--text-2xl--line-height);
       }
 
       > tbody th,
       > tbody td {
-        @apply px-4 py-4 text-2xl text-green-200;
+        padding: 1rem;
+        font-size: var(--text-2xl);
+        line-height: var(--text-2xl--line-height);
+        color: var(--color-green-200);
       }
     }
 
     &.stickyHeader {
-      @apply relative;
+      position: relative;
 
       > thead th,
       > thead td {
         /* Unsure that z-index rule is right here, solved for ensuring header appeared above relatively-positioned links on standings-table */
-        @apply sticky top-0 z-10 bg-slate-950;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background-color: var(--color-slate-950);
       }
     }
   }
