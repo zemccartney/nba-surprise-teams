@@ -31,7 +31,7 @@ export default defineConfig([
   {
     extends: [json.configs.recommended],
     files: ["**/*.json"],
-    ignores: ["**/package.json", "**/package-lock.json"],
+    ignores: ["**/package.json"],
     language: "json/json",
     rules: {
       "json/sort-keys": "error",

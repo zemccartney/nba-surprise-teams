@@ -1,6 +1,6 @@
-# Findings: tooling migration (pnpm, lefthook, ESLint 10, Node 24)
+# Findings: tooling migration (pnpm, lefthook, ESLint 10, Node)
 
-_Researched 2026-09-07. Registry facts checked with `npm view` that day._
+_Researched 2026-09-07. Registry facts checked with `npm view` that day. Corrections from doing it are under "What actually happened" at the end; Node 26 was chosen over 24._
 
 ## pnpm
 
@@ -71,3 +71,12 @@ Active LTS; **Maintenance from 2026-10-20** (Node 26 becomes LTS 2026-10-28). La
 8. `eslint.config.ts` needs the flag in every invocation.
 9. `PUBLIC_DEPLOY_ENV` on Workers Builds: derive from branch or run two Workers.
 10. No commit-message skip on Workers Builds; use build watch paths.
+
+## What actually happened (2026-09-07, see log.md Step 3)
+
+- `sharp` **does** have an install script (0.33.5 and 0.34.4 both in the tree); it needs `allowBuilds: { sharp: false }`. The four listed above were right.
+- `trustPolicy: no-downgrade` rejected `semver@6.3.1` and `vite@6.4.1` (backports without provenance). `trustPolicyIgnoreAfter` (v10.27, minutes) and `trustPolicyExclude` (v10.22) exist; used 1 year + one exclusion.
+- `pnpm import` converts `package-lock.json` with zero version drift; do that rather than a fresh resolve.
+- A nested project needs its own `pnpm-workspace.yaml` to stop pnpm walking up to the root's.
+- Cloudflare Pages build image v3: default pnpm 10.11.1, `PNPM_VERSION` to override; `packageManager` self-selection handles it. Node via `NODE_VERSION` or `.node-version`; precedence undocumented, so remove the env var.
+- pnpm 11's lockfile is still `lockfileVersion: '9.0'`.
