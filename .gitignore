@@ -26,3 +26,9 @@ pnpm-debug.log*
 # local wrangler config
 .wrangler/
 worker-configuration.d.ts
+# baseline capture: keep summaries, skip bulky captures
+plan/baseline/runs/**/*.png
+plan/baseline/runs/**/html/
+
+# personal Claude Code permissions
+.claude/settings.local.json

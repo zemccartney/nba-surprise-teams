@@ -13,3 +13,5 @@ src/content/games.json
 
 # auto-generated
 worker-configuration.d.ts
+# baseline capture output (generated)
+plan/baseline/runs/

@@ -1,0 +1,3599 @@
+{
+  "base": "https://nbastt.grepco.net",
+  "capturedAt": "2026-09-07T04:47:24.963Z",
+  "label": "prod",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1606,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7011,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "other": {
+              "bytes": 22004,
+              "count": 2,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "script": {
+              "bytes": 426818,
+              "count": 9,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js"
+              ]
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 424,
+            "load": 424,
+            "transferSize": 3062
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1166,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7010,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "other": {
+              "bytes": 22003,
+              "count": 2,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "script": {
+              "bytes": 427202,
+              "count": 9,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js"
+              ]
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 415,
+            "load": 415,
+            "transferSize": 3064
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1572,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7009,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "other": {
+              "bytes": 22004,
+              "count": 2,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "script": {
+              "bytes": 427256,
+              "count": 9,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js"
+              ]
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 394,
+            "load": 624,
+            "transferSize": 3060
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/",
+      "htmlBytes": 6644,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 1,
+      "jsBytes": 426818,
+      "page": "/",
+      "redirects": [],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a37311454f530bcd-ORD",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:03 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=nG3%2Fd0sZG2%2BxT1O3O%2BxGgd5DAiqmw1pVx9evC37P65Xf5xcKn9%2FrD9E%2FqXhqBHrSLiAEexP5rXuHfO%2FK13Ev3Fo3YVQT5m%2F29%2FsFOoWyxfATR5cFeMNJQJlZv%2FCS1E2v6Pb6tA%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [
+        {
+          "bytes": 18386,
+          "headers": {
+            "alt-svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "cf-ray": "a37311472d4b0bcd-ORD",
+            "connection": "keep-alive",
+            "content-encoding": "br",
+            "content-type": "text/html",
+            "date": "Mon, 07 Sep 2026 04:46:03 GMT",
+            "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+            "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZxjDFlVO6cLps9ndHLUtblXzyK4VZ3qnHBKFLnqg1fuaWvGt3V9ykkbMGr0vUwQAbFr57rW%2F7sWAkpcfOY%2BHRKZujZQ0%2FNTBqYslnucHhanRTj5A16I1AIS00CcWdwO9ARQ4rw%3D%3D\"}]}",
+            "server": "cloudflare",
+            "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "x-content-type-options": "nosniff",
+            "x-robots-tag": "noindex"
+          },
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_server-islands/StandingsTable?e=default&p=584A62C5A0B04847A10D73D7tkPjqxdtEOmLeNuZD%2F5eLl5ld1hEVuO%2FRVbDsO%2BoUlZQG88%3D&s=%7B%7D"
+        }
+      ],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        },
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        }
+      ],
+      "loadedBytes": 1532024
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 2792,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 9051,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/archive",
+                "https://nbastt.grepco.net/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "script": {
+              "bytes": 149007,
+              "count": 3,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 425,
+            "load": 425,
+            "transferSize": 2737
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 2084,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 9052,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/archive",
+                "https://nbastt.grepco.net/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "script": {
+              "bytes": 150061,
+              "count": 3,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 666,
+            "load": 666,
+            "transferSize": 2716
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 2856,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 9052,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/archive",
+                "https://nbastt.grepco.net/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "script": {
+              "bytes": 148862,
+              "count": 3,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 481,
+            "load": 481,
+            "transferSize": 2716
+          }
+        }
+      },
+      "cssBytes": 33184,
+      "finalUrl": "https://nbastt.grepco.net/archive/",
+      "htmlBytes": 8383,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 1,
+      "jsBytes": 149007,
+      "page": "/archive",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/archive"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a3731173d91df5f8-EWR",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:10 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=SPDKtAXAu5s8r5rTOrNYxkY4%2FRqrvh17nJbXc1Z3z%2FAloUKKIUpnBIvRKEfqqzP6cuzQJTjCCGkvYZ4okTn4XCAjLvdlLjQuWMPe8yREI2Zr10tMaclA49V3MdYMkTfzoeUOVw%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        }
+      ],
+      "loadedBytes": 208496
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 2196,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 123412,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/stats",
+                "https://nbastt.grepco.net/stats/"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "script": {
+              "bytes": 809803,
+              "count": 13,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/surprises-per-season.D-Pjf9xZ.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/BarChart.Deb8rkG4.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js",
+                "https://nbastt.grepco.net/_astro/surprises-by-team.qANRNnAN.js",
+                "https://nbastt.grepco.net/_astro/team-season-scatter.goRRvuQV.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 539,
+            "load": 889,
+            "transferSize": 12240
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 3474,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 123411,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/stats",
+                "https://nbastt.grepco.net/stats/"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "script": {
+              "bytes": 810798,
+              "count": 13,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/surprises-per-season.D-Pjf9xZ.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/BarChart.Deb8rkG4.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js",
+                "https://nbastt.grepco.net/_astro/surprises-by-team.qANRNnAN.js",
+                "https://nbastt.grepco.net/_astro/team-season-scatter.goRRvuQV.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 566,
+            "load": 1035,
+            "transferSize": 12214
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 3546,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 123412,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/stats",
+                "https://nbastt.grepco.net/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 810281,
+              "count": 13,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/surprises-per-season.D-Pjf9xZ.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/BarChart.Deb8rkG4.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/team-season-scatter.goRRvuQV.js",
+                "https://nbastt.grepco.net/_astro/surprises-by-team.qANRNnAN.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 427,
+            "load": 656,
+            "transferSize": 12240
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/stats/",
+      "htmlBytes": 122743,
+      "hydratedIslands": 4,
+      "inlineScripts": 5,
+      "inlineStyles": 2,
+      "jsBytes": 809803,
+      "page": "/stats",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/stats"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a37311a0aa4d4225-EWR",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:17 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=K%2Bs6ZXI%2B0be832GZMPs68WROGWWqUfDZpv8F874%2FsJ0VZNLvzWlHg1B6y%2BrO%2BVJF51qOZnaOPAQKxxaz%2FOWAIkKm6njG7vxSkQfryotyANA2SqpTM9LfAy4SVhx6elTH8z8SKg%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        },
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        }
+      ],
+      "loadedBytes": 2983038
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior.",
+              "type": "warning"
+            }
+          ],
+          "documentHeight": 3393,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 12805,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/about",
+                "https://nbastt.grepco.net/about/"
+              ]
+            },
+            "script": {
+              "bytes": 149717,
+              "count": 4,
+              "urls": [
+                "https://nbastt.grepco.net/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 1464231,
+              "count": 10,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://embed.podcasts.apple.com/assets/index-jDohFwzS.js",
+                "https://embed.podcasts.apple.com/assets/index-amVc6HNg.js",
+                "https://embed.podcasts.apple.com/assets/translations-Bteu-GvX.js",
+                "https://embed.podcasts.apple.com/assets/version-BNUm1OH-.js",
+                "https://embed.podcasts.apple.com/assets/setup-global-ybpovfhW.js",
+                "https://embed.podcasts.apple.com/assets/dev-CqRVY3KZ.js",
+                "https://embed.podcasts.apple.com/assets/index-Dwl59HIc.js",
+                "https://embed.podcasts.apple.com/assets/musickit-Dvnix80X.js"
+              ]
+            },
+            "document": {
+              "bytes": 20597,
+              "count": 2,
+              "urls": [
+                "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555",
+                "https://embed.podcasts.apple.com/us/episode/1000706552555"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 361573,
+              "count": 2,
+              "urls": [
+                "https://embed.podcasts.apple.com/assets/index-DK8uQ7xW.css",
+                "https://www.apple.com/wss/fonts?families=SF+Pro,v4%7CSF+Pro+Icons,v1&display=swap"
+              ]
+            },
+            "image": {
+              "bytes": 10977,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 1335,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 562,
+            "load": 1043,
+            "transferSize": 4954
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior.",
+              "type": "warning"
+            }
+          ],
+          "documentHeight": 4759,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 12805,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/about",
+                "https://nbastt.grepco.net/about/"
+              ]
+            },
+            "script": {
+              "bytes": 150931,
+              "count": 4,
+              "urls": [
+                "https://nbastt.grepco.net/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 1464231,
+              "count": 10,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://embed.podcasts.apple.com/assets/index-jDohFwzS.js",
+                "https://embed.podcasts.apple.com/assets/translations-Bteu-GvX.js",
+                "https://embed.podcasts.apple.com/assets/index-amVc6HNg.js",
+                "https://embed.podcasts.apple.com/assets/version-BNUm1OH-.js",
+                "https://embed.podcasts.apple.com/assets/setup-global-ybpovfhW.js",
+                "https://embed.podcasts.apple.com/assets/dev-CqRVY3KZ.js",
+                "https://embed.podcasts.apple.com/assets/index-Dwl59HIc.js",
+                "https://embed.podcasts.apple.com/assets/musickit-Dvnix80X.js"
+              ]
+            },
+            "document": {
+              "bytes": 20597,
+              "count": 2,
+              "urls": [
+                "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555",
+                "https://embed.podcasts.apple.com/us/episode/1000706552555"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 361573,
+              "count": 2,
+              "urls": [
+                "https://embed.podcasts.apple.com/assets/index-DK8uQ7xW.css",
+                "https://www.apple.com/wss/fonts?families=SF+Pro,v4%7CSF+Pro+Icons,v1&display=swap"
+              ]
+            },
+            "image": {
+              "bytes": 10977,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 1335,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 478,
+            "load": 871,
+            "transferSize": 4953
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior.",
+              "type": "warning"
+            }
+          ],
+          "documentHeight": 3457,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 12805,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/about",
+                "https://nbastt.grepco.net/about/"
+              ]
+            },
+            "script": {
+              "bytes": 150246,
+              "count": 4,
+              "urls": [
+                "https://nbastt.grepco.net/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 1464231,
+              "count": 10,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://embed.podcasts.apple.com/assets/index-jDohFwzS.js",
+                "https://embed.podcasts.apple.com/assets/version-BNUm1OH-.js",
+                "https://embed.podcasts.apple.com/assets/index-amVc6HNg.js",
+                "https://embed.podcasts.apple.com/assets/translations-Bteu-GvX.js",
+                "https://embed.podcasts.apple.com/assets/setup-global-ybpovfhW.js",
+                "https://embed.podcasts.apple.com/assets/dev-CqRVY3KZ.js",
+                "https://embed.podcasts.apple.com/assets/index-Dwl59HIc.js",
+                "https://embed.podcasts.apple.com/assets/musickit-Dvnix80X.js"
+              ]
+            },
+            "document": {
+              "bytes": 20597,
+              "count": 2,
+              "urls": [
+                "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555",
+                "https://embed.podcasts.apple.com/us/episode/1000706552555"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 361573,
+              "count": 2,
+              "urls": [
+                "https://embed.podcasts.apple.com/assets/index-DK8uQ7xW.css",
+                "https://www.apple.com/wss/fonts?families=SF+Pro,v4%7CSF+Pro+Icons,v1&display=swap"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "image": {
+              "bytes": 10977,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 1335,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 413,
+            "load": 728,
+            "transferSize": 4951
+          }
+        }
+      },
+      "cssBytes": 33184,
+      "finalUrl": "https://nbastt.grepco.net/about/",
+      "htmlBytes": 12136,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 1,
+      "jsBytes": 149717,
+      "page": "/about",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/about"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a37311d3af2dae70-EWR",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:25 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=grqhGeiQliJnNDIgKYs2W3BMsdqMZFnbAsvlbfTe7dLReXCOEfgUNGpTFDTQhYlLVt7dE6rYkV9o8BmlOh2X6BkP03XIbAhWaYYOQQJp4T4m6IAE%2FRLBVZsuzYQjIuaWVFacdw%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "bytes": 1239,
+          "cacheControl": "public",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        }
+      ],
+      "loadedBytes": 1196028
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1646,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 12857,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2025",
+                "https://nbastt.grepco.net/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "script": {
+              "bytes": 426633,
+              "count": 9,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.DLERcHEW.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 22004,
+              "count": 2,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 433,
+            "load": 692,
+            "transferSize": 5422
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1174,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 12858,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2025",
+                "https://nbastt.grepco.net/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "other": {
+              "bytes": 22004,
+              "count": 2,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "script": {
+              "bytes": 427749,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/popover.DLERcHEW.js",
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 414,
+            "load": 627,
+            "transferSize": 5411
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1720,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 12858,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2025",
+                "https://nbastt.grepco.net/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "other": {
+              "bytes": 22004,
+              "count": 2,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "script": {
+              "bytes": 428783,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.DLERcHEW.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js"
+              ]
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 447,
+            "load": 733,
+            "transferSize": 5428
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/2025/",
+      "htmlBytes": 12189,
+      "hydratedIslands": 1,
+      "inlineScripts": 7,
+      "inlineStyles": 2,
+      "jsBytes": 426633,
+      "page": "/2025",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/2025"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a3731212bdaae8d0-ORD",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:36 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=UQALakZcAdG0pBVtsYV4bJMb4BbeFofgLPJhPpvbydXaxFYTHzHFt6HWRWJnkNeANFgg9I6s1XF7bDcBr2qUIOXma%2Fe93PKCyvCDpQIsIj4xLJpKeuS8MHiNVbLPhLXY5e5P5g%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [
+        {
+          "bytes": 18386,
+          "headers": {
+            "alt-svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "cf-ray": "a37312136ccac32b-EWR",
+            "connection": "keep-alive",
+            "content-encoding": "br",
+            "content-type": "text/html",
+            "date": "Mon, 07 Sep 2026 04:46:36 GMT",
+            "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+            "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=6bCuSHRQhGeJx65T%2BDja3Alv6DhteGA1BSdxVxYyxO2G3Uli6kc7Bn7z6mcEsWdMMJ2ixQPUi7yfXeU1b0iIbQciVvGrkXStUdHe5zUZO6gNaDQLCCoVSRcxrnI3vf48n4icFw%3D%3D\"}]}",
+            "server": "cloudflare",
+            "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "x-content-type-options": "nosniff",
+            "x-robots-tag": "noindex"
+          },
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_server-islands/StandingsTable?e=default&p=BFE47E8E7FDF83C0EE7B4447NXD1KdApP2xhcUzO9pJxyl6jMBrXZqLjD6vxocP%2F82medP8%3D&s=%7B%7D"
+        }
+      ],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        },
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        }
+      ],
+      "loadedBytes": 2520753
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1112,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 8430,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2025/CHA",
+                "https://nbastt.grepco.net/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "other": {
+              "bytes": 26799,
+              "count": 2,
+              "urls": []
+            },
+            "script": {
+              "bytes": 887050,
+              "count": 12,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 525,
+            "load": 874,
+            "transferSize": 3744
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1606,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 8430,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2025/CHA",
+                "https://nbastt.grepco.net/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "other": {
+              "bytes": 26799,
+              "count": 2,
+              "urls": []
+            },
+            "script": {
+              "bytes": 890352,
+              "count": 12,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 474,
+            "load": 770,
+            "transferSize": 3735
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1642,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 8429,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2025/CHA",
+                "https://nbastt.grepco.net/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 885292,
+              "count": 12,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 26798,
+              "count": 2,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 485,
+            "load": 863,
+            "transferSize": 3742
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/2025/CHA/",
+      "htmlBytes": 7761,
+      "hydratedIslands": 0,
+      "inlineScripts": 4,
+      "inlineStyles": 3,
+      "jsBytes": 887050,
+      "page": "/2025/CHA",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/2025/CHA"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a37312415dcb43c7-EWR",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:43 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=TxQ%2BmWTHxS25tFwsjacPj9Wggvly5WjCsTFMVzfPJYxGM2Ju74kr68mpmSLe%2Bjsoag%2BoHl44xNnemLdnmIymRgSgGymIaFt1k6iARNiQLh0cM0N6ey%2Fds1Bn%2FAFyY48kcdwHFw%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [
+        {
+          "bytes": 23181,
+          "headers": {
+            "alt-svc": "h3=\":443\"; ma=86400",
+            "cf-cache-status": "DYNAMIC",
+            "cf-ray": "a373124229102caf-EWR",
+            "connection": "keep-alive",
+            "content-encoding": "br",
+            "content-type": "text/html",
+            "date": "Mon, 07 Sep 2026 04:46:43 GMT",
+            "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+            "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=mPx8H2N69Db0M%2BxDNmoVMFs2X0X%2FQ2h2ql%2Fuz%2F2In87KI9DpJ7DEs0vyHSHI3OjnFV2Y3DlH72Ya1cN2kI1uC2Gku3wlZQU71TsLkzcQ9WnKgGIwu70f6dnEdAvlIR55n31v1g%3D%3D\"}]}",
+            "server": "cloudflare",
+            "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "x-content-type-options": "nosniff",
+            "x-robots-tag": "noindex"
+          },
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_server-islands/TeamStats?e=default&p=1B451884C203B570C0410A83e4GMxvC5HB3XqhufRHlMaxNU%2BJaxlUNVEnt0bKtPFefg4auOsDjNBLloCRCbUnR405A%3D&s=%7B%7D"
+        }
+      ],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        },
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        }
+      ],
+      "loadedBytes": 2953880
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1684,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23968,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2024",
+                "https://nbastt.grepco.net/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "script": {
+              "bytes": 407705,
+              "count": 8,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/popover.DLERcHEW.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 416,
+            "load": 637,
+            "transferSize": 6303
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1256,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23968,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2024",
+                "https://nbastt.grepco.net/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "script": {
+              "bytes": 405851,
+              "count": 8,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.DLERcHEW.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 390,
+            "load": 610,
+            "transferSize": 6302
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1736,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23968,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2024",
+                "https://nbastt.grepco.net/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "script": {
+              "bytes": 407010,
+              "count": 8,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/popover.DLERcHEW.js",
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 475,
+            "load": 762,
+            "transferSize": 6296
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/2024/",
+      "htmlBytes": 23299,
+      "hydratedIslands": 2,
+      "inlineScripts": 6,
+      "inlineStyles": 2,
+      "jsBytes": 407705,
+      "page": "/2024",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/2024"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a37312711c1d5612-EWR",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:51 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=G178%2BkyQstbjERxBwBc7oJt37FDx3pQINSy6HXYtJyO9EQGKd7Zk1%2B1AKEThLC9XbiXMDulzj3egWu%2FOo9jKP%2FaGlWa%2BTPiyU4Fw6v7O5j9T5OKA8NmgW4RLe0y3PqbVecoPAg%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        },
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        }
+      ],
+      "loadedBytes": 2494010
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1200,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28843,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2024/TOR",
+                "https://nbastt.grepco.net/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 866313,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 439,
+            "load": 754,
+            "transferSize": 6643
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1738,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28843,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2024/TOR",
+                "https://nbastt.grepco.net/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 867490,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 404,
+            "load": 665,
+            "transferSize": 6640
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1798,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28843,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2024/TOR",
+                "https://nbastt.grepco.net/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 866836,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 466,
+            "load": 701,
+            "transferSize": 6640
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/2024/TOR/",
+      "htmlBytes": 28174,
+      "hydratedIslands": 4,
+      "inlineScripts": 4,
+      "inlineStyles": 4,
+      "jsBytes": 866313,
+      "page": "/2024/TOR",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/2024/TOR"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a373129cceb51dc7-EWR",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:46:58 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2Bh6j9CYqgDkqNWiZxRQ4xznI%2Bp6NL7lotF4uZvpdNQJrqsUgpNQRtjbAT7uf%2BxIdeyDc%2F9h2rpqxp4FgUvwUyhyP3MBMLvN%2BXIMhF9z8NsHOImOVf2O0PR2TVT85n4Ov7aJCCA%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        },
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        }
+      ],
+      "loadedBytes": 2937303
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1908,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 25137,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2011",
+                "https://nbastt.grepco.net/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "script": {
+              "bytes": 406367,
+              "count": 7,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 463,
+            "load": 674,
+            "transferSize": 6332
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1490,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 25138,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2011",
+                "https://nbastt.grepco.net/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "script": {
+              "bytes": 407738,
+              "count": 7,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 421,
+            "load": 590,
+            "transferSize": 6350
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1966,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 25138,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2011",
+                "https://nbastt.grepco.net/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "script": {
+              "bytes": 406020,
+              "count": 7,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 436,
+            "load": 612,
+            "transferSize": 6355
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/2011/",
+      "htmlBytes": 24469,
+      "hydratedIslands": 1,
+      "inlineScripts": 6,
+      "inlineStyles": 2,
+      "jsBytes": 406367,
+      "page": "/2011",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/2011"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a37312c9dc1c43da-EWR",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:47:05 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=taHzCSlHLBjvKH9IoRNP293zwiE2heTrPqtjNtQTqETvbClExH9uDWpNYyjQuLsDIH803C6VYisImFHd8b8ZPZ2OzIe9NlegIW0ohu7tS4RnxFrNZeoUTXVEijxUfjXtlo3ocg%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        },
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        }
+      ],
+      "loadedBytes": 1521269
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1272,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28269,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2011/CHA",
+                "https://nbastt.grepco.net/2011/CHA/"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "script": {
+              "bytes": 865862,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 497,
+            "load": 808,
+            "transferSize": 6782
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1858,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28269,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2011/CHA",
+                "https://nbastt.grepco.net/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 866591,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495",
+                "https://static.cloudflareinsights.com/beacon.min.js"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 428,
+            "load": 647,
+            "transferSize": 6775
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1886,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28269,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/2011/CHA",
+                "https://nbastt.grepco.net/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 37989,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css",
+                "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 866159,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/_astro/popover.CnTdPjom.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.056W3nNF.js",
+                "https://nbastt.grepco.net/_astro/client.BJD2Sfcx.js",
+                "https://nbastt.grepco.net/_astro/index.lA7YnG4N.js",
+                "https://nbastt.grepco.net/_astro/utils.CfpxcyAi.js",
+                "https://nbastt.grepco.net/_astro/popover.Di1ffpwA.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.PWONC5G5.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 60588,
+              "count": 2,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js",
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 492,
+            "load": 655,
+            "transferSize": 6776
+          }
+        }
+      },
+      "cssBytes": 37989,
+      "finalUrl": "https://nbastt.grepco.net/2011/CHA/",
+      "htmlBytes": 27600,
+      "hydratedIslands": 5,
+      "inlineScripts": 4,
+      "inlineStyles": 4,
+      "jsBytes": 865862,
+      "page": "/2011/CHA",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://nbastt.grepco.net/2011/CHA"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a37312f5be5fe82d-ORD",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:47:12 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=UwN63XjtFsMnFUfGsfZPr%2FjP6XQ4iU9Jfk2xte8InnOpxrJMLilg6rgF8jW9kcI8lkvW1wY4KYam5x9DJMNG8lLpazD2%2Bfv796j7P%2BgPgVBppq40jHdy2Z9yGO%2BFTybXvBUiOg%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        },
+        {
+          "bytes": 4805,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/index.6l48L1fY.css"
+        }
+      ],
+      "loadedBytes": 2933554
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 ()",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 900,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 4329,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "script": {
+              "bytes": 148330,
+              "count": 3,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 30294,
+              "count": 1,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 369,
+            "load": 369,
+            "transferSize": 2302
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 ()",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 844,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 4329,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "script": {
+              "bytes": 149117,
+              "count": 3,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 30294,
+              "count": 1,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 361,
+            "load": 362,
+            "transferSize": 2300
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 ()",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1024,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 4329,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 33184,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+              ]
+            },
+            "script": {
+              "bytes": 149559,
+              "count": 3,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.DE2REkpw.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {
+            "script": {
+              "bytes": 30294,
+              "count": 1,
+              "urls": [
+                "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+              ]
+            },
+            "fetch": {
+              "bytes": 2,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "timing": {
+            "domContentLoaded": 339,
+            "load": 339,
+            "transferSize": 2300
+          }
+        }
+      },
+      "cssBytes": 33184,
+      "finalUrl": "https://nbastt.grepco.net/nope",
+      "htmlBytes": 3962,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 1,
+      "jsBytes": 148330,
+      "page": "/nope",
+      "redirects": [],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "no-store",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a3731321cb9fb1d6-ORD",
+        "connection": "keep-alive",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 07 Sep 2026 04:47:19 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=lP9TGyJGldDFOWKsClculjI8v1TJK93jFiiYaW%2BHOhhytJ2%2B2Kzu8biRt22pQEjS4%2BXcBWu2ShfFuA2G15mxVJxc%2FqAx%2BS6DrNs84PauYgrru%2BwVcAXhpm4iEhlDrjEQYIRmOA%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "transfer-encoding": "chunked",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.DE2REkpw.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 404,
+      "stylesheets": [
+        {
+          "bytes": 33184,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.DWgfsvQw.css"
+        }
+      ],
+      "loadedBytes": 203097
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    }
+  }
+}

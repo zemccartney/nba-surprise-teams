@@ -31,7 +31,7 @@ export default defineConfig([
   {
     extends: [json.configs.recommended],
     files: ["**/*.json"],
-    ignores: ["package.json", "package-lock.json"],
+    ignores: ["**/package.json", "**/package-lock.json"],
     language: "json/json",
     rules: {
       "json/sort-keys": "error",
@@ -89,7 +89,17 @@ export default defineConfig([
   },
   {
     // auto-generated, no sense in linting
-    ignores: ["scratchpad.js"],
+    ignores: ["scratchpad.js", "plan/baseline/runs/"],
+  },
+  {
+    // baseline capture scripts: node, plus browser globals inside page.evaluate callbacks
+    files: ["plan/baseline/*.mjs"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
   },
   {
     extends: [vitest.configs.recommended],
