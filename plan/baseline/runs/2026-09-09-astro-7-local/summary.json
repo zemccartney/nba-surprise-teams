@@ -1,0 +1,2492 @@
+{
+  "base": "http://localhost:8794",
+  "capturedAt": "2026-09-09T20:53:19.180Z",
+  "label": "astro-7-local",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 900,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 11624,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 16,
+            "load": 19,
+            "transferSize": 11924
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 844,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 11624,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 16,
+            "transferSize": 11924
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1024,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 11624,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 10,
+            "load": 14,
+            "transferSize": 11924
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1080,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 11624,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 6,
+            "load": 11,
+            "transferSize": 11924
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/",
+      "htmlBytes": 11624,
+      "hydratedIslands": 0,
+      "inlineScripts": 0,
+      "inlineStyles": 1,
+      "jsBytes": 0,
+      "page": "/",
+      "redirects": [],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:49:38 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 46379
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 2880,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/archive",
+                "http://localhost:8794/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 28,
+            "load": 38,
+            "transferSize": 8117
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 2148,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/archive",
+                "http://localhost:8794/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 18,
+            "transferSize": 8117
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 2944,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/archive",
+                "http://localhost:8794/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 17,
+            "transferSize": 8117
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 2880,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/archive",
+                "http://localhost:8794/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 19,
+            "transferSize": 8117
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/archive/",
+      "htmlBytes": 7817,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 1,
+      "jsBytes": 0,
+      "page": "/archive",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/archive"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:49:57 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 42572
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 2196,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 78017,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/stats",
+                "http://localhost:8794/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 595843,
+              "count": 5,
+              "urls": [
+                "http://localhost:8794/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.D57JNWss.js",
+                "http://localhost:8794/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DlPe1PKD.js",
+                "http://localhost:8794/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BlrLRqBY.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 73,
+            "load": 75,
+            "transferSize": 78317
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 3474,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 78017,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/stats",
+                "http://localhost:8794/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 595843,
+              "count": 5,
+              "urls": [
+                "http://localhost:8794/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.D57JNWss.js",
+                "http://localhost:8794/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DlPe1PKD.js",
+                "http://localhost:8794/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BlrLRqBY.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 61,
+            "load": 69,
+            "transferSize": 78317
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 3546,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 78017,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/stats",
+                "http://localhost:8794/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "script": {
+              "bytes": 595843,
+              "count": 5,
+              "urls": [
+                "http://localhost:8794/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DlPe1PKD.js",
+                "http://localhost:8794/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.D57JNWss.js",
+                "http://localhost:8794/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BlrLRqBY.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 53,
+            "load": 76,
+            "transferSize": 78317
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1972,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 78017,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/stats",
+                "http://localhost:8794/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 595843,
+              "count": 5,
+              "urls": [
+                "http://localhost:8794/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DlPe1PKD.js",
+                "http://localhost:8794/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.D57JNWss.js",
+                "http://localhost:8794/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BlrLRqBY.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 60,
+            "load": 68,
+            "transferSize": 78317
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/stats/",
+      "htmlBytes": 78017,
+      "hydratedIslands": 0,
+      "inlineScripts": 4,
+      "inlineStyles": 2,
+      "jsBytes": 595843,
+      "page": "/stats",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/stats"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:50:17 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [
+        {
+          "bytes": 1250,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/javascript",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.D57JNWss.js"
+        },
+        {
+          "bytes": 1679,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/javascript",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DlPe1PKD.js"
+        },
+        {
+          "bytes": 1346,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/javascript",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BlrLRqBY.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2703195
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 3393,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/about",
+                "http://localhost:8794/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 19,
+            "load": 66,
+            "transferSize": 13283
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 4759,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/about",
+                "http://localhost:8794/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 20,
+            "load": 63,
+            "transferSize": 13283
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 3457,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/about",
+                "http://localhost:8794/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 16,
+            "load": 66,
+            "transferSize": 13283
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 2937,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/about",
+                "http://localhost:8794/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 20,
+            "load": 64,
+            "transferSize": 13283
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/about/",
+      "htmlBytes": 12983,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 1,
+      "jsBytes": 0,
+      "page": "/about",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/about"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:50:38 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 1030806
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1698,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28464,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025",
+                "http://localhost:8794/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 14,
+            "load": 64,
+            "transferSize": 28764
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1274,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28464,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025",
+                "http://localhost:8794/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 62,
+            "transferSize": 28764
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1772,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28464,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025",
+                "http://localhost:8794/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 66,
+            "transferSize": 28764
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1698,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28464,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025",
+                "http://localhost:8794/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 67,
+            "transferSize": 28764
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/2025/",
+      "htmlBytes": 28464,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 2,
+      "jsBytes": 0,
+      "page": "/2025",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/2025"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:50:59 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2070853
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1168,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23425,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025/CHA",
+                "http://localhost:8794/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 54,
+            "load": 99,
+            "transferSize": 23725
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1746,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23425,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025/CHA",
+                "http://localhost:8794/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 52,
+            "load": 60,
+            "transferSize": 23725
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1766,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23425,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025/CHA",
+                "http://localhost:8794/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 52,
+            "load": 61,
+            "transferSize": 23725
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1168,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23425,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2025/CHA",
+                "http://localhost:8794/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 53,
+            "load": 105,
+            "transferSize": 23725
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/2025/CHA/",
+      "htmlBytes": 23425,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 2,
+      "jsBytes": 593036,
+      "page": "/2025/CHA",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/2025/CHA"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:51:19 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [
+        {
+          "bytes": 1468,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/javascript",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2631192
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1684,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28881,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024",
+                "http://localhost:8794/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 57,
+            "transferSize": 29181
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1256,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28881,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024",
+                "http://localhost:8794/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 18,
+            "load": 67,
+            "transferSize": 29181
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1736,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28881,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024",
+                "http://localhost:8794/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 67,
+            "transferSize": 29181
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1684,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28881,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024",
+                "http://localhost:8794/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 14,
+            "load": 66,
+            "transferSize": 29181
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/2024/",
+      "htmlBytes": 28881,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 2,
+      "jsBytes": 0,
+      "page": "/2024",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/2024"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:51:39 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2070730
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1200,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23654,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024/TOR",
+                "http://localhost:8794/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 50,
+            "load": 97,
+            "transferSize": 23954
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1738,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23654,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024/TOR",
+                "http://localhost:8794/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 52,
+            "load": 61,
+            "transferSize": 23954
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1798,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23654,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024/TOR",
+                "http://localhost:8794/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 56,
+            "load": 65,
+            "transferSize": 23954
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1200,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23654,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2024/TOR",
+                "http://localhost:8794/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 55,
+            "load": 64,
+            "transferSize": 23954
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/2024/TOR/",
+      "htmlBytes": 23654,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 2,
+      "jsBytes": 593036,
+      "page": "/2024/TOR",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/2024/TOR"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:51:59 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [
+        {
+          "bytes": 1468,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/javascript",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2638349
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1908,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 30200,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011",
+                "http://localhost:8794/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 60,
+            "transferSize": 30500
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1490,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 30200,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011",
+                "http://localhost:8794/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 64,
+            "transferSize": 30500
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1966,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 30200,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011",
+                "http://localhost:8794/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 14,
+            "load": 62,
+            "transferSize": 30500
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1908,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 30200,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011",
+                "http://localhost:8794/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 65,
+            "transferSize": 30500
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/2011/",
+      "htmlBytes": 30200,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 2,
+      "jsBytes": 0,
+      "page": "/2011",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/2011"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:52:19 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 1099477
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1272,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23966,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011/CHA",
+                "http://localhost:8794/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 61,
+            "load": 71,
+            "transferSize": 24266
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1858,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23966,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011/CHA",
+                "http://localhost:8794/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 54,
+            "load": 64,
+            "transferSize": 24266
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1886,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23966,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011/CHA",
+                "http://localhost:8794/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 53,
+            "load": 66,
+            "transferSize": 24266
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1272,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23966,
+              "count": 2,
+              "urls": [
+                "http://localhost:8794/2011/CHA",
+                "http://localhost:8794/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 593036,
+              "count": 3,
+              "urls": [
+                "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js",
+                "http://localhost:8794/_astro/utils.DS64JlTE.js",
+                "http://localhost:8794/_astro/echarts.BzgXyCAX.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 50,
+            "load": 77,
+            "transferSize": 24266
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/2011/CHA/",
+      "htmlBytes": 23966,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 2,
+      "jsBytes": 593036,
+      "page": "/2011/CHA",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "http://localhost:8794/2011/CHA"
+        }
+      ],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:52:39 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [
+        {
+          "bytes": 1468,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/javascript",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/team-season-pace.astro_astro_type_script_index_0_lang.Bg2par1W.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2635937
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 900,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 3468,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 9,
+            "load": 15,
+            "transferSize": 3768
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 844,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 3468,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 14,
+            "load": 23,
+            "transferSize": 3768
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1024,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 3468,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 10,
+            "load": 17,
+            "transferSize": 3768
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1080,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 3468,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:8794/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 11,
+            "load": 15,
+            "transferSize": 3768
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:8794/nope",
+      "htmlBytes": 3468,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 2,
+      "jsBytes": 0,
+      "page": "/nope",
+      "redirects": [],
+      "responseHeaders": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 20:52:59 GMT",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 404,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": null,
+          "contentEncoding": null,
+          "contentType": "text/css",
+          "status": 200,
+          "url": "http://localhost:8794/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 38223
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

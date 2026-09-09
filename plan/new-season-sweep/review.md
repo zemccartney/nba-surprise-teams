@@ -14,6 +14,206 @@ round and have no section here.
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
+## Step 8: Astro 7 and the Cloudflare Workers adapter
+
+**State.** Branch `astro-7` on `trailing-slash`. **No Pages preview**: the
+Pages build cannot build an Astro 6+ branch, so everything here was verified
+locally. Nothing was created in the Cloudflare account, and the deploy workflow
+is inert until you set a repository variable. Two commits: `08a6471` is the
+upgrade, and the one after it is this write-up plus the comparison artifacts.
+Both carry `[CF-Pages-Skip]`, because a Pages build of this branch would only
+fail; the deployment Cloudflare records for it sits at "Idle" and never runs.
+
+### Files to read, in order
+
+1. `astro.config.mjs`: `imageService`, `compressHTML`, `session`, and the two
+   things that are gone (`platformProxy`, the `vite.ssr.external` list).
+2. `wrangler.jsonc`: this is the deploy config now. The `GAMES_KV` id is a
+   placeholder you have to fill in.
+3. `src/layouts/typography.astro`: the `:global(...)` on the three layout
+   rules, and `src/components/table.astro`: the deleted `color` inside
+   `&.compact`. These two are the visual regressions the upgrade caused, both
+   from the same compiler change, and both carry a comment explaining why.
+4. `src/actions/index.ts`, `src/middleware.ts`, `src/env.d.ts`: the three
+   places `Astro.locals.runtime` used to appear.
+5. `archiver/api.ts` and `archiver/script.ts`: the write moved out of the route
+   and into the node script.
+6. `.github/workflows/deploy.yml`: what a real deploy would do, and the
+   `DEPLOY_ENABLED` gate that stops it doing anything today.
+7. `vitest.config.ts`: why the Cloudflare vite plugins are filtered out.
+
+### Astro 6 and 7 features: what I took
+
+Forced by the upgrade, nothing to decide: Vite 8 and Rolldown, the Rust
+compiler, queued rendering, Zod 4 through `astro/zod`, workerd for dev,
+prerendering and preview, and the wrangler file as the build config.
+
+Chosen:
+
+- **`session: false`** — no `SESSION` KV namespace gets provisioned on deploy,
+  and `unstorage` leaves the worker.
+- **`imageService: "compile"`** — keeps today's behaviour, sharp at build time.
+  The adapter's new default routes every processed image through the
+  Cloudflare Images binding at runtime.
+- **`compressHTML: true`** — 5.x whitespace, so the HTML diff stayed readable.
+  Astro 7's default is `'jsx'`, which collapses newlines between inline
+  elements.
+- **Immutable `Cache-Control` on `/_astro/*`** — the adapter writes it into
+  `_headers` by itself. Free, and the Pages build never did it.
+
+### Astro 6 and 7 features: what I left out, and why
+
+You asked for the omissions, so here they are, roughly most to least worth
+revisiting.
+
+1. **Content Security Policy** (`security.csp`, stable since 6.0). Deliberately
+   held for the session you and I do together. Worth knowing going in: it emits
+   a `<meta>` policy with hashes for Astro-processed scripts and styles, it is
+   not applied in dev, external scripts and styles need hashes added by hand
+   (which is where Cloudflare's injected beacon comes in), and 7.1 added `kind`
+   scoping so inline `style` attributes can be allowed without loosening the
+   `<style>` policy.
+2. **Fonts API** (`fonts: [...]`, `<Font />`, stable since 6.0). Would replace
+   the two `@fontsource/*` CSS imports with declarative config that also emits
+   preloads and metric-matched fallbacks. Real but cosmetic, and it changes how
+   every font on the site is delivered, so it wants its own round.
+3. **Route caching** (`cache.provider`, `routeRules`, `Astro.cache`, stable in
+   7.0). This is the platform-agnostic version of the manual `Cache-Control`
+   the two server islands set today. I left it because the providers don't fit:
+   `memoryCache()` is per-isolate memory, which on Workers means almost
+   nothing, and `cacheCloudflare()` needs the Workers Cache private beta, which
+   the docs say not to use without access.
+4. **`experimental_getFontFileURL()`** (6.2). The documented way to build a
+   satori OG image. Only useful once the Fonts API is in, and its docs example
+   rasterizes with sharp, which will not run in workerd — so the OG endpoint
+   would have to prerender or use `prerenderEnvironment: 'node'`. Flagging it
+   now because the OG image is on your list.
+5. **`prerenderEnvironment: 'node'`** (adapter 13.1). The escape hatch for
+   prerendering pages that need Node APIs. Not needed today; the thing that
+   needed Node was the archiver route, and that moved to the node script.
+6. **`CF_VERSION_METADATA` binding** (adapter 14.2.5). Adds a version cache tag
+   and a weak ETag, and it is also how Sentry detects releases. Belongs with
+   the Sentry rework.
+7. **Cloudflare preview deployments** (adapter 13.2). Could replace the
+   separate preview environment, but it is a Cloudflare private beta and I
+   could not verify availability without touching your account.
+8. **`image.service.config.{jpeg,webp,avif,png}`** (6.1). Per-codec sharp
+   settings. Only worth it if logo output size or quality ever bothers you.
+9. **`experimental.svgOptimizer`** (6.2, still experimental). The site's SVGs
+   go through `getImage` and `import.meta.glob` as assets rather than as
+   components, which is not what this optimizes.
+10. **`experimental.incrementalBuild`** (7.2) and
+    **`experimental.collectionStorage: 'chunked'`** (7.1). Both aimed at big
+    sites; ours builds in about forty seconds and the data store is one file.
+11. **Custom and JSON logging** (`logger`, stable in 7.0). Worker logs go to
+    Cloudflare observability, which is already enabled in `wrangler.jsonc`.
+12. **Advanced routing** (`src/fetch.ts`, `astro/fetch`, the Hono middleware,
+    `cf()` helpers). Composing the request pipeline by hand. Nothing here needs
+    it, and the Sentry wrapper wraps the default entrypoint anyway.
+13. **`astro dev --background`** and the matching preview commands (7.0/7.2).
+    Turned off in `pnpm start` rather than adopted; see the log entry.
+
+Not applicable, listed so you know they were looked at: live content
+collections, the Sätteri Markdown pipeline, `@astrojs/db` (removed), i18n
+fallback routes, `<ClientRouter />`, `paginate({ format })`, the Container API,
+session drivers, resilient hydration for framework islands, and remote image
+redirects.
+
+### Surprises, and what each one means for review
+
+1. **Scoped-CSS selectors changed meaning, and that is the thing to look at
+   hardest.** Astro 7 scopes every compound of a scoped selector; Astro 5 left
+   descendants alone. Two consequences here, and both were silent — the build
+   was green and only the pixel comparison caught them. The lesson for future
+   components: a scoped selector's specificity in Astro 7 is one attribute per
+   compound, so nested rules are heavier than they read.
+   - Rules reaching into slotted content stopped matching, because slotted
+     children carry the page's attribute rather than the component's. That is
+     the typography regression; fixed with `:global(...)`. Check `/about/`,
+     `/`, and any team page: paragraphs should have a gap between them and
+     headings a bigger gap above than below.
+   - Rules that were safely below a consumer's specificity moved up to tie
+     with it, and then lost or won on source order. That is the table one.
+     Check a team page: the row labels in the small stats table (Record,
+     Over/Under, Record Needed…) should be lime, and the values beside them
+     green.
+2. **A Node shim ships to the browser.** Every page's inline script now starts
+   with `globalThis.process ??= {}`. It comes from the adapter setting a
+   Rolldown banner at the top level instead of per environment. Harmless, 62
+   bytes, and removable — see the decisions below.
+3. **Two stylesheets instead of one**, and the order differs per page. Check
+   the network panel on `/2024/TOR/` and `/stats/`. This is what made the table
+   specificity tie visible rather than harmless, so it is not purely cosmetic.
+4. **Trailing-slash redirects go from 308 to 307.** Pages answers `/about` with
+   a permanent redirect; the Workers asset layer answers it with a temporary
+   one, and `assets.html_handling` cannot change that (I tried
+   `"force-trailing-slash"`). Paths with no asset behind them still get Astro's
+   own permanent redirect from the worker. Same destination, one hop either
+   way; what changes is the signal to crawlers. See the decisions below.
+5. **The server-island bootstrap was rewritten.** Astro 7 preloads the island
+   endpoint from `<head>` and swaps the markup through a shared helper keyed by
+   `data-island-id`. Behaviour is unchanged and the rendered pages are
+   pixel-identical, but if you ever read that markup it will look nothing like
+   what you remember.
+6. **No preview build for this branch.** Pages cannot build Astro 6+. Merging
+   this to `main` without the Workers cutover would break the deployed site, so
+   this branch and the cutover have to land together.
+
+### Decisions you may flip
+
+- `compressHTML: true` keeps 5.x whitespace. Dropping it takes Astro 7's `jsx`
+  default and a smaller page, at the cost of checking every inline-element
+  boundary for a lost space.
+- The `globalThis.process` banner could be cleared for the client environment
+  in `astro.config.mjs`. Nothing in the client references `process` today, but
+  the adapter pairs the banner with `define: { "process.env": "process.env" }`,
+  and a production build with Sentry bundled might. I left it; it is a safe
+  thing to revisit during the Sentry round.
+- The 307 on trailing-slash redirects is left as it is. The alternatives are
+  a Cloudflare redirect rule in the dashboard, or `assets.html_handling: "none"`
+  plus running the worker first, which would put every HTML request through a
+  worker invocation and give up the asset cache. Neither is worth it for a
+  permanence signal on one hop, but it is your call and it belongs to the
+  cutover round, not this one.
+- `compatibility_date` is pinned to `2025-03-21`, the date the Pages build
+  used. The adapter would otherwise default it to the installed workerd's date.
+- The deploy workflow builds through `pnpm run build`, which runs the full
+  verify (check, format, lint, test) before every deploy. Slower CI, but it
+  matches what the local build does.
+- `wrangler.jsonc` rather than `wrangler.json` or `.toml`, so the file can
+  carry comments. It costs a `.prettierrc` override to stop prettier and the
+  linter fighting over trailing commas.
+
+### Manual test checklist
+
+- [ ] `pnpm start`: dev server stays in the foreground, `concurrently` shows
+      both processes, `/stats` 404s and `/stats/` serves.
+- [ ] `/about/` and `/`: paragraphs and headings have spacing. This is the
+      first regression that was fixed; it is the thing most worth a human eye.
+- [ ] Any team page, e.g. `/2024/TOR/`: the stats-table row labels are lime and
+      the values green. That is the second regression.
+- [ ] `node archiver/script.ts 2099`: prints "Processing season 2099...", then
+      "Archive request failed: 404 Not Found". The endpoint runs in workerd
+      now, so this proves the route still works there.
+- [ ] `pnpm run archive:latest` if you want the real path: it should rewrite
+      `src/content/games.json` from the node script, after which the
+      `archive:diff` script should report nothing changed.
+- [ ] `pnpm exec astro preview`: the built worker serves, including a server
+      island if you add a 2026 team season.
+- [ ] `pnpm test` and `pnpm run check` both pass.
+
+### Comparison artifacts
+
+- `plan/baseline/runs/2026-09-09-astro-7-local` vs
+  `runs/2026-09-09-trailing-slash-local`, both served by
+  `plan/baseline/serve-dist.mjs`: 44/44 pixel-identical, 0 console errors.
+- `runs/2026-09-09-astro-7-scratch-island` vs
+  `runs/2026-09-09-trailing-slash-scratch-island`, both served by
+  `astro preview` on real workerd: 8/8 pixel-identical, both islands 200,
+  0 console errors.
+- The two regressions before their fixes, for scale: `/about/` differed by
+  22–27% at every viewport, and the twelve team-page shots by 0.15–0.46%.
+
 ## Step 7: trailing slashes
 
 **State.** Branch `trailing-slash` on `deps`. Preview:
