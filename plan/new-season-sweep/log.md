@@ -18,7 +18,9 @@ KV namespace from being provisioned on deploy and takes `unstorage` out of the
 worker; `imageService: "compile"`, which keeps sharp running at build time
 rather than moving images to the Cloudflare Images binding the adapter now
 defaults to; and `compressHTML: true`, which is 5.x's whitespace behaviour
-where 7.0 defaults to `'jsx'`.
+where 7.0 defaults to `'jsx'`. `imageService: "compile"` needs a companion in
+dev: a five-line inline integration in `astro.config.mjs` points `/_image` at
+Astro's generic endpoint when `command === "dev"`. See finding 15.
 
 `Astro.locals.runtime` is gone. KV now comes from `env` in `cloudflare:workers`,
 the Sentry middleware's `waitUntil` context from `Astro.locals.cfContext`, and
@@ -131,6 +133,47 @@ passed through the environment rather than interpolated into a `run` block).
     14 doesn't depend on the types package, so nothing contradicts wrangler's
     optional peer. Removed from `pnpm-workspace.yaml`.
 
+15. **Every image on the site was broken in dev, and the build comparison
+    could not see it.** Reported by Zack on first use of `pnpm start`, after
+    the round was already pushed. With `imageService: "compile"` the adapter
+    points the dev `/_image` endpoint at its Cloudflare Images binding
+    (`image-transform-endpoint`), and that binding accepts only jpeg, png, gif,
+    webp and avif. All 45 assets here are SVG, so every request answered
+    `400 Unsupported format: svg` and no image rendered anywhere under
+    `pnpm start`. Production is unaffected: `compile` runs sharp at build time
+    and prerendered pages ship static `/_astro/*.svg` files, never touching
+    `/_image`, which is exactly why 44/44 screenshots passed. The fix is a
+    dev-only inline integration that sets `image.endpoint` to
+    `astro/assets/endpoint/generic`; integrations run after the adapter, so it
+    wins, and the build config the adapter computes is untouched. Verified: the
+    421 files of client output are byte-identical before and after.
+    Two options were rejected. `imageService: "passthrough"` fixes dev but
+    makes prerendered pages reference `/_image/?href=…` at runtime, turning
+    every image on every page into a worker invocation instead of a static
+    asset. Leaving it and telling Cloudflare to allow more formats is not
+    possible; the format list is hardcoded in the adapter. Worth knowing for
+    later: `compile` emits 98 SVG files for 45 sources, and every one is
+    byte-identical to its source, so build-time image processing currently buys
+    this site nothing but duplicate files.
+16. **The Sentry middleware logs a workerd warning in dev.** "A promise was
+    resolved or rejected from a different request context than the one it was
+    created in." `@sentry/cloudflare`'s `makeFlushLock` wraps the request's
+    `waitUntil` and flushes after the response; under Astro's dev server the
+    flush outlives the request context and workerd cancels the continuation.
+    Dev only, and confirmed so: zero occurrences across twelve on-demand
+    server-island requests against `astro preview`, because in a production
+    build the middleware short-circuits on prerendered routes and the on-demand
+    handlers finish fast enough to flush in-request. New with adapter 14 only
+    in the sense that dev now runs in workerd at all. Left alone; it belongs to
+    the Sentry rework.
+17. **Nothing in the harness ever exercised the dev server.** That is how
+    finding 15 shipped. `plan/baseline/dev-smoke.mjs` is new: it loads seven
+    pages in a real browser against a running dev server, scrolls to trigger
+    lazy loading, and exits non-zero on any image that never decoded, any
+    console error, any failed request or any response at 400 or above. Checked
+    against both states: it passes on the fix and reports 400s and broken
+    images with the fix removed.
+
 **Verification.** 44/44 screenshots pixel-identical to the trailing-slash build
 across four viewports, 0 console errors, both charts and the popover behaving
 the same, nav highlight on exactly one link on `/archive/`, `/stats/` and
@@ -145,7 +188,9 @@ console errors. `astro check` reports 0 errors across 55 files, prettier and
 eslint are clean, and all 10 tests pass. `wrangler types` generates exactly
 `GAMES_KV: KVNamespace` and `ASSETS: Fetcher`, with no SESSION binding.
 Deployment was not attempted: the workflow is gated off and no Cloudflare
-resource was created.
+resource was created. Added after the fact, once the dev breakage surfaced:
+`dev-smoke.mjs` reports 47 images across seven pages with none failing to
+render and no console errors or failed requests.
 
 ## 2026-09-09 — Step 7: `trailingSlash: "always"`, links written with the slash
 

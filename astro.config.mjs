@@ -11,6 +11,37 @@ const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
   "",
 );
 
+/*
+  Dev-only fix for images. With `imageService: "compile"` the adapter points
+  /_image at its Cloudflare Images binding endpoint in dev, and that binding
+  only accepts jpeg, png, gif, webp and avif — every image on this site is an
+  SVG, so every request came back "400 Unsupported format: svg" and no image
+  rendered under `pnpm start`. Build is unaffected: sharp runs at build time and
+  prerendered pages ship static files, which is why this never showed up in the
+  build comparison.
+
+  Astro's generic endpoint is the one the adapter itself uses for its other dev
+  modes. It is fetch-based, so it runs in workerd, and it hands the bytes to the
+  configured service, which under "compile" is @astrojs/cloudflare's workerd
+  service: a passthrough that returns the input unchanged with the format from
+  the URL. SVG in, SVG out, correct content type.
+
+  Integrations run after the adapter, so this override wins. Dev only, so the
+  build config the adapter computes is untouched.
+*/
+const devImageEndpoint = () => ({
+  hooks: {
+    "astro:config:setup": ({ command, updateConfig }) => {
+      if (command === "dev") {
+        updateConfig({
+          image: { endpoint: { entrypoint: "astro/assets/endpoint/generic" } },
+        });
+      }
+    },
+  },
+  name: "dev-image-endpoint",
+});
+
 const siteByEnv = {
   preview: "https://dev.nba-surprise-teams.pages.dev",
   production: "https://nbastt.grepco.net",
@@ -54,6 +85,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    devImageEndpoint(),
     archiver(),
     ...(SENTRY_AUTH_TOKEN
       ? [

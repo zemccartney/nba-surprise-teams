@@ -26,8 +26,10 @@ fail; the deployment Cloudflare records for it sits at "Idle" and never runs.
 
 ### Files to read, in order
 
-1. `astro.config.mjs`: `imageService`, `compressHTML`, `session`, and the two
-   things that are gone (`platformProxy`, the `vite.ssr.external` list).
+1. `astro.config.mjs`: `imageService`, `compressHTML`, `session`, the two
+   things that are gone (`platformProxy`, the `vite.ssr.external` list), and
+   the `devImageEndpoint` integration at the top, which is the fix for the
+   broken-images bug you hit.
 2. `wrangler.jsonc`: this is the deploy config now. The `GAMES_KV` id is a
    placeholder you have to fill in.
 3. `src/layouts/typography.astro`: the `:global(...)` on the three layout
@@ -137,25 +139,35 @@ redirects.
      Check a team page: the row labels in the small stats table (Record,
      Over/Under, Record Needed…) should be lime, and the values beside them
      green.
-2. **A Node shim ships to the browser.** Every page's inline script now starts
+2. **Images were broken in dev and the harness could not see it.** You found
+   this, not me, and the reason it got past every check is worth stating
+   plainly: everything I verified ran against built output, where these images
+   are static files that never touch `/_image`. In dev they do, and under
+   `imageService: "compile"` the adapter routes `/_image` to the Cloudflare
+   Images binding, which rejects SVG. All 45 assets here are SVG. The fix is
+   dev-only and the 421 files of build output are byte-identical before and
+   after it, so the 44/44 result still stands. `plan/baseline/dev-smoke.mjs` is
+   the new check that would have caught it; run it whenever a round touches
+   dev, the adapter or images.
+3. **A Node shim ships to the browser.** Every page's inline script now starts
    with `globalThis.process ??= {}`. It comes from the adapter setting a
    Rolldown banner at the top level instead of per environment. Harmless, 62
    bytes, and removable — see the decisions below.
-3. **Two stylesheets instead of one**, and the order differs per page. Check
+4. **Two stylesheets instead of one**, and the order differs per page. Check
    the network panel on `/2024/TOR/` and `/stats/`. This is what made the table
    specificity tie visible rather than harmless, so it is not purely cosmetic.
-4. **Trailing-slash redirects go from 308 to 307.** Pages answers `/about` with
+5. **Trailing-slash redirects go from 308 to 307.** Pages answers `/about` with
    a permanent redirect; the Workers asset layer answers it with a temporary
    one, and `assets.html_handling` cannot change that (I tried
    `"force-trailing-slash"`). Paths with no asset behind them still get Astro's
    own permanent redirect from the worker. Same destination, one hop either
    way; what changes is the signal to crawlers. See the decisions below.
-5. **The server-island bootstrap was rewritten.** Astro 7 preloads the island
+6. **The server-island bootstrap was rewritten.** Astro 7 preloads the island
    endpoint from `<head>` and swaps the markup through a shared helper keyed by
    `data-island-id`. Behaviour is unchanged and the rendered pages are
    pixel-identical, but if you ever read that markup it will look nothing like
    what you remember.
-6. **No preview build for this branch.** Pages cannot build Astro 6+. Merging
+7. **No preview build for this branch.** Pages cannot build Astro 6+. Merging
    this to `main` without the Workers cutover would break the deployed site, so
    this branch and the cutover have to land together.
 
@@ -169,6 +181,21 @@ redirects.
   the adapter pairs the banner with `define: { "process.env": "process.env" }`,
   and a production build with Sentry bundled might. I left it; it is a safe
   thing to revisit during the Sentry round.
+- Sentry logs a workerd cross-request promise warning on some dev requests.
+  It is dev only: zero occurrences across twelve on-demand island requests
+  against `astro preview`, because a production build short-circuits the
+  middleware on prerendered routes. The underlying question is whether the
+  Sentry middleware should run in dev at all, which is your call and belongs to
+  the Sentry round, so I left it. The alternative, the
+  `no_handle_cross_request_promise_resolution` compatibility flag, would
+  silence it in production too and is the wrong tool.
+- `imageService` stays `"compile"` with a dev-only endpoint override rather
+  than `"passthrough"`. Passthrough fixes dev in one line, but it makes every
+  prerendered page request `/_image` at runtime, so every image becomes a
+  worker invocation instead of a static asset. Related and worth a look
+  sometime: `compile` emits 98 SVG files for 45 sources and every one is
+  byte-identical to its source, so build-time processing is currently buying
+  nothing here.
 - The 307 on trailing-slash redirects is left as it is. The alternatives are
   a Cloudflare redirect rule in the dashboard, or `assets.html_handling: "none"`
   plus running the worker first, which would put every HTML request through a
@@ -188,6 +215,12 @@ redirects.
 
 - [ ] `pnpm start`: dev server stays in the foreground, `concurrently` shows
       both processes, `/stats` 404s and `/stats/` serves.
+- [ ] With that running, the `dev-smoke.mjs` script under `plan/baseline/`
+      exits 0 when pointed at the dev server with `--base`. Team logos and
+      emoji should be visible on `/2024/`, a team page and `/stats/`.
+- [ ] Images in a browser other than Chrome, if you care to. SVG in an `<img>`
+      needs a correct content type and the dev endpoint now sends
+      `image/svg+xml`, but I only checked Chrome.
 - [ ] `/about/` and `/`: paragraphs and headings have spacing. This is the
       first regression that was fixed; it is the thing most worth a human eye.
 - [ ] Any team page, e.g. `/2024/TOR/`: the stats-table row labels are lime and
@@ -211,7 +244,9 @@ redirects.
   `runs/2026-09-09-trailing-slash-scratch-island`, both served by
   `astro preview` on real workerd: 8/8 pixel-identical, both islands 200,
   0 console errors.
-- The two regressions before their fixes, for scale: `/about/` differed by
+- `plan/baseline/dev-smoke.mjs` against a running dev server: 47 images across
+  seven pages, none failing to render, no console errors or failed requests.
+- The two CSS regressions before their fixes, for scale: `/about/` differed by
   22–27% at every viewport, and the twelve team-page shots by 0.15–0.46%.
 
 ## Step 7: trailing slashes
