@@ -16,7 +16,7 @@ const archivedSeasons = await ContentUtils.getArchivedSeasons();
     <div class="archive-list">
       {
         archivedSeasons.map((season) => (
-          <Link class="archive-link" href={`/${season.id}`}>
+          <Link class="archive-link" href={`/${season.id}/`}>
             {ContentUtils.abbreviateSeasonRange(season)}
           </Link>
         ))

@@ -96,7 +96,7 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
             <th scope="row">
               <div class="team-cell">
                 <Logo seasonId={seasonId} team={teamRow.team} />
-                <Link href={`/${seasonId}/${teamRow.team.id}`}>
+                <Link href={`/${seasonId}/${teamRow.team.id}/`}>
                   <span class="team-name-full">
                     {ContentUtils.resolveTeamName(teamRow.team, seasonId)}
                     <span

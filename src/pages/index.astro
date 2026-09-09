@@ -21,9 +21,9 @@ const [, mm, dd] = latestSeason.data.startDate.split("-", 3);
   <Fragment slot="header">
     <h1 class="home-title">NBA Surprise Teams Tracker</h1>
     <nav class="home-nav">
-      <Link class="home-nav-link" href="/archive">Archive</Link>
-      <Link class="home-nav-link" href="/stats">Stats</Link>
-      <Link class="home-nav-link" href="/about">About</Link>
+      <Link class="home-nav-link" href="/archive/">Archive</Link>
+      <Link class="home-nav-link" href="/stats/">Stats</Link>
+      <Link class="home-nav-link" href="/about/">About</Link>
     </nav>
   </Fragment>
   <main class="home-main">
@@ -43,7 +43,7 @@ const [, mm, dd] = latestSeason.data.startDate.split("-", 3);
           <p class="body-text">
             Next season kicks off on {`${mm}/${dd}`}! Pre-season over/unders are
             typically posted mid-September. Till then, check out how{" "}
-            <Link href="/archive">past years</Link> shook out.
+            <Link href="/archive/">past years</Link> shook out.
           </p>
         </Typography>
       )

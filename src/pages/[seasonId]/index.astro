@@ -77,7 +77,7 @@ const seasonAfter = adjacent(1);
       hasArchive && (
         <div class="season-nav">
           {seasonBefore && (
-            <a class="season-button" href={`/${seasonBefore.id}`}>
+            <a class="season-button" href={`/${seasonBefore.id}/`}>
               <ArrowLeftSvg
                 class="SeasonArchiveButton fill-current"
                 width={24}
@@ -91,7 +91,7 @@ const seasonAfter = adjacent(1);
             </a>
           )}
           {seasonAfter && (
-            <a class="season-button" href={`/${seasonAfter.id}`}>
+            <a class="season-button" href={`/${seasonAfter.id}/`}>
               {ContentUtils.abbreviateSeasonRange(seasonAfter, {
                 compact: true,
               })}{" "}
