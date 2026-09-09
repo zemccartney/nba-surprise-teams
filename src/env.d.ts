@@ -1,11 +1,9 @@
-// https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/#use-bindings-in-your-astro-application
+// Adapter 14 dropped Astro.locals.runtime. Locals now carries only cfContext
+// (the ExecutionContext, used by the Sentry middleware); bindings come from
+// `cloudflare:workers`, typed by the generated worker-configuration.d.ts.
+// https://docs.astro.build/en/guides/integrations-guide/cloudflare/#typing
 
-interface ENV {
-  GAMES_KV: KVNamespace;
-}
-
-// use a default runtime configuration (advanced mode).
-type Runtime = import("@astrojs/cloudflare").Runtime<ENV>;
+type Runtime = import("@astrojs/cloudflare").Runtime;
 declare namespace App {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface Locals extends Runtime {}

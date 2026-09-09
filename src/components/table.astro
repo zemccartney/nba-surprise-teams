@@ -91,7 +91,11 @@ const {
         padding: 1rem;
         font-size: var(--text-2xl);
         line-height: var(--text-2xl--line-height);
-        color: var(--color-green-200);
+        /* No color here on purpose. The unqualified `> tbody th, > tbody td`
+           rule above already sets green-200, so repeating it only added
+           specificity. Under Astro 7 that extra weight beat consumers'
+           own cell colors (team-stats' lime-400 row labels) because the
+           compiler now scopes the nested `tbody` compound too. */
       }
     }
 

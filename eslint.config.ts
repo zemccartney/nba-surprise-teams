@@ -66,8 +66,12 @@ export default defineConfig([
       // plugin packages export `configs` both as a named export and on the
       // default export; `plugin.configs.x` is their documented usage
       "import-x/no-named-as-default-member": "off",
-      // `astro:*` modules are virtual, provided by Astro at build time
-      "import-x/no-unresolved": ["error", { ignore: ["^astro:"] }],
+      // `astro:*` modules are virtual, provided by Astro at build time;
+      // `cloudflare:*` are workerd built-ins, provided by the runtime
+      "import-x/no-unresolved": [
+        "error",
+        { ignore: ["^astro:", "^cloudflare:"] },
+      ],
       // perfectionist/sort-imports owns import ordering
       "import-x/order": "off",
       "unicorn/filename-case": ["off"],

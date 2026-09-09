@@ -1,6 +1,9 @@
 import * as Astro from "astro";
+import Fs from "node:fs/promises";
 import Path from "node:path";
 import Url from "node:url";
+
+import type { GameData } from "../src/content-utils";
 
 const __filename = Url.fileURLToPath(import.meta.url);
 const projectRoot = Path.dirname(Path.dirname(__filename));
@@ -11,9 +14,42 @@ const seasonId =
 
 interface ArchiveResponse {
   failed: { error: string; seasonId: string }[];
+  games: GameData[];
   message?: string;
   processed: string[];
   totalGames: number;
+}
+
+// The endpoint runs in workerd, which cannot write to the repo, so the merge
+// into src/content/games.json happens here.
+async function updateGamesFile(
+  fetchedGames: GameData[],
+  processedSeasonIds: string[],
+): Promise<void> {
+  const gamesFile = Path.join(projectRoot, "src/content/games.json");
+
+  const existingGames = JSON.parse(
+    await Fs.readFile(gamesFile, "utf8"),
+  ) as GameData[];
+
+  const allGames = [
+    ...existingGames.filter(
+      (game) => !processedSeasonIds.includes(game.seasonId),
+    ),
+    ...fetchedGames,
+  ].toSorted((a, b) => {
+    // Sort by playedOn date first, then by game ID for stability
+    const dateCompare = a.playedOn.localeCompare(b.playedOn);
+    return dateCompare === 0 ? a.id.localeCompare(b.id) : dateCompare;
+  });
+
+  await Fs.writeFile(gamesFile, JSON.stringify(allGames), {
+    encoding: "utf8",
+  });
+
+  console.log(
+    `Updated games file with ${fetchedGames.length} games from ${processedSeasonIds.length} seasons`,
+  );
 }
 
 const astroServer = await Astro.dev({
@@ -48,6 +84,10 @@ try {
   }
 
   const results = (await response.json()) as ArchiveResponse;
+
+  if (results.processed.length > 0) {
+    await updateGamesFile(results.games, results.processed);
+  }
 
   console.log("\n=== Archive Results ===");
   console.log(`✓ Successfully processed: ${results.processed.length} seasons`);

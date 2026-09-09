@@ -21,9 +21,11 @@ export default defineConfig({
     site: siteByEnv[PUBLIC_DEPLOY_ENV],
   }),
   adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
+    // Adapter 14 defaults to "cloudflare-binding", which turns every processed
+    // image into a runtime /_image request through Cloudflare Images. "compile"
+    // keeps what the site does today: sharp runs at build time and prerendered
+    // pages ship finished files.
+    imageService: "compile",
   }),
   // The default, written down because it pairs with trailingSlash below: with
   // "directory", Astro.url.pathname ends in "/" at build time as it does in dev
@@ -31,6 +33,10 @@ export default defineConfig({
   build: {
     format: "directory",
   },
+  // Astro 7 defaults this to "jsx", which collapses newlines between inline
+  // elements. "true" is the 5.x behaviour and keeps the built HTML identical;
+  // revisit once there's a reason to take the smaller output.
+  compressHTML: true,
   env: {
     schema: {
       PUBLIC_DEPLOY_ENV: envField.enum({
@@ -62,24 +68,12 @@ export default defineConfig({
         ]
       : []),
   ],
+  // Sessions are unused. Declaring that keeps the adapter from provisioning a
+  // SESSION KV namespace on deploy and tree-shakes unstorage out of the worker.
+  session: false,
   // Cloudflare already 308s /about to /about/ for prerendered pages. Declaring it
   // makes the dev server match (a request without the slash is a 404 there), so
   // internal links are written with the slash and the nav highlight in
   // subpage.astro compares equal paths.
   trailingSlash: "always",
-  vite: {
-    ssr: {
-      external: [
-        // needed for sentry cloudflare
-        "node:async_hooks",
-        // used only by content loaders at build, I think? not needed at runtime (i hope / assume)
-        "node:fs/promises",
-        "node:path",
-        "node:fs",
-        "node:url",
-        "fs",
-        "path",
-      ],
-    },
-  },
 });

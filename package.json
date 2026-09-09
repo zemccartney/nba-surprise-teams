@@ -21,21 +21,21 @@
     "lint:debug": "eslint --flag unstable_native_nodejs_ts_config --inspect-config",
     "prepare": "if git rev-parse --git-dir >/dev/null 2>&1; then lefthook install; fi",
     "preview": "astro preview",
-    "start": "rm -r .wrangler || true && wrangler types && concurrently  --kill-others --names astro,ts -c red,blue \"astro dev\" \"pnpm run typewatch\"",
+    "start": "rm -r .wrangler || true && wrangler types && ASTRO_DEV_BACKGROUND=0 concurrently  --kill-others --names astro,ts -c red,blue \"astro dev\" \"pnpm run typewatch\"",
     "test": "vitest --run",
     "typewatch": "astro check --watch --preserveWatchOutput",
     "verify": "pnpm run check && pnpm test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/cloudflare": "^12.6.13",
+    "@astrojs/cloudflare": "^14.3.0",
     "@fontsource-variable/sixtyfour": "^5.3.0",
     "@fontsource/iosevka-curly": "^5.3.0",
     "@sentry/astro": "^10.22.0",
     "@sentry/cloudflare": "^10.22.0",
-    "astro": "^5.18.2",
+    "astro": "^7.3.1",
     "echarts": "6.1.0",
-    "sharp": "0.34.4",
+    "sharp": "^0.35.4",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
@@ -61,7 +61,7 @@
     "prettier": "3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "typescript-eslint": "^8.69.0",
-    "vite": "6.4.1",
+    "vite": "^8.2.2",
     "vitest": "^5.0.0",
     "wrangler": "^4.129.0"
   },

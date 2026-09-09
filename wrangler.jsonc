@@ -1,0 +1,23 @@
+{
+  // Adapter 14 makes this the build and deploy config, not just a local-dev
+  // convenience: `astro build` reads it and `wrangler deploy` ships what it
+  // describes. Keys the adapter fills in when absent (assets.directory, the
+  // SESSION KV namespace) are left out; `session: false` in astro.config.mjs is
+  // what keeps SESSION from being provisioned. Keys are sorted because
+  // json/sort-keys lints this file.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "assets": {
+    "binding": "ASSETS"
+  },
+  // Same date the Pages build used, so the runtime behaves as it does today.
+  "compatibility_date": "2025-03-21",
+  "compatibility_flags": ["nodejs_compat"],
+  // TODO Fill in the real namespace id from the Cloudflare dashboard before the
+  // first Workers deploy. Local dev ignores it and uses .wrangler/state.
+  "kv_namespaces": [{ "binding": "GAMES_KV", "id": "REPLACE_WITH_REAL_KV_ID" }],
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "name": "nbastt",
+  "observability": {
+    "enabled": true
+  }
+}

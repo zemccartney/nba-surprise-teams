@@ -1,5 +1,6 @@
 import { file } from "astro/loaders";
-import { defineCollection, reference, z } from "astro:content";
+import { z } from "astro/zod";
+import { defineCollection, reference } from "astro:content";
 
 import { teamCodeSchema } from "./content-utils";
 
@@ -36,7 +37,7 @@ const seasons = defineCollection({
         .regex(/^\d{4}-\d{2}-\d{2}$/)
         .optional(),
       episodeTitle: z.string().optional(),
-      episodeUrl: z.string().url().optional(),
+      episodeUrl: z.url().optional(),
       id: z.string(),
       shortened: z
         .object({
