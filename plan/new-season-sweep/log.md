@@ -45,13 +45,28 @@ reported zero islands.
 5. **No client-side action call exists to break.** `getSeasonData` is only
    reached through `Astro.callAction` inside the two island components, so
    there is no browser POST to `/_actions/…` that the setting could affect.
-6. **`wrangler pages dev` dies under the capture.** Twice, at about three
-   minutes in, with `Error in ProxyController: Error inside ProxyWorker` /
-   `Network connection lost` (wrangler 4.129, logged under
-   `~/Library/Preferences/.wrangler/logs/`). Nothing to do with the site; the
-   capture runner now health-checks the server and restarts it between steps.
+6. **`wrangler pages dev` dies under the capture.** Three runs out of three,
+   between one and three minutes in: the proxy controller reports an error
+   inside the proxy worker, cause "Network connection lost" (wrangler 4.129,
+   full trace under `~/Library/Preferences/.wrangler/logs/`).
+   Restarting and retrying did not help. The capture now runs against
+   `plan/baseline/serve-dist.mjs`, a 40-line static server that answers
+   `<path>/index.html` for `/path/`, 308s `/path` to `/path/` and serves
+   `404.html` with a 404 — which is what Cloudflare does for a prerendered
+   site. Both sides of the comparison were re-captured through it, so the
+   result is server-for-server honest. Nothing here says anything about the
+   site; it is a harness problem, written down so the next round doesn't spend
+   an hour on it again.
 
-**Verification.** Build green. Of 504 output files, 187 are byte-identical to
+**Verification.** 44/44 screenshots pixel-identical to the dependency-round
+build across four viewports, 0 console errors, charts and popover unchanged.
+The nav highlight lands on exactly one link on `/archive/`, `/stats/` and
+`/about/`, and on none on `/`, `/2024/` or `/2024/TOR/`. Per-page HTML moves by
+between −36 and +4 bytes, which is the shortened nav script plus one character
+per link. The Pages preview of the branch (`513416fd`) 308s `/about`, `/stats`
+and `/2024/TOR` to their slashed forms and 404s `/nope`.
+
+Build green. Of 504 output files, 187 are byte-identical to
 the dependency-round build; the differences are the twelve renamed worker
 chunks (content hashes move because the routes changed), the two worker
 entrypoints, and 303 HTML files. Diffing the HTML with asset hashes normalized

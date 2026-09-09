@@ -55,6 +55,14 @@ pnpm exec wrangler pages dev dist --port 8788 --compatibility-date 2025-03-21 --
 
 Then `node plan/baseline/capture.mjs --base http://localhost:8788 --label <name>`.
 
+`wrangler pages dev` dies partway through a full capture (`Error inside
+ProxyWorker` / `Network connection lost`, wrangler 4.129, three runs out of
+three on 2026-09-09). When that happens, serve the build with
+`node plan/baseline/serve-dist.mjs <dist> <port>` instead: it returns
+`<path>/index.html` for `/path/`, 308s `/path` to `/path/` and serves
+`404.html` with a 404, which is what Cloudflare does for a prerendered site.
+Capture both sides through the same server so the comparison stays honest.
+
 Known, expected deltas vs prod:
 
 - Prod pages carry ~150 KB more JS: the Sentry client SDK, bundled only when

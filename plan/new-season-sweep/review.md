@@ -73,7 +73,9 @@ of this section.
 ### Comparison artifacts
 
 - `plan/baseline/runs/2026-09-09-trailing-slash-local` vs
-  `runs/2026-09-09-deps-local`.
+  `runs/2026-09-09-deps-static`: 44/44 pixel-identical, 0 console errors.
+  Both were captured through `plan/baseline/serve-dist.mjs` rather than
+  `wrangler pages dev`, which died partway through three runs out of three.
 - `runs/2026-09-09-trailing-slash-scratch-island` vs
   `runs/2026-09-09-deps-scratch-island`: 8/8 pixel-identical, islands 0 → 1
   (the capture fix), HTML 13–38 B smaller.
