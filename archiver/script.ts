@@ -5,7 +5,7 @@ import Url from "node:url";
 const __filename = Url.fileURLToPath(import.meta.url);
 const projectRoot = Path.dirname(Path.dirname(__filename));
 
-const latestOnly = process.argv[2] === "--latest";
+const isLatestOnly = process.argv[2] === "--latest";
 const seasonId =
   process.argv[2] && process.argv[2].length === 4 ? process.argv[2] : undefined;
 
@@ -28,7 +28,7 @@ const baseURL = `http://localhost:4322`;
 
 try {
   let endpoint: string;
-  if (latestOnly) {
+  if (isLatestOnly) {
     endpoint = `${baseURL}/api/archive/latest`;
     console.log("Processing latest season...");
   } else if (seasonId) {

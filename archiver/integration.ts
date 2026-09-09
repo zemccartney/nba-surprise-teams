@@ -10,15 +10,17 @@ export default function archiverIntegration(): AstroIntegration {
   return {
     hooks: {
       "astro:config:setup": ({ command, injectRoute, logger }) => {
-        if (command === "dev") {
-          injectRoute({
-            entrypoint: Path.resolve(__dirname, "api.ts"),
-            pattern: "/api/archive/[seasonId]",
-            prerender: false,
-          });
-
-          logger.info("Archive API route injected for development");
+        if (command !== "dev") {
+          return;
         }
+
+        injectRoute({
+          entrypoint: Path.resolve(__dirname, "api.ts"),
+          pattern: "/api/archive/[seasonId]",
+          prerender: false,
+        });
+
+        logger.info("Archive API route injected for development");
       },
     },
     name: "archiver",

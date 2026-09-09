@@ -4,6 +4,10 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "eslint.options": {
+    "flags": ["unstable_native_nodejs_ts_config"]
+  },
+  "eslint.probe": ["javascript", "typescript", "json", "jsonc", "astro"],
   "search.exclude": {
     "**/*.svg": true,
     "**/node_modules": true,

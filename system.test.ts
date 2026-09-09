@@ -71,16 +71,15 @@ describe("system validation", () => {
 
     test("current/upcoming seasons must not have static games data", () => {
       const today = new Date();
+      const unfinishedSeasons = seasons.filter(
+        (season) => new Date(season.data.endDate) > today,
+      );
 
-      for (const season of seasons) {
-        const endDate = new Date(season.data.endDate);
-
-        if (endDate > today && games.length > 0) {
-          const seasonGames = games.filter(
-            (game) => game.data.seasonId === season.id,
-          );
-          expect(seasonGames.length).toBe(0);
-        }
+      for (const season of unfinishedSeasons) {
+        const seasonGames = games.filter(
+          (game) => game.data.seasonId === season.id,
+        );
+        expect(seasonGames).toHaveLength(0);
       }
     });
 
@@ -208,7 +207,7 @@ describe("system validation", () => {
 
       for (const teamSeason of rawTeamSeasons) {
         expect(teamIds).toContain(teamSeason.team);
-        const [, teamId] = teamSeason.id.split("/");
+        const [, teamId] = teamSeason.id.split("/", 2);
         expect(teamIds).toContain(teamId);
       }
 
@@ -224,7 +223,7 @@ describe("system validation", () => {
 
       for (const teamSeason of rawTeamSeasons) {
         expect(seasonIds).toContain(teamSeason.season);
-        const [seasonId] = teamSeason.id.split("/");
+        const [seasonId] = teamSeason.id.split("/", 1);
         expect(seasonIds).toContain(seasonId);
       }
 

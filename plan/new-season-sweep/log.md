@@ -3,6 +3,68 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-09 — Step 5: ESLint 10, `eslint.config.ts`, vitest 5, import-x
+
+**What changed.** ESLint 9 → 10.10 with every plugin on its current major:
+eslint-plugin-astro 3 (parses `.astro` with `@astrojs/compiler-rs`), unicorn
+74, perfectionist 5, eslint-plugin-package-json 1, @eslint/json 2, globals 17,
+typescript-eslint 8.69; vitest 3 → 5. The config is `eslint.config.ts`, loaded
+by Node's type stripping behind ESLint's `unstable_native_nodejs_ts_config`
+flag (scripts, `lefthook.yml`, `.vscode/settings.json`); `@eslint/compat` is
+gone (`includeIgnoreFile` ships in `eslint/config`), as is the `__dirname`
+shim (`import.meta.dirname`). New: eslint-plugin-import-x with the TypeScript
+resolver, so an import of a package that isn't in `package.json` is a lint
+error (the phantom-dependency failure from Step 3; verified it reports `zod`).
+`package.json` is `"private": true`. The `tsx` glob left the lefthook lint job.
+Details and versions in `findings-tooling.md`.
+
+**Lint fallout, 111 findings → 0.** Rules turned off, each with its reason in
+the config: unicorn `max-nested-calls`, `no-top-level-side-effects`,
+`prefer-await`, `prefer-number-coercion`, `prefer-simple-condition-first`;
+import-x `no-named-as-default-member`; package-json `require-*` configured
+with `ignorePrivate`. Code changes, all behavior-preserving: `--fix` for split
+limits, `URL#href`, `CSS.escape` in two selectors, early returns, comment
+style, a type-union order; by hand: four boolean renames (`isLatestOnly`,
+`isInitial`, `isServer`, `isSameOrigin`), `Object.hasOwn` for two `in` checks
+and one `!games[id]` in the archiver, `Iterator#toArray()` for six spreads in
+Node-only scripts, two declarations moved past early exits, one loop header
+hoisted to a variable, and the stats page's per-team loop deduplicated (the
+`if (teamHistory)` branches ended with the same 20 lines; now one loop after
+the branch). One inline disable: the archiver's games.json comparator, where
+`localeCompare` could reorder the archive. `system.test.ts`: the conditional
+`expect` became a filter plus a loop.
+
+**Found on the way:**
+
+1. `--fix` for `single-line-block-comment-style` turns `/* Section */` into a
+   three-line block comment, not `//`. Converted the stats page's eight
+   section markers to `//` by hand.
+2. A plugin's rule options in a config object without `files` fails config
+   validation for every other file ("could not find plugin package-json"),
+   while `"off"` for the same rule is tolerated. The package.json block now
+   carries `files: ["**/package.json"]`.
+3. Perl `s|…\|\|…|` with `|` as the delimiter: escaping the delimiter yields
+   regex alternation, which matched every line and prefixed the whole archiver
+   file. Restored from git and redone with `#` delimiters. Tooling note, not a
+   repo one.
+
+**Verification.** `pnpm run build` (the Cloudflare path: verify, then build)
+green on Node 26.8.1; lint over the repo takes about 4.5 s. Build output vs the
+same tree built before the round (`ea1f789`): 183 of 504 files byte-identical;
+the ECharts client chunk and its four wrapper chunks got new hashes (the chart
+module changed: `CSS.escape`, an early return, a rename); every HTML page
+differs only in the inlined nav-highlight script, which gained the 12
+characters of `CSS.escape()` (asset hashes normalized, then compared
+character by character; the stats page, whose per-team loop was restructured,
+is identical otherwise). Runtime capture `runs/2026-09-09-eslint-10-local` vs
+`runs/2026-09-09-react-removal-local`: 44/44 screenshots pixel-identical,
+payload +12 bytes per page and +14 bytes of JS on chart pages, popovers and
+chart tooltips behave as in Step 4 (including the island-mounted chart), no
+console errors. The two lint guards were exercised on purpose: an `<img>`
+without `alt` in a scratch `.astro` file is reported by
+`astro/jsx-a11y/alt-text`, and `import { z } from "zod"` in a scratch `.ts`
+file is reported by `import-x/no-extraneous-dependencies`.
+
 ## 2026-09-09 — Step 4: React out, ECharts and a native popover in
 
 **What changed.** The four Recharts charts are now ECharts 6.1 (`echarts/core`

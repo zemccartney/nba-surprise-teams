@@ -6,12 +6,7 @@ export interface SurprisesByTeamChartProps {
   data: Datapoint[];
 }
 
-type Datapoint = {
-  name: string;
-  numEliminated: number;
-  numSurprised: number;
-  teamId: string;
-} & (
+type Datapoint = (
   | {
       history: {
         duration: [number, number?];
@@ -23,7 +18,12 @@ type Datapoint = {
   | {
       logoSrc?: string;
     }
-);
+) & {
+  name: string;
+  numEliminated: number;
+  numSurprised: number;
+  teamId: string;
+};
 
 const tooltipContent = (point: Datapoint) => {
   const record = `<p class="tooltip-centered">Surprise Record: ${point.numSurprised} - ${point.numEliminated}</p>`;

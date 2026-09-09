@@ -38,7 +38,8 @@ console.log(
   "| page | status A/B | html Δ | JS Δ | CSS Δ | total Δ | ext scripts A/B | islands A/B |",
 );
 console.log("| --- | --- | --- | --- | --- | --- | --- | --- |");
-for (const page of new Set([...Object.keys(pa), ...Object.keys(pb)])) {
+const pages = new Set([...Object.keys(pa), ...Object.keys(pb)]);
+for (const page of pages) {
   const x = pa[page];
   const y = pb[page];
   console.log(
@@ -65,7 +66,8 @@ const pad = (png, width, height) => {
 
 console.log("\n| screenshot | size A | size B | diff px | diff % |");
 console.log("| --- | --- | --- | --- | --- |");
-for (const file of filesB.toSorted()) {
+const sortedB = filesB.toSorted((a, b) => a.localeCompare(b));
+for (const file of sortedB) {
   if (!filesA.has(file)) {
     console.log(`| ${file} | missing | ${file} | - | - |`);
     continue;

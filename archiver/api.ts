@@ -239,7 +239,8 @@ async function loadSeasonFromNBAAPI(
   }
   gameCounts = gameCounts as Record<TeamCode, number>;
 
-  for (const game of parsed.resultSets[0].rowSet) {
+  const rows = parsed.resultSets[0].rowSet;
+  for (const game of rows) {
     // must parse given that each game record identifies only one team's participation
 
     // PHX @ GSW (phoenix away)   or   GSW vs. PHX (warriors home)
@@ -260,8 +261,8 @@ async function loadSeasonFromNBAAPI(
       // Consider games only including at least one surprise team candidate
       seasonTeamCodes.includes(t1) ||
       seasonTeamCodes.includes(t2) ||
-      t1 in seasonLegacyTeamCodes ||
-      t2 in seasonLegacyTeamCodes
+      Object.hasOwn(seasonLegacyTeamCodes, t1) ||
+      Object.hasOwn(seasonLegacyTeamCodes, t2)
     ) {
       const teamOne = (
         Object.hasOwn(legacyTeamCodes, t1)
@@ -296,7 +297,7 @@ async function loadSeasonFromNBAAPI(
 
       // We want to count each game only once
       // Editing an existing game means a matchup between surprise teams i.e. should not be double-counted
-      if (!games[id]) {
+      if (!Object.hasOwn(games, id)) {
         totalGames += 1;
       }
 
@@ -375,6 +376,7 @@ async function loadSeasonFromNBAAPI(
     // the nba api returns games in chronological order by day, but, apparently, random within days i.e.
     // the same set of games on any given day will be returned in different orders on different runs,
     // leading to unnecessary diffs in the output
+    // eslint-disable-next-line unicorn/prefer-simple-sort-comparator -- code-unit order keeps games.json stable across runs
     games: GamesSchema.parse(Object.values(games)).toSorted((a, b) =>
       a.id < b.id ? -1 : a.id > b.id ? 1 : 0,
     ) as ContentUtils.GameData[],

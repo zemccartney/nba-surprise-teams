@@ -88,3 +88,51 @@ Active LTS; **Maintenance from 2026-10-20** (Node 26 becomes LTS 2026-10-28). La
 - ESLint 10 round: vitest 5 (needs Vite ≥ 6.4, satisfied), eslint-plugin-import-x 4.17 (+ typescript-eslint ≥ 8.56, eslint-import-resolver-typescript; disable `import-x/order`, ignore `astro:*` in `no-unresolved`; `no-extraneous-dependencies` is the rule that would have caught the phantom imports).
 - sqlite work: the vacuous vitest run in fresh checkouts (content store only written by dev/build).
 - ESLint 10 round, added 2026-09-09: `eslint-plugin-jsx-a11y` did **not** leave with React. `eslint-plugin-astro`'s `jsx-a11y-strict` config uses it to lint `.astro` templates, so it stays until that round decides whether the unmaintained plugin is worth keeping for Astro files.
+
+## What actually happened (2026-09-09, ESLint 10 round; see log.md Step 5)
+
+- Landed: eslint 10.10.0, @eslint/js 10.0.1, @eslint/json 2.1.0,
+  eslint-plugin-astro 3.1.0, unicorn 74.0.0, perfectionist 5.11.0,
+  eslint-plugin-package-json 1.8.0, typescript-eslint + parser 8.69.0 (8.70.0
+  was two days old, under `minimumReleaseAge`), globals 17.12.0, vitest 5.0.0,
+  @vitest/eslint-plugin 1.6.27, eslint-plugin-import-x 4.17.1,
+  eslint-import-resolver-typescript 4.4.5. `@eslint/compat` dropped:
+  `includeIgnoreFile` comes from `eslint/config` now.
+- `eslint.config.ts` is still behind `--flag unstable_native_nodejs_ts_config`
+  in 10.10 (`lib/shared/flags.js` lists it as active, nothing inactive
+  replaces it). No jiti: Node 26 strips types itself. The flag lives in the
+  scripts, `lefthook.yml`, and `.vscode/settings.json`, same as pagemeta.
+- `eslint-import-resolver-typescript` pulls in `unrs-resolver`, whose
+  `napi-postinstall` script trips `strictDepBuilds` →
+  `allowBuilds: { unrs-resolver: false }` (binary ships as platform optional
+  dependencies, same shape as esbuild).
+- `eslint-plugin-jsx-a11y` 6.10.2 runs fine under ESLint 10: it uses none of
+  the removed `context.*` methods, and eslint-plugin-astro 3 still wraps it
+  (`configs["jsx-a11y-strict"]`; verified an `<img>` without `alt` is
+  reported). Its peer range stops at ESLint 9, so pnpm warns; the mismatch is
+  allowed in `pnpm-workspace.yaml` (`peerDependencyRules.allowedVersions`).
+  Kept; revisit if a maintained a11y plugin for Astro templates appears.
+- unicorn 62 → 74: `prevent-abbreviations` → `name-replacements` (still off),
+  `no-keyword-prefix` is off in `recommended` now, and about 100 new rules
+  produced 105 findings. Turned off, with the reason next to each in the
+  config: `max-nested-calls` (zod schemas), `no-top-level-side-effects`
+  (Astro frontmatter, ECharts registration), `prefer-await`,
+  `prefer-number-coercion` (its `Math.trunc(Number(x))` changes edge cases),
+  `prefer-simple-condition-first` (`import.meta.env.DEV` stays first so Vite
+  drops the block). One inline disable: the games.json sort comparator
+  (`prefer-simple-sort-comparator` wants `localeCompare`, which could reorder
+  the archive). Everything else was fixed, mostly by `--fix`.
+- eslint-plugin-package-json 1.x `recommended` includes
+  `require-exports/files/license/repository/sideEffects/attribution`. Each
+  takes `ignorePrivate: true`, so the site is `"private": true` now and the
+  rules are configured with it rather than turned off.
+- import-x on `.astro` files works without extra parser settings (the astro
+  parser exposes the frontmatter as a program); zero false positives here with
+  `no-unresolved` ignoring `^astro:` and `import-x/order` off (perfectionist
+  sorts imports). `no-named-as-default-member` is off: ESLint plugin packages
+  export `configs` both as a named export and on the default.
+- vitest 5: the only change was `/// <reference types="vitest/config" />`
+  (the plain `vitest` reference no longer augments Vite's `UserConfig`, so
+  `astro check` flagged `test:`). `teardownTimeout` and `watchTriggerPatterns`
+  are unchanged. `vitest/no-conditional-expect` flagged one test; rewritten as
+  a filter plus a loop.
