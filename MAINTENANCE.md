@@ -57,6 +57,7 @@ What does this look like in practice? Requirements for keeping the site current 
 The day after the season ends (or as close as possible):
 
 1. Create games archive for newly ended season: `pnpm run archive:latest` --> should add to end of `src/content/games.json`
+   - `pnpm run archive:diff` explains the resulting change (ids added, scores corrected); `git diff` can't, the file is one line and marked `-diff`
 2. Review hardcoded limits on graphs; new data still fits? possible to make less fragile?
 3. Review stats leaderboard; does slicing still work? Way to automate this? (e.g. if items past 10th are same number, collapse into single row listing their count)
 

@@ -20,6 +20,7 @@
 | `pnpm run preview`         | Preview the build locally, before deploying                           |
 | `pnpm run astro -- --help` | Astro CLI help                                                        |
 | `pnpm run deps`            | Interactive dependency update (`npm-check-updates`)                   |
+| `pnpm run archive:diff`    | Explain what changed in `games.json` (committed vs working tree)      |
 
 ## Dependencies and supply chain
 

@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "archive:all": "tsx archiver/script.ts",
+    "archive:diff": "node archiver/diff.ts",
     "archive:latest": "tsx archiver/script.ts --latest",
     "astro": "astro",
     "build": "pnpm run verify && astro build",

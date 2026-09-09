@@ -71,7 +71,25 @@ vitest setup step that writes the store to `.astro/`. Sharp also needs a direct
 dependency for the same hoisting reason as `vite`: Astro's build-time image
 generation imports `sharp` from the output directory.
 
-**Still to do by hand (Cloudflare Pages dashboard):** build command
+**Decisions, 2026-09-08 (Zack):** the vacuous-tests gap waits for the sqlite
+work, which replaces the content collections it stems from. vitest 5 and
+eslint-plugin-import-x go in the ESLint 10 round; tsx removal in the deps round.
+Added `pnpm run archive:diff` (`archiver/diff.ts`) after `archive:all` turned up
+a one-game score correction (1996-11-10 CLE/DEN, 108–79 → 101–86, confirmed by
+Basketball-Reference and ESPN; NBA.com's game header still shows the old line
+while its box score sums to the new one). Cloudflare dashboard updated.
+
+**Pages preview, 2026-09-08.** With the dashboard updated (`pnpm run build`,
+`NODE_VERSION` removed) the `tooling` branch built and deployed. Its CSS asset
+hash matches the local build, so the lockfile was honored. Captured as
+`runs/2026-09-08-preview-tooling` and compared with `runs/2026-09-08-preview-tailwind`
+(the same code as `main`, captured before the season commit): 10/11 pages
+identical in payload and scripts; the home page is now the countdown, which is
+the season registration, not tooling. One screenshot (2011/CHA desktop) caught
+the pace chart mid-animation on a heavily loaded machine; a re-capture with a
+6 s settle is pixel-identical on all four widths.
+
+**Done by hand (Cloudflare Pages dashboard, 2026-09-08):** build command
 `pnpm run build`; delete `NODE_VERSION` (or set 26) so `.node-version` applies;
 `PNPM_VERSION` can stay unset — the image's pnpm 10 self-selects 11.26.0 from
 `packageManager`. The first preview build is the test.
