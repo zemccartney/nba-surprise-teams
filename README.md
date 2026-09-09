@@ -37,6 +37,11 @@ meet day to day:
   (`ERR_PNPM_IGNORED_BUILDS` names the newcomer). Read the script before
   allowing it; `false` is right when the package ships its binary as an
   optional dependency and the script is only a check or a fallback download.
+- **No hoisting.** Only packages listed in `package.json` are importable from
+  project code. `Cannot find module 'x'` for a package you never installed means
+  `x` must be declared (that's why `vite` is a devDependency: `astro.config.mjs`
+  uses its `loadEnv`) or imported through the package that owns it (`astro/zod`
+  rather than `zod`).
 - The lockfile is re-verified against these policies on every install,
   including the Cloudflare build, so a violation fails loudly rather than
   deploying.

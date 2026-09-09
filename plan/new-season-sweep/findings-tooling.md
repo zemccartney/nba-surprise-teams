@@ -80,3 +80,4 @@ Active LTS; **Maintenance from 2026-10-20** (Node 26 becomes LTS 2026-10-28). La
 - A nested project needs its own `pnpm-workspace.yaml` to stop pnpm walking up to the root's.
 - Cloudflare Pages build image v3: default pnpm 10.11.1, `PNPM_VERSION` to override; `packageManager` self-selection handles it. Node via `NODE_VERSION` or `.node-version`; precedence undocumented, so remove the env var.
 - pnpm 11's lockfile is still `lockfileVersion: '9.0'`.
+- `pnpm install` over an existing npm `node_modules` leaves npm's hoisted transitive packages behind, so undeclared imports keep working until a clean install. Delete `node_modules` first, then scan for bare imports not in `package.json`.

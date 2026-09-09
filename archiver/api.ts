@@ -1,12 +1,12 @@
 import type { APIRoute } from "astro";
 import type { CollectionEntry } from "astro:content";
 
+import { z } from "astro/zod";
 import { getCollection, getEntry } from "astro:content";
 import Assert from "node:assert/strict";
 import Fs from "node:fs/promises";
 import Path from "node:path";
 import Url from "node:url";
-import { z } from "zod";
 
 import type { TeamCode } from "../src/content-utils";
 

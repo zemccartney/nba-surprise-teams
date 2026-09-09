@@ -44,6 +44,33 @@ delta: the pnpm build bundles a second copy of zod into
 6.42 → 6.55 MB). Nothing reaches the client and Astro 7 rechunks all of this,
 so it's noted, not chased.
 
+**Addendum, 2026-09-08 — phantom dependencies.** The first `pnpm install` ran on
+top of npm's `node_modules`; pnpm moved the direct dependencies aside but left
+npm's hoisted transitive packages in place, so three undeclared imports kept
+resolving: `vite` (`loadEnv` in `astro.config.mjs`), `zod` in
+`src/loaders/live.ts` and `archiver/api.ts`. A clean install the next day broke
+`astro dev` and `astro build` ("Cannot find module 'vite'"), which a Cloudflare
+build would have hit too. Fixes: `vite` declared as a devDependency at the
+version Astro resolves (Astro's documented pnpm requirement for `loadEnv`);
+`zod` imported as `astro/zod`; unused `dotenv` removed. The `zod` fix also
+removed the duplicate zod copy noted above: the bare import had resolved to
+npm's leftover copy. The `prepare` script now skips `lefthook install` outside a
+git checkout so `git archive`-based reference builds still install. Verified
+with a from-scratch `CI=true pnpm install --frozen-lockfile && pnpm run build`
+in a copy of the tree. Lesson: after switching package managers, `rm -rf
+node_modules` before the first install.
+
+**Also found, not fixed (pre-existing):** in a fresh checkout the vitest run
+passes vacuously. `getCollection` in vitest reads `.astro/data-store.json`, which
+only `astro dev` and `astro build` write; `astro check` and `astro sync` populate
+`node_modules/.astro/` instead. So `verify` on the Cloudflare build (and the old
+`prebuild`) runs the 10 lifecycle tests against empty collections and logs
+"The collection … does not exist or is empty". Locally the store exists from dev
+runs, which is why it looks fine. Candidate fixes: test after the build, or a
+vitest setup step that writes the store to `.astro/`. Sharp also needs a direct
+dependency for the same hoisting reason as `vite`: Astro's build-time image
+generation imports `sharp` from the output directory.
+
 **Still to do by hand (Cloudflare Pages dashboard):** build command
 `pnpm run build`; delete `NODE_VERSION` (or set 26) so `.node-version` applies;
 `PNPM_VERSION` can stay unset — the image's pnpm 10 self-selects 11.26.0 from

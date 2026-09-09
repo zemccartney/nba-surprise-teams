@@ -17,7 +17,7 @@
     "kv:reset": "wrangler kv key delete $(node -e \"import fs from 'fs'; const seasons = JSON.parse(fs.readFileSync('src/content/seasons.json', 'utf8')); console.log(seasons.sort((a,b) => b.id.localeCompare(a.id))[0].id)\") --binding=GAMES_KV --local",
     "lint": "eslint .",
     "lint:debug": "eslint --inspect-config",
-    "prepare": "lefthook install",
+    "prepare": "if git rev-parse --git-dir >/dev/null 2>&1; then lefthook install; fi",
     "preview": "astro preview",
     "start": "rm -r .wrangler || true && wrangler types && concurrently  --kill-others --names astro,ts -c red,blue \"astro dev\" \"pnpm run typewatch\"",
     "test": "vitest --run",
@@ -37,10 +37,10 @@
     "@types/react-dom": "^19.2.2",
     "astro": "^5.14.1",
     "clsx": "^2.1.1",
-    "dotenv": "^17.2.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "recharts": "^2.15.3",
+    "sharp": "0.34.4",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
@@ -67,6 +67,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "tsx": "^4.20.6",
     "typescript-eslint": "^8.46.2",
+    "vite": "6.4.1",
     "vitest": "^3.2.4",
     "wrangler": "^4.40.2"
   },
