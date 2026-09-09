@@ -1,0 +1,3746 @@
+{
+  "base": "https://react-removal.nba-surprise-teams.pages.dev",
+  "capturedAt": "2026-09-09T04:51:56.112Z",
+  "label": "preview-react-removal",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 900,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 11008,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 342,
+            "load": 359,
+            "transferSize": 2934
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 844,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 11008,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 326,
+            "load": 378,
+            "transferSize": 2935
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1024,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 11008,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 318,
+            "load": 365,
+            "transferSize": 2934
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1080,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 11008,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 229,
+            "load": 271,
+            "transferSize": 2934
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/",
+      "htmlBytes": 11008,
+      "hydratedIslands": 0,
+      "inlineScripts": 0,
+      "inlineStyles": 1,
+      "jsBytes": 128300,
+      "page": "/",
+      "redirects": [],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a3838e848c95c176-ORD",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:47:45 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=7nMMGOCjVIZe1Pyn2WKmdFox327BvK2%2FwDA1W9lg%2BtcZDjgOGGIzW6c%2BSMWmdRIKMze5weBk0%2F0slwbrNRHrSZTPHE0Ss69Y%2FPKTc6gj6y46tarvI08SDSxLVQHTIVHGHJUp3%2BCLtaTSRxjz3aY%2FO00qwvBJTYcPToovR0o%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 173882
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 2880,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 8480,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/archive",
+                "https://react-removal.nba-surprise-teams.pages.dev/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 387,
+            "load": 443,
+            "transferSize": 2098
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 2148,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 8480,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/archive",
+                "https://react-removal.nba-surprise-teams.pages.dev/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 306,
+            "load": 351,
+            "transferSize": 2098
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 2944,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 8480,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/archive",
+                "https://react-removal.nba-surprise-teams.pages.dev/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 356,
+            "load": 397,
+            "transferSize": 2098
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 2880,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 8480,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/archive",
+                "https://react-removal.nba-surprise-teams.pages.dev/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 401,
+            "load": 460,
+            "transferSize": 2098
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/archive/",
+      "htmlBytes": 8480,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 2,
+      "jsBytes": 128300,
+      "page": "/archive",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/archive"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a3838f0a4f022b4b-ORD",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:48:06 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2BHRRzlTMe%2BwIm5%2BepLc0v9he1T6nKt%2B0uwI5Gn4o4A%2F2YwGLSJHOI4MrNubRJwm5GT%2BveOL%2BvNGJAZYE%2BL1ARORBSDNchYq0qRpl8GELflPZ1pUIs0wf3Q3gIW%2Bk8m4%2FmVwyLKhgn%2FY16AuCSsSyRg1dSbT58v9MWuESfLU%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 171354
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 2196,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 78225,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/stats",
+                "https://react-removal.nba-surprise-teams.pages.dev/stats/"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 728917,
+              "count": 6,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DQcAE-4r.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.B3ZKJiH_.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BdzkWNgX.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 718,
+            "load": 718,
+            "transferSize": 10095
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 3474,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 78225,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/stats",
+                "https://react-removal.nba-surprise-teams.pages.dev/stats/"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 728917,
+              "count": 6,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.B3ZKJiH_.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BdzkWNgX.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DQcAE-4r.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 568,
+            "load": 568,
+            "transferSize": 10095
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 3546,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 78225,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/stats",
+                "https://react-removal.nba-surprise-teams.pages.dev/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 728917,
+              "count": 6,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.B3ZKJiH_.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BdzkWNgX.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DQcAE-4r.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 608,
+            "load": 609,
+            "transferSize": 10148
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1972,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 78225,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/stats",
+                "https://react-removal.nba-surprise-teams.pages.dev/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 21772,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 728917,
+              "count": 6,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.B3ZKJiH_.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BdzkWNgX.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DQcAE-4r.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 689,
+            "load": 689,
+            "transferSize": 10095
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/stats/",
+      "htmlBytes": 78225,
+      "hydratedIslands": 0,
+      "inlineScripts": 4,
+      "inlineStyles": 2,
+      "jsBytes": 728917,
+      "page": "/stats",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/stats"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a3838f961b09255d-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:48:29 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=N5S295DhJenz6kpaC1ump3PTVmBksbsMK08MmK0W1kj2WQLIHAjRQ4fjtrnlUmioOchuV4CrwAqvm7ef1MEpXzYoMH4mSletg1yifRysxNd8f9TdfghQhzxAssqL6lWo94EZTsNArELPrhGMF2zdtUOv14o%2BIQzvOi3fthU%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "bytes": 1774,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.B3ZKJiH_.js"
+        },
+        {
+          "bytes": 2193,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.DQcAE-4r.js"
+        },
+        {
+          "bytes": 1884,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BdzkWNgX.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 2836296
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 3393,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 13683,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/about",
+                "https://react-removal.nba-surprise-teams.pages.dev/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 453,
+            "load": 763,
+            "transferSize": 4389
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 4759,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 13683,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/about",
+                "https://react-removal.nba-surprise-teams.pages.dev/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 296,
+            "load": 554,
+            "transferSize": 4389
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 3457,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 13683,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/about",
+                "https://react-removal.nba-surprise-teams.pages.dev/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 381,
+            "load": 665,
+            "transferSize": 4387
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 2937,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 13683,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/about",
+                "https://react-removal.nba-surprise-teams.pages.dev/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 269,
+            "load": 523,
+            "transferSize": 4389
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/about/",
+      "htmlBytes": 13683,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 2,
+      "jsBytes": 128300,
+      "page": "/about",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/about"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a383902d3bddd123-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:48:53 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=KHySdaQ9adMjX98BXqnjPW9Vrp0X%2BTB%2B6JTlR%2FhYIUtvAO2vagZ9gw6RCmiKweKHrE3jTlRGGRpg%2FOmFg1jPPaUUD18n5ttNTP%2FC9nd0ywkskFVbN7Ou304%2FOOjLNk6gs5b9jV3t%2B3gvr%2BhprP%2BuJqoDrH%2FfxuJg4AVylao%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 1159625
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1698,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30398,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 282,
+            "load": 612,
+            "transferSize": 5295
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1274,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30398,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 343,
+            "load": 691,
+            "transferSize": 5297
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1772,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30398,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 382,
+            "load": 778,
+            "transferSize": 5295
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1698,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30398,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "image": {
+              "bytes": 34826,
+              "count": 13,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 320,
+            "load": 648,
+            "transferSize": 5295
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/2025/",
+      "htmlBytes": 30398,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 2,
+      "jsBytes": 128300,
+      "page": "/2025",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/2025"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a38390c1f9b642bb-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:49:17 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ONaaeAxbLaBOte552rxIMErys%2FMA%2FVuGr35qk5xC3e2WTqt77Q0sDrIhWI9guOdgHLF1gBiu93dYSy3qSAcWwsSq7oybuOOWvbguVrOF33choGfn9NpaVQ8kr0t8D%2BM4NdVYCUeg4u3iwr7%2BYLoqiQzbvRAk4XQW32TO9t4%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 2200906
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1168,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 19798,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA/"
+              ]
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 537,
+            "load": 548,
+            "transferSize": 4748
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1746,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 19798,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 652,
+            "load": 652,
+            "transferSize": 4748
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1766,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 19798,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 577,
+            "load": 577,
+            "transferSize": 4748
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1168,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 19798,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 616,
+            "load": 617,
+            "transferSize": 4748
+          }
+        }
+      },
+      "cssBytes": 21438,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA/",
+      "htmlBytes": 19798,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 2,
+      "jsBytes": 725048,
+      "page": "/2025/CHA",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/2025/CHA"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a383915159d530f5-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:49:40 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qT%2BZ%2FxOPi6gY%2FJpLvQAPJNG3fgPPJDzzJubx9RzE7LrjwTziV1y4nJAZrCXn%2FN%2B4pLbhNRhL7nZ7i618oEysuzusTZFvo4TmdZLFv5AZyGpSPdKoa5yJRGArDt%2Bwk0TLv%2BhetOAd5rLSRL5Ty05trzTZlnsS9uoEwK8jHOk%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "bytes": 1982,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 4118,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+        },
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 2763514
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1684,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30814,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 333,
+            "load": 666,
+            "transferSize": 5430
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1256,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30814,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 315,
+            "load": 715,
+            "transferSize": 5430
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1736,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30814,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 281,
+            "load": 629,
+            "transferSize": 5430
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1684,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 30814,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 34286,
+              "count": 13,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 343,
+            "load": 681,
+            "transferSize": 5430
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/2024/",
+      "htmlBytes": 30814,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 2,
+      "jsBytes": 128300,
+      "page": "/2024",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/2024"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a38391e28d96b1bc-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:50:03 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=bWfpJKTje9dYraZbBQKdMdB67Q0Xf937xq7dvFE4m3xa%2FOhS%2Ff08OaXd9vvjxLR6bnVlaV0AvanZVMhkiCamWVQyY2mlsFSPAtE6TFOY7FYDuxXd7Nq4xOhjxouZBYn75hFM80zcQ48ZrR76STh4SwWF59qPRhHYJkUXQfU%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 2200782
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1200,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20027,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 555,
+            "load": 556,
+            "transferSize": 4744
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1738,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20027,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 728,
+            "load": 729,
+            "transferSize": 4744
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1798,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20027,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 699,
+            "load": 700,
+            "transferSize": 4784
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1200,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20027,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR",
+                "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "image": {
+              "bytes": 14096,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 577,
+            "load": 577,
+            "transferSize": 4744
+          }
+        }
+      },
+      "cssBytes": 21438,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR/",
+      "htmlBytes": 20027,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 2,
+      "jsBytes": 725048,
+      "page": "/2024/TOR",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/2024/TOR"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a38392717df63f3b-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:50:26 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=DIYe1vn7zIwioiiUmpFdYZLt4kl3e2WtriI5TE1XhHWpcHVMejMs4SN%2FKmAek36grNToKFXqWYw4E1wyLUtNQQGDAgg3tAaxtHT%2FcyR%2FyCUjKNBQFTKiy2M%2Frchb5odT41cFi4Zn05SinmvfPP83Ft9ygFZyufKGSVE7ODI%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "bytes": 1982,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 4118,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+        },
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 2770671
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1908,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32195,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 355,
+            "load": 668,
+            "transferSize": 5399
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1490,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32195,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 316,
+            "load": 645,
+            "transferSize": 5399
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1966,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32195,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 293,
+            "load": 577,
+            "transferSize": 5399
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1908,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32195,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 1003376,
+              "count": 3,
+              "urls": []
+            },
+            "image": {
+              "bytes": 44782,
+              "count": 14,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 328,
+            "load": 659,
+            "transferSize": 5399
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/2011/",
+      "htmlBytes": 32195,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 2,
+      "jsBytes": 128300,
+      "page": "/2011",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/2011"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a3839302ecb35e74-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:50:49 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=bIMejhkKC9S%2FoJjdCs3K2J%2BZF3OZkf4jHRfz6O8uGrLXYTfaUr8RQ4dfoQZYINabIXSeCAcpKFvTBCjZ3mdOD8OueBvYb4BL%2FGO90QTyPDKYK8nXxirkLyOCGZWf7LKr8vd3Un2B7eS%2FYCVWrjS2A8fG0c6A%2BHH9B4GTx6g%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 1229591
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1272,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20302,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 625,
+            "load": 634,
+            "transferSize": 4809
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1858,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20302,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 761,
+            "load": 761,
+            "transferSize": 4809
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1886,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20302,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 719,
+            "load": 728,
+            "transferSize": 4809
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1272,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 20302,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA",
+                "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "image": {
+              "bytes": 11372,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 725048,
+              "count": 4,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/utils.DPASWncW.js",
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/echarts.Cid1grVW.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 596,
+            "load": 605,
+            "transferSize": 4809
+          }
+        }
+      },
+      "cssBytes": 21438,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA/",
+      "htmlBytes": 20302,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 2,
+      "jsBytes": 725048,
+      "page": "/2011/CHA",
+      "redirects": [
+        {
+          "status": 308,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/2011/CHA"
+        }
+      ],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-ray": "a383939249570013-ORD",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:51:12 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qdmflGq29I%2B6V710ql1a6MxHo0hCivJX1V7EOFcPiCjB9ZWHyPIrBHI%2Ff4FX%2BR1wwlME5F82Lu5gyoyfngbQclNXA4Dipbp0GWwZGm5JDsFNB8DJT8mgiJOaZVVNTSrzIgwwVyxZ6L9kvFy7a8F3DDM%2FACZbE4mhNsyKRhc%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-robots-tag": "noindex"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        },
+        {
+          "bytes": 1982,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C14grpaB.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 4118,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CwVRLsEz.css"
+        },
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 2768222
+    },
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 ()",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 900,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 4308,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 227,
+            "load": 271,
+            "transferSize": 1630
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 ()",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 844,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 4308,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 311,
+            "load": 356,
+            "transferSize": 1630
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 ()",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1024,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 4308,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 255,
+            "load": 303,
+            "transferSize": 1630
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: the server responded with a status of 404 ()",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1080,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 4308,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/nope"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17320,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "script": {
+              "bytes": 128300,
+              "count": 1,
+              "urls": [
+                "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 253,
+            "load": 311,
+            "transferSize": 1630
+          }
+        }
+      },
+      "cssBytes": 17320,
+      "finalUrl": "https://react-removal.nba-surprise-teams.pages.dev/nope",
+      "htmlBytes": 4308,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 2,
+      "jsBytes": 128300,
+      "page": "/nope",
+      "redirects": [],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "no-store",
+        "cf-ray": "a383942208f60c82-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Wed, 09 Sep 2026 04:51:35 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=xRy1mFjvbYkcdzMiRd0osiES74rPdNTEf0yB9LM8tNtsT8CZQzDWfBeLlZ6UkOPORja5WQbH8Mxc4lGbSOzuDSKVkKfQPQA%2F5FwZoufqVHnHIgkk53EKDzTAKHCtWJzfjMb2YEDdQMlje0Lhjlw%2BpD2w%2FTNpicqFQHy6Nlw%3D\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128300,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/page.xGiUly3I.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 404,
+      "stylesheets": [
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=0, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://react-removal.nba-surprise-teams.pages.dev/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 167182
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

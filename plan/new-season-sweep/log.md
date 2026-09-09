@@ -61,6 +61,17 @@ popover styling on all four charts; the island-mounted chart works; no console
 errors. Not testable here: Safari and Firefox (anchor positioning shipped in
 Safari 26 and Firefox 147; older browsers center the popover).
 
+**Pages preview, 2026-09-09.** `react-removal.nba-surprise-teams.pages.dev`
+built on the first push (no React deps to install went unnoticed by the image).
+Captured as `runs/2026-09-09-preview-react-removal` and compared with
+`runs/2026-09-08-preview-tooling`: same shape as the local comparison, seven
+pages pixel-identical, chart pages differ in the chart area; the CSS hash
+matches the local build while the script chunk hashes differ because the
+preview also bundles Sentry. The interaction script passes against the preview
+too. Its only console messages are Cloudflare's Web Analytics beacon being
+refused by CORS on the `pages.dev` hostname, which is not ours (the capture
+tool blocks third-party requests, which is why it never shows up there).
+
 **Deliberate deviations.** No popover arrow: Radix drew a 5px triangle that sat
 inside the popover's 12px glow. Y-axis tick intervals are ECharts' choice on the
 scatter (10 instead of 15) and pinned to 5 on the team chart.
