@@ -132,6 +132,11 @@ export default defineConfig([
         ...globals.node,
       },
     },
+    rules: {
+      // plan/baseline is its own pnpm project; its node_modules only exists
+      // after `pnpm install` there, never on the Cloudflare build
+      "import-x/no-unresolved": "off",
+    },
   },
   {
     extends: [vitest.configs.recommended],

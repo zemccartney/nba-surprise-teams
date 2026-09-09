@@ -47,6 +47,14 @@ the branch). One inline disable: the archiver's games.json comparator, where
    regex alternation, which matched every line and prefixed the whole archiver
    file. Restored from git and redone with `#` delimiters. Tooling note, not a
    repo one.
+4. The round's first Pages build failed in lint: `import-x/no-unresolved` on
+   `plan/baseline/*.mjs` for `playwright-core`, `pixelmatch`, and `pngjs`.
+   That directory is its own pnpm project, so its `node_modules` exists here
+   (installed for the captures) and never on the build image. A lint result
+   must not depend on what happens to be installed, so `no-unresolved` is off
+   for that directory; the other import-x rules stay quiet on modules they
+   can't resolve. Reproduced locally by moving `plan/baseline/node_modules`
+   aside before the fix.
 
 **Verification.** `pnpm run build` (the Cloudflare path: verify, then build)
 green on Node 26.8.1; lint over the repo takes about 4.5 s. Build output vs the

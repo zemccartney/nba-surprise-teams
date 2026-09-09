@@ -57,9 +57,9 @@ to 578 KB; stats 640 to 583 KB. Gzipped, the chart pages are a wash at about
 200 KB either way; ECharts' core with only the line chart is 174 KB gzip, so
 that is the floor with this library.
 
-**Lint.** `eslint-plugin-jsx-a11y` stays for now: eslint-plugin-astro's
-`jsx-a11y-strict` config lints `.astro` templates with it. The ESLint 10 round
-decides.
+**Lint.** `eslint-plugin-jsx-a11y` stays: eslint-plugin-astro's
+`jsx-a11y-strict` config lints `.astro` templates with it, and the ESLint 10
+round (Step 5) confirmed it runs on ESLint 10.
 
 ## Manual test checklist
 
