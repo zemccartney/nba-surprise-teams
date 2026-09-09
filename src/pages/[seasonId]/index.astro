@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import ArrowLeftSvg from "../../assets/images/arrow-line-left.svg";
 import ArrowRightSvg from "../../assets/images/arrow-line-right.svg";
 import Link from "../../components/link.astro";
-import Popover from "../../components/popover.tsx";
+import Popover from "../../components/popover.astro";
 import StandingsTable from "../../components/standings-table/index.astro";
 import * as ContentUtils from "../../content-utils.ts";
 import Subpage from "../../layouts/subpage.astro";
@@ -130,7 +130,7 @@ const seasonAfter = adjacent(1);
               body: "popover-episode-body",
               trigger: "popover-episode-trigger",
             }}
-            client:load
+            id="episode-popover"
           >
             If the link's broken (grumbling about Apple...), you're looking for
             the episode "{season.data.episodeTitle}" from

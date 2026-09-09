@@ -6,8 +6,6 @@ import prettier from "eslint-config-prettier";
 import astro from "eslint-plugin-astro";
 import pkgJson from "eslint-plugin-package-json";
 import perfectionist from "eslint-plugin-perfectionist";
-import react from "eslint-plugin-react";
-import reactRefresh from "eslint-plugin-react-refresh";
 import unicorn from "eslint-plugin-unicorn";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
@@ -53,7 +51,7 @@ export default defineConfig([
       unicorn.configs.recommended,
       perfectionist.configs["recommended-natural"],
     ],
-    files: ["**/*.{js,ts,tsx,jsx,astro,mjs}"],
+    files: ["**/*.{js,ts,astro,mjs}"],
     rules: {
       "unicorn/filename-case": ["off"],
       "unicorn/no-keyword-prefix": ["off"],
@@ -78,11 +76,10 @@ export default defineConfig([
     },
   },
   {
-    extends: [react.configs.flat.recommended, reactRefresh.configs.vite],
-    files: ["**/*.{tsx}"],
+    // client-side chart modules, loaded by the <script> in each chart's .astro wrapper
+    files: ["src/components/charts/*.ts"],
     languageOptions: {
       globals: {
-        ...globals.serviceworker,
         ...globals.browser,
       },
     },

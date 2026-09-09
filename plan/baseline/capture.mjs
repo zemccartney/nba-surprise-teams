@@ -40,7 +40,8 @@ const { values: args } = parseArgs({
     out: { type: "string" },
     pages: { type: "string" },
     screenshots: { default: true, type: "boolean" },
-    // ms to wait after scrolling; Recharts animates on mount (~1.5s) and ignores reduced-motion
+    // ms to wait after scrolling, for late paints. The charts mount lazily and
+    // skip their animation under the reduced-motion emulation set below.
     settle: { default: "2000", type: "string" },
     "third-party": { default: false, type: "boolean" },
   },

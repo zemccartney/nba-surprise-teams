@@ -1,5 +1,4 @@
 import cloudflare from "@astrojs/cloudflare";
-import react from "@astrojs/react";
 import sentry from "@sentry/astro";
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
@@ -44,7 +43,6 @@ export default defineConfig({
   },
   integrations: [
     archiver(),
-    react(),
     ...(SENTRY_AUTH_TOKEN
       ? [
           sentry({
@@ -59,14 +57,6 @@ export default defineConfig({
       : []),
   ],
   vite: {
-    resolve: {
-      // https://github.com/withastro/adapters/pull/436#issuecomment-2525190557
-      // Use react-dom/server.edge instead of react-dom/server.browser for React 19.
-      // Without this, MessageChannel from node:worker_threads needs to be polyfilled.
-      alias: import.meta.env.PROD && {
-        "react-dom/server": "react-dom/server.edge",
-      },
-    },
     ssr: {
       external: [
         // needed for sentry cloudflare

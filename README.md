@@ -94,10 +94,17 @@ settled on; the site should render exactly as it did under Tailwind 4.1.
   rest props onto its root element, which is how Astro forwards the parent's
   scope attribute. `link.astro`, `table.astro`, `typography.astro`, and
   `crash.astro` do; check before relying on it.
-- **React components can't use scoped styles**, so the popover and chart styles
-  are plain global stylesheets imported by the component
-  (`src/components/popover.css`, `src/components/charts/charts.css`). This goes
-  away with React.
+- **Popover and chart tooltip styles are global stylesheets**
+  (`src/components/popover.css`, `src/components/charts/charts.css`), imported
+  by the component. The popover is a native `[popover]` element in the top
+  layer, positioned with CSS anchor positioning; the chart tooltips are HTML
+  that ECharts builds from strings, so neither can carry a scoped-style
+  attribute.
+- **Charts are ECharts**, mounted by a `<script>` in each chart's `.astro`
+  wrapper (`src/components/charts/`). The wrapper serializes the props into a
+  JSON script block; the client module reads it and builds the option. Colors
+  and fonts are read from the design tokens at mount, because SVG attributes
+  can't resolve `var()`.
 - **Regression check:** `plan/baseline/` captures screenshots and payload sizes
   for a build and diffs two captures. Run it against a reference before and after
   any styling change; see its README.

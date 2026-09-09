@@ -1,7 +1,9 @@
+/* A [popover] element. The UA stylesheet puts it in the top layer, fixed and
+   centered in the viewport; that stays as the fallback for browsers without
+   anchor positioning. */
 .popover-body {
   box-shadow: var(--shadow-popover);
   background-color: var(--color-blurple-glow);
-  z-index: 10;
   width: fit-content;
   max-width: 20rem;
   padding: 1.75rem;
@@ -9,6 +11,25 @@
   font-size: var(--text-xl);
   line-height: var(--text-xl--line-height);
   color: var(--color-green-200);
+
+  /* The popover stays where it's authored (often a bold, right-aligned table
+     header), so reset the inherited text properties that the old portal-to-body
+     popover never picked up. */
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+}
+
+/* Hang the popover below its trigger. The popovertarget button is the implicit
+   anchor, so no anchor-name is needed and instances don't collide. Flips above
+   the trigger when there's no room below. */
+@supports (position-area: block-end) {
+  .popover-body {
+    inset: auto;
+    margin: 0.25rem 0;
+    position-area: block-end;
+    position-try-fallbacks: flip-block;
+  }
 }
 
 .popover-trigger {
@@ -50,10 +71,6 @@
 
 .popover-close:hover {
   color: var(--color-lime-600);
-}
-
-.popover-arrow {
-  fill: var(--color-blurple-glow);
 }
 
 /* Override variants used by consuming components */
