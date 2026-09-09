@@ -73,6 +73,19 @@ without `alt` in a scratch `.astro` file is reported by
 `astro/jsx-a11y/alt-text`, and `import { z } from "zod"` in a scratch `.ts`
 file is reported by `import-x/no-extraneous-dependencies`.
 
+**Pages preview, 2026-09-09.** The first push failed the Pages build in lint
+(item 4 above); the second built in under five minutes on Node 26.8.1 with the
+flagged `eslint.config.ts`. `eslint-10.nba-surprise-teams.pages.dev` captured
+as `runs/2026-09-09-preview-eslint-10` and compared with
+`runs/2026-09-09-preview-react-removal`: 44/44 screenshots pixel-identical,
+the same +12/+14 byte deltas as locally, CSS hash matching the local build,
+script hashes differing because the preview bundles Sentry. Popovers and chart
+tooltips pass the interaction script; the only console messages are the
+Cloudflare Web Analytics beacon's CORS refusals on the `pages.dev` host.
+Reading a failed Pages build without the dashboard: `wrangler pages deployment
+list` shows the status per commit, and the log is one API call away
+(`deployments/<id>/history/logs`), both with the local wrangler login.
+
 ## 2026-09-09 — Step 4: React out, ECharts and a native popover in
 
 **What changed.** The four Recharts charts are now ECharts 6.1 (`echarts/core`
