@@ -661,17 +661,17 @@
           <div
             class="bar"
             role="img"
-            aria-label="13 of 35 items done, 3 blocked, 19 not started"
+            aria-label="13 of 36 items done, 3 blocked, 20 not started"
           >
             <span class="seg-done" style="flex: 13"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 19"></span>
+            <span class="seg-open" style="flex: 20"></span>
           </div>
           <p class="tally">
             <span class="k-done"><b>13</b> done and verified</span>
             <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
-            <span class="k-open"><b>19</b> not started</span>
-            <span>35 tracked</span>
+            <span class="k-open"><b>20</b> not started</span>
+            <span>36 tracked</span>
           </p>
         </div>
       </header>
@@ -686,7 +686,7 @@
               >
             </li>
             <li>
-              <a href="#s1">1 · Foundations<span class="count">10/16</span></a>
+              <a href="#s1">1 · Foundations<span class="count">10/17</span></a>
             </li>
             <li>
               <a href="#s2">2 · Season prep<span class="count">1/4</span></a>
@@ -856,7 +856,7 @@
             <div class="section-head">
               <span class="section-num">01</span>
               <h2>Foundations</h2>
-              <span class="count">8 / 16 done</span>
+              <span class="count">10 / 17 done</span>
             </div>
             <p class="milestone">
               Milestone: the site renders exactly as it does on prod today, no
@@ -961,6 +961,36 @@
 
             <p class="subhead">Still open after Step 9</p>
             <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Four chart regressions against production — Zack, 2026-09-11
+                  </p>
+                  <p class="item-note">
+                    All four come out of Step 4 (Recharts → ECharts), not the
+                    Astro or image work. Detail and starting hypotheses are
+                    under <strong>Issues found in review</strong> in the Step 4
+                    section of <code>review.md</code>.
+                  </p>
+                  <p class="item-note">
+                    <b>1.</b> Opening and closing a tooltip fires a request for
+                    every image on the page (304s); prod does not.
+                    <b>2.</b> Team-season pace: area coloring and opacity
+                    changed. <b>3.</b> Surprises-per-season: top edge no longer
+                    aligns with the top-10 block. <b>4.</b> Axis scales drifted
+                    on both pace and scatter.
+                  </p>
+                  <p class="item-note">
+                    <strong>Nothing automated checks chart interiors.</strong>
+                    The Step 4 comparison explicitly set the chart area aside,
+                    and <code>dev-smoke.mjs</code> only counts
+                    <code>&lt;img&gt;</code>. That is why all four reached
+                    Zack's eyes first, and it bounds how much of "anything else"
+                    anyone can answer today.
+                  </p>
+                </div>
+              </li>
               <li class="item s-done">
                 <span class="marker">[x]</span>
                 <div>

@@ -620,8 +620,48 @@ Run `pnpm start`, or use the preview URL.
 
 ### Issues found in review
 
-- 2026-09-09, Zack: "some layout and coloring issues", details to follow.
-  Where to look first: `src/components/charts/charts.css` (`.chart` is a
-  fixed 600px tall; Recharts sized from its ResponsiveContainer), the theme
-  reader in `echarts.ts` (hex conversion, surprise 2 above), and
-  `popover.css` (`width: fit-content; max-width: 20rem`).
+**2026-09-11, Zack — chart regressions vs production.** Details for the
+placeholder that used to sit here. Not addressed; logged for a later round.
+None of these is a blocker, and none has been reproduced or diagnosed by me
+yet — the notes under each are hypotheses to start from, not findings.
+
+1. **Opening and closing a tooltip fires a request for every image on the
+   page** (304s). Production does not do this.
+   Two separate things to separate before chasing it. _Why any request at
+   all:_ an ECharts tooltip show/hide may be re-applying the series option,
+   and logo symbols are `image://<url>` strings, so a re-render can re-fetch
+   them; Recharts rendered its symbols as DOM `<img>` and would not. _Why you
+   see it at all:_ if this was observed under `pnpm start`, dev serves assets
+   without an immutable cache header, so the browser revalidates and you get
+   304s, while production's `/_astro/*` is immutable and never asks. That
+   second half would make it dev-only noise rather than a regression — worth
+   settling first, since it decides whether there is anything to fix.
+   Reproduce on `astro preview` and in prod's own DevTools before assuming.
+
+2. **Team-season pace: coloring changed, opacity is different.**
+   The area fill under the line. Suspects: the hex conversion in the theme
+   reader (`echarts.ts` reads the oklch tokens and converts), and the
+   `areaStyle` opacity, which Recharts and ECharts do not default the same
+   way. Related: `cd43deb Fix area coloring for undefeated teams` on `main`
+   is the most recent change to this exact code path.
+
+3. **Surprises-per-season: top edge no longer aligns with the top-10 block.**
+   Layout, not chart internals. `.chart` in `charts.css` is a fixed 600px
+   tall; Recharts sized itself from a `ResponsiveContainer`. The fixed height
+   plus ECharts' own `grid` insets is the likely mismatch.
+
+4. **Scales drifted on both the pace and scatter charts.**
+   Axis ranges and tick placement. ECharts' default `min`/`max`/`splitNumber`
+   behaviour differs from Recharts' domain calculation, so any axis where the
+   old code relied on Recharts' defaults will land somewhere else. Check
+   whether the old config pinned domains explicitly and the port dropped them.
+
+**Why the harness missed all four.** The Step 4 comparison recorded that
+"chart pages differ only inside the chart area" and moved on — meaning the
+chart interiors were the one region never compared. `dev-smoke.mjs` has the
+same hole from the other direction: ECharts symbols are not `<img>` elements,
+so it does not count them either. Anything inside a chart is currently
+unverified by any automated check in this repo, which is the honest scope of
+"anything else" — these four are what Zack's eyes caught, not what exists.
+Closing that gap is the tracked item "dev-smoke.mjs only counts <img>", and
+the cheaper half is to stop excluding the chart region from `compare.mjs`.

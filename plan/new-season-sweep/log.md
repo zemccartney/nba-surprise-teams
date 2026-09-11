@@ -6,6 +6,13 @@ the baseline comparison showed, and what was decided.
 For the scope of the whole session and what is still outstanding, see
 `status.html`.
 
+Unaddressed review feedback does not get an entry here — it lives under
+"Issues found in review" in the `review.md` section for the round that
+introduced it. As of 2026-09-11 there are four open chart regressions against
+production from Step 4 (tooltip image re-requests, pace area coloring,
+surprises-per-season top alignment, axis scales on pace and scatter), logged
+in detail there.
+
 ## 2026-09-11 — Step 9: drop `<Image>` for the SVGs, svgo at build
 
 Branch `svg-images` on `astro-7`. Follow-on from the Step 8 image breakage:
