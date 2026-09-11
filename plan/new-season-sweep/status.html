@@ -1,0 +1,1473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>New-Season Sweep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sixtyfour&display=swap"
+    />
+    <style>
+      /* ============================================================
+         Palette lifted from the site's own tokens in
+         src/styles/global.css, so this board reads as part of the
+         project. Single theme on purpose: nbastt is dark-only today,
+         and light mode is item 3.1 on this very board.
+         ============================================================ */
+      :root {
+        color-scheme: dark;
+
+        --ground: oklch(22.1% 0.067 142.863); /* site body background */
+        --sunken: oklch(17.6% 0.055 145);
+        --raised: oklch(26.5% 0.062 145);
+        --rule: oklch(38% 0.05 148 / 0.5);
+        --rule-soft: oklch(38% 0.05 148 / 0.26);
+
+        --ink: oklch(92.5% 0.084 155.995); /* green-200 */
+        --ink-dim: oklch(78% 0.05 152);
+        --ink-mute: oklch(66% 0.042 152);
+
+        --accent: oklch(84.1% 0.238 128.85); /* lime-400 */
+        --accent-deep: oklch(64.8% 0.2 131.684); /* lime-600 */
+        --warn: oklch(85.2% 0.199 91.936); /* yellow-400 */
+        --info: oklch(78.5% 0.115 274.713); /* indigo-300 */
+
+        --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
+        --font-code: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+        --font-display: "Sixtyfour", "IBM Plex Mono", monospace;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--ground);
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 17px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      code,
+      pre,
+      .marker,
+      .tally,
+      .count {
+        font-family: var(--font-code);
+        font-variant-ligatures: none;
+      }
+
+      code {
+        font-size: 0.88em;
+        color: var(--accent);
+        background: oklch(84.1% 0.238 128.85 / 0.09);
+        padding: 0.08em 0.22em;
+        border-radius: 2px;
+        overflow-wrap: break-word;
+      }
+
+      a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+        text-decoration-color: var(--rule);
+      }
+
+      a:hover {
+        text-decoration-color: currentColor;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      /* ---------------- shell ---------------- */
+
+      .shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 clamp(1.1rem, 4vw, 2.5rem) 6rem;
+      }
+
+      /* ---------------- masthead ---------------- */
+
+      .masthead {
+        padding: clamp(2.5rem, 6vw, 4.25rem) 0 2rem;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .wordmark {
+        font-family: var(--font-display);
+        font-size: clamp(0.72rem, 2.1vw, 0.98rem);
+        line-height: 1;
+        color: var(--accent-deep);
+        margin: 0 0 clamp(1.4rem, 3vw, 1.9rem);
+        letter-spacing: 0.02em;
+      }
+
+      .masthead h1 {
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 3.1rem);
+        font-weight: 700;
+        letter-spacing: -0.022em;
+        line-height: 1.05;
+        text-wrap: balance;
+      }
+
+      .standfirst {
+        margin: 1.1rem 0 0;
+        max-width: 62ch;
+        color: var(--ink-dim);
+        font-size: 1.1rem;
+      }
+
+      .provenance {
+        margin: 1.6rem 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.6rem;
+        font-family: var(--font-code);
+        font-size: 0.83rem;
+        color: var(--ink-mute);
+      }
+
+      .provenance b {
+        color: var(--ink-dim);
+        font-weight: 500;
+      }
+
+      /* ---------------- progress strip ---------------- */
+
+      .progress {
+        margin: 2rem 0 0;
+      }
+
+      .bar {
+        display: flex;
+        height: 8px;
+        gap: 2px;
+        overflow: hidden;
+      }
+
+      .bar span {
+        display: block;
+      }
+
+      .bar .seg-done {
+        background: var(--accent);
+      }
+
+      .bar .seg-blocked {
+        background: var(--warn);
+      }
+
+      .bar .seg-open {
+        background: var(--raised);
+        border: 1px solid var(--rule-soft);
+      }
+
+      .tally {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.5rem;
+        margin: 0.75rem 0 0;
+        font-size: 0.86rem;
+        color: var(--ink-mute);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .tally b {
+        font-weight: 600;
+      }
+
+      .tally .k-done b {
+        color: var(--accent);
+      }
+
+      .tally .k-blocked b {
+        color: var(--warn);
+      }
+
+      .tally .k-open b {
+        color: var(--ink-dim);
+      }
+
+      /* ---------------- two-column body ---------------- */
+
+      .body {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding-top: 2.75rem;
+        align-items: start;
+      }
+
+      @media (min-width: 940px) {
+        .body {
+          grid-template-columns: 232px minmax(0, 1fr);
+          gap: 3.5rem;
+        }
+
+        .rail {
+          position: sticky;
+          top: 1.75rem;
+          max-height: calc(100vh - 3.5rem);
+          overflow-y: auto;
+        }
+      }
+
+      /* ---------------- rail ---------------- */
+
+      .rail-heading {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--ink-mute);
+        margin: 0 0 0.75rem;
+      }
+
+      .rail-heading:not(:first-child) {
+        margin-top: 2.1rem;
+      }
+
+      .toc {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .toc a {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0.6rem;
+        padding: 0.4rem 0;
+        color: var(--ink-dim);
+        text-decoration: none;
+        border-bottom: 1px solid var(--rule-soft);
+        font-size: 0.93rem;
+      }
+
+      .toc a:hover {
+        color: var(--accent);
+      }
+
+      .toc .count {
+        font-size: 0.78rem;
+        color: var(--ink-mute);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      .filters {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem;
+        margin-top: 0.2rem;
+      }
+
+      .chip {
+        font: inherit;
+        font-size: 0.82rem;
+        font-family: var(--font-code);
+        cursor: pointer;
+        padding: 0.28rem 0.6rem;
+        color: var(--ink-dim);
+        background: transparent;
+        border: 1px solid var(--rule);
+        border-radius: 2px;
+      }
+
+      .chip:hover {
+        color: var(--accent);
+        border-color: var(--accent-deep);
+      }
+
+      .chip[aria-pressed="true"] {
+        color: var(--ground);
+        background: var(--accent);
+        border-color: var(--accent);
+        font-weight: 600;
+      }
+
+      .legend {
+        list-style: none;
+        margin: 1.4rem 0 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        font-size: 0.85rem;
+        color: var(--ink-mute);
+      }
+
+      .legend li {
+        display: flex;
+        gap: 0.55rem;
+        align-items: baseline;
+      }
+
+      .legend .marker {
+        flex: none;
+      }
+
+      /* ---------------- briefing panel ---------------- */
+
+      .briefing {
+        background: var(--sunken);
+        border: 1px solid var(--rule-soft);
+        border-left: 2px solid var(--accent-deep);
+        padding: clamp(1.25rem, 3vw, 1.9rem);
+        margin-bottom: 3.25rem;
+      }
+
+      .briefing > h2 {
+        margin: 0 0 0.4rem;
+        font-size: 1.18rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .briefing > p.lede {
+        margin: 0 0 1.75rem;
+        color: var(--ink-mute);
+        font-size: 0.96rem;
+        max-width: 60ch;
+      }
+
+      .brief-block + .brief-block {
+        margin-top: 1.75rem;
+        padding-top: 1.75rem;
+        border-top: 1px solid var(--rule-soft);
+      }
+
+      .brief-block h3 {
+        margin: 0 0 0.6rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .brief-block p {
+        margin: 0 0 0.6rem;
+        max-width: 66ch;
+        font-size: 1rem;
+        color: var(--ink-dim);
+      }
+
+      .brief-block p:last-child {
+        margin-bottom: 0;
+      }
+
+      .rules,
+      .steps {
+        max-width: 66ch;
+        font-size: 1rem;
+        color: var(--ink-dim);
+      }
+
+      .rules {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 0.95rem;
+        border-left: 1px solid var(--accent-deep);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .steps {
+        margin: 0;
+        padding-left: 1.35rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+
+      .steps li::marker {
+        color: var(--accent-deep);
+        font-family: var(--font-code);
+        font-size: 0.85em;
+      }
+
+      pre {
+        margin: 0 0 0.75rem;
+        padding: 0.8rem 0.95rem;
+        background: var(--ground);
+        border: 1px solid var(--rule-soft);
+        overflow-x: auto;
+        font-size: 0.87rem;
+        line-height: 1.5;
+        color: var(--accent);
+      }
+
+      .chain {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.35rem;
+        margin: 0 0 0.75rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .chain li {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .chain li:not(:last-child)::after {
+        content: "→";
+        color: var(--accent-deep);
+        font-family: var(--font-code);
+      }
+
+      .chain code {
+        white-space: nowrap;
+      }
+
+      .chain .base code {
+        color: var(--ink-mute);
+        background: transparent;
+        border: 1px dashed var(--rule);
+      }
+
+      .chain .tip code {
+        color: var(--ground);
+        background: var(--accent);
+        font-weight: 600;
+      }
+
+      .flag {
+        display: flex;
+        gap: 0.7rem;
+        margin: 1.25rem 0 0;
+        padding: 0.75rem 0.9rem;
+        background: oklch(85.2% 0.199 91.936 / 0.08);
+        border: 1px solid oklch(85.2% 0.199 91.936 / 0.32);
+        font-size: 0.96rem;
+        color: var(--ink-dim);
+        max-width: 66ch;
+      }
+
+      .flag .marker {
+        color: var(--warn);
+        flex: none;
+      }
+
+      .flag p {
+        margin: 0;
+      }
+
+      /* ---------------- checklist sections ---------------- */
+
+      .section {
+        margin-bottom: 3.5rem;
+        scroll-margin-top: 1.5rem;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        gap: 0.85rem;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 0.6rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .section-num {
+        font-family: var(--font-code);
+        font-size: 0.88rem;
+        color: var(--accent-deep);
+        font-weight: 600;
+        flex: none;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: 1.42rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        flex: 1 1 auto;
+        text-wrap: balance;
+      }
+
+      .section-head .count {
+        font-size: 0.79rem;
+        color: var(--ink-mute);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+        flex: none;
+      }
+
+      .milestone {
+        margin: 0 0 1.5rem;
+        max-width: 66ch;
+        color: var(--ink-mute);
+        font-size: 0.98rem;
+      }
+
+      .subhead {
+        margin: 2.25rem 0 0.9rem;
+        font-size: 0.77rem;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .items {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 2.4rem minmax(0, 1fr);
+        gap: 0 0.35rem;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid var(--rule-soft);
+      }
+
+      .marker {
+        font-size: 0.93rem;
+        white-space: pre;
+        line-height: 1.75;
+        color: var(--ink-mute);
+      }
+
+      .s-done .marker {
+        color: var(--accent);
+      }
+
+      .s-blocked .marker {
+        color: var(--warn);
+      }
+
+      .s-wip .marker {
+        color: var(--info);
+      }
+
+      .item-title {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.06rem;
+        color: var(--ink);
+        text-wrap: pretty;
+      }
+
+      .s-done .item-title {
+        color: var(--ink-dim);
+        font-weight: 500;
+      }
+
+      .item-note {
+        margin: 0.3rem 0 0;
+        font-size: 0.97rem;
+        color: var(--ink-mute);
+        max-width: 68ch;
+        text-wrap: pretty;
+      }
+
+      .item-note + .item-note {
+        margin-top: 0.5rem;
+      }
+
+      .s-blocked .item-title::after {
+        content: "needs a call";
+        margin-left: 0.6rem;
+        font-family: var(--font-code);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--warn);
+        border: 1px solid oklch(85.2% 0.199 91.936 / 0.4);
+        padding: 0.1rem 0.34rem;
+        white-space: nowrap;
+        vertical-align: 0.12em;
+      }
+
+      .coda {
+        margin: 1.75rem 0 0;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--rule-soft);
+        max-width: 68ch;
+        font-size: 0.96rem;
+        color: var(--ink-mute);
+      }
+
+      /* ---------------- filtering ---------------- */
+
+      #board[data-filter="remaining"] .item.s-done,
+      #board[data-filter="blocked"] .item:not(.s-blocked),
+      #board[data-filter="done"] .item:not(.s-done) {
+        display: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="masthead">
+        <p class="wordmark">NBASTT</p>
+        <h1>New-Season Sweep</h1>
+        <p class="standfirst">
+          The bird's-eye view of the maintenance sweep: everything in scope,
+          what state it is in, and what has to happen next.
+        </p>
+        <p class="provenance">
+          <span><b>This board</b> plan/new-season-sweep/status.html</span>
+          <span><b>Round log</b> log.md</span>
+          <span><b>Review material</b> review.md</span>
+          <span><b>Original wish list</b> plan.md</span>
+          <span><b>Image service spec</b> image-service-spec.html</span>
+        </p>
+
+        <div class="progress">
+          <div
+            class="bar"
+            role="img"
+            aria-label="13 of 35 items done, 3 blocked, 19 not started"
+          >
+            <span class="seg-done" style="flex: 13"></span>
+            <span class="seg-blocked" style="flex: 3"></span>
+            <span class="seg-open" style="flex: 19"></span>
+          </div>
+          <p class="tally">
+            <span class="k-done"><b>13</b> done and verified</span>
+            <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
+            <span class="k-open"><b>19</b> not started</span>
+            <span>35 tracked</span>
+          </p>
+        </div>
+      </header>
+
+      <div class="body">
+        <aside class="rail">
+          <p class="rail-heading">Sections</p>
+          <ul class="toc">
+            <li>
+              <a href="#orientation"
+                >Orientation<span class="count">brief</span></a
+              >
+            </li>
+            <li>
+              <a href="#s1">1 · Foundations<span class="count">10/16</span></a>
+            </li>
+            <li>
+              <a href="#s2">2 · Season prep<span class="count">1/4</span></a>
+            </li>
+            <li>
+              <a href="#s3">3 · Features<span class="count">0/3</span></a>
+            </li>
+            <li>
+              <a href="#s4"
+                >4 · Quality of life<span class="count">2/3</span></a
+              >
+            </li>
+            <li>
+              <a href="#s5"
+                >5 · Infra &amp; deferred<span class="count">0/9</span></a
+              >
+            </li>
+          </ul>
+
+          <p class="rail-heading">Show</p>
+          <div class="filters">
+            <button class="chip" data-filter="all" aria-pressed="true">
+              All
+            </button>
+            <button class="chip" data-filter="remaining" aria-pressed="false">
+              Remaining
+            </button>
+            <button class="chip" data-filter="blocked" aria-pressed="false">
+              Blocked
+            </button>
+            <button class="chip" data-filter="done" aria-pressed="false">
+              Done
+            </button>
+          </div>
+
+          <p class="rail-heading">Markers</p>
+          <ul class="legend">
+            <li>
+              <span class="marker" style="color: var(--accent)">[x]</span>
+              <span>done and verified</span>
+            </li>
+            <li>
+              <span class="marker" style="color: var(--info)">[~]</span>
+              <span>in progress</span>
+            </li>
+            <li><span class="marker">[ ]</span><span>not started</span></li>
+            <li>
+              <span class="marker" style="color: var(--warn)">[!]</span>
+              <span>blocked, or waiting on a decision only Zack can make</span>
+            </li>
+          </ul>
+        </aside>
+
+        <main id="board" data-filter="all">
+          <!-- ============ ORIENTATION ============ -->
+          <section class="briefing" id="orientation">
+            <h2>Orientation for whoever picks this up</h2>
+            <p class="lede">
+              Keep this board current. When a round lands, flip its box, add the
+              <code>log.md</code> entry and the <code>review.md</code> section.
+              When a decision gets made, move the item out of the blocked state
+              and record the outcome.
+            </p>
+
+            <div class="brief-block">
+              <h3>Working agreements</h3>
+              <ul class="rules">
+                <li>
+                  Address him as Zack. Push back with specific technical
+                  reasons; say so when it is a gut feeling. Never "you're
+                  absolutely right." Ask rather than assume.
+                </li>
+                <li>
+                  Each round: its own branch stacked on the previous one, a
+                  <code>log.md</code> entry, and a <code>review.md</code>
+                  section — files to read in order, surprises, decisions you may
+                  flip, manual checklist, comparison artifacts.
+                </li>
+                <li>
+                  Mechanical rounds get batched and reviewed at the end. Stop
+                  before anything that needs design input or his Cloudflare
+                  account.
+                </li>
+                <li>
+                  <strong
+                    >Nothing may be created in the Cloudflare account</strong
+                  >
+                  without asking.
+                </li>
+                <li>
+                  Decisions that fall out of a round get listed as "decisions
+                  you may flip" rather than asked one at a time.
+                </li>
+                <li>
+                  A round is not verified until the <strong>dev server</strong>
+                  has been exercised, not just the built output.
+                </li>
+              </ul>
+            </div>
+
+            <div class="brief-block">
+              <h3>Toolchain</h3>
+              <p>Every shell call needs this prefix:</p>
+              <pre><code>eval "$(fnm env)"; fnm use &gt;/dev/null; export PATH="$HOME/Library/pnpm:$PATH"</code></pre>
+              <p>
+                Node 26.8.1, pnpm 11.26.0. ESLint needs
+                <code>--flag unstable_native_nodejs_ts_config</code>.
+              </p>
+            </div>
+
+            <div class="brief-block">
+              <h3>Branch stack, oldest first</h3>
+              <ul class="chain">
+                <li class="base"><code>main</code></li>
+                <li><code>tooling</code></li>
+                <li><code>react-removal</code></li>
+                <li><code>eslint-10</code></li>
+                <li><code>deps</code></li>
+                <li><code>trailing-slash</code></li>
+                <li class="tip"><code>astro-7</code></li>
+              </ul>
+              <p>
+                Each is stacked on the one before it, so merging the tip takes
+                the lot; check out an intermediate branch to bisect. Nothing has
+                been merged to <code>main</code> yet. <code>light-mode</code> is
+                a separate WIP branch off an older <code>main</code>.
+              </p>
+            </div>
+
+            <div class="brief-block">
+              <h3>Verification harness · plan/baseline/</h3>
+              <ol class="steps">
+                <li>
+                  <code>pnpm run build</code>, then serve with
+                  <code>serve-dist.mjs</code> — or <code>astro preview</code>
+                  when server islands are in play, which runs real workerd.
+                </li>
+                <li>
+                  <code>capture.mjs</code> to screenshot,
+                  <code>compare.mjs</code> against a prior run in
+                  <code>runs/</code>, <code>interact.mjs</code> for popovers and
+                  charts.
+                </li>
+                <li>
+                  <code>dev-smoke.mjs --base &lt;url&gt;</code> against a
+                  running dev server. <strong>Required</strong> for any round
+                  touching dev, the adapter, images, or middleware.
+                </li>
+                <li><code>pnpm run check</code> and <code>pnpm test</code>.</li>
+              </ol>
+            </div>
+
+            <div class="flag">
+              <span class="marker">[!]</span>
+              <p>
+                <strong>Known local state.</strong> <code>package.json</code>
+                carries an uncommitted edit of Zack's own —
+                <code>wrangler types &amp;&amp;</code> prepended to the
+                <code>build</code> and <code>preview</code> scripts. Leave it
+                alone.
+              </p>
+            </div>
+          </section>
+
+          <!-- ============ 1. FOUNDATIONS ============ -->
+          <section class="section" id="s1">
+            <div class="section-head">
+              <span class="section-num">01</span>
+              <h2>Foundations</h2>
+              <span class="count">8 / 16 done</span>
+            </div>
+            <p class="milestone">
+              Milestone: the site renders exactly as it does on prod today, no
+              user-facing changes, ready to launch. All eight rounds are done
+              and pushed; none are merged.
+            </p>
+
+            <ul class="items">
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Step 1 — Finish the Tailwind removal</p>
+                  <p class="item-note">
+                    Plain CSS and design tokens. Branch <code>main</code>
+                    (<code>77d7715</code>). Reviewed round by round.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Step 2 — Register the 2026-27 season</p>
+                  <p class="item-note">
+                    Branch <code>main</code> (<code>54515f9</code>).
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Step 3 — pnpm 11, Node 26, lefthook</p>
+                  <p class="item-note">
+                    Branch <code>tooling</code>. Strict supply-chain settings;
+                    dependencies npm's hoisting had been hiding are now
+                    declared.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">
+                    Step 4 — React out, ECharts and a native popover in
+                  </p>
+                  <p class="item-note">
+                    Branch <code>react-removal</code>. Recharts and Radix gone.
+                    <code>review.md</code> has an "Issues found in review"
+                    subsection for this round.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">
+                    Step 5 — ESLint 10, eslint.config.ts, vitest 5, import-x
+                  </p>
+                  <p class="item-note">Branch <code>eslint-10</code>.</p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Step 6 — Dependency round</p>
+                  <p class="item-note">
+                    Branch <code>deps</code>. tsx dropped, ncu 23, concurrently
+                    10, in-range bumps.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Step 7 — trailingSlash: "always"</p>
+                  <p class="item-note">
+                    Branch <code>trailing-slash</code>. Explicit
+                    <code>build.format: "directory"</code>, links written with
+                    the slash.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">
+                    Step 8 — Astro 7 and Cloudflare adapter 14
+                  </p>
+                  <p class="item-note">
+                    Branch <code>astro-7</code>, three commits, all tagged
+                    <code>[CF-Pages-Skip]</code>. 44/44 screenshots
+                    pixel-identical, 8/8 island screenshots identical, 0 console
+                    errors.
+                  </p>
+                  <p class="item-note">
+                    <strong>No Pages preview exists for this branch</strong> —
+                    the Pages build cannot build Astro 6+, so it was verified
+                    locally only.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <p class="subhead">Still open after Step 9</p>
+            <ul class="items">
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">
+                    Image handling — Step 9, branch <code>svg-images</code>
+                  </p>
+                  <p class="item-note">
+                    Settled by
+                    <strong
+                      >dropping <code>&lt;Image&gt;</code> and
+                      <code>getImage()</code> entirely</strong
+                    >. Every asset on the site is an SVG, and no image service
+                    was doing anything to them but copying bytes.
+                    <code>logo.astro</code> and
+                    <code>result-emoji.astro</code> render a plain
+                    <code>&lt;img src={meta.src}&gt;</code>; the six chart call
+                    sites read <code>.src</code> off the imported metadata.
+                  </p>
+                  <p class="item-note">
+                    Results: <strong>98 → 45 emitted SVGs</strong>, 260,103 →
+                    78,211 bytes, <strong>zero</strong>
+                    <code>/_image</code> requests in build, dev, or the two
+                    server islands. The Step 8 dev shim is deleted — it was dead
+                    code once nothing asked for <code>/_image</code>.
+                  </p>
+                  <p class="item-note">
+                    Verified: 44/44 and 8/8 screenshots pixel-identical,
+                    <code>dev-smoke.mjs</code> 47 images 0 problems, island
+                    checked on real workerd.
+                  </p>
+                  <p class="item-note">
+                    The general fix — never having to know an asset's type to
+                    know which component to use — is the image service, now
+                    specced in <code>image-service-spec.html</code> and tracked
+                    in section 5.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">svgo at build — Step 9</p>
+                  <p class="item-note">
+                    Landed as an <code>astro:build:done</code> integration in
+                    <code>svg-optimizer/</code> rather than a one-time pass over
+                    the sources, so the checked-in files stay readable.
+                    <strong>46/46 files, 114.3 KB → 78.8 KB (31.0%)</strong>,
+                    including <code>public/favicon.svg</code>.
+                  </p>
+                  <p class="item-note">
+                    Left at svgo's default <code>floatPrecision: 3</code>, which
+                    moves antialiasing by 1–5 pixels on 21 of 44 screenshots
+                    (0.00% each). Precision 5 removes that and costs back ~11 KB
+                    — a one-line flip if the diffs bother you.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    dev-smoke.mjs only counts &lt;img&gt;
+                  </p>
+                  <p class="item-note">
+                    The ECharts chart symbols come from
+                    <code>getImage()</code> and are not
+                    <code>&lt;img&gt;</code>, so the check would not have caught
+                    them breaking. Worth fixing regardless of the image
+                    decision.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Disable the Sentry middleware in dev</p>
+                  <p class="item-note">
+                    Zack: "sentry middleware should be disabled in dev, can
+                    address later." It is the cause of the workerd
+                    cross-request-promise warning, which is dev-only — zero
+                    occurrences under <code>astro preview</code>. Belongs to the
+                    Sentry round.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Bump compatibility_date in wrangler.jsonc
+                  </p>
+                  <p class="item-note">
+                    To the present day. Currently pinned to
+                    <code>2025-03-21</code>, the date the Pages build used.
+                    Zack: "fine to do later."
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <p class="subhead">Zack's exhaustive review of Foundations</p>
+            <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Work review.md end to end</p>
+                  <p class="item-note">
+                    Steps 4 through 8 each have a manual test checklist that has
+                    not been ticked. Steps 1 to 3 were reviewed as they landed.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Decide the "decisions you may flip" items per round
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Merge the stack into main once satisfied
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ============ 2. SEASON PREP ============ -->
+          <section class="section" id="s2">
+            <div class="section-head">
+              <span class="section-num">02</span>
+              <h2>Season prep</h2>
+              <span class="count">1 / 4 done</span>
+            </div>
+            <p class="milestone">
+              Milestone: the bare minimum to have the site ready for the new
+              season. Time-boxed by the real calendar, unlike everything else
+              here.
+            </p>
+
+            <ul class="items">
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Schedule release</p>
+                  <p class="item-note">
+                    2026-27 season registered in
+                    <code>src/content/seasons.json</code> (Step 2).
+                  </p>
+                </div>
+              </li>
+              <li class="item s-blocked">
+                <span class="marker">[!]</span>
+                <div>
+                  <p class="item-title">Odds release, mid-September</p>
+                  <p class="item-note">
+                    The next real deadline. Per <code>MAINTENANCE.md</code>:
+                    register any never-before-surprising teams — logo under
+                    <code>src/assets/images/emoji</code>, emoji name in
+                    <code>src/content/utils.ts</code>, team code in
+                    <code>src/content.config.ts</code>, team in
+                    <code>src/content/teams.json</code> — then add the team
+                    seasons to <code>src/content/teamSeasons.json</code>.
+                    Waiting on the odds being published.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Verify the expectations in MAINTENANCE.md
+                  </p>
+                  <p class="item-note">
+                    After the odds land: home and season detail show an empty
+                    standings table rendered on demand, team/season pages
+                    generate with data via server island, archive and stats
+                    unaffected.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Re-test server-island caching</p>
+                  <p class="item-note">
+                    Once there is a live season. Zack flagged this as finnicky
+                    to get right originally, and the adapter changed under it.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ============ 3. FEATURES ============ -->
+          <section class="section" id="s3">
+            <div class="section-head">
+              <span class="section-num">03</span>
+              <h2>Features for this season</h2>
+              <span class="count">0 / 3 done</span>
+            </div>
+
+            <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Light mode</p>
+                  <p class="item-note">
+                    Partly done on the <code>light-mode</code> branch — four WIP
+                    commits off an older <code>main</code> — which has the
+                    colors he settled on. Sticking point he named: styling the
+                    mode toggle as a light bulb, specifically the glow.
+                  </p>
+                  <p class="item-note">
+                    Will need rebasing onto the post-sweep <code>main</code>,
+                    and the Tailwind removal landed in between, so expect
+                    conflicts.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Surprise Showdown page</p>
+                  <p class="item-note">
+                    A per-year page of matchups between surprise teams. Full
+                    spec in <code>plan.md</code>: title, icon set (favicon face,
+                    two punching bags, the clown), a question-mark dialog with
+                    his copy, a standings table, and matchups grouped by date
+                    with enlarged team emoji either side of an <code>@</code>.
+                    Needs design input; do not start it alone.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Open Graph image</p>
+                  <p class="item-note">
+                    One image for the whole site, following
+                    cassidoo.co/post/og-image-gen-astro, but
+                    <strong>without</strong> publishing the preview route — he
+                    wants the page to play with, then styles it himself.
+                  </p>
+                  <p class="item-note">
+                    Note from the Astro 7 round: the documented path uses
+                    <code>experimental_getFontFileURL()</code> (needs the Fonts
+                    API) and rasterizes with sharp, which will not run in
+                    workerd, so the endpoint has to prerender or use
+                    <code>prerenderEnvironment: 'node'</code>.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ============ 4. QUALITY OF LIFE ============ -->
+          <section class="section" id="s4">
+            <div class="section-head">
+              <span class="section-num">04</span>
+              <h2>Quality of life</h2>
+              <span class="count">2 / 3 done</span>
+            </div>
+
+            <ul class="items">
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Trailing slash settings</p>
+                  <p class="item-note">Landed as Step 7.</p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">SQLite content store</p>
+                  <p class="item-note">
+                    Half-baked idea from <code>plan.md</code>: keep the static
+                    build but get referential integrity that Astro content
+                    collections don't give, currently checked by tests. Shape he
+                    floated: a human-readable sqldump migrated into the db at
+                    pre-commit. Needs design.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Remove React, switch to ECharts</p>
+                  <p class="item-note">Landed as Step 4.</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ============ 5. INFRA ============ -->
+          <section class="section" id="s5">
+            <div class="section-head">
+              <span class="section-num">05</span>
+              <h2>Infrastructure and deferred rounds</h2>
+              <span class="count">0 / 9 done</span>
+            </div>
+
+            <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Custom image service — see
+                    <code>image-service-spec.html</code>
+                  </p>
+                  <p class="item-note">
+                    A reusable Astro image service for Zack's Cloudflare-hosted
+                    sites: sharp at build, jimp + wasm codecs at runtime in
+                    workerd, SVG passed through as one file with no variants,
+                    and an svg-hush-based audit that fails the build on unsafe
+                    features that are not allow-listed. No dependency on
+                    Cloudflare's paid transformation product.
+                  </p>
+                  <p class="item-note">
+                    This site is the test case, not the customer — Step 9
+                    already removed its need for one. Every load-bearing claim
+                    in the spec is tagged <code>VERIFIED</code> with a
+                    file:line, <code>UNVERIFIED</code>, or
+                    <code>ZACK DECIDES</code>; read the open questions first.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-blocked">
+                <span class="marker">[!]</span>
+                <div>
+                  <p class="item-title">Content Security Policy</p>
+                  <p class="item-note">
+                    Held deliberately for a session Zack and I do together — he
+                    wants to understand Astro's implementation, not just have
+                    one.
+                  </p>
+                  <p class="item-note">
+                    Going in: <code>security.csp</code> emits a
+                    <code>&lt;meta&gt;</code> policy with hashes for
+                    Astro-processed scripts and styles, it is
+                    <strong>not applied in dev</strong>, external scripts and
+                    styles need hashes added by hand (Cloudflare's injected
+                    beacon is exactly that case), and 7.1 added
+                    <code>kind</code> scoping so inline <code>style</code>
+                    attributes can be allowed without loosening
+                    <code>&lt;style&gt;</code>.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Sentry rework</p>
+                  <p class="item-note">
+                    Zack's standing worry is silently breaking it. Carries three
+                    items from above: disabling the middleware in dev, the
+                    <code>globalThis.process</code> banner in
+                    <code>astro.config.mjs</code>, and the
+                    <code>CF_VERSION_METADATA</code> binding (adapter 14.2.5),
+                    which is how Sentry detects releases and also adds a version
+                    cache tag and weak ETag.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-blocked">
+                <span class="marker">[!]</span>
+                <div>
+                  <p class="item-title">Production cutover to Workers</p>
+                  <p class="item-note">
+                    Needs his Cloudflare account. Blockers, all deliberate:
+                    <code>wrangler.jsonc</code> has the placeholder
+                    <code>REPLACE_WITH_REAL_KV_ID</code>;
+                    <code>.github/workflows/deploy.yml</code> is written,
+                    SHA-pinned and zizmor-clean but gated off behind
+                    <code>vars.DEPLOY_ENABLED == 'true'</code>; the custom
+                    domain has to move.
+                  </p>
+                  <p class="item-note">
+                    Also settle here: trailing-slash redirects become
+                    <strong>307</strong> on Workers vs 308 on Pages —
+                    <code>html_handling: "force-trailing-slash"</code> does not
+                    change it, tested — and whether the deploy workflow should
+                    keep running the full verify.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <p class="subhead">Astro 6/7 features left on the table</p>
+            <p class="milestone">
+              Full list with reasoning in <code>review.md</code>, "what I left
+              out, and why." These are the ones worth a second look.
+            </p>
+            <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">Fonts API — stable 6.0</p>
+                  <p class="item-note">
+                    Would replace the two <code>@fontsource/*</code> CSS imports
+                    with declarative config that also emits preloads and
+                    metric-matched fallbacks. Prerequisite for the OG image
+                    work.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Route caching — cache.provider, routeRules, Astro.cache, 7.0
+                  </p>
+                  <p class="item-note">
+                    The platform-agnostic version of the manual
+                    <code>Cache-Control</code> the two server islands set today.
+                    Left because <code>memoryCache()</code> is per-isolate,
+                    meaningless on Workers, and <code>cacheCloudflare()</code>
+                    needs a private beta.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Cloudflare preview deployments — adapter 13.2
+                  </p>
+                  <p class="item-note">
+                    Could replace the separate preview environment. Private
+                    beta; availability unverified because that needs his
+                    account.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    image.service.config.{jpeg,webp,avif,png} — 6.1
+                  </p>
+                  <p class="item-note">
+                    Per-codec sharp settings. Only if output size or quality
+                    ever bothers him.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">compressHTML</p>
+                  <p class="item-note">
+                    Currently <code>true</code> to preserve 5.x whitespace.
+                    Dropping it takes Astro 7's <code>jsx</code> default and a
+                    smaller page, at the cost of checking every inline-element
+                    boundary for a lost space.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <p class="coda">
+              <strong>Looked at and set aside:</strong>
+              <code>prerenderEnvironment: 'node'</code> (builds fine and is
+              faster, but changes CSS output — drops two
+              <code>-webkit-text-decoration</code> prefixes and leaves two
+              nested <code>&amp;</code> selectors unflattened),
+              <code>experimental.svgOptimizer</code> (only applies to SVG
+              components, not our asset pipeline),
+              <code>experimental.incrementalBuild</code>,
+              <code>collectionStorage: 'chunked'</code>, custom/JSON logging,
+              advanced routing (<code>src/fetch.ts</code>, Hono middleware), and
+              <code>astro dev --background</code>.
+            </p>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const board = document.getElementById("board");
+        const chips = document.querySelectorAll(".chip");
+
+        const syncSections = () => {
+          document.querySelectorAll(".section").forEach((section) => {
+            const items = section.querySelectorAll(".item");
+            const visible = [...items].some(
+              (item) => getComputedStyle(item).display !== "none",
+            );
+            section.hidden = !visible;
+          });
+        };
+
+        chips.forEach((chip) => {
+          chip.addEventListener("click", () => {
+            chips.forEach((c) => c.setAttribute("aria-pressed", "false"));
+            chip.setAttribute("aria-pressed", "true");
+            board.dataset.filter = chip.dataset.filter;
+            syncSections();
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
