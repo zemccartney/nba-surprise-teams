@@ -549,26 +549,114 @@
             </div>
 
             <p>
-              Zack's sites deploy to Cloudflare. The
-              <code>@astrojs/cloudflare</code> adapter's image handling is
-              uneven across formats: with the default
-              <code>imageService: "cloudflare-binding"</code>, or with
-              <code>"compile"</code> in dev, <code>/_image</code> is routed
-              through the Cloudflare Images binding, whose accepted output
-              formats are a hardcoded list of
-              <code>jpeg, jpg, png, gif, webp, avif</code>. An SVG request
-              returns <code>400 Unsupported format: svg</code>.
-              <span class="tag t-verified">verified</span>
-              <span class="cite"
-                >@astrojs/cloudflare@14.3.0 —
-                dist/utils/image-binding-transform.js, the
-                <code>supportedFormats</code> map inside
-                <code>transformStream</code></span
+              Zack's sites deploy to Cloudflare. The premise here is not that
+              the adapter has a bug — it is that
+              <strong
+                >no single setting on <code>@astrojs/cloudflare</code> makes
+                every image type work without paying Cloudflare.</strong
               >
+              Getting this site's images working in build <em>and</em> at
+              runtime took two coordinated overrides, and the zero-config
+              default was unusable for a site whose assets are all SVG.
             </p>
 
             <p>
-              That is stricter than the platform it wraps. Cloudflare Images
+              What the default actually does: with no
+              <code>imageService</code> set,
+              <code>normalizeImageServiceConfig</code> resolves
+              <code>"cloudflare-binding"</code>, which yields
+              <code>transformAtBuild: false</code> and
+              <code>needsImagesBinding: true</code>. Every runtime image request
+              goes to <code>env.IMAGES</code> — so rendering a logo requires
+              provisioning Cloudflare's metered Images product first, whether or
+              not any pixel needs touching.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >@astrojs/cloudflare@14.3.0 — dist/utils/image-config.js:2-17
+                and dist/index.js:87-89</span
+              >
+            </p>
+
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th><code>imageService</code></th>
+                    <th>Endpoint in dev</th>
+                    <th>Endpoint at runtime</th>
+                    <th>Needs paid binding</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>cloudflare-binding</code> (default)</td>
+                    <td>transform</td>
+                    <td>transform</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td><code>compile</code></td>
+                    <td><strong>transform</strong></td>
+                    <td>passthrough</td>
+                    <td>no</td>
+                  </tr>
+                  <tr>
+                    <td><code>passthrough</code></td>
+                    <td>generic</td>
+                    <td>passthrough</td>
+                    <td>no</td>
+                  </tr>
+                  <tr>
+                    <td><code>cloudflare</code></td>
+                    <td>generic</td>
+                    <td>CF service</td>
+                    <td>yes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="cite" style="margin-top: -0.4rem">
+              <span class="tag t-verified">verified</span>
+              @astrojs/cloudflare@14.3.0 — dist/utils/image-config.js:28-77,
+              reading <code>setImageConfig</code> branch by branch. "transform"
+              is <code>@astrojs/cloudflare/image-transform-endpoint</code>,
+              which calls <code>env.IMAGES</code>.
+            </p>
+
+            <div class="callout">
+              <span class="marker">!</span>
+              <p>
+                <strong
+                  >The bolded cell looks like an adapter bug, and it is the one
+                  we papered over by hand.</strong
+                >
+                Under <code>compile</code> the runtime service is
+                <code>passthrough</code>, yet
+                <code>command === "dev"</code> hardcodes the Cloudflare Images
+                endpoint anyway — the adapter routes dev at a product its own
+                configuration says nothing should reach. The
+                <code>passthrough</code> and <code>cloudflare</code> branches
+                immediately above it both special-case dev to
+                <code>GENERIC_ENDPOINT</code>; <code>compile</code> does not.
+                One line, mirroring its neighbours, would make the Step 8 dev
+                shim unnecessary for everyone. Worth filing upstream.
+                <span class="tag t-verified">verified</span>
+                <span class="cite">dist/utils/image-config.js:31-63</span>
+              </p>
+            </div>
+
+            <p>
+              The SVG failure itself is a second, narrower fact: the transform
+              endpoint's accepted output formats are a hardcoded
+              <code>jpeg, jpg, png, gif, webp, avif</code>, so an SVG request
+              returns <code>400 Unsupported format: svg</code>.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >dist/utils/image-binding-transform.js, the
+                <code>supportedFormats</code> map inside
+                <code>transformStream</code></span
+              >
+              That is stricter than the platform it wraps: Cloudflare Images
               lists SVG as both a supported input and output format, states that
               it does not resize SVG and ignores optimization parameters for it,
               and sanitizes it with svg-hush on delivery.
@@ -580,15 +668,17 @@
             </p>
 
             <p>
-              The practical consequence is the thing worth fixing:
+              Both facts land on the same DX complaint, which is the actual
+              motivation:
               <strong
-                >you have to know a file's type to know whether you may use
-                Astro's <code>&lt;Image&gt;</code> component.</strong
+                >you have to know a file's type, and hold a matrix of adapter
+                settings in your head, to know whether you may use Astro's
+                <code>&lt;Image&gt;</code> component.</strong
               >
               That is a bad seam to carry across several personal sites. The
-              goal here is one service that makes <code>&lt;Image&gt;</code>
+              goal is one service that makes <code>&lt;Image&gt;</code> simply
               correct for every format, on Cloudflare, with no paid image
-              product involved.
+              product involved and no per-site configuration archaeology.
             </p>
 
             <h3>Goals</h3>
