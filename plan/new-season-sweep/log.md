@@ -13,6 +13,45 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## 2026-09-12 — Step 10: mise and hk cleanup, pnpm 12 verification
+
+Branch `mise-setup` on `svg-images`. Zack's initial migration (`f38a829`)
+introduced mise/hk and moved pnpm 11 → 12. Review found a broken bare-Prettier
+command, missing ESLint file arguments and test step, pnpm self-selecting
+12.4.1 over mise's 12.3.4 pin, and the deploy workflow still relying on the
+removed `packageManager` field.
+
+**What changed.** Prettier's check/list/fix all use `pnpm exec`; ESLint
+receives hk's selected files and includes JSONC; tests are restored.
+Pre-commit retains auto-fix with explicit auto-staging and Git stashing.
+`mise check` is explicitly read-only. `mise setup` documents noninteractive
+bootstrap (frozen dependency install plus hook install). `devEngines` now
+requires 12.3.4 with `onFail: "error"`, matching the existing mise pin.
+The application-dependency document in the pnpm lockfile is unchanged.
+CI uses the SHA-pinned mise action with `--locked`; the deployment gate stays
+untouched. Removed Lefthook's example config and build permission, plus its
+identified leftover `prepare-commit-msg` hook in this local checkout.
+README and the status board now describe the current bootstrap and stack.
+
+**Additional finding.** The inherited `PNPM_HOME/bin` outranked mise tools
+inside hk's subprocesses, even though a direct `mise x -- pnpm --version`
+returned 12.3.4. The new strict check exposed this as `ERR_PNPM_BAD_PM_VERSION`.
+Project-local `activate_aggressive = true` fixes the PATH precedence rather
+than weakening the version check or editing the user's shell configuration.
+
+**Verification.** Disposable Git checkout, clean frozen install, full build,
+then `mise check` passed (10 tests, clean types/lint/format, svgo 46/46 and
+31.0% saved). Actual commits exercised partial staging: successful auto-fix
+preserved an unstaged hunk and unrelated unstaged JS; failed validation
+preserved HEAD, index and unstaged work, with no stash left. Dev smoke against
+the disposable checkout on port 4337 passed (47 images, zero problems), and
+the server was stopped. The main checkout's `mise check` also passed.
+
+**Limits.** No production comparison, remote workflow or deployment attempted.
+The existing content-store/vacuous-test gap is not fixed by this tooling round;
+review it before relying on green tests during the site review. No Cloudflare
+resources created. Cleanup is locally verified and not yet committed.
+
 ## 2026-09-11 — Step 9: drop `<Image>` for the SVGs, svgo at build
 
 Branch `svg-images` on `astro-7`. Follow-on from the Step 8 image breakage:

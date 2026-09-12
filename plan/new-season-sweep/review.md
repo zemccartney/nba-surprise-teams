@@ -13,9 +13,85 @@ For the scope of the whole session and what is still outstanding, see
 `status.html`.
 
 **Branch stack, oldest first.** `tooling` → `react-removal` → `eslint-10` →
-`deps` → `trailing-slash` → `astro-7`. Each branch is stacked on the previous
+`deps` → `trailing-slash` → `astro-7` → `svg-images` → `mise-setup`.
+Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
+
+## Step 10: mise, pnpm 12 and hk
+
+**State.** Branch `mise-setup` on `svg-images`. Zack's initial migration is
+`f38a829`; the cleanup below is locally verified, awaiting commit. No deploy
+attempted; the GitHub workflow remains gated by `DEPLOY_ENABLED`.
+
+### Files to read, in order
+
+1. `mise.toml` and `mise.lock`: exact Node 26.8.1, pnpm 12.3.4 and hk 1.56.1;
+   release-age/provenance policies; enter hook; setup/check/fix tasks.
+2. `package.json`: exact matching pnpm `devEngines` with `onFail: "error"`.
+   This is also a pnpm 11 → 12 migration, not just a new tool installer.
+3. `hk.pkl`: project-local Prettier/ESLint through `pnpm exec`, explicit file
+   arguments, types/tests, Git stashing and auto-staging for pre-commit.
+4. `.github/workflows/deploy.yml`: SHA-pinned mise action replaces the old
+   pnpm/setup-node bootstrap and installs with `--locked`.
+5. README Toolchain and Git hooks: interactive and noninteractive bootstrap,
+   GUI PATH requirement and how to remove legacy Lefthook hooks safely.
+
+### Issues found and fixed
+
+- The Prettier builtin ran bare `prettier`, absent from PATH. All three
+  commands (check, list-different, fix) now use `pnpm exec`.
+- pnpm downloaded 12.4.1 despite mise's 12.3.4 pin. The metadata now matches
+  mise exactly and rejects a mismatched executable instead of switching it.
+- Inherited `PNPM_HOME/bin` took precedence in subprocesses even though
+  `mise x -- pnpm` resolved the pinned tool. `activate_aggressive = true`
+  keeps the project toolchain first; tested with the inherited old PATH.
+- ESLint lacked `{{files}}`, so it ran over the whole repository and could
+  fix unrelated files. Explicit arguments restore scoped lint/fix; JSONC is
+  included too.
+- Tests had been dropped from hk; restored. `mise check` explicitly selects
+  check-only mode. Its tracked-file scope is documented rather than claimed
+  identical to the build's tool-driven file discovery.
+- `pnpm/action-setup` had lost its version input when `packageManager` was
+  removed. CI now consumes the same mise lock as local development.
+- Deleted the example-only `lefthook.yml` and obsolete build permission;
+  removed the identified Lefthook `prepare-commit-msg` hook from this checkout.
+
+### Decisions you may flip
+
+- Keep Zack's **auto-fix on commit**, unlike the old check-only hook. hk
+  stashes unstaged work, fixes/stages selected files, then restores it.
+- pnpm stays at mise's chosen **12.3.4**, not the incidental downloaded 12.4.1.
+  The application dependency document in the lockfile is byte-identical to
+  `f38a829`; only the package-manager document changed in this cleanup.
+- `.node-version` remains `26` for hosting compatibility; mise pins the patch.
+  The separate `plan/baseline` project retains pnpm 11 for now.
+- Build verification remains `pnpm run verify`; hk offers the same four check
+  categories but uses tracked files. No new CI/deployment behavior is enabled.
+
+### Verification and remaining manual checklist
+
+Completed in a disposable Git checkout with no existing `node_modules`:
+
+- Locked mise install and `mise run setup` (frozen pnpm install).
+- `pnpm run build`, followed by `mise run check`: clean types/lint/format,
+  10 tests passed, svgo 46/46 SVGs and 31.0% savings.
+- Real Git commit with a partially staged JSON file: formatting fixed in the
+  commit; unstaged hunk and unrelated unstaged JS preserved; index empty.
+- Deliberately invalid staged JSON: commit blocked; HEAD/index/unstaged work
+  preserved; no leftover stash.
+- Dev server on port 4337 and `dev-smoke.mjs`: 47 images, zero problems.
+  Server stopped after verification. No visual comparison performed here.
+
+Still to review:
+
+- [ ] Your usual GUI/editor can commit with mise on PATH.
+- [ ] Confirm auto-fixing on commit is the behavior you want day to day.
+- [ ] Exercise the updated workflow on Linux during the coordinated Workers
+      cutover. It has not run remotely in this round.
+- [ ] Before trusting the broader site review's test results, revisit the
+      existing fresh-content-store/vacuous-test gap from Step 3. A passing
+      test count alone does not establish that all collections were populated.
 
 ## Step 9: plain `<img>` for the SVGs, svgo at build
 

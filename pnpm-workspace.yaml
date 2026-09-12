@@ -32,7 +32,6 @@ blockExoticSubdeps: true
 allowBuilds:
   "@sentry/cli": false
   esbuild: false
-  lefthook: false
   sharp: false
   # unrs-resolver (eslint-import-resolver-typescript): napi-postinstall, same shape
   unrs-resolver: false

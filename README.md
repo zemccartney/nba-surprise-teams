@@ -2,13 +2,28 @@
 
 ## Toolchain
 
-- **Node 26**, pinned in `.node-version`. With fnm, run `fnm use` in the repo
-  (or add `--use-on-cd` to the `fnm env` line in your shell profile).
-  `package.json` `engines` enforces it: `pnpm install` refuses older Nodes.
-- **pnpm**, version pinned in the `packageManager` field. Any pnpm ≥ 10 on
-  `PATH` downloads and runs that exact version (`pnpm -v` in the repo should
-  print it); `corepack enable` also works. Never `npm install` here.
-- `pnpm install` installs dependencies and the git hooks.
+[mise](https://mise.jdx.dev/) manages **Node 26.8.1, pnpm 12.3.4 and hk
+1.56.1**, pinned in `mise.toml` with platform checksums in `mise.lock`.
+Install mise and trust this checkout after reviewing its config, then:
+
+```sh
+mise trust
+mise install --locked
+mise run setup
+```
+
+`setup` installs dependencies with the frozen lockfile and installs hk's Git
+hooks. With `mise activate` configured in your shell, entering the repo also
+installs missing tools and refreshes the hooks. Noninteractive shells and
+agents should use `mise run <task>` or `mise x -- pnpm <command>`; no fnm or
+manual pnpm PATH prefix is needed. Project tools take precedence over inherited
+PATH additions such as `PNPM_HOME/bin`.
+
+`package.json` checks the exact pnpm version via `devEngines` with
+`onFail: "error"`; it does not request automatic version switching. Keep that
+version in sync with `mise.toml`. `.node-version` retains the Node major for
+hosting tools that read it; `engines.node` restricts installs to Node 26.
+Never `npm install` here. The deploy workflow installs the locked mise tools.
 
 ## Commands
 
@@ -67,17 +82,34 @@ capture tooling's dependencies stay out of the site's lockfile and build.
 
 ## Git hooks
 
-[lefthook](https://lefthook.dev), configured in `lefthook.yml`, installed by
-`pnpm install`. Pre-commit runs `astro check`, the tests, and Prettier and
-ESLint on the staged files, in parallel. `pnpm exec lefthook run pre-commit`
-runs it by hand; `LEFTHOOK=0 git commit` skips it.
+[hk](https://hk.jdx.dev/), configured in `hk.pkl`, installed by `mise run setup`
+or the mise enter hook. Pre-commit **auto-fixes and stages** Prettier and ESLint
+changes on selected files, and runs whole-project `astro check` and tests.
+Unstaged changes are stashed with Git and restored afterward, including when a
+check fails. Review the resulting commit when using partial staging.
+
+- `mise run check`: read-only types, format, lint and tests across tracked files.
+- `mise run fix`: the same checks, applying available fixes.
+- `mise x -- hk run pre-commit`: exercise the staged-file hook manually.
+- `HK=0 git commit`: explicit hook bypass.
+
+Git hooks use `mise x`, so GUI Git clients must have the mise executable on
+PATH; shell activation alone does not guarantee that. `pnpm install` no longer
+installs hooks. When migrating an existing checkout, remove only old
+Lefthook-generated hooks from `.git/hooks` (including `prepare-commit-msg` if
+present), then run `mise x -- hk install --mise`; preserve unrelated hooks.
+
+The build retains `pnpm run verify`, which discovers files through the tools
+rather than hk's tracked-file list. Both run tests, but the existing content
+store caveat still applies: tests in a fresh checkout can pass against empty
+collections until dev/build has populated `.astro/data-store.json`.
 
 ## Linting
 
 The ESLint config is TypeScript (`eslint.config.ts`), loaded through Node's own
 type stripping. ESLint 10 still gates that behind a feature flag, so every
 invocation carries `--flag unstable_native_nodejs_ts_config`: the `lint`
-scripts, `lefthook.yml`, and `.vscode/settings.json` (`eslint.options.flags`).
+scripts, `hk.pkl`, and `.vscode/settings.json` (`eslint.options.flags`).
 Without it ESLint fails with "The 'jiti' library is required for loading
 TypeScript configuration files". Rules that are turned off
 have the reason in a comment next to them in the config; that's the place to
