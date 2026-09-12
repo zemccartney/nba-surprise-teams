@@ -1,0 +1,24 @@
+---
+/*
+  Chart host + data; the script mounts ECharts on the client. Data travels as a
+  JSON script block rather than an attribute so it isn't HTML-escaped.
+*/
+import type { SurprisesByTeamChartProps } from "./surprises-by-team";
+
+import "./charts.css";
+
+type Props = SurprisesByTeamChartProps;
+
+const json = JSON.stringify(Astro.props).replaceAll("<", String.raw`\u003c`);
+---
+
+<div class="chart" data-chart="surprises-by-team">
+  <script is:inline set:html={json} type="application/json" />
+</div>
+
+<script>
+  import { mountCharts } from "./echarts";
+  import { option } from "./surprises-by-team";
+
+  mountCharts("surprises-by-team", option);
+</script>

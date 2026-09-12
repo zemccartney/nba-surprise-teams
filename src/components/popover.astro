@@ -1,0 +1,38 @@
+---
+/*
+  Native popover: the HTML `popover` attribute gives the top layer, light
+  dismiss, and Escape for free, and `popovertarget` wires the buttons to it.
+  Placement is CSS anchor positioning (popover.css), with the invoking button
+  as the implicit anchor; browsers without it show the popover centered in the
+  viewport (the UA default). No JavaScript. Replaces the Radix popover.
+*/
+import "./popover.css";
+
+interface Props {
+  classes?: Partial<Record<"body" | "close" | "trigger", string>>;
+  // Unique within the page: links the trigger and close buttons to the popover
+  id: string;
+}
+
+const { classes, id } = Astro.props;
+---
+
+<button
+  class:list={["popover-trigger", classes?.trigger]}
+  popovertarget={id}
+  type="button"
+>
+  ?
+</button>
+<div class:list={["popover-body", classes?.body]} id={id} popover>
+  <slot />
+  <button
+    aria-label="Close"
+    class:list={["popover-close", classes?.close]}
+    popovertarget={id}
+    popovertargetaction="hide"
+    type="button"
+  >
+    x
+  </button>
+</div>

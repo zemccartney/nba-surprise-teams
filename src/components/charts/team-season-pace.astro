@@ -1,0 +1,35 @@
+---
+/*
+  Chart host + data; the script mounts ECharts on the client. Data travels as a
+  JSON script block rather than an attribute so it isn't HTML-escaped.
+*/
+import { getImage } from "astro:assets";
+
+import type {
+  TeamSeasonPaceChartData,
+  TeamSeasonPaceChartProps,
+} from "./team-season-pace";
+
+import * as Utils from "../../utils";
+import "./charts.css";
+
+type Props = TeamSeasonPaceChartProps;
+
+const emoji = await getImage({ src: Utils.getEmoji("hushed-face") });
+const data: TeamSeasonPaceChartData = {
+  ...Astro.props,
+  surprisedEmojiSrc: emoji.src,
+};
+const json = JSON.stringify(data).replaceAll("<", String.raw`\u003c`);
+---
+
+<div class="chart" data-chart="team-season-pace">
+  <script is:inline set:html={json} type="application/json" />
+</div>
+
+<script>
+  import { mountCharts } from "./echarts";
+  import { option } from "./team-season-pace";
+
+  mountCharts("team-season-pace", option);
+</script>

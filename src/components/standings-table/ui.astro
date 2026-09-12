@@ -9,7 +9,7 @@ import * as ContentUtils from "../../content-utils";
 import * as Utils from "../../utils";
 import Link from "../link.astro";
 import Logo from "../logo.astro";
-import Popover from "../popover";
+import Popover from "../popover.astro";
 import ResultEmoji from "../result-emoji.astro";
 import Table from "../table.astro";
 
@@ -77,7 +77,7 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
       </th>
       <th class="pace-col" scope="col">
         Pace
-        <Popover client:load>
+        <Popover id="pace-popover">
           <p class="popover-heading">Pace</p>
           <p>
             Current Projected Wins - Wins needed to surprise ({

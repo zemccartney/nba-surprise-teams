@@ -87,3 +87,4 @@ Active LTS; **Maintenance from 2026-10-20** (Node 26 becomes LTS 2026-10-28). La
 - Deps round: drop `tsx` (`node archiver/script.ts`; Node 26 strips types, `erasableSyntaxOnly` already on, no relative imports in script.ts); ncu 23.
 - ESLint 10 round: vitest 5 (needs Vite ≥ 6.4, satisfied), eslint-plugin-import-x 4.17 (+ typescript-eslint ≥ 8.56, eslint-import-resolver-typescript; disable `import-x/order`, ignore `astro:*` in `no-unresolved`; `no-extraneous-dependencies` is the rule that would have caught the phantom imports).
 - sqlite work: the vacuous vitest run in fresh checkouts (content store only written by dev/build).
+- ESLint 10 round, added 2026-09-09: `eslint-plugin-jsx-a11y` did **not** leave with React. `eslint-plugin-astro`'s `jsx-a11y-strict` config uses it to lint `.astro` templates, so it stays until that round decides whether the unmaintained plugin is worth keeping for Astro files.

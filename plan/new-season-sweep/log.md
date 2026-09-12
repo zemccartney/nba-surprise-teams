@@ -3,6 +3,79 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-09 — Step 4: React out, ECharts and a native popover in
+
+**What changed.** The four Recharts charts are now ECharts 6.1 (`echarts/core`
+with only the bar, line, and scatter charts, the grid, tooltip, markLine,
+visualMap, and aria components, and the SVG renderer registered). Each chart is
+an `.astro` wrapper that renders a host `<div>` plus the props as a JSON script
+block, and a `<script>` that imports the chart's option builder
+(`src/components/charts/*.ts`) and mounts it when the host scrolls into view.
+Colors and fonts are read from the design tokens at mount. The Radix popover is
+a native `[popover]` element: `popovertarget` buttons open and close it, CSS
+anchor positioning hangs it below its trigger (flipping above when there's no
+room, sliding sideways to stay in the viewport), and browsers without anchor
+positioning get the UA default, centered in the viewport. Zero JavaScript.
+Removed: react, react-dom, recharts, @radix-ui/react-popover, @astrojs/react,
+@types/react\*, clsx, eslint-plugin-react, eslint-plugin-react-refresh; the
+`jsx` tsconfig settings; the `react-dom/server.edge` alias. `.tsx` is gone
+from the lint globs. `eslint-plugin-jsx-a11y` stays: eslint-plugin-astro uses it
+for `.astro` templates (noted in `findings-tooling.md` for the ESLint round).
+
+**Found on the way:**
+
+1. An open-ended `visualMap` piece (`{ gte: 28 }` with no upper bound) crashes
+   ECharts' line view when it builds the area gradient
+   (`getVisualGradient` reads a stop that was clipped away). Both pieces are
+   bounded to the axis range now.
+2. zrender can't parse `oklch()` and throws mid-animation when it tweens a hover
+   state. The theme reader paints each color token into a 1px canvas and reads
+   back the sRGB bytes as hex. Same pixels for in-gamut colors, and the light
+   mode round can re-mount on theme change.
+3. Importing an SVG from a client `.ts` module pulls Astro's asset runtime and
+   zod into the chunk (66 KB for one emoji). The pace wrapper resolves the URL
+   server-side with `getImage` and passes it in the payload.
+4. Server islands insert their HTML with `createContextualFragment`, so the
+   `<script type="module" src>` a component renders inside an island does run.
+   The current-season team page mounts its chart that way; verified.
+5. The native popover gives the trigger `aria-expanded` and `aria-details` for
+   free (Radix set those by hand). The trigger's accessible name is still just
+   "?", as before.
+6. Radix portaled the popover content to `<body>`; the native one stays where
+   it's authored, usually inside a bold, right- or center-aligned table header,
+   and inherited all of that. `.popover-body` now resets `font-weight`,
+   `font-style`, and `text-align`. Caught by screenshotting the open state.
+
+**Verification.** Types, lint, format, tests green. `runs/2026-09-09-react-removal-local`
+vs `runs/2026-09-07-tooling-pnpm-local`: the 7 pages without charts are
+pixel-identical at all four widths, including the season pages whose popovers
+changed (closed state renders the same). Chart pages differ in the chart area
+only, as expected from a different renderer; reviewed side by side. JS shipped
+(uncompressed): season pages 249 KB → 0; team pages 697 → 578 KB; stats
+640 → 582 KB. Gzipped the chart pages are a wash (about 200 KB either way:
+ECharts' core is 174 KB gzip before the chart types; the visualMap component is
+12 KB of that, aria 1 KB). Interaction checks in Chrome: every popover opens
+anchored to its trigger, flips above it near the bottom of the viewport, stays
+inside a 390px viewport, closes on Escape; chart tooltips render with the
+popover styling on all four charts; the island-mounted chart works; no console
+errors. Not testable here: Safari and Firefox (anchor positioning shipped in
+Safari 26 and Firefox 147; older browsers center the popover).
+
+**Pages preview, 2026-09-09.** `react-removal.nba-surprise-teams.pages.dev`
+built on the first push (no React deps to install went unnoticed by the image).
+Captured as `runs/2026-09-09-preview-react-removal` and compared with
+`runs/2026-09-08-preview-tooling`: same shape as the local comparison, seven
+pages pixel-identical, chart pages differ in the chart area; the CSS hash
+matches the local build while the script chunk hashes differ because the
+preview also bundles Sentry. The interaction script passes against the preview
+too. Its only console messages are Cloudflare's Web Analytics beacon being
+refused by CORS on the `pages.dev` hostname, which is not ours (the capture
+tool blocks third-party requests, which is why it never shows up there).
+
+**Deliberate deviations.** No popover arrow: Radix drew a 5px triangle that sat
+inside the popover's 12px glow. Y-axis tick intervals are ECharts' choice on the
+scatter (10 instead of 15) and pinned to 5 on the team chart.
+
 ## 2026-09-07 — Step 3: pnpm 11, Node 26, lefthook
 
 **What changed.** npm → pnpm 11.26.0, pinned with its integrity hash in

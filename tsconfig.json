@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "erasableSyntaxOnly": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
     "noImplicitReturns": false
   },
   "exclude": ["dist"],

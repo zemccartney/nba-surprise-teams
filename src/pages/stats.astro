@@ -6,12 +6,12 @@ import { getCollection, getEntry } from "astro:content";
 
 import type { TeamCode } from "../content-utils";
 
-import SurprisesByTeamChart from "../components/charts/surprises-by-team";
-import SurprisesPerSeasonChart from "../components/charts/surprises-per-season";
-import TeamSeasonScatterPlot from "../components/charts/team-season-scatter";
+import SurprisesByTeamChart from "../components/charts/surprises-by-team.astro";
+import SurprisesPerSeasonChart from "../components/charts/surprises-per-season.astro";
+import TeamSeasonScatterPlot from "../components/charts/team-season-scatter.astro";
 import Link from "../components/link.astro";
 import Logo from "../components/logo.astro";
-import Popover from "../components/popover";
+import Popover from "../components/popover.astro";
 import Table from "../components/table.astro";
 import * as ContentUtils from "../content-utils";
 import Subpage from "../layouts/subpage.astro";
@@ -305,7 +305,6 @@ for (const teamSeason of teamSeasons) {
     <section class="section-surprises-season">
       <h2 class="section-title">Surprises x Season</h2>
       <SurprisesPerSeasonChart
-        client:load
         data={surprisesPerSeason}
         latestSeasonYear={Number.parseInt(latestSeason.id, 10)}
       />
@@ -323,7 +322,7 @@ for (const teamSeason of teamSeasons) {
             </th>
             <th class="col-pace" scope="col">
               Pace
-              <Popover client:load>
+              <Popover id="top10-pace-popover">
                 <p class="popover-heading">Pace</p>
                 <p>
                   Current Projected Wins - Wins needed to surprise (x (10 for
@@ -375,12 +374,12 @@ for (const teamSeason of teamSeasons) {
 
     <section class="section-surprises-team">
       <h2 class="section-title">Surprises x Teams</h2>
-      <SurprisesByTeamChart client:visible data={surprisesByTeam} />
+      <SurprisesByTeamChart data={surprisesByTeam} />
     </section>
 
     <section class="section-scatter">
       <h2 class="section-title">Pace x Over/Under</h2>
-      <TeamSeasonScatterPlot client:visible data={scatterPoints} />
+      <TeamSeasonScatterPlot data={scatterPoints} />
     </section>
   </div>
 </Subpage>

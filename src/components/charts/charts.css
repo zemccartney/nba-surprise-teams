@@ -1,19 +1,10 @@
-/* Shared styles for Recharts SVG text labels */
-.chart-axis-label {
-  fill: var(--color-lime-500);
-  stroke: var(--color-lime-500);
-  font-family: var(--font-mono);
-  font-size: var(--text-xl);
-  line-height: var(--text-xl--line-height);
-  letter-spacing: 0.025em;
+/* Chart host: ECharts sizes itself to this box (was ResponsiveContainer) */
+.chart {
+  width: 100%;
+  height: 600px;
 }
 
-.chart-ref-label {
-  fill: var(--color-lime-500);
-  stroke: var(--color-lime-500);
-}
-
-/* Shared tooltip content styles */
+/* Tooltip content, rendered by the chart tooltip formatters */
 .tooltip-heading {
   margin-bottom: 0.25rem;
   font-weight: bold;
