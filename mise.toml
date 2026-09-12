@@ -1,0 +1,32 @@
+[settings]
+# Keep project tools ahead of inherited PATH additions (e.g. PNPM_HOME/bin).
+activate_aggressive = true
+pin = true
+lockfile = true
+locked_verify_provenance = true
+minimum_release_age = "7d"
+
+[tools]
+hk = "1.56.1"
+node = "26.8.1"
+pnpm = "12.3.4"
+
+[hooks]
+# Runs on every cd into the repo (requires `mise activate` in the shell, which
+# the developer must configure). Installs any missing pinned tools, then (re)installs the git
+# pre-commit hook so a fresh clone needs no manual step. --mise makes the hook
+# itself run through `mise x`. GUI clients still need mise on PATH.
+# Noninteractive bootstrap: mise install --locked && mise run setup.
+enter = ["mise install --locked", "mise x -- hk install --mise"]
+
+[tasks.check]
+description = "Run types, format, lint and tests across tracked files"
+run = "hk check --all --check"
+
+[tasks.setup]
+description = "Install project dependencies and git hooks after mise install --locked"
+run = ["pnpm install --frozen-lockfile", "hk install --mise"]
+
+[tasks.fix]
+description = "Run every check, applying fixes where a fixer exists"
+run = "hk fix --all"

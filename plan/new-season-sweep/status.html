@@ -661,17 +661,17 @@
           <div
             class="bar"
             role="img"
-            aria-label="13 of 36 items done, 3 blocked, 20 not started"
+            aria-label="14 of 37 items done, 3 blocked, 20 not started"
           >
-            <span class="seg-done" style="flex: 13"></span>
+            <span class="seg-done" style="flex: 14"></span>
             <span class="seg-blocked" style="flex: 3"></span>
             <span class="seg-open" style="flex: 20"></span>
           </div>
           <p class="tally">
-            <span class="k-done"><b>13</b> done and verified</span>
+            <span class="k-done"><b>14</b> done and verified</span>
             <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
             <span class="k-open"><b>20</b> not started</span>
-            <span>36 tracked</span>
+            <span>37 tracked</span>
           </p>
         </div>
       </header>
@@ -686,7 +686,7 @@
               >
             </li>
             <li>
-              <a href="#s1">1 · Foundations<span class="count">10/17</span></a>
+              <a href="#s1">1 · Foundations<span class="count">11/18</span></a>
             </li>
             <li>
               <a href="#s2">2 · Season prep<span class="count">1/4</span></a>
@@ -789,10 +789,16 @@
 
             <div class="brief-block">
               <h3>Toolchain</h3>
-              <p>Every shell call needs this prefix:</p>
-              <pre><code>eval "$(fnm env)"; fnm use &gt;/dev/null; export PATH="$HOME/Library/pnpm:$PATH"</code></pre>
+              <p>Bootstrap a trusted checkout with mise:</p>
+              <pre><code>mise trust
+mise install --locked
+mise run setup</code></pre>
               <p>
-                Node 26.8.1, pnpm 11.26.0. ESLint needs
+                Node 26.8.1, pnpm 12.3.4, hk 1.56.1; pinned in
+                <code>mise.toml</code> and <code>mise.lock</code>. Use
+                <code>mise run check</code> or prefix package commands with
+                <code>mise x --</code>. No fnm or manual PATH prefix. ESLint
+                still needs
                 <code>--flag unstable_native_nodejs_ts_config</code>.
               </p>
             </div>
@@ -806,7 +812,9 @@
                 <li><code>eslint-10</code></li>
                 <li><code>deps</code></li>
                 <li><code>trailing-slash</code></li>
-                <li class="tip"><code>astro-7</code></li>
+                <li><code>astro-7</code></li>
+                <li><code>svg-images</code></li>
+                <li class="tip"><code>mise-setup</code></li>
               </ul>
               <p>
                 Each is stacked on the one before it, so merging the tip takes
@@ -842,11 +850,12 @@
             <div class="flag">
               <span class="marker">[!]</span>
               <p>
-                <strong>Known local state.</strong> <code>package.json</code>
-                carries an uncommitted edit of Zack's own —
-                <code>wrangler types &amp;&amp;</code> prepended to the
-                <code>build</code> and <code>preview</code> scripts. Leave it
-                alone.
+                <strong>Deployment gate.</strong> Production still runs on
+                Pages. The Astro 7 stack needs the coordinated Workers cutover;
+                do not merge it into the current Pages build path alone.
+                <code>DEPLOY_ENABLED</code> remains gated off. The earlier
+                <code>wrangler types &amp;&amp;</code> edits were committed in
+                Step 9, not left as local changes.
               </p>
             </div>
           </section>
@@ -856,12 +865,13 @@
             <div class="section-head">
               <span class="section-num">01</span>
               <h2>Foundations</h2>
-              <span class="count">10 / 17 done</span>
+              <span class="count">11 / 18 done</span>
             </div>
             <p class="milestone">
               Milestone: the site renders exactly as it does on prod today, no
-              user-facing changes, ready to launch. All eight rounds are done
-              and pushed; none are merged.
+              user-facing changes, ready to launch. Rounds through Step 9 are
+              committed; Step 10's tooling cleanup is locally verified and
+              awaiting commit. The stacked branches are not merged.
             </p>
 
             <ul class="items">
@@ -959,7 +969,7 @@
               </li>
             </ul>
 
-            <p class="subhead">Still open after Step 9</p>
+            <p class="subhead">Follow-ups after Step 10</p>
             <ul class="items">
               <li class="item s-open">
                 <span class="marker">[ ]</span>
@@ -1055,8 +1065,7 @@
                     dev-smoke.mjs only counts &lt;img&gt;
                   </p>
                   <p class="item-note">
-                    The ECharts chart symbols come from
-                    <code>getImage()</code> and are not
+                    The ECharts chart symbols use imported SVG URLs and are not
                     <code>&lt;img&gt;</code>, so the check would not have caught
                     them breaking. Worth fixing regardless of the image
                     decision.
@@ -1091,6 +1100,23 @@
               </li>
             </ul>
 
+            <ul class="items">
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">Step 10 — mise, pnpm 12, hk</p>
+                  <p class="item-note">
+                    Branch <code>mise-setup</code> on <code>svg-images</code>.
+                    Locked toolchain locally and in the gated deploy workflow;
+                    staged-file auto-fixes, whole-project types and tests. Clean
+                    install/build, dev smoke and partial-staging success and
+                    failure paths verified. See <code>review.md</code> for
+                    bootstrap, PATH precedence and the remaining test-store gap.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
             <p class="subhead">Zack's exhaustive review of Foundations</p>
             <ul class="items">
               <li class="item s-open">
@@ -1098,8 +1124,9 @@
                 <div>
                   <p class="item-title">Work review.md end to end</p>
                   <p class="item-note">
-                    Steps 4 through 8 each have a manual test checklist that has
-                    not been ticked. Steps 1 to 3 were reviewed as they landed.
+                    Steps 4 through 10 each have a manual test checklist that
+                    has not been ticked. Steps 1 to 3 were reviewed as they
+                    landed.
                   </p>
                 </div>
               </li>
