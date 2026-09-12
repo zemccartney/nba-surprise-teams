@@ -1,0 +1,30 @@
+amends "package://github.com/jdx/hk/releases/download/v1.56.1/hk@1.56.1#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.56.1/hk@1.56.1#/Builtins.pkl"
+// Using a coding agent? See https://hk.jdx.dev/agents
+
+local linters = new Mapping<String, Step> {
+    ["prettier"] = Builtins.prettier
+    ["lint"] = {
+      glob = "**/*.{js,mjs,cjs,ts,astro,json}"
+      check = "pnpm exec eslint --flag unstable_native_nodejs_ts_config --no-warn-ignored"
+      fix = "pnpm exec eslint --flag unstable_native_nodejs_ts_config --no-warn-ignored --fix"
+    }
+    ["typecheck"] = {
+      check = "pnpm exec astro check"
+    }
+}
+
+hooks {
+    ["pre-commit"] {
+        fix = true
+        stash = "git"
+        steps = linters
+    }
+    ["fix"] {
+        fix = true
+        steps = linters
+    }
+    ["check"] {
+        steps = linters
+    }
+}
