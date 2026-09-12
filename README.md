@@ -50,6 +50,22 @@ meet day to day:
 `plan/baseline/` is its own pnpm project (own `pnpm-workspace.yaml`) so the
 capture tooling's dependencies stay out of the site's lockfile and build.
 
+### Held back on purpose
+
+`pnpm run deps` will keep offering these; each moves with the thing named.
+
+- `prettier` (exact 3.6.2): 3.7+ with `prettier-plugin-astro` 0.14 reflows
+  paragraphs in `.astro` files past `printWidth`. Move to 3.9 together with
+  `prettier-plugin-astro` 1.0 (a rewrite on the Astro 7 compiler), as one
+  formatting commit.
+- `@sentry/astro` and `@sentry/cloudflare` (10.22): from 10.40 the integration
+  wraps the Cloudflare worker entry itself. Moves with the Workers adapter.
+- `sharp` (0.34.x): must satisfy Astro's own optional `sharp` range, or two
+  copies get installed and Astro uses its own. Moves with Astro.
+- `vite` (6.4.1): only here for `loadEnv` in `astro.config.mjs`; must match the
+  Vite major Astro brings. Moves with Astro.
+- `typescript` (5.9): `astro check` supports 5 and 6, not 7. Moves with Astro.
+
 ## Git hooks
 
 [lefthook](https://lefthook.dev), configured in `lefthook.yml`, installed by

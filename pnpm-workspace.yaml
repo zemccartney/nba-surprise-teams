@@ -38,9 +38,15 @@ allowBuilds:
   unrs-resolver: false
   workerd: false
 
-# eslint-plugin-jsx-a11y declares peer eslint ≤ 9 but runs fine on ESLint 10
-# (uses none of the removed context APIs; eslint-plugin-astro 3 wraps it for
-# .astro templates, verified 2026-09-09). Silence the unmet-peer warning.
+# Peer ranges known to be wrong in practice. Each entry silences one
+# unmet-peer warning on install.
 peerDependencyRules:
   allowedVersions:
+    # eslint-plugin-jsx-a11y declares peer eslint ≤ 9 but runs fine on ESLint 10
+    # (uses none of the removed context APIs; eslint-plugin-astro 3 wraps it for
+    # .astro templates, verified 2026-09-09).
     "eslint-plugin-jsx-a11y>eslint": "10"
+    # wrangler ≥ 4.129 lists @cloudflare/workers-types 5 as an optional peer;
+    # @astrojs/cloudflare 12 still brings 4. wrangler doesn't use the types
+    # itself. Drop with the adapter 14 move.
+    "wrangler>@cloudflare/workers-types": "4"

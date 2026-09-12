@@ -136,3 +136,34 @@ Active LTS; **Maintenance from 2026-10-20** (Node 26 becomes LTS 2026-10-28). La
   `astro check` flagged `test:`). `teardownTimeout` and `watchTriggerPatterns`
   are unchanged. `vitest/no-conditional-expect` flagged one test; rewritten as
   a filter plus a loop.
+
+## What actually happened (2026-09-09, deps round; see log.md Step 6)
+
+- `tsx` is gone: `node archiver/script.ts` runs under Node 26's type stripping
+  (the archiver is `erasableSyntaxOnly` code). Dry run with a bogus season id
+  boots the Astro dev server and gets the expected 404 from the archive
+  endpoint.
+- npm-check-updates 19 → 23: ESM-only, Node ≥ 22, `--format group` is the
+  default now (dropped from the `deps` script); `-i`, `--cooldown`, `-p pnpm`
+  unchanged. concurrently 9 → 10: ESM-only, Node ≥ 22, `--name-separator`
+  removed (unused here), prefix colors default to automatic.
+- Within-range bumps: astro 5.14.1 → 5.18.2, @astrojs/cloudflare 12.6.13,
+  @astrojs/check 0.9.10, wrangler 4.41 → 4.129.0 (4.129.1 and 4.130.0 were
+  inside the 3-day `minimumReleaseAge`), fontsource packages 5.3.0.
+- **Held back**, reasons in the README's "Held back on purpose" list: prettier
+  3.9.6 (with prettier-plugin-astro 0.14.1 it fills paragraphs in `.astro`
+  files to 83–87 columns; `printWidth` is 80), @sentry/\* 10.73 (10.40+ adds a
+  Vite plugin that wraps the SSR entry with `withSentry` whenever the wrangler
+  config has no `pages_build_output_dir`, which is our case even on Pages;
+  unverifiable without the Sentry token, and the Workers round rewrites it),
+  sharp 0.35 (astro 5.18 optional-depends on `^0.34.0`), vite 6.4.3 and
+  TypeScript 6/7 (Astro 7 round).
+- prettier-plugin-astro 1.0.0 was published 2026-09-08, inside the release
+  age; it needs the Astro 7 compiler anyway.
+- wrangler ≥ 4.129 lists `@cloudflare/workers-types` 5 as an optional peer
+  while adapter 12 brings 4: `peerDependencyRules.allowedVersions` entry,
+  to drop with adapter 14.
+- Astro 5.18 emits one CSS file where 5.14 emitted two: the 4.1 KB team-page
+  stylesheet now lands under Vite's 4 KB `assetsInlineLimit` and is inlined
+  into team pages (`build.inlineStylesheets: "auto"`). Same bytes, different
+  delivery: HTML +4 KB on team pages, one fewer request.

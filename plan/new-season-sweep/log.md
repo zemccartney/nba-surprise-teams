@@ -3,6 +3,77 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-09 — Step 6: dependency round (tsx out, ncu 23, in-range bumps)
+
+**What changed.** `tsx` is gone: `archive:all` and `archive:latest` run
+`node archiver/script.ts` (Node 26 strips the types; the archiver is
+erasable-syntax TypeScript, `erasableSyntaxOnly` has been on since Step 3).
+npm-check-updates 19 → 23 and concurrently 9 → 10, both ESM-only and Node ≥
+22; ncu groups output by default now, so `--format group` left the `deps`
+script. In-range bumps: astro 5.14.1 → 5.18.2, @astrojs/cloudflare 12.6.10 →
+12.6.13, @astrojs/check 0.9.5 → 0.9.10, wrangler 4.41.0 → 4.129.0 (4.129.1
+and 4.130.0 are inside the 3-day release age), both fontsource packages 5.3.0,
+and a `pnpm update` pass over the transitive tree. Held back, each with its
+reason in the README's new "Held back on purpose" list: prettier (pinned
+3.6.2), @sentry/astro and @sentry/cloudflare (10.22), sharp (0.34.4), vite
+(6.4.1), TypeScript (5.9). `pnpm-workspace.yaml` allows wrangler's optional
+`@cloudflare/workers-types` 5 peer against the 4 the adapter brings. Process
+change for the batch: `review-step4.md` became the running `review.md`, one
+section per round, Step 5 added from its chat report.
+
+**Found on the way:**
+
+1. `@sentry/astro` ≥ 10.40 decides "Workers, not Pages" by looking for
+   `pages_build_output_dir` in the wrangler config. Ours is local-only and has
+   none, so 10.73 would have added its `withSentry` wrapper around the SSR
+   entry of the Pages build too, next to the manual `wrapRequestHandler`
+   middleware. That only shows in a build with the Sentry token and can't be
+   checked here; held at 10.22 until the round that changes the adapter.
+2. prettier 3.9.6 with prettier-plugin-astro 0.14.1 refills two paragraphs of
+   `about.astro` to 83–87 columns (`printWidth` is 80); the same lines were
+   within 80 under 3.6.2. prettier-plugin-astro 1.0.0 (a rewrite on the Astro
+   7 compiler, published 2026-09-08, inside the release age) is where the
+   whitespace handling changes on purpose, so both move together later.
+3. Astro 5.18 emits one CSS file where 5.14 emitted two: the shared stylesheet
+   (17,312 bytes, 8 fewer) and, on the team pages, nothing else, because the
+   4,118-byte team-page stylesheet now minifies to under Vite's 4 KB
+   `assetsInlineLimit` and `inlineStylesheets: "auto"` inlines it. Same
+   rules, delivered in the HTML: team pages +4,029 bytes of HTML, −4,126 of
+   CSS, one request fewer. The CSS minifier also drops a few more spaces:
+   inline `<style>` blocks shrink by 12 to 32 bytes per page.
+4. On the 269 team pages the pace chart's `<script type="module">` tag moved
+   from after the chart's JSON props block to the top of the team-stats
+   component. Module scripts are deferred and the chart mounts on an
+   IntersectionObserver, so nothing observable changes; noted so the HTML
+   diff isn't a surprise.
+5. Astro 5.18 changed the suffix it appends to processed image names
+   (`bat.CRGm1UJN_Z1Nf8JG.svg` → `…_Z2gt7Q3.svg`; the content hash before the
+   underscore is unchanged), so every page's HTML differed until the
+   comparison normalized that suffix as well as the JS/CSS hashes. The
+   normalizer is now a small Python script (`htmldiff.py` in the session
+   scratchpad; classifies each page as identical, whitespace-only, stylesheet
+   delivery, script placement, or other) rather than a sed expression.
+6. No page on the site carries a server island right now: the 2026 season has
+   no team seasons yet, so `/2026` isn't generated and the home page shows the
+   countdown. The baseline capture can't exercise islands until the odds land
+   (or with a scratch team season; the next round does that).
+
+**Verification.** `pnpm run build` green, 47 s locally. Output vs the
+eslint-10 build: 68 of 504 files identical by hash; the rest differ by the
+image suffix (5) and the CSS chunking (3); `_routes.json` lists the same
+routes in a different order; five `_worker.js` modules changed (astro and
+adapter internals); the ECharts chunk is 383 bytes larger (bundler output).
+HTML, hashes normalized: 269 team pages differ by the inlined stylesheet and
+the moved script tag only, the other 34 pages by whitespace inside their
+inline `<style>` blocks only; no page differs in any other way.
+Runtime capture `runs/2026-09-09-deps-local` vs
+`runs/2026-09-09-eslint-10-local`: 44/44 screenshots pixel-identical; team
+pages +4,029 B HTML / −4,126 B CSS, every other page −8 B CSS; popovers and
+chart tooltips pass the interaction script; 0 console errors. Archiver dry
+run: `node archiver/script.ts 2099` boots the Astro dev server on 4322 and
+reports the endpoint's 404 for the unknown season, which is the whole script
+path minus the NBA fetch.
+
 ## 2026-09-09 — Step 5: ESLint 10, `eslint.config.ts`, vitest 5, import-x
 
 **What changed.** ESLint 9 → 10.10 with every plugin on its current major:
