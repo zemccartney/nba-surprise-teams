@@ -102,10 +102,10 @@ export const abbreviateSeasonRange = (
 ) => {
   if (compact) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return `'${season.data.startDate.split("-")[0]!.slice(2)}-${season.data.endDate.split("-")[0]!.slice(2)}`;
+    return `'${season.data.startDate.split("-", 1)[0]!.slice(2)}-${season.data.endDate.split("-", 1)[0]!.slice(2)}`;
   }
 
-  return `${season.data.startDate.split("-")[0]} - ${season.data.endDate.split("-")[0]}`;
+  return `${season.data.startDate.split("-", 1)[0]} - ${season.data.endDate.split("-", 1)[0]}`;
 };
 
 // archiving: games are present only in complete sets, only for complete seasons

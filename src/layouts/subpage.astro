@@ -12,7 +12,7 @@ const { class: className, ...layoutProps } = Astro.props;
     currentPath = currentPath.slice(0, -1);
   }
   const navLink = document.querySelector(
-    `nav .NBASTT-Link[href="${currentPath}"]`,
+    `nav .NBASTT-Link[href="${CSS.escape(currentPath)}"]`,
   );
   navLink?.classList.add("active");
 </script>

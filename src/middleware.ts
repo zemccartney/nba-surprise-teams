@@ -5,9 +5,9 @@ import { defineMiddleware } from "astro:middleware";
 export const onRequest = defineMiddleware((ctx, next) => {
   // middleware are called during static page generation, too; since building occurs in a node
   // env (not a cf env) and we wouldn't need sentry at buildtime anyway, we passthrough if prerendering
-  const whenServer = !ctx.isPrerendered;
+  const isServer = !ctx.isPrerendered;
 
-  if (!whenServer) {
+  if (!isServer) {
     return next();
   }
   const requestHandlerOptions = {

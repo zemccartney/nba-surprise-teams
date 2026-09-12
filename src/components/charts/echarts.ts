@@ -170,7 +170,7 @@ export const mountCharts = <Props>(
   build: (props: Props, theme: Theme) => ChartOption,
 ) => {
   for (const host of document.querySelectorAll<HTMLElement>(
-    `[data-chart="${kind}"]`,
+    `[data-chart="${CSS.escape(kind)}"]`,
   )) {
     const payload = host.querySelector(
       'script[type="application/json"]',
@@ -182,10 +182,12 @@ export const mountCharts = <Props>(
 
     const props = JSON.parse(payload) as Props;
     const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        observer.disconnect();
-        void render(host, props, build);
+      if (entries.every((entry) => !entry.isIntersecting)) {
+        return;
       }
+
+      observer.disconnect();
+      void render(host, props, build);
     });
     observer.observe(host);
   }
@@ -210,11 +212,11 @@ const render = async <Props>(
     ...build(props, theme),
   });
 
-  let initial = true;
+  let isInitial = true;
   new ResizeObserver(() => {
     // The observer fires once on observe(); the chart is already sized for that
-    if (initial) {
-      initial = false;
+    if (isInitial) {
+      isInitial = false;
       return;
     }
     chart.resize();

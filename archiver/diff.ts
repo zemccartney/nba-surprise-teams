@@ -56,8 +56,14 @@ const list = (items: string[]): string => {
 const beforeById = new Map(before.map((game) => [game.id, game]));
 const afterById = new Map(after.map((game) => [game.id, game]));
 
-const added = [...afterById.keys()].filter((id) => !beforeById.has(id));
-const removed = [...beforeById.keys()].filter((id) => !afterById.has(id));
+const added = afterById
+  .keys()
+  .filter((id) => !beforeById.has(id))
+  .toArray();
+const removed = beforeById
+  .keys()
+  .filter((id) => !afterById.has(id))
+  .toArray();
 
 let firstOrderChange = -1;
 for (const [index, game] of before.entries()) {

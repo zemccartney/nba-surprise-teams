@@ -34,4 +34,13 @@ allowBuilds:
   esbuild: false
   lefthook: false
   sharp: false
+  # unrs-resolver (eslint-import-resolver-typescript): napi-postinstall, same shape
+  unrs-resolver: false
   workerd: false
+
+# eslint-plugin-jsx-a11y declares peer eslint ≤ 9 but runs fine on ESLint 10
+# (uses none of the removed context APIs; eslint-plugin-astro 3 wraps it for
+# .astro templates, verified 2026-09-09). Silence the unmet-peer warning.
+peerDependencyRules:
+  allowedVersions:
+    "eslint-plugin-jsx-a11y>eslint": "10"

@@ -57,6 +57,20 @@ capture tooling's dependencies stay out of the site's lockfile and build.
 ESLint on the staged files, in parallel. `pnpm exec lefthook run pre-commit`
 runs it by hand; `LEFTHOOK=0 git commit` skips it.
 
+## Linting
+
+The ESLint config is TypeScript (`eslint.config.ts`), loaded through Node's own
+type stripping. ESLint 10 still gates that behind a feature flag, so every
+invocation carries `--flag unstable_native_nodejs_ts_config`: the `lint`
+scripts, `lefthook.yml`, and `.vscode/settings.json` (`eslint.options.flags`).
+Without it ESLint fails with "The 'jiti' library is required for loading
+TypeScript configuration files". Rules that are turned off
+have the reason in a comment next to them in the config; that's the place to
+flip one. `import-x/no-extraneous-dependencies` is the rule that catches an
+import of a package that isn't declared in `package.json` (the "No hoisting"
+failure mode above), and `import-x/no-unresolved` catches a path that doesn't
+exist.
+
 ## Maintenance
 
 see [MAINTENANCE](./MAINTENANCE.md)

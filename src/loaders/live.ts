@@ -46,7 +46,7 @@ const includesCandidateTeam = (
 // gameDate format: "10/04/2024 00:00:00"
 const toYYYYMMDD = (gameDate: string) => {
   // @ts-expect-error : "Object possibly undefined" Not sure why index type of split result is string | undefined
-  const [mm, dd, yyyy] = gameDate.split(" ")[0].split("/");
+  const [mm, dd, yyyy] = gameDate.split(" ", 1)[0].split("/", 3);
   return `${yyyy}-${mm}-${dd}`;
 };
 

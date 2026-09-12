@@ -38,7 +38,7 @@ const teamSeasons = await getCollection("teamSeasons", (entry) => {
   }
 });
 
-/* All-time Top 10 Table */
+// All-time Top 10 Table
 
 const paceArchive = [];
 for (const teamSeason of teamSeasons) {
@@ -94,9 +94,9 @@ for (const paceEntry of paceTop10) {
   });
 }
 
-/* END All-time Top 10 Table */
+// END All-time Top 10 Table
 
-/* Surprises per Season chart */
+// Surprises per Season chart
 
 const surprisesPerSeason: ComponentProps<
   typeof SurprisesPerSeasonChart
@@ -150,9 +150,9 @@ for (const season of archivedSeasons) {
   surprisesPerSeason.push(datapoint);
 }
 
-/* END Surprises per Season chart */
+// END Surprises per Season chart
 
-/* Surprises by Team chart */
+// Surprises by Team chart
 
 const surprisesByTeam: ComponentProps<typeof SurprisesByTeamChart>["data"] = [];
 const teams = await getCollection("teams");
@@ -160,16 +160,19 @@ const teams = await getCollection("teams");
 for (const team of teams) {
   const teamHistory = await ContentUtils.getTeamHistory(team.data.id);
 
-  if (teamHistory) {
-    const histResolvedLogos = [];
+  let datapoint: (typeof surprisesByTeam)[number];
+  let seasonsByTeam: typeof teamSeasons;
 
+  if (teamHistory) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const currentTeamId = teamHistory.at(-1)!.teamId;
-    const teamIds = new Set<TeamCode>();
 
     if (surprisesByTeam.some((point) => point.teamId === currentTeamId)) {
       continue;
     }
+
+    const histResolvedLogos = [];
+    const teamIds = new Set<TeamCode>();
 
     for (const hist of teamHistory) {
       teamIds.add(hist.teamId);
@@ -183,7 +186,7 @@ for (const team of teams) {
       });
     }
 
-    const datapoint: (typeof surprisesByTeam)[number] = {
+    datapoint = {
       // @ts-expect-error: Don't feel like wrestling with TS here
       history: histResolvedLogos,
       name: team.data.name,
@@ -192,36 +195,15 @@ for (const team of teams) {
       teamId: currentTeamId,
     };
 
-    const seasonsByTeam = teamSeasons.filter(({ data }) => {
+    seasonsByTeam = teamSeasons.filter(({ data }) => {
       return teamIds.has(data.team.id);
     });
-
-    for (const teamSeason of seasonsByTeam) {
-      // calculateTeamRecord also filters input games by specified team;
-      // could have repeated here, but not strictly necessary
-      const gamesInSeason = games.filter(({ data }) => {
-        return data.seasonId === teamSeason.data.season.id;
-      });
-
-      const record = ContentUtils.calculateTeamRecord(
-        teamSeason.data.team.id,
-        gamesInSeason.map((game) => game.data),
-      );
-      const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
-      if (isSurpriseTeam) {
-        datapoint.numSurprised += 1;
-      } else {
-        datapoint.numEliminated += 1;
-      }
-    }
-
-    surprisesByTeam.push(datapoint);
   } else {
     const img = await getImage({
       src: ContentUtils.getTeamLogo(team.data.id),
     });
 
-    const datapoint: (typeof surprisesByTeam)[number] = {
+    datapoint = {
       logoSrc: img.src,
       name: team.data.name,
       numEliminated: 0,
@@ -229,36 +211,36 @@ for (const team of teams) {
       teamId: team.data.id,
     };
 
-    const seasonsByTeam = teamSeasons.filter(({ data }) => {
+    seasonsByTeam = teamSeasons.filter(({ data }) => {
       return data.team.id === team.id;
     });
-
-    for (const teamSeason of seasonsByTeam) {
-      // calculateTeamRecord also filters input games by specified team;
-      // could have repeated here, but not strictly necessary
-      const gamesInSeason = games.filter(({ data }) => {
-        return data.seasonId === teamSeason.data.season.id;
-      });
-
-      const record = ContentUtils.calculateTeamRecord(
-        teamSeason.data.team.id,
-        gamesInSeason.map((game) => game.data),
-      );
-      const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
-      if (isSurpriseTeam) {
-        datapoint.numSurprised += 1;
-      } else {
-        datapoint.numEliminated += 1;
-      }
-    }
-
-    surprisesByTeam.push(datapoint);
   }
+
+  for (const teamSeason of seasonsByTeam) {
+    // calculateTeamRecord also filters input games by specified team;
+    // could have repeated here, but not strictly necessary
+    const gamesInSeason = games.filter(({ data }) => {
+      return data.seasonId === teamSeason.data.season.id;
+    });
+
+    const record = ContentUtils.calculateTeamRecord(
+      teamSeason.data.team.id,
+      gamesInSeason.map((game) => game.data),
+    );
+    const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
+    if (isSurpriseTeam) {
+      datapoint.numSurprised += 1;
+    } else {
+      datapoint.numEliminated += 1;
+    }
+  }
+
+  surprisesByTeam.push(datapoint);
 }
 
-/* END Surprises by Team chart */
+// END Surprises by Team chart
 
-/* Team Season scatterplot */
+// Team Season scatterplot
 
 const scatterPoints: ComponentProps<typeof TeamSeasonScatterPlot>["data"] = [];
 
@@ -293,7 +275,7 @@ for (const teamSeason of teamSeasons) {
   });
 }
 
-/* END Team Season scatterplot */
+// END Team Season scatterplot
 ---
 
 <Subpage

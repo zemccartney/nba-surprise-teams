@@ -64,7 +64,7 @@ await mkdir(Path.join(outDir, "html"), { recursive: true });
 await mkdir(Path.join(outDir, "screens"), { recursive: true });
 
 const origin = new URL(base).origin;
-const sameOrigin = (u) => new URL(u).origin === origin;
+const isSameOrigin = (u) => new URL(u).origin === origin;
 const sum = (list) => list.reduce((n, a) => n + (a.bytes ?? 0), 0);
 
 const slugify = (p) =>
@@ -83,7 +83,7 @@ const fetchWithChain = async (url) => {
     });
     if (res.status >= 300 && res.status < 400 && res.headers.get("location")) {
       chain.push({ status: res.status, url: current });
-      current = new URL(res.headers.get("location"), current).toString();
+      current = new URL(res.headers.get("location"), current).href;
       continue;
     }
     return { chain, res, url: current };
@@ -114,23 +114,27 @@ const fetchAsset = async (url) => {
 };
 
 const inventory = (html, pageUrl) => {
-  const scripts = [...html.matchAll(/<script\b([^>]*)>/g)].map((m) => m[1]);
+  const scripts = html
+    .matchAll(/<script\b([^>]*)>/g)
+    .map((m) => m[1])
+    .toArray();
   const external = scripts
     .map((attrs) => attrs.match(/\bsrc=["']([^"']+)["']/)?.[1])
     .filter(Boolean)
-    .map((src) => new URL(src, pageUrl).toString());
+    .map((src) => new URL(src, pageUrl).href);
   const inline = scripts.length - external.length;
-  const stylesheets = [
-    ...html.matchAll(/<link\b[^>]*rel=["']stylesheet["'][^>]*>/g),
-  ]
+  const stylesheets = html
+    .matchAll(/<link\b[^>]*rel=["']stylesheet["'][^>]*>/g)
     .map((m) => m[0].match(/\bhref=["']([^"']+)["']/)?.[1])
     .filter(Boolean)
-    .map((href) => new URL(href, pageUrl).toString());
+    .map((href) => new URL(href, pageUrl).href)
+    .toArray();
   const inlineStyles = (html.match(/<style\b/g) ?? []).length;
-  const islands = [
-    ...html.matchAll(/fetch\('([^']*_server-islands[^']*)'\)/g),
-  ].map((m) => new URL(m[1], pageUrl).toString());
-  const hydrated = [...html.matchAll(/<astro-island\b[^>]*>/g)].length;
+  const islands = html
+    .matchAll(/fetch\('([^']*_server-islands[^']*)'\)/g)
+    .map((m) => new URL(m[1], pageUrl).href)
+    .toArray();
+  const hydrated = html.matchAll(/<astro-island\b[^>]*>/g).toArray().length;
   return { external, hydrated, inline, inlineStyles, islands, stylesheets };
 };
 
@@ -157,13 +161,13 @@ for (const pagePath of pages) {
   const scriptAssets = [];
   for (const u of inv.external) {
     scriptAssets.push(
-      sameOrigin(u) ? await fetchAsset(u) : { external: true, url: u },
+      isSameOrigin(u) ? await fetchAsset(u) : { external: true, url: u },
     );
   }
   const styleAssets = [];
   for (const u of inv.stylesheets) {
     styleAssets.push(
-      sameOrigin(u) ? await fetchAsset(u) : { external: true, url: u },
+      isSameOrigin(u) ? await fetchAsset(u) : { external: true, url: u },
     );
   }
   const islandResponses = [];
@@ -210,7 +214,9 @@ for (const pagePath of pages) {
         // Deterministic screenshots: third-party embeds (Apple Podcasts on /about)
         // paint on their own schedule. Pass --third-party to load them.
         await page.route("**/*", (route) =>
-          sameOrigin(route.request().url()) ? route.continue() : route.abort(),
+          isSameOrigin(route.request().url())
+            ? route.continue()
+            : route.abort(),
         );
       }
       const consoleMessages = [];
@@ -238,7 +244,7 @@ for (const pagePath of pages) {
       const pendingBodies = [];
       page.on("response", (res) => {
         const type = res.request().resourceType();
-        const bucket = sameOrigin(res.url()) ? resources : thirdParty;
+        const bucket = isSameOrigin(res.url()) ? resources : thirdParty;
         const entry = (bucket[type] ??= { bytes: 0, count: 0, urls: [] });
         entry.count += 1;
         if (["document", "script", "stylesheet"].includes(type)) {

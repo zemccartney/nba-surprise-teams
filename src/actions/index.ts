@@ -50,7 +50,6 @@ export const server = {
         // on fetching data, we want only the games scheduled through the current date i.e. possibly finished
         // so, we need the yyyy-mm-dd representation of the current data in EST, regardless of the server's time zone
         const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
-        const now = Date.now();
 
         // TODO Document; needed to handle when season-in-waiting i.e. season and over/unders for upcoming set, but season not started (see home page)
         // Build assumption: allowable / expected that season will be ready data-wise prior to season start date, given
@@ -61,6 +60,8 @@ export const server = {
             games: [],
           };
         }
+
+        const now = Date.now();
 
         const gamesCache = await astroCtx.locals.runtime.env.GAMES_KV.get<{
           data: LoaderResponse;

@@ -14,7 +14,7 @@ if (!latestSeason) {
 const teamsInSeason = await ContentUtils.getTeamsInSeason(latestSeason.id);
 const isSeasonReady = teamsInSeason.length > 0;
 
-const [, mm, dd] = latestSeason.data.startDate.split("-");
+const [, mm, dd] = latestSeason.data.startDate.split("-", 3);
 ---
 
 <Layout>
