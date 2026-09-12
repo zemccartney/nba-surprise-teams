@@ -4,9 +4,6 @@ import type { CollectionEntry } from "astro:content";
 import { z } from "astro/zod";
 import { getCollection, getEntry } from "astro:content";
 import Assert from "node:assert/strict";
-import Fs from "node:fs/promises";
-import Path from "node:path";
-import Url from "node:url";
 
 import type { TeamCode } from "../src/content-utils";
 
@@ -141,6 +138,10 @@ export const GET: APIRoute = async ({ params }) => {
 
 interface ProcessResult {
   failed: { error: string; seasonId: CollectionEntry<"seasons">["id"] }[];
+  // Handed back to the caller rather than written here: on-demand routes run
+  // inside workerd (adapter 14), which has no filesystem to write. archiver/
+  // script.ts merges these into src/content/games.json from node.
+  games: ContentUtils.GameData[];
   processed: string[];
   totalGames: number;
 }
@@ -215,12 +216,19 @@ async function loadSeasonFromNBAAPI(
   const result = await res.json();
   const parsed = SeasonDataSchema.parse(result);
 
+  // Zod 4 types a .nonempty() array as T[], not [T, ...T[]], so the first
+  // element needs a guard even though the schema rejects an empty array.
+  const [resultSet] = parsed.resultSets;
+  if (!resultSet) {
+    throw new Error(`[${seasonId}] NBA API returned no result sets`);
+  }
+
   const seasonTeams = await ContentUtils.getTeamsInSeason(seasonId);
   const seasonTeamCodes = seasonTeams.map((team) => team.data.id);
 
   const fIdx: Record<string, number> = {};
-  for (let i = 0; i < parsed.resultSets[0].headers.length; i++) {
-    const header = parsed.resultSets[0].headers[i];
+  for (let i = 0; i < resultSet.headers.length; i++) {
+    const header = resultSet.headers[i];
     if (
       header &&
       ["GAME_DATE", "MATCHUP", "PTS", "TEAM_ABBREVIATION"].includes(header)
@@ -239,7 +247,7 @@ async function loadSeasonFromNBAAPI(
   }
   gameCounts = gameCounts as Record<TeamCode, number>;
 
-  const rows = parsed.resultSets[0].rowSet;
+  const rows = resultSet.rowSet;
   for (const game of rows) {
     // must parse given that each game record identifies only one team's participation
 
@@ -389,11 +397,10 @@ async function processSeasons(
 ): Promise<ProcessResult> {
   const results: ProcessResult = {
     failed: [],
+    games: [],
     processed: [],
     totalGames: 0,
   };
-
-  const fetchedGames: ContentUtils.GameData[] = [];
 
   for (let i = 0; i < seasonIds.length; i += concurrencyLimit) {
     const batch = seasonIds.slice(i, i + concurrencyLimit);
@@ -413,7 +420,7 @@ async function processSeasons(
       if (result.status === "fulfilled") {
         results.processed.push(seasonId);
         results.totalGames += result.value.games.length;
-        fetchedGames.push(...result.value.games);
+        results.games.push(...result.value.games);
         console.log(
           `[Archive API] ✓ Processed season ${seasonId}: ${result.value.games.length} games`,
         );
@@ -430,43 +437,5 @@ async function processSeasons(
     }
   }
 
-  // Write successful results to games file
-  if (results.processed.length > 0) {
-    await updateGamesFile(fetchedGames, results.processed);
-  }
-
   return results;
-}
-
-async function updateGamesFile(
-  fetchedGames: ContentUtils.GameData[],
-  processedSeasonIds: string[],
-): Promise<void> {
-  const __filename = Url.fileURLToPath(import.meta.url);
-  const projectRoot = Path.dirname(Path.dirname(__filename));
-  const gamesFile = Path.join(projectRoot, "src/content/games.json");
-
-  const existingGames = JSON.parse(
-    await Fs.readFile(gamesFile, "utf8"),
-  ) as ContentUtils.GameData[];
-
-  // Filter out games from processed seasons
-  const filteredGames = existingGames.filter(
-    (game) => !processedSeasonIds.includes(game.seasonId),
-  );
-
-  // Combine existing games (minus processed seasons) with newly fetched games
-  const allGames = [...filteredGames, ...fetchedGames].toSorted((a, b) => {
-    // Sort by playedOn date first, then by game ID for stability
-    const dateCompare = a.playedOn.localeCompare(b.playedOn);
-    return dateCompare === 0 ? a.id.localeCompare(b.id) : dateCompare;
-  });
-
-  await Fs.writeFile(gamesFile, JSON.stringify(allGames), {
-    encoding: "utf8",
-  });
-
-  console.log(
-    `[Archive API] Updated games file with ${fetchedGames.length} new games from ${processedSeasonIds.length} seasons`,
-  );
 }

@@ -1,7 +1,8 @@
 import * as Sentry from "@sentry/cloudflare";
+import { z } from "astro/zod";
 import { ActionError, defineAction } from "astro:actions";
 import { getEntry } from "astro:content";
-import { z } from "astro:schema";
+import { env } from "cloudflare:workers";
 
 import type { LoaderResponse } from "../content-utils";
 
@@ -35,7 +36,7 @@ export const server = {
       seasonId: z.string(),
     }),
     // eslint-disable-next-line perfectionist/sort-objects
-    handler: async (input, astroCtx): Promise<LoaderResponse> => {
+    handler: async (input): Promise<LoaderResponse> => {
       try {
         const season = await getEntry("seasons", input.seasonId);
 
@@ -63,7 +64,7 @@ export const server = {
 
         const now = Date.now();
 
-        const gamesCache = await astroCtx.locals.runtime.env.GAMES_KV.get<{
+        const gamesCache = await env.GAMES_KV.get<{
           data: LoaderResponse;
           id: string;
         }>(season.data.id.toString(), "json");
@@ -95,7 +96,7 @@ export const server = {
           const refreshed = await LiveLoader();
 
           // expiration without eviction: keep data around as a fallback,
-          await astroCtx.locals.runtime.env.GAMES_KV.put(
+          await env.GAMES_KV.put(
             season.id.toString(),
             JSON.stringify({
               data: refreshed,

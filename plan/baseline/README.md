@@ -63,6 +63,18 @@ three on 2026-09-09). When that happens, serve the build with
 `404.html` with a 404, which is what Cloudflare does for a prerendered site.
 Capture both sides through the same server so the comparison stays honest.
 
+## dev-smoke.mjs
+
+`capture.mjs` only ever sees built output, so it says nothing about
+`astro dev`. Since adapter 14 the two environments differ enough that a config
+can build perfectly and serve nothing in dev, which is how a round shipped with
+every image broken under `pnpm start`. Start the dev server, then run
+`node plan/baseline/dev-smoke.mjs --base http://localhost:4321`. It loads seven
+pages in a real browser, scrolls each one so lazy images request, and exits
+non-zero on an image that never decoded, a console error, a failed request, or
+any response at 400 or above. Run it in any round that touches dev, the
+adapter, or images.
+
 Known, expected deltas vs prod:
 
 - Prod pages carry ~150 KB more JS: the Sentry client SDK, bundled only when

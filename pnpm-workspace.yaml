@@ -46,7 +46,6 @@ peerDependencyRules:
     # (uses none of the removed context APIs; eslint-plugin-astro 3 wraps it for
     # .astro templates, verified 2026-09-09).
     "eslint-plugin-jsx-a11y>eslint": "10"
-    # wrangler ≥ 4.129 lists @cloudflare/workers-types 5 as an optional peer;
-    # @astrojs/cloudflare 12 still brings 4. wrangler doesn't use the types
-    # itself. Drop with the adapter 14 move.
-    "wrangler>@cloudflare/workers-types": "4"
+    # The wrangler / @cloudflare/workers-types entry that was here is gone:
+    # adapter 14 no longer depends on the types package, so nothing contradicts
+    # wrangler's optional peer any more.

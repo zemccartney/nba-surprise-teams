@@ -3,6 +3,195 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-09 — Step 8: Astro 7, Cloudflare adapter 14, Workers instead of Pages
+
+**What changed.** astro 5.18.2 → 7.3.1, `@astrojs/cloudflare` 12.6.13 → 14.3.0,
+vite 6.4.1 → 8.2.2 (Rolldown), sharp 0.34.4 → 0.35.4. astro 7.3.2 and adapter
+14.3.1 exist but are inside the three-day release age. The adapter dropped
+Cloudflare Pages in 13, so `wrangler.toml` became `wrangler.jsonc` and stopped
+being local-only: it now carries the worker name, entry point, compatibility
+date and flags, the `ASSETS` binding, `GAMES_KV` (with a placeholder id) and
+observability, and `astro build` reads it. `platformProxy` and the whole
+`vite.ssr.external` list are gone, because adapter 14 forces `ssr.noExternal`
+and externalizes sharp itself. Added: `session: false`, which keeps a `SESSION`
+KV namespace from being provisioned on deploy and takes `unstorage` out of the
+worker; `imageService: "compile"`, which keeps sharp running at build time
+rather than moving images to the Cloudflare Images binding the adapter now
+defaults to; and `compressHTML: true`, which is 5.x's whitespace behaviour
+where 7.0 defaults to `'jsx'`. `imageService: "compile"` needs a companion in
+dev: a five-line inline integration in `astro.config.mjs` points `/_image` at
+Astro's generic endpoint when `command === "dev"`. See finding 15.
+
+`Astro.locals.runtime` is gone. KV now comes from `env` in `cloudflare:workers`,
+the Sentry middleware's `waitUntil` context from `Astro.locals.cfContext`, and
+`src/env.d.ts` is down to the adapter's own `Runtime` type plus the bindings
+`wrangler types` generates. Zod 4 arrived with Astro 6, so `z` is imported from
+`astro/zod` in the action, the content config and the content utilities.
+
+The archiver had to be split. On-demand routes run inside workerd now, which
+has no filesystem, so `archiver/api.ts` no longer writes
+`src/content/games.json`: it returns the games it fetched and
+`archiver/script.ts` does the merge and the write from node.
+
+`.github/workflows/deploy.yml` is new: build and `wrangler versions upload`
+with a branch alias for any branch, build and `wrangler deploy` for `main`. It
+is gated on a `DEPLOY_ENABLED` repository variable, so pushing it does nothing
+to Cloudflare until that variable is set. `uvx zizmor` reports no findings
+(actions pinned by commit SHA, `persist-credentials: false`, the branch name
+passed through the environment rather than interpolated into a `run` block).
+
+**Found on the way:**
+
+1. **Astro 7 scopes every compound of a scoped selector, and that broke two
+   things.** Astro 5 scoped only the compounds it considered "yours" and left
+   descendants bare; Astro 7 puts the component's `data-astro-cid` attribute on
+   every compound in the selector. Both regressions below come from that one
+   change, and both are cases where a selector reached elements the component
+   did not author. A diff of every scoped selector across the two builds turned
+   up no third case.
+2. **The prose pages lost every vertical gap.** `src/layouts/typography.astro`
+   spaces slotted children with `& > * { & + * { margin-top: 1em } }`. Astro 5
+   compiled that to `.TypoBox[cid] > * + *`; Astro 7 emits
+   `.TypoBox[cid] > [cid] + [cid]`. Slotted children belong to the page, not to
+   TypoBox, so they carry the page's attribute and the rules stopped matching.
+   `/about/` lost 662 px of height at every viewport, and the home page and the
+   team pages lost their paragraph spacing. Wrapping the three layout rules in
+   `:global(...)` restores the Astro 5 selectors.
+3. **The team-stats row labels turned green.** `src/components/table.astro` had
+   `color: var(--color-green-200)` twice: once on `> tbody th, > tbody td` and
+   again, verbatim, inside `&.compact`. Under Astro 5 the second copy was a
+   no-op that happened to sit at specificity (0,3,2), below
+   `team-stats/ui.astro`'s `.stats-table tr th` at (0,4,2). Astro 7 scoped the
+   nested `tbody`, which lifted the `.compact` rule to (0,4,2) — a tie, decided
+   by source order, and the CSS chunk split (finding 6) put table.css after the
+   inline block holding the team-stats rule. Result: lime-400 labels rendered
+   green-200 on all twelve team-page screenshots. The redundant declaration is
+   deleted rather than the consumer's specificity raised, because the base rule
+   already sets the same colour and the duplicate only ever contributed weight.
+4. **Vitest could not start.** `@cloudflare/vite-plugin`, which the adapter
+   brings in, boots a workerd runner that Vitest's node environment cannot
+   satisfy: "AssertionError: depsOptimizer is required in dev mode". The vitest
+   config now filters out the `vite-plugin-cloudflare:*` plugins and keeps the
+   Astro ones, which are what make `astro:content` resolve. That also removed
+   the "something prevents 2 Vite servers from exiting" warning, so the
+   `teardownTimeout: 1000` workaround is gone.
+5. **The adapter leaks a Node shim into the browser bundle.** Adapter 14 sets
+   `vite.build.rolldownOptions.output.banner` at the top level rather than per
+   environment, so `globalThis.process ??= {}; globalThis.process.env ??= {};`
+   is prepended to every client chunk and every inline module script — 302
+   pages here. Nothing in the client code references `process` today, but the
+   adapter pairs the banner with `define: { "process.env": "process.env" }`,
+   which a Sentry-enabled production build might rely on. Left alone; see
+   "decisions you may flip".
+6. **CSS delivery changed again, the other way this time.** Astro 5.18 shipped
+   one 17,312-byte stylesheet plus a 4.1 KB inlined block; Astro 7 ships two
+   (`layout.css` 17,501 and `table.css` 4,105) and inlines less. Team pages
+   lose about 3.5 KB of HTML and gain one CSS request. The link order differs
+   per page — `/stats/` loads table before layout, everything else the reverse.
+   That reordering is what turned finding 3 from a tie into a visible bug, so
+   it is worth remembering the next time two rules land at equal specificity.
+7. **Astro 7 backgrounds its servers when it detects a coding agent.**
+   `astro dev` returns immediately with "Stop: astro dev stop", which would
+   break `concurrently --kill-others` in `pnpm start`, so the `start` script
+   now sets `ASTRO_DEV_BACKGROUND=0`. `astro preview` does the same and refuses
+   a second instance on another port; stopping it needs `astro preview stop`,
+   not a signal to the foreground process.
+8. **The build output moved.** `dist/` is now `dist/client` (static assets,
+   `_headers`, `.assetsignore`) and `dist/server` (the worker plus a generated
+   `wrangler.json`). `_routes.json` is gone; Workers doesn't use it. The
+   adapter writes an immutable `Cache-Control` for `/_astro/*` into `_headers`
+   on its own, which the Pages build never did.
+9. **The worker looks bigger and isn't.** 4.7 MB → 5.4 MB on disk, but
+   1,080,767 → 1,060,091 bytes gzipped, so the deployed artifact is slightly
+   smaller. 4.25 MB of the 5.4 is the content data layer, which is the thing
+   the sqlite content-store idea would address. Client JS is unchanged within
+   2.4 KB.
+10. **Trailing-slash redirects become temporary on Workers.** Pages 308s
+    `/about` to `/about/`, verified against live production and the
+    `trailing-slash` preview. The Workers static-asset layer answers the same
+    request with a 307. Setting `assets.html_handling` to
+    `"force-trailing-slash"` does not change it — tested, still 307 — so the
+    status is not configurable from the wrangler config. Paths with no matching
+    asset still get Astro's own permanent redirect from inside the worker
+    (`/nope` → `/nope/`, then the 404 page). One hop either way, and the
+    destination is identical; what changes is the permanence signal. See
+    "decisions you may flip".
+11. **The server-island bootstrap was rewritten.** Astro 7 adds
+    `<link rel="preload" as="fetch" crossorigin="anonymous">` for the island
+    endpoint in `<head>`, and the inline script now calls a shared
+    `replaceServerIsland` helper keyed by `data-island-id` instead of inlining
+    the swap logic. The fetch call also switched from single to double quotes,
+    which silently broke `plan/baseline/capture.mjs` again; its regex now
+    accepts either quote.
+12. **Zod 4 fallout in the archiver.** `.nonempty()` no longer types an array as
+    `[T, ...T[]]`, so `parsed.resultSets[0]` needed a guard, and
+    `z.string().url()` is deprecated in favour of `z.url()`.
+13. **prettier and `@eslint/json` disagree about `.jsonc`.** Prettier adds
+    trailing commas, the linter's JSONC parser rejects them. `.prettierrc` now
+    sets `trailingComma: "none"` for `*.jsonc`.
+14. **The `@cloudflare/workers-types` peer rule is no longer needed.** Adapter
+    14 doesn't depend on the types package, so nothing contradicts wrangler's
+    optional peer. Removed from `pnpm-workspace.yaml`.
+
+15. **Every image on the site was broken in dev, and the build comparison
+    could not see it.** Reported by Zack on first use of `pnpm start`, after
+    the round was already pushed. With `imageService: "compile"` the adapter
+    points the dev `/_image` endpoint at its Cloudflare Images binding
+    (`image-transform-endpoint`), and that binding accepts only jpeg, png, gif,
+    webp and avif. All 45 assets here are SVG, so every request answered
+    `400 Unsupported format: svg` and no image rendered anywhere under
+    `pnpm start`. Production is unaffected: `compile` runs sharp at build time
+    and prerendered pages ship static `/_astro/*.svg` files, never touching
+    `/_image`, which is exactly why 44/44 screenshots passed. The fix is a
+    dev-only inline integration that sets `image.endpoint` to
+    `astro/assets/endpoint/generic`; integrations run after the adapter, so it
+    wins, and the build config the adapter computes is untouched. Verified: the
+    421 files of client output are byte-identical before and after.
+    Two options were rejected. `imageService: "passthrough"` fixes dev but
+    makes prerendered pages reference `/_image/?href=…` at runtime, turning
+    every image on every page into a worker invocation instead of a static
+    asset. Leaving it and telling Cloudflare to allow more formats is not
+    possible; the format list is hardcoded in the adapter. Worth knowing for
+    later: `compile` emits 98 SVG files for 45 sources, and every one is
+    byte-identical to its source, so build-time image processing currently buys
+    this site nothing but duplicate files.
+16. **The Sentry middleware logs a workerd warning in dev.** "A promise was
+    resolved or rejected from a different request context than the one it was
+    created in." `@sentry/cloudflare`'s `makeFlushLock` wraps the request's
+    `waitUntil` and flushes after the response; under Astro's dev server the
+    flush outlives the request context and workerd cancels the continuation.
+    Dev only, and confirmed so: zero occurrences across twelve on-demand
+    server-island requests against `astro preview`, because in a production
+    build the middleware short-circuits on prerendered routes and the on-demand
+    handlers finish fast enough to flush in-request. New with adapter 14 only
+    in the sense that dev now runs in workerd at all. Left alone; it belongs to
+    the Sentry rework.
+17. **Nothing in the harness ever exercised the dev server.** That is how
+    finding 15 shipped. `plan/baseline/dev-smoke.mjs` is new: it loads seven
+    pages in a real browser against a running dev server, scrolls to trigger
+    lazy loading, and exits non-zero on any image that never decoded, any
+    console error, any failed request or any response at 400 or above. Checked
+    against both states: it passes on the fix and reports 400s and broken
+    images with the fix removed.
+
+**Verification.** 44/44 screenshots pixel-identical to the trailing-slash build
+across four viewports, 0 console errors, both charts and the popover behaving
+the same, nav highlight on exactly one link on `/archive/`, `/stats/` and
+`/about/` and none on `/` or `/2024/`. Both regressions above were caught by
+that comparison and are fixed; before the fixes `/about/` differed by 22–27%
+and the twelve team-page shots by 0.15–0.46%. Server islands were exercised
+with a scratch 2026 team season under `astro preview` (real workerd, not the
+static server): `/_server-islands/StandingsTable/` and
+`/_server-islands/TeamStats/` both answer 200 at 3,095 and 3,519 bytes against
+3,108 and 3,468 on Astro 5, and 8/8 screenshots are pixel-identical with no
+console errors. `astro check` reports 0 errors across 55 files, prettier and
+eslint are clean, and all 10 tests pass. `wrangler types` generates exactly
+`GAMES_KV: KVNamespace` and `ASSETS: Fetcher`, with no SESSION binding.
+Deployment was not attempted: the workflow is gated off and no Cloudflare
+resource was created. Added after the fact, once the dev breakage surfaced:
+`dev-smoke.mjs` reports 47 images across seven pages with none failing to
+render and no console errors or failed requests.
+
 ## 2026-09-09 — Step 7: `trailingSlash: "always"`, links written with the slash
 
 **What changed.** `astro.config.mjs` declares both halves of the pair:

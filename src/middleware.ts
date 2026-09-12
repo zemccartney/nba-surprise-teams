@@ -11,7 +11,7 @@ export const onRequest = defineMiddleware((ctx, next) => {
     return next();
   }
   const requestHandlerOptions = {
-    context: ctx.locals.runtime.ctx,
+    context: ctx.locals.cfContext,
 
     options: {
       dsn: PUBLIC_SENTRY_DSN,

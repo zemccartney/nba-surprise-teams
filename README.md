@@ -54,17 +54,16 @@ capture tooling's dependencies stay out of the site's lockfile and build.
 
 `pnpm run deps` will keep offering these; each moves with the thing named.
 
-- `prettier` (exact 3.6.2): 3.7+ with `prettier-plugin-astro` 0.14 reflows
-  paragraphs in `.astro` files past `printWidth`. Move to 3.9 together with
-  `prettier-plugin-astro` 1.0 (a rewrite on the Astro 7 compiler), as one
-  formatting commit.
+- `prettier` (exact 3.6.2) and `prettier-plugin-astro` (0.14.1): 3.7+ with the
+  0.14 plugin reflows paragraphs in `.astro` files past `printWidth`, so the two
+  move together in one formatting commit, once plugin 1.0 clears the release
+  age. The plugin carries its own copy of the Astro compiler, so it is not
+  affected by Astro's move to the Rust one.
 - `@sentry/astro` and `@sentry/cloudflare` (10.22): from 10.40 the integration
-  wraps the Cloudflare worker entry itself. Moves with the Workers adapter.
-- `sharp` (0.34.x): must satisfy Astro's own optional `sharp` range, or two
-  copies get installed and Astro uses its own. Moves with Astro.
-- `vite` (6.4.1): only here for `loadEnv` in `astro.config.mjs`; must match the
-  Vite major Astro brings. Moves with Astro.
-- `typescript` (5.9): `astro check` supports 5 and 6, not 7. Moves with Astro.
+  wraps the Cloudflare worker entry itself, which collides with the manual
+  `wrapRequestHandler` in `src/middleware.ts`. Moves with the Sentry rework.
+- `typescript` (5.9): `astro check` supports 5 and 6, not 7. Astro's own
+  tooling can only rely on TypeScript 6, so 7 has no date.
 
 ## Git hooks
 
@@ -154,5 +153,23 @@ Need to update our action's `SCHEMA_ID` if shape of data stored in KV ever chang
 
 ### Cloudflare
 
-- Semi-regularly review and update node compatibility date: https://developers.cloudflare.com/workers/configuration/compatibility-flags/#setting-compatibility-flags
-  - Setting in CF dashboard
+The site deploys as a Worker, not a Pages project: `@astrojs/cloudflare` 13
+dropped Pages support. `wrangler.jsonc` is the build and deploy config, and the
+adapter reads it during `astro build`.
+
+- Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
+  Review them semi-regularly:
+  https://developers.cloudflare.com/workers/configuration/compatibility-flags/
+- `GAMES_KV` needs the real namespace id in `wrangler.jsonc`. Local dev ignores
+  it and uses `.wrangler/state`.
+- No `SESSION` namespace is provisioned, because `session: false` is set in
+  `astro.config.mjs`. Remove that line if the site ever uses sessions.
+- `.github/workflows/deploy.yml` builds and deploys: a preview version aliased
+  to the branch name for any branch, a production release for `main`. It does
+  nothing until the repository variable `DEPLOY_ENABLED` is set to `true`, and
+  it needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
+  and `SENTRY_AUTH_TOKEN` as repository secrets.
+- Dev, prerendering and `astro preview` all run inside workerd now, so anything
+  that needs Node APIs has to live outside a route. That is why the archiver
+  endpoint hands its games back to `archiver/script.ts` instead of writing
+  `src/content/games.json` itself.

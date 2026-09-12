@@ -1,6 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 
-import { getCollection, getEntry, z } from "astro:content";
+import { z } from "astro/zod";
+import { getCollection, getEntry } from "astro:content";
 
 export type GameData = CollectionEntry<"games">["data"];
 import * as Utils from "./utils";

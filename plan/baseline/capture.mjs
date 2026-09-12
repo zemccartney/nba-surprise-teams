@@ -131,7 +131,9 @@ const inventory = (html, pageUrl) => {
     .toArray();
   const inlineStyles = (html.match(/<style\b/g) ?? []).length;
   const islands = html
-    .matchAll(/fetch\('([^']*_server-islands[^']*)'/g)
+    // Astro 5 emitted fetch('...'); Astro 7 emits fetch("...") and also adds a
+    // <link rel="preload" as="fetch"> for the same URL. Match either quote.
+    .matchAll(/fetch\(["']([^"']*_server-islands[^"']*)["']/g)
     .map((m) => new URL(m[1], pageUrl).href)
     .toArray();
   const hydrated = html.matchAll(/<astro-island\b[^>]*>/g).toArray().length;

@@ -41,28 +41,32 @@ const Element = element;
         margin-top: 0.5em;
       }
     }
+  }
 
-    /*
-        Layout rules, assume only relevant to top level of layout, that container elements
-        will more often than not want to be responsible for spacing/laying out their own children
-      */
-    & > * {
-      & + * {
-        margin-top: 1em;
-      }
+  /*
+    Layout rules, assume only relevant to top level of layout, that container elements
+    will more often than not want to be responsible for spacing/laying out their own children
 
-      & + h1,
-      & + h2,
-      & + h3 {
-        margin-top: 1.5em;
-        margin-bottom: 1em;
-      }
+    :global is load-bearing. These target slotted children, which belong to the
+    page, not to this component, so they carry the page's data-astro-cid, not
+    TypoBox's. Astro 5 left nested descendant selectors unscoped and they matched
+    by accident; Astro 7's compiler scopes every compound of a selector, which
+    stopped them matching and collapsed every gap on /about and the home page.
+  */
+  .TypoBox > :global(* + *) {
+    margin-top: 1em;
+  }
 
-      & + ul,
-      & + ol {
-        margin-top: 0.5em;
-      }
-    }
+  .TypoBox > :global(* + h1),
+  .TypoBox > :global(* + h2),
+  .TypoBox > :global(* + h3) {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .TypoBox > :global(* + ul),
+  .TypoBox > :global(* + ol) {
+    margin-top: 0.5em;
   }
 </style>
 
