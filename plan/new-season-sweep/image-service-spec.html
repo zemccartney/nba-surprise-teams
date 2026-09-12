@@ -1,0 +1,1434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portable Image Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Sixtyfour&display=swap"
+    />
+    <style>
+      /* Same tokens as status.html, which takes them from the site's own
+         src/styles/global.css. These two planning docs are a set. */
+      :root {
+        color-scheme: dark;
+
+        --ground: oklch(22.1% 0.067 142.863);
+        --sunken: oklch(17.6% 0.055 145);
+        --raised: oklch(26.5% 0.062 145);
+        --rule: oklch(38% 0.05 148 / 0.5);
+        --rule-soft: oklch(38% 0.05 148 / 0.26);
+
+        --ink: oklch(92.5% 0.084 155.995);
+        --ink-dim: oklch(78% 0.05 152);
+        --ink-mute: oklch(66% 0.042 152);
+
+        --accent: oklch(84.1% 0.238 128.85);
+        --accent-deep: oklch(64.8% 0.2 131.684);
+        --warn: oklch(85.2% 0.199 91.936);
+        --info: oklch(78.5% 0.115 274.713);
+        --bad: oklch(63% 0.21 27.5);
+
+        --font-body: "Archivo", ui-sans-serif, system-ui, sans-serif;
+        --font-code: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+        --font-display: "Sixtyfour", "IBM Plex Mono", monospace;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--ground);
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: 17px;
+        line-height: 1.62;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      code,
+      pre,
+      .tag,
+      .cite {
+        font-family: var(--font-code);
+        font-variant-ligatures: none;
+      }
+
+      code {
+        font-size: 0.88em;
+        color: var(--accent);
+        background: oklch(84.1% 0.238 128.85 / 0.09);
+        padding: 0.08em 0.22em;
+        border-radius: 2px;
+        overflow-wrap: break-word;
+      }
+
+      a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+        text-decoration-color: var(--rule);
+      }
+
+      a:hover {
+        text-decoration-color: currentColor;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      .shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 clamp(1.1rem, 4vw, 2.5rem) 6rem;
+      }
+
+      /* ---- masthead ---- */
+
+      .masthead {
+        padding: clamp(2.5rem, 6vw, 4.25rem) 0 2rem;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .wordmark {
+        font-family: var(--font-display);
+        font-size: clamp(0.72rem, 2.1vw, 0.98rem);
+        line-height: 1;
+        color: var(--accent-deep);
+        margin: 0 0 clamp(1.4rem, 3vw, 1.9rem);
+      }
+
+      .masthead h1 {
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 3.1rem);
+        font-weight: 700;
+        letter-spacing: -0.022em;
+        line-height: 1.05;
+        text-wrap: balance;
+      }
+
+      .standfirst {
+        margin: 1.1rem 0 0;
+        max-width: 64ch;
+        color: var(--ink-dim);
+        font-size: 1.1rem;
+      }
+
+      .provenance {
+        margin: 1.6rem 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.6rem;
+        font-family: var(--font-code);
+        font-size: 0.83rem;
+        color: var(--ink-mute);
+      }
+
+      .provenance b {
+        color: var(--ink-dim);
+        font-weight: 500;
+      }
+
+      /* ---- layout ---- */
+
+      .body {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding-top: 2.75rem;
+        align-items: start;
+      }
+
+      @media (min-width: 940px) {
+        .body {
+          grid-template-columns: 236px minmax(0, 1fr);
+          gap: 3.5rem;
+        }
+
+        .rail {
+          position: sticky;
+          top: 1.75rem;
+          max-height: calc(100vh - 3.5rem);
+          overflow-y: auto;
+        }
+      }
+
+      .rail-heading {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--ink-mute);
+        margin: 0 0 0.75rem;
+      }
+
+      .rail-heading:not(:first-child) {
+        margin-top: 2.1rem;
+      }
+
+      .toc {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .toc a {
+        display: flex;
+        gap: 0.6rem;
+        padding: 0.4rem 0;
+        color: var(--ink-dim);
+        text-decoration: none;
+        border-bottom: 1px solid var(--rule-soft);
+        font-size: 0.93rem;
+      }
+
+      .toc a:hover {
+        color: var(--accent);
+      }
+
+      .toc .n {
+        color: var(--accent-deep);
+        font-family: var(--font-code);
+        font-size: 0.8rem;
+        flex: none;
+      }
+
+      /* ---- evidence tags: the core structural device here ----
+         Every load-bearing claim is marked as read out of source, or as
+         something the implementing agent still has to establish. */
+
+      .tag {
+        display: inline-block;
+        font-size: 0.64rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.12rem 0.4rem;
+        border-radius: 2px;
+        vertical-align: 0.14em;
+        white-space: nowrap;
+      }
+
+      .t-verified {
+        color: var(--accent);
+        border: 1px solid oklch(84.1% 0.238 128.85 / 0.4);
+      }
+
+      .t-open {
+        color: var(--warn);
+        border: 1px solid oklch(85.2% 0.199 91.936 / 0.42);
+      }
+
+      .t-decide {
+        color: var(--info);
+        border: 1px solid oklch(78.5% 0.115 274.713 / 0.42);
+      }
+
+      .cite {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.76rem;
+        color: var(--ink-mute);
+      }
+
+      /* ---- sections ---- */
+
+      .section {
+        margin-bottom: 3.5rem;
+        scroll-margin-top: 1.5rem;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        gap: 0.85rem;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 0.6rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .section-num {
+        font-family: var(--font-code);
+        font-size: 0.88rem;
+        color: var(--accent-deep);
+        font-weight: 600;
+        flex: none;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: 1.42rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        text-wrap: balance;
+      }
+
+      .section h3 {
+        margin: 2.1rem 0 0.7rem;
+        font-size: 1.02rem;
+        font-weight: 700;
+        letter-spacing: -0.008em;
+      }
+
+      .section p,
+      .section li {
+        max-width: 70ch;
+      }
+
+      .section p {
+        margin: 0 0 0.9rem;
+        color: var(--ink-dim);
+        text-wrap: pretty;
+      }
+
+      .section ul,
+      .section ol {
+        margin: 0 0 1rem;
+        padding-left: 1.3rem;
+        color: var(--ink-dim);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .section li::marker {
+        color: var(--accent-deep);
+      }
+
+      pre {
+        margin: 0 0 1.1rem;
+        padding: 0.9rem 1rem;
+        background: var(--sunken);
+        border: 1px solid var(--rule-soft);
+        border-left: 2px solid var(--accent-deep);
+        overflow-x: auto;
+        font-size: 0.83rem;
+        line-height: 1.55;
+        color: var(--ink);
+      }
+
+      pre .c {
+        color: var(--ink-mute);
+      }
+
+      .tablewrap {
+        overflow-x: auto;
+        margin: 0 0 1.2rem;
+        border: 1px solid var(--rule-soft);
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 0.88rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 0.6rem 0.8rem;
+        border-bottom: 1px solid var(--rule-soft);
+        vertical-align: top;
+        color: var(--ink-dim);
+      }
+
+      th {
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.72rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        background: var(--sunken);
+      }
+
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      td.rec {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .callout {
+        display: flex;
+        gap: 0.8rem;
+        margin: 0 0 1.2rem;
+        padding: 0.85rem 1rem;
+        border: 1px solid var(--rule-soft);
+        background: var(--sunken);
+        max-width: 72ch;
+      }
+
+      .callout p {
+        margin: 0;
+      }
+
+      .callout p + p {
+        margin-top: 0.6rem;
+      }
+
+      .callout .marker {
+        flex: none;
+        font-family: var(--font-code);
+        font-size: 0.88rem;
+        color: var(--accent);
+      }
+
+      .callout.warn {
+        border-color: oklch(85.2% 0.199 91.936 / 0.32);
+        background: oklch(85.2% 0.199 91.936 / 0.07);
+      }
+
+      .callout.warn .marker {
+        color: var(--warn);
+      }
+
+      .callout.bad {
+        border-color: oklch(63% 0.21 27.5 / 0.38);
+        background: oklch(63% 0.21 27.5 / 0.08);
+      }
+
+      .callout.bad .marker {
+        color: var(--bad);
+      }
+
+      dl.api {
+        margin: 0 0 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        max-width: 72ch;
+      }
+
+      dl.api > div {
+        padding-left: 0.95rem;
+        border-left: 1px solid var(--accent-deep);
+      }
+
+      dl.api dt {
+        font-family: var(--font-code);
+        font-size: 0.86rem;
+        color: var(--accent);
+        margin-bottom: 0.2rem;
+      }
+
+      dl.api dd {
+        margin: 0;
+        color: var(--ink-dim);
+        font-size: 0.95rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="masthead">
+        <p class="wordmark">NBASTT</p>
+        <h1>Portable Image Service</h1>
+        <p class="standfirst">
+          An Astro image service for Cloudflare-deployed sites that makes
+          <code>&lt;Image&gt;</code> behave the same whatever the file type,
+          without depending on paid Cloudflare image infrastructure. Specced for
+          a later agent to implement; nbastt is the test case, not the
+          beneficiary.
+        </p>
+        <p class="provenance">
+          <span><b>Status</b> spec, not started</span>
+          <span><b>Board</b> status.html</span>
+          <span><b>Written</b> 2026-09-11</span>
+        </p>
+      </header>
+
+      <div class="body">
+        <aside class="rail">
+          <p class="rail-heading">Contents</p>
+          <ul class="toc">
+            <li>
+              <a href="#s1"><span class="n">1</span> Why</a>
+            </li>
+            <li>
+              <a href="#s2"
+                ><span class="n">2</span> How Astro's pipeline works</a
+              >
+            </li>
+            <li>
+              <a href="#s3"><span class="n">3</span> Design</a>
+            </li>
+            <li>
+              <a href="#s4"><span class="n">4</span> Raster at runtime</a>
+            </li>
+            <li>
+              <a href="#s5"><span class="n">5</span> SVG safety audit</a>
+            </li>
+            <li>
+              <a href="#s6"><span class="n">6</span> Package shape</a>
+            </li>
+            <li>
+              <a href="#s7"><span class="n">7</span> Milestones</a>
+            </li>
+            <li>
+              <a href="#s8"><span class="n">8</span> Open questions</a>
+            </li>
+          </ul>
+
+          <p class="rail-heading">Claim tags</p>
+          <ul class="toc" style="border: 0">
+            <li style="padding: 0.3rem 0">
+              <span class="tag t-verified">verified</span>
+            </li>
+            <li
+              style="
+                padding: 0.3rem 0;
+                color: var(--ink-mute);
+                font-size: 0.8rem;
+              "
+            >
+              read out of installed source or vendor docs; citation follows
+            </li>
+            <li style="padding: 0.5rem 0 0.3rem">
+              <span class="tag t-open">unverified</span>
+            </li>
+            <li
+              style="
+                padding: 0.3rem 0;
+                color: var(--ink-mute);
+                font-size: 0.8rem;
+              "
+            >
+              plausible but not established — prove before relying on it
+            </li>
+            <li style="padding: 0.5rem 0 0.3rem">
+              <span class="tag t-decide">zack decides</span>
+            </li>
+            <li
+              style="
+                padding: 0.3rem 0;
+                color: var(--ink-mute);
+                font-size: 0.8rem;
+              "
+            >
+              a product call, not a technical one — do not pick for him
+            </li>
+          </ul>
+        </aside>
+
+        <main>
+          <!-- 1 -->
+          <section class="section" id="s1">
+            <div class="section-head">
+              <span class="section-num">01</span>
+              <h2>Why this exists</h2>
+            </div>
+
+            <p>
+              Zack's sites deploy to Cloudflare. The premise here is not that
+              the adapter has a bug — it is that
+              <strong
+                >no single setting on <code>@astrojs/cloudflare</code> makes
+                every image type work without paying Cloudflare.</strong
+              >
+              Getting this site's images working in build <em>and</em> at
+              runtime took two coordinated overrides, and the zero-config
+              default was unusable for a site whose assets are all SVG.
+            </p>
+
+            <p>
+              What the default actually does: with no
+              <code>imageService</code> set,
+              <code>normalizeImageServiceConfig</code> resolves
+              <code>"cloudflare-binding"</code>, which yields
+              <code>transformAtBuild: false</code> and
+              <code>needsImagesBinding: true</code>. Every runtime image request
+              goes to <code>env.IMAGES</code> — so rendering a logo requires
+              provisioning Cloudflare's metered Images product first, whether or
+              not any pixel needs touching.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >@astrojs/cloudflare@14.3.0 — dist/utils/image-config.js:2-17
+                and dist/index.js:87-89</span
+              >
+            </p>
+
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th><code>imageService</code></th>
+                    <th>Endpoint in dev</th>
+                    <th>Endpoint at runtime</th>
+                    <th>Needs paid binding</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>cloudflare-binding</code> (default)</td>
+                    <td>transform</td>
+                    <td>transform</td>
+                    <td>yes</td>
+                  </tr>
+                  <tr>
+                    <td><code>compile</code></td>
+                    <td><strong>transform</strong></td>
+                    <td>passthrough</td>
+                    <td>no</td>
+                  </tr>
+                  <tr>
+                    <td><code>passthrough</code></td>
+                    <td>generic</td>
+                    <td>passthrough</td>
+                    <td>no</td>
+                  </tr>
+                  <tr>
+                    <td><code>cloudflare</code></td>
+                    <td>generic</td>
+                    <td>CF service</td>
+                    <td>yes</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="cite" style="margin-top: -0.4rem">
+              <span class="tag t-verified">verified</span>
+              @astrojs/cloudflare@14.3.0 — dist/utils/image-config.js:28-77,
+              reading <code>setImageConfig</code> branch by branch. "transform"
+              is <code>@astrojs/cloudflare/image-transform-endpoint</code>,
+              which calls <code>env.IMAGES</code>.
+            </p>
+
+            <div class="callout">
+              <span class="marker">i</span>
+              <p>
+                <strong
+                  >The bolded cell is deliberate, not an oversight.</strong
+                >
+                <code>index.js:121</code> sets
+                <code
+                  >needsImagesBindingForDev = (isCompile || isBindingBuild)
+                  &amp;&amp; command === "dev"</code
+                >, provisioning the local Images binding in dev on purpose so
+                that dev approximates production's build-time optimization;
+                withastro/astro#15435 states that intent. An earlier draft of
+                this spec called it a one-line bug and proposed mirroring the
+                <code>passthrough</code> branch — that was wrong and would have
+                broken the intent.
+                <span class="tag t-verified">verified</span>
+                <span class="cite"
+                  >dist/index.js:121,130 and
+                  dist/utils/image-config.js:31-63</span
+                >
+              </p>
+              <p>
+                The genuine defect is narrower and sits one file over: the
+                transform endpoint's hardcoded
+                <code>supportedFormats</code> omits <code>svg</code>, so the
+                request 400s before <code>images.input()</code> is called —
+                stricter than Cloudflare Images itself. Written up ready to file
+                in <code>upstream-issue-svg.md</code>. It does not change the
+                case for this service: the paid-binding default and runtime
+                raster in workerd are untouched by it.
+              </p>
+            </div>
+
+            <p>
+              The SVG failure itself is a second, narrower fact: the transform
+              endpoint's accepted output formats are a hardcoded
+              <code>jpeg, jpg, png, gif, webp, avif</code>, so an SVG request
+              returns <code>400 Unsupported format: svg</code>.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >dist/utils/image-binding-transform.js, the
+                <code>supportedFormats</code> map inside
+                <code>transformStream</code></span
+              >
+              That is stricter than the platform it wraps: Cloudflare Images
+              lists SVG as both a supported input and output format, states that
+              it does not resize SVG and ignores optimization parameters for it,
+              and sanitizes it with svg-hush on delivery.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >developers.cloudflare.com/images/get-started/limits/ and
+                blog.cloudflare.com/svg-support-in-cloudflare-images/</span
+              >
+            </p>
+
+            <p>
+              Both facts land on the same DX complaint, which is the actual
+              motivation:
+              <strong
+                >you have to know a file's type, and hold a matrix of adapter
+                settings in your head, to know whether you may use Astro's
+                <code>&lt;Image&gt;</code> component.</strong
+              >
+              That is a bad seam to carry across several personal sites. The
+              goal is one service that makes <code>&lt;Image&gt;</code> simply
+              correct for every format, on Cloudflare, with no paid image
+              product involved and no per-site configuration archaeology.
+            </p>
+
+            <h3>Goals</h3>
+            <ul>
+              <li>
+                <code>&lt;Image&gt;</code> and <code>getImage()</code> work for
+                SVG and raster alike, with no per-call-site knowledge of type.
+              </li>
+              <li>
+                No Cloudflare Images binding, no metered transformations, no
+                account provisioning.
+              </li>
+              <li>
+                SVG emits <strong>one</strong> file per source, not one per
+                requested size. Sizes are meaningless for vectors.
+              </li>
+              <li>Raster keeps sharp-quality output at build time.</li>
+              <li>
+                Raster transformation still works at runtime inside workerd, for
+                server islands and on-demand routes.
+              </li>
+              <li>
+                Optional: a build-time audit that flags SVGs carrying unsafe
+                features.
+              </li>
+            </ul>
+
+            <h3>Non-goals</h3>
+            <ul>
+              <li>Runtime SVG rasterization. Vectors go out as vectors.</li>
+              <li>
+                Replacing sharp at build time. Sharp is better than anything
+                that runs in workerd and it already works in Node.
+              </li>
+              <li>
+                Remote-image handling beyond what <code>baseService</code>
+                already does.
+              </li>
+            </ul>
+
+            <div class="callout">
+              <span class="marker">i</span>
+              <p>
+                <strong>nbastt is the test case, not the customer.</strong> This
+                site is 100% SVG and currently uses a plain
+                <code>&lt;img src={meta.src}&gt;</code>, which is strictly less
+                machinery than any service. Landing the service here proves it;
+                the payoff is the other sites. Do not remove the
+                <code>&lt;img&gt;</code> approach until the service is verified
+                against it.
+              </p>
+            </div>
+          </section>
+
+          <!-- 2 -->
+          <section class="section" id="s2">
+            <div class="section-head">
+              <span class="section-num">02</span>
+              <h2>How Astro's image pipeline actually works</h2>
+            </div>
+
+            <p>
+              This is the part that makes the design possible, and it is not
+              obvious from the docs. All of it was read out of
+              <code>astro@7.3.1</code> and
+              <code>@astrojs/cloudflare@14.3.0</code> as installed in this repo.
+            </p>
+
+            <h3>Service and endpoint are two different things</h3>
+            <dl class="api">
+              <div>
+                <dt>image.endpoint</dt>
+                <dd>
+                  The route that serves <code>/_image</code>. An Astro API
+                  route.
+                </dd>
+              </div>
+              <div>
+                <dt>image.service</dt>
+                <dd>
+                  The module that does the pixel work. Called by that route at
+                  runtime, and by the build when generating static images.
+                </dd>
+              </div>
+            </dl>
+            <p>
+              The adapter's <code>imageService</code> option is a preset that
+              sets both. Under <code>"compile"</code> in dev it pairs a
+              passthrough service with the <em>Cloudflare binding</em> endpoint
+              — which is why SVG broke in dev while the build was fine.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >@astrojs/cloudflare dist/utils/image-config.js,
+                <code>setImageConfig</code>, the <code>compile</code> case</span
+              >
+            </p>
+
+            <h3>
+              A user service survives <code>compile</code>, and runs in Node
+            </h3>
+            <p>
+              Two facts that together make this whole design work. First,
+              <code>setImageConfig</code>'s <code>compile</code> branch keeps a
+              user-set service rather than overriding it:
+            </p>
+            <pre><code>service: hasUserImageService(config) ? config.service : WORKERD_IMAGE_SERVICE</code></pre>
+            <p>
+              Second, at build the adapter imports that entrypoint
+              <strong>in Node</strong> to generate the static images:
+            </p>
+            <pre><code>if (userImageServiceEntrypoint) {
+  const mod = await import(userImageServiceEntrypoint);
+  globalThis.astroAsset.imageService = mod.default ?? mod;
+} else {
+  const { default: sharpService } = await import("astro/assets/services/sharp");
+  globalThis.astroAsset.imageService = sharpService;
+}</code></pre>
+            <p>
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >@astrojs/cloudflare dist/prerenderer.js, around lines 188 and
+                241</span
+              >
+            </p>
+            <p>
+              So <code>transform()</code> runs in Node at build time with sharp
+              available, and in workerd only when <code>/_image</code> is hit at
+              runtime. The service must therefore branch on runtime, and must
+              never import sharp at module top level or the worker bundle
+              breaks.
+            </p>
+
+            <h3>Variant filenames, and how to collapse them</h3>
+            <p>
+              Astro does not statically analyse anything. Every
+              <code>&lt;Image&gt;</code> / <code>getImage()</code> call at
+              render time calls <code>addStaticImage()</code>, which hashes the
+              transform props and accumulates them in a global map; after all
+              pages render, the build writes one file per accumulated hash. The
+              filename is
+              <code>&lt;base&gt;_&lt;hashTransform(...)&gt;&lt;ext&gt;</code>.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >astro dist/assets/vite-plugin-assets.js
+                <code>addStaticImageFactory</code>; dist/assets/utils/hash.js
+                <code>propsToFilename</code>, <code>hashTransform</code></span
+              >
+            </p>
+            <p>
+              On this site that produced 98 files from 45 sources, every one
+              byte-identical to its source, because a logo used at five sizes
+              got five hashes. <code>propertiesToHash</code> is a static
+              <code>string[]</code> on the service, so it cannot be varied per
+              image — but
+              <strong
+                ><code>validateOptions</code> runs before the hash, and its
+                return value is what gets hashed</strong
+              >:
+            </p>
+            <pre><code>const validatedOptions = service.validateOptions
+  ? await service.validateOptions(resolvedOptions, imageConfig, logger)
+  : resolvedOptions;
+<span class="c">// …then, further down…</span>
+globalThis.astroAsset.addStaticImage(validatedOptions, propsToHash, originalFilePath)</code></pre>
+            <p>
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >astro dist/assets/internal.js, lines ~132 and ~158-161</span
+              >
+            </p>
+            <p>
+              That is the hook. Strip the size props off an SVG in
+              <code>validateOptions</code> and every call site collapses to one
+              hash, hence one file.
+            </p>
+          </section>
+
+          <!-- 3 -->
+          <section class="section" id="s3">
+            <div class="section-head">
+              <span class="section-num">03</span>
+              <h2>Design</h2>
+            </div>
+
+            <p>
+              One service module implementing Astro's
+              <code>LocalImageService</code>, spreading
+              <code>baseService</code> and overriding four methods.
+            </p>
+
+            <h3>validateOptions — collapse SVG variants</h3>
+            <p>
+              If the source is an SVG, delete <code>width</code>,
+              <code>height</code>, <code>quality</code> and any
+              <code>format</code> other than <code>svg</code> from the returned
+              options, after stashing the dimensions somewhere outside
+              <code>propertiesToHash</code>. Everything else passes to
+              <code>baseService.validateOptions</code> untouched.
+            </p>
+            <div class="callout warn">
+              <span class="marker">!</span>
+              <p>
+                <code>getHTMLAttributes</code> receives the
+                <em>validated</em> options, so stripping width/height there
+                would also strip them off the rendered
+                <code>&lt;img&gt;</code> and reintroduce layout shift. The
+                stash-and-restore is not optional. Astro's
+                <code>baseService.getHTMLAttributes</code> derives
+                <code>targetWidth</code>/<code>targetHeight</code> via
+                <code>getTargetDimensions(options)</code> — read it before
+                writing the override.
+              </p>
+            </div>
+
+            <h3>getHTMLAttributes — restore them</h3>
+            <p>
+              Read the stashed dimensions back and emit
+              <code>width</code>/<code>height</code> exactly as
+              <code>baseService</code> would have. Callers that pass only a
+              width must still get a height derived from the source aspect
+              ratio; <code>result-emoji.astro</code> in this repo shows the
+              arithmetic.
+            </p>
+
+            <h3>transform — branch on type, then on runtime</h3>
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Input</th>
+                    <th>Build (Node)</th>
+                    <th>Runtime (workerd)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>SVG</td>
+                    <td>svgo, return as <code>svg</code></td>
+                    <td>Return input unchanged, <code>image/svg+xml</code></td>
+                  </tr>
+                  <tr>
+                    <td>Raster</td>
+                    <td>sharp, lazily imported inside the call</td>
+                    <td>jSquash wasm codecs (see §4)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Runtime detection: prefer a build-time flag injected by the
+              companion integration over sniffing globals, so the branch is
+              statically analysable and the unused side can be tree-shaken out
+              of the worker bundle.
+              <span class="tag t-open">unverified</span> — confirm Rolldown
+              actually drops the sharp branch; if it does not, split into two
+              entrypoints and let the integration choose.
+            </p>
+
+            <h3>What not to touch</h3>
+            <p>
+              <code>getURL</code> and <code>parseURL</code> inherit from
+              <code>baseService</code> unchanged. Do not reimplement them; the
+              adapter's endpoints parse those URLs.
+            </p>
+
+            <h3>svgo lives here</h3>
+            <p>
+              This repo currently runs svgo from a separate
+              <code>astro:build:done</code> integration
+              (<code>svg-optimizer/integration.ts</code>), because with plain
+              <code>&lt;img&gt;</code> the image pipeline never sees these
+              files. Once the service is in, svgo belongs in
+              <code>transform()</code> instead and that integration should be
+              deleted. Note svgo v4 dropped <code>removeViewBox</code> from
+              <code>preset-default</code>; do not add it back, these logos are
+              rendered at several sizes.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >svgo 4.1.0 warns "removeViewBox is not part of preset-default";
+                measured 113,401 → 78,211 bytes over this site's 45 SVGs</span
+              >
+            </p>
+          </section>
+
+          <!-- 4 -->
+          <section class="section" id="s4">
+            <div class="section-head">
+              <span class="section-num">04</span>
+              <h2>Raster at runtime in workerd</h2>
+            </div>
+
+            <p>
+              This is the piece that justifies the whole exercise being
+              "portable" rather than "an svgo wrapper," and it is more viable
+              than it first appears.
+            </p>
+
+            <h3>jimp's wasm codecs are real</h3>
+            <p>
+              <code>@jimp/wasm-webp</code> and <code>@jimp/wasm-avif</code> both
+              exist at 1.6.1. They are opt-in plugins, which is why they are
+              absent from the default <code>jimp</code> dependency list.
+              <code>@jimp/wasm-webp</code> is a thin wrapper over
+              <code>@jsquash/webp</code> — the Squoosh codecs.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >npm pack @jimp/wasm-webp 1.6.1 → dist/esm/index.js imports
+                <code>@jsquash/webp/decode.js</code> and
+                <code>/encode.js</code></span
+              >
+            </p>
+
+            <h3>workerd blocks dynamic wasm, jSquash has the escape hatch</h3>
+            <p>
+              Workers disallow
+              <code>WebAssembly.instantiate()</code> on an ArrayBuffer — "Wasm
+              code generation disallowed by embedder." A <code>.wasm</code> file
+              must be statically imported so the runtime hands you a
+              <code>WebAssembly.Module</code>.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >developers.cloudflare.com/workers/runtime-apis/webassembly/</span
+              >
+            </p>
+            <p>
+              jSquash's <code>init()</code> takes exactly that, and its README
+              names Cloudflare Workers as the reason:
+            </p>
+            <pre><code>export async function init(module, moduleOptionOverrides) {
+  let actualModule = module;
+  <span class="c">// …if only one argument and it is not a WebAssembly.Module, treat it as options…</span>
+  emscriptenModule = initEmscriptenModule(webp_dec, actualModule, actualOptions);
+}</code></pre>
+            <p>
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >npm pack @jsquash/webp 1.5.0 → decode.js; README §"Usage in
+                Cloudflare Workers"</span
+              >
+            </p>
+            <p>So the runtime path is:</p>
+            <pre><code>import WEBP_ENC_WASM from "@jsquash/webp/codec/enc/webp_enc.wasm";
+import encode, { init as initEncode } from "@jsquash/webp/encode.js";
+
+initEncode(WEBP_ENC_WASM);</code></pre>
+
+            <h3>Bundle budget</h3>
+            <p>
+              Each codec is a separate binary and they are not small. Measured
+              from the packed tarballs:
+            </p>
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>File</th>
+                    <th>Size</th>
+                    <th>Needed for</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>webp_dec.wasm</code></td>
+                    <td>135 KB</td>
+                    <td>reading WebP sources</td>
+                  </tr>
+                  <tr>
+                    <td><code>webp_enc.wasm</code></td>
+                    <td>275 KB</td>
+                    <td>writing WebP</td>
+                  </tr>
+                  <tr>
+                    <td><code>webp_enc_simd.wasm</code></td>
+                    <td>337 KB</td>
+                    <td>faster writing; pick one</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Workers limits are 3 MB compressed on the free plan and 10 MB on
+              paid, so a webp encoder alone is affordable, but shipping the full
+              jimp plus every codec is not obviously so.
+              <span class="tag t-decide">zack decides</span> — which formats are
+              worth carrying in the worker at all? A defensible default is
+              <strong>WebP encode only</strong>, with anything else passed
+              through unchanged at runtime.
+            </p>
+
+            <div class="callout warn">
+              <span class="marker">!</span>
+              <p>
+                <strong>The unresolved risk.</strong>
+                <code>@jimp/wasm-webp</code>'s own wrapper calls jSquash's
+                <code>init()</code> with no module, letting jSquash resolve the
+                binary itself — which is the thing workerd forbids. Priming the
+                same module instance by calling
+                <code>init(WASM_MODULE)</code> first <em>should</em> work,
+                because the plugin imports the same singleton, but that is
+                inference from reading the source, not a test.
+                <span class="tag t-open">unverified</span>
+              </p>
+              <p>
+                <strong>Verify this before building anything else.</strong> The
+                cheapest probe: a throwaway Worker that statically imports
+                <code>webp_enc.wasm</code>, calls <code>initEncode</code>, and
+                encodes a 2×2 pixel buffer. If that fails, drop jimp and call
+                jSquash directly — jimp's value here is only its resize/decode
+                plumbing.
+              </p>
+            </div>
+
+            <div class="callout bad">
+              <span class="marker">×</span>
+              <p>
+                <strong>Correction to earlier advice.</strong> An earlier pass
+                told Zack jimp had no WebP or AVIF support and could not run in
+                workerd. Both claims were wrong: the codecs exist as separate
+                wasm packages, and jSquash exists specifically to run in
+                Workers. The design here follows Zack's original instinct.
+              </p>
+            </div>
+          </section>
+
+          <!-- 5 -->
+          <section class="section" id="s5">
+            <div class="section-head">
+              <span class="section-num">05</span>
+              <h2>SVG safety audit</h2>
+            </div>
+
+            <p>
+              The use case is <strong>not</strong> sanitizing untrusted uploads.
+              It is auditing assets Zack pulls into projects — SVGs generated
+              elsewhere, downloaded, or modified from other sources — where an
+              unsafe feature is easy to overlook. That makes this a build-time
+              lint, running in Node, not a runtime sanitizer. A reasonable
+              shape: fail the build when an SVG carries features outside an
+              allowlist, unless that file is explicitly allow-listed.
+            </p>
+
+            <h3>What svg-hush is</h3>
+            <p>
+              Rust crate, version 0.9.7, Apache-2.0 or MIT. Removes scripting,
+              cross-origin hyperlinks and cross-origin resource references;
+              strips anything outside its allowlist; forces URLs same-origin. It
+              has a <code>src/main.rs</code>, so the crate ships a CLI as well
+              as a library. Its dependencies are all pure Rust —
+              <code>data-url</code>, <code>base64</code>,
+              <code>quick-error</code>, <code>url</code>, <code>xml</code> —
+              with no C or system libraries, which is what makes a
+              <code>wasm32</code> build plausible.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >github.com/cloudflare/svg-hush — Cargo.toml, README.md, src/
+                listing</span
+              >
+            </p>
+
+            <div class="callout warn">
+              <span class="marker">!</span>
+              <p>
+                <strong>It cleans; it does not report.</strong> The public API
+                is <code>Filter::new()</code> and
+                <code>filter(read, write)</code> — cleaned bytes out, no list of
+                what was removed. So "flag unsafe features" has to be
+                implemented as
+                <em>filter, then compare against the original</em>: unequal
+                means something was stripped. That tells you a file is dirty but
+                not why, so any failure message should include a diff or point
+                at the file for a human to inspect.
+                <span class="tag t-verified">verified</span>
+                <span class="cite"
+                  >src/lib.rs — the <code>impl Filter</code> block</span
+                >
+              </p>
+            </div>
+
+            <h3>Ways to call it from Node</h3>
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Option</th>
+                    <th>Cost</th>
+                    <th>Verdict</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>cargo install svg-hush</code>, exec the CLI</td>
+                    <td>
+                      Rust toolchain on every dev machine and in CI; process
+                      spawn per file
+                    </td>
+                    <td class="rec">
+                      Best first step. Zero new npm dependencies, first-party
+                      code, and it proves the idea before anyone builds
+                      packaging.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Build it to wasm yourself (wasm-pack)</td>
+                    <td>
+                      A small wrapper crate and a release pipeline; you own the
+                      artifact
+                    </td>
+                    <td>
+                      The right long-term answer if the lint earns its keep.
+                      Works in Node and workerd. Dependencies are pure Rust, so
+                      it should compile clean.
+                      <span class="tag t-open">unverified</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>napi-rs native addon</td>
+                    <td>
+                      Per-platform prebuilds, CI matrix, binary distribution
+                    </td>
+                    <td>
+                      More work than wasm for no benefit — this only ever needs
+                      to run in Node at build. Skip.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>@zeropress/svg-hush</code> (third-party wasm)</td>
+                    <td>v0.1.0, single maintainer, published 2026-08-19</td>
+                    <td>
+                      Against this project's strict pnpm supply-chain posture.
+                      Useful as a reference for how to build the wasm, not as a
+                      dependency.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Port the allowlist to JS</td>
+                    <td>
+                      Ongoing drift against upstream; you own the security
+                      judgement
+                    </td>
+                    <td>
+                      Tempting since svgo already parses SVG, but the allowlist
+                      <em>is</em> the product. Don't fork it.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>
+              <span class="tag t-decide">zack decides</span> Ship this as part
+              of the image service, or as a standalone lint that runs from
+              lefthook over <code>src/assets</code>? The lint has no dependency
+              on the service and is useful on its own — arguably it should land
+              first, since it is smaller and the value is immediate.
+            </p>
+          </section>
+
+          <!-- 6 -->
+          <section class="section" id="s6">
+            <div class="section-head">
+              <span class="section-num">06</span>
+              <h2>Package shape</h2>
+            </div>
+
+            <p>
+              Built for reuse across Zack's Cloudflare sites, so it wants to be
+              its own package, developed here and extracted once it works. Look
+              at <code>~/proj/grepco/opensource/pagemeta</code> for his house
+              conventions on packaging, since that is where the pnpm and tooling
+              preferences in this repo came from.
+            </p>
+
+            <dl class="api">
+              <div>
+                <dt>./service</dt>
+                <dd>
+                  The image service. Set as
+                  <code>image.service.entrypoint</code>. Must not import sharp
+                  at module scope.
+                </dd>
+              </div>
+              <div>
+                <dt>./integration</dt>
+                <dd>
+                  An Astro integration that wires the service, injects the
+                  runtime flag, and (optionally) runs the SVG audit. Ordering
+                  matters: Astro <code>unshift</code>s the adapter to the front
+                  of <code>config.integrations</code>, so any user integration's
+                  <code>updateConfig</code> merges on top of the adapter's.
+                  <span class="tag t-verified">verified</span>
+                  <span class="cite"
+                    >astro dist/integrations/hooks.js, lines 127-129 in
+                    <code>runHookConfigSetup</code></span
+                  >
+                </dd>
+              </div>
+              <div>
+                <dt>./endpoint</dt>
+                <dd>
+                  Optional. Only needed if the adapter's own endpoints prove
+                  unsuitable; prefer not shipping one.
+                </dd>
+              </div>
+            </dl>
+
+            <p>Consumer config should end up roughly:</p>
+            <pre><code>adapter: cloudflare({ imageService: "compile" }),
+image: { service: { entrypoint: "&lt;pkg&gt;/service", config: { formats: ["webp"] } } },
+integrations: [cfImages({ auditSvg: true })],</code></pre>
+            <p>
+              <code>imageService: "compile"</code> is load-bearing: it is the
+              mode whose <code>hasUserImageService</code> check preserves a
+              user-set service and whose build path imports it in Node.
+              <code>"custom"</code> also respects a user endpoint but logs a
+              permanent, false "Sharp image service cannot run inside the
+              workerd runtime" warning on every dev start.
+              <span class="tag t-verified">verified</span>
+              <span class="cite"
+                >dist/utils/image-config.js — the <code>custom</code> case's
+                <code>logger.warn</code></span
+              >
+            </p>
+          </section>
+
+          <!-- 7 -->
+          <section class="section" id="s7">
+            <div class="section-head">
+              <span class="section-num">07</span>
+              <h2>Milestones and verification</h2>
+            </div>
+
+            <p>
+              Strictly ordered — each one kills the project cheaply if it fails.
+            </p>
+            <ol>
+              <li>
+                <strong>Probe wasm in workerd.</strong> Throwaway Worker, static
+                <code>webp_enc.wasm</code> import, encode a 2×2 buffer. If this
+                fails, §4 is dead and the service degrades to "sharp at build,
+                passthrough at runtime" — still worth building, but stop and
+                re-scope with Zack first.
+              </li>
+              <li>
+                <strong>Variant collapsing.</strong> Service that only overrides
+                <code>validateOptions</code> and <code>getHTMLAttributes</code>,
+                spreading <code>baseService</code> otherwise. Revert this site
+                to <code>&lt;Image&gt;</code> and confirm the build emits
+                <strong>45</strong> SVGs, not 98, with <code>width</code>/<code
+                  >height</code
+                >
+                intact on every <code>&lt;img&gt;</code>.
+              </li>
+              <li>
+                <strong>svgo into <code>transform()</code>.</strong> Delete
+                <code>svg-optimizer/integration.ts</code>. Confirm total SVG
+                bytes land at ~78,211 as the standalone integration achieves
+                today.
+              </li>
+              <li>
+                <strong>Raster at build.</strong> Add a real PNG to this site
+                and confirm sharp still converts it (a 400×400 PNG went 3,265 B
+                → 100 B WebP under the stock adapter; match that).
+              </li>
+              <li><strong>Raster at runtime</strong>, per the §4 probe.</li>
+              <li><strong>SVG audit</strong>, per §5.</li>
+              <li><strong>Extract the package.</strong></li>
+            </ol>
+
+            <h3>Acceptance criteria, using this repo's harness</h3>
+            <p>
+              Everything under <code>plan/baseline/</code>; see its README. The
+              bar is the existing runs, not a fresh eyeball.
+            </p>
+            <ul>
+              <li>
+                <code>capture.mjs</code> + <code>compare.mjs</code> against
+                <code>runs/2026-09-11-svgo</code>: 44/44 screenshots within the
+                1–5px antialiasing noise already documented there, 0 console
+                errors.
+              </li>
+              <li>
+                Server islands on real workerd via <code>astro preview</code>
+                with a scratch 2026 team season —
+                <strong>one</strong> <code>2026/CHA</code> entry at
+                <code>overUnder: 30.5</code>, which is what
+                <code>runs/2026-09-09-astro-7-scratch-island</code> used.
+                Getting this wrong produces an 11% diff that is nothing but
+                different data.
+              </li>
+              <li>
+                <code>dev-smoke.mjs</code> exits 0 with 47 images across seven
+                pages. <strong>Required</strong> — this whole area shipped
+                broken once because every check ran against built output.
+              </li>
+              <li>
+                <code>astro check</code>, ESLint (<code
+                  >--flag unstable_native_nodejs_ts_config</code
+                >), prettier, and <code>pnpm test</code> all clean.
+              </li>
+            </ul>
+          </section>
+
+          <!-- 8 -->
+          <section class="section" id="s8">
+            <div class="section-head">
+              <span class="section-num">08</span>
+              <h2>Open questions for Zack</h2>
+            </div>
+            <ol>
+              <li>
+                Which raster formats are worth carrying in the worker bundle?
+                WebP encode only is the cheap default; every added codec is
+                135–337 KB.
+              </li>
+              <li>
+                Does the SVG audit ship inside this package, or as a standalone
+                lefthook lint? It has no real dependency on the service.
+              </li>
+              <li>
+                Is a Rust toolchain acceptable as a build prerequisite, even
+                temporarily? That decides whether milestone 6 starts with the
+                svg-hush CLI or goes straight to building a wasm artifact.
+              </li>
+              <li>
+                Where does the package live — its own repo, or a workspace
+                alongside pagemeta?
+              </li>
+              <li>
+                Does <code>&lt;Image&gt;</code> come back to this site once the
+                service works, or does nbastt stay on plain
+                <code>&lt;img&gt;</code> and serve only as the test bed? The
+                <code>&lt;img&gt;</code> approach is genuinely less machinery
+                for a site with no raster images.
+              </li>
+            </ol>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

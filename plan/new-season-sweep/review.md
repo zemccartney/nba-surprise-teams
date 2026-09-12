@@ -9,10 +9,100 @@ checklist, and the comparison artifacts. The full record of every round is in
 `log.md`; this file is the checklist. Steps 1 to 3 were reviewed round by
 round and have no section here.
 
+For the scope of the whole session and what is still outstanding, see
+`status.html`.
+
 **Branch stack, oldest first.** `tooling` → `react-removal` → `eslint-10` →
 `deps` → `trailing-slash` → `astro-7`. Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
+
+## Step 9: plain `<img>` for the SVGs, svgo at build
+
+**State.** Branch `svg-images` on `astro-7`. One commit, `[CF-Pages-Skip]`, no
+Pages preview (the Pages build still cannot build an Astro 6+ branch). Verified
+locally and on real workerd via `astro preview`.
+
+### Files to read, in order
+
+1. `src/components/logo.astro`: the whole component is the change. The comment
+   above `const { default: logo }` says why a plain `<img>` and not `<Image>`.
+2. `src/components/result-emoji.astro`: same move, plus the bit that matters —
+   `<Image>` used to derive a missing `height` from the source aspect ratio and
+   callers only pass `width`, so that arithmetic is now explicit. If it were
+   dropped, every emoji would shift layout.
+3. `svg-optimizer/integration.ts`: ~100 lines. Read the header comment for why
+   this is an `astro:build:done` step and not part of an image service.
+4. `astro.config.mjs`: `devImageEndpoint` is gone, `svgOptimizer()` is added.
+5. `src/pages/stats.astro` and `src/components/charts/team-season-pace.astro`:
+   mechanical — `getImage({src: X})` became `const { default: img } = await X`.
+   `img.src` is untouched, so nothing downstream in the ECharts config moved.
+
+### Surprises, and what each one means for review
+
+- **`<Image>` was doing nothing for these files and costing two things.** Astro
+  emits one output per distinct set of transform props even when the service
+  returns the input buffer unchanged, so 45 sources became 98 byte-identical
+  files. And because `Logo` and `ResultEmoji` render inside the two server
+  islands, every island render was making runtime `/_image` requests. Both are
+  gone.
+- **The dev shim added in Step 8 is now dead code**, so it was deleted. If you
+  ever reintroduce `<Image>` for an SVG, you need it back — or, better, the
+  image service in `image-service-spec.html`.
+- **svgo optimizes `public/favicon.svg` too** (3,618 → 2,531), because the
+  integration walks the whole client dir rather than just `_astro`. Sources are
+  untouched; only the built copy changes. If that is unwanted, scope the walk.
+- **The emitted filename hash no longer matches the file's contents.** Rolldown
+  hashes before `astro:build:done` runs, so the hash is of the unoptimized
+  bytes. Harmless for cache busting — it still changes when the source changes
+  — but worth knowing before it confuses someone.
+
+### Decisions you may flip
+
+- **Plain `<img>` instead of `<Image>`.** The trade is that you now have to
+  know the file is an SVG to know which to use — exactly the seam the image
+  service spec exists to remove. For a site that is 100% SVG this is strictly
+  less machinery; for the general case it is the wrong shape.
+- **svgo's `floatPrecision` left at the default 3.** Costs 1–5 pixels of
+  antialiasing movement on 21 of 44 screenshots (0.00% each). Precision 5
+  removes it and gives back ~11 KB of the 35 KB saved.
+- **svgo runs over the build output, not the sources.** The alternative is
+  optimizing `src/assets` once and committing, which needs no dependency and no
+  build step but makes the sources less readable. Reversible either way.
+- **`favicon.svg` is in scope** — see above.
+- **svgo is a dependency now.** It is the only new one.
+
+### Manual test checklist
+
+- [ ] `pnpm start`, then `node plan/baseline/dev-smoke.mjs --base http://localhost:4321`
+      exits 0 with 47 images. Logos and emoji visible on `/2024/`, a team page
+      and `/stats/`.
+- [ ] Any team page: the stats-table emoji are the right size and the row does
+      not shift as they load. This is the aspect-ratio arithmetic in
+      `result-emoji.astro`.
+- [ ] `/2024/`: the Pistons logo still has its drop shadow. That inline style
+      survives the `<Image>` → `<img>` move.
+- [ ] A chart page, e.g. `/2011/CHA/` and `/stats/`: the ECharts symbols are
+      still the team logos. `dev-smoke.mjs` does **not** cover these — they are
+      not `<img>` elements — so this one needs your eyes.
+- [ ] `pnpm run build`: the log line reads
+      `[svg-optimizer] Optimized 46/46 SVGs ... 31.0%`.
+- [ ] Spot-check one optimized file in `dist/client/_astro/` still has a
+      `viewBox`. Every logo depends on it to scale.
+- [ ] `pnpm exec astro preview` with a scratch 2026 team season: the island
+      renders logos and the payload contains no `/_image`.
+
+### Comparison artifacts
+
+- `plan/baseline/runs/2026-09-11-no-image-component` vs
+  `runs/2026-09-09-astro-7-local`: 44/44 pixel-identical, 0 console errors.
+- `plan/baseline/runs/2026-09-11-no-image-scratch-island` vs
+  `runs/2026-09-09-astro-7-scratch-island`, both on `astro preview`: 8/8
+  pixel-identical. **Use one `2026/CHA` at `overUnder: 30.5`** for the scratch
+  season or the comparison is meaningless.
+- `plan/baseline/runs/2026-09-11-svgo` vs `runs/2026-09-11-no-image-component`:
+  HTML byte-identical, transfer down 1–12.5 KB per page, 21 screenshots
+  differing by 1–5 pixels.
 
 ## Step 8: Astro 7 and the Cloudflare Workers adapter
 
@@ -530,8 +620,48 @@ Run `pnpm start`, or use the preview URL.
 
 ### Issues found in review
 
-- 2026-09-09, Zack: "some layout and coloring issues", details to follow.
-  Where to look first: `src/components/charts/charts.css` (`.chart` is a
-  fixed 600px tall; Recharts sized from its ResponsiveContainer), the theme
-  reader in `echarts.ts` (hex conversion, surprise 2 above), and
-  `popover.css` (`width: fit-content; max-width: 20rem`).
+**2026-09-11, Zack — chart regressions vs production.** Details for the
+placeholder that used to sit here. Not addressed; logged for a later round.
+None of these is a blocker, and none has been reproduced or diagnosed by me
+yet — the notes under each are hypotheses to start from, not findings.
+
+1. **Opening and closing a tooltip fires a request for every image on the
+   page** (304s). Production does not do this.
+   Two separate things to separate before chasing it. _Why any request at
+   all:_ an ECharts tooltip show/hide may be re-applying the series option,
+   and logo symbols are `image://<url>` strings, so a re-render can re-fetch
+   them; Recharts rendered its symbols as DOM `<img>` and would not. _Why you
+   see it at all:_ if this was observed under `pnpm start`, dev serves assets
+   without an immutable cache header, so the browser revalidates and you get
+   304s, while production's `/_astro/*` is immutable and never asks. That
+   second half would make it dev-only noise rather than a regression — worth
+   settling first, since it decides whether there is anything to fix.
+   Reproduce on `astro preview` and in prod's own DevTools before assuming.
+
+2. **Team-season pace: coloring changed, opacity is different.**
+   The area fill under the line. Suspects: the hex conversion in the theme
+   reader (`echarts.ts` reads the oklch tokens and converts), and the
+   `areaStyle` opacity, which Recharts and ECharts do not default the same
+   way. Related: `cd43deb Fix area coloring for undefeated teams` on `main`
+   is the most recent change to this exact code path.
+
+3. **Surprises-per-season: top edge no longer aligns with the top-10 block.**
+   Layout, not chart internals. `.chart` in `charts.css` is a fixed 600px
+   tall; Recharts sized itself from a `ResponsiveContainer`. The fixed height
+   plus ECharts' own `grid` insets is the likely mismatch.
+
+4. **Scales drifted on both the pace and scatter charts.**
+   Axis ranges and tick placement. ECharts' default `min`/`max`/`splitNumber`
+   behaviour differs from Recharts' domain calculation, so any axis where the
+   old code relied on Recharts' defaults will land somewhere else. Check
+   whether the old config pinned domains explicitly and the port dropped them.
+
+**Why the harness missed all four.** The Step 4 comparison recorded that
+"chart pages differ only inside the chart area" and moved on — meaning the
+chart interiors were the one region never compared. `dev-smoke.mjs` has the
+same hole from the other direction: ECharts symbols are not `<img>` elements,
+so it does not count them either. Anything inside a chart is currently
+unverified by any automated check in this repo, which is the honest scope of
+"anything else" — these four are what Zack's eyes caught, not what exists.
+Closing that gap is the tracked item "dev-smoke.mjs only counts <img>", and
+the cheaper half is to stop excluding the chart region from `compare.mjs`.

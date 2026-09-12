@@ -3,7 +3,6 @@
   Chart host + data; the script mounts ECharts on the client. Data travels as a
   JSON script block rather than an attribute so it isn't HTML-escaped.
 */
-import { getImage } from "astro:assets";
 
 import type {
   TeamSeasonPaceChartData,
@@ -15,7 +14,7 @@ import "./charts.css";
 
 type Props = TeamSeasonPaceChartProps;
 
-const emoji = await getImage({ src: Utils.getEmoji("hushed-face") });
+const { default: emoji } = await Utils.getEmoji("hushed-face");
 const data: TeamSeasonPaceChartData = {
   ...Astro.props,
   surprisedEmojiSrc: emoji.src,

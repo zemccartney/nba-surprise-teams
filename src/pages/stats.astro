@@ -1,7 +1,6 @@
 ---
 import type { ComponentProps } from "astro/types";
 
-import { getImage } from "astro:assets";
 import { getCollection, getEntry } from "astro:content";
 
 import type { TeamCode } from "../content-utils";
@@ -65,12 +64,10 @@ const tableRows = [];
 for (const paceEntry of paceTop10) {
   const team = await getEntry(paceEntry.teamSeason.data.team);
 
-  const img = await getImage({
-    src: ContentUtils.getTeamSeasonLogo(
-      team,
-      paceEntry.teamSeason.data.season.id,
-    ),
-  });
+  const { default: img } = await ContentUtils.getTeamSeasonLogo(
+    team,
+    paceEntry.teamSeason.data.season.id,
+  );
 
   tableRows.push({
     isSurpriseTeam: await ContentUtils.isSurprise(
@@ -132,9 +129,10 @@ for (const season of archivedSeasons) {
     if (isSurpriseTeam) {
       const team = await getEntry(teamSeason.data.team);
 
-      const img = await getImage({
-        src: ContentUtils.getTeamSeasonLogo(team, teamSeason.data.season.id),
-      });
+      const { default: img } = await ContentUtils.getTeamSeasonLogo(
+        team,
+        teamSeason.data.season.id,
+      );
 
       datapoint.numSurprises += 1;
       datapoint.surpriseTeams.push({
@@ -177,9 +175,7 @@ for (const team of teams) {
     for (const hist of teamHistory) {
       teamIds.add(hist.teamId);
       const { logo, ...keep } = hist;
-      const img = await getImage({
-        src: Utils.getEmoji(logo),
-      });
+      const { default: img } = await Utils.getEmoji(logo);
       histResolvedLogos.push({
         ...keep,
         logoSrc: img.src,
@@ -199,9 +195,7 @@ for (const team of teams) {
       return teamIds.has(data.team.id);
     });
   } else {
-    const img = await getImage({
-      src: ContentUtils.getTeamLogo(team.data.id),
-    });
+    const { default: img } = await ContentUtils.getTeamLogo(team.data.id);
 
     datapoint = {
       logoSrc: img.src,
@@ -257,9 +251,10 @@ for (const teamSeason of teamSeasons) {
   );
   const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
   const team = await getEntry(teamSeason.data.team);
-  const img = await getImage({
-    src: ContentUtils.getTeamSeasonLogo(team, teamSeason.data.season.id),
-  });
+  const { default: img } = await ContentUtils.getTeamSeasonLogo(
+    team,
+    teamSeason.data.season.id,
+  );
 
   scatterPoints.push({
     isSurpriseTeam,

@@ -3,6 +3,96 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+For the scope of the whole session and what is still outstanding, see
+`status.html`.
+
+Unaddressed review feedback does not get an entry here — it lives under
+"Issues found in review" in the `review.md` section for the round that
+introduced it. As of 2026-09-11 there are four open chart regressions against
+production from Step 4 (tooltip image re-requests, pace area coloring,
+surprises-per-season top alignment, axis scales on pace and scatter), logged
+in detail there.
+
+## 2026-09-11 — Step 9: drop `<Image>` for the SVGs, svgo at build
+
+Branch `svg-images` on `astro-7`. Follow-on from the Step 8 image breakage:
+rather than keep a dev-only shim so `/_image` could serve SVG, stop asking the
+image pipeline to handle SVG at all.
+
+**What changed.** `logo.astro` and `result-emoji.astro` emit a plain `<img>`;
+the six `getImage()` calls in `stats.astro` and `team-season-pace.astro` became
+destructured awaits (`const { default: img } = await ...`), so `img.src` is
+unchanged at every call site and the ECharts wiring did not move. A new
+`svg-optimizer/` integration runs svgo over the client build in
+`astro:build:done`. The `devImageEndpoint` shim in `astro.config.mjs` is gone.
+
+**Why this and not a custom endpoint.** Four facts, each read out of installed
+source rather than inferred:
+
+1. Astro's sharp service returns SVG input unchanged for svg output
+   (`astro/dist/assets/services/sharp.js`, the `outputFormat === "svg"`
+   branch), and Cloudflare Images documents that it does not resize SVG and
+   ignores optimization parameters for it. So the image pipeline was never
+   doing anything to these files.
+2. Despite that, Astro names output files
+   `<base>_<hashTransform(...)>` keyed on the requested props
+   (`dist/assets/utils/hash.js`), so a logo used at five sizes produced five
+   byte-identical files. 45 sources produced 98 files.
+3. An ESM-imported image's `.src` is the plain asset URL —
+   `/_astro/<name>.<hash>.svg` in a build, `/@fs/...` in dev
+   (`dist/assets/utils/node.js`, `emitImageMetadata`). A plain `<img>` gets
+   file caching and never touches `/_image`.
+4. `Logo` and `ResultEmoji` both render inside the two server islands, so
+   before this change every island render emitted runtime `/_image` requests.
+
+**Numbers.** SVG files in the build 98 → 45, one per source. Bytes ~260,103 →
+78,211 (the before figure is approximate; three emitted names could not be
+resolved back to a source). `/_image` references in built client HTML: 0.
+Per-page HTML shrank up to 2,589 bytes on `/stats`; per-page transfer 1–12.5 KB.
+
+**svgo.** 113,401 → 78,211 over the 45 emitted SVGs (31.0%), plus
+`favicon.svg` 3,618 → 2,531. Sources are untouched. svgo v4 dropped
+`removeViewBox` from `preset-default`, so viewBox survives with no override —
+verified on all 45, and it must stay that way since every logo is rendered at
+several sizes. Default `floatPrecision: 3` moves antialiased edges by 1–5
+pixels on 21 of 44 screenshots (all 0.00%); raising it to 5 removes that and
+costs ~11 KB, a third of the saving. Left at the default.
+
+**The dev shim is dead code now.** Verified rather than assumed: removed it,
+restarted dev, re-ran `dev-smoke.mjs` — 47 images, 0 problems. Nothing requests
+`/_image` any more.
+
+**Comparison.** 44/44 screenshots pixel-identical against
+`runs/2026-09-09-astro-7-local`, 0 console errors. 8/8 island screenshots
+pixel-identical against `runs/2026-09-09-astro-7-scratch-island` on real
+workerd. The runtime island returns 200 with five `<img src="/_astro/*.svg">`
+and zero `/_image`, which is what proves `result-emoji`'s dynamic `import()`
+resolves inside workerd. `astro check` 0 errors across 56 files, ESLint clean,
+prettier clean, 10/10 tests, `dev-smoke.mjs` 47 images 0 problems.
+
+**Two traps worth recording.**
+
+- The first island comparison showed 11% diffs. That was the scratch data, not
+  a regression: `runs/2026-09-09-astro-7-scratch-island` used a single
+  `2026/CHA` at `overUnder: 30.5`, and three teams at 35.5 is a different
+  table. Match the scratch data exactly or the comparison is meaningless.
+- `astro.config.mjs` had picked up an uncommitted
+  `import * as Endpoint from "astro/assets/endpoint/generic"`. That module
+  imports `astro:assets`, a Vite virtual module, so Node cannot load it from a
+  config file and it broke `astro check` and the build outright. Removed. The
+  string is a valid _entrypoint value_ for `image.endpoint`; it is not
+  importable from the config.
+
+**Also in this commit, not from this round.** Zack's own uncommitted
+`package.json` edit adding `wrangler types &&` to the `build` and `preview`
+scripts. It is combined here rather than split out: the pre-commit hook runs
+`pnpm install`, so a commit that staged only part of `package.json` uninstalled
+svgo and failed its own checks.
+
+**Follow-ups.** A spec for the portable image service is at
+`plan/new-season-sweep/image-service-spec.html`. `dev-smoke.mjs` still only
+counts `<img>`, so the ECharts chart symbols remain uncovered.
+
 ## 2026-09-09 — Step 8: Astro 7, Cloudflare adapter 14, Workers instead of Pages
 
 **What changed.** astro 5.18.2 → 7.3.1, `@astrojs/cloudflare` 12.6.13 → 14.3.0,
