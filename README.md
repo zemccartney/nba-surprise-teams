@@ -1,16 +1,61 @@
 # NBA Surprise Teams Tracker
 
-## 🧞 Commands
+## Toolchain
 
-All commands are run from the root of the project, from a terminal:
+- **Node 26**, pinned in `.node-version`. With fnm, run `fnm use` in the repo
+  (or add `--use-on-cd` to the `fnm env` line in your shell profile).
+  `package.json` `engines` enforces it: `pnpm install` refuses older Nodes.
+- **pnpm**, version pinned in the `packageManager` field. Any pnpm ≥ 10 on
+  `PATH` downloads and runs that exact version (`pnpm -v` in the repo should
+  print it); `corepack enable` also works. Never `npm install` here.
+- `pnpm install` installs dependencies and the git hooks.
 
-| Command                   | Action                                       |
-| :------------------------ | :------------------------------------------- |
-| `npm run dev`             | Starts local dev server at `localhost:4321`  |
-| `npm run build`           | Build your production site to `./dist/`      |
-| `npm run preview`         | Preview your build locally, before deploying |
-| `npm run astro -- --help` | Get help using the Astro CLI                 |
-| `npm run deps`            | Helper to check and update dependencies      |
+## Commands
+
+| Command                    | Action                                                                |
+| :------------------------- | :-------------------------------------------------------------------- |
+| `pnpm start`               | Dev server at `localhost:4321` plus a type-check watcher              |
+| `pnpm run build`           | `verify`, then build the production site to `./dist/`                 |
+| `pnpm run verify`          | Types, format, lint, tests over the whole repo (the CF build runs it) |
+| `pnpm run preview`         | Preview the build locally, before deploying                           |
+| `pnpm run astro -- --help` | Astro CLI help                                                        |
+| `pnpm run deps`            | Interactive dependency update (`npm-check-updates`)                   |
+| `pnpm run archive:diff`    | Explain what changed in `games.json` (committed vs working tree)      |
+
+## Dependencies and supply chain
+
+pnpm's settings live in `pnpm-workspace.yaml` (pnpm ≥ 11 ignores everything but
+registry/auth in `.npmrc`). Each setting is commented there; the ones you'll
+meet day to day:
+
+- **`minimumReleaseAge`**: versions published less than 3 days ago don't
+  resolve. `pnpm run deps` uses the same cooldown. Waiting is the fix.
+- **`trustPolicy: no-downgrade`**: a version whose provenance is weaker than an
+  earlier release's is refused (`ERR_PNPM_TRUST_DOWNGRADE`). Versions older
+  than a year are exempt. Real backports trip this; after checking the
+  release, add the exact version to `trustPolicyExclude`.
+- **`allowBuilds`**: dependencies with install scripts must be listed
+  (`ERR_PNPM_IGNORED_BUILDS` names the newcomer). Read the script before
+  allowing it; `false` is right when the package ships its binary as an
+  optional dependency and the script is only a check or a fallback download.
+- **No hoisting.** Only packages listed in `package.json` are importable from
+  project code. `Cannot find module 'x'` for a package you never installed means
+  `x` must be declared (that's why `vite` is a devDependency: `astro.config.mjs`
+  uses its `loadEnv`) or imported through the package that owns it (`astro/zod`
+  rather than `zod`).
+- The lockfile is re-verified against these policies on every install,
+  including the Cloudflare build, so a violation fails loudly rather than
+  deploying.
+
+`plan/baseline/` is its own pnpm project (own `pnpm-workspace.yaml`) so the
+capture tooling's dependencies stay out of the site's lockfile and build.
+
+## Git hooks
+
+[lefthook](https://lefthook.dev), configured in `lefthook.yml`, installed by
+`pnpm install`. Pre-commit runs `astro check`, the tests, and Prettier and
+ESLint on the staged files, in parallel. `pnpm exec lefthook run pre-commit`
+runs it by hand; `LEFTHOOK=0 git commit` skips it.
 
 ## Maintenance
 

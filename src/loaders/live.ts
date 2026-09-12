@@ -1,4 +1,7 @@
-import { z } from "zod"; // using zod directly, instead of version exported by astro, so file is importable / executable in node (astro: protocol not supported)
+// astro/zod, not astro:schema: a real package subpath resolves in plain node too,
+// so the archiver can import this file. A bare "zod" import would be an
+// undeclared dependency (pnpm does not hoist) and bundled a second zod copy.
+import { z } from "astro/zod";
 
 import type { GameData, LoaderResponse, TeamCode } from "../content-utils";
 

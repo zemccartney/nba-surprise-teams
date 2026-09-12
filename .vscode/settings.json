@@ -7,7 +7,7 @@
   "search.exclude": {
     "**/*.svg": true,
     "**/node_modules": true,
-    "**/package-lock.json": true,
+    "**/pnpm-lock.yaml": true,
     "**/worker-configuration.d.ts": true
   }
 }

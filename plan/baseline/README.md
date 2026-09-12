@@ -7,7 +7,7 @@ changes can be compared against a known-good reference.
 ## Setup
 
 ```sh
-cd plan/baseline && npm install
+cd plan/baseline && pnpm install
 ```
 
 Uses the system Google Chrome via Playwright's `channel: "chrome"`. Override with
@@ -49,8 +49,8 @@ The comparison target for foundation work (group 1) is committed `main` plus the
 ```sh
 mkdir -p /tmp/main-baseline && git archive main | tar -x -C /tmp/main-baseline
 cp src/content/games.json /tmp/main-baseline/src/content/games.json
-cd /tmp/main-baseline && npm ci && npx astro build
-npx wrangler pages dev dist --port 8788 --compatibility-date 2025-03-21 --compatibility-flags nodejs_compat --kv GAMES_KV
+cd /tmp/main-baseline && pnpm install --frozen-lockfile && pnpm exec astro build
+pnpm exec wrangler pages dev dist --port 8788 --compatibility-date 2025-03-21 --compatibility-flags nodejs_compat --kv GAMES_KV
 ```
 
 Then `node plan/baseline/capture.mjs --base http://localhost:8788 --label <name>`.

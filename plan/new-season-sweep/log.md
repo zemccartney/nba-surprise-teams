@@ -3,6 +3,97 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-07 — Step 3: pnpm 11, Node 26, lefthook
+
+**What changed.** npm → pnpm 11.26.0, pinned with its integrity hash in
+`packageManager`; the lockfile came from `pnpm import`, so every resolved
+version is what `package-lock.json` had (set-compared: only `pre-commit`'s
+subtree left and `lefthook`'s platform binaries arrived). Node 26 via
+`.node-version` and `engines`. `pre-commit` (last published 2017) → lefthook 2,
+installed by the `prepare` script, running types/format/lint/tests in parallel
+with the two linters scoped to staged files. pnpm settings with comments in
+`pnpm-workspace.yaml`. `plan/baseline/` got its own `pnpm-workspace.yaml` so
+it's a separate project rather than a workspace member. README gained
+Toolchain / Dependencies / Git hooks sections.
+
+**Found on the way:**
+
+1. `npm run build` ran check + test twice: npm runs `prebuild` as a lifecycle
+   hook and the `build` script called it again explicitly. Renamed to `verify`,
+   called once.
+2. `trustPolicy: no-downgrade` compares provenance by publish date. Two
+   legitimate backports trip it: `semver@6.3.1` (2023, via eslint-plugin-react)
+   and `vite@6.4.1` (2025-10 security backport). Kept the policy with
+   `trustPolicyIgnoreAfter` = 1 year and `vite@6.4.1` in `trustPolicyExclude`.
+3. `sharp` still has an install script (the research said otherwise); it needs
+   an `allowBuilds` entry like esbuild/workerd/@sentry/cli/lefthook. When a
+   build is unreviewed, pnpm writes a `set this to true or false` placeholder
+   into the workspace file.
+4. While `pnpm install` is failing, every `pnpm run`/`pnpm exec` fails too
+   (`verifyDepsBeforeRun` re-runs the install first).
+
+**Verification.** `pnpm run verify` green on Node 26.8.1. `astro build` output
+vs the same commit built with npm on Node 24: `dist/_astro/` (118 files) and
+all static output byte-identical; server chunks differ only in Astro's embedded
+module paths (`node_modules/.pnpm/...`) and Rollup export-name ordering. Runtime
+capture of both builds served by wrangler (`runs/2026-09-07-main-npm-local` vs
+`runs/2026-09-07-tooling-pnpm-local`): identical payloads on all 11 pages, 44/44
+screenshots pixel-identical, no console or request errors. One server-side
+delta: the pnpm build bundles a second copy of zod into
+`_worker.js/_astro-internal_actions.mjs` (7 KB → 136 KB; worker total
+6.42 → 6.55 MB). Nothing reaches the client and Astro 7 rechunks all of this,
+so it's noted, not chased.
+
+**Addendum, 2026-09-08 — phantom dependencies.** The first `pnpm install` ran on
+top of npm's `node_modules`; pnpm moved the direct dependencies aside but left
+npm's hoisted transitive packages in place, so three undeclared imports kept
+resolving: `vite` (`loadEnv` in `astro.config.mjs`), `zod` in
+`src/loaders/live.ts` and `archiver/api.ts`. A clean install the next day broke
+`astro dev` and `astro build` ("Cannot find module 'vite'"), which a Cloudflare
+build would have hit too. Fixes: `vite` declared as a devDependency at the
+version Astro resolves (Astro's documented pnpm requirement for `loadEnv`);
+`zod` imported as `astro/zod`; unused `dotenv` removed. The `zod` fix also
+removed the duplicate zod copy noted above: the bare import had resolved to
+npm's leftover copy. The `prepare` script now skips `lefthook install` outside a
+git checkout so `git archive`-based reference builds still install. Verified
+with a from-scratch `CI=true pnpm install --frozen-lockfile && pnpm run build`
+in a copy of the tree. Lesson: after switching package managers, `rm -rf
+node_modules` before the first install.
+
+**Also found, not fixed (pre-existing):** in a fresh checkout the vitest run
+passes vacuously. `getCollection` in vitest reads `.astro/data-store.json`, which
+only `astro dev` and `astro build` write; `astro check` and `astro sync` populate
+`node_modules/.astro/` instead. So `verify` on the Cloudflare build (and the old
+`prebuild`) runs the 10 lifecycle tests against empty collections and logs
+"The collection … does not exist or is empty". Locally the store exists from dev
+runs, which is why it looks fine. Candidate fixes: test after the build, or a
+vitest setup step that writes the store to `.astro/`. Sharp also needs a direct
+dependency for the same hoisting reason as `vite`: Astro's build-time image
+generation imports `sharp` from the output directory.
+
+**Decisions, 2026-09-08 (Zack):** the vacuous-tests gap waits for the sqlite
+work, which replaces the content collections it stems from. vitest 5 and
+eslint-plugin-import-x go in the ESLint 10 round; tsx removal in the deps round.
+Added `pnpm run archive:diff` (`archiver/diff.ts`) after `archive:all` turned up
+a one-game score correction (1996-11-10 CLE/DEN, 108–79 → 101–86, confirmed by
+Basketball-Reference and ESPN; NBA.com's game header still shows the old line
+while its box score sums to the new one). Cloudflare dashboard updated.
+
+**Pages preview, 2026-09-08.** With the dashboard updated (`pnpm run build`,
+`NODE_VERSION` removed) the `tooling` branch built and deployed. Its CSS asset
+hash matches the local build, so the lockfile was honored. Captured as
+`runs/2026-09-08-preview-tooling` and compared with `runs/2026-09-08-preview-tailwind`
+(the same code as `main`, captured before the season commit): 10/11 pages
+identical in payload and scripts; the home page is now the countdown, which is
+the season registration, not tooling. One screenshot (2011/CHA desktop) caught
+the pace chart mid-animation on a heavily loaded machine; a re-capture with a
+6 s settle is pixel-identical on all four widths.
+
+**Done by hand (Cloudflare Pages dashboard, 2026-09-08):** build command
+`pnpm run build`; delete `NODE_VERSION` (or set 26) so `.node-version` applies;
+`PNPM_VERSION` can stay unset — the image's pnpm 10 self-selects 11.26.0 from
+`packageManager`. The first preview build is the test.
+
 ## 2026-09-08 — Step 2: register the 2026-27 season
 
 `seasons.json` gains id `2026`, 2026-10-20 to 2027-04-11 (NBA schedule released

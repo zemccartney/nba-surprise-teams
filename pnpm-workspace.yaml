@@ -1,0 +1,37 @@
+# pnpm project settings. Since pnpm 11, .npmrc is for registry/auth only;
+# everything else lives here. Reference: https://pnpm.io/settings
+
+# Refuse to install if Node doesn't satisfy package.json "engines"
+# (for this project and for every dependency).
+engineStrict: true
+
+# Supply chain: ignore package versions published less than 3 days ago
+# (minutes). Matches the `--cooldown 3` in the `deps` script.
+minimumReleaseAge: 4320
+
+# Refuse a package version whose publishing trust (provenance attestation
+# or trusted publishing) is weaker than an earlier-published version's. The
+# comparison is by publish date, not semver, so a backport to an old major
+# line published without provenance trips it. Two escape hatches:
+#   - versions older than a year are assumed safe (minutes);
+#   - specific versions can be excluded after review.
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 525600
+trustPolicyExclude:
+  # 2025-10 security backport on the Vite 6 line, published without provenance
+  - vite@6.4.1
+
+# Refuse transitive dependencies that resolve to git/URL/tarball sources
+# instead of the registry.
+blockExoticSubdeps: true
+
+# pnpm 11 refuses to install unless every dependency with an install
+# script is listed here (strictDepBuilds). Each of these ships its binary
+# as a platform-specific optional dependency; the install script only
+# verifies or downloads a fallback, so it is safe to skip.
+allowBuilds:
+  "@sentry/cli": false
+  esbuild: false
+  lefthook: false
+  sharp: false
+  workerd: false

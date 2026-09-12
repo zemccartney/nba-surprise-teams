@@ -1,0 +1,17 @@
+# Git hooks. `pnpm install` installs them (see the "prepare" script).
+# Reference: https://lefthook.dev/configuration/
+min_version: 2.0.0
+glob_matcher: doublestar
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: types
+      run: pnpm exec astro check
+    - name: format
+      run: pnpm exec prettier --check --ignore-unknown {staged_files}
+    - name: lint
+      glob: "**/*.{js,mjs,cjs,ts,tsx,astro,json}"
+      run: pnpm exec eslint --no-warn-ignored {staged_files}
+    - name: test
+      run: pnpm test

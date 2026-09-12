@@ -1,0 +1,4 @@
+# Marks plan/baseline as its own pnpm project so its dependencies stay out
+# of the site's lockfile and Cloudflare build. Run `pnpm install` here.
+engineStrict: true
+minimumReleaseAge: 4320
