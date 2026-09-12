@@ -131,7 +131,7 @@ const inventory = (html, pageUrl) => {
     .toArray();
   const inlineStyles = (html.match(/<style\b/g) ?? []).length;
   const islands = html
-    .matchAll(/fetch\('([^']*_server-islands[^']*)'\)/g)
+    .matchAll(/fetch\('([^']*_server-islands[^']*)'/g)
     .map((m) => new URL(m[1], pageUrl).href)
     .toArray();
   const hydrated = html.matchAll(/<astro-island\b[^>]*>/g).toArray().length;

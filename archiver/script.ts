@@ -29,13 +29,13 @@ const baseURL = `http://localhost:4322`;
 try {
   let endpoint: string;
   if (isLatestOnly) {
-    endpoint = `${baseURL}/api/archive/latest`;
+    endpoint = `${baseURL}/api/archive/latest/`;
     console.log("Processing latest season...");
   } else if (seasonId) {
-    endpoint = `${baseURL}/api/archive/${seasonId}`;
+    endpoint = `${baseURL}/api/archive/${seasonId}/`;
     console.log(`Processing season ${seasonId}...`);
   } else {
-    endpoint = `${baseURL}/api/archive/all`;
+    endpoint = `${baseURL}/api/archive/all/`;
     console.log("Processing all archivable seasons...");
   }
 

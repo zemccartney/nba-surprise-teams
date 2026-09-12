@@ -3,6 +3,82 @@
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 
+## 2026-09-09 — Step 7: `trailingSlash: "always"`, links written with the slash
+
+**What changed.** `astro.config.mjs` declares both halves of the pair:
+`build.format: "directory"` (already the default, written down so the
+relationship is visible) and `trailingSlash: "always"`. Every internal link is
+now written with the slash: the three nav links in `subpage.astro`, the four on
+the home page, the season links on `/archive/`, the two season buttons and the
+team links on a season page, the back link on a team page, and the team links
+on `/stats/`. The nav-highlight script in `subpage.astro` lost its
+normalization step — it stripped the trailing slash off `location.pathname`
+before matching, and now both sides carry it. `archiver/script.ts` calls the
+dev-only archive endpoints at `/api/archive/latest/`, `/api/archive/<id>/` and
+`/api/archive/all/`, because the injected route is SSR and redirects the
+slash-less form. One test-harness fix rides along: `plan/baseline/capture.mjs`
+counted server islands with a regex ending in `'\)`, and Astro 5.18 emits
+`fetch('…', { headers })`, so every capture since the dependency round had
+reported zero islands.
+
+**Found on the way:**
+
+1. **Dev does not redirect; it 404s.** Astro's dev server answers a
+   mismatched request with the 404 page rather than a redirect (the check
+   lives in `vite-plugin-astro-server/trailing-slash.js`), so `/stats` is a
+   hard 404 under `pnpm dev` while production 308s it. That is the reason every internal link had to be
+   rewritten rather than left to the host: a slash-less link now breaks
+   locally even though it works deployed.
+2. **Production behavior for prerendered pages does not change.** Cloudflare
+   already 308s `/about` to `/about/`, verified against the `deps` preview.
+   What the setting changes is dev, the SSR routes, and what Astro treats as
+   the canonical form when it writes URLs itself.
+3. **Astro writes the slash into the server-island endpoint too.** The island
+   script went from `fetch('/_server-islands/StandingsTable?…')` to
+   `fetch('/_server-islands/StandingsTable/?…')`. Both island components were
+   exercised with a scratch 2026 team season: the slashed endpoint answers 200,
+   the unslashed one 404s, and the rendered pages are pixel-identical to the
+   same build on the `deps` branch.
+4. **Astro exempts internal paths from the check.** `isInternalPath` skips
+   anything starting `/_`, `/@`, `/.` or `//`, so `/_server-islands/…`,
+   `/_actions/…` and Vite's own routes never see the mismatch 404 in dev.
+5. **No client-side action call exists to break.** `getSeasonData` is only
+   reached through `Astro.callAction` inside the two island components, so
+   there is no browser POST to `/_actions/…` that the setting could affect.
+6. **`wrangler pages dev` dies under the capture.** Three runs out of three,
+   between one and three minutes in: the proxy controller reports an error
+   inside the proxy worker, cause "Network connection lost" (wrangler 4.129,
+   full trace under `~/Library/Preferences/.wrangler/logs/`).
+   Restarting and retrying did not help. The capture now runs against
+   `plan/baseline/serve-dist.mjs`, a 40-line static server that answers
+   `<path>/index.html` for `/path/`, 308s `/path` to `/path/` and serves
+   `404.html` with a 404 — which is what Cloudflare does for a prerendered
+   site. Both sides of the comparison were re-captured through it, so the
+   result is server-for-server honest. Nothing here says anything about the
+   site; it is a harness problem, written down so the next round doesn't spend
+   an hour on it again.
+
+**Verification.** 44/44 screenshots pixel-identical to the dependency-round
+build across four viewports, 0 console errors, charts and popover unchanged.
+The nav highlight lands on exactly one link on `/archive/`, `/stats/` and
+`/about/`, and on none on `/`, `/2024/` or `/2024/TOR/`. Per-page HTML moves by
+between −36 and +4 bytes, which is the shortened nav script plus one character
+per link. The Pages preview of the branch (`513416fd`) 308s `/about`, `/stats`
+and `/2024/TOR` to their slashed forms and 404s `/nope`.
+
+Build green. Of 504 output files, 187 are byte-identical to
+the dependency-round build; the differences are the twelve renamed worker
+chunks (content hashes move because the routes changed), the two worker
+entrypoints, and 303 HTML files. Diffing the HTML with asset hashes normalized
+shows exactly two changes per page and nothing else: the shortened nav script
+and the slashed hrefs. Local probes against the built output: `/stats` 308 to
+`/stats/`, `/stats/` 200, `/2024/TOR` 308 to `/2024/TOR/`, `/nope` and `/nope/`
+both 404. Dev-server probes: `/stats` 404, `/stats/` 200,
+`/api/archive/2099/` reaches the route (its own "not found" body, after
+"Entry seasons → 2099 was not found"), `/api/archive/2099` gets the mismatch
+page. Island run: 8/8 screenshots pixel-identical to the `deps` scratch-island
+build, 0 console errors, islands detected 0 → 1 per page (the capture fix).
+
 ## 2026-09-09 — Step 6: dependency round (tsx out, ncu 23, in-range bumps)
 
 **What changed.** `tsx` is gone: `archive:all` and `archive:latest` run
@@ -20,6 +96,12 @@ reason in the README's new "Held back on purpose" list: prettier (pinned
 `@cloudflare/workers-types` 5 peer against the 4 the adapter brings. Process
 change for the batch: `review-step4.md` became the running `review.md`, one
 section per round, Step 5 added from its chat report.
+
+**Preview.** Pages build `e7971404` on branch `deps`: 44/44 screenshots
+pixel-identical to the local build, no new console errors beyond Cloudflare's
+own CORS-blocked RUM beacon. The preview poll script looked for a "Success"
+status in `wrangler pages deployment list`, which that table does not print;
+the deployment was healthy the whole time.
 
 **Found on the way:**
 

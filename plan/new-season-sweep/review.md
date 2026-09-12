@@ -14,6 +14,74 @@ round and have no section here.
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
+## Step 7: trailing slashes
+
+**State.** Branch `trailing-slash` on `deps`. Preview:
+https://trailing-slash.nba-surprise-teams.pages.dev. Commits listed at the end
+of this section.
+
+### Files to read, in order
+
+1. `astro.config.mjs`: the `build.format` block and the `trailingSlash` line,
+   each with the comment that ties it to the other.
+2. `src/layouts/subpage.astro`: the nav-highlight script (three lines shorter)
+   and the three nav links.
+3. Everything else is one character per link. The whole change is
+   `git diff deps..trailing-slash -- src/ archiver/`.
+
+### Surprises, and what each one means for review
+
+1. **Dev 404s where production redirects.** Astro's dev server answers a
+   slash-less request with the 404 page instead of a redirect, so a link
+   written without the slash breaks under `pnpm dev` and still works deployed.
+   That asymmetry is the point of the round: it makes a missed link loud
+   locally. Check: `pnpm dev`, visit `/stats` (404) and `/stats/` (200).
+2. **The island endpoint gained a slash.** Astro now writes
+   `fetch('/_server-islands/StandingsTable/?…')`. Nothing to change, but it is
+   the one URL in the app that Astro writes for you, so it is the one that
+   could have gone wrong silently. Verified with a scratch 2026 team season,
+   which is still the only way to see an island at all until the odds land.
+3. **Nothing changes for the deployed site today.** Cloudflare already 308s
+   `/about` to `/about/`. Check the response line for `/about` on the live
+   site and on the preview; both should be a 308.
+
+### Decisions you may flip
+
+- `build.format: "directory"` is written out even though it is the default.
+  Drop it if you would rather the config only carry non-defaults; the comment
+  is the reason it is there.
+- The nav highlight matches the full path against the `href`. It would also
+  work to compare normalized paths on both sides, which would survive a future
+  link written without the slash. I took the stricter version so a bad link
+  shows up as a missing highlight.
+- `archiver/script.ts` calls the endpoints with the slash. The alternative is
+  leaving them slash-less and letting the dev server redirect, which it will
+  not do — it 404s.
+
+### Manual test checklist
+
+- [ ] `pnpm dev`: `/stats` 404, `/stats/` 200. Click every nav link from every
+      page; none should hit a 404.
+- [ ] On `/archive/`, `/stats/`, `/about/`: the current nav link is
+      highlighted. On `/` and on a season page, none is.
+- [ ] `/2024/` → click a team → back link returns to `/2024/`. Both URLs keep
+      the slash in the address bar with no redirect flash.
+- [ ] `node archiver/script.ts 2099` still reaches the route: "Processing
+      season 2099…", "Entry seasons → 2099 was not found", then the 404 throw.
+- [ ] On the preview, `curl -sI …/about | head -3` shows a 308 to `/about/`.
+
+### Comparison artifacts
+
+- `plan/baseline/runs/2026-09-09-trailing-slash-local` vs
+  `runs/2026-09-09-deps-static`: 44/44 pixel-identical, 0 console errors.
+  Both were captured through `plan/baseline/serve-dist.mjs` rather than
+  `wrangler pages dev`, which died partway through three runs out of three.
+- `runs/2026-09-09-trailing-slash-scratch-island` vs
+  `runs/2026-09-09-deps-scratch-island`: 8/8 pixel-identical, islands 0 → 1
+  (the capture fix), HTML 13–38 B smaller.
+- HTML diff of the two builds: exactly two changes per page, the nav script and
+  the slashed hrefs.
+
 ## Step 6: dependency round
 
 **State.** Branch `deps` on `eslint-10`. Preview:
@@ -73,8 +141,11 @@ section.
 - `plan/baseline/runs/2026-09-09-deps-local` vs
   `runs/2026-09-09-eslint-10-local`: 44/44 pixel-identical; team pages
   +4,029 B HTML / −4,126 B CSS; other pages −8 B CSS.
-- Preview run: see the Step 6 entry in `log.md` once the Pages build is
-  captured.
+- `runs/2026-09-09-preview-deps` (Pages build `e7971404`) vs
+  `runs/2026-09-09-deps-local`: 44/44 pixel-identical. The HTML and JS deltas
+  are Cloudflare's own injected scripts (about 128 KB, two extra external
+  scripts per page), and the ten console errors are its RUM beacon being
+  CORS-blocked — the same on every preview since the tooling round.
 
 ## Step 5: ESLint 10, `eslint.config.ts`, vitest 5, import-x
 
