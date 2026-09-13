@@ -1,0 +1,38 @@
+[
+  {
+    "imageRequests": 0,
+    "kind": "surprises-per-season",
+    "moves": 20,
+    "width": 1440
+  },
+  {
+    "imageRequests": 0,
+    "kind": "surprises-by-team",
+    "moves": 20,
+    "width": 1440
+  },
+  {
+    "imageRequests": 0,
+    "kind": "team-season-scatter",
+    "moves": 20,
+    "width": 1440
+  },
+  {
+    "imageRequests": 0,
+    "kind": "surprises-per-season",
+    "moves": 20,
+    "width": 390
+  },
+  {
+    "imageRequests": 0,
+    "kind": "surprises-by-team",
+    "moves": 20,
+    "width": 390
+  },
+  {
+    "imageRequests": 0,
+    "kind": "team-season-scatter",
+    "moves": 20,
+    "width": 390
+  }
+]

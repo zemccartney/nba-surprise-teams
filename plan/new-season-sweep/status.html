@@ -661,17 +661,19 @@
           <div
             class="bar"
             role="img"
-            aria-label="14 of 37 items done, 3 blocked, 20 not started"
+            aria-label="14 of 38 items done, 1 in progress, 3 blocked, 20 not started"
           >
             <span class="seg-done" style="flex: 14"></span>
+            <span style="flex: 1; background: var(--info)"></span>
             <span class="seg-blocked" style="flex: 3"></span>
             <span class="seg-open" style="flex: 20"></span>
           </div>
           <p class="tally">
             <span class="k-done"><b>14</b> done and verified</span>
             <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
+            <span style="color: var(--info)"><b>1</b> in progress</span>
             <span class="k-open"><b>20</b> not started</span>
-            <span>37 tracked</span>
+            <span>38 tracked</span>
           </p>
         </div>
       </header>
@@ -701,7 +703,7 @@
             </li>
             <li>
               <a href="#s5"
-                >5 · Infra &amp; deferred<span class="count">0/9</span></a
+                >5 · Infra &amp; deferred<span class="count">0/10</span></a
               >
             </li>
           </ul>
@@ -814,7 +816,8 @@ mise run setup</code></pre>
                 <li><code>trailing-slash</code></li>
                 <li><code>astro-7</code></li>
                 <li><code>svg-images</code></li>
-                <li class="tip"><code>mise-setup</code></li>
+                <li><code>mise-setup</code></li>
+                <li class="tip"><code>chart-parity</code></li>
               </ul>
               <p>
                 Each is stacked on the one before it, so merging the tip takes
@@ -869,9 +872,11 @@ mise run setup</code></pre>
             </div>
             <p class="milestone">
               Milestone: the site renders exactly as it does on prod today, no
-              user-facing changes, ready to launch. Rounds through Step 9 are
-              committed; Step 10's tooling cleanup is locally verified and
-              awaiting commit. The stacked branches are not merged.
+              user-facing changes, ready to launch. Rounds through Step 10 are
+              committed. Step 11's visual walkthrough is approved. Independent
+              full-stack review found remaining test-validity, interaction and
+              deployment-safety issues; fixes/commit and cutover are still
+              gated. The stacked branches are not merged.
             </p>
 
             <ul class="items">
@@ -971,17 +976,19 @@ mise run setup</code></pre>
 
             <p class="subhead">Follow-ups after Step 10</p>
             <ul class="items">
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-wip">
+                <span class="marker">[~]</span>
                 <div>
                   <p class="item-title">
-                    Four chart regressions against production — Zack, 2026-09-11
+                    Chart parity — Step 11 fixes under review
                   </p>
                   <p class="item-note">
-                    All four come out of Step 4 (Recharts → ECharts), not the
-                    Astro or image work. Detail and starting hypotheses are
-                    under <strong>Issues found in review</strong> in the Step 4
-                    section of <code>review.md</code>.
+                    Four reported by Zack on 2026-09-11, plus lost keyboard
+                    chart navigation confirmed in the 2026-09-13 walkthrough.
+                    Chart changes come from Step 4 (Recharts → ECharts). The
+                    walkthrough also found broken table striping caused by Astro
+                    7's scoping of slotted rows. Confirmed findings and Step
+                    11's fixes are in <code>review.md</code>.
                   </p>
                   <p class="item-note">
                     <b>1.</b> Opening and closing a tooltip fires a request for
@@ -989,15 +996,44 @@ mise run setup</code></pre>
                     <b>2.</b> Team-season pace: area coloring and opacity
                     changed. <b>3.</b> Surprises-per-season: top edge no longer
                     aligns with the top-10 block. <b>4.</b> Axis scales drifted
-                    on both pace and scatter.
+                    on both pace and scatter. <b>5.</b> The pace chart lost
+                    production's Tab/arrow-key point navigation; audit the other
+                    charts too.
                   </p>
                   <p class="item-note">
-                    <strong>Nothing automated checks chart interiors.</strong>
-                    The Step 4 comparison explicitly set the chart area aside,
-                    and <code>dev-smoke.mjs</code> only counts
-                    <code>&lt;img&gt;</code>. That is why all four reached
-                    Zack's eyes first, and it bounds how much of "anything else"
-                    anyone can answer today.
+                    <strong
+                      >The original harness missed chart interiors.</strong
+                    >
+                    Step 4 set the chart area aside and dev smoke only counted
+                    <code>&lt;img&gt;</code>. The walkthrough now compares chart
+                    screenshots, payloads, sampled tooltips and keyboard
+                    behavior. On <code>/2025/CHA/</code>, all 82 datapoints
+                    match. Branch <code>chart-parity</code> restores plot/table
+                    alignment, stripes and keyboard navigation (including
+                    responsive DOM/tab order) and production's
+                    intermediate-width table sizing, with approved deviations:
+                    0.8 opacity, endpoint-only axis labels and vertical-only
+                    grid lines; Zack visually approved the team page. Stats
+                    column sizing, resize containment, plot alignment and season
+                    bounds are now corrected. All visual pages are approved;
+                    same-point tooltip icon reloads are fixed. Stats keyboard
+                    selectors, responsive tab order and purple active-dot
+                    feedback are implemented: 21 tests and normal dev/workerd
+                    browser checks pass. Runtime date corrected to 2026-09-10;
+                    Node compatibility is implicit. Zack approved the scatter
+                    feedback; manual screen-reader review remains. Preview is
+                    back on port 4322. See <code>walkthrough.md</code>.
+                  </p>
+                  <p class="item-note">
+                    <strong>Independent full-stack review complete.</strong>
+                    Fable 5.1 and Codex GPT-6-Astra reviewed separate snapshots.
+                    Independently confirmed empty/stale content-test stores,
+                    font-failure blank charts, click/keyboard double highlights,
+                    unfocused-hover Escape and deployment/configuration gaps.
+                    Root tests now live in <code>tests/</code>. Findings are not
+                    yet fixed; merge/cutover remain gated. See the
+                    <a href="prelaunch-review/README.md">reconciled report</a>
+                    for priorities, evidence and rejected claims.
                   </p>
                 </div>
               </li>
@@ -1322,10 +1358,33 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">05</span>
               <h2>Infrastructure and deferred rounds</h2>
-              <span class="count">0 / 9 done</span>
+              <span class="count">0 / 10 done</span>
             </div>
 
             <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Reduce Iosevka font payload — deferred
+                  </p>
+                  <p class="item-note">
+                    Zack explicitly deferred this until the end of the sweep,
+                    alongside other deprioritized work (2026-09-13 UTC). Not a
+                    Foundations merge/deploy blocker. Regular and bold WOFF2
+                    total 1,972,808 bytes (1.88 MiB), unchanged from production.
+                  </p>
+                  <p class="item-note">
+                    Start with a measured subsetting experiment that preserves
+                    the design, both weights, required shaping, accented names,
+                    punctuation and mathematical symbols, including dynamic
+                    chart and tooltip text. Existing files are already labelled
+                    Latin. See <code>walkthrough.md</code> for measurements.
+                    Separate from adopting Astro's Fonts API below; that alone
+                    does not guarantee smaller font binaries.
+                  </p>
+                </div>
+              </li>
               <li class="item s-open">
                 <span class="marker">[ ]</span>
                 <div>

@@ -1,0 +1,212 @@
+{
+  "base": "http://localhost:4322",
+  "capturedAt": "2026-09-12T23:44:07.918Z",
+  "label": "walkthrough-archive-preview",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 2880,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 14,
+            "load": 20,
+            "transferSize": 8117
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 2148,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 19,
+            "transferSize": 8117
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 2944,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 18,
+            "transferSize": 8117
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 2880,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 7817,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/archive/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 13636,
+              "count": 2,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 19,
+            "transferSize": 8117
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:4322/archive/",
+      "htmlBytes": 7817,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 1,
+      "jsBytes": 0,
+      "page": "/archive/",
+      "redirects": [],
+      "responseHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "HIT",
+        "connection": "keep-alive",
+        "content-length": "7817",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sat, 12 Sep 2026 23:43:55 GMT",
+        "etag": "\"9a4aad74c1085f9cc358d19ea2dc634c\"",
+        "keep-alive": "timeout=5",
+        "vary": "Origin"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 17501,
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 41485
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

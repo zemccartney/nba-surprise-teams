@@ -1,0 +1,2314 @@
+[
+  {
+    "label": "prod",
+    "base": "https://nbastt.grepco.net",
+    "views": [
+      {
+        "width": 1440,
+        "dom": {
+          "rows": [
+            [
+              "Charlotte Hornets",
+              "27.5",
+              "+6"
+            ],
+            [
+              "Phoenix Suns",
+              "31.5",
+              "+3"
+            ],
+            [
+              "Portland Trail Blazers",
+              "34.5",
+              "-3"
+            ],
+            [
+              "Utah Jazz",
+              "18.5",
+              "-7"
+            ],
+            [
+              "Brooklyn Nets",
+              "20.5",
+              "-11"
+            ],
+            [
+              "Chicago Bulls",
+              "32.5",
+              "-12"
+            ],
+            [
+              "New Orleans Pelicans",
+              "30.5",
+              "-15"
+            ],
+            [
+              "Washington Wizards",
+              "21.5",
+              "-15"
+            ],
+            [
+              "Sacramento Kings",
+              "35.5",
+              "-24"
+            ]
+          ],
+          "images": [
+            {
+              "alt": "Logo for Charlotte Hornets",
+              "src": "https://nbastt.grepco.net/_astro/hornet.DHgNjKbH_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 590
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 622,
+              "y": 588
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Phoenix Suns",
+              "src": "https://nbastt.grepco.net/_astro/sun.CEO0JfTo_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 694
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 547.75,
+              "y": 692
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Portland Trail Blazers",
+              "src": "https://nbastt.grepco.net/_astro/hiking-boot.RAo7VDyl_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 798
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 685,
+              "y": 796
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Utah Jazz",
+              "src": "https://nbastt.grepco.net/_astro/saxophone.CBfi5ff7_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 902
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 502.75,
+              "y": 900
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Brooklyn Nets",
+              "src": "https://nbastt.grepco.net/_astro/dragon.XLCa8u4f_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1006
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 563.5,
+              "y": 1004
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Chicago Bulls",
+              "src": "https://nbastt.grepco.net/_astro/bull.7NyMbv27_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1110
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 547.75,
+              "y": 1108
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for New Orleans Pelicans",
+              "src": "https://nbastt.grepco.net/_astro/king-cake-baby.Cid93CPF_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 54,
+              "x": 288,
+              "y": 1212
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 673.75,
+              "y": 1219
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Washington Wizards",
+              "src": "https://nbastt.grepco.net/_astro/wizard.zIpw0Cvj_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1332
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 658,
+              "y": 1330
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Sacramento Kings",
+              "src": "https://nbastt.grepco.net/_astro/crown.-KwoyI1y_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1436
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 622,
+              "y": 1434
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z16Po59.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 288,
+              "y": 1522
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z16Po59.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 288,
+              "y": 1558
+            }
+          ],
+          "links": [
+            {
+              "text": "",
+              "href": "https://nbastt.grepco.net/cdn-cgi/content?id=yAnfswFlZGkhe0WD1S06wmwCLLzhdQDDL__2qj19DRI-1789258024.6926608-1.2.1.1-2JgV_g9fWIJakBtRYuZnJvUQss6b_3ecT917LEWHh.aTcO68yQxMdVWtga2mN8tk",
+              "target": "",
+              "rel": "nofollow noopener"
+            },
+            {
+              "text": "NBA Surprise\nTeams Tracker",
+              "href": "/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Archive",
+              "href": "/archive",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Stats",
+              "href": "/stats",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "About",
+              "href": "/about",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "'24-25 Season",
+              "href": "/2024",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Slam N' Jam Episode",
+              "href": "https://podcasts.apple.com/us/podcast/the-athletic-nba-daily/id1358187061?i=1000728681443",
+              "target": "_blank",
+              "rel": ""
+            },
+            {
+              "text": "Charlotte Hornets",
+              "href": "/2025/CHA",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Phoenix Suns",
+              "href": "/2025/PHX",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Portland Trail Blazers",
+              "href": "/2025/POR",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Utah Jazz",
+              "href": "/2025/UTA",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Brooklyn Nets",
+              "href": "/2025/BKN",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Chicago Bulls",
+              "href": "/2025/CHI",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "New Orleans Pelicans",
+              "href": "/2025/NOP",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Washington Wizards",
+              "href": "/2025/WAS",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Sacramento Kings",
+              "href": "/2025/SAC",
+              "target": "",
+              "rel": ""
+            }
+          ],
+          "activeNav": [],
+          "overflow": false
+        },
+        "popovers": [
+          {
+            "index": 0,
+            "text": "If the link's broken (grumbling about Apple...), you're looking for the episode \"Surprises Teams\" from 09/27/2025",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "start",
+            "rect": {
+              "x": 689,
+              "y": 349,
+              "width": 400,
+              "height": 144
+            },
+            "inViewport": true,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          },
+          {
+            "index": 1,
+            "text": "Pace Current Projected Wins - Wins needed to surprise (10 wins above a team's preseason over/under (rounded up))",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "start",
+            "rect": {
+              "x": 996,
+              "y": 501,
+              "width": 320,
+              "height": 228
+            },
+            "inViewport": true,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          }
+        ],
+        "fonts": [
+          {
+            "url": "https://nbastt.grepco.net/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 4236,
+            "encodedBytes": 4795
+          },
+          {
+            "url": "https://nbastt.grepco.net/fonts/ChicagoKare-Regular.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 9400,
+            "encodedBytes": 9966
+          },
+          {
+            "url": "https://nbastt.grepco.net/_astro/iosevka-curly-latin-400-normal.CAuYWew6.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 983068,
+            "encodedBytes": 983770
+          },
+          {
+            "url": "https://nbastt.grepco.net/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 989740,
+            "encodedBytes": 990458
+          }
+        ],
+        "errors": []
+      },
+      {
+        "width": 390,
+        "dom": {
+          "rows": [
+            [
+              "CHA",
+              "27.5",
+              "+6"
+            ],
+            [
+              "PHX",
+              "31.5",
+              "+3"
+            ],
+            [
+              "POR",
+              "34.5",
+              "-3"
+            ],
+            [
+              "UTA",
+              "18.5",
+              "-7"
+            ],
+            [
+              "BKN",
+              "20.5",
+              "-11"
+            ],
+            [
+              "CHI",
+              "32.5",
+              "-12"
+            ],
+            [
+              "NOP",
+              "30.5",
+              "-15"
+            ],
+            [
+              "WAS",
+              "21.5",
+              "-15"
+            ],
+            [
+              "SAC",
+              "35.5",
+              "-24"
+            ]
+          ],
+          "images": [
+            {
+              "alt": "Logo for Charlotte Hornets",
+              "src": "https://nbastt.grepco.net/_astro/hornet.DHgNjKbH_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 468
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 470
+            },
+            {
+              "alt": "Logo for Phoenix Suns",
+              "src": "https://nbastt.grepco.net/_astro/sun.CEO0JfTo_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 536
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 538
+            },
+            {
+              "alt": "Logo for Portland Trail Blazers",
+              "src": "https://nbastt.grepco.net/_astro/hiking-boot.RAo7VDyl_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 604
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 606
+            },
+            {
+              "alt": "Logo for Utah Jazz",
+              "src": "https://nbastt.grepco.net/_astro/saxophone.CBfi5ff7_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 672
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 674
+            },
+            {
+              "alt": "Logo for Brooklyn Nets",
+              "src": "https://nbastt.grepco.net/_astro/dragon.XLCa8u4f_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 740
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 119,
+              "y": 742
+            },
+            {
+              "alt": "Logo for Chicago Bulls",
+              "src": "https://nbastt.grepco.net/_astro/bull.7NyMbv27_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 808
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 110,
+              "y": 810
+            },
+            {
+              "alt": "Logo for New Orleans Pelicans",
+              "src": "https://nbastt.grepco.net/_astro/king-cake-baby.Cid93CPF_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 54,
+              "x": 16,
+              "y": 876
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 117.5,
+              "y": 887
+            },
+            {
+              "alt": "Logo for Washington Wizards",
+              "src": "https://nbastt.grepco.net/_astro/wizard.zIpw0Cvj_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 962
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 120.5,
+              "y": 964
+            },
+            {
+              "alt": "Logo for Sacramento Kings",
+              "src": "https://nbastt.grepco.net/_astro/crown.-KwoyI1y_Z1Nf8JG.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 1030
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z1cKeQz.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 114.5,
+              "y": 1032
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "https://nbastt.grepco.net/_astro/hushed-face.Cv4H2-Hx_Z16Po59.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 16,
+              "y": 1098
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "https://nbastt.grepco.net/_astro/skull-and-crossbones.D-NR7zVk_Z16Po59.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 16,
+              "y": 1134
+            }
+          ],
+          "links": [
+            {
+              "text": "",
+              "href": "https://nbastt.grepco.net/cdn-cgi/content?id=6QbsSHqgzMaJtBnaOG3o4NfwGqmEeelWHrdAMvOf5Ng-1789258028.3988318-1.2.1.1-VAfjdmkDsOj6eBQThf8ld8nRqbieTDGbX50ggj3QodNwBJrW6rG5QJ9beF8BuYzX",
+              "target": "",
+              "rel": "nofollow noopener"
+            },
+            {
+              "text": "NBA Surprise\nTeams Tracker",
+              "href": "/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Archive",
+              "href": "/archive",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Stats",
+              "href": "/stats",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "About",
+              "href": "/about",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "'24-25 Season",
+              "href": "/2024",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Slam N' Jam Episode",
+              "href": "https://podcasts.apple.com/us/podcast/the-athletic-nba-daily/id1358187061?i=1000728681443",
+              "target": "_blank",
+              "rel": ""
+            },
+            {
+              "text": "CHA",
+              "href": "/2025/CHA",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "PHX",
+              "href": "/2025/PHX",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "POR",
+              "href": "/2025/POR",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "UTA",
+              "href": "/2025/UTA",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "BKN",
+              "href": "/2025/BKN",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "CHI",
+              "href": "/2025/CHI",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "NOP",
+              "href": "/2025/NOP",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "WAS",
+              "href": "/2025/WAS",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "SAC",
+              "href": "/2025/SAC",
+              "target": "",
+              "rel": ""
+            }
+          ],
+          "activeNav": [],
+          "overflow": false
+        },
+        "popovers": [
+          {
+            "index": 0,
+            "text": "If the link's broken (grumbling about Apple...), you're looking for the episode \"Surprises Teams\" from 09/27/2025",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "start",
+            "rect": {
+              "x": 0,
+              "y": 333,
+              "width": 400,
+              "height": 144
+            },
+            "inViewport": false,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          },
+          {
+            "index": 1,
+            "text": "Pace Current Projected Wins - Wins needed to surprise (10 wins above a team's preseason over/under (rounded up))",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "start",
+            "rect": {
+              "x": 70,
+              "y": 425,
+              "width": 320,
+              "height": 228
+            },
+            "inViewport": true,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          }
+        ],
+        "fonts": [
+          {
+            "url": "https://nbastt.grepco.net/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 4236,
+            "encodedBytes": 4795
+          },
+          {
+            "url": "https://nbastt.grepco.net/fonts/ChicagoKare-Regular.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 9400,
+            "encodedBytes": 9966
+          },
+          {
+            "url": "https://nbastt.grepco.net/_astro/iosevka-curly-latin-400-normal.CAuYWew6.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 983068,
+            "encodedBytes": 983790
+          },
+          {
+            "url": "https://nbastt.grepco.net/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 989740,
+            "encodedBytes": 990457
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "links": [
+      {
+        "path": "/",
+        "status": 200,
+        "finalPath": "/"
+      },
+      {
+        "path": "/archive",
+        "status": 200,
+        "finalPath": "/archive/"
+      },
+      {
+        "path": "/stats",
+        "status": 200,
+        "finalPath": "/stats/"
+      },
+      {
+        "path": "/about",
+        "status": 200,
+        "finalPath": "/about/"
+      },
+      {
+        "path": "/2024",
+        "status": 200,
+        "finalPath": "/2024/"
+      },
+      {
+        "path": "/2025/CHA",
+        "status": 200,
+        "finalPath": "/2025/CHA/"
+      },
+      {
+        "path": "/2025/PHX",
+        "status": 200,
+        "finalPath": "/2025/PHX/"
+      },
+      {
+        "path": "/2025/POR",
+        "status": 200,
+        "finalPath": "/2025/POR/"
+      },
+      {
+        "path": "/2025/UTA",
+        "status": 200,
+        "finalPath": "/2025/UTA/"
+      },
+      {
+        "path": "/2025/BKN",
+        "status": 200,
+        "finalPath": "/2025/BKN/"
+      },
+      {
+        "path": "/2025/CHI",
+        "status": 200,
+        "finalPath": "/2025/CHI/"
+      },
+      {
+        "path": "/2025/NOP",
+        "status": 200,
+        "finalPath": "/2025/NOP/"
+      },
+      {
+        "path": "/2025/WAS",
+        "status": 200,
+        "finalPath": "/2025/WAS/"
+      },
+      {
+        "path": "/2025/SAC",
+        "status": 200,
+        "finalPath": "/2025/SAC/"
+      }
+    ]
+  },
+  {
+    "label": "preview",
+    "base": "http://localhost:4322",
+    "views": [
+      {
+        "width": 1440,
+        "dom": {
+          "rows": [
+            [
+              "Charlotte Hornets",
+              "27.5",
+              "+6"
+            ],
+            [
+              "Phoenix Suns",
+              "31.5",
+              "+3"
+            ],
+            [
+              "Portland Trail Blazers",
+              "34.5",
+              "-3"
+            ],
+            [
+              "Utah Jazz",
+              "18.5",
+              "-7"
+            ],
+            [
+              "Brooklyn Nets",
+              "20.5",
+              "-11"
+            ],
+            [
+              "Chicago Bulls",
+              "32.5",
+              "-12"
+            ],
+            [
+              "New Orleans Pelicans",
+              "30.5",
+              "-15"
+            ],
+            [
+              "Washington Wizards",
+              "21.5",
+              "-15"
+            ],
+            [
+              "Sacramento Kings",
+              "35.5",
+              "-24"
+            ]
+          ],
+          "images": [
+            {
+              "alt": "Logo for Charlotte Hornets",
+              "src": "http://localhost:4322/_astro/hornet.DHgNjKbH.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 590
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 622,
+              "y": 588
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Phoenix Suns",
+              "src": "http://localhost:4322/_astro/sun.CEO0JfTo.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 694
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 547.75,
+              "y": 692
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Portland Trail Blazers",
+              "src": "http://localhost:4322/_astro/hiking-boot.RAo7VDyl.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 798
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 685,
+              "y": 796
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Utah Jazz",
+              "src": "http://localhost:4322/_astro/saxophone.CBfi5ff7.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 902
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 502.75,
+              "y": 900
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Brooklyn Nets",
+              "src": "http://localhost:4322/_astro/dragon.XLCa8u4f.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1006
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 563.5,
+              "y": 1004
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Chicago Bulls",
+              "src": "http://localhost:4322/_astro/bull.7NyMbv27.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1110
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 547.75,
+              "y": 1108
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for New Orleans Pelicans",
+              "src": "http://localhost:4322/_astro/king-cake-baby.Cid93CPF.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 54,
+              "x": 288,
+              "y": 1212
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 673.75,
+              "y": 1219
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Washington Wizards",
+              "src": "http://localhost:4322/_astro/wizard.zIpw0Cvj.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1332
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 658,
+              "y": 1330
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Logo for Sacramento Kings",
+              "src": "http://localhost:4322/_astro/crown.-KwoyI1y.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 288,
+              "y": 1436
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 622,
+              "y": 1434
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 798
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 288,
+              "y": 1522
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 288,
+              "y": 1558
+            }
+          ],
+          "links": [
+            {
+              "text": "NBA Surprise\nTeams Tracker",
+              "href": "/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Archive",
+              "href": "/archive/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Stats",
+              "href": "/stats/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "About",
+              "href": "/about/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "'24-25 Season",
+              "href": "/2024/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Slam N' Jam Episode",
+              "href": "https://podcasts.apple.com/us/podcast/the-athletic-nba-daily/id1358187061?i=1000728681443",
+              "target": "_blank",
+              "rel": ""
+            },
+            {
+              "text": "Charlotte Hornets",
+              "href": "/2025/CHA/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Phoenix Suns",
+              "href": "/2025/PHX/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Portland Trail Blazers",
+              "href": "/2025/POR/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Utah Jazz",
+              "href": "/2025/UTA/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Brooklyn Nets",
+              "href": "/2025/BKN/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Chicago Bulls",
+              "href": "/2025/CHI/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "New Orleans Pelicans",
+              "href": "/2025/NOP/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Washington Wizards",
+              "href": "/2025/WAS/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Sacramento Kings",
+              "href": "/2025/SAC/",
+              "target": "",
+              "rel": ""
+            }
+          ],
+          "activeNav": [],
+          "overflow": false
+        },
+        "popovers": [
+          {
+            "index": 0,
+            "text": "If the link's broken (grumbling about Apple...), you're looking for the episode \"Surprises Teams\" from 09/27/2025",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "left",
+            "rect": {
+              "x": 688.5,
+              "y": 348,
+              "width": 400,
+              "height": 144
+            },
+            "inViewport": true,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          },
+          {
+            "index": 1,
+            "text": "Pace Current Projected Wins - Wins needed to surprise (10 wins above a team's preseason over/under (rounded up))",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "left",
+            "rect": {
+              "x": 995.5,
+              "y": 500,
+              "width": 320,
+              "height": 228
+            },
+            "inViewport": true,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          }
+        ],
+        "fonts": [
+          {
+            "url": "http://localhost:4322/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 4236,
+            "encodedBytes": 4236
+          },
+          {
+            "url": "http://localhost:4322/fonts/ChicagoKare-Regular.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 9400,
+            "encodedBytes": 9400
+          },
+          {
+            "url": "http://localhost:4322/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 989740,
+            "encodedBytes": 989740
+          },
+          {
+            "url": "http://localhost:4322/_astro/iosevka-curly-latin-400-normal.CAuYWew6.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 983068,
+            "encodedBytes": 983068
+          }
+        ],
+        "errors": []
+      },
+      {
+        "width": 390,
+        "dom": {
+          "rows": [
+            [
+              "CHA",
+              "27.5",
+              "+6"
+            ],
+            [
+              "PHX",
+              "31.5",
+              "+3"
+            ],
+            [
+              "POR",
+              "34.5",
+              "-3"
+            ],
+            [
+              "UTA",
+              "18.5",
+              "-7"
+            ],
+            [
+              "BKN",
+              "20.5",
+              "-11"
+            ],
+            [
+              "CHI",
+              "32.5",
+              "-12"
+            ],
+            [
+              "NOP",
+              "30.5",
+              "-15"
+            ],
+            [
+              "WAS",
+              "21.5",
+              "-15"
+            ],
+            [
+              "SAC",
+              "35.5",
+              "-24"
+            ]
+          ],
+          "images": [
+            {
+              "alt": "Logo for Charlotte Hornets",
+              "src": "http://localhost:4322/_astro/hornet.DHgNjKbH.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 468
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 470
+            },
+            {
+              "alt": "Logo for Phoenix Suns",
+              "src": "http://localhost:4322/_astro/sun.CEO0JfTo.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 536
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 538
+            },
+            {
+              "alt": "Logo for Portland Trail Blazers",
+              "src": "http://localhost:4322/_astro/hiking-boot.RAo7VDyl.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 604
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 606
+            },
+            {
+              "alt": "Logo for Utah Jazz",
+              "src": "http://localhost:4322/_astro/saxophone.CBfi5ff7.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 672
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 116,
+              "y": 674
+            },
+            {
+              "alt": "Logo for Brooklyn Nets",
+              "src": "http://localhost:4322/_astro/dragon.XLCa8u4f.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 740
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 119,
+              "y": 742
+            },
+            {
+              "alt": "Logo for Chicago Bulls",
+              "src": "http://localhost:4322/_astro/bull.7NyMbv27.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 808
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 110,
+              "y": 810
+            },
+            {
+              "alt": "Logo for New Orleans Pelicans",
+              "src": "http://localhost:4322/_astro/king-cake-baby.Cid93CPF.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 54,
+              "x": 16,
+              "y": 876
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 117.5,
+              "y": 887
+            },
+            {
+              "alt": "Logo for Washington Wizards",
+              "src": "http://localhost:4322/_astro/wizard.zIpw0Cvj.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 962
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 120.5,
+              "y": 964
+            },
+            {
+              "alt": "Logo for Sacramento Kings",
+              "src": "http://localhost:4322/_astro/crown.-KwoyI1y.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 36,
+              "width": 36,
+              "height": 36,
+              "x": 16,
+              "y": 1030
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": false,
+              "complete": false,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 0,
+              "y": 374
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 20,
+              "height": 20,
+              "x": 114.5,
+              "y": 1032
+            },
+            {
+              "alt": "Hushed face emoji, indicating team is a surprise team",
+              "src": "http://localhost:4322/_astro/hushed-face.Cv4H2-Hx.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 16,
+              "y": 1098
+            },
+            {
+              "alt": "Skull and crossbones emoji, indicating a team is eliminated from surprise team contention",
+              "src": "http://localhost:4322/_astro/skull-and-crossbones.D-NR7zVk.svg",
+              "visible": true,
+              "complete": true,
+              "naturalWidth": 150,
+              "width": 18,
+              "height": 28,
+              "x": 16,
+              "y": 1134
+            }
+          ],
+          "links": [
+            {
+              "text": "NBA Surprise\nTeams Tracker",
+              "href": "/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Archive",
+              "href": "/archive/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Stats",
+              "href": "/stats/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "About",
+              "href": "/about/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "'24-25 Season",
+              "href": "/2024/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "Slam N' Jam Episode",
+              "href": "https://podcasts.apple.com/us/podcast/the-athletic-nba-daily/id1358187061?i=1000728681443",
+              "target": "_blank",
+              "rel": ""
+            },
+            {
+              "text": "CHA",
+              "href": "/2025/CHA/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "PHX",
+              "href": "/2025/PHX/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "POR",
+              "href": "/2025/POR/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "UTA",
+              "href": "/2025/UTA/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "BKN",
+              "href": "/2025/BKN/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "CHI",
+              "href": "/2025/CHI/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "NOP",
+              "href": "/2025/NOP/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "WAS",
+              "href": "/2025/WAS/",
+              "target": "",
+              "rel": ""
+            },
+            {
+              "text": "SAC",
+              "href": "/2025/SAC/",
+              "target": "",
+              "rel": ""
+            }
+          ],
+          "activeNav": [],
+          "overflow": false
+        },
+        "popovers": [
+          {
+            "index": 0,
+            "text": "If the link's broken (grumbling about Apple...), you're looking for the episode \"Surprises Teams\" from 09/27/2025",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "left",
+            "rect": {
+              "x": 0,
+              "y": 332,
+              "width": 390,
+              "height": 144
+            },
+            "inViewport": true,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          },
+          {
+            "index": 1,
+            "text": "Pace Current Projected Wins - Wins needed to surprise (10 wins above a team's preseason over/under (rounded up))",
+            "fontWeight": "400",
+            "fontStyle": "normal",
+            "textAlign": "left",
+            "rect": {
+              "x": 70,
+              "y": 424,
+              "width": 320,
+              "height": 228
+            },
+            "inViewport": true,
+            "focusReturned": true,
+            "escapeClosed": true,
+            "outsideClosed": true,
+            "closeButtonClosed": true
+          }
+        ],
+        "fonts": [
+          {
+            "url": "http://localhost:4322/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 4236,
+            "encodedBytes": 4236
+          },
+          {
+            "url": "http://localhost:4322/fonts/ChicagoKare-Regular.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 9400,
+            "encodedBytes": 9400
+          },
+          {
+            "url": "http://localhost:4322/_astro/iosevka-curly-latin-400-normal.CAuYWew6.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 983068,
+            "encodedBytes": 983068
+          },
+          {
+            "url": "http://localhost:4322/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+            "status": 200,
+            "contentType": "font/woff2",
+            "decodedBytes": 989740,
+            "encodedBytes": 989740
+          }
+        ],
+        "errors": []
+      }
+    ],
+    "links": [
+      {
+        "path": "/",
+        "status": 200,
+        "finalPath": "/"
+      },
+      {
+        "path": "/archive/",
+        "status": 200,
+        "finalPath": "/archive/"
+      },
+      {
+        "path": "/stats/",
+        "status": 200,
+        "finalPath": "/stats/"
+      },
+      {
+        "path": "/about/",
+        "status": 200,
+        "finalPath": "/about/"
+      },
+      {
+        "path": "/2024/",
+        "status": 200,
+        "finalPath": "/2024/"
+      },
+      {
+        "path": "/2025/CHA/",
+        "status": 200,
+        "finalPath": "/2025/CHA/"
+      },
+      {
+        "path": "/2025/PHX/",
+        "status": 200,
+        "finalPath": "/2025/PHX/"
+      },
+      {
+        "path": "/2025/POR/",
+        "status": 200,
+        "finalPath": "/2025/POR/"
+      },
+      {
+        "path": "/2025/UTA/",
+        "status": 200,
+        "finalPath": "/2025/UTA/"
+      },
+      {
+        "path": "/2025/BKN/",
+        "status": 200,
+        "finalPath": "/2025/BKN/"
+      },
+      {
+        "path": "/2025/CHI/",
+        "status": 200,
+        "finalPath": "/2025/CHI/"
+      },
+      {
+        "path": "/2025/NOP/",
+        "status": 200,
+        "finalPath": "/2025/NOP/"
+      },
+      {
+        "path": "/2025/WAS/",
+        "status": 200,
+        "finalPath": "/2025/WAS/"
+      },
+      {
+        "path": "/2025/SAC/",
+        "status": 200,
+        "finalPath": "/2025/SAC/"
+      }
+    ]
+  }
+]

@@ -4,6 +4,12 @@
   height: 600px;
 }
 
+/* Make the chart's keyboard point selector visible without changing layout. */
+.chart:focus-visible {
+  outline: 2px solid var(--color-lime-400);
+  outline-offset: 4px;
+}
+
 /* Tooltip content, rendered by the chart tooltip formatters */
 .tooltip-heading {
   margin-bottom: 0.25rem;

@@ -64,6 +64,17 @@ for (let i = 0; i < teamGames.length; i++) {
 }
 ---
 
+<script>
+  import { syncResponsiveOrder } from "../responsive-order";
+
+  syncResponsiveOrder({
+    desktopFirst: '[data-chart="team-season-pace"]',
+    minWidth: 1024,
+    mobileFirst: ".stats-table",
+    selector: ".NBASurpriseTracker-TeamStats",
+  });
+</script>
+
 <style>
   .NBASurpriseTracker-TeamStats {
     grid-template-columns: 3fr 2fr;
@@ -159,7 +170,7 @@ for (let i = 0; i < teamGames.length; i++) {
   .stats-grid {
     margin-top: 3rem;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 4rem;
     padding-inline: 0.5rem;
   }
@@ -167,10 +178,21 @@ for (let i = 0; i < teamGames.length; i++) {
   @media (min-width: 1024px) {
     .stats-grid {
       display: grid;
+      grid-template-areas: "chart stats";
     }
   }
 
+  /* Explicit desktop areas avoid a layout shift while the client synchronizes
+     DOM order. Mobile's default table-first markup is its reading order. */
+  .stats-grid > :global(.chart) {
+    grid-area: chart;
+    /* ECharts' explicit SVG width must not become this grid item's minimum
+       width and squeeze the table when the container steps down at 1280px. */
+    min-width: 0;
+  }
+
   .stats-table {
+    grid-area: stats;
     max-height: 2rem;
   }
 
@@ -305,11 +327,6 @@ for (let i = 0; i < teamGames.length; i++) {
     )
   }
   <div class="NBASurpriseTracker-TeamStats stats-grid">
-    <TeamSeasonPaceChart
-      data={datapoints}
-      surpriseRules={surpriseRules}
-      winsToSurprise={winsToSurprise}
-    />
     <Table class="compact stats-table">
       <Fragment slot="head">
         <tr>
@@ -402,5 +419,10 @@ for (let i = 0; i < teamGames.length; i++) {
         </tr>
       </Fragment>
     </Table>
+    <TeamSeasonPaceChart
+      data={datapoints}
+      surpriseRules={surpriseRules}
+      winsToSurprise={winsToSurprise}
+    />
   </div>
 </>

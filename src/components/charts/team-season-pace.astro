@@ -28,7 +28,10 @@ const json = JSON.stringify(data).replaceAll("<", String.raw`\u003c`);
 
 <script>
   import { mountCharts } from "./echarts";
-  import { option } from "./team-season-pace";
+  import { describePacePoint, option } from "./team-season-pace";
 
-  mountCharts("team-season-pace", option);
+  mountCharts("team-season-pace", option, {
+    label: "Selected game on the projected wins chart",
+    points: (props) => props.data.map((point) => describePacePoint(point)),
+  });
 </script>

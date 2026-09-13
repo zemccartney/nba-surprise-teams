@@ -30,6 +30,13 @@ export interface TeamSeasonPaceChartProps {
   winsToSurprise: number;
 }
 
+export const paceAxisTicks = (numGames: number): number[] => [0, numGames];
+
+export const describePacePoint = (
+  point: TeamSeasonPaceChartProps["data"][number],
+): string =>
+  `${point.date}. Record ${point.recordFmt}. Projected wins ${point.projectedWins}. Pace ${Utils.signedFormatter.format(point.pace)}.`;
+
 export const option = (
   {
     data,
@@ -40,12 +47,13 @@ export const option = (
   t: Theme,
 ): ChartOption => ({
   aria: { enabled: true },
-  grid: { ...gridBase(t), bottom: 40, left: 96, right: 8, top: 12 },
+  // Match the old plot insets; the visible plot starts level with the table.
+  grid: { ...gridBase(t), bottom: 30, left: 84, right: 0, top: 0 },
   series: [
     {
       // The fill runs between the line and the surprise threshold; visualMap
       // (below) colors it by which side of the threshold each point is on
-      areaStyle: { opacity: 1, origin: winsToSurprise },
+      areaStyle: { opacity: 0.8, origin: winsToSurprise },
       data: data.map((point) => point.projectedWins),
       lineStyle: { color: t.lime500, width: 1.5 },
       markLine: {
@@ -109,16 +117,28 @@ export const option = (
     axisLine: { show: false },
     boundaryGap: false,
     data: data.map((point) => point.date),
+    splitLine: { ...axisBase(t).splitLine, show: true },
     type: "category",
   },
   yAxis: {
     ...axisBase(t),
+    axisLabel: {
+      ...axisBase(t).axisLabel,
+      // Only the endpoints: the threshold has its own label and icon, and
+      // intermediate ticks distract from it. Use the actual season length.
+      customValues: paceAxisTicks(surpriseRules.numGames),
+      showMaxLabel: true,
+      showMinLabel: true,
+      verticalAlignMaxLabel: "top",
+    },
     axisLine: { show: false },
-    interval: 20,
+    axisTick: { show: false },
     max: surpriseRules.numGames,
     min: 0,
     name: "Projected Wins",
     nameGap: 64,
+    // The surprise threshold is the only horizontal line.
+    splitLine: { show: false },
     type: "value",
   },
 });

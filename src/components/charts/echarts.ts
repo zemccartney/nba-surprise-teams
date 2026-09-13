@@ -32,6 +32,11 @@ import {
 import * as echarts from "echarts/core";
 import { SVGRenderer } from "echarts/renderers";
 
+import type { ChartKeyboardNavigation } from "./keyboard";
+
+import { enableChartKeyboard } from "./keyboard";
+import { stableTooltip } from "./tooltip";
+
 echarts.use([
   AriaComponent,
   BarChart,
@@ -60,6 +65,7 @@ export interface Theme {
   fontMono: string;
   green200: string;
   green700: string;
+  indigo400: string;
   lime200: string;
   lime500: string;
   red700: string;
@@ -98,6 +104,7 @@ const readTheme = (): Theme => {
     fontMono: token("--font-mono"),
     green200: color("--color-green-200"),
     green700: color("--color-green-700"),
+    indigo400: color("--color-indigo-400"),
     lime200: color("--color-lime-200"),
     lime500: color("--color-lime-500"),
     red700: color("--color-red-700"),
@@ -120,11 +127,15 @@ export const axisText = (t: Theme, fontSize: number) => ({
 
 export const axisBase = (t: Theme) => ({
   axisLabel: { ...axisText(t, 16), margin: 12 },
-  axisLine: { lineStyle: { color: "#666" } },
+  axisLine: { show: false },
   axisTick: { length: 6, lineStyle: { color: t.lime200 } },
   nameLocation: "middle" as const,
   nameTextStyle: axisText(t, 20),
-  splitLine: { lineStyle: { color: t.lime200, type: [3, 3] } },
+  splitLine: {
+    lineStyle: { color: t.lime200, type: [3, 3] },
+    showMaxLine: false,
+    showMinLine: false,
+  },
 });
 
 export const gridBase = (t: Theme) => ({
@@ -168,6 +179,7 @@ export const escapeHtml = (value: string) =>
 export const mountCharts = <Props>(
   kind: string,
   build: (props: Props, theme: Theme) => ChartOption,
+  keyboard?: ChartKeyboardNavigation<Props>,
 ) => {
   for (const host of document.querySelectorAll<HTMLElement>(
     `[data-chart="${CSS.escape(kind)}"]`,
@@ -186,9 +198,27 @@ export const mountCharts = <Props>(
         return;
       }
 
-      observer.disconnect();
-      void render(host, props, build);
+      mount();
     });
+    let hasMounted = false;
+    const mount = () => {
+      if (hasMounted) {
+        return;
+      }
+      hasMounted = true;
+      observer.disconnect();
+      host.removeEventListener("focus", mount);
+      void render(host, props, build, keyboard);
+    };
+
+    // An offscreen lazy chart must still be reachable by Tab. Focus can mount
+    // it too; once ready, the point selector replaces this temporary group.
+    if (keyboard && keyboard.points(props).length > 0) {
+      host.tabIndex = 0;
+      host.setAttribute("role", "group");
+      host.setAttribute("aria-label", keyboard.label);
+      host.addEventListener("focus", mount);
+    }
     observer.observe(host);
   }
 };
@@ -197,6 +227,7 @@ const render = async <Props>(
   host: HTMLElement,
   props: Props,
   build: (props: Props, theme: Theme) => ChartOption,
+  keyboard?: ChartKeyboardNavigation<Props>,
 ) => {
   const theme = readTheme();
 
@@ -207,10 +238,32 @@ const render = async <Props>(
   ]);
 
   const chart = echarts.init(host, undefined, { renderer: "svg" });
+  const pointDescriptions = keyboard?.points(props) ?? [];
+  const chartOption = build(props, theme);
+  const tooltip = chartOption.tooltip;
+  if (
+    tooltip &&
+    !Array.isArray(tooltip) &&
+    typeof tooltip.formatter === "function"
+  ) {
+    tooltip.formatter = stableTooltip(tooltip.formatter);
+  }
   chart.setOption({
     animation: !matchMedia("(prefers-reduced-motion: reduce)").matches,
-    ...build(props, theme),
+    ...chartOption,
+    // The interactive selector owns its role/label. Do not let ECharts' aria
+    // visual stage replace them with a static image description on updates.
+    ...(pointDescriptions.length > 0 && { aria: { enabled: false } }),
   });
+
+  if (keyboard) {
+    enableChartKeyboard(host, chart, keyboard.label, pointDescriptions, {
+      dataIndices: keyboard.dataIndices?.(props) ?? [],
+      orderDescription: keyboard.orderDescription ?? "",
+      pointLabel: keyboard.pointLabel ?? "Game",
+      seriesIndices: keyboard.seriesIndices ?? [0],
+    });
+  }
 
   let isInitial = true;
   new ResizeObserver(() => {

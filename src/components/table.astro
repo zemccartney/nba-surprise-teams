@@ -68,12 +68,6 @@ const {
       }
     }
 
-    > tbody > tr {
-      &:nth-of-type(2n + 1) {
-        background-color: var(--color-lime-950);
-      }
-    }
-
     &.compact {
       box-shadow: var(--shadow-glow-sm);
 
@@ -111,6 +105,12 @@ const {
         background-color: var(--color-slate-950);
       }
     }
+  }
+
+  /* Rows arrive through the body slot and carry the caller's scope attribute,
+     not Table's. Keep the table/tbody scoped, but cross that slot boundary. */
+  .NBASurpriseTracker-Table > tbody > :global(tr:nth-of-type(2n + 1)) {
+    background-color: var(--color-lime-950);
   }
 </style>
 

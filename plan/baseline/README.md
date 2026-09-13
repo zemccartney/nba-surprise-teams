@@ -13,6 +13,21 @@ cd plan/baseline && pnpm install
 Uses the system Google Chrome via Playwright's `channel: "chrome"`. Override with
 `--chrome /path/to/binary` or `CHROME_PATH`.
 
+## How the checks fit together
+
+- **Unit tests:** `tests/chart-options.test.ts` runs with `pnpm test`
+  (Vitest), normal verify/build and the existing test hook. It checks chart
+  options, navigation order and spoken descriptions without content collections.
+- **Browser regressions:** `chart-parity.mjs`, `stats-parity.mjs`,
+  `stats-tooltips.mjs` and `stats-keyboard.mjs` are reusable Playwright scripts
+  in this standalone module. Run them against a running **dev server and built
+  preview** after chart/shared-interaction changes. Each accepts `--base` and
+  optional `--out`; assertion failures exit nonzero. They are **not** currently
+  included in `pnpm test`, pre-commit or CI. CI wiring would need server/browser
+  setup and teardown, not merely adding them to Vitest.
+- **Captures:** screenshot/response inventories and production comparisons
+  complement those checks, but do not prove keyboard or interaction behavior.
+
 ## Capture
 
 ```sh
@@ -74,6 +89,74 @@ pages in a real browser, scrolls each one so lazy images request, and exits
 non-zero on an image that never decoded, a console error, a failed request, or
 any response at 400 or above. Run it in any round that touches dev, the
 adapter, or images.
+
+## chart-parity.mjs
+
+```sh
+node plan/baseline/chart-parity.mjs --base http://localhost:4322 --out /tmp/chart-parity
+```
+
+Run against **dev and workerd preview** after changing pace charts, keyboard
+controls or shared table styles. Checks three team seasons (including a
+shortened season) at desktop/mobile widths: visible plot/table top alignment,
+alternating rows, 0.8 area opacity, vertical grid lines, only one horizontal
+threshold line, endpoint/threshold labels only, and SVG threshold-image responses. Exercises
+Tab discovery before scrolling a lazy chart into view, mobile table-trigger
+order before the chart, desktop chart-first order, arrow/Home/End selection,
+boundary clamping, Escape/blur dismissal, forward/backward Tab escape and mouse
+hover afterward. Cross-breakpoint checks preserve chart focus/selection and open
+table popovers; mobile sessions also exercise the fallback without `moveBefore`.
+An already-rendered chart is resized through 1280/1279/1150/1030/1024/1023px:
+asserts production's 3:2 column widths, single-line records and no overflow. `--out` optionally saves keyboard screenshots and JSON results.
+Failures exit nonzero. These are the agreed **new** chart choices, so this probe
+is not expected to pass against unchanged production.
+
+`tests/chart-options.test.ts` also tests tick choices (82/66/50 games), the option
+contract and spoken point descriptions without requiring content collections.
+This focused probe does not yet cover the stats-page charts or replace a
+screen-reader/browser compatibility review.
+
+## stats-parity.mjs
+
+```sh
+node plan/baseline/stats-parity.mjs --base http://localhost:4322 --out /tmp/stats-parity
+```
+
+Run on dev and workerd preview. Mounts all three Stats charts before narrowing
+from 1920 through desktop/stacked/mobile breakpoints and back. Checks equal
+columns, section/chart/table containment, season-plot/top-10 alignment, removal
+of the dotted frame, one bar per actual season, edge spacing and endpoint
+tooltip text. Captures may retain a tooltip: dismissal/revalidation and keyboard
+access remain separate audits, as do the lower charts' scales and styling.
+
+## stats-tooltips.mjs
+
+```sh
+node plan/baseline/stats-tooltips.mjs --base http://localhost:4322 --out /tmp/stats-tooltips
+```
+
+Checks all three Stats charts at 1440/390: 8px mobile margins, no boundary grid
+lines or gray axis overlays, dotted scatter zero, and 20 real within-point
+mousemoves per chart. Heading/icon nodes must remain identical, visible and
+decoded, with zero image requests during movement. Also verifies the scatter's
+hover outline surrounds the mouse target. Run on dev and preview;
+use the other probes for changed-point contents, resizing and pace keyboard
+behavior. This is not a general dismissal or screen-reader audit.
+
+## stats-keyboard.mjs
+
+```sh
+node plan/baseline/stats-keyboard.mjs --base http://localhost:4322 --out /tmp/stats-keyboard
+```
+
+Checks all three Stats charts at desktop/mobile: Tab discovery before scrolling,
+responsive Top 10/season-chart reading order, focus rings, arrows/Home/End,
+endpoint clamping, spoken-value/tooltip mapping, Escape, Tab escape and focus
+preservation across breakpoints. Scatter checks also verify exactly one outlined
+point at the selected data coordinates, including the effective 2px stroke after
+SVG scaling. Mobile tests exercise the DOM-move fallback.
+Screen-reader operation remains a manual check. Run alongside Stats layout and
+tooltip probes and the pace regression probe after shared keyboard changes.
 
 Known, expected deltas vs prod:
 

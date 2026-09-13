@@ -1,0 +1,450 @@
+{
+  "base": "https://nbastt.grepco.net",
+  "capturedAt": "2026-09-13T00:19:19.280Z",
+  "label": "walkthrough-team-prod",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1168,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32710,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/2025/CHA/"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.CAPrQYXY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "script": {
+              "bytes": 867437,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.CBHdIFpG.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CW0PB--P.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.Cd6n3NRX.js",
+                "https://nbastt.grepco.net/_astro/client.wYKJj2cp.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/index.CEZ3bDk8.js",
+                "https://nbastt.grepco.net/_astro/utils.DSjzOSDL.js",
+                "https://nbastt.grepco.net/_astro/popover.DUe0fMTC.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.BIiYeqMw.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 323,
+            "load": 655,
+            "transferSize": 7226
+          }
+        },
+        "mobile": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1746,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32711,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.CAPrQYXY.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.CwVRLsEz.css"
+              ]
+            },
+            "script": {
+              "bytes": 867083,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.CBHdIFpG.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CW0PB--P.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/team-season-pace.Cd6n3NRX.js",
+                "https://nbastt.grepco.net/_astro/client.wYKJj2cp.js",
+                "https://nbastt.grepco.net/_astro/index.CEZ3bDk8.js",
+                "https://nbastt.grepco.net/_astro/popover.DUe0fMTC.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.BIiYeqMw.js",
+                "https://nbastt.grepco.net/_astro/utils.DSjzOSDL.js"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 416,
+            "load": 863,
+            "transferSize": 7245
+          }
+        },
+        "tablet": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1766,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32711,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.CwVRLsEz.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 866696,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.CBHdIFpG.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CW0PB--P.js",
+                "https://nbastt.grepco.net/_astro/team-season-pace.Cd6n3NRX.js",
+                "https://nbastt.grepco.net/_astro/client.wYKJj2cp.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/index.CEZ3bDk8.js",
+                "https://nbastt.grepco.net/_astro/popover.DUe0fMTC.js",
+                "https://nbastt.grepco.net/_astro/utils.DSjzOSDL.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.BIiYeqMw.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 417,
+            "load": 743,
+            "transferSize": 7244
+          }
+        },
+        "wide": {
+          "consoleMessages": [
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            },
+            {
+              "text": "Failed to load resource: net::ERR_FAILED",
+              "type": "error"
+            }
+          ],
+          "documentHeight": 1168,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://static.cloudflareinsights.com/beacon.min.js"
+            },
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://o4508586287824896.ingest.us.sentry.io/api/4508586289856512/envelope/?sentry_version=7&sentry_key=46dbd994010d20746a0c9651942b13b6&sentry_client=sentry.javascript.astro%2F10.22.0"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 32711,
+              "count": 1,
+              "urls": [
+                "https://nbastt.grepco.net/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 21438,
+              "count": 2,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/_teamId_.CwVRLsEz.css",
+                "https://nbastt.grepco.net/_astro/_teamId_.CAPrQYXY.css"
+              ]
+            },
+            "image": {
+              "bytes": 7168,
+              "count": 5,
+              "urls": []
+            },
+            "script": {
+              "bytes": 866767,
+              "count": 10,
+              "urls": [
+                "https://nbastt.grepco.net/_astro/page.CBHdIFpG.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+                "https://nbastt.grepco.net/_astro/popover.CW0PB--P.js",
+                "https://nbastt.grepco.net/cdn-cgi/challenge-platform/h/g/scripts/jsd/330e41bb475c/main.js?",
+                "https://nbastt.grepco.net/_astro/team-season-pace.Cd6n3NRX.js",
+                "https://nbastt.grepco.net/_astro/client.wYKJj2cp.js",
+                "https://nbastt.grepco.net/_astro/index.CEZ3bDk8.js",
+                "https://nbastt.grepco.net/_astro/popover.DUe0fMTC.js",
+                "https://nbastt.grepco.net/_astro/utils.DSjzOSDL.js",
+                "https://nbastt.grepco.net/_astro/generateCategoricalChart.BIiYeqMw.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "xhr": {
+              "bytes": 0,
+              "count": 1,
+              "urls": []
+            },
+            "other": {
+              "bytes": 3618,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 369,
+            "load": 686,
+            "transferSize": 7241
+          }
+        }
+      },
+      "cssBytes": 21438,
+      "finalUrl": "https://nbastt.grepco.net/2025/CHA/",
+      "htmlBytes": 32344,
+      "hydratedIslands": 4,
+      "inlineScripts": 4,
+      "inlineStyles": 3,
+      "jsBytes": 867437,
+      "page": "/2025/CHA/",
+      "redirects": [],
+      "responseHeaders": {
+        "access-control-allow-origin": "*",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "DYNAMIC",
+        "cf-ray": "a3a2fa0aee2d7aa6-EWR",
+        "content-encoding": "br",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 13 Sep 2026 00:18:48 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=7VBG2WYk2ouTUuEZbLIIQJsZJWltj7a2%2BIfFGQVIA8sjs1OAft8PkeASX6nvWLMh3VG0WgL4qqM6%2FfJc1SwJriD5b%2FL6P%2FCoPafBi2Ar5RmLkqs3xWqE10PqOsRHrtEIeYPlJg%3D%3D\"}]}",
+        "server": "cloudflare",
+        "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+        "vary": "accept-encoding",
+        "x-content-type-options": "nosniff"
+      },
+      "scripts": [
+        {
+          "bytes": 128303,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "application/javascript",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/page.CBHdIFpG.js"
+        },
+        {
+          "external": true,
+          "url": "https://static.cloudflareinsights.com/beacon.min.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 4118,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.CwVRLsEz.css"
+        },
+        {
+          "bytes": 17320,
+          "cacheControl": "public, max-age=14400, must-revalidate",
+          "contentEncoding": "br",
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "https://nbastt.grepco.net/_astro/_teamId_.CAPrQYXY.css"
+        }
+      ],
+      "loadedBytes": 2918815
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

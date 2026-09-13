@@ -1,0 +1,232 @@
+{
+  "base": "http://localhost:4322",
+  "capturedAt": "2026-09-13T00:02:14.088Z",
+  "label": "walkthrough-season-preview",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1698,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28232,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 20470,
+              "count": 11,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 22,
+            "load": 82,
+            "transferSize": 28532
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1274,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28232,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 20470,
+              "count": 11,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 64,
+            "transferSize": 28532
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1772,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28232,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 20470,
+              "count": 11,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 12,
+            "load": 56,
+            "transferSize": 28532
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1698,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 28232,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "image": {
+              "bytes": 20470,
+              "count": 11,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 13,
+            "load": 64,
+            "transferSize": 28532
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:4322/2025/",
+      "htmlBytes": 28232,
+      "hydratedIslands": 0,
+      "inlineScripts": 3,
+      "inlineStyles": 2,
+      "jsBytes": 0,
+      "page": "/2025/",
+      "redirects": [],
+      "responseHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "HIT",
+        "connection": "keep-alive",
+        "content-length": "28232",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 13 Sep 2026 00:02:02 GMT",
+        "etag": "\"93b7617a86399da8e0ea72a1695d2e29\"",
+        "keep-alive": "timeout=5",
+        "vary": "Origin"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 17501,
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2055178
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

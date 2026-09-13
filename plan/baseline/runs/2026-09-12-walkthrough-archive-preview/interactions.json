@@ -1,0 +1,718 @@
+[
+  {
+    "base": "https://nbastt.grepco.net",
+    "dom": {
+      "seasons": [
+        {
+          "text": "2025 - 2026",
+          "href": "/2025"
+        },
+        {
+          "text": "2024 - 2025",
+          "href": "/2024"
+        },
+        {
+          "text": "2023 - 2024",
+          "href": "/2023"
+        },
+        {
+          "text": "2022 - 2023",
+          "href": "/2022"
+        },
+        {
+          "text": "2021 - 2022",
+          "href": "/2021"
+        },
+        {
+          "text": "2020 - 2021",
+          "href": "/2020"
+        },
+        {
+          "text": "2018 - 2019",
+          "href": "/2018"
+        },
+        {
+          "text": "2017 - 2018",
+          "href": "/2017"
+        },
+        {
+          "text": "2016 - 2017",
+          "href": "/2016"
+        },
+        {
+          "text": "2015 - 2016",
+          "href": "/2015"
+        },
+        {
+          "text": "2014 - 2015",
+          "href": "/2014"
+        },
+        {
+          "text": "2013 - 2014",
+          "href": "/2013"
+        },
+        {
+          "text": "2012 - 2013",
+          "href": "/2012"
+        },
+        {
+          "text": "2011 - 2012",
+          "href": "/2011"
+        },
+        {
+          "text": "2010 - 2011",
+          "href": "/2010"
+        },
+        {
+          "text": "2009 - 2010",
+          "href": "/2009"
+        },
+        {
+          "text": "2008 - 2009",
+          "href": "/2008"
+        },
+        {
+          "text": "2007 - 2008",
+          "href": "/2007"
+        },
+        {
+          "text": "2006 - 2007",
+          "href": "/2006"
+        },
+        {
+          "text": "2005 - 2006",
+          "href": "/2005"
+        },
+        {
+          "text": "2004 - 2005",
+          "href": "/2004"
+        },
+        {
+          "text": "2003 - 2004",
+          "href": "/2003"
+        },
+        {
+          "text": "2002 - 2003",
+          "href": "/2002"
+        },
+        {
+          "text": "2001 - 2002",
+          "href": "/2001"
+        },
+        {
+          "text": "2000 - 2001",
+          "href": "/2000"
+        },
+        {
+          "text": "1999 - 2000",
+          "href": "/1999"
+        },
+        {
+          "text": "1997 - 1998",
+          "href": "/1997"
+        },
+        {
+          "text": "1996 - 1997",
+          "href": "/1996"
+        },
+        {
+          "text": "1993 - 1994",
+          "href": "/1993"
+        }
+      ],
+      "nav": [
+        {
+          "text": "NBA SurpriseTeams Tracker",
+          "href": "/",
+          "active": false,
+          "ariaCurrent": null
+        },
+        {
+          "text": "Archive",
+          "href": "/archive",
+          "active": true,
+          "ariaCurrent": null
+        },
+        {
+          "text": "Stats",
+          "href": "/stats",
+          "active": false,
+          "ariaCurrent": null
+        },
+        {
+          "text": "About",
+          "href": "/about",
+          "active": false,
+          "ariaCurrent": null
+        }
+      ],
+      "headings": [
+        "Archive"
+      ],
+      "title": "Archive - NBASTT",
+      "description": "Listing of seasons tracked for surprise teams so far"
+    },
+    "links": [
+      {
+        "path": "/2025",
+        "status": 200,
+        "finalPath": "/2025/"
+      },
+      {
+        "path": "/2024",
+        "status": 200,
+        "finalPath": "/2024/"
+      },
+      {
+        "path": "/2023",
+        "status": 200,
+        "finalPath": "/2023/"
+      },
+      {
+        "path": "/2022",
+        "status": 200,
+        "finalPath": "/2022/"
+      },
+      {
+        "path": "/2021",
+        "status": 200,
+        "finalPath": "/2021/"
+      },
+      {
+        "path": "/2020",
+        "status": 200,
+        "finalPath": "/2020/"
+      },
+      {
+        "path": "/2018",
+        "status": 200,
+        "finalPath": "/2018/"
+      },
+      {
+        "path": "/2017",
+        "status": 200,
+        "finalPath": "/2017/"
+      },
+      {
+        "path": "/2016",
+        "status": 200,
+        "finalPath": "/2016/"
+      },
+      {
+        "path": "/2015",
+        "status": 200,
+        "finalPath": "/2015/"
+      },
+      {
+        "path": "/2014",
+        "status": 200,
+        "finalPath": "/2014/"
+      },
+      {
+        "path": "/2013",
+        "status": 200,
+        "finalPath": "/2013/"
+      },
+      {
+        "path": "/2012",
+        "status": 200,
+        "finalPath": "/2012/"
+      },
+      {
+        "path": "/2011",
+        "status": 200,
+        "finalPath": "/2011/"
+      },
+      {
+        "path": "/2010",
+        "status": 200,
+        "finalPath": "/2010/"
+      },
+      {
+        "path": "/2009",
+        "status": 200,
+        "finalPath": "/2009/"
+      },
+      {
+        "path": "/2008",
+        "status": 200,
+        "finalPath": "/2008/"
+      },
+      {
+        "path": "/2007",
+        "status": 200,
+        "finalPath": "/2007/"
+      },
+      {
+        "path": "/2006",
+        "status": 200,
+        "finalPath": "/2006/"
+      },
+      {
+        "path": "/2005",
+        "status": 200,
+        "finalPath": "/2005/"
+      },
+      {
+        "path": "/2004",
+        "status": 200,
+        "finalPath": "/2004/"
+      },
+      {
+        "path": "/2003",
+        "status": 200,
+        "finalPath": "/2003/"
+      },
+      {
+        "path": "/2002",
+        "status": 200,
+        "finalPath": "/2002/"
+      },
+      {
+        "path": "/2001",
+        "status": 200,
+        "finalPath": "/2001/"
+      },
+      {
+        "path": "/2000",
+        "status": 200,
+        "finalPath": "/2000/"
+      },
+      {
+        "path": "/1999",
+        "status": 200,
+        "finalPath": "/1999/"
+      },
+      {
+        "path": "/1997",
+        "status": 200,
+        "finalPath": "/1997/"
+      },
+      {
+        "path": "/1996",
+        "status": 200,
+        "finalPath": "/1996/"
+      },
+      {
+        "path": "/1993",
+        "status": 200,
+        "finalPath": "/1993/"
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "finalPath": "/"
+      },
+      {
+        "path": "/archive",
+        "status": 200,
+        "finalPath": "/archive/"
+      },
+      {
+        "path": "/stats",
+        "status": 200,
+        "finalPath": "/stats/"
+      },
+      {
+        "path": "/about",
+        "status": 200,
+        "finalPath": "/about/"
+      }
+    ],
+    "redirect": {
+      "status": 308,
+      "location": "/archive/"
+    },
+    "clickedPath": "/2025/",
+    "back": {
+      "path": "/archive/",
+      "active": [
+        "Archive"
+      ]
+    },
+    "tabs": [
+      {
+        "text": "NBA SurpriseTeams Tracker",
+        "href": "/"
+      },
+      {
+        "text": "Archive",
+        "href": "/archive"
+      },
+      {
+        "text": "Stats",
+        "href": "/stats"
+      },
+      {
+        "text": "About",
+        "href": "/about"
+      },
+      {
+        "text": "2025 - 2026",
+        "href": "/2025"
+      },
+      {
+        "text": "2024 - 2025",
+        "href": "/2024"
+      }
+    ]
+  },
+  {
+    "base": "http://localhost:4322",
+    "dom": {
+      "seasons": [
+        {
+          "text": "2025 - 2026",
+          "href": "/2025/"
+        },
+        {
+          "text": "2024 - 2025",
+          "href": "/2024/"
+        },
+        {
+          "text": "2023 - 2024",
+          "href": "/2023/"
+        },
+        {
+          "text": "2022 - 2023",
+          "href": "/2022/"
+        },
+        {
+          "text": "2021 - 2022",
+          "href": "/2021/"
+        },
+        {
+          "text": "2020 - 2021",
+          "href": "/2020/"
+        },
+        {
+          "text": "2018 - 2019",
+          "href": "/2018/"
+        },
+        {
+          "text": "2017 - 2018",
+          "href": "/2017/"
+        },
+        {
+          "text": "2016 - 2017",
+          "href": "/2016/"
+        },
+        {
+          "text": "2015 - 2016",
+          "href": "/2015/"
+        },
+        {
+          "text": "2014 - 2015",
+          "href": "/2014/"
+        },
+        {
+          "text": "2013 - 2014",
+          "href": "/2013/"
+        },
+        {
+          "text": "2012 - 2013",
+          "href": "/2012/"
+        },
+        {
+          "text": "2011 - 2012",
+          "href": "/2011/"
+        },
+        {
+          "text": "2010 - 2011",
+          "href": "/2010/"
+        },
+        {
+          "text": "2009 - 2010",
+          "href": "/2009/"
+        },
+        {
+          "text": "2008 - 2009",
+          "href": "/2008/"
+        },
+        {
+          "text": "2007 - 2008",
+          "href": "/2007/"
+        },
+        {
+          "text": "2006 - 2007",
+          "href": "/2006/"
+        },
+        {
+          "text": "2005 - 2006",
+          "href": "/2005/"
+        },
+        {
+          "text": "2004 - 2005",
+          "href": "/2004/"
+        },
+        {
+          "text": "2003 - 2004",
+          "href": "/2003/"
+        },
+        {
+          "text": "2002 - 2003",
+          "href": "/2002/"
+        },
+        {
+          "text": "2001 - 2002",
+          "href": "/2001/"
+        },
+        {
+          "text": "2000 - 2001",
+          "href": "/2000/"
+        },
+        {
+          "text": "1999 - 2000",
+          "href": "/1999/"
+        },
+        {
+          "text": "1997 - 1998",
+          "href": "/1997/"
+        },
+        {
+          "text": "1996 - 1997",
+          "href": "/1996/"
+        },
+        {
+          "text": "1993 - 1994",
+          "href": "/1993/"
+        }
+      ],
+      "nav": [
+        {
+          "text": "NBA SurpriseTeams Tracker",
+          "href": "/",
+          "active": false,
+          "ariaCurrent": null
+        },
+        {
+          "text": "Archive",
+          "href": "/archive/",
+          "active": true,
+          "ariaCurrent": null
+        },
+        {
+          "text": "Stats",
+          "href": "/stats/",
+          "active": false,
+          "ariaCurrent": null
+        },
+        {
+          "text": "About",
+          "href": "/about/",
+          "active": false,
+          "ariaCurrent": null
+        }
+      ],
+      "headings": [
+        "Archive"
+      ],
+      "title": "Archive - NBASTT",
+      "description": "Listing of seasons tracked for surprise teams so far"
+    },
+    "links": [
+      {
+        "path": "/2025/",
+        "status": 200,
+        "finalPath": "/2025/"
+      },
+      {
+        "path": "/2024/",
+        "status": 200,
+        "finalPath": "/2024/"
+      },
+      {
+        "path": "/2023/",
+        "status": 200,
+        "finalPath": "/2023/"
+      },
+      {
+        "path": "/2022/",
+        "status": 200,
+        "finalPath": "/2022/"
+      },
+      {
+        "path": "/2021/",
+        "status": 200,
+        "finalPath": "/2021/"
+      },
+      {
+        "path": "/2020/",
+        "status": 200,
+        "finalPath": "/2020/"
+      },
+      {
+        "path": "/2018/",
+        "status": 200,
+        "finalPath": "/2018/"
+      },
+      {
+        "path": "/2017/",
+        "status": 200,
+        "finalPath": "/2017/"
+      },
+      {
+        "path": "/2016/",
+        "status": 200,
+        "finalPath": "/2016/"
+      },
+      {
+        "path": "/2015/",
+        "status": 200,
+        "finalPath": "/2015/"
+      },
+      {
+        "path": "/2014/",
+        "status": 200,
+        "finalPath": "/2014/"
+      },
+      {
+        "path": "/2013/",
+        "status": 200,
+        "finalPath": "/2013/"
+      },
+      {
+        "path": "/2012/",
+        "status": 200,
+        "finalPath": "/2012/"
+      },
+      {
+        "path": "/2011/",
+        "status": 200,
+        "finalPath": "/2011/"
+      },
+      {
+        "path": "/2010/",
+        "status": 200,
+        "finalPath": "/2010/"
+      },
+      {
+        "path": "/2009/",
+        "status": 200,
+        "finalPath": "/2009/"
+      },
+      {
+        "path": "/2008/",
+        "status": 200,
+        "finalPath": "/2008/"
+      },
+      {
+        "path": "/2007/",
+        "status": 200,
+        "finalPath": "/2007/"
+      },
+      {
+        "path": "/2006/",
+        "status": 200,
+        "finalPath": "/2006/"
+      },
+      {
+        "path": "/2005/",
+        "status": 200,
+        "finalPath": "/2005/"
+      },
+      {
+        "path": "/2004/",
+        "status": 200,
+        "finalPath": "/2004/"
+      },
+      {
+        "path": "/2003/",
+        "status": 200,
+        "finalPath": "/2003/"
+      },
+      {
+        "path": "/2002/",
+        "status": 200,
+        "finalPath": "/2002/"
+      },
+      {
+        "path": "/2001/",
+        "status": 200,
+        "finalPath": "/2001/"
+      },
+      {
+        "path": "/2000/",
+        "status": 200,
+        "finalPath": "/2000/"
+      },
+      {
+        "path": "/1999/",
+        "status": 200,
+        "finalPath": "/1999/"
+      },
+      {
+        "path": "/1997/",
+        "status": 200,
+        "finalPath": "/1997/"
+      },
+      {
+        "path": "/1996/",
+        "status": 200,
+        "finalPath": "/1996/"
+      },
+      {
+        "path": "/1993/",
+        "status": 200,
+        "finalPath": "/1993/"
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "finalPath": "/"
+      },
+      {
+        "path": "/archive/",
+        "status": 200,
+        "finalPath": "/archive/"
+      },
+      {
+        "path": "/stats/",
+        "status": 200,
+        "finalPath": "/stats/"
+      },
+      {
+        "path": "/about/",
+        "status": 200,
+        "finalPath": "/about/"
+      }
+    ],
+    "redirect": {
+      "status": 307,
+      "location": "/archive/"
+    },
+    "clickedPath": "/2025/",
+    "back": {
+      "path": "/archive/",
+      "active": [
+        "Archive"
+      ]
+    },
+    "tabs": [
+      {
+        "text": "NBA SurpriseTeams Tracker",
+        "href": "/"
+      },
+      {
+        "text": "Archive",
+        "href": "/archive/"
+      },
+      {
+        "text": "Stats",
+        "href": "/stats/"
+      },
+      {
+        "text": "About",
+        "href": "/about/"
+      },
+      {
+        "text": "2025 - 2026",
+        "href": "/2025/"
+      },
+      {
+        "text": "2024 - 2025",
+        "href": "/2024/"
+      }
+    ]
+  }
+]

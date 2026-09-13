@@ -18,7 +18,7 @@ const json = JSON.stringify(Astro.props).replaceAll("<", String.raw`\u003c`);
 
 <script>
   import { mountCharts } from "./echarts";
-  import { option } from "./team-season-scatter";
+  import { keyboard, option } from "./team-season-scatter";
 
-  mountCharts("team-season-scatter", option);
+  mountCharts("team-season-scatter", option, keyboard);
 </script>

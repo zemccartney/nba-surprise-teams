@@ -1,0 +1,2016 @@
+[
+  {
+    "label": "prod",
+    "base": "https://nbastt.grepco.net",
+    "data": {
+      "data": [
+        {
+          "date": "2025-10-22",
+          "pace": 44,
+          "projectedWins": 82,
+          "recordFmt": "1 - 0"
+        },
+        {
+          "date": "2025-10-25",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "1 - 1"
+        },
+        {
+          "date": "2025-10-26",
+          "pace": 16,
+          "projectedWins": 54,
+          "recordFmt": "2 - 1"
+        },
+        {
+          "date": "2025-10-28",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "2 - 2"
+        },
+        {
+          "date": "2025-10-30",
+          "pace": -6,
+          "projectedWins": 32,
+          "recordFmt": "2 - 3"
+        },
+        {
+          "date": "2025-11-01",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "2 - 4"
+        },
+        {
+          "date": "2025-11-02",
+          "pace": -3,
+          "projectedWins": 35,
+          "recordFmt": "3 - 4"
+        },
+        {
+          "date": "2025-11-04",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "3 - 5"
+        },
+        {
+          "date": "2025-11-07",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "3 - 6"
+        },
+        {
+          "date": "2025-11-10",
+          "pace": -14,
+          "projectedWins": 24,
+          "recordFmt": "3 - 7"
+        },
+        {
+          "date": "2025-11-12",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "4 - 7"
+        },
+        {
+          "date": "2025-11-14",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "4 - 8"
+        },
+        {
+          "date": "2025-11-15",
+          "pace": -13,
+          "projectedWins": 25,
+          "recordFmt": "4 - 9"
+        },
+        {
+          "date": "2025-11-17",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "4 - 10"
+        },
+        {
+          "date": "2025-11-19",
+          "pace": -17,
+          "projectedWins": 21,
+          "recordFmt": "4 - 11"
+        },
+        {
+          "date": "2025-11-22",
+          "pace": -18,
+          "projectedWins": 20,
+          "recordFmt": "4 - 12"
+        },
+        {
+          "date": "2025-11-23",
+          "pace": -19,
+          "projectedWins": 19,
+          "recordFmt": "4 - 13"
+        },
+        {
+          "date": "2025-11-26",
+          "pace": -20,
+          "projectedWins": 18,
+          "recordFmt": "4 - 14"
+        },
+        {
+          "date": "2025-11-28",
+          "pace": -17,
+          "projectedWins": 21,
+          "recordFmt": "5 - 14"
+        },
+        {
+          "date": "2025-11-29",
+          "pace": -14,
+          "projectedWins": 24,
+          "recordFmt": "6 - 14"
+        },
+        {
+          "date": "2025-12-01",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "6 - 15"
+        },
+        {
+          "date": "2025-12-03",
+          "pace": -16,
+          "projectedWins": 22,
+          "recordFmt": "6 - 16"
+        },
+        {
+          "date": "2025-12-05",
+          "pace": -14,
+          "projectedWins": 24,
+          "recordFmt": "7 - 16"
+        },
+        {
+          "date": "2025-12-07",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "7 - 17"
+        },
+        {
+          "date": "2025-12-12",
+          "pace": -16,
+          "projectedWins": 22,
+          "recordFmt": "7 - 18"
+        },
+        {
+          "date": "2025-12-14",
+          "pace": -13,
+          "projectedWins": 25,
+          "recordFmt": "8 - 18"
+        },
+        {
+          "date": "2025-12-18",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "9 - 18"
+        },
+        {
+          "date": "2025-12-20",
+          "pace": -12,
+          "projectedWins": 26,
+          "recordFmt": "9 - 19"
+        },
+        {
+          "date": "2025-12-22",
+          "pace": -13,
+          "projectedWins": 25,
+          "recordFmt": "9 - 20"
+        },
+        {
+          "date": "2025-12-23",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "10 - 20"
+        },
+        {
+          "date": "2025-12-26",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "11 - 20"
+        },
+        {
+          "date": "2025-12-29",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "11 - 21"
+        },
+        {
+          "date": "2025-12-31",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "11 - 22"
+        },
+        {
+          "date": "2026-01-02",
+          "pace": -12,
+          "projectedWins": 26,
+          "recordFmt": "11 - 23"
+        },
+        {
+          "date": "2026-01-03",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "12 - 23"
+        },
+        {
+          "date": "2026-01-05",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "13 - 23"
+        },
+        {
+          "date": "2026-01-07",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "13 - 24"
+        },
+        {
+          "date": "2026-01-08",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "13 - 25"
+        },
+        {
+          "date": "2026-01-10",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "14 - 25"
+        },
+        {
+          "date": "2026-01-12",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "14 - 26"
+        },
+        {
+          "date": "2026-01-15",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "15 - 26"
+        },
+        {
+          "date": "2026-01-17",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "15 - 27"
+        },
+        {
+          "date": "2026-01-18",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "16 - 27"
+        },
+        {
+          "date": "2026-01-21",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "16 - 28"
+        },
+        {
+          "date": "2026-01-22",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "17 - 28"
+        },
+        {
+          "date": "2026-01-24",
+          "pace": -6,
+          "projectedWins": 32,
+          "recordFmt": "18 - 28"
+        },
+        {
+          "date": "2026-01-26",
+          "pace": -5,
+          "projectedWins": 33,
+          "recordFmt": "19 - 28"
+        },
+        {
+          "date": "2026-01-28",
+          "pace": -4,
+          "projectedWins": 34,
+          "recordFmt": "20 - 28"
+        },
+        {
+          "date": "2026-01-29",
+          "pace": -3,
+          "projectedWins": 35,
+          "recordFmt": "21 - 28"
+        },
+        {
+          "date": "2026-01-31",
+          "pace": -2,
+          "projectedWins": 36,
+          "recordFmt": "22 - 28"
+        },
+        {
+          "date": "2026-02-02",
+          "pace": -2,
+          "projectedWins": 36,
+          "recordFmt": "23 - 28"
+        },
+        {
+          "date": "2026-02-05",
+          "pace": -1,
+          "projectedWins": 37,
+          "recordFmt": "24 - 28"
+        },
+        {
+          "date": "2026-02-07",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "25 - 28"
+        },
+        {
+          "date": "2026-02-09",
+          "pace": -1,
+          "projectedWins": 37,
+          "recordFmt": "25 - 29"
+        },
+        {
+          "date": "2026-02-11",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "26 - 29"
+        },
+        {
+          "date": "2026-02-19",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "26 - 30"
+        },
+        {
+          "date": "2026-02-20",
+          "pace": -1,
+          "projectedWins": 37,
+          "recordFmt": "26 - 31"
+        },
+        {
+          "date": "2026-02-22",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "27 - 31"
+        },
+        {
+          "date": "2026-02-24",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "28 - 31"
+        },
+        {
+          "date": "2026-02-26",
+          "pace": 1,
+          "projectedWins": 39,
+          "recordFmt": "29 - 31"
+        },
+        {
+          "date": "2026-02-28",
+          "pace": 2,
+          "projectedWins": 40,
+          "recordFmt": "30 - 31"
+        },
+        {
+          "date": "2026-03-03",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "31 - 31"
+        },
+        {
+          "date": "2026-03-04",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "32 - 31"
+        },
+        {
+          "date": "2026-03-06",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "32 - 32"
+        },
+        {
+          "date": "2026-03-08",
+          "pace": 2,
+          "projectedWins": 40,
+          "recordFmt": "32 - 33"
+        },
+        {
+          "date": "2026-03-10",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "33 - 33"
+        },
+        {
+          "date": "2026-03-11",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "34 - 33"
+        },
+        {
+          "date": "2026-03-14",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "34 - 34"
+        },
+        {
+          "date": "2026-03-17",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "35 - 34"
+        },
+        {
+          "date": "2026-03-19",
+          "pace": 4,
+          "projectedWins": 42,
+          "recordFmt": "36 - 34"
+        },
+        {
+          "date": "2026-03-21",
+          "pace": 4,
+          "projectedWins": 42,
+          "recordFmt": "37 - 34"
+        },
+        {
+          "date": "2026-03-24",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "38 - 34"
+        },
+        {
+          "date": "2026-03-26",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "39 - 34"
+        },
+        {
+          "date": "2026-03-28",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "39 - 35"
+        },
+        {
+          "date": "2026-03-29",
+          "pace": 4,
+          "projectedWins": 42,
+          "recordFmt": "39 - 36"
+        },
+        {
+          "date": "2026-03-31",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "40 - 36"
+        },
+        {
+          "date": "2026-04-02",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "41 - 36"
+        },
+        {
+          "date": "2026-04-03",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "42 - 36"
+        },
+        {
+          "date": "2026-04-05",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "43 - 36"
+        },
+        {
+          "date": "2026-04-07",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "43 - 37"
+        },
+        {
+          "date": "2026-04-10",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "43 - 38"
+        },
+        {
+          "date": "2026-04-12",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "44 - 38"
+        }
+      ],
+      "surpriseRules": {
+        "numGames": 82,
+        "overUnderCutoff": 36,
+        "paceTarget": 10
+      },
+      "winsToSurprise": 38,
+      "data-astro-cid-xxriqmbb": true
+    },
+    "dom": {
+      "rows": [
+        [
+          "Record",
+          "44 - 38"
+        ],
+        [
+          "Over/Under",
+          "27.5"
+        ],
+        [
+          "Record Needed\n?",
+          "38 - 44"
+        ],
+        [
+          "Pace (Projected Record)\n?",
+          "+6 (44 - 38)"
+        ],
+        [
+          "Surprise Have-to-Go\n?",
+          ""
+        ]
+      ],
+      "host": {
+        "x": 88,
+        "y": 472,
+        "width": 720,
+        "height": 600
+      },
+      "labels": [
+        {
+          "text": "2025-10-22",
+          "rect": {
+            "x": 134.5,
+            "y": 1059.3599853515625,
+            "width": 75,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "2025-11-15",
+          "rect": {
+            "x": 231.72222900390625,
+            "y": 1059.3599853515625,
+            "width": 69,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "2025-12-12",
+          "rect": {
+            "x": 324.4444580078125,
+            "y": 1059.3599853515625,
+            "width": 72,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "2026-01-07",
+          "rect": {
+            "x": 417.1666564941406,
+            "y": 1059.3599853515625,
+            "width": 75,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "2026-01-29",
+          "rect": {
+            "x": 511.38885498046875,
+            "y": 1059.3599853515625,
+            "width": 75,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "2026-02-28",
+          "rect": {
+            "x": 604.111083984375,
+            "y": 1059.3599853515625,
+            "width": 78,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "2026-03-26",
+          "rect": {
+            "x": 698.3333129882812,
+            "y": 1059.3599853515625,
+            "width": 78,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "0",
+          "rect": {
+            "x": 146,
+            "y": 1035.6799926757812,
+            "width": 8,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "25",
+          "rect": {
+            "x": 138,
+            "y": 861.8995361328125,
+            "width": 16,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "50",
+          "rect": {
+            "x": 138,
+            "y": 688.1190185546875,
+            "width": 16,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "82",
+          "rect": {
+            "x": 138,
+            "y": 477.67999267578125,
+            "width": 16,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        },
+        {
+          "text": "Projected Wins",
+          "rect": {
+            "x": 93,
+            "y": 666,
+            "width": 23.459991455078125,
+            "height": 147
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "38",
+          "rect": {
+            "x": 128,
+            "y": 769.8536376953125,
+            "width": 16,
+            "height": 16
+          },
+          "font": "ChicagoKare-Regular, sans-serif"
+        }
+      ],
+      "paths": [
+        {
+          "tag": "rect",
+          "class": null,
+          "fill": null,
+          "fillOpacity": "1",
+          "stroke": null,
+          "rect": {
+            "x": 0,
+            "y": 172,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "tag": "rect",
+          "class": "recharts-cartesian-grid-bg",
+          "fill": "var(--color-slate-950)",
+          "fillOpacity": "1",
+          "stroke": "none",
+          "rect": {
+            "x": 172,
+            "y": 472,
+            "width": 636,
+            "height": 570
+          }
+        },
+        {
+          "tag": "rect",
+          "class": null,
+          "fill": null,
+          "fillOpacity": "1",
+          "stroke": null,
+          "rect": {
+            "x": 0,
+            "y": 172,
+            "width": 0,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": "recharts-curve recharts-area-area",
+          "fill": "url(#splitColor)",
+          "fillOpacity": "0.6",
+          "stroke": "none",
+          "d": "M84,0C86.617,142.5,89.235,285,91.852,285C94.469,285,97.086,194.634,99.704,194.634C102.321,194.634,104.938,259.512,107.55",
+          "rect": {
+            "x": 172,
+            "y": 472,
+            "width": 636,
+            "height": 444.87799072265625
+          }
+        },
+        {
+          "tag": "path",
+          "class": "recharts-curve recharts-area-curve",
+          "fill": "none",
+          "fillOpacity": "0.6",
+          "stroke": "var(--color-lime-500)",
+          "d": "M84,0C86.617,142.5,89.235,285,91.852,285C94.469,285,97.086,194.634,99.704,194.634C102.321,194.634,104.938,259.512,107.55",
+          "rect": {
+            "x": 172,
+            "y": 472,
+            "width": 636,
+            "height": 444.87799072265625
+          }
+        }
+      ],
+      "keyboard": [
+        {
+          "tag": "svg",
+          "role": "application",
+          "tabindex": "0"
+        },
+        {
+          "tag": "DIV",
+          "role": null,
+          "tabindex": "-1"
+        }
+      ],
+      "hostSemantics": {
+        "role": null,
+        "tabindex": null
+      },
+      "links": [
+        {
+          "text": "",
+          "href": "https://nbastt.grepco.net/cdn-cgi/content?id=9LoGMKn0QmTbpNSsj_OOKBHRA1.sUm93pmNUULxrfqQ-1789258920.5750542-1.2.1.1-WchIoWGfNEK2PBJVcs4.hOCZeofV2FykCr0y3ooJXmUrrgB5YcJ9kImHDXZk77jA"
+        },
+        {
+          "text": "NBA Surprise\nTeams Tracker",
+          "href": "/"
+        },
+        {
+          "text": "Archive",
+          "href": "/archive"
+        },
+        {
+          "text": "Stats",
+          "href": "/stats"
+        },
+        {
+          "text": "About",
+          "href": "/about"
+        },
+        {
+          "text": "Back to '25-26 Season",
+          "href": "/2025"
+        }
+      ],
+      "overflow": false
+    },
+    "plot": {
+      "x": 172,
+      "y": 300,
+      "width": 636,
+      "height": 570
+    },
+    "tooltips": [
+      {
+        "index": 0,
+        "expected": {
+          "date": "2025-10-22",
+          "pace": 44,
+          "projectedWins": 82,
+          "recordFmt": "1 - 0"
+        },
+        "visible": [
+          "2025-10-22\n\nRecord:1 - 0\n\nProjected Wins:82\n\nPace:+44"
+        ]
+      },
+      {
+        "index": 20,
+        "expected": {
+          "date": "2025-12-01",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "6 - 15"
+        },
+        "visible": [
+          "2025-12-01\n\nRecord:6 - 15\n\nProjected Wins:23\n\nPace:-15"
+        ]
+      },
+      {
+        "index": 40,
+        "expected": {
+          "date": "2026-01-15",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "15 - 26"
+        },
+        "visible": [
+          "2026-01-15\n\nRecord:15 - 26\n\nProjected Wins:30\n\nPace:-8"
+        ]
+      },
+      {
+        "index": 81,
+        "expected": {
+          "date": "2026-04-12",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "44 - 38"
+        },
+        "visible": [
+          "2026-04-12\n\nRecord:44 - 38\n\nProjected Wins:44\n\nPace:+6"
+        ]
+      }
+    ],
+    "keyboard": {
+      "focusableCount": 1,
+      "tooltip": [
+        "2025-10-25\n\nRecord:1 - 1\n\nProjected Wins:41\n\nPace:+3"
+      ]
+    },
+    "popovers": [
+      {
+        "width": 1440,
+        "index": 0,
+        "text": "Record Needed Record needed to qualify as a Surprise Team i.e. 10 wins above a team's preseason over/under (rounded up)",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 1440,
+        "index": 1,
+        "text": "Pace Current projected wins - Wins needed to surprise Projected Record How many wins the team would have if their current winning percentage held for all 82 games.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 1440,
+        "index": 2,
+        "text": "Surprise Have-to-Go What would a team \"have to go\" the rest of the way to end up a surprise team? As in, the worst record over games remaining with which the team would still achieve surprise status.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 390,
+        "index": 0,
+        "text": "Record Needed Record needed to qualify as a Surprise Team i.e. 10 wins above a team's preseason over/under (rounded up)",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 390,
+        "index": 1,
+        "text": "Pace Current projected wins - Wins needed to surprise Projected Record How many wins the team would have if their current winning percentage held for all 82 games.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 390,
+        "index": 2,
+        "text": "Surprise Have-to-Go What would a team \"have to go\" the rest of the way to end up a surprise team? As in, the worst record over games remaining with which the team would still achieve surprise status.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      }
+    ],
+    "errors": []
+  },
+  {
+    "label": "preview",
+    "base": "http://localhost:4322",
+    "data": {
+      "data": [
+        {
+          "date": "2025-10-22",
+          "pace": 44,
+          "projectedWins": 82,
+          "recordFmt": "1 - 0"
+        },
+        {
+          "date": "2025-10-25",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "1 - 1"
+        },
+        {
+          "date": "2025-10-26",
+          "pace": 16,
+          "projectedWins": 54,
+          "recordFmt": "2 - 1"
+        },
+        {
+          "date": "2025-10-28",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "2 - 2"
+        },
+        {
+          "date": "2025-10-30",
+          "pace": -6,
+          "projectedWins": 32,
+          "recordFmt": "2 - 3"
+        },
+        {
+          "date": "2025-11-01",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "2 - 4"
+        },
+        {
+          "date": "2025-11-02",
+          "pace": -3,
+          "projectedWins": 35,
+          "recordFmt": "3 - 4"
+        },
+        {
+          "date": "2025-11-04",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "3 - 5"
+        },
+        {
+          "date": "2025-11-07",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "3 - 6"
+        },
+        {
+          "date": "2025-11-10",
+          "pace": -14,
+          "projectedWins": 24,
+          "recordFmt": "3 - 7"
+        },
+        {
+          "date": "2025-11-12",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "4 - 7"
+        },
+        {
+          "date": "2025-11-14",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "4 - 8"
+        },
+        {
+          "date": "2025-11-15",
+          "pace": -13,
+          "projectedWins": 25,
+          "recordFmt": "4 - 9"
+        },
+        {
+          "date": "2025-11-17",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "4 - 10"
+        },
+        {
+          "date": "2025-11-19",
+          "pace": -17,
+          "projectedWins": 21,
+          "recordFmt": "4 - 11"
+        },
+        {
+          "date": "2025-11-22",
+          "pace": -18,
+          "projectedWins": 20,
+          "recordFmt": "4 - 12"
+        },
+        {
+          "date": "2025-11-23",
+          "pace": -19,
+          "projectedWins": 19,
+          "recordFmt": "4 - 13"
+        },
+        {
+          "date": "2025-11-26",
+          "pace": -20,
+          "projectedWins": 18,
+          "recordFmt": "4 - 14"
+        },
+        {
+          "date": "2025-11-28",
+          "pace": -17,
+          "projectedWins": 21,
+          "recordFmt": "5 - 14"
+        },
+        {
+          "date": "2025-11-29",
+          "pace": -14,
+          "projectedWins": 24,
+          "recordFmt": "6 - 14"
+        },
+        {
+          "date": "2025-12-01",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "6 - 15"
+        },
+        {
+          "date": "2025-12-03",
+          "pace": -16,
+          "projectedWins": 22,
+          "recordFmt": "6 - 16"
+        },
+        {
+          "date": "2025-12-05",
+          "pace": -14,
+          "projectedWins": 24,
+          "recordFmt": "7 - 16"
+        },
+        {
+          "date": "2025-12-07",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "7 - 17"
+        },
+        {
+          "date": "2025-12-12",
+          "pace": -16,
+          "projectedWins": 22,
+          "recordFmt": "7 - 18"
+        },
+        {
+          "date": "2025-12-14",
+          "pace": -13,
+          "projectedWins": 25,
+          "recordFmt": "8 - 18"
+        },
+        {
+          "date": "2025-12-18",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "9 - 18"
+        },
+        {
+          "date": "2025-12-20",
+          "pace": -12,
+          "projectedWins": 26,
+          "recordFmt": "9 - 19"
+        },
+        {
+          "date": "2025-12-22",
+          "pace": -13,
+          "projectedWins": 25,
+          "recordFmt": "9 - 20"
+        },
+        {
+          "date": "2025-12-23",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "10 - 20"
+        },
+        {
+          "date": "2025-12-26",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "11 - 20"
+        },
+        {
+          "date": "2025-12-29",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "11 - 21"
+        },
+        {
+          "date": "2025-12-31",
+          "pace": -11,
+          "projectedWins": 27,
+          "recordFmt": "11 - 22"
+        },
+        {
+          "date": "2026-01-02",
+          "pace": -12,
+          "projectedWins": 26,
+          "recordFmt": "11 - 23"
+        },
+        {
+          "date": "2026-01-03",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "12 - 23"
+        },
+        {
+          "date": "2026-01-05",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "13 - 23"
+        },
+        {
+          "date": "2026-01-07",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "13 - 24"
+        },
+        {
+          "date": "2026-01-08",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "13 - 25"
+        },
+        {
+          "date": "2026-01-10",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "14 - 25"
+        },
+        {
+          "date": "2026-01-12",
+          "pace": -10,
+          "projectedWins": 28,
+          "recordFmt": "14 - 26"
+        },
+        {
+          "date": "2026-01-15",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "15 - 26"
+        },
+        {
+          "date": "2026-01-17",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "15 - 27"
+        },
+        {
+          "date": "2026-01-18",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "16 - 27"
+        },
+        {
+          "date": "2026-01-21",
+          "pace": -9,
+          "projectedWins": 29,
+          "recordFmt": "16 - 28"
+        },
+        {
+          "date": "2026-01-22",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "17 - 28"
+        },
+        {
+          "date": "2026-01-24",
+          "pace": -6,
+          "projectedWins": 32,
+          "recordFmt": "18 - 28"
+        },
+        {
+          "date": "2026-01-26",
+          "pace": -5,
+          "projectedWins": 33,
+          "recordFmt": "19 - 28"
+        },
+        {
+          "date": "2026-01-28",
+          "pace": -4,
+          "projectedWins": 34,
+          "recordFmt": "20 - 28"
+        },
+        {
+          "date": "2026-01-29",
+          "pace": -3,
+          "projectedWins": 35,
+          "recordFmt": "21 - 28"
+        },
+        {
+          "date": "2026-01-31",
+          "pace": -2,
+          "projectedWins": 36,
+          "recordFmt": "22 - 28"
+        },
+        {
+          "date": "2026-02-02",
+          "pace": -2,
+          "projectedWins": 36,
+          "recordFmt": "23 - 28"
+        },
+        {
+          "date": "2026-02-05",
+          "pace": -1,
+          "projectedWins": 37,
+          "recordFmt": "24 - 28"
+        },
+        {
+          "date": "2026-02-07",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "25 - 28"
+        },
+        {
+          "date": "2026-02-09",
+          "pace": -1,
+          "projectedWins": 37,
+          "recordFmt": "25 - 29"
+        },
+        {
+          "date": "2026-02-11",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "26 - 29"
+        },
+        {
+          "date": "2026-02-19",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "26 - 30"
+        },
+        {
+          "date": "2026-02-20",
+          "pace": -1,
+          "projectedWins": 37,
+          "recordFmt": "26 - 31"
+        },
+        {
+          "date": "2026-02-22",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "27 - 31"
+        },
+        {
+          "date": "2026-02-24",
+          "pace": 0,
+          "projectedWins": 38,
+          "recordFmt": "28 - 31"
+        },
+        {
+          "date": "2026-02-26",
+          "pace": 1,
+          "projectedWins": 39,
+          "recordFmt": "29 - 31"
+        },
+        {
+          "date": "2026-02-28",
+          "pace": 2,
+          "projectedWins": 40,
+          "recordFmt": "30 - 31"
+        },
+        {
+          "date": "2026-03-03",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "31 - 31"
+        },
+        {
+          "date": "2026-03-04",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "32 - 31"
+        },
+        {
+          "date": "2026-03-06",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "32 - 32"
+        },
+        {
+          "date": "2026-03-08",
+          "pace": 2,
+          "projectedWins": 40,
+          "recordFmt": "32 - 33"
+        },
+        {
+          "date": "2026-03-10",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "33 - 33"
+        },
+        {
+          "date": "2026-03-11",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "34 - 33"
+        },
+        {
+          "date": "2026-03-14",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "34 - 34"
+        },
+        {
+          "date": "2026-03-17",
+          "pace": 3,
+          "projectedWins": 41,
+          "recordFmt": "35 - 34"
+        },
+        {
+          "date": "2026-03-19",
+          "pace": 4,
+          "projectedWins": 42,
+          "recordFmt": "36 - 34"
+        },
+        {
+          "date": "2026-03-21",
+          "pace": 4,
+          "projectedWins": 42,
+          "recordFmt": "37 - 34"
+        },
+        {
+          "date": "2026-03-24",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "38 - 34"
+        },
+        {
+          "date": "2026-03-26",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "39 - 34"
+        },
+        {
+          "date": "2026-03-28",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "39 - 35"
+        },
+        {
+          "date": "2026-03-29",
+          "pace": 4,
+          "projectedWins": 42,
+          "recordFmt": "39 - 36"
+        },
+        {
+          "date": "2026-03-31",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "40 - 36"
+        },
+        {
+          "date": "2026-04-02",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "41 - 36"
+        },
+        {
+          "date": "2026-04-03",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "42 - 36"
+        },
+        {
+          "date": "2026-04-05",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "43 - 36"
+        },
+        {
+          "date": "2026-04-07",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "43 - 37"
+        },
+        {
+          "date": "2026-04-10",
+          "pace": 5,
+          "projectedWins": 43,
+          "recordFmt": "43 - 38"
+        },
+        {
+          "date": "2026-04-12",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "44 - 38"
+        }
+      ],
+      "surpriseRules": {
+        "numGames": 82,
+        "overUnderCutoff": 36,
+        "paceTarget": 10
+      },
+      "winsToSurprise": 38,
+      "data-astro-cid-u4jxvsiu": true,
+      "surprisedEmojiSrc": "/_astro/hushed-face.Cv4H2-Hx.svg"
+    },
+    "dom": {
+      "rows": [
+        [
+          "Record",
+          "44 - 38"
+        ],
+        [
+          "Over/Under",
+          "27.5"
+        ],
+        [
+          "Record Needed\n?",
+          "38 - 44"
+        ],
+        [
+          "Pace (Projected Record)\n?",
+          "+6 (44 - 38)"
+        ],
+        [
+          "Surprise Have-to-Go\n?",
+          ""
+        ]
+      ],
+      "host": {
+        "x": 88,
+        "y": 472,
+        "width": 720,
+        "height": 600
+      },
+      "labels": [
+        {
+          "text": "Projected Wins",
+          "rect": {
+            "x": 98.30999755859375,
+            "y": 688,
+            "width": 23.459999084472656,
+            "height": 140
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "0",
+          "rect": {
+            "x": 164,
+            "y": 1023,
+            "width": 8,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "20",
+          "rect": {
+            "x": 156,
+            "y": 889.3414916992188,
+            "width": 16,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "40",
+          "rect": {
+            "x": 156,
+            "y": 755.682861328125,
+            "width": 16,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "60",
+          "rect": {
+            "x": 156,
+            "y": 622.0244140625,
+            "width": 16,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "80",
+          "rect": {
+            "x": 156,
+            "y": 488.36590576171875,
+            "width": 16,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "2025-10-22",
+          "rect": {
+            "x": 144,
+            "y": 1043.1600341796875,
+            "width": 80,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "2025-11-19",
+          "rect": {
+            "x": 250.46910095214844,
+            "y": 1043.1600341796875,
+            "width": 80.00001525878906,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "2025-12-22",
+          "rect": {
+            "x": 356.93829345703125,
+            "y": 1043.1600341796875,
+            "width": 80,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "2026-01-18",
+          "rect": {
+            "x": 463.40740966796875,
+            "y": 1043.1600341796875,
+            "width": 80,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "2026-02-20",
+          "rect": {
+            "x": 569.8765258789062,
+            "y": 1043.1600341796875,
+            "width": 80,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": "2026-03-21",
+          "rect": {
+            "x": 676.345703125,
+            "y": 1043.1600341796875,
+            "width": 80,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        },
+        {
+          "text": " ",
+          "rect": {
+            "x": 159.65625,
+            "y": 771.048828125,
+            "width": 3.34375,
+            "height": 14
+          },
+          "font": "sans-serif"
+        },
+        {
+          "text": "38",
+          "rect": {
+            "x": 143.666015625,
+            "y": 769.048828125,
+            "width": 16,
+            "height": 18
+          },
+          "font": "\"Iosevka Curly\", monospace"
+        }
+      ],
+      "paths": [
+        {
+          "tag": "rect",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": null,
+          "rect": {
+            "x": 88,
+            "y": 472,
+            "width": 720,
+            "height": 600
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "#020618",
+          "fillOpacity": "1",
+          "stroke": "#b7b9be",
+          "d": "M96 12l616 0l0 548l-616 0Z",
+          "rect": {
+            "x": 184,
+            "y": 484,
+            "width": 616,
+            "height": 548
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M96 560.5L712 560.5",
+          "rect": {
+            "x": 184,
+            "y": 1032.5,
+            "width": 616,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M96 426.5L712 426.5",
+          "rect": {
+            "x": 184,
+            "y": 898.5,
+            "width": 616,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M96 292.5L712 292.5",
+          "rect": {
+            "x": 184,
+            "y": 764.5,
+            "width": 616,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M96 159.5L712 159.5",
+          "rect": {
+            "x": 184,
+            "y": 631.5,
+            "width": 616,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M96 25.5L712 25.5",
+          "rect": {
+            "x": 184,
+            "y": 497.5,
+            "width": 616,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M96 12.5L712 12.5",
+          "rect": {
+            "x": 184,
+            "y": 484.5,
+            "width": 616,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M96.5 560L96.5 566",
+          "rect": {
+            "x": 184.5,
+            "y": 1032,
+            "width": 0,
+            "height": 6
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M202.5 560L202.5 566",
+          "rect": {
+            "x": 290.5,
+            "y": 1032,
+            "width": 0,
+            "height": 6
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M309.5 560L309.5 566",
+          "rect": {
+            "x": 397.5,
+            "y": 1032,
+            "width": 0,
+            "height": 6
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M415.5 560L415.5 566",
+          "rect": {
+            "x": 503.5,
+            "y": 1032,
+            "width": 0,
+            "height": 6
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M522.5 560L522.5 566",
+          "rect": {
+            "x": 610.5,
+            "y": 1032,
+            "width": 0,
+            "height": 6
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#d8f999",
+          "d": "M628.5 560L628.5 566",
+          "rect": {
+            "x": 716.5,
+            "y": 1032,
+            "width": 0,
+            "height": 6
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "url(#zr0-g0)",
+          "fillOpacity": "1",
+          "stroke": null,
+          "d": "M96 12C96 12 99.8025 286 103.6049 286C107.4074 286 107.4074 199.1219 111.2099 199.1219C115.0123 199.1219 115.0123 286 11",
+          "rect": {
+            "x": 184,
+            "y": 484,
+            "width": 616,
+            "height": 427.707275390625
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#7ccf00",
+          "d": "M96 12C96 12 99.8025 286 103.6049 286C107.4074 286 107.4074 199.1219 111.2099 199.1219C115.0123 199.1219 115.0123 286 11",
+          "rect": {
+            "x": 184,
+            "y": 484,
+            "width": 616,
+            "height": 427.707275390625
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "none",
+          "fillOpacity": "1",
+          "stroke": "#7ccf00",
+          "d": "M96 306L712 306",
+          "rect": {
+            "x": 184,
+            "y": 778,
+            "width": 616,
+            "height": 0
+          }
+        },
+        {
+          "tag": "path",
+          "class": null,
+          "fill": "#000",
+          "fillOpacity": "1",
+          "stroke": null,
+          "d": "M95 11.25l619 0l0 549.5l-619 0Z",
+          "rect": {
+            "x": 0,
+            "y": 172,
+            "width": 0,
+            "height": 0
+          }
+        }
+      ],
+      "keyboard": [],
+      "hostSemantics": {
+        "role": "img",
+        "tabindex": null,
+        "ariaLabel": "This is a chart with type Line chart.The first 10 items are: the data for 2025-10-22 is 0, 82, the data for 2025-10-25 is 1, 41, the data for 2025-10-26 is 2, 5"
+      },
+      "links": [
+        {
+          "text": "NBA Surprise\nTeams Tracker",
+          "href": "/"
+        },
+        {
+          "text": "Archive",
+          "href": "/archive/"
+        },
+        {
+          "text": "Stats",
+          "href": "/stats/"
+        },
+        {
+          "text": "About",
+          "href": "/about/"
+        },
+        {
+          "text": "Back to '25-26 Season",
+          "href": "/2025/"
+        }
+      ],
+      "overflow": false
+    },
+    "plot": {
+      "x": 184,
+      "y": 312,
+      "width": 616,
+      "height": 548
+    },
+    "tooltips": [
+      {
+        "index": 0,
+        "expected": {
+          "date": "2025-10-22",
+          "pace": 44,
+          "projectedWins": 82,
+          "recordFmt": "1 - 0"
+        },
+        "visible": [
+          "2025-10-22\n\nRecord:1 - 0\n\nProjected Wins:82\n\nPace:+44"
+        ]
+      },
+      {
+        "index": 20,
+        "expected": {
+          "date": "2025-12-01",
+          "pace": -15,
+          "projectedWins": 23,
+          "recordFmt": "6 - 15"
+        },
+        "visible": [
+          "2025-12-01\n\nRecord:6 - 15\n\nProjected Wins:23\n\nPace:-15"
+        ]
+      },
+      {
+        "index": 40,
+        "expected": {
+          "date": "2026-01-15",
+          "pace": -8,
+          "projectedWins": 30,
+          "recordFmt": "15 - 26"
+        },
+        "visible": [
+          "2026-01-15\n\nRecord:15 - 26\n\nProjected Wins:30\n\nPace:-8"
+        ]
+      },
+      {
+        "index": 81,
+        "expected": {
+          "date": "2026-04-12",
+          "pace": 6,
+          "projectedWins": 44,
+          "recordFmt": "44 - 38"
+        },
+        "visible": [
+          "2026-04-12\n\nRecord:44 - 38\n\nProjected Wins:44\n\nPace:+6"
+        ]
+      }
+    ],
+    "keyboard": {
+      "focusableCount": 0
+    },
+    "popovers": [
+      {
+        "width": 1440,
+        "index": 0,
+        "text": "Record Needed Record needed to qualify as a Surprise Team i.e. 10 wins above a team's preseason over/under (rounded up)",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 1440,
+        "index": 1,
+        "text": "Pace Current projected wins - Wins needed to surprise Projected Record How many wins the team would have if their current winning percentage held for all 82 games.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 1440,
+        "index": 2,
+        "text": "Surprise Have-to-Go What would a team \"have to go\" the rest of the way to end up a surprise team? As in, the worst record over games remaining with which the team would still achieve surprise status.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 390,
+        "index": 0,
+        "text": "Record Needed Record needed to qualify as a Surprise Team i.e. 10 wins above a team's preseason over/under (rounded up)",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 390,
+        "index": 1,
+        "text": "Pace Current projected wins - Wins needed to surprise Projected Record How many wins the team would have if their current winning percentage held for all 82 games.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      },
+      {
+        "width": 390,
+        "index": 2,
+        "text": "Surprise Have-to-Go What would a team \"have to go\" the rest of the way to end up a surprise team? As in, the worst record over games remaining with which the team would still achieve surprise status.",
+        "fontWeight": "400",
+        "fontStyle": "normal",
+        "inViewport": true,
+        "focusReturned": true,
+        "escapeClosed": true,
+        "outsideClosed": true,
+        "closeButtonClosed": true
+      }
+    ],
+    "errors": []
+  }
+]

@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 import Fs from "node:fs/promises";
 import { beforeAll, describe, expect, test } from "vitest";
 
-import * as ContentUtils from "./src/content-utils";
+import * as ContentUtils from "../src/content-utils";
 
 // TODO test to catch the sort of issues seen on stats page i.e. showing current data?
 // snapshot tests? something w/ astro? pattern for inspecting data passed to render? i.e.

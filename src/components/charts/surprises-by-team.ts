@@ -1,4 +1,5 @@
 import type { ChartOption, Theme } from "./echarts";
+import type { ChartKeyboardNavigation } from "./keyboard";
 
 import { axisBase, escapeHtml, gridBase, tooltipBase } from "./echarts";
 
@@ -49,6 +50,28 @@ const tooltipContent = (point: Datapoint) => {
     `<h3 class="tooltip-heading-centered"><img class="tooltip-logo" src="${escapeHtml(point.logoSrc ?? "")}" width="30"> ${escapeHtml(point.name)}</h3>`,
     record,
   ].join("");
+};
+
+export const keyboard: ChartKeyboardNavigation<SurprisesByTeamChartProps> = {
+  label: "Selected team on the surprise results chart",
+  orderDescription: "Ordered by team code from left to right.",
+  pointLabel: "Team",
+  points: ({ data }) =>
+    data
+      .toSorted((a, b) => a.teamId.localeCompare(b.teamId))
+      .map((point) => {
+        const history =
+          "history" in point
+            ? point.history
+                .map(
+                  (entry) =>
+                    `${entry.name}, ${entry.duration[0]} to ${entry.duration[1] === undefined ? "present" : entry.duration[1] + 1}`,
+                )
+                .join("; ")
+            : "";
+        return `${point.name}. ${point.numSurprised} surprise seasons. ${point.numEliminated} eliminated seasons.${history ? ` Team history: ${history}.` : ""}`;
+      }),
+  seriesIndices: [0, 1],
 };
 
 export const option = (

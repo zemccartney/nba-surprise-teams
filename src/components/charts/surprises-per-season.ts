@@ -1,4 +1,5 @@
 import type { ChartOption, Theme } from "./echarts";
+import type { ChartKeyboardNavigation } from "./keyboard";
 
 import { axisBase, escapeHtml, gridBase, tooltipBase } from "./echarts";
 
@@ -16,15 +17,38 @@ export interface SurprisesPerSeasonChartProps {
   latestSeasonYear: number;
 }
 
+export const seasonKeyboardOrder = ({
+  data,
+}: SurprisesPerSeasonChartProps): number[] =>
+  data
+    .map((_point, index) => index)
+    .toSorted((a, b) => Number(data[a]?.seasonId) - Number(data[b]?.seasonId));
+
+export const keyboard: ChartKeyboardNavigation<SurprisesPerSeasonChartProps> = {
+  dataIndices: seasonKeyboardOrder,
+  label: "Selected season on the surprises per season chart",
+  orderDescription: "Ordered from earliest to latest season.",
+  pointLabel: "Season",
+  points: (props) =>
+    seasonKeyboardOrder(props).map((index) => {
+      const point = props.data[index];
+      if (!point) return "";
+      return `${point.seasonRange} season. ${point.numSurprises} surprise ${point.numSurprises === 1 ? "team" : "teams"}.${point.surpriseTeams.length > 0 ? ` ${point.surpriseTeams.map((team) => team.name).join(", ")}.` : ""}`;
+    }),
+};
+
 export const option = (
-  { data, latestSeasonYear }: SurprisesPerSeasonChartProps,
+  { data }: SurprisesPerSeasonChartProps,
   t: Theme,
 ): ChartOption => {
   const axis = axisBase(t);
+  const seasons = data
+    .map((point) => point.seasonId)
+    .toSorted((a, b) => Number(a) - Number(b));
 
   return {
     aria: { enabled: true },
-    grid: { ...gridBase(t), bottom: 76, left: 60, right: 8, top: 12 },
+    grid: { ...gridBase(t), bottom: 76, left: 60, right: 8, top: 0 },
     series: [
       {
         barMaxWidth: 40,
@@ -32,7 +56,7 @@ export const option = (
         barMinHeight: 10,
         data: data.map((point, i) => ({
           itemStyle: { color: i % 2 ? t.lime200 : t.green700 },
-          value: [Number(point.seasonId), point.numSurprises],
+          value: [point.seasonId, point.numSurprises],
         })),
         type: "bar",
       },
@@ -75,20 +99,35 @@ export const option = (
       ...axis,
       axisLabel: {
         ...axis.axisLabel,
-        formatter: (value: number) => (value % 5 === 0 ? String(value) : ""),
+        formatter: (value: string) =>
+          Number(value) % 5 === 0 ||
+          value === seasons[0] ||
+          value === seasons.at(-1)
+            ? value
+            : "",
+        hideOverlap: true,
+        interval: 0,
       },
-      interval: 5,
-      max: latestSeasonYear + 1,
-      min: 1990,
+      boundaryGap: true,
+      data: seasons,
       name: "Season",
       nameGap: 44,
-      type: "value",
+      splitLine: {
+        ...axis.splitLine,
+        interval: (_index: number, value: string) => Number(value) % 5 === 0,
+        show: true,
+        showMaxLine: false,
+        showMinLine: false,
+      },
+      type: "category",
     },
     yAxis: {
       ...axis,
+      axisLabel: { ...axis.axisLabel, verticalAlignMaxLabel: "top" },
       minInterval: 1,
       name: "# Surprises",
       nameGap: 40,
+      splitLine: { ...axis.splitLine, showMaxLine: false, showMinLine: false },
       type: "value",
     },
   };

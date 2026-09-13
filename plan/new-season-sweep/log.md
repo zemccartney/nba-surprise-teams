@@ -13,6 +13,186 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Pre-launch review — full stack and test organization
+
+Moved root `system.test.ts` and `chart-options.test.ts` into `tests/`; updated
+imports, Vitest discovery/watch selection and ESLint, and added `tests/README.md`.
+21 tests and full verify passed. No commit/push.
+
+Completed independent Fable 5.1 and Codex GPT-6-Astra CLI reviews of the entire
+Foundations stack and current work. Separate snapshots, identical prompt,
+neither saw the other. Reconciled their findings using browser failures,
+isolated test-store experiments, actual integration hooks and mocked execution
+of the real loader/action/helper logic. Reports and evidence are in
+`prelaunch-review/`; unresolved findings live there and in `review.md`.
+
+Important validation correction: content tests can pass on both empty and stale
+dev stores. Even sync/build did not fix the empty-store case; a deleted game was
+only caught after refreshing the dev store. Also reproduced font-failure blank
+charts and two pointer/keyboard interactions missed by earlier probes. No
+review-driven application fixes or deployments were made in this round.
+
+Zack approved the scatter appearance. Live odds publication can exercise island
+insertion, but the action's season-start-date guard means the upstream/KV path
+needs controlled fixtures for full pre-opening-night verification.
+
+## 2026-09-14 — Scatter feedback and runtime configuration resolved
+
+Zack explained his Wrangler change in `scratch.md`. Verified the linked
+Cloudflare docs: dates from **2026-08-04** enable Node compatibility by default;
+omitting the flags is correct. The blocker was the requested date exceeding the
+installed workerd maximum, not missing flags. Set date to **2026-09-10**, keep
+flags omitted. Normal dev, build and preview now work; scratch preview 4338 was
+stopped and the current full build is back at 4322.
+
+Scatter emphasis now uses the site's bright purple link accent (indigo-400), a
+2px outline, full opacity and modest 1.4x scaling for both mouse and keyboard.
+Extended existing browser probes to assert one outlined dot at the selected
+coordinates and one surrounding the hover target; SVG stroke widths are checked
+in screen pixels, accounting for symbol transforms. Added a unit option test.
+21 tests/full build pass; normal dev smoke and dev/preview keyboard, hover,
+layout and pace checks pass. Artifacts: `runs/2026-09-14-scatter-{feedback,hover}-checks`.
+
+Documented the test split in baseline README: unit tests are normal Vitest
+checks; standalone browser probes are reusable but manually run, not yet in CI
+or pre-commit. No commit/push/deploy. Zack subsequently approved the scatter
+feedback ("looks great"); see the newer full-stack review for remaining findings.
+
+## 2026-09-14 — Stats keyboard access and completed visual walkthrough
+
+About and 404 visually approved; Zack played the podcast embed successfully.
+Live-season verification is deferred until publishing preseason odds activates
+the upcoming season's API-backed server islands, not necessarily opening night.
+
+All three Stats charts now use the shared keyboard selector. Added point nouns,
+spoken values, explicit navigation-to-series index mapping, stacked-series
+highlighting and stated traversal order. Seasons navigate chronologically,
+teams by bar order, scatter by over/under then pace/name/season. Extracted the
+team page's responsive DOM-order helper and reused it on Stats so mobile Top 10
+precedes the season chart in reading/tab order; desktop reverses that pair.
+
+20 tests and full checks pass. Dev and isolated built workerd preview pass the
+new `stats-keyboard.mjs` on 29 seasons/30 teams/269 scatter points at 1440/390,
+plus existing pace, Stats layout and stable-tooltip-image probes. Artifact:
+`runs/2026-09-14-stats-keyboard-checks`. Manual screen-reader review is pending.
+
+**Build caveat:** Wrangler was independently changed to compatibility date
+2026-09-13 with nodejs_compat removed. Installed dev workerd supports dates only
+through 2026-09-10; preserved this edit. Ignored scratch config restored previous
+runtime settings for verification, with separate build output and local Workers
+preview at 4338 (launcher PID 4214). Normal 4322 remains the prior build. Default
+configuration needs resolution; no deploy/commit/push.
+
+## 2026-09-14 — Stats margins, boundary axes and stable tooltip images
+
+Mobile chart margins reduced from 16px to 8px, preserving full-width Top 10.
+Shared axes omit boundary split lines and plain axis strokes, so scatter y=0
+uses its dotted green split line rather than a gray overlay. Solid threshold
+and result mark lines are unchanged.
+
+ECharts recreates icons when string tooltip formatters feed repeated innerHTML
+assignments. New shared `tooltip.ts` returns a stable DOM subtree and only
+replaces its contents on a content change. Native browser checks confirm all
+three Stats charts retain visible/decoded identical heading/icon nodes through
+20 within-point moves at both desktop/mobile, with zero image requests.
+
+Full build/verify: 17 tests pass. Dev and rebuilt workerd preview pass the new
+`stats-tooltips.mjs`, Stats resizing/endpoint checks and pace keyboard/parity
+checks. Artifacts: `runs/2026-09-14-{stats-tooltip,stats-polish,pace-polish}-checks`.
+Preview restarted on 4322; uncommitted on `chart-parity`. Visual review and stats
+keyboard access remain pending; this does not claim every tooltip dismissal
+or other-page image issue has been audited.
+
+## 2026-09-13 — Stats layout and season-count chart refinements
+
+Team page visually approved; Stats walkthrough underway. Restored equal Stats
+grid columns and shrinking after charts render, including the single-column
+layout. Removed automatic section/track minimums based on old SVG widths and
+clipped chart painting so stale absolute tooltip positions cannot overflow the
+page. Season plot top now aligns with Top 10; outer dotted grid lines removed,
+interior lines retained. The category axis includes only actual season IDs,
+with ordinary inter-bar spacing at the ends rather than blank years.
+
+Full build/verify: 16 tests pass, including a non-multiple-of-five season-bound
+fixture. New `plan/baseline/stats-parity.mjs` passes on dev and rebuilt workerd
+preview through ten width transitions after mounting all three charts. It
+checks equal columns, containment, alignment, border, all 29 bars, edge spacing
+and endpoint tooltip text. Artifacts: `runs/2026-09-13-stats-layout-checks`.
+Preview restarted on 4322; uncommitted on `chart-parity`. Visual approval and
+remaining stats tooltip/keyboard/lower-chart details are pending; tooltip
+persistence during probing is not claimed fixed.
+
+## 2026-09-13 — Step 11 follow-up: intermediate-width chart/table layout
+
+Zack requested opacity **0.8** and production-like table width below 1280px.
+Measured production's table at 377.6px throughout 1024–1279px; preview shrank it
+to 224px because ECharts' previously rendered 720px SVG imposed an automatic
+minimum on the chart grid item. Set the chart item's `min-width: 0`, retaining
+production's 3:2 split instead of forcing a fixed table width. The chart now
+absorbs narrowing, with no need to shrink or nowrap the table cells.
+
+Extended the browser regression probe to resize an already-rendered chart
+through 1280/1279/1150/1030/1024/1023px and back to desktop, checking column
+shares, single-line records and page/table overflow. Dev and rebuilt workerd
+preview checks pass on all three team pages; full build/verify and 15 tests pass.
+Results: `plan/baseline/runs/2026-09-13-chart-width-checks`. Preview restarted on 4322. Visual review remains pending; changes are uncommitted on `chart-parity`.
+
+## 2026-09-13 — Step 11: team-chart parity and table striping
+
+Branch `chart-parity` on `mise-setup` (`907fd89`), uncommitted; locally verified
+and awaiting Zack's visual approval. During the `/2025/CHA/` walkthrough Zack
+requested plot/table top alignment, alternating value cells, vertical dotted
+grid lines, a midpoint in fill opacity, y labels 0/25/50/82 (actual season
+length for shortened seasons), no horizontal lines except the surprise
+threshold, and restored keyboard point exploration.
+
+**Implemented.** Pace plot insets align its top with the stats table; fill
+opacity is now 0.85, with only 0 and the actual season maximum labelled.
+Zack reviewed the initial 0.75/25/50 trial, said it looked good, then requested
+these two refinements; the surprise threshold keeps its separate label/icon. Vertical split lines are enabled and horizontal ones
+removed; the threshold line/icon/label remain. Shared Table's odd-row selector
+now marks slotted rows global while keeping its own ancestors scoped.
+
+**Confirmed striping cause.** Both dev and preview had transparent backgrounds
+on every row. Astro 7 scoped the `tr` to Table even though rows come from its
+body slot and carry the caller's attribute. Earlier walkthrough wording that
+the table was unchanged was too broad; copy and layout checks missed this.
+
+**Keyboard.** Pace charts opt into a shared helper: a focusable game selector
+with slider semantics, full point text via `aria-valuetext`, arrow/Home/End
+controls and matching ECharts tooltip/highlight. Escape hides, blur cleans up,
+Tab is not intercepted. The tab stop is present before lazy rendering so
+keyboard users can discover offscreen mobile charts; focus triggers mounting
+when needed. Empty series do not get an unusable selector. No keyboard behavior
+is changed on the stats-page charts in this round.
+
+**Verification.** Full build, check/lint/format and 15 tests pass. New
+`chart-options.test.ts` covers tick choices for 82/66/50-game seasons, the
+rendering option contract and point descriptions without relying on content
+collections. `plan/baseline/chart-parity.mjs` exercises the real browser at
+390/1440 on three team pages, against both dev and real-workerd preview. Checks
+alignment/stripes/grid/labels/opacity, lazy keyboard discovery, point selection
+and bounds, Escape/Tab cleanup, mouse hover and SVG threshold images. Dev smoke
+also passes: 47 images, zero problems. Workerd preview was rebuilt and restarted
+on port 4322; no Cloudflare deployment or resources touched.
+
+**Follow-up refinements.** Zack approved the first visual pass, then requested
+0.85 opacity and no intermediate axis labels. He also caught mobile tab order:
+CSS had reversed the layout without changing DOM order. `team-stats/ui.astro`
+now emits table-first markup, retains stable desktop grid areas and synchronizes
+DOM order at the 1024px breakpoint. Focus/selection and open popovers survive
+native state-preserving moves or the insert-and-restore fallback. The browser
+probe now asserts mobile question marks precede the chart, desktop chart comes
+first, and resizing preserves focus/order/popovers. Final captures/results are
+`runs/2026-09-13-chart-refinement-team` and
+`runs/2026-09-13-chart-refinement-checks`; dev and preview checks pass.
+
+**Artifacts and remaining work.** Initial four-width team capture in
+`runs/2026-09-13-chart-parity-team`; targeted browser results in
+`runs/2026-09-13-chart-parity-checks`, both under `plan/baseline/`. Visual
+review of the final 0.85-opacity/endpoint-label refinement, screen-reader checks
+and the stats page walkthrough remain. No claim that the entire chart migration is settled.
+
 ## 2026-09-12 — Step 10: mise and hk cleanup, pnpm 12 verification
 
 Branch `mise-setup` on `svg-images`. Zack's initial migration (`f38a829`)

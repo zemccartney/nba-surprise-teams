@@ -144,7 +144,7 @@ export default defineConfig([
   },
   {
     extends: [vitest.configs.recommended],
-    files: ["system.test.ts"],
+    files: ["tests/**/*.test.ts"],
   },
   prettier,
 ]);

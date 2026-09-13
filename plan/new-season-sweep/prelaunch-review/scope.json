@@ -1,0 +1,94 @@
+{
+  "base": "f5382f317227bee436f1420cf9c5fbe861b1dbcc",
+  "candidate": "chart-parity working tree, including untracked source/tests; before review-driven fixes",
+  "head": "907fd89be6f8dabdbff67ca9218f0212021eaa2b",
+  "note": "Separate snapshots and identical prompt; reviewers did not see each other. Report copies receive formatting only; original absolute links refer to temporary snapshots.",
+  "prs": [
+    {
+      "baseRefName": "svg-images",
+      "headRefName": "mise-setup",
+      "headRefOid": "907fd89be6f8dabdbff67ca9218f0212021eaa2b",
+      "number": 16,
+      "title": "Foundations 8/8 \u2014 Locked mise toolchain and hk hooks"
+    },
+    {
+      "baseRefName": "astro-7",
+      "headRefName": "svg-images",
+      "headRefOid": "15f967eb1aaf51c057033fa834f9f0f895395b68",
+      "number": 15,
+      "title": "Foundations 7/8 \u2014 Plain SVG assets and build-time SVGO"
+    },
+    {
+      "baseRefName": "trailing-slash",
+      "headRefName": "astro-7",
+      "headRefOid": "f6aa53c1a764cdf9dafb17fe3ed26d44a45a0a39",
+      "number": 14,
+      "title": "Foundations 6/8 \u2014 Astro 7 and Cloudflare Workers adapter"
+    },
+    {
+      "baseRefName": "deps",
+      "headRefName": "trailing-slash",
+      "headRefOid": "1e0209fbcfbed0b07a2a41afac572947ace3b2cb",
+      "number": 13,
+      "title": "Foundations 5/8 \u2014 Explicit trailing slashes"
+    },
+    {
+      "baseRefName": "eslint-10",
+      "headRefName": "deps",
+      "headRefOid": "eff1154c956726e6090e7746bfe3328202b3f126",
+      "number": 12,
+      "title": "Foundations 4/8 \u2014 Dependency updates and native Node archiver"
+    },
+    {
+      "baseRefName": "react-removal",
+      "headRefName": "eslint-10",
+      "headRefOid": "c95db3943fa1919af7b4f7dfdce9b159d40ea68b",
+      "number": 11,
+      "title": "Foundations 3/8 \u2014 ESLint 10, native TypeScript config and Vitest 5"
+    },
+    {
+      "baseRefName": "tooling",
+      "headRefName": "react-removal",
+      "headRefOid": "82af91d30bce0fdb034d415cd8c04056edf47273",
+      "number": 10,
+      "title": "Foundations 2/8 \u2014 Remove React; ECharts and native popovers"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "tooling",
+      "headRefOid": "8cb3c20f2a64340ab343c31e2fb4056baa0bd79d",
+      "number": 9,
+      "title": "Foundations 1/8 \u2014 pnpm 11, Node 26 and Lefthook"
+    }
+  ],
+  "refs": [
+    "refs/remotes/origin/HEAD f5382f317227bee436f1420cf9c5fbe861b1dbcc",
+    "refs/remotes/origin/astro-7 f6aa53c1a764cdf9dafb17fe3ed26d44a45a0a39",
+    "refs/remotes/origin/deps eff1154c956726e6090e7746bfe3328202b3f126",
+    "refs/remotes/origin/eslint-10 c95db3943fa1919af7b4f7dfdce9b159d40ea68b",
+    "refs/remotes/origin/light-mode 8e39cda08a53ee1bd3adfc21dfbc983e34a551dd",
+    "refs/remotes/origin/main f5382f317227bee436f1420cf9c5fbe861b1dbcc",
+    "refs/remotes/origin/mise-setup 907fd89be6f8dabdbff67ca9218f0212021eaa2b",
+    "refs/remotes/origin/react-removal 82af91d30bce0fdb034d415cd8c04056edf47273",
+    "refs/remotes/origin/svg-images 15f967eb1aaf51c057033fa834f9f0f895395b68",
+    "refs/remotes/origin/tooling 8cb3c20f2a64340ab343c31e2fb4056baa0bd79d",
+    "refs/remotes/origin/trailing-slash 1e0209fbcfbed0b07a2a41afac572947ace3b2cb"
+  ],
+  "reviewers": [
+    {
+      "effort": "high",
+      "mode": "plan",
+      "name": "Claude",
+      "report": "claude-fable-5.1.md",
+      "reportedModel": "claude-fable-5-1",
+      "requestedModel": "claude-fable-5-1[1m]"
+    },
+    {
+      "effort": "high",
+      "name": "Codex",
+      "report": "codex-gpt-6-astra.md",
+      "requestedModel": "gpt-6-astra",
+      "sandbox": "read-only"
+    }
+  ]
+}

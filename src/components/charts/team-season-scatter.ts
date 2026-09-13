@@ -1,4 +1,5 @@
 import type { ChartOption, Theme } from "./echarts";
+import type { ChartKeyboardNavigation } from "./keyboard";
 
 import * as Utils from "../../utils";
 import { axisBase, escapeHtml, gridBase, tooltipBase } from "./echarts";
@@ -14,6 +15,39 @@ export interface TeamSeasonScatterplotProps {
     teamName: string;
   }[];
 }
+
+// Traverse left to right, then bottom to top for equal over/unders. Keep the
+// original series indices so keyboard and mouse select exactly the same data.
+export const scatterKeyboardOrder = ({
+  data,
+}: TeamSeasonScatterplotProps): number[] =>
+  data
+    .map((_point, index) => index)
+    .toSorted((a, b) => {
+      const left = data[a];
+      const right = data[b];
+      if (!left || !right) return 0;
+      return (
+        left.overUnder - right.overUnder ||
+        left.pace - right.pace ||
+        left.teamName.localeCompare(right.teamName) ||
+        left.seasonRange.localeCompare(right.seasonRange)
+      );
+    });
+
+export const keyboard: ChartKeyboardNavigation<TeamSeasonScatterplotProps> = {
+  dataIndices: scatterKeyboardOrder,
+  label: "Selected team season on the pace versus over/under chart",
+  orderDescription:
+    "Ordered by over/under from low to high, then pace from low to high.",
+  pointLabel: "Team season",
+  points: (props) =>
+    scatterKeyboardOrder(props).map((index) => {
+      const point = props.data[index];
+      if (!point) return "";
+      return `${point.seasonRange} ${point.teamName}. Over/under ${point.overUnder}. Pace ${Utils.signedFormatter.format(point.pace)}. Record ${point.recordFmt}. ${point.isSurpriseTeam ? "Surprise team" : "Eliminated"}.`;
+    }),
+};
 
 const roundToFive = (num: number, dir: "down" | "up"): number => {
   const method =
@@ -58,6 +92,10 @@ export const option = (
           itemStyle: { color: point.isSurpriseTeam ? t.lime500 : t.red700 },
           value: [point.overUnder, point.pace],
         })),
+        emphasis: {
+          itemStyle: { borderColor: t.indigo400, borderWidth: 2, opacity: 1 },
+          scale: 1.4,
+        },
         symbolSize: 9,
         type: "scatter",
       },

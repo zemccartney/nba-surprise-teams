@@ -1,0 +1,278 @@
+{
+  "base": "http://localhost:4322",
+  "capturedAt": "2026-09-13T00:43:42.534Z",
+  "label": "chart-parity-team",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 1168,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23469,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "script": {
+              "bytes": 594897,
+              "count": 3,
+              "urls": [
+                "http://localhost:4322/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C6PkaK9N.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.D7ktFydo.js"
+              ]
+            },
+            "image": {
+              "bytes": 5027,
+              "count": 3,
+              "urls": []
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 51,
+            "load": 105,
+            "transferSize": 23769
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 1746,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23469,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 5027,
+              "count": 3,
+              "urls": []
+            },
+            "script": {
+              "bytes": 594897,
+              "count": 3,
+              "urls": [
+                "http://localhost:4322/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C6PkaK9N.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.D7ktFydo.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 55,
+            "load": 63,
+            "transferSize": 23769
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 1766,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23469,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 5027,
+              "count": 3,
+              "urls": []
+            },
+            "script": {
+              "bytes": 594897,
+              "count": 3,
+              "urls": [
+                "http://localhost:4322/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C6PkaK9N.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.D7ktFydo.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 48,
+            "load": 57,
+            "transferSize": 23769
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1168,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 23469,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/2025/CHA/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 5027,
+              "count": 3,
+              "urls": []
+            },
+            "script": {
+              "bytes": 594897,
+              "count": 3,
+              "urls": [
+                "http://localhost:4322/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C6PkaK9N.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.D7ktFydo.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 58,
+            "load": 59,
+            "transferSize": 23769
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:4322/2025/CHA/",
+      "htmlBytes": 23469,
+      "hydratedIslands": 0,
+      "inlineScripts": 2,
+      "inlineStyles": 2,
+      "jsBytes": 594897,
+      "page": "/2025/CHA/",
+      "redirects": [],
+      "responseHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "HIT",
+        "connection": "keep-alive",
+        "content-length": "23469",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 13 Sep 2026 00:43:30 GMT",
+        "etag": "\"60427a2a3c1555b6ba592d38ea45f144\"",
+        "keep-alive": "timeout=5",
+        "vary": "Origin"
+      },
+      "scripts": [
+        {
+          "bytes": 1876,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 1876,
+          "contentType": "text/javascript; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/team-season-pace.astro_astro_type_script_index_0_lang.C6PkaK9N.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 17501,
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2629869
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

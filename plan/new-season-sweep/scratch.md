@@ -1,0 +1,2 @@
+- https://developers.cloudflare.com/workers/runtime-apis/nodejs/#get-started why I removed the node_compat flags from wrangler config
+- zizmor needs to be an explicit project dependency, run as part of pre-commit (maybe can use the hk built-in?); figure install w/ mise

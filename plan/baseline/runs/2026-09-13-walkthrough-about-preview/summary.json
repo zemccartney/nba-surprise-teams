@@ -1,0 +1,232 @@
+{
+  "base": "http://localhost:4322",
+  "capturedAt": "2026-09-13T04:18:48.836Z",
+  "label": "walkthrough-about-preview",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 3393,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 25,
+            "load": 71,
+            "transferSize": 13283
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 4759,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 20,
+            "load": 52,
+            "transferSize": 13283
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 3457,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 17,
+            "load": 52,
+            "transferSize": 13283
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 2937,
+          "failedRequests": [
+            {
+              "error": "net::ERR_FAILED",
+              "url": "https://embed.podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555"
+            }
+          ],
+          "resources": {
+            "document": {
+              "bytes": 12983,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/about/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "font": {
+              "bytes": 996704,
+              "count": 3,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 14,
+            "load": 47,
+            "transferSize": 13283
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:4322/about/",
+      "htmlBytes": 12983,
+      "hydratedIslands": 0,
+      "inlineScripts": 1,
+      "inlineStyles": 1,
+      "jsBytes": 0,
+      "page": "/about/",
+      "redirects": [],
+      "responseHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "HIT",
+        "connection": "keep-alive",
+        "content-length": "12983",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 13 Sep 2026 04:18:35 GMT",
+        "etag": "\"9cc215c5846d8db7dcd7e5860e3c976b\"",
+        "keep-alive": "timeout=5",
+        "vary": "Origin"
+      },
+      "scripts": [],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 17501,
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 1029719
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

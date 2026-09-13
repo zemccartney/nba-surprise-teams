@@ -1,0 +1,304 @@
+{
+  "base": "http://localhost:4322",
+  "capturedAt": "2026-09-13T03:04:08.048Z",
+  "label": "walkthrough-stats-preview",
+  "pages": [
+    {
+      "browser": {
+        "desktop": {
+          "consoleMessages": [],
+          "documentHeight": 2196,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 75483,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 15224,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 597340,
+              "count": 5,
+              "urls": [
+                "http://localhost:4322/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.oqYpFQ5k.js",
+                "http://localhost:4322/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.CmNhLUwv.js",
+                "http://localhost:4322/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.ixsMMe2p.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.BnNYM-4Q.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 64,
+            "load": 74,
+            "transferSize": 75783
+          }
+        },
+        "mobile": {
+          "consoleMessages": [],
+          "documentHeight": 3474,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 75483,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 15224,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 597340,
+              "count": 5,
+              "urls": [
+                "http://localhost:4322/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.oqYpFQ5k.js",
+                "http://localhost:4322/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.CmNhLUwv.js",
+                "http://localhost:4322/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.ixsMMe2p.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.BnNYM-4Q.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 48,
+            "load": 57,
+            "transferSize": 75783
+          }
+        },
+        "tablet": {
+          "consoleMessages": [],
+          "documentHeight": 3546,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 75483,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 15224,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 597340,
+              "count": 5,
+              "urls": [
+                "http://localhost:4322/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.oqYpFQ5k.js",
+                "http://localhost:4322/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.CmNhLUwv.js",
+                "http://localhost:4322/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.ixsMMe2p.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.BnNYM-4Q.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 51,
+            "load": 60,
+            "transferSize": 75783
+          }
+        },
+        "wide": {
+          "consoleMessages": [],
+          "documentHeight": 1972,
+          "failedRequests": [],
+          "resources": {
+            "document": {
+              "bytes": 75483,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/stats/"
+              ]
+            },
+            "stylesheet": {
+              "bytes": 17501,
+              "count": 1,
+              "urls": [
+                "http://localhost:4322/_astro/layout.DusHnpwK.css"
+              ]
+            },
+            "image": {
+              "bytes": 15224,
+              "count": 9,
+              "urls": []
+            },
+            "script": {
+              "bytes": 597340,
+              "count": 5,
+              "urls": [
+                "http://localhost:4322/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.CmNhLUwv.js",
+                "http://localhost:4322/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.oqYpFQ5k.js",
+                "http://localhost:4322/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.ixsMMe2p.js",
+                "http://localhost:4322/_astro/utils.DS64JlTE.js",
+                "http://localhost:4322/_astro/echarts.BnNYM-4Q.js"
+              ]
+            },
+            "font": {
+              "bytes": 1986444,
+              "count": 4,
+              "urls": []
+            },
+            "other": {
+              "bytes": 2531,
+              "count": 1,
+              "urls": []
+            }
+          },
+          "thirdParty": {},
+          "timing": {
+            "domContentLoaded": 48,
+            "load": 57,
+            "transferSize": 75783
+          }
+        }
+      },
+      "cssBytes": 17501,
+      "finalUrl": "http://localhost:4322/stats/",
+      "htmlBytes": 75483,
+      "hydratedIslands": 0,
+      "inlineScripts": 4,
+      "inlineStyles": 2,
+      "jsBytes": 597340,
+      "page": "/stats/",
+      "redirects": [],
+      "responseHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cf-cache-status": "HIT",
+        "connection": "keep-alive",
+        "content-length": "75483",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 13 Sep 2026 03:03:55 GMT",
+        "etag": "\"4bc6637f5588e9e5530d3cb1e6423816\"",
+        "keep-alive": "timeout=5",
+        "vary": "Origin"
+      },
+      "scripts": [
+        {
+          "bytes": 1250,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 1250,
+          "contentType": "text/javascript; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.oqYpFQ5k.js"
+        },
+        {
+          "bytes": 1679,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 1679,
+          "contentType": "text/javascript; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.CmNhLUwv.js"
+        },
+        {
+          "bytes": 1346,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 1346,
+          "contentType": "text/javascript; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.ixsMMe2p.js"
+        }
+      ],
+      "serverIslands": [],
+      "status": 200,
+      "stylesheets": [
+        {
+          "bytes": 17501,
+          "cacheControl": "public, max-age=31536000, immutable",
+          "contentEncoding": null,
+          "contentLength": 17501,
+          "contentType": "text/css; charset=utf-8",
+          "status": 200,
+          "url": "http://localhost:4322/_astro/layout.DusHnpwK.css"
+        }
+      ],
+      "loadedBytes": 2694523
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "height": 900,
+      "width": 1440
+    },
+    "mobile": {
+      "height": 844,
+      "width": 390
+    },
+    "tablet": {
+      "height": 1024,
+      "width": 768
+    },
+    "wide": {
+      "height": 1080,
+      "width": 1920
+    }
+  }
+}

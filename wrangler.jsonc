@@ -9,9 +9,9 @@
   "assets": {
     "binding": "ASSETS"
   },
-  // Same date the Pages build used, so the runtime behaves as it does today.
-  "compatibility_date": "2025-03-21",
-  "compatibility_flags": ["nodejs_compat"],
+  // Node compatibility is implicit from 2026-08-04. Keep the date within the
+  // installed workerd runtime's supported range (currently through 2026-09-10).
+  "compatibility_date": "2026-09-10",
   // TODO Fill in the real namespace id from the Cloudflare dashboard before the
   // first Workers deploy. Local dev ignores it and uses .wrangler/state.
   "kv_namespaces": [{ "binding": "GAMES_KV", "id": "REPLACE_WITH_REAL_KV_ID" }],
