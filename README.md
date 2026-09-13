@@ -2,8 +2,8 @@
 
 ## Toolchain
 
-[mise](https://mise.jdx.dev/) manages **Node 26.8.1, pnpm 12.3.4 and hk
-1.56.1**, pinned in `mise.toml` with platform checksums in `mise.lock`.
+[mise](https://mise.jdx.dev/) manages **Node 26.8.1, pnpm 12.3.4, hk
+1.56.1 and zizmor 1.30.0**, pinned in `mise.toml` with platform checksums in `mise.lock`.
 Install mise and trust this checkout after reviewing its config, then:
 
 ```sh
@@ -12,8 +12,8 @@ mise install --locked
 mise run setup
 ```
 
-`setup` installs dependencies with the frozen lockfile and installs hk's Git
-hooks. With `mise activate` configured in your shell, entering the repo also
+`setup` installs dependencies with the frozen lockfile, generates the ignored
+Worker type declarations, and installs hk's Git hooks. With `mise activate` configured in your shell, entering the repo also
 installs missing tools and refreshes the hooks. Noninteractive shells and
 agents should use `mise run <task>` or `mise x -- pnpm <command>`; no fnm or
 manual pnpm PATH prefix is needed. Project tools take precedence over inherited
@@ -84,7 +84,9 @@ capture tooling's dependencies stay out of the site's lockfile and build.
 
 [hk](https://hk.jdx.dev/), configured in `hk.pkl`, installed by `mise run setup`
 or the mise enter hook. Pre-commit **auto-fixes and stages** Prettier and ESLint
-changes on selected files, and runs whole-project `astro check` and tests.
+changes on selected files, checks selected workflows with zizmor, and runs
+whole-project `astro check` and tests. Zizmor uses offline, strict-collection
+mode: no credentials/network required, and malformed workflows fail.
 Unstaged changes are stashed with Git and restored afterward, including when a
 check fails. Review the resulting commit when using partial staging.
 
@@ -100,9 +102,21 @@ Lefthook-generated hooks from `.git/hooks` (including `prepare-commit-msg` if
 present), then run `mise x -- hk install --mise`; preserve unrelated hooks.
 
 The build retains `pnpm run verify`, which discovers files through the tools
-rather than hk's tracked-file list. Both run tests, but the existing content
-store caveat still applies: tests in a fresh checkout can pass against empty
-collections until dev/build has populated `.astro/data-store.json`.
+rather than hk's tracked-file list. Both run tests. System checks now read a
+fresh JSON snapshot on every run and preserve duplicate IDs; they do not rely
+on Astro's cached content store. The build still validates Astro schemas.
+`pnpm run lint:workflows` checks all workflows independently of staged files.
+
+CI verification runs at deployment time: `deploy.yml` runs the full build and
+whole-repository checks before either preview or production publishing. There
+is no separate every-push/PR verification workflow. `DEPLOY_ENABLED` is a
+**temporary cutover interlock**, to retire after migration; while it is unset,
+the deploy job (including its verification) is skipped and checks remain local.
+`scripts/deployment-target.ts` selects production only for case-sensitive
+`refs/heads/main`; other branch refs select preview and non-branch refs fail.
+Preview aliases are normalized, length-bounded and hashed from the original
+branch name, using the generated Worker name. Actual bindings and the Pages to
+Workers cutover still require explicit provisioning and coordination.
 
 ## Linting
 

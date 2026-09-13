@@ -18,6 +18,8 @@ Uses the system Google Chrome via Playwright's `channel: "chrome"`. Override wit
 - **Unit tests:** `tests/chart-options.test.ts` runs with `pnpm test`
   (Vitest), normal verify/build and the existing test hook. It checks chart
   options, navigation order and spoken descriptions without content collections.
+  System validation now reads fresh JSON through `tests/content-fixture.ts`, not
+  Astro's dev store; see `tests/README.md` for the full unit/tooling test inventory.
 - **Browser regressions:** `chart-parity.mjs`, `stats-parity.mjs`,
   `stats-tooltips.mjs` and `stats-keyboard.mjs` are reusable Playwright scripts
   in this standalone module. Run them against a running **dev server and built
@@ -25,6 +27,16 @@ Uses the system Google Chrome via Playwright's `channel: "chrome"`. Override wit
   optional `--out`; assertion failures exit nonzero. They are **not** currently
   included in `pnpm test`, pre-commit or CI. CI wiring would need server/browser
   setup and teardown, not merely adding them to Vitest.
+- **Data corrections:** `data-corrections.mjs --base http://localhost:4322`
+  checks D1/D3 in actual rendered team tables, chart data, tooltips and keyboard
+  descriptions. Run against dev and built preview; failures exit nonzero. This
+  manual script accepts `--base` only and is not in CI. The companion
+  `tests/content-utils.test.ts` runs automatically with Vitest using fresh JSON.
+- **Chart resilience:** `chart-resilience.mjs --base http://localhost:4322`
+  blocks/stalls fonts across all four charts and checks mouse/keyboard/touch
+  handoff, one active scatter outline and Escape/popover precedence. Like the
+  data-correction probe, it accepts `--base` only and is manually run against
+  dev and preview. Font readiness also has ordinary Vitest coverage.
 - **Captures:** screenshot/response inventories and production comparisons
   complement those checks, but do not prove keyboard or interaction behavior.
 

@@ -2,6 +2,7 @@ import type { AstroIntegration } from "astro";
 
 import Fs from "node:fs/promises";
 import Path from "node:path";
+import { fileURLToPath } from "node:url";
 import { optimize } from "svgo";
 
 /*
@@ -49,7 +50,7 @@ export default function svgOptimizerIntegration(): AstroIntegration {
   return {
     hooks: {
       "astro:build:done": async ({ logger }) => {
-        const root = Path.normalize(clientDir.pathname);
+        const root = fileURLToPath(clientDir);
         const files = await collectSvgs(root);
 
         let before = 0;

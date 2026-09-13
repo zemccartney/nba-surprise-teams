@@ -336,6 +336,12 @@ try {
           ),
         props.data[middle].date,
       );
+      Assert.ok(
+        await host.evaluate((el) => document.activeElement !== el),
+        "hover does not focus pace chart",
+      );
+      await page.keyboard.press("Escape");
+      await tooltip.waitFor({ state: "hidden" });
       await page.mouse.move(5, 5);
       await tooltip.waitFor({ state: "hidden" });
 

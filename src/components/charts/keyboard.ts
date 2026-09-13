@@ -32,6 +32,8 @@ export const enableChartKeyboard = (
   }
 
   let selected = 0;
+  let isKeyboardActive = false;
+  let pointerIndex: number | undefined;
   const noun = options.pointLabel ?? "Game";
   const series = options.seriesIndices ?? [0];
   const dataIndex = () => options.dataIndices?.[selected] ?? selected;
@@ -56,14 +58,26 @@ export const enableChartKeyboard = (
 
   const hide = () => {
     chart.dispatchAction({ type: "hideTip" });
-    chart.dispatchAction({
-      dataIndex: dataIndex(),
-      seriesIndex: [...series],
-      type: "downplay",
-    });
+    if (isKeyboardActive) {
+      chart.dispatchAction({
+        dataIndex: dataIndex(),
+        seriesIndex: [...series],
+        type: "downplay",
+      });
+      isKeyboardActive = false;
+    }
+  };
+
+  // A pointer can remain over a dot while the keyboard selects another one.
+  // Clear both native and programmatic emphasis when handing ownership over.
+  const resetEmphasis = () => {
+    chart.dispatchAction({ seriesIndex: [...series], type: "downplay" });
+    pointerIndex = undefined;
   };
 
   const show = () => {
+    resetEmphasis();
+    isKeyboardActive = true;
     announce();
     chart.dispatchAction({
       dataIndex: dataIndex(),
@@ -78,12 +92,77 @@ export const enableChartKeyboard = (
   };
 
   announce();
-  host.addEventListener("focus", show);
+  const onFocus = () => {
+    // Pointer focus must not activate an unrelated remembered selection.
+    if (host.matches(":focus-visible")) show();
+  };
+  host.addEventListener("focus", onFocus);
   host.addEventListener("blur", hide);
+  // Restore pointer emphasis even when returning within the same dot (there
+  // need not be a new mouseover event after keyboard navigation).
+  const onPointerPoint = (event: {
+    dataIndex?: number;
+    seriesIndex?: number;
+  }) => {
+    if (
+      event.dataIndex === undefined ||
+      !series.includes(event.seriesIndex ?? -1)
+    )
+      return;
+    if (isKeyboardActive) hide();
+    if (pointerIndex === event.dataIndex) return;
+    resetEmphasis();
+    pointerIndex = event.dataIndex;
+    chart.dispatchAction({
+      dataIndex: pointerIndex,
+      seriesIndex: [...series],
+      type: "highlight",
+    });
+  };
+  host.addEventListener("pointerleave", () => {
+    if (isKeyboardActive) {
+      return;
+    }
+
+    resetEmphasis();
+    hide();
+  });
+  chart.on("mousemove", onPointerPoint);
+  chart.on("mouseout", () => {
+    if (!isKeyboardActive) resetEmphasis();
+  });
+  host.addEventListener("pointerdown", () => {
+    if (isKeyboardActive) hide();
+  });
+  chart.on("click", (event: { dataIndex?: number; seriesIndex?: number }) => {
+    onPointerPoint(event);
+    if (
+      event.dataIndex === undefined ||
+      !series.includes(event.seriesIndex ?? -1)
+    )
+      return;
+    const index = options.dataIndices?.length
+      ? options.dataIndices.indexOf(event.dataIndex)
+      : event.dataIndex;
+    if (index < 0 || index >= points.length) return;
+    selected = index;
+    announce();
+    host.focus({ preventScroll: true });
+  });
   // Focus may have triggered lazy mounting before these listeners existed.
-  if (document.activeElement === host) {
-    show();
-  }
+  if (document.activeElement === host) onFocus();
+
+  const hasOpenControl = () =>
+    document.querySelector(":popover-open, dialog[open]") !== null;
+  document.addEventListener("keydown", (event) => {
+    if (
+      event.key === "Escape" &&
+      !event.defaultPrevented &&
+      host.isConnected &&
+      !hasOpenControl()
+    )
+      hide();
+  });
   host.addEventListener("keydown", (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey) {
       return;
@@ -106,6 +185,7 @@ export const enableChartKeyboard = (
         break;
       }
       case "Escape": {
+        if (hasOpenControl()) return;
         event.preventDefault();
         hide();
         return;

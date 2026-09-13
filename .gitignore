@@ -32,6 +32,8 @@ plan/baseline/runs/**/html/
 
 # personal Claude Code permissions
 .claude/settings.local.json
+# generated nested worktrees (also excluded from parent lint)
+.claude/worktrees/
 
 # lefthook per-machine overrides
 lefthook-local.yml

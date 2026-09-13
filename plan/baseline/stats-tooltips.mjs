@@ -188,6 +188,19 @@ try {
           "hover outline encloses the mouse target",
         );
       }
+      Assert.ok(
+        await host.evaluate((el) => document.activeElement !== el),
+        `${kind}: hover did not focus chart`,
+      );
+      await page.keyboard.press("Escape");
+      await page.waitForFunction(
+        ({ heading }) =>
+          !heading.checkVisibility({
+            opacityProperty: true,
+            visibilityProperty: true,
+          }),
+        probe,
+      );
       await probe.dispose();
       results.push({ imageRequests: requests.length, kind, moves: 20, width });
       console.log(

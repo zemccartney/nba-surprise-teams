@@ -19,7 +19,55 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: independent full-stack pre-launch review
+## Latest: agreed cleanup
+
+See [cleanup.md](prelaunch-review/cleanup.md). CI remains full verification at
+preview/production deployment time; the separate verification workflow was
+removed and DEPLOY_ENABLED is explicitly temporary. Deployment selection is a
+shared TypeScript function/CLI, without shell extraction. Both data suites share
+small lookup plumbing but keep their appropriate separate inputs. Content
+checks are at a stopping point; no SQLite migration or new test runtime now.
+
+## Previous: content-test and tooling gates ready for review
+
+Zack approved D1/D3 and R3–R5. R2 now reads fresh raw content with a per-run
+lookup adapter rather than Astro's store; fresh, stale-store, missing-game and
+watch negative controls pass/fail as intended. R6/R7 use case-sensitive branch
+selection and bounded hashed aliases; R9 adds ungated verification. R8 fixes
+SVG file-URL conversion; R10 generates Worker types during setup. Zizmor is
+pinned via mise and runs in hooks and verify/build.
+
+59 tests/full build pass, including a disposable checkout under a path containing
+spaces. Unsafe/malformed workflow fixtures fail the hook. See
+[the review guide](prelaunch-review/test-tooling-gates.md). No new commit/push/
+deployment. D2/live-feed work and hosted/operational gates remain outstanding.
+
+## R3–R5 chart resilience — approved
+
+Zack approved D1/D3. The next local batch handles failed/stalled fonts, pointer
+focus and keyboard/pointer/touch handoff, and unfocused-hover Escape with native
+popover precedence. [Review guide](prelaunch-review/chart-resilience.md).
+
+37 tests and full build pass. Resilience runs on dev/preview; existing chart,
+layout, image/tooltip, keyboard and data-correction probes pass on preview.
+Broader content-test/tooling gates and Workers provisioning remain open. No
+additional commit, push or deployment.
+
+## D1/D3 data corrections — approved
+
+Checkpoint `4c3bc20` includes all prior work. Zack reproduced the data bugs and
+approved fixes. Projected wins now multiply before dividing with a zero-games
+guard; Stats resolves historical names by season; Nets history names are no
+longer swapped. No archive JSON changed. See
+[the review/verification guide](prelaunch-review/data-fixes.md).
+
+34 tests and normal build pass. New data browser checks pass on dev and preview;
+all four existing chart probes pass on preview. Tests use fresh JSON rather
+than the cached Astro store. Broader test-store and interaction/deployment
+findings remain open. Changes after the checkpoint are uncommitted; no push or
+deployment.
+
+## Independent full-stack pre-launch review
 
 Fable 5.1 and Codex GPT-6-Astra reviewed identical, separate snapshots of PRs
 #9–#16 plus the entire uncommitted tree, without seeing one another's findings.

@@ -13,6 +13,11 @@ local linters = new Mapping<String, Step> {
       check = "pnpm exec eslint --flag unstable_native_nodejs_ts_config --no-warn-ignored {{files}}"
       fix = "pnpm exec eslint --flag unstable_native_nodejs_ts_config --no-warn-ignored --fix {{files}}"
     }
+    ["workflows"] = {
+      glob = ".github/workflows/*.{yml,yaml}"
+      // Deterministic, credential-free, and fail on malformed workflow input.
+      check = "zizmor --offline --strict-collection {{files}}"
+    }
     ["typecheck"] = {
       check = "pnpm exec astro check"
     }

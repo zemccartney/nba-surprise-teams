@@ -428,6 +428,9 @@ clicking a dot and an Escape-dismissal failure with focus outside the chart.
 
 All visual pages are approved. Stats keyboard controls are implemented and
 browser-verified, not yet manually screen-reader verified. Same-point tooltip
-image requests are resolved. The content-test gap is now independently confirmed
-for both empty and stale stores; passing tests alone prove neither population
-nor freshness. Tests moved into `tests/`; the move does not fix that gap.
+image requests are resolved. Zack subsequently approved D1/D3 data corrections
+and R3–R5 font/input resilience. R2 now reads fresh raw data and passes the
+fresh/stale/missing-game and watch-mode negative controls. R6–R10 tooling fixes
+are also local, with 59 tests and a pinned zizmor check. See
+[the current review guide](prelaunch-review/test-tooling-gates.md). Live-action/
+feed work and hosted/operational gates remain; no deployment has occurred.

@@ -23,13 +23,14 @@ const isCloudflareDevPlugin = (plugin: unknown) =>
   typeof plugin.name === "string" &&
   plugin.name.startsWith("vite-plugin-cloudflare:");
 
-// @cloudflare/vite-plugin (pulled in by the adapter since v13) starts a workerd
-// runner for the dev environment, which Vitest's node environment cannot
-// satisfy: "AssertionError: depsOptimizer is required in dev mode". The system
-// test only reads content collections, so the Cloudflare dev plugins come out
-// and the suite runs in plain node. The Astro-side plugins stay, since they are
-// what make `astro:content` resolve. Dropping them also fixed the hanging-Vite-
-// server warning that `teardownTimeout` used to paper over.
+// The adapter supplies Cloudflare development plugins, whose Node-compat import
+// resolver expects a dev dependency optimizer. Vitest disables optimization by
+// default, causing "AssertionError: depsOptimizer is required in dev mode".
+// Keep this suite in Node without that Worker-specific wiring. Astro plugins
+// still resolve virtual module imports, but tests mock the content API and read
+// source JSON explicitly: this configuration does not refresh content stores.
+// See plan/new-season-sweep/content-lifecycle.md. A smaller Vite configuration
+// can be considered later; do not expand this into a content-sync harness.
 const config: UserConfigFnPromise = async (env) => {
   const resolved = (await astroConfig(env)) as UserConfig;
   const plugins = (resolved.plugins ?? []) as unknown[];

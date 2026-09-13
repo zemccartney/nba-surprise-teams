@@ -1,5 +1,8 @@
 pnpm-lock.yaml
 
+# generated nested worktrees
+.claude/worktrees/
+
 # build output
 dist/
 

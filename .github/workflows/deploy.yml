@@ -1,5 +1,5 @@
-# Deploys the Worker build: a preview version aliased to the branch name for
-# any branch, a production release for main. Inert until the repository
+# Deploys the Worker build: a safe, hashed preview alias for branches,
+# a production release only for refs/heads/main. Inert until the repository
 # variable DEPLOY_ENABLED is set to "true" (Settings -> Secrets and variables
 # -> Actions -> Variables), so pushing this file does not touch Cloudflare.
 # Needs CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, PUBLIC_SENTRY_DSN and
@@ -10,13 +10,14 @@ name: deploy
 on:
   workflow_dispatch:
   push:
+    branches: ["**"]
 
 permissions:
   contents: read
 
 jobs:
   deploy:
-    if: vars.DEPLOY_ENABLED == 'true'
+    if: vars.DEPLOY_ENABLED == 'true' && startsWith(github.ref, 'refs/heads/')
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -32,18 +33,19 @@ jobs:
           version: 2026.9.1
           install_args: --locked
       - run: pnpm install --frozen-lockfile
-      - name: Build and deploy preview
-        if: github.ref_name != 'main'
+      - name: Build and deploy selected branch
+        shell: bash
         env:
           BRANCH: ${{ github.ref_name }}
-          PUBLIC_DEPLOY_ENV: preview
         run: |
+          # Separate assignment preserves a classifier failure under bash -e.
+          # JavaScript comparisons are case-sensitive, unlike GitHub expressions.
+          PUBLIC_DEPLOY_ENV="$(node scripts/deployment-target.ts "$GITHUB_REF")"
+          export PUBLIC_DEPLOY_ENV
           pnpm run build
-          pnpm exec wrangler versions upload --preview-alias "$BRANCH"
-      - name: Build and deploy production
-        if: github.ref_name == 'main'
-        env:
-          PUBLIC_DEPLOY_ENV: production
-        run: |
-          pnpm run build
-          pnpm exec wrangler deploy
+          if [[ "$PUBLIC_DEPLOY_ENV" == production ]]; then
+            pnpm exec wrangler deploy
+          else
+            ALIAS="$(node scripts/preview-alias.ts)"
+            pnpm exec wrangler versions upload --preview-alias "$ALIAS"
+          fi

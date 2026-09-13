@@ -1,8 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 
-import { getCollection } from "astro:content";
-import Fs from "node:fs/promises";
-import { beforeAll, describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
 import * as ContentUtils from "../src/content-utils";
 
@@ -11,19 +9,20 @@ import * as ContentUtils from "../src/content-utils";
 // architecting for headless / testing?
 // test to catch loader issues e.g. opening night '25?
 
-/*
-  WARNINGS:
-  
-  - content does not load here when running during build on cloudflare, I assume due to 
-  runtime incompatibility? Rely on the precommit hook to verify build; seems feasible that one
-  day, CF's runtime will support fs operations such that test work as expected
-
-  - changes to content don't appear to surface automatically in tests,
-  required starting dev server to trigger a content sync. Unclear why yet
-*/
-const games = await getCollection("games");
-const seasons = await getCollection("seasons");
-const teamSeasons = await getCollection("teamSeasons");
+// One fresh disk snapshot per run (including watch reruns) for both assertions
+// and the real domain helpers. Never trust the empty/stale Astro dev store.
+const fixture = await vi.hoisted(async () => {
+  const { readContentFixture } = await import("./content-fixture");
+  return readContentFixture();
+});
+vi.mock("astro:content", () => fixture.api);
+const { games, seasons, teamSeasons } = fixture.entries;
+const {
+  games: rawGames,
+  seasons: rawSeasons,
+  teams: rawTeams,
+  teamSeasons: rawTeamSeasons,
+} = fixture.raw;
 
 describe("system validation", () => {
   describe("season rules", () => {
@@ -152,42 +151,6 @@ describe("system validation", () => {
   });
 
   describe("referential integrity and constraints", () => {
-    let rawSeasons: CollectionEntry<"seasons">["data"][];
-    let rawTeams: CollectionEntry<"teams">["data"][];
-    let rawTeamSeasons: CollectionEntry<"teamSeasons">["data"][];
-    let rawGames: CollectionEntry<"games">["data"][];
-
-    beforeAll(async () => {
-      /*
-        Why loading raw data? To work around how astro treats swallows duplicate ids, preserving
-        only the latest (source order) record of the duplicated id instead of erroring. Unclear why,
-        but prefer to guard against that
-
-        The idea is that these tests should verify the data on disk is referentially consistent. Ideally,
-        astro's representation of said data would match its physical representation or at least as far
-        as ref integrity goes, but since it's not, use raw data wherever we need to assert facts we need
-        to be true about the ids of said data
-      */
-
-      rawSeasons = JSON.parse(
-        await Fs.readFile("./src/content/seasons.json", { encoding: "utf8" }),
-      ) as unknown as CollectionEntry<"seasons">["data"][];
-
-      rawTeams = JSON.parse(
-        await Fs.readFile("./src/content/teams.json", { encoding: "utf8" }),
-      ) as unknown as CollectionEntry<"teams">["data"][];
-
-      rawTeamSeasons = JSON.parse(
-        await Fs.readFile("./src/content/teamSeasons.json", {
-          encoding: "utf8",
-        }),
-      ) as unknown as CollectionEntry<"teamSeasons">["data"][];
-
-      rawGames = JSON.parse(
-        await Fs.readFile("./src/content/games.json", { encoding: "utf8" }),
-      ) as unknown as CollectionEntry<"games">["data"][];
-    });
-
     test("all IDs unique within their respective files", async () => {
       const seasonIds = rawSeasons.map((s) => s.id);
       expect(new Set(seasonIds).size).toBe(seasonIds.length);
@@ -263,14 +226,14 @@ describe("system validation", () => {
   // Didn't feel like burning time hashing that out
   describe("chart hardcoding checks", () => {
     test("stats page top-10 table - no ties at cutoff", async () => {
-      if (games.length === 0) {
-        console.warn("Skipping top-10 table test - no games data available");
-        return;
-      }
-
-      // Use exact same calculation as stats.astro (lines 37-57)
+      // Match Stats: only archived seasons contribute to the ranking.
+      const archivedSeasonIds = new Set(games.map(({ data }) => data.seasonId));
+      const archivedTeams = teamSeasons.filter(({ data }) =>
+        archivedSeasonIds.has(data.season.id),
+      );
+      expect(archivedTeams.length).toBeGreaterThan(10);
       const paceArchive = [];
-      for (const teamSeason of teamSeasons) {
+      for (const teamSeason of archivedTeams) {
         const gamesPlayed = games.filter(({ data }) => {
           return (
             data.seasonId === teamSeason.data.season.id &&

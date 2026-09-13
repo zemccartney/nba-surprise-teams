@@ -34,6 +34,7 @@ import { SVGRenderer } from "echarts/renderers";
 
 import type { ChartKeyboardNavigation } from "./keyboard";
 
+import { waitForChartFonts } from "./fonts";
 import { enableChartKeyboard } from "./keyboard";
 import { stableTooltip } from "./tooltip";
 
@@ -231,11 +232,9 @@ const render = async <Props>(
 ) => {
   const theme = readTheme();
 
-  // Labels are measured at render; make sure the mono font is in first
-  await Promise.all([
-    document.fonts.load(`16px ${theme.fontMono}`),
-    document.fonts.load(`bold 16px ${theme.fontMono}`),
-  ]);
+  // Prefer loaded fonts for measurement, but render with fallback metrics
+  // when requests fail or stall rather than leaving an unusable placeholder.
+  await waitForChartFonts(document.fonts, theme.fontMono);
 
   const chart = echarts.init(host, undefined, { renderer: "svg" });
   const pointDescriptions = keyboard?.points(props) ?? [];

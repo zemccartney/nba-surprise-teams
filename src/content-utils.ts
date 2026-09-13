@@ -273,7 +273,12 @@ export const projectedWins = async (
   record: ReturnType<typeof calculateTeamRecord>,
 ) => {
   const surpriseRules = await getSeasonSurpriseRules(seasonId);
-  return Math.floor(surpriseRules.numGames * currentWinPct(record)); // Math.floor = partial wins don't count, need to absolutely exceed
+  const gamesPlayed = record.w + record.l;
+  // Multiply integers first: dividing first can turn an exact 47 into
+  // 46.99999999999999. Partial wins still deliberately round down.
+  return gamesPlayed
+    ? Math.floor((surpriseRules.numGames * record.w) / gamesPlayed)
+    : 0;
 };
 
 export const pace = async (
@@ -371,14 +376,14 @@ export const getTeamHistory = async (teamId: TeamCode) => {
         duration: [1977, 2011],
         logo: emojiByTeam[TEAM_CODES.NJN],
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        name: brooklyn!.data.name,
+        name: newJersey!.data.name,
         teamId: TEAM_CODES.NJN,
       },
       {
         duration: [2012],
         logo: emojiByTeam[TEAM_CODES.BKN],
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        name: newJersey!.data.name,
+        name: brooklyn!.data.name,
         teamId: TEAM_CODES.BKN,
       },
     ];

@@ -137,7 +137,7 @@ for (const season of archivedSeasons) {
       datapoint.numSurprises += 1;
       datapoint.surpriseTeams.push({
         logoSrc: img.src,
-        name: ContentUtils.resolveTeamName(team, team.id),
+        name: ContentUtils.resolveTeamName(team, season.id),
         teamId: teamSeason.data.team.id as TeamCode,
       });
     }

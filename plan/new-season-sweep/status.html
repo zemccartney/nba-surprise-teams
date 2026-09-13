@@ -703,7 +703,7 @@
             </li>
             <li>
               <a href="#s5"
-                >5 · Infra &amp; deferred<span class="count">0/10</span></a
+                >5 · Infra &amp; deferred<span class="count">0/12</span></a
               >
             </li>
           </ul>
@@ -1030,8 +1030,25 @@ mise run setup</code></pre>
                     Independently confirmed empty/stale content-test stores,
                     font-failure blank charts, click/keyboard double highlights,
                     unfocused-hover Escape and deployment/configuration gaps.
-                    Root tests now live in <code>tests/</code>. Findings are not
-                    yet fixed; merge/cutover remain gated. See the
+                    Root tests now live in <code>tests/</code>. D1/D3 data
+                    corrections are now locally implemented: 34 tests and the
+                    new dev/preview data probe pass. See the
+                    <a href="prelaunch-review/data-fixes.md"
+                      >data-fix review guide</a
+                    >. Zack approved D1/D3. R3–R5 chart resilience is now
+                    locally fixed with 37 tests and dev/preview browser checks;
+                    see the
+                    <a href="prelaunch-review/chart-resilience.md"
+                      >interaction review guide</a
+                    >. Zack approved that batch. R2 and R6–R10 are now locally
+                    addressed locally with fresh/stale/watch negative controls,
+                    safe deployment refs/aliases, deploy-time CI, SVG path
+                    handling and setup types. Zizmor is pinned via mise and runs
+                    in hooks and verify/build. See the
+                    <a href="prelaunch-review/test-tooling-gates.md"
+                      >test/tooling review guide</a
+                    >. Live-action/feed work and hosted gates remain open;
+                    merge/cutover stay gated. See the
                     <a href="prelaunch-review/README.md">reconciled report</a>
                     for priorities, evidence and rejected claims.
                   </p>
@@ -1335,11 +1352,17 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">SQLite content store</p>
                   <p class="item-note">
-                    Half-baked idea from <code>plan.md</code>: keep the static
-                    build but get referential integrity that Astro content
-                    collections don't give, currently checked by tests. Shape he
-                    floated: a human-readable sqldump migrated into the db at
-                    pre-commit. Needs design.
+                    Deferred: aim for database-enforced referential integrity
+                    and a project-owned query API/types, dropping Astro content
+                    collection queries entirely. Original source-format idea:
+                    human-readable SQL dump; details still need design. Enforce
+                    a build-only database boundary deliberately, accounting for
+                    metadata needed by live islands/actions. No conversion now;
+                    current source-data tests are at a stopping point apart from
+                    small cleanup. See the
+                    <a href="content-lifecycle.md"
+                      >content lifecycle diagrams and future boundary notes</a
+                    >.
                   </p>
                 </div>
               </li>
@@ -1358,10 +1381,39 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">05</span>
               <h2>Infrastructure and deferred rounds</h2>
-              <span class="count">0 / 10 done</span>
+              <span class="count">0 / 12 done</span>
             </div>
 
             <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Consolidate verification definitions — deferred
+                  </p>
+                  <p class="item-note">
+                    Package scripts and hk currently duplicate check commands
+                    without mechanically enforcing consistency. Establish a
+                    shared source of truth or an automated consistency check,
+                    preserving intentional staged-file versus whole-repository
+                    scope differences. Log only for now; not part of the live
+                    action/feed correctness work.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Knip — deferred standard-toolkit addition
+                  </p>
+                  <p class="item-note">
+                    Zack wants Knip added to this project as part of his
+                    standard toolkit. Log only for now; installation,
+                    configuration and check integration are deferred.
+                  </p>
+                </div>
+              </li>
               <li class="item s-open">
                 <span class="marker">[ ]</span>
                 <div>
@@ -1457,14 +1509,20 @@ mise run setup</code></pre>
                     <code>.github/workflows/deploy.yml</code> is written,
                     SHA-pinned and zizmor-clean but gated off behind
                     <code>vars.DEPLOY_ENABLED == 'true'</code>; the custom
-                    domain has to move.
+                    domain has to move. The gate is a temporary cutover
+                    interlock, to retire after migration. Per Zack's workflow,
+                    CI runs full verification at deployment time, not in a
+                    separate every-push/PR workflow. First actual GitHub/Linux
+                    execution is still pending.
                   </p>
                   <p class="item-note">
                     Also settle here: trailing-slash redirects become
                     <strong>307</strong> on Workers vs 308 on Pages —
                     <code>html_handling: "force-trailing-slash"</code> does not
-                    change it, tested — and whether the deploy workflow should
-                    keep running the full verify.
+                    change it, tested. The deploy workflow keeps its full
+                    whole-repository verification before either preview or
+                    production publishing. The classifier is a shared tested
+                    TypeScript CLI, not inline shell scraped by tests.
                   </p>
                 </div>
               </li>

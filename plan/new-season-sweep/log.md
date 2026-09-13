@@ -13,6 +13,70 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Review follow-up — bounded cleanup
+
+Zack clarified that DEPLOY_ENABLED is only a temporary cutover interlock.
+Removed the proposed separate verify workflow; full verification remains before
+both deployment paths. Extracted the case-sensitive classifier to a TypeScript
+function/CLI with portable unit/CLI tests. Shared content lookup plumbing without
+forcing helper tests to load games. Corrected Vite comments, retained the working
+configuration, and stopped short of any content-sync/runtime/database redesign.
+See `prelaunch-review/cleanup.md`. SQLite and Knip remain deferred. No new commit,
+push or deployment.
+
+## R2 and R6–R10 — current-data tests and tooling gates
+
+Zack approved the chart resilience batch and authorized continuing. System tests
+now take a fresh disk snapshot per run and retain real domain calculations via
+a small mocked content lookup boundary. Removed the empty top-10 skip, retained
+duplicate IDs for assertions, and aligned ranking inputs with archived seasons.
+A disposable copy passed without a dev store; removing one game failed 81 vs 82
+even with a stale store; restoring it passed. Actual watch mode also went
+pass → fail → pass without dev.
+
+Hardened deploy ref selection (including Main versus main), added bounded hashed
+preview aliases and an ungated secret-free verification workflow. SVG optimization
+uses fileURLToPath; a full build under a space-containing checkout passed. A root
+path containing # still fails upstream Vite before the optimizer; no broader
+compatibility claim. Setup now generates Worker types before installing hooks.
+
+Fulfilled scratch.md's zizmor request: pinned 1.30.0 through mise with attestation/
+checksums, offline strict workflow checks in hk and verify/build. Selected unsafe
+and malformed workflow fixtures fail; real workflows pass. Existing tool versions
+and pnpm onFail:error unchanged. 59 tests/full build pass. Guide:
+`prelaunch-review/test-tooling-gates.md`. No post-checkpoint commit/push/deploy;
+D2/live-feed and hosted operational gates remain open.
+
+## R3–R5 — chart failure handling and mixed input
+
+Zack reviewed and approved D1/D3, then authorized continuing. Charts now wait at
+most 1.5 seconds for fonts and tolerate failed loads. Pointer focus no longer
+activates a stale keyboard point; click/tap updates selection and arrows resume
+there. Explicit emphasis handoff also fixes the extra double-highlight case
+found when pressing an arrow after clicking, and restores pointer feedback when
+returning inside the same dot. Hover Escape works independently of chart focus,
+while native popovers/dialogs keep precedence.
+
+Added three font tests (37 total), a resilience browser probe, and unfocused
+Escape checks to existing desktop/mobile probes. Full build and all chart/data
+probes pass; resilience also passes in dev. Review guide:
+`prelaunch-review/chart-resilience.md`. Remaining gates are still open. No
+post-checkpoint commit/push/deployment; dev stopped, preview stays on 4322.
+
+## D1/D3 — historical data presentation corrected
+
+Committed prior work as `4c3bc20`, without pushing. Zack reproduced the production
+bugs and approved fixes after reviewing their root causes. Corrected projection
+arithmetic, the Stats season-name argument and swapped Nets history names.
+No source game/season/team JSON changed. Added 13 cache-independent helper tests
+and a rendered-page browser probe. Normal build/34 tests pass; the new probe
+passes on dev and preview, as do all four previous preview chart probes.
+
+Also excluded generated nested Claude worktrees from parent Git/lint/format
+scope after an unrelated checkout broke formatting verification. No files in
+that checkout were changed. Review guide: `prelaunch-review/data-fixes.md`.
+Post-checkpoint changes are uncommitted; remaining pre-launch findings are open.
+
 ## Pre-launch review — full stack and test organization
 
 Moved root `system.test.ts` and `chart-options.test.ts` into `tests/`; updated

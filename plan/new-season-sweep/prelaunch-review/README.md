@@ -1,5 +1,12 @@
 # Pre-launch review: full Foundations stack
 
+## Latest cleanup disposition
+
+See [cleanup.md](cleanup.md): Zack chose deployment-time whole-repository CI,
+not a separate always-on workflow. The temporary cutover gate will retire after
+migration. This supersedes R9's proposed ungated workflow below. Classifier and
+fixture cleanup is local; content testing is at a stopping point.
+
 ## Decision
 
 **Keep merge/cutover gated; address the focused findings below first.** The
@@ -38,12 +45,19 @@ been registered and the Workers migration has not happened. Treat R1 as migratio
 provisioning/cutover work, not a current production incident. Settle preview write
 isolation during that work rather than conflating it with the existing data bugs.
 
-Zack wants to inspect D1/D3's user-facing consequences before authorizing those
-fixes. First create a clean checkpoint of the current work; do not push or start
-fixes yet. After confirmation and implementation, provide a review/verification
-write-up.
+Zack reproduced D1/D3 and approved their fixes after reviewing the root causes.
+Checkpoint: `4c3bc20`. Those fixes are now implemented locally with independent
+regressions; see [data-fixes.md](data-fixes.md) for the review/verification guide.
+Zack reviewed and approved D1/D3. R3–R5 are now also fixed locally; see
+[chart-resilience.md](chart-resilience.md) for the next review and verification
+steps. Zack approved that batch too. R2 and R6–R10 are now addressed locally,
+including the requested pinned zizmor hook/CI check; see
+[test-tooling-gates.md](test-tooling-gates.md) for the evidence and review steps.
+These changes are not yet committed or deployed. The findings below describe
+the original review snapshot. D2/live-feed work and operational deployment gates
+remain open.
 
-## Validated findings to address
+## Validated findings — original review snapshot
 
 Severity describes impact; the timing column separates merge readiness from
 hosted/live-operation gates. C = Claude; A = Astra.
@@ -280,7 +294,7 @@ contract review. This is pre-existing, not a new Workers regression.
   helpers/tests and validate the eventual committed tree. Existing PR heads do
   not contain the current uncommitted fixes.
 
-## Suggested next round
+## Original suggested next round
 
 1. Fix R1–R9 in focused commits/PR updates; include R10 with tooling setup cleanup.
 2. Add the reproduced failure/modality cases and a reliable content-data gate.
