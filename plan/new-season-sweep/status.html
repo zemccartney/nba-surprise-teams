@@ -1050,9 +1050,16 @@ mise run setup</code></pre>
                     >. Latest live-data guardrails and the standalone preseason
                     diagnostic are implemented. Follow-up cleanup consolidates
                     the loader, clarifies Sentry reporting and improves tests
-                    and readability. 110 tests/full source-copy build pass; see
+                    and readability. The live-data batch is committed as
+                    <code>6fdba39</code>. The diagnostic now offers a Gum
+                    <code>--pretty</code> view, and content tests use typed
+                    import mocks. 113 tests pass; see
                     <a href="prelaunch-review/live-readability.md"
                       >the live-data follow-up</a
+                    >
+                    and
+                    <a href="prelaunch-review/gum-and-test-mocks.md"
+                      >Gum/test cleanup notes</a
                     >. Finality observations and hosted gates remain open;
                     merge/cutover stay gated. See the
                     <a href="prelaunch-review/README.md">reconciled report</a>

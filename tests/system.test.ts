@@ -15,7 +15,7 @@ const fixture = await vi.hoisted(async () => {
   const { readContentFixture } = await import("./content-fixture");
   return readContentFixture();
 });
-vi.mock("astro:content", () => fixture.api);
+vi.mock(import("astro:content"), () => fixture.api);
 const { games, seasons, teamSeasons } = fixture.entries;
 const {
   games: rawGames,

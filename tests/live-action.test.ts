@@ -15,7 +15,7 @@ const mocks = vi.hoisted(() => ({
 vi.mock(import("@sentry/cloudflare"), () => ({
   captureException: mocks.captureException,
 }));
-vi.mock("astro:content", () => ({ getEntry: mocks.getEntry }));
+vi.mock(import("astro:content"), () => ({ getEntry: mocks.getEntry }));
 vi.mock(import("../src/content-utils"), async (importOriginal) => ({
   ...(await importOriginal()),
   getLatestSeason: mocks.getLatestSeason,
@@ -24,6 +24,9 @@ vi.mock(import("../src/loaders/live"), async (importOriginal) => ({
   ...(await importOriginal()),
   default: mocks.loader,
 }));
+// These two shims intentionally replace only the handler/transport boundary,
+// not the full platform APIs. Keep string mocks rather than casting away their
+// incompatible types merely to force the typed-import syntax.
 vi.mock("cloudflare:workers", () => ({
   env: { GAMES_KV: { get: mocks.get, put: mocks.put } },
 }));

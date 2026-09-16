@@ -8,9 +8,10 @@ Following [Vitest's agent guidance](https://vitest.dev/guide/learn/writing-tests
 `vitest.config.ts` resets mock implementations/history, restores spies and
 unstubs globals/environment variables before each test. Fake timers still need
 explicit `vi.useRealTimers()` cleanup. Prefer short behavior names and typed
-`vi.mock(import(...))` for application modules. Partial Astro/Worker transport
-shims intentionally use string mocks rather than pretending to implement their
-full framework types. Run tests noninteractively (`pnpm test` uses `--run`).
+`vi.mock(import(...))`; content fixtures use this too, with typed collection
+filters and both reference/ID entry lookups. Only the deliberately partial
+`astro:actions` transport and `cloudflare:workers` environment shims retain
+string mocks rather than hiding incompatible framework types behind casts. Run tests noninteractively (`pnpm test` uses `--run`).
 
 - `system.test.ts`: source-data lifecycle, completeness, referential integrity
   and top-10 cutoff checks. `content-fixture.ts` reads one fresh JSON snapshot

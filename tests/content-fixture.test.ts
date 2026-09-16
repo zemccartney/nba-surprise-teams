@@ -34,6 +34,26 @@ const withContent = async (check: (url: URL) => Promise<void>) => {
 };
 
 describe("fresh content snapshots", () => {
+  it("supports reference lookups and collection filters", async () => {
+    const fixture = await readContentFixture();
+    const season = fixture.entries.seasons[0];
+
+    if (!season) {
+      throw new Error("Expected a season fixture");
+    }
+
+    await expect(
+      fixture.api.getEntry({
+        collection: "seasons",
+        id: season.id,
+      }),
+    ).resolves.toEqual(season);
+
+    await expect(
+      fixture.api.getCollection("seasons", (entry) => entry.id === season.id),
+    ).resolves.toEqual([season]);
+  });
+
   it("reads changed games on the next invocation without a dev server", () =>
     withContent(async (url) => {
       const first = await readContentFixture(url);

@@ -7,6 +7,7 @@ locked_verify_provenance = true
 minimum_release_age = "7d"
 
 [tools]
+gum = "2.0.0"
 hk = "1.56.1"
 node = "26.8.1"
 pnpm = "12.3.4"

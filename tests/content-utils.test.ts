@@ -10,7 +10,7 @@ import {
 } from "../src/content-utils";
 
 // These tests use fresh JSON, not Astro's potentially empty/stale dev store.
-vi.mock("astro:content", async () => {
+vi.mock(import("astro:content"), async () => {
   const { default: seasons } = await import("../src/content/seasons.json");
   const { default: teams } = await import("../src/content/teams.json");
   const { createContentApi } = await import("./content-api");

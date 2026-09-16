@@ -13,6 +13,17 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Incremental checkpoints, Gum view and typed content mocks
+
+Per Zack's standing instruction to commit progress, checkpointed the live-data
+batch as `6fdba39`. Hooks passed 110 tests; hk isolated/restored the untracked
+user scratch file. Added optional --pretty rendering to the same diagnostic,
+using Gum 2.0.0 pinned through mise (2.0.1 was inside the release cooldown).
+JSON stays unchanged. Clarified unassignedMatchups as participant placeholders,
+not missing results. Extended import() mocks to content tests with typed fixture
+lookup signatures; retained only two documented partial-platform exceptions.
+113 tests pass. See `prelaunch-review/gum-and-test-mocks.md`. No push/deployment.
+
 ## Live-data readability and observability follow-up
 
 Applied Zack's review: two-file loader layout, a readable diagnostic organized

@@ -1,3 +1,4 @@
+import { spawnSync } from "node:child_process";
 import Fs from "node:fs/promises";
 import { parseArgs } from "node:util";
 
@@ -298,11 +299,141 @@ export const inspectNbaFeed = (value: unknown, expectedSeason?: string) => {
   };
 };
 
+// Keep presentation separate from observations. JSON remains the default;
+// this Markdown view is rendered by Gum only when --pretty is requested.
+const text = (value: unknown) =>
+  String(value ?? "unknown")
+    .replaceAll(/\p{Cc}/gu, " ")
+    .replaceAll("|", String.raw`\|`);
+
+const matchup = (game: GameObservation) => {
+  const away = game.away || "TBD";
+  const home = game.home || "TBD";
+
+  return `${text(away)} ${game.awayScore} at ${text(home)} ${game.homeScore}`;
+};
+
+export const formatFeedReport = (report: ReturnType<typeof inspectNbaFeed>) => {
+  const hasFindings = report.errors.length > 0 || report.warnings.length > 0;
+  const summary = hasFindings
+    ? `${report.errors.length} errors · ${report.warnings.length} warnings — review required`
+    : "No errors or warnings in this snapshot";
+
+  const lines = [
+    `# NBA feed check — ${text(report.season)}`,
+    "",
+    `**${summary}**`,
+    "",
+    `Feed timestamp: ${text(report.feedTime)}`,
+    "",
+    `**Games: ${report.gameCount}** · **Matchups awaiting team assignment: ${report.unassignedMatchups}**`,
+    "",
+    "Awaiting assignment means at least one team code is blank or missing; it does not mean a result is missing.",
+    "",
+    "## Game ID prefixes",
+    "",
+    "| Prefix | Games |",
+    "| --- | ---: |",
+    ...Object.entries(report.prefixes).map(
+      ([prefix, count]) => `| ${text(prefix)} | ${count} |`,
+    ),
+    "",
+    "## Status observations",
+  ];
+
+  for (const sample of report.statusSamples) {
+    lines.push(
+      "",
+      `### Status ${text(sample.status)} — ${report.statuses[sample.status]} games`,
+      "",
+    );
+
+    for (const game of sample.games) {
+      lines.push(
+        `- ${matchup(game)} — ${text(game.statusText)} · ID ${text(game.id)}`,
+      );
+    }
+  }
+
+  lines.push("", "## First preseason game", "");
+
+  if (report.firstPreseason) {
+    const game = report.firstPreseason;
+    const eastern = new Intl.DateTimeFormat("en-US", {
+      dateStyle: "full",
+      timeStyle: "short",
+      timeZone: "America/New_York",
+    }).format(new Date(startTime(game)));
+
+    lines.push(
+      matchup(game),
+      "",
+      `${eastern} (Eastern)`,
+      "",
+      `UTC: ${text(game.startUTC)}`,
+    );
+  } else {
+    lines.push("No preseason game with a usable start time in this snapshot.");
+  }
+
+  lines.push("", "## Cup championship entries", "");
+
+  if (report.championships.length === 0) {
+    lines.push("None observed.");
+  }
+
+  for (const game of report.championships) {
+    lines.push(
+      `- ${text(game.id)} · ${text(game.label)} / ${text(game.subLabel)} · ${matchup(game)}`,
+    );
+  }
+
+  for (const [heading, findings] of [
+    ["Errors", report.errors],
+    ["Warnings", report.warnings],
+  ] as const) {
+    if (findings.length > 0) {
+      lines.push(
+        "",
+        `## ${heading}`,
+        "",
+        ...findings.map((finding) => `- ${text(finding)}`),
+      );
+    }
+  }
+
+  lines.push(
+    "",
+    "Scheduled-only data does not verify live score updates or finality. Recheck before, during and after a preseason game.",
+    "",
+  );
+
+  return lines.join("\n");
+};
+
+const showPrettyReport = (report: ReturnType<typeof inspectNbaFeed>) => {
+  const rendered = spawnSync("gum", ["format", "--type", "markdown"], {
+    input: formatFeedReport(report),
+    stdio: ["pipe", "inherit", "inherit"],
+  });
+
+  if (rendered.error) {
+    throw new Error(
+      "Unable to run Gum. Use mise install --locked, or omit --pretty.",
+    );
+  }
+
+  if (rendered.status !== 0) {
+    throw new Error(`Gum rendering failed (exit ${String(rendered.status)})`);
+  }
+};
+
 const main = async () => {
   const { values } = parseArgs({
     options: {
       help: { type: "boolean" },
       input: { type: "string" },
+      pretty: { type: "boolean" },
       save: { type: "string" },
       season: { type: "string" },
     },
@@ -311,7 +442,8 @@ const main = async () => {
   if (values.help) {
     console.log(
       [
-        "node scripts/check-nba-feed.ts [--season 2026-27] [--save NEW.json] [--input SAVED.json]",
+        "node scripts/check-nba-feed.ts [--season 2026-27] [--save NEW.json] [--input SAVED.json] [--pretty]",
+        "JSON is the default; --pretty renders a human-readable view with Gum.",
         "One direct NBA fetch or offline snapshot analysis. No Astro, KV, polling or deployments.",
         "Errors exit 1; warnings require review but exit 0. --save never overwrites a file.",
       ].join("\n"),
@@ -348,7 +480,11 @@ const main = async () => {
 
   const report = inspectNbaFeed(data, values.season);
 
-  console.log(JSON.stringify(report, undefined, 2));
+  if (values.pretty) {
+    showPrettyReport(report);
+  } else {
+    console.log(JSON.stringify(report, undefined, 2));
+  }
 
   if (report.errors.length > 0) {
     process.exitCode = 1;

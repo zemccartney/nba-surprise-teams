@@ -19,7 +19,16 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: live-data readability and reporting review
+## Latest: Gum view and typed content mocks
+
+Committed the preceding live-data work as `6fdba39` with 110 tests/hooks passing.
+The new follow-up adds optional Gum rendering (`--pretty`), keeps JSON unchanged,
+and extends typed import mocks to the content suites. 113 tests pass. See
+[gum-and-test-mocks.md](prelaunch-review/gum-and-test-mocks.md). Gum 2.0.0 is pinned
+through mise, respecting the seven-day cooldown. Incremental commits are now
+authorized; no push or deployment.
+
+## Previous: live-data readability and reporting review
 
 See [live-readability.md](prelaunch-review/live-readability.md). Consolidated live
 code into index.ts/utils.ts, moved season guarantees to the loader, separated

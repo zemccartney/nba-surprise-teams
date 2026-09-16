@@ -3,7 +3,9 @@
 ## Toolchain
 
 [mise](https://mise.jdx.dev/) manages **Node 26.8.1, pnpm 12.3.4, hk
-1.56.1 and zizmor 1.30.0**, pinned in `mise.toml` with platform checksums in `mise.lock`.
+1.56.1, zizmor 1.30.0 and Gum 2.0.0**, pinned in `mise.toml` with platform checksums in `mise.lock`.
+Gum renders the optional human-readable preseason feed report (`--pretty`);
+ordinary JSON output does not require invoking it.
 Install mise and trust this checkout after reviewing its config, then:
 
 ```sh

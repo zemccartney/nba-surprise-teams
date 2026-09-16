@@ -122,6 +122,14 @@ filtering. Request headers can affect access; the current working request sends
    mise x -- node scripts/check-nba-feed.ts --season 2026-27 --save /tmp/nba-preseason-before.json
    ```
 
+   For a styled, human-readable report, add `--pretty` (Gum is pinned through
+   mise). The same analysis runs; JSON remains the default for agents/tools:
+
+   ```sh
+   mise x -- node scripts/check-nba-feed.ts --season 2026-27 --pretty
+   mise x -- node scripts/check-nba-feed.ts --season 2026-27 --input /tmp/nba-preseason-before.json --pretty
+   ```
+
    Use different snapshot filenames for before/during/after observations;
    `--save` deliberately refuses to overwrite. Re-analyze a saved response
    without making a request:
@@ -132,6 +140,9 @@ filtering. Request headers can affect access; the current working request sends
 
    Reports include HTTP status (live requests), feed season/timestamp, ID
    prefixes, labels, statuses, score samples and the first preseason game.
+   `unassignedMatchups` counts games with at least one blank/missing team tricode:
+   usually future bracket placeholders, not missing results. The captured 2026–27
+   schedule has seven (four Cup quarterfinals, two semifinals, one championship).
    Structural errors, duplicate IDs or a mismatched expected season exit 1;
    working-theory warnings exit 0 but require manual review. A clean report of
    scheduled games does not verify in-progress/final behavior. No assumptions

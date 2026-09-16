@@ -5,7 +5,7 @@ import Path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-import { inspectNbaFeed } from "../scripts/check-nba-feed";
+import { formatFeedReport, inspectNbaFeed } from "../scripts/check-nba-feed";
 
 const game = (gameId = "0012600009") => ({
   awayTeam: { score: 0, teamTricode: "MIA" },
@@ -23,6 +23,35 @@ const payload = (games: unknown[] = [game()]) => ({
 });
 
 describe("standalone feed observations", () => {
+  it("formats observations without changing the JSON report", () => {
+    const report = inspectNbaFeed(
+      payload([
+        {
+          ...game(),
+          awayTeam: { score: 0, teamTricode: "" },
+        },
+      ]),
+      "2026-27",
+    );
+    const original = JSON.stringify(report);
+
+    const formatted = formatFeedReport(report);
+
+    expect(formatted).toContain("Matchups awaiting team assignment: 1");
+    expect(formatted).toContain("Game ID prefixes");
+    expect(formatted).toContain("Status 1");
+    expect(formatted).toContain("Eastern");
+    expect(formatted).toContain("does not mean a result is missing");
+    expect(JSON.stringify(report)).toBe(original);
+  });
+
+  it("includes diagnostic failures in the human report", () => {
+    const report = inspectNbaFeed(payload(), "2025-26");
+
+    expect(formatFeedReport(report)).toContain("review required");
+    expect(formatFeedReport(report)).toContain("Expected season 2025-26");
+  });
+
   it("accepts noncontiguous IDs", () => {
     const report = inspectNbaFeed(
       payload([game(), game("0012600067")]),
