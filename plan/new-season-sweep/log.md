@@ -13,6 +13,20 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Server profiling and deferred-render probe
+
+Per Zack's approval, profiled a separate archived-source copy and rendered the
+existing team UI through a local fixture-backed server island. Stats makes 2,172
+season/352 team entry lookups; the team UI makes 257 season lookups. A reversible
+Astro asset-import promise-cache experiment reduced dev Stats first byte from
+~1.5s to ~0.4s and team from ~0.66s to ~0.034s; restoring the dependency restored
+latency, with chart payload hashes unchanged. Cache experiment is not a safe HMR
+fix and is fully restored. Built island: ~9ms repeat request duration, ~47ms first
+request, same 82-game chart data and working keyboard mount on cold/reload visits.
+No NBA/KV access; real live/hosted performance not established. Main source,
+dependencies and baseline servers untouched. See
+`prelaunch-review/render-profile-and-island.md`; pause before Chart.js/fixes.
+
 ## Chart-library investigation: unchanged ECharts baseline
 
 Zack requested review stops after baseline, an archived-data server-island probe,

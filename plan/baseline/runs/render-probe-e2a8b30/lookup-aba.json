@@ -1,0 +1,1479 @@
+{
+  "note": "Each group run 0 is a warm-up; medians use runs 1\u20133. Instrumented copy, serial curl, same chart payload hashes. Cached-import case is a temporary dependency experiment, fully restored.",
+  "samples": [
+    {
+      "label": "original-A",
+      "path": "/stats/",
+      "run": 0,
+      "firstByteMs": 1678.127,
+      "totalMs": 1678.334,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1561,
+          "bytes": 143212,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 69,
+              "maxMs": 68
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 4,
+              "maxMs": 4
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 991,
+              "maxMs": 23
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 144,
+              "maxMs": 2
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 75
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 299
+            },
+            {
+              "name": "stats:per season",
+              "ms": 180
+            },
+            {
+              "name": "stats:by team",
+              "ms": 172
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 821
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "original-A",
+      "path": "/stats/",
+      "run": 1,
+      "firstByteMs": 1475.584,
+      "totalMs": 1475.743,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1435,
+          "bytes": 143212,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 3,
+              "maxMs": 3
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 961,
+              "maxMs": 5
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 157,
+              "maxMs": 2
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 5
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 318
+            },
+            {
+              "name": "stats:per season",
+              "ms": 165
+            },
+            {
+              "name": "stats:by team",
+              "ms": 182
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 758
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "original-A",
+      "path": "/stats/",
+      "run": 2,
+      "firstByteMs": 1450.009,
+      "totalMs": 1450.222,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1410,
+          "bytes": 143212,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 3,
+              "maxMs": 2
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 968,
+              "maxMs": 8
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 173,
+              "maxMs": 7
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 4
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 293
+            },
+            {
+              "name": "stats:per season",
+              "ms": 167
+            },
+            {
+              "name": "stats:by team",
+              "ms": 172
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 767
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "original-A",
+      "path": "/stats/",
+      "run": 3,
+      "firstByteMs": 1474.4930000000002,
+      "totalMs": 1474.686,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1431,
+          "bytes": 143212,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 992,
+              "maxMs": 38
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 161,
+              "maxMs": 10
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 2
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 283
+            },
+            {
+              "name": "stats:per season",
+              "ms": 192
+            },
+            {
+              "name": "stats:by team",
+              "ms": 166
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 782
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "original-A",
+      "path": "/2025/CHA/",
+      "run": 0,
+      "firstByteMs": 620.501,
+      "totalMs": 620.641,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 117,
+          "bytes": 41869,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 105,
+              "maxMs": 2
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 214,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 226,
+              "maxMs": 3
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 4
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 101
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "original-A",
+      "path": "/2025/CHA/",
+      "run": 1,
+      "firstByteMs": 617.53,
+      "totalMs": 617.6850000000001,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 121,
+          "bytes": 41869,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 114,
+              "maxMs": 6
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 220,
+              "maxMs": 4
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 222,
+              "maxMs": 8
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 5
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 109
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "original-A",
+      "path": "/2025/CHA/",
+      "run": 2,
+      "firstByteMs": 681.264,
+      "totalMs": 681.38,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 190,
+          "bytes": 41869,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 157,
+              "maxMs": 3
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 223,
+              "maxMs": 2
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 211,
+              "maxMs": 10
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 20
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 139
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "original-A",
+      "path": "/2025/CHA/",
+      "run": 3,
+      "firstByteMs": 671.8349999999999,
+      "totalMs": 671.962,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 112,
+          "bytes": 41869,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 105,
+              "maxMs": 5
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 271,
+              "maxMs": 42
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 222,
+              "maxMs": 2
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 10
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 96
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/stats/",
+      "run": 0,
+      "firstByteMs": 1262.508,
+      "totalMs": 1262.726,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 602,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 54,
+              "maxMs": 53
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": []
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/stats/",
+      "run": 1,
+      "firstByteMs": 453.34200000000004,
+      "totalMs": 453.538,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 303,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 11,
+              "maxMs": 10
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 4,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 11
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 41
+            },
+            {
+              "name": "stats:per season",
+              "ms": 29
+            },
+            {
+              "name": "stats:by team",
+              "ms": 47
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 164
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/stats/",
+      "run": 2,
+      "firstByteMs": 327.975,
+      "totalMs": 328.155,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 287,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 1
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 44
+            },
+            {
+              "name": "stats:per season",
+              "ms": 27
+            },
+            {
+              "name": "stats:by team",
+              "ms": 47
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 160
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/stats/",
+      "run": 3,
+      "firstByteMs": 395.384,
+      "totalMs": 395.57599999999996,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 341,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 1
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 38
+            },
+            {
+              "name": "stats:per season",
+              "ms": 35
+            },
+            {
+              "name": "stats:by team",
+              "ms": 101
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 159
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/2025/CHA/",
+      "run": 0,
+      "firstByteMs": 238.187,
+      "totalMs": 238.338,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 142,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 0
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/2025/CHA/",
+      "run": 1,
+      "firstByteMs": 64.428,
+      "totalMs": 64.566,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 7,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:teams": {
+              "calls": 269,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 269,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 0
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/2025/CHA/",
+      "run": 2,
+      "firstByteMs": 34.281,
+      "totalMs": 34.425999999999995,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 7,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 0
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "cached-import-B",
+      "path": "/2025/CHA/",
+      "run": 3,
+      "firstByteMs": 33.022999999999996,
+      "totalMs": 33.156,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 8,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 0
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/stats/",
+      "run": 0,
+      "firstByteMs": 2378.8619999999996,
+      "totalMs": 2379.0789999999997,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1713,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 52,
+              "maxMs": 51
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 975,
+              "maxMs": 7
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 165,
+              "maxMs": 2
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": []
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/stats/",
+      "run": 1,
+      "firstByteMs": 1601.451,
+      "totalMs": 1601.63,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1447,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 16,
+              "maxMs": 15
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 972,
+              "maxMs": 6
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 164,
+              "maxMs": 4
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 17
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 298
+            },
+            {
+              "name": "stats:per season",
+              "ms": 173
+            },
+            {
+              "name": "stats:by team",
+              "ms": 180
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 766
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/stats/",
+      "run": 2,
+      "firstByteMs": 1414.234,
+      "totalMs": 1414.431,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1367,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 958,
+              "maxMs": 8
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 136,
+              "maxMs": 3
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 3
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 289
+            },
+            {
+              "name": "stats:per season",
+              "ms": 164
+            },
+            {
+              "name": "stats:by team",
+              "ms": 170
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 735
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/stats/",
+      "run": 3,
+      "firstByteMs": 1546.2530000000002,
+      "totalMs": 1546.452,
+      "chartPayloadSha256": "3fb50890edebc9217ef184745a6b38a417a265678e83466d062dce12c343a92a",
+      "profiles": [
+        {
+          "path": "/stats/",
+          "totalMs": 1499,
+          "bytes": 143183,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getCollection:seasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getCollection:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 2172,
+              "ms": 999,
+              "maxMs": 35
+            },
+            "getEntry:teams": {
+              "calls": 352,
+              "ms": 190,
+              "maxMs": 20
+            },
+            "getCollection:teams": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            }
+          },
+          "outsideBeforeRequest": {},
+          "phases": [
+            {
+              "name": "stats:initial collections",
+              "ms": 2
+            },
+            {
+              "name": "stats:top ten",
+              "ms": 280
+            },
+            {
+              "name": "stats:per season",
+              "ms": 175
+            },
+            {
+              "name": "stats:by team",
+              "ms": 174
+            },
+            {
+              "name": "stats:scatter",
+              "ms": 856
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/2025/CHA/",
+      "run": 0,
+      "firstByteMs": 801.194,
+      "totalMs": 801.342,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 260,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 117,
+              "maxMs": 4
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 225,
+              "maxMs": 3
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 216,
+              "maxMs": 2
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 5
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 112
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/2025/CHA/",
+      "run": 1,
+      "firstByteMs": 639.572,
+      "totalMs": 639.71,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 119,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 111,
+              "maxMs": 2
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 232,
+              "maxMs": 4
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 217,
+              "maxMs": 1
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 5
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 107
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/2025/CHA/",
+      "run": 2,
+      "firstByteMs": 660.515,
+      "totalMs": 660.658,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 114,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 107,
+              "maxMs": 2
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 241,
+              "maxMs": 8
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 240,
+              "maxMs": 12
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 4
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 103
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "restored-A2",
+      "path": "/2025/CHA/",
+      "run": 3,
+      "firstByteMs": 659.1550000000001,
+      "totalMs": 659.297,
+      "chartPayloadSha256": "342005341724ee09bd2de48ab184f40dcead3c694fb7b06127eaad1632620202",
+      "profiles": [
+        {
+          "path": "/2025/CHA/",
+          "totalMs": 118,
+          "bytes": 41840,
+          "counters": {
+            "getCollection:games": {
+              "calls": 2,
+              "ms": 1,
+              "maxMs": 1
+            },
+            "getEntry:teamSeasons": {
+              "calls": 1,
+              "ms": 0,
+              "maxMs": 0
+            },
+            "getEntry:seasons": {
+              "calls": 257,
+              "ms": 112,
+              "maxMs": 5
+            }
+          },
+          "outsideBeforeRequest": {
+            "getCollection:teamSeasons": {
+              "calls": 2,
+              "ms": 2,
+              "maxMs": 1
+            },
+            "getEntry:teams": {
+              "calls": 538,
+              "ms": 257,
+              "maxMs": 25
+            },
+            "getEntry:seasons": {
+              "calls": 538,
+              "ms": 219,
+              "maxMs": 2
+            }
+          },
+          "phases": [
+            {
+              "name": "team-ui:summary helpers",
+              "ms": 5
+            },
+            {
+              "name": "team-ui:chart points",
+              "ms": 107
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -99,6 +99,20 @@ export const summarize = (report) => {
         pathname: sample.pathname,
         resourceCount: sample.resources.length,
         run: sample.run,
+        serverIslands: sample.resources
+          .filter((resource) =>
+            new URL(resource.name).pathname.startsWith("/_server-islands/"),
+          )
+          .map((resource) => ({
+            durationMs: rounded(resource.duration),
+            path: new URL(resource.name).pathname,
+            responseEndMs: rounded(resource.responseEnd),
+            responseStartMs: rounded(resource.responseStart),
+            serverTiming: resource.serverTiming,
+            startMs: rounded(resource.startTime),
+            status: resource.responseStatus,
+            transferBytes: resource.transferSize,
+          })),
       };
     }),
   };

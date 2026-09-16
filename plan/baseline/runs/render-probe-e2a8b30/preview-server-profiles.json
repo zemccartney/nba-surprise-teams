@@ -1,0 +1,338 @@
+[
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 36,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 27,
+        "maxMs": 27
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 2,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 2
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 6,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 0,
+        "maxMs": 0
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 3,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 3
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 3,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 1,
+        "maxMs": 1
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 2,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 2
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 9,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 0,
+        "maxMs": 0
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 6,
+        "maxMs": 3
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 6
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 3,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 0,
+        "maxMs": 0
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 2,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 2
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 5,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 1,
+        "maxMs": 1
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 4,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 4
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 3,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 1,
+        "maxMs": 1
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 2,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 2
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 4,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 0,
+        "maxMs": 0
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 2,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 3
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 3,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 0,
+        "maxMs": 0
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 2,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 2
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 8,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 1,
+        "maxMs": 1
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 1,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 3
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 3,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 0,
+        "maxMs": 0
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 1,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 2
+      }
+    ]
+  },
+  {
+    "path": "/_server-islands/ProbeTeamStats/",
+    "totalMs": 4,
+    "bytes": 10292,
+    "counters": {
+      "getEntry:teamSeasons": {
+        "calls": 1,
+        "ms": 0,
+        "maxMs": 0
+      },
+      "getEntry:seasons": {
+        "calls": 257,
+        "ms": 2,
+        "maxMs": 1
+      }
+    },
+    "outsideBeforeRequest": {},
+    "phases": [
+      {
+        "name": "team-ui:summary helpers",
+        "ms": 0
+      },
+      {
+        "name": "team-ui:chart points",
+        "ms": 2
+      }
+    ]
+  }
+]

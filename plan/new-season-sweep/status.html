@@ -1061,12 +1061,13 @@ mise run setup</code></pre>
                     <a href="prelaunch-review/gum-and-test-mocks.md"
                       >Gum/test cleanup notes</a
                     >. Chart.js investigation is paused at the
-                    <a href="prelaunch-review/chart-performance-baseline.md"
-                      >unchanged ECharts baseline review</a
-                    >: dev Stats waits ~1.5s for HTML; built preview chart
-                    readiness is ~115ms cold. No chart migration or island probe
-                    yet. Finality observations and hosted gates remain open;
-                    merge/cutover stay gated. See the
+                    <a href="prelaunch-review/render-profile-and-island.md"
+                      >server-profile/island review</a
+                    >: repeated Astro lookups amplify dev module-runner
+                    overhead; the built fixture island takes ~9ms per repeated
+                    uncached local request (~47ms first). No application fix or
+                    chart migration yet. Finality observations and hosted gates
+                    remain open; merge/cutover stay gated. See the
                     <a href="prelaunch-review/README.md">reconciled report</a>
                     for priorities, evidence and rejected claims.
                   </p>

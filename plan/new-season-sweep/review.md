@@ -19,7 +19,19 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: ECharts performance baseline — manual review stop
+## Latest: dev root cause and built server-island probe — review stop
+
+Profiled a separate diagnostic copy and completed a reversible A/B/A experiment:
+Astro content APIs' repeated asset-map imports through the Vite dev runner account
+for much of the delay. Caching that import experimentally reduced warm Stats
+HTML first byte from ~1.5s to ~0.4s; restoration brought the delay back. No
+production patch. The built archived-data island exercises the unchanged UI with
+82 games and takes ~9ms per repeated uncached local request; first request ~47ms.
+See [render-profile-and-island.md](prelaunch-review/render-profile-and-island.md)
+for limits, actual call counts, running URLs and reproduction. Live NBA/KV/hosted
+performance remains unverified. Pause for review before Chart.js or helper fixes.
+
+## Previous: ECharts performance baseline — manual review stop
 
 Before a possible Chart.js migration, measured unchanged `e2a8b30` in isolated
 local dev and built preview. Stats' dev delay is predominantly its ~1.5-second

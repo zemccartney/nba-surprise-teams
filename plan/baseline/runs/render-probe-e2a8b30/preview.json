@@ -1,0 +1,735 @@
+{
+  "base": "http://127.0.0.1:4324",
+  "browser": "152.0.7977.83",
+  "capturedAt": "2026-09-16T21:09:29.045Z",
+  "machine": {
+    "cpu": "Apple M4 Pro",
+    "platform": "darwin"
+  },
+  "revision": "e2a8b30-diagnostic",
+  "settings": {
+    "cache": "fresh browser context, then reload in that same context",
+    "cpuThrottling": "none",
+    "networkThrottling": "none",
+    "observation": "initial viewport, followed by scrolling every chart into view",
+    "reducedMotion": "no-preference",
+    "viewport": {
+      "height": 900,
+      "width": 1440
+    }
+  },
+  "groups": [
+    {
+      "cache": "cold-browser",
+      "pathname": "/render-probe/",
+      "runs": 5,
+      "firstByteMs": {
+        "max": 132.9,
+        "median": 2.5,
+        "min": 2.5
+      },
+      "firstChartFrameMs": {
+        "max": 289.5,
+        "median": 117.5,
+        "min": 103.5
+      },
+      "lastInitialChartMutationMs": {
+        "max": 1297.9,
+        "median": 1117.3,
+        "min": 1104.1
+      },
+      "longestInitialFontLoadMs": {
+        "max": 31,
+        "median": 29.7,
+        "min": 28.7
+      },
+      "responseToChartMs": {
+        "max": 156.6,
+        "median": 114.1,
+        "min": 101
+      }
+    },
+    {
+      "cache": "warm-reload",
+      "pathname": "/render-probe/",
+      "runs": 5,
+      "firstByteMs": {
+        "max": 5.7,
+        "median": 4.8,
+        "min": 4.7
+      },
+      "firstChartFrameMs": {
+        "max": 68.7,
+        "median": 64.4,
+        "min": 61.9
+      },
+      "lastInitialChartMutationMs": {
+        "max": 1052.6,
+        "median": 1047.2,
+        "min": 1044.9
+      },
+      "longestInitialFontLoadMs": {
+        "max": 0.1,
+        "median": 0,
+        "min": 0
+      },
+      "responseToChartMs": {
+        "max": 64,
+        "median": 58.7,
+        "min": 57.2
+      }
+    }
+  ],
+  "samples": [
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 186.59999990463257,
+          "kind": "team-season-pace",
+          "visibleAt": 197.19999992847443,
+          "lastMutationAt": 1297.8999999761581,
+          "graphicAt": 285.6999999284744,
+          "framePending": true,
+          "interactiveFrameAt": 289.5
+        }
+      ],
+      "domContentLoadedMs": 161,
+      "errors": [],
+      "firstByteMs": 132.9,
+      "firstChartFrameMs": 289.5,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 186.59999990463257,
+            "kind": "team-season-pace",
+            "visibleAt": 197.19999992847443,
+            "lastMutationAt": 1297.8999999761581,
+            "graphicAt": 285.6999999284744,
+            "framePending": true,
+            "interactiveFrameAt": 289.5
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 228.89999997615814,
+            "end": 259.89999997615814
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 230,
+            "end": 232.5
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 1,
+      "serverIslands": [
+        {
+          "durationMs": 46.5,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 184.4,
+          "responseStartMs": 184.3,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 36,
+              "description": ""
+            }
+          ],
+          "startMs": 137.9,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 23.899999976158142,
+          "kind": "team-season-pace",
+          "lastMutationAt": 1044.8999999761581,
+          "graphicAt": 38.799999952316284,
+          "framePending": true,
+          "visibleAt": 31.799999952316284,
+          "interactiveFrameAt": 61.89999997615814
+        }
+      ],
+      "domContentLoadedMs": 12.8,
+      "errors": [],
+      "firstByteMs": 4.7,
+      "firstChartFrameMs": 61.9,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 23.899999976158142,
+            "kind": "team-season-pace",
+            "lastMutationAt": 1044.8999999761581,
+            "graphicAt": 38.799999952316284,
+            "framePending": true,
+            "visibleAt": 31.799999952316284,
+            "interactiveFrameAt": 61.89999997615814
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 32.199999928474426,
+            "end": 32.199999928474426
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 32.199999928474426,
+            "end": 32.199999928474426
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 1,
+      "serverIslands": [
+        {
+          "durationMs": 8.6,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 18.7,
+          "responseStartMs": 18.6,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 6,
+              "description": ""
+            }
+          ],
+          "startMs": 10.1,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 17.600000023841858,
+          "kind": "team-season-pace",
+          "visibleAt": 33.89999997615814,
+          "lastMutationAt": 1117.2999999523163,
+          "graphicAt": 110.89999997615814,
+          "framePending": true,
+          "interactiveFrameAt": 117.5
+        }
+      ],
+      "domContentLoadedMs": 16.4,
+      "errors": [],
+      "firstByteMs": 3.4,
+      "firstChartFrameMs": 117.5,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 17.600000023841858,
+            "kind": "team-season-pace",
+            "visibleAt": 33.89999997615814,
+            "lastMutationAt": 1117.2999999523163,
+            "graphicAt": 110.89999997615814,
+            "framePending": true,
+            "interactiveFrameAt": 117.5
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 55,
+            "end": 84.89999997615814
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 55.799999952316284,
+            "end": 57
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 2,
+      "serverIslands": [
+        {
+          "durationMs": 9.3,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 15,
+          "responseStartMs": 14.9,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 3,
+              "description": ""
+            }
+          ],
+          "startMs": 5.7,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 23.200000047683716,
+          "kind": "team-season-pace",
+          "lastMutationAt": 1047.2000000476837,
+          "visibleAt": 32.60000002384186,
+          "graphicAt": 40.200000047683716,
+          "framePending": true,
+          "interactiveFrameAt": 63.10000002384186
+        }
+      ],
+      "domContentLoadedMs": 12.2,
+      "errors": [],
+      "firstByteMs": 5.2,
+      "firstChartFrameMs": 63.1,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 23.200000047683716,
+            "kind": "team-season-pace",
+            "lastMutationAt": 1047.2000000476837,
+            "visibleAt": 32.60000002384186,
+            "graphicAt": 40.200000047683716,
+            "framePending": true,
+            "interactiveFrameAt": 63.10000002384186
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 33,
+            "end": 33.10000002384186
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 33,
+            "end": 33.10000002384186
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 2,
+      "serverIslands": [
+        {
+          "durationMs": 12.9,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 22.4,
+          "responseStartMs": 22.2,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 9,
+              "description": ""
+            }
+          ],
+          "startMs": 9.5,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 16.799999952316284,
+          "kind": "team-season-pace",
+          "visibleAt": 31.699999928474426,
+          "lastMutationAt": 1114.1999999284744,
+          "graphicAt": 104.29999995231628,
+          "framePending": true,
+          "interactiveFrameAt": 106.19999992847443
+        }
+      ],
+      "domContentLoadedMs": 16.2,
+      "errors": [],
+      "firstByteMs": 2.5,
+      "firstChartFrameMs": 106.2,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 16.799999952316284,
+            "kind": "team-season-pace",
+            "visibleAt": 31.699999928474426,
+            "lastMutationAt": 1114.1999999284744,
+            "graphicAt": 104.29999995231628,
+            "framePending": true,
+            "interactiveFrameAt": 106.19999992847443
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 52.799999952316284,
+            "end": 81.89999997615814
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 53.5,
+            "end": 56.39999997615814
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 3,
+      "serverIslands": [
+        {
+          "durationMs": 9,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 13.5,
+          "responseStartMs": 13.4,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 3,
+              "description": ""
+            }
+          ],
+          "startMs": 4.5,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 22,
+          "kind": "team-season-pace",
+          "lastMutationAt": 1052.6000000238419,
+          "visibleAt": 36.299999952316284,
+          "graphicAt": 43.700000047683716,
+          "framePending": true,
+          "interactiveFrameAt": 68.70000004768372
+        }
+      ],
+      "domContentLoadedMs": 11.3,
+      "errors": [],
+      "firstByteMs": 4.7,
+      "firstChartFrameMs": 68.7,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 22,
+            "kind": "team-season-pace",
+            "lastMutationAt": 1052.6000000238419,
+            "visibleAt": 36.299999952316284,
+            "graphicAt": 43.700000047683716,
+            "framePending": true,
+            "interactiveFrameAt": 68.70000004768372
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 36.799999952316284,
+            "end": 36.799999952316284
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 36.799999952316284,
+            "end": 36.799999952316284
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 3,
+      "serverIslands": [
+        {
+          "durationMs": 9.4,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 18.1,
+          "responseStartMs": 17.9,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 5,
+              "description": ""
+            }
+          ],
+          "startMs": 8.7,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 15.299999952316284,
+          "kind": "team-season-pace",
+          "visibleAt": 24.199999928474426,
+          "lastMutationAt": 1104.1000000238419,
+          "graphicAt": 100,
+          "framePending": true,
+          "interactiveFrameAt": 103.5
+        }
+      ],
+      "domContentLoadedMs": 14.8,
+      "errors": [],
+      "firstByteMs": 2.5,
+      "firstChartFrameMs": 103.5,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 15.299999952316284,
+            "kind": "team-season-pace",
+            "visibleAt": 24.199999928474426,
+            "lastMutationAt": 1104.1000000238419,
+            "graphicAt": 100,
+            "framePending": true,
+            "interactiveFrameAt": 103.5
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 48.89999997615814,
+            "end": 77.60000002384186
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 49.60000002384186,
+            "end": 55
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 4,
+      "serverIslands": [
+        {
+          "durationMs": 8.3,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 12.8,
+          "responseStartMs": 12.8,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 3,
+              "description": ""
+            }
+          ],
+          "startMs": 4.5,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 22.399999976158142,
+          "kind": "team-season-pace",
+          "lastMutationAt": 1046.3999999761581,
+          "graphicAt": 37.60000002384186,
+          "framePending": true,
+          "visibleAt": 31,
+          "interactiveFrameAt": 64.39999997615814
+        }
+      ],
+      "domContentLoadedMs": 12.2,
+      "errors": [],
+      "firstByteMs": 5.7,
+      "firstChartFrameMs": 64.4,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 22.399999976158142,
+            "kind": "team-season-pace",
+            "lastMutationAt": 1046.3999999761581,
+            "graphicAt": 37.60000002384186,
+            "framePending": true,
+            "visibleAt": 31,
+            "interactiveFrameAt": 64.39999997615814
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 31.399999976158142,
+            "end": 31.5
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 31.5,
+            "end": 31.5
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 4,
+      "serverIslands": [
+        {
+          "durationMs": 8.2,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 17.9,
+          "responseStartMs": 17.8,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 4,
+              "description": ""
+            }
+          ],
+          "startMs": 9.7,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 16,
+          "kind": "team-season-pace",
+          "visibleAt": 23.899999976158142,
+          "lastMutationAt": 1117.5,
+          "graphicAt": 108.89999997615814,
+          "framePending": true,
+          "interactiveFrameAt": 119
+        }
+      ],
+      "domContentLoadedMs": 15.3,
+      "errors": [],
+      "firstByteMs": 2.5,
+      "firstChartFrameMs": 119,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 16,
+            "kind": "team-season-pace",
+            "visibleAt": 23.899999976158142,
+            "lastMutationAt": 1117.5,
+            "graphicAt": 108.89999997615814,
+            "framePending": true,
+            "interactiveFrameAt": 119
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 57.10000002384186,
+            "end": 86.80000007152557
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 57.800000071525574,
+            "end": 59.10000002384186
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 5,
+      "serverIslands": [
+        {
+          "durationMs": 8.4,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 13,
+          "responseStartMs": 12.9,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 3,
+              "description": ""
+            }
+          ],
+          "startMs": 4.6,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 21.700000047683716,
+          "kind": "team-season-pace",
+          "lastMutationAt": 1049.2999999523163,
+          "visibleAt": 34.60000002384186,
+          "graphicAt": 41.700000047683716,
+          "framePending": true,
+          "interactiveFrameAt": 67.5
+        }
+      ],
+      "domContentLoadedMs": 11.7,
+      "errors": [],
+      "firstByteMs": 4.8,
+      "firstChartFrameMs": 67.5,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 21.700000047683716,
+            "kind": "team-season-pace",
+            "lastMutationAt": 1049.2999999523163,
+            "visibleAt": 34.60000002384186,
+            "graphicAt": 41.700000047683716,
+            "framePending": true,
+            "interactiveFrameAt": 67.5
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 35.200000047683716,
+            "end": 35.200000047683716
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 35.200000047683716,
+            "end": 35.200000047683716
+          }
+        ],
+        "longTasks": []
+      },
+      "pathname": "/render-probe/",
+      "resourceCount": 14,
+      "run": 5,
+      "serverIslands": [
+        {
+          "durationMs": 11.5,
+          "path": "/_server-islands/ProbeTeamStats/",
+          "responseEndMs": 20.6,
+          "responseStartMs": 20.3,
+          "serverTiming": [
+            {
+              "name": "probe",
+              "duration": 8,
+              "description": ""
+            }
+          ],
+          "startMs": 9.1,
+          "status": 200,
+          "transferBytes": 10592
+        }
+      ]
+    }
+  ]
+}

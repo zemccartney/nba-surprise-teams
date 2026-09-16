@@ -62,6 +62,25 @@ Capture cold-server first visits separately from warm-server/cold-browser visits
 keep Sentry, content, hardware and browser settings comparable between libraries.
 These scripts are manual research tools, not CI tests or accessibility checks.
 
+## Server profiling / deferred-render research
+
+`prepare-render-probe.mjs EXTERNAL_COPY` installs diagnostic instrumentation and
+an archived-fixture server island into a **separate git archive of e2a8b30**.
+It refuses the working source tree and repeat preparation. `check-render-probe.mjs`
+compares the built island's chart payload with the frozen archived page and checks
+mounting, keyboard End selection and fresh `no-store` requests on navigation/reload.
+Defaults are baseline port 4322 and probe port 4324; optional positional arguments
+override those two base URLs.
+
+`probe-import-cache.mjs EXTERNAL_COPY enable|restore` is a reversible dependency
+counterfactual, **not a production/HMR fix**. It requires local dependency files,
+not external symlinks. Never deploy these diagnostic routes or the experiment.
+
+See [server profiling and island review](../new-season-sweep/prelaunch-review/render-profile-and-island.md)
+for the source-level cause, A/B/A results, request/render distinctions and exact
+reproduction instructions. The performance summarizer includes island resource
+timings separately from document/chart readiness. These remain manual tools.
+
 ## Capture
 
 ```sh
