@@ -1,0 +1,2065 @@
+{
+  "base": "http://127.0.0.1:4326",
+  "browser": "152.0.7977.83",
+  "capturedAt": "2026-09-16T21:56:46.341Z",
+  "machine": {
+    "cpu": "Apple M4 Pro",
+    "platform": "darwin"
+  },
+  "revision": "f5382f3",
+  "settings": {
+    "cache": "fresh browser context, then reload in that same context",
+    "cpuThrottling": "none",
+    "networkThrottling": "none",
+    "observation": "initial viewport, followed by scrolling every chart into view",
+    "reducedMotion": "no-preference",
+    "renderer": "react",
+    "readyMarker": "Hydrated Recharts SVG plus two animation frames; not keyboard readiness",
+    "viewport": {
+      "height": 900,
+      "width": 1440
+    }
+  },
+  "assets": [
+    {
+      "brotli": 430948,
+      "file": "server/chunks/_astro_data-layer-content_Ba8DfOuN.mjs",
+      "gzip": 697307,
+      "raw": 3505246
+    },
+    {
+      "brotli": 150791,
+      "file": "server/chunks/generateCategoricalChart_B7hARccd.mjs",
+      "gzip": 202929,
+      "raw": 958276
+    },
+    {
+      "brotli": 47782,
+      "file": "server/renderers.mjs",
+      "gzip": 95378,
+      "raw": 531942
+    },
+    {
+      "brotli": 85897,
+      "file": "client/_astro/generateCategoricalChart.7OQeD0it.js",
+      "gzip": 105194,
+      "raw": 380557
+    },
+    {
+      "brotli": 54084,
+      "file": "server/_astro-internal_middleware.mjs",
+      "gzip": 66163,
+      "raw": 260435
+    },
+    {
+      "brotli": 43605,
+      "file": "server/chunks/astro/server_SyO1lkuv.mjs",
+      "gzip": 52214,
+      "raw": 257188
+    },
+    {
+      "brotli": 49734,
+      "file": "client/_astro/client.CCIqU-Wc.js",
+      "gzip": 57593,
+      "raw": 182701
+    },
+    {
+      "brotli": 33428,
+      "file": "server/chunks/table_DaoL7Unq.mjs",
+      "gzip": 39690,
+      "raw": 168141
+    },
+    {
+      "brotli": 31438,
+      "file": "server/chunks/exports_aUaPjbuL.mjs",
+      "gzip": 37519,
+      "raw": 131733
+    },
+    {
+      "brotli": 22163,
+      "file": "server/chunks/index_DMuB2spr.mjs",
+      "gzip": 26123,
+      "raw": 108959
+    },
+    {
+      "brotli": 19608,
+      "file": "client/_astro/team-season-pace.CZAl9IQo.js",
+      "gzip": 22093,
+      "raw": 78180
+    },
+    {
+      "brotli": 13732,
+      "file": "server/chunks/_astro_assets_Bv5YcYzF.mjs",
+      "gzip": 15723,
+      "raw": 60627
+    },
+    {
+      "brotli": 19094,
+      "file": "client/_astro/popover.Bd-66SGz.js",
+      "gzip": 21444,
+      "raw": 59663
+    },
+    {
+      "brotli": 13647,
+      "file": "server/chunks/astro-designed-error-pages_BGWNuDCQ.mjs",
+      "gzip": 16138,
+      "raw": 42561
+    },
+    {
+      "brotli": 8763,
+      "file": "server/chunks/ssr_BT5AMZeA.mjs",
+      "gzip": 9842,
+      "raw": 42281
+    },
+    {
+      "brotli": 10156,
+      "file": "server/chunks/content-utils_DiQu88pC.mjs",
+      "gzip": 11462,
+      "raw": 40979
+    },
+    {
+      "brotli": 8093,
+      "file": "server/chunks/_@astrojs-ssr-adapter_CDp9d6dy.mjs",
+      "gzip": 9306,
+      "raw": 35572
+    },
+    {
+      "brotli": 5700,
+      "file": "server/manifest_1EFsgBOv.mjs",
+      "gzip": 6431,
+      "raw": 33496
+    },
+    {
+      "brotli": 5637,
+      "file": "server/chunks/index_BZJJrgaA.mjs",
+      "gzip": 6455,
+      "raw": 27348
+    },
+    {
+      "brotli": 9444,
+      "file": "client/_astro/_teamId_.CAPrQYXY.css",
+      "gzip": 10467,
+      "raw": 17320
+    },
+    {
+      "brotli": 4326,
+      "file": "client/_astro/team-season-scatter.BeXVlL6R.js",
+      "gzip": 4795,
+      "raw": 14599
+    },
+    {
+      "brotli": 3935,
+      "file": "client/_astro/index.CGE1uNFL.js",
+      "gzip": 4447,
+      "raw": 12347
+    },
+    {
+      "brotli": 2714,
+      "file": "server/chunks/hiking-boot_Dy9JJ8Vv.mjs",
+      "gzip": 3331,
+      "raw": 9049
+    },
+    {
+      "brotli": 3152,
+      "file": "server/chunks/raptor_3-OJOFmJ.mjs",
+      "gzip": 3596,
+      "raw": 8474
+    },
+    {
+      "brotli": 2084,
+      "file": "server/chunks/parse_yL_293SP.mjs",
+      "gzip": 2346,
+      "raw": 7782
+    },
+    {
+      "brotli": 1892,
+      "file": "server/chunks/fleur-de-hornet_Bj5Dz41W.mjs",
+      "gzip": 2160,
+      "raw": 7699
+    },
+    {
+      "brotli": 2594,
+      "file": "server/chunks/king-cake-baby_BJRhC-f9.mjs",
+      "gzip": 3020,
+      "raw": 7674
+    },
+    {
+      "brotli": 1761,
+      "file": "server/chunks/ssr_BdB_Rzyt.mjs",
+      "gzip": 1996,
+      "raw": 7401
+    },
+    {
+      "brotli": 2042,
+      "file": "server/_astro-internal_actions.mjs",
+      "gzip": 2393,
+      "raw": 6831
+    },
+    {
+      "brotli": 1813,
+      "file": "server/chunks/result-emoji_Dy0eHqoC.mjs",
+      "gzip": 2026,
+      "raw": 6338
+    },
+    {
+      "brotli": 2234,
+      "file": "server/chunks/giraffe_D-oDS_Em.mjs",
+      "gzip": 2542,
+      "raw": 5889
+    },
+    {
+      "brotli": 1586,
+      "file": "server/chunks/bobcat_BnIkyUcG.mjs",
+      "gzip": 1841,
+      "raw": 5781
+    },
+    {
+      "brotli": 1685,
+      "file": "server/chunks/pacer_BoT2PgU3.mjs",
+      "gzip": 1907,
+      "raw": 4867
+    },
+    {
+      "brotli": 1158,
+      "file": "server/pages/_image.astro.mjs",
+      "gzip": 1357,
+      "raw": 4302
+    },
+    {
+      "brotli": 1598,
+      "file": "server/chunks/rebounding_CnK3GO2l.mjs",
+      "gzip": 1905,
+      "raw": 4254
+    },
+    {
+      "brotli": 763,
+      "file": "client/_astro/_teamId_.CwVRLsEz.css",
+      "gzip": 926,
+      "raw": 4118
+    },
+    {
+      "brotli": 1502,
+      "file": "server/chunks/whammer_Db2Np7gv.mjs",
+      "gzip": 1753,
+      "raw": 4069
+    },
+    {
+      "brotli": 1192,
+      "file": "server/chunks/crown_DF6DRVgD.mjs",
+      "gzip": 1357,
+      "raw": 3983
+    },
+    {
+      "brotli": 1608,
+      "file": "server/chunks/mav_DiA1XYbr.mjs",
+      "gzip": 1812,
+      "raw": 3912
+    },
+    {
+      "brotli": 1508,
+      "file": "server/chunks/dragon_BKs9loNW.mjs",
+      "gzip": 1651,
+      "raw": 3677
+    },
+    {
+      "brotli": 1242,
+      "file": "server/chunks/_astro_actions_CQbI_oZK.mjs",
+      "gzip": 1465,
+      "raw": 3591
+    },
+    {
+      "brotli": 1325,
+      "file": "server/chunks/party-popper_D4y1r8sT.mjs",
+      "gzip": 1573,
+      "raw": 3538
+    },
+    {
+      "brotli": 1461,
+      "file": "server/chunks/nets_Lb9zcEDg.mjs",
+      "gzip": 1656,
+      "raw": 3517
+    },
+    {
+      "brotli": 1010,
+      "file": "server/chunks/sharp_DR7BnsmV.mjs",
+      "gzip": 1158,
+      "raw": 3191
+    },
+    {
+      "brotli": 1087,
+      "file": "server/chunks/racing-car_DIqVk91l.mjs",
+      "gzip": 1221,
+      "raw": 3154
+    },
+    {
+      "brotli": 908,
+      "file": "server/chunks/cloudflare-kv-binding_DMly_2Gl.mjs",
+      "gzip": 1057,
+      "raw": 3013
+    },
+    {
+      "brotli": 1058,
+      "file": "server/chunks/warriors_BT5esSYl.mjs",
+      "gzip": 1198,
+      "raw": 2880
+    },
+    {
+      "brotli": 1190,
+      "file": "server/chunks/magic_BrF8O2Fu.mjs",
+      "gzip": 1341,
+      "raw": 2769
+    },
+    {
+      "brotli": 1129,
+      "file": "server/chunks/piston_BSxLzKip.mjs",
+      "gzip": 1283,
+      "raw": 2723
+    },
+    {
+      "brotli": 1164,
+      "file": "server/chunks/wizard_em1H8akf.mjs",
+      "gzip": 1278,
+      "raw": 2649
+    },
+    {
+      "brotli": 1140,
+      "file": "server/chunks/wolf_CmYDvPSF.mjs",
+      "gzip": 1288,
+      "raw": 2576
+    },
+    {
+      "brotli": 945,
+      "file": "client/_astro/surprises-by-team.jxogDpKy.js",
+      "gzip": 1073,
+      "raw": 2546
+    },
+    {
+      "brotli": 1001,
+      "file": "server/chunks/deer_7ukewQcp.mjs",
+      "gzip": 1181,
+      "raw": 2506
+    },
+    {
+      "brotli": 1099,
+      "file": "server/chunks/skull-and-crossbones_BXXO7Jt_.mjs",
+      "gzip": 1233,
+      "raw": 2432
+    },
+    {
+      "brotli": 784,
+      "file": "server/chunks/path_CbDegNe0.mjs",
+      "gzip": 910,
+      "raw": 2409
+    },
+    {
+      "brotli": 965,
+      "file": "client/_astro/surprises-per-season.C4y0Uyu-.js",
+      "gzip": 1065,
+      "raw": 2385
+    },
+    {
+      "brotli": 871,
+      "file": "server/chunks/bat_rUJh2F4d.mjs",
+      "gzip": 1048,
+      "raw": 2170
+    },
+    {
+      "brotli": 794,
+      "file": "server/chunks/bear_BOYhvIcD.mjs",
+      "gzip": 906,
+      "raw": 2120
+    },
+    {
+      "brotli": 766,
+      "file": "server/chunks/nuggets_B3Ukhidm.mjs",
+      "gzip": 901,
+      "raw": 2077
+    },
+    {
+      "brotli": 1008,
+      "file": "server/chunks/hornet_BuzxdY1N.mjs",
+      "gzip": 1124,
+      "raw": 2050
+    },
+    {
+      "brotli": 730,
+      "file": "server/chunks/grizzly_m3N0QCyp.mjs",
+      "gzip": 836,
+      "raw": 2049
+    },
+    {
+      "brotli": 991,
+      "file": "server/chunks/feather_DCB2_3-G.mjs",
+      "gzip": 1124,
+      "raw": 2034
+    },
+    {
+      "brotli": 617,
+      "file": "server/index.js",
+      "gzip": 719,
+      "raw": 2015
+    },
+    {
+      "brotli": 782,
+      "file": "server/chunks/tophat_DKJ0cZWw.mjs",
+      "gzip": 893,
+      "raw": 1711
+    },
+    {
+      "brotli": 778,
+      "file": "server/chunks/bison_CIOpcOOp.mjs",
+      "gzip": 893,
+      "raw": 1495
+    },
+    {
+      "brotli": 675,
+      "file": "server/chunks/sad-but-relieved-face_CcEr5M2G.mjs",
+      "gzip": 767,
+      "raw": 1367
+    },
+    {
+      "brotli": 356,
+      "file": "client/_astro/stats.D291G9bU.css",
+      "gzip": 452,
+      "raw": 1340
+    },
+    {
+      "brotli": 579,
+      "file": "server/chunks/space-needle_CCKvFemK.mjs",
+      "gzip": 666,
+      "raw": 1315
+    },
+    {
+      "brotli": 578,
+      "file": "server/chunks/logo_CBBz9tug.mjs",
+      "gzip": 668,
+      "raw": 1250
+    },
+    {
+      "brotli": 544,
+      "file": "server/chunks/saxophone_BkD4gUjP.mjs",
+      "gzip": 627,
+      "raw": 1142
+    },
+    {
+      "brotli": 615,
+      "file": "server/chunks/heat_whOVSjzm.mjs",
+      "gzip": 685,
+      "raw": 1088
+    },
+    {
+      "brotli": 557,
+      "file": "server/chunks/hushed-face_CNvmQcD9.mjs",
+      "gzip": 626,
+      "raw": 1075
+    },
+    {
+      "brotli": 417,
+      "file": "server/chunks/sun_DuxJsc3d.mjs",
+      "gzip": 485,
+      "raw": 1026
+    },
+    {
+      "brotli": 413,
+      "file": "server/chunks/runtime_BC0uiYgT.mjs",
+      "gzip": 496,
+      "raw": 990
+    },
+    {
+      "brotli": 537,
+      "file": "server/chunks/rocket_Dscduat8.mjs",
+      "gzip": 589,
+      "raw": 971
+    },
+    {
+      "brotli": 390,
+      "file": "server/pages/_actions/_---path_.astro.mjs",
+      "gzip": 473,
+      "raw": 932
+    },
+    {
+      "brotli": 455,
+      "file": "server/chunks/link_BltX4l_N.mjs",
+      "gzip": 521,
+      "raw": 920
+    },
+    {
+      "brotli": 515,
+      "file": "server/chunks/shamrock_DqsNVYBY.mjs",
+      "gzip": 590,
+      "raw": 906
+    },
+    {
+      "brotli": 521,
+      "file": "server/chunks/bull_B1h7guEq.mjs",
+      "gzip": 598,
+      "raw": 897
+    },
+    {
+      "brotli": 426,
+      "file": "server/chunks/bell_BKoDNvk-.mjs",
+      "gzip": 495,
+      "raw": 848
+    },
+    {
+      "brotli": 421,
+      "file": "server/chunks/clipper_DkNljNKy.mjs",
+      "gzip": 484,
+      "raw": 810
+    },
+    {
+      "brotli": 256,
+      "file": "client/_astro/stats.C2qYdX-v.css",
+      "gzip": 336,
+      "raw": 771
+    },
+    {
+      "brotli": 383,
+      "file": "server/chunks/question_BAsjZSLN.mjs",
+      "gzip": 452,
+      "raw": 670
+    },
+    {
+      "brotli": 213,
+      "file": "server/chunks/consts_47CwkweC.mjs",
+      "gzip": 249,
+      "raw": 548
+    },
+    {
+      "brotli": 188,
+      "file": "server/chunks/noop-middleware_BwA1HzSC.mjs",
+      "gzip": 226,
+      "raw": 333
+    },
+    {
+      "brotli": 185,
+      "file": "client/_astro/BarChart.BWg6L9V3.js",
+      "gzip": 231,
+      "raw": 318
+    },
+    {
+      "brotli": 184,
+      "file": "server/chunks/TeamStats_gYiGZnYR.mjs",
+      "gzip": 204,
+      "raw": 285
+    },
+    {
+      "brotli": 157,
+      "file": "server/chunks/StandingsTable_CL7yrYwz.mjs",
+      "gzip": 186,
+      "raw": 246
+    },
+    {
+      "brotli": 105,
+      "file": "server/_@astrojs-ssr-adapter.mjs",
+      "gzip": 132,
+      "raw": 140
+    },
+    {
+      "brotli": 83,
+      "file": "server/chunks/content-modules_Bvq7llv8.mjs",
+      "gzip": 113,
+      "raw": 131
+    },
+    {
+      "brotli": 118,
+      "file": "client/_astro/popover.BC6CjmgF.js",
+      "gzip": 118,
+      "raw": 129
+    },
+    {
+      "brotli": 118,
+      "file": "client/_astro/popover.Dc29ZFWT.js",
+      "gzip": 118,
+      "raw": 129
+    },
+    {
+      "brotli": 83,
+      "file": "server/chunks/content-assets_XqCgPAV2.mjs",
+      "gzip": 114,
+      "raw": 129
+    },
+    {
+      "brotli": 77,
+      "file": "client/_astro/utils.Blt5UFT-.js",
+      "gzip": 93,
+      "raw": 73
+    },
+    {
+      "brotli": 57,
+      "file": "server/pages/404.astro.mjs",
+      "gzip": 78,
+      "raw": 63
+    },
+    {
+      "brotli": 57,
+      "file": "server/pages/_seasonid_.astro.mjs",
+      "gzip": 78,
+      "raw": 63
+    },
+    {
+      "brotli": 57,
+      "file": "server/pages/about.astro.mjs",
+      "gzip": 78,
+      "raw": 63
+    },
+    {
+      "brotli": 57,
+      "file": "server/pages/archive.astro.mjs",
+      "gzip": 78,
+      "raw": 63
+    },
+    {
+      "brotli": 57,
+      "file": "server/pages/index.astro.mjs",
+      "gzip": 78,
+      "raw": 63
+    },
+    {
+      "brotli": 57,
+      "file": "server/pages/stats.astro.mjs",
+      "gzip": 78,
+      "raw": 63
+    },
+    {
+      "brotli": 57,
+      "file": "server/pages/_seasonid_/_teamid_.astro.mjs",
+      "gzip": 78,
+      "raw": 63
+    }
+  ],
+  "groups": [
+    {
+      "cache": "cold-browser",
+      "pathname": "/stats/",
+      "runs": 5,
+      "firstByteMs": {
+        "max": 11,
+        "median": 3.7,
+        "min": 3
+      },
+      "firstChartFrameMs": {
+        "max": 138.9,
+        "median": 118.8,
+        "min": 102
+      },
+      "lastInitialChartMutationMs": {
+        "max": 641.1,
+        "median": 620.4,
+        "min": 603.8
+      },
+      "longestInitialFontLoadMs": {
+        "max": 0,
+        "median": 0,
+        "min": 0
+      },
+      "responseToChartMs": {
+        "max": 127.9,
+        "median": 115.1,
+        "min": 98.7
+      }
+    },
+    {
+      "cache": "warm-reload",
+      "pathname": "/stats/",
+      "runs": 5,
+      "firstByteMs": {
+        "max": 5,
+        "median": 3.7,
+        "min": 3.5
+      },
+      "firstChartFrameMs": {
+        "max": 68.2,
+        "median": 66.7,
+        "min": 62.3
+      },
+      "lastInitialChartMutationMs": {
+        "max": 569.7,
+        "median": 567.4,
+        "min": 546.9
+      },
+      "longestInitialFontLoadMs": {
+        "max": 0,
+        "median": 0,
+        "min": 0
+      },
+      "responseToChartMs": {
+        "max": 64.5,
+        "median": 62.6,
+        "min": 58.1
+      }
+    },
+    {
+      "cache": "cold-browser",
+      "pathname": "/2025/CHA/",
+      "runs": 5,
+      "firstByteMs": {
+        "max": 4.2,
+        "median": 3.5,
+        "min": 3
+      },
+      "firstChartFrameMs": {
+        "max": 135.9,
+        "median": 119.8,
+        "min": 116.6
+      },
+      "lastInitialChartMutationMs": {
+        "max": 1703.1,
+        "median": 1686.4,
+        "min": 1685.5
+      },
+      "longestInitialFontLoadMs": {
+        "max": 0,
+        "median": 0,
+        "min": 0
+      },
+      "responseToChartMs": {
+        "max": 131.7,
+        "median": 116.3,
+        "min": 113.6
+      }
+    },
+    {
+      "cache": "warm-reload",
+      "pathname": "/2025/CHA/",
+      "runs": 5,
+      "firstByteMs": {
+        "max": 5.3,
+        "median": 5.1,
+        "min": 4.2
+      },
+      "firstChartFrameMs": {
+        "max": 66.6,
+        "median": 65.1,
+        "min": 52.4
+      },
+      "lastInitialChartMutationMs": {
+        "max": 1633.5,
+        "median": 1617.1,
+        "min": 1601.8
+      },
+      "longestInitialFontLoadMs": {
+        "max": 0,
+        "median": 0,
+        "min": 0
+      },
+      "responseToChartMs": {
+        "max": 61.4,
+        "median": 60.9,
+        "min": 47.6
+      }
+    }
+  ],
+  "samples": [
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 43.39999997615814,
+          "kind": "surprises-per-season",
+          "visibleAt": 54.699999928474426,
+          "graphicAt": 130.09999990463257,
+          "framePending": true,
+          "lastMutationAt": 641.0999999046326,
+          "interactiveFrameAt": 138.89999997615814
+        },
+        {
+          "hostSeenAt": 46.39999997615814,
+          "kind": "surprises-by-team",
+          "visibleAt": 2072.6999999284744,
+          "graphicAt": 2090.2999999523163,
+          "framePending": true,
+          "lastMutationAt": 2608.5,
+          "interactiveFrameAt": 2117.7999999523163
+        },
+        {
+          "hostSeenAt": 46.5,
+          "kind": "team-season-scatter",
+          "visibleAt": 2072.6999999284744,
+          "graphicAt": 2117.399999976158,
+          "framePending": true,
+          "lastMutationAt": 2599.5,
+          "interactiveFrameAt": 2122.6999999284744
+        }
+      ],
+      "domContentLoadedMs": 55.1,
+      "errors": [],
+      "firstByteMs": 11,
+      "firstChartFrameMs": 138.9,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 43.39999997615814,
+            "kind": "surprises-per-season",
+            "visibleAt": 54.699999928474426,
+            "graphicAt": 130.09999990463257,
+            "framePending": true,
+            "lastMutationAt": 641.0999999046326,
+            "interactiveFrameAt": 138.89999997615814
+          },
+          {
+            "hostSeenAt": 46.39999997615814,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 46.5,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 1,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 16,
+          "kind": "surprises-per-season",
+          "visibleAt": 19.799999952316284,
+          "graphicAt": 44.09999990463257,
+          "framePending": true,
+          "lastMutationAt": 546.8999999761581,
+          "interactiveFrameAt": 62.299999952316284
+        },
+        {
+          "hostSeenAt": 17.299999952316284,
+          "kind": "surprises-by-team",
+          "visibleAt": 1977.2999999523163,
+          "graphicAt": 1986.5999999046326,
+          "framePending": true,
+          "lastMutationAt": 2513.5999999046326,
+          "interactiveFrameAt": 2012
+        },
+        {
+          "hostSeenAt": 17.299999952316284,
+          "kind": "team-season-scatter",
+          "visibleAt": 1977.2999999523163,
+          "graphicAt": 2006.8999999761581,
+          "framePending": true,
+          "lastMutationAt": 2473.6999999284744,
+          "interactiveFrameAt": 2012
+        }
+      ],
+      "domContentLoadedMs": 20.3,
+      "errors": [],
+      "firstByteMs": 4.2,
+      "firstChartFrameMs": 62.3,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 16,
+            "kind": "surprises-per-season",
+            "visibleAt": 19.799999952316284,
+            "graphicAt": 44.09999990463257,
+            "framePending": true,
+            "lastMutationAt": 546.8999999761581,
+            "interactiveFrameAt": 62.299999952316284
+          },
+          {
+            "hostSeenAt": 17.299999952316284,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 17.299999952316284,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 1,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 24.199999928474426,
+          "kind": "surprises-per-season",
+          "visibleAt": 38.39999997615814,
+          "graphicAt": 104.10000002384186,
+          "framePending": true,
+          "lastMutationAt": 620.3999999761581,
+          "interactiveFrameAt": 117.29999995231628
+        },
+        {
+          "hostSeenAt": 25.600000023841858,
+          "kind": "surprises-by-team",
+          "visibleAt": 2017,
+          "graphicAt": 2038.8999999761581,
+          "framePending": true,
+          "lastMutationAt": 2554.2999999523163,
+          "interactiveFrameAt": 2062.399999976158
+        },
+        {
+          "hostSeenAt": 25.699999928474426,
+          "kind": "team-season-scatter",
+          "visibleAt": 2017,
+          "graphicAt": 2061.899999976158,
+          "framePending": true,
+          "lastMutationAt": 2545.1999999284744,
+          "interactiveFrameAt": 2068.399999976158
+        }
+      ],
+      "domContentLoadedMs": 26.1,
+      "errors": [],
+      "firstByteMs": 4.1,
+      "firstChartFrameMs": 117.3,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 24.199999928474426,
+            "kind": "surprises-per-season",
+            "visibleAt": 38.39999997615814,
+            "graphicAt": 104.10000002384186,
+            "framePending": true,
+            "lastMutationAt": 620.3999999761581,
+            "interactiveFrameAt": 117.29999995231628
+          },
+          {
+            "hostSeenAt": 25.600000023841858,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 25.699999928474426,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 2,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 18.199999928474426,
+          "kind": "surprises-per-season",
+          "visibleAt": 21,
+          "graphicAt": 43.39999997615814,
+          "framePending": true,
+          "lastMutationAt": 553.1000000238419,
+          "interactiveFrameAt": 68
+        },
+        {
+          "hostSeenAt": 19.5,
+          "kind": "surprises-by-team",
+          "visibleAt": 1968.1999999284744,
+          "graphicAt": 1979.1999999284744,
+          "framePending": true,
+          "lastMutationAt": 2503.1999999284744,
+          "interactiveFrameAt": 2002.1000000238419
+        },
+        {
+          "hostSeenAt": 19.5,
+          "kind": "team-season-scatter",
+          "visibleAt": 1968.1999999284744,
+          "graphicAt": 2001.3999999761581,
+          "framePending": true,
+          "lastMutationAt": 2463.1999999284744,
+          "interactiveFrameAt": 2002.1000000238419
+        }
+      ],
+      "domContentLoadedMs": 21.3,
+      "errors": [],
+      "firstByteMs": 3.5,
+      "firstChartFrameMs": 68,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 18.199999928474426,
+            "kind": "surprises-per-season",
+            "visibleAt": 21,
+            "graphicAt": 43.39999997615814,
+            "framePending": true,
+            "lastMutationAt": 553.1000000238419,
+            "interactiveFrameAt": 68
+          },
+          {
+            "hostSeenAt": 19.5,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 19.5,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 2,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 23.799999952316284,
+          "kind": "surprises-per-season",
+          "visibleAt": 39.299999952316284,
+          "graphicAt": 102.79999995231628,
+          "framePending": true,
+          "lastMutationAt": 621.5,
+          "interactiveFrameAt": 119.70000004768372
+        },
+        {
+          "hostSeenAt": 25.200000047683716,
+          "kind": "surprises-by-team",
+          "visibleAt": 2017.7000000476837,
+          "graphicAt": 2034.7000000476837,
+          "framePending": true,
+          "lastMutationAt": 2554.2999999523163,
+          "interactiveFrameAt": 2060.7000000476837
+        },
+        {
+          "hostSeenAt": 25.299999952316284,
+          "kind": "team-season-scatter",
+          "visibleAt": 2017.7000000476837,
+          "graphicAt": 2060.2000000476837,
+          "framePending": true,
+          "lastMutationAt": 2529.7999999523163,
+          "interactiveFrameAt": 2069.7000000476837
+        }
+      ],
+      "domContentLoadedMs": 25.9,
+      "errors": [],
+      "firstByteMs": 3,
+      "firstChartFrameMs": 119.7,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 23.799999952316284,
+            "kind": "surprises-per-season",
+            "visibleAt": 39.299999952316284,
+            "graphicAt": 102.79999995231628,
+            "framePending": true,
+            "lastMutationAt": 621.5,
+            "interactiveFrameAt": 119.70000004768372
+          },
+          {
+            "hostSeenAt": 25.200000047683716,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 25.299999952316284,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 3,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 17.399999976158142,
+          "kind": "surprises-per-season",
+          "visibleAt": 35.199999928474426,
+          "graphicAt": 42.60000002384186,
+          "framePending": true,
+          "lastMutationAt": 567.3999999761581,
+          "interactiveFrameAt": 66.29999995231628
+        },
+        {
+          "hostSeenAt": 18.600000023841858,
+          "kind": "surprises-by-team",
+          "visibleAt": 1965.8999999761581,
+          "graphicAt": 1975.7999999523163,
+          "framePending": true,
+          "lastMutationAt": 2500.600000023842,
+          "interactiveFrameAt": 1998.1999999284744
+        },
+        {
+          "hostSeenAt": 18.699999928474426,
+          "kind": "team-season-scatter",
+          "visibleAt": 1965.8999999761581,
+          "graphicAt": 1997.6000000238419,
+          "framePending": true,
+          "lastMutationAt": 2460.899999976158,
+          "interactiveFrameAt": 1998.1999999284744
+        }
+      ],
+      "domContentLoadedMs": 19.1,
+      "errors": [],
+      "firstByteMs": 3.7,
+      "firstChartFrameMs": 66.3,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 17.399999976158142,
+            "kind": "surprises-per-season",
+            "visibleAt": 35.199999928474426,
+            "graphicAt": 42.60000002384186,
+            "framePending": true,
+            "lastMutationAt": 567.3999999761581,
+            "interactiveFrameAt": 66.29999995231628
+          },
+          {
+            "hostSeenAt": 18.600000023841858,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 18.699999928474426,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 3,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 24.700000047683716,
+          "kind": "surprises-per-season",
+          "visibleAt": 38.5,
+          "graphicAt": 107.70000004768372,
+          "framePending": true,
+          "lastMutationAt": 603.8000000715256,
+          "interactiveFrameAt": 118.80000007152557
+        },
+        {
+          "hostSeenAt": 26.100000023841858,
+          "kind": "surprises-by-team",
+          "visibleAt": 2017.8999999761581,
+          "graphicAt": 2039,
+          "framePending": true,
+          "lastMutationAt": 2553.399999976158,
+          "interactiveFrameAt": 2061.8000000715256
+        },
+        {
+          "hostSeenAt": 26.100000023841858,
+          "kind": "team-season-scatter",
+          "visibleAt": 2017.8999999761581,
+          "graphicAt": 2061.600000023842,
+          "framePending": true,
+          "lastMutationAt": 2530.3000000715256,
+          "interactiveFrameAt": 2068.2000000476837
+        }
+      ],
+      "domContentLoadedMs": 26.7,
+      "errors": [],
+      "firstByteMs": 3.7,
+      "firstChartFrameMs": 118.8,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 24.700000047683716,
+            "kind": "surprises-per-season",
+            "visibleAt": 38.5,
+            "graphicAt": 107.70000004768372,
+            "framePending": true,
+            "lastMutationAt": 603.8000000715256,
+            "interactiveFrameAt": 118.80000007152557
+          },
+          {
+            "hostSeenAt": 26.100000023841858,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 26.100000023841858,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 4,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 16.899999976158142,
+          "kind": "surprises-per-season",
+          "visibleAt": 19.699999928474426,
+          "graphicAt": 42.299999952316284,
+          "framePending": true,
+          "lastMutationAt": 569.6999999284744,
+          "interactiveFrameAt": 68.19999992847443
+        },
+        {
+          "hostSeenAt": 18.199999928474426,
+          "kind": "surprises-by-team",
+          "visibleAt": 1951.3999999761581,
+          "graphicAt": 1963.6999999284744,
+          "framePending": true,
+          "lastMutationAt": 2486.2999999523163,
+          "interactiveFrameAt": 1987.5999999046326
+        },
+        {
+          "hostSeenAt": 18.199999928474426,
+          "kind": "team-season-scatter",
+          "visibleAt": 1951.3999999761581,
+          "graphicAt": 1986.7999999523163,
+          "framePending": true,
+          "lastMutationAt": 2446.2999999523163,
+          "interactiveFrameAt": 1987.5999999046326
+        }
+      ],
+      "domContentLoadedMs": 20,
+      "errors": [],
+      "firstByteMs": 3.7,
+      "firstChartFrameMs": 68.2,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 16.899999976158142,
+            "kind": "surprises-per-season",
+            "visibleAt": 19.699999928474426,
+            "graphicAt": 42.299999952316284,
+            "framePending": true,
+            "lastMutationAt": 569.6999999284744,
+            "interactiveFrameAt": 68.19999992847443
+          },
+          {
+            "hostSeenAt": 18.199999928474426,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 18.199999928474426,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 4,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 22.90000009536743,
+          "kind": "surprises-per-season",
+          "visibleAt": 38.200000047683716,
+          "graphicAt": 93,
+          "framePending": true,
+          "lastMutationAt": 604.1000000238419,
+          "interactiveFrameAt": 102
+        },
+        {
+          "hostSeenAt": 24.200000047683716,
+          "kind": "surprises-by-team",
+          "visibleAt": 2002.3000000715256,
+          "graphicAt": 2020.9000000953674,
+          "framePending": true,
+          "lastMutationAt": 2535.5,
+          "interactiveFrameAt": 2048.100000023842
+        },
+        {
+          "hostSeenAt": 24.300000071525574,
+          "kind": "team-season-scatter",
+          "visibleAt": 2002.3000000715256,
+          "graphicAt": 2047.9000000953674,
+          "framePending": true,
+          "lastMutationAt": 2512.7000000476837,
+          "interactiveFrameAt": 2050.5
+        }
+      ],
+      "domContentLoadedMs": 24.9,
+      "errors": [],
+      "firstByteMs": 3.3,
+      "firstChartFrameMs": 102,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 22.90000009536743,
+            "kind": "surprises-per-season",
+            "visibleAt": 38.200000047683716,
+            "graphicAt": 93,
+            "framePending": true,
+            "lastMutationAt": 604.1000000238419,
+            "interactiveFrameAt": 102
+          },
+          {
+            "hostSeenAt": 24.200000047683716,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 24.300000071525574,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 5,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 18.399999976158142,
+          "kind": "surprises-per-season",
+          "visibleAt": 36.39999997615814,
+          "graphicAt": 43.60000002384186,
+          "framePending": true,
+          "lastMutationAt": 568.3000000715256,
+          "interactiveFrameAt": 66.70000004768372
+        },
+        {
+          "hostSeenAt": 19.700000047683716,
+          "kind": "surprises-by-team",
+          "visibleAt": 1966.5,
+          "graphicAt": 1978.6000000238419,
+          "framePending": true,
+          "lastMutationAt": 2499.399999976158,
+          "interactiveFrameAt": 2002.3000000715256
+        },
+        {
+          "hostSeenAt": 19.700000047683716,
+          "kind": "team-season-scatter",
+          "visibleAt": 1966.5,
+          "graphicAt": 2001.6000000238419,
+          "framePending": true,
+          "lastMutationAt": 2476.7000000476837,
+          "interactiveFrameAt": 2002.3000000715256
+        }
+      ],
+      "domContentLoadedMs": 20,
+      "errors": [],
+      "firstByteMs": 5,
+      "firstChartFrameMs": 66.7,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 18.399999976158142,
+            "kind": "surprises-per-season",
+            "visibleAt": 36.39999997615814,
+            "graphicAt": 43.60000002384186,
+            "framePending": true,
+            "lastMutationAt": 568.3000000715256,
+            "interactiveFrameAt": 66.70000004768372
+          },
+          {
+            "hostSeenAt": 19.700000047683716,
+            "kind": "surprises-by-team"
+          },
+          {
+            "hostSeenAt": 19.700000047683716,
+            "kind": "team-season-scatter"
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/team-season-scatter.BeXVlL6R.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/surprises-by-team.jxogDpKy.js",
+          "client/_astro/surprises-per-season.C4y0Uyu-.js",
+          "client/_astro/BarChart.BWg6L9V3.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 655318,
+        "gzip": 196053,
+        "brotli": 165276
+      },
+      "pathname": "/stats/",
+      "resourceCount": 25,
+      "run": 5,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 21.899999976158142,
+          "kind": "team-season-pace",
+          "visibleAt": 25,
+          "graphicAt": 115.89999997615814,
+          "framePending": true,
+          "lastMutationAt": 1703.1000000238419,
+          "interactiveFrameAt": 135.89999997615814
+        }
+      ],
+      "domContentLoadedMs": 25.4,
+      "errors": [],
+      "firstByteMs": 4.2,
+      "firstChartFrameMs": 135.9,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 21.899999976158142,
+            "kind": "team-season-pace",
+            "visibleAt": 25,
+            "graphicAt": 115.89999997615814,
+            "framePending": true,
+            "lastMutationAt": 1703.1000000238419,
+            "interactiveFrameAt": 135.89999997615814
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 1,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 16.899999976158142,
+          "kind": "team-season-pace",
+          "visibleAt": 18.299999952316284,
+          "graphicAt": 42.5,
+          "framePending": true,
+          "lastMutationAt": 1617.1000000238419,
+          "interactiveFrameAt": 66.5
+        }
+      ],
+      "domContentLoadedMs": 18.3,
+      "errors": [],
+      "firstByteMs": 5.1,
+      "firstChartFrameMs": 66.5,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 16.899999976158142,
+            "kind": "team-season-pace",
+            "visibleAt": 18.299999952316284,
+            "graphicAt": 42.5,
+            "framePending": true,
+            "lastMutationAt": 1617.1000000238419,
+            "interactiveFrameAt": 66.5
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 1,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 18.399999976158142,
+          "kind": "team-season-pace",
+          "visibleAt": 21.699999928474426,
+          "graphicAt": 115.39999997615814,
+          "framePending": true,
+          "lastMutationAt": 1686.3999999761581,
+          "interactiveFrameAt": 133.69999992847443
+        }
+      ],
+      "domContentLoadedMs": 22.2,
+      "errors": [],
+      "firstByteMs": 3.1,
+      "firstChartFrameMs": 133.7,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 18.399999976158142,
+            "kind": "team-season-pace",
+            "visibleAt": 21.699999928474426,
+            "graphicAt": 115.39999997615814,
+            "framePending": true,
+            "lastMutationAt": 1686.3999999761581,
+            "interactiveFrameAt": 133.69999992847443
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 2,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 15.399999976158142,
+          "kind": "team-season-pace",
+          "visibleAt": 33.89999997615814,
+          "graphicAt": 41.60000002384186,
+          "framePending": true,
+          "lastMutationAt": 1633.5,
+          "interactiveFrameAt": 66.60000002384186
+        }
+      ],
+      "domContentLoadedMs": 16.1,
+      "errors": [],
+      "firstByteMs": 5.2,
+      "firstChartFrameMs": 66.6,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 15.399999976158142,
+            "kind": "team-season-pace",
+            "visibleAt": 33.89999997615814,
+            "graphicAt": 41.60000002384186,
+            "framePending": true,
+            "lastMutationAt": 1633.5,
+            "interactiveFrameAt": 66.60000002384186
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 2,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 18.600000023841858,
+          "kind": "team-season-pace",
+          "visibleAt": 21.699999928474426,
+          "graphicAt": 111.60000002384186,
+          "framePending": true,
+          "lastMutationAt": 1685.5,
+          "interactiveFrameAt": 116.60000002384186
+        }
+      ],
+      "domContentLoadedMs": 21.8,
+      "errors": [],
+      "firstByteMs": 3,
+      "firstChartFrameMs": 116.6,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 18.600000023841858,
+            "kind": "team-season-pace",
+            "visibleAt": 21.699999928474426,
+            "graphicAt": 111.60000002384186,
+            "framePending": true,
+            "lastMutationAt": 1685.5,
+            "interactiveFrameAt": 116.60000002384186
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 3,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 15.5,
+          "kind": "team-season-pace",
+          "visibleAt": 18.100000023841858,
+          "graphicAt": 39.39999997615814,
+          "framePending": true,
+          "lastMutationAt": 1601.8000000715256,
+          "interactiveFrameAt": 52.39999997615814
+        }
+      ],
+      "domContentLoadedMs": 16.2,
+      "errors": [],
+      "firstByteMs": 4.8,
+      "firstChartFrameMs": 52.4,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 15.5,
+            "kind": "team-season-pace",
+            "visibleAt": 18.100000023841858,
+            "graphicAt": 39.39999997615814,
+            "framePending": true,
+            "lastMutationAt": 1601.8000000715256,
+            "interactiveFrameAt": 52.39999997615814
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 3,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 20.5,
+          "kind": "team-season-pace",
+          "visibleAt": 23.699999928474426,
+          "graphicAt": 100.89999997615814,
+          "framePending": true,
+          "lastMutationAt": 1687.3999999761581,
+          "interactiveFrameAt": 119.79999995231628
+        }
+      ],
+      "domContentLoadedMs": 24.1,
+      "errors": [],
+      "firstByteMs": 3.5,
+      "firstChartFrameMs": 119.8,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 20.5,
+            "kind": "team-season-pace",
+            "visibleAt": 23.699999928474426,
+            "graphicAt": 100.89999997615814,
+            "framePending": true,
+            "lastMutationAt": 1687.3999999761581,
+            "interactiveFrameAt": 119.79999995231628
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 4,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 14.799999952316284,
+          "kind": "team-season-pace",
+          "visibleAt": 34,
+          "graphicAt": 42.199999928474426,
+          "framePending": true,
+          "lastMutationAt": 1615.5,
+          "interactiveFrameAt": 65.10000002384186
+        }
+      ],
+      "domContentLoadedMs": 15.7,
+      "errors": [],
+      "firstByteMs": 4.2,
+      "firstChartFrameMs": 65.1,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 14.799999952316284,
+            "kind": "team-season-pace",
+            "visibleAt": 34,
+            "graphicAt": 42.199999928474426,
+            "framePending": true,
+            "lastMutationAt": 1615.5,
+            "interactiveFrameAt": 65.10000002384186
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 4,
+      "serverIslands": []
+    },
+    {
+      "cache": "cold-browser",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 20,
+          "kind": "team-season-pace",
+          "visibleAt": 23,
+          "graphicAt": 112.30000007152557,
+          "framePending": true,
+          "lastMutationAt": 1685.7000000476837,
+          "interactiveFrameAt": 118.5
+        }
+      ],
+      "domContentLoadedMs": 23.3,
+      "errors": [],
+      "firstByteMs": 3.6,
+      "firstChartFrameMs": 118.5,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 20,
+            "kind": "team-season-pace",
+            "visibleAt": 23,
+            "graphicAt": 112.30000007152557,
+            "framePending": true,
+            "lastMutationAt": 1685.7000000476837,
+            "interactiveFrameAt": 118.5
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 5,
+      "serverIslands": []
+    },
+    {
+      "cache": "warm-reload",
+      "chartsAfterScrolling": [
+        {
+          "hostSeenAt": 17.199999928474426,
+          "kind": "team-season-pace",
+          "visibleAt": 34.5,
+          "graphicAt": 42.299999952316284,
+          "framePending": true,
+          "lastMutationAt": 1630.7999999523163,
+          "interactiveFrameAt": 62.09999990463257
+        }
+      ],
+      "domContentLoadedMs": 18,
+      "errors": [],
+      "firstByteMs": 5.3,
+      "firstChartFrameMs": 62.1,
+      "initial": {
+        "charts": [
+          {
+            "hostSeenAt": 17.199999928474426,
+            "kind": "team-season-pace",
+            "visibleAt": 34.5,
+            "graphicAt": 42.299999952316284,
+            "framePending": true,
+            "lastMutationAt": 1630.7999999523163,
+            "interactiveFrameAt": 62.09999990463257
+          }
+        ],
+        "fontLoads": [],
+        "longTasks": []
+      },
+      "loadedBuiltJs": {
+        "files": [
+          "client/_astro/generateCategoricalChart.7OQeD0it.js",
+          "client/_astro/client.CCIqU-Wc.js",
+          "client/_astro/team-season-pace.CZAl9IQo.js",
+          "client/_astro/popover.Bd-66SGz.js",
+          "client/_astro/index.CGE1uNFL.js",
+          "client/_astro/popover.BC6CjmgF.js",
+          "client/_astro/utils.Blt5UFT-.js"
+        ],
+        "raw": 713650,
+        "gzip": 210982,
+        "brotli": 178463
+      },
+      "pathname": "/2025/CHA/",
+      "resourceCount": 19,
+      "run": 5,
+      "serverIslands": []
+    }
+  ]
+}

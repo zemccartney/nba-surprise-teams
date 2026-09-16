@@ -1,5 +1,12 @@
 # Pre-launch review: full Foundations stack
 
+## Latest performance review stop
+
+The [historical React / Astro 5 comparison](legacy-react-performance.md) confirms
+faster repeat dev navigation before this sweep, with similar local built chart
+startup. It includes running old/current URLs, timings, animation differences
+and attribution limits. Pause for manual review before fixes or migration.
+
 ## Latest cleanup disposition
 
 See [cleanup.md](cleanup.md): Zack chose deployment-time whole-repository CI,

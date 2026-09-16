@@ -12,9 +12,11 @@ const { values } = parseArgs({
   options: {
     base: { default: "http://127.0.0.1:4322", type: "string" },
     dist: { type: "string" },
+    "dist-layout": { default: "split", type: "string" },
     out: { type: "string" },
     paths: { default: "/stats/,/2025/CHA/", type: "string" },
     "reduced-motion": { default: "no-preference", type: "string" },
+    renderer: { default: "echarts", type: "string" },
     revision: { type: "string" },
     runs: { default: "5", type: "string" },
   },
@@ -23,6 +25,12 @@ assert.ok(values.out, "Supply a new --out directory for each capture");
 const runs = Number(values.runs);
 assert.ok(Number.isSafeInteger(runs) && runs > 0);
 assert.ok(["no-preference", "reduce"].includes(values["reduced-motion"]));
+assert.ok(["echarts", "react"].includes(values.renderer));
+assert.ok(["legacy", "split"].includes(values["dist-layout"]));
+const hostSelector =
+  values.renderer === "react"
+    ? ".recharts-responsive-container"
+    : "[data-chart]";
 await mkdir(values.out, { recursive: true });
 const reportPath = path.join(values.out, "measurements.json");
 // Never silently replace an earlier baseline.
@@ -42,7 +50,12 @@ const report = {
     networkThrottling: "none",
     observation:
       "initial viewport, followed by scrolling every chart into view",
+    readyMarker:
+      values.renderer === "react"
+        ? "Hydrated Recharts SVG plus two animation frames; not keyboard readiness"
+        : "ECharts slider role plus two animation frames",
     reducedMotion: values["reduced-motion"],
+    renderer: values.renderer,
     viewport: { height: 900, width: 1440 },
   },
 };
@@ -51,14 +64,26 @@ try {
   if (values.dist) {
     report.assets = [];
     for (const directory of ["client", "server"]) {
-      const root = path.join(values.dist, directory);
+      const isLegacy = values["dist-layout"] === "legacy";
+      const relativeRoot = isLegacy
+        ? directory === "client"
+          ? ""
+          : "_worker.js"
+        : directory;
+      const root = path.join(values.dist, relativeRoot);
       const entries = await readdir(root, { recursive: true });
-      const files = entries.filter((file) => /\.(?:js|mjs|css)$/.test(file));
+      const files = entries.filter((file) => {
+        const isServerFile =
+          isLegacy &&
+          directory === "client" &&
+          (file === "_worker.js" || file.startsWith("_worker.js" + path.sep));
+        return !isServerFile && /\.(?:js|mjs|css)$/.test(file);
+      });
       for (const file of files) {
         const bytes = await readFile(path.join(root, file));
         report.assets.push({
           brotli: brotliCompressSync(bytes).length,
-          file: `${directory}/${file}`,
+          file: `${directory}/${file.replaceAll(path.sep, "/")}`,
           gzip: gzipSync(bytes).length,
           raw: bytes.length,
         });
@@ -97,7 +122,11 @@ try {
         }
       });
 
-      await page.addInitScript(() => {
+      await page.addInitScript((renderer) => {
+        const selector =
+          renderer === "react"
+            ? ".recharts-responsive-container"
+            : "[data-chart]";
         performance.setResourceTimingBufferSize(10_000);
         const state = { charts: [], fontLoads: [], longTasks: [] };
         Object.defineProperty(globalThis, "__chartPerformance", {
@@ -113,12 +142,19 @@ try {
           }
         });
         const scan = () => {
-          for (const host of document.querySelectorAll("[data-chart]")) {
+          for (const host of document.querySelectorAll(selector)) {
             let chart = seen.get(host);
             if (!chart) {
               chart = {
                 hostSeenAt: performance.now(),
-                kind: host.dataset.chart,
+                kind:
+                  host.dataset.chart ??
+                  host
+                    .closest("astro-island")
+                    ?.getAttribute("component-url")
+                    ?.split("/")
+                    .at(-1)
+                    ?.split(".", 1)[0],
               };
               state.charts.push(chart);
               seen.set(host, chart);
@@ -130,7 +166,14 @@ try {
             ) {
               chart.graphicAt = performance.now();
             }
-            if (host.getAttribute("role") === "slider" && !chart.framePending) {
+            const island = host.closest("astro-island");
+            const isReady =
+              renderer === "react"
+                ? island &&
+                  !island.hasAttribute("ssr") &&
+                  host.querySelector("svg.recharts-surface")
+                : host.getAttribute("role") === "slider";
+            if (isReady && !chart.framePending) {
               chart.framePending = true;
               requestAnimationFrame(() =>
                 requestAnimationFrame(() => {
@@ -147,7 +190,7 @@ try {
               record.target.nodeType === 1
                 ? record.target
                 : record.target.parentElement;
-            const chart = seen.get(element?.closest("[data-chart]"));
+            const chart = seen.get(element?.closest(selector));
             if (chart) chart.lastMutationAt = performance.now();
           }
         }).observe(document, {
@@ -181,7 +224,7 @@ try {
             });
           }
         }).observe({ buffered: true, type: "longtask" });
-      });
+      }, values.renderer);
 
       for (const cache of ["cold-browser", "warm-reload"]) {
         errors.length = 0;
@@ -214,13 +257,24 @@ try {
             ),
           });
         }
-        const hosts = await page.locator("[data-chart]").all();
+        const hosts = await page.locator(hostSelector).all();
         for (const host of hosts) {
           await host.scrollIntoViewIfNeeded();
           await page.waitForFunction(
-            (element) =>
-              element.getAttribute("role") === "slider" &&
-              element.querySelector("svg,canvas"),
+            (element) => {
+              if (element.matches(".recharts-responsive-container")) {
+                const island = element.closest("astro-island");
+                return (
+                  island &&
+                  !island.hasAttribute("ssr") &&
+                  element.querySelector("svg.recharts-surface")
+                );
+              }
+              return (
+                element.getAttribute("role") === "slider" &&
+                element.querySelector("svg,canvas")
+              );
+            },
             await host.elementHandle(),
           );
         }
@@ -253,7 +307,7 @@ try {
           ),
         );
         console.log(
-          `${pathname} ${run} ${cache}: response ${sample.navigation.responseStart.toFixed(0)} ms; first interactive frame ${first.toFixed(0)} ms`,
+          `${pathname} ${run} ${cache}: response ${sample.navigation.responseStart.toFixed(0)} ms; first chart frame ${first.toFixed(0)} ms`,
         );
       }
       await context.close();

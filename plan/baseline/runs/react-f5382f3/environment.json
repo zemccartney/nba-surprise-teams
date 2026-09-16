@@ -1,0 +1,18 @@
+{
+  "sourceRevision": "f5382f317227bee436f1420cf9c5fbe861b1dbcc",
+  "historicalTrackedFilesUnchanged": true,
+  "serverNode": "22.20.0",
+  "npm": "10.9.3",
+  "captureNode": "26.8.1",
+  "astro": "5.14.1",
+  "vite": "6.4.1",
+  "react": "19.2.0",
+  "recharts": "2.15.3",
+  "cloudflareAdapter": "12.6.10",
+  "wrangler": "4.41.0",
+  "install": "npm ci using historical package-lock.json",
+  "dev": "astro dev on 127.0.0.1:4325",
+  "preview": "wrangler pages dev dist on 127.0.0.1:4326",
+  "sentryCredentials": "unset; no env files copied",
+  "datasetDifference": "Same collection counts. seasons/teams/teamSeasons byte-identical. games differs at 1996-11-10/CLE__DEN: old 108\u201379, current 101\u201386; winner unchanged."
+}

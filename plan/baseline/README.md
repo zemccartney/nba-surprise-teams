@@ -62,6 +62,13 @@ Capture cold-server first visits separately from warm-server/cold-browser visits
 keep Sentry, content, hardware and browser settings comparable between libraries.
 These scripts are manual research tools, not CI tests or accessibility checks.
 
+For the historical React stack, use `--renderer react`: readiness means a hydrated
+Recharts SVG plus two frames, not the ECharts keyboard marker. Its Pages build
+needs `--dist-layout legacy --dist /path/to/old/dist` to separate `_worker.js/`
+server code from browser assets. Defaults retain the current ECharts/split-build
+behavior. See [the historical comparison](../new-season-sweep/prelaunch-review/legacy-react-performance.md)
+for frozen versions, measured differences, animation caveats and running URLs.
+
 ## Server profiling / deferred-render research
 
 `prepare-render-probe.mjs EXTERNAL_COPY` installs diagnostic instrumentation and

@@ -13,6 +13,23 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Historical React baseline — manual review stop
+
+At Zack's request, started an untouched `f5382f3` archive with its locked Astro
+5.14.1 / React 19.2 / Recharts 2.15.3 stack, Node 22.20.0 and npm 10.9.3, separate
+from current dependencies and generated caches. Five cold-browser/warm-reload
+pairs per page confirm much faster old repeat dev HTML responses: Stats 226ms
+versus current 1,481ms, team 94ms versus 685ms. Interleaved curl confirms the gap
+without chart JS. Old first cold dev visits were still expensive. Built preview
+chart startup is similar across stacks; animation defaults differ (old bars
+400ms / area 1,500ms versus current ~1,000ms), and chart-readiness markers are
+explicitly distinct. Shared capture tooling now supports Recharts hydration and
+the old Pages build layout without classifying Worker code as browser assets.
+Old build/checks/10 tests pass, with a legacy Vite shutdown warning. Historical
+tracked files hash-match the original revision. Servers left on 4325/4326;
+[review guide](prelaunch-review/legacy-react-performance.md) includes measurements,
+limits and exact manual reproduction. No application fixes or migration; pause.
+
 ## Server profiling and deferred-render probe
 
 Per Zack's approval, profiled a separate archived-source copy and rendered the

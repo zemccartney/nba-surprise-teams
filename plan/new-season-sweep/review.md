@@ -19,7 +19,19 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: dev root cause and built server-island probe — review stop
+## Latest: historical React / Astro 5 comparison — review stop
+
+Your memory of faster repeat local navigation is supported. An untouched
+`f5382f3` copy gives warm dev HTML first byte of 226ms for Stats and 94ms for the
+team page, versus 1,481ms / 685ms in the current baseline. Curl independently
+confirms it. Both built previews start charts in roughly the same range; old
+first cold dev visits remain expensive and animation defaults differ. This is
+a whole-stack comparison, not attribution to one upgrade alone. See
+[legacy-react-performance.md](prelaunch-review/legacy-react-performance.md) for
+all results, caveats, old dev/preview URLs (4325/4326) and manual checks. Pause
+before any fixes, animation changes or Chart.js work.
+
+## Previous: dev root cause and built server-island probe — review stop
 
 Profiled a separate diagnostic copy and completed a reversible A/B/A experiment:
 Astro content APIs' repeated asset-map imports through the Vite dev runner account
