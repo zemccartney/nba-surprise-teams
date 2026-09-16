@@ -13,6 +13,20 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Chart-library investigation: unchanged ECharts baseline
+
+Zack requested review stops after baseline, an archived-data server-island probe,
+and a prospective Chart.js pace-chart spike. Completed only the baseline: frozen
+`e2a8b30`, local dev/preview, five cold-context/warm-reload pairs per chart page.
+Stats dev first-byte median ~1.5s, reproduced with curl; built preview ~3–5ms.
+First chart-ready frames ~115ms cold/~45ms warm in preview. Font loads ~30ms cold,
+no timeout; normal animation adds ~1s, confirmed by a separate reduced-motion
+probe. Added standalone capture/summarizer and compact frozen results. No app
+changes. An initial symlinked-dependency capture had font 403s and was rejected;
+valid captures use local dependency files. User .gitignore/scr.js untouched.
+See `prelaunch-review/chart-performance-baseline.md`; pause for manual review
+before implementing any deferred-render probe or library migration.
+
 ## Incremental checkpoints, Gum view and typed content mocks
 
 Per Zack's standing instruction to commit progress, checkpointed the live-data

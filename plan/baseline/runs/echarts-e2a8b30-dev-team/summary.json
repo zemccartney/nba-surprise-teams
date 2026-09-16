@@ -1,0 +1,555 @@
+{
+  "capturedAt": "2026-09-16T19:52:57.896Z",
+  "base": "http://127.0.0.1:4321",
+  "revision": "e2a8b30",
+  "browser": "152.0.7977.83",
+  "machine": {
+    "platform": "darwin",
+    "cpu": "Apple M4 Pro"
+  },
+  "settings": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "reducedMotion": "no-preference",
+    "cpuThrottling": "none",
+    "networkThrottling": "none",
+    "cache": "fresh browser context, then reload in that same context",
+    "observation": "initial viewport, followed by scrolling every chart into view"
+  },
+  "groups": [
+    {
+      "pathname": "/2025/CHA/",
+      "cache": "cold-browser",
+      "runs": 5,
+      "firstByteMs": {
+        "min": 687.3,
+        "median": 703.7,
+        "max": 835.4
+      },
+      "firstChartFrameMs": {
+        "min": 815.4,
+        "median": 834.1,
+        "max": 985.6
+      },
+      "responseToChartMs": {
+        "min": 123.1,
+        "median": 124.5,
+        "max": 150.2
+      },
+      "lastInitialChartMutationMs": {
+        "min": 1815.6,
+        "median": 1837.2,
+        "max": 1981.1
+      },
+      "longestInitialFontLoadMs": {
+        "min": 26.9,
+        "median": 27.5,
+        "max": 30.3
+      }
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "cache": "warm-reload",
+      "runs": 5,
+      "firstByteMs": {
+        "min": 654.8,
+        "median": 685.3,
+        "max": 736.4
+      },
+      "firstChartFrameMs": {
+        "min": 718.9,
+        "median": 755.8,
+        "max": 805.6
+      },
+      "responseToChartMs": {
+        "min": 64.1,
+        "median": 69.2,
+        "max": 71.3
+      },
+      "lastInitialChartMutationMs": {
+        "min": 1718.8,
+        "median": 1739.6,
+        "max": 1786.8
+      },
+      "longestInitialFontLoadMs": {
+        "min": 4.2,
+        "median": 5.5,
+        "max": 6.1
+      }
+    }
+  ],
+  "samples": [
+    {
+      "pathname": "/2025/CHA/",
+      "run": 1,
+      "cache": "cold-browser",
+      "firstByteMs": 835.4,
+      "domContentLoadedMs": 905.5,
+      "firstChartFrameMs": 985.6,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 841.1000000238419,
+            "lastMutationAt": 1981.1000000238419,
+            "visibleAt": 843.3999999761581,
+            "graphicAt": 974.1000000238419,
+            "framePending": true,
+            "interactiveFrameAt": 985.6000000238419
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 920.7999999523163,
+            "end": 950
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 921,
+            "end": 921
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 841.1000000238419,
+          "lastMutationAt": 1981.1000000238419,
+          "visibleAt": 843.3999999761581,
+          "graphicAt": 974.1000000238419,
+          "framePending": true,
+          "interactiveFrameAt": 985.6000000238419
+        }
+      ],
+      "resourceCount": 67,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 1,
+      "cache": "warm-reload",
+      "firstByteMs": 680.8,
+      "domContentLoadedMs": 697.1,
+      "firstChartFrameMs": 747.9,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 687,
+            "lastMutationAt": 1731.6999999284744,
+            "visibleAt": 689.7999999523163,
+            "graphicAt": 729.3999999761581,
+            "framePending": true,
+            "interactiveFrameAt": 747.8999999761581
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 717.7999999523163,
+            "end": 723.1999999284744
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 717.8999999761581,
+            "end": 717.8999999761581
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 687,
+          "lastMutationAt": 1731.6999999284744,
+          "visibleAt": 689.7999999523163,
+          "graphicAt": 729.3999999761581,
+          "framePending": true,
+          "interactiveFrameAt": 747.8999999761581
+        }
+      ],
+      "resourceCount": 62,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 2,
+      "cache": "cold-browser",
+      "firstByteMs": 692.3,
+      "domContentLoadedMs": 756.3,
+      "firstChartFrameMs": 815.4,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 697.6999999284744,
+            "lastMutationAt": 1815.5999999046326,
+            "visibleAt": 705.3999999761581,
+            "graphicAt": 812.7999999523163,
+            "framePending": true,
+            "interactiveFrameAt": 815.3999999761581
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 762.1999999284744,
+            "end": 789.0999999046326
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 762.3999999761581,
+            "end": 762.3999999761581
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 697.6999999284744,
+          "lastMutationAt": 1815.5999999046326,
+          "visibleAt": 705.3999999761581,
+          "graphicAt": 812.7999999523163,
+          "framePending": true,
+          "interactiveFrameAt": 815.3999999761581
+        }
+      ],
+      "resourceCount": 63,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 2,
+      "cache": "warm-reload",
+      "firstByteMs": 654.8,
+      "domContentLoadedMs": 672.5,
+      "firstChartFrameMs": 718.9,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 661.1000000238419,
+            "lastMutationAt": 1718.8000000715256,
+            "visibleAt": 664.1000000238419,
+            "graphicAt": 703,
+            "framePending": true,
+            "interactiveFrameAt": 718.8999999761581
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 691.8999999761581,
+            "end": 697.6000000238419
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 692,
+            "end": 692
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 661.1000000238419,
+          "lastMutationAt": 1718.8000000715256,
+          "visibleAt": 664.1000000238419,
+          "graphicAt": 703,
+          "framePending": true,
+          "interactiveFrameAt": 718.8999999761581
+        }
+      ],
+      "resourceCount": 62,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 3,
+      "cache": "cold-browser",
+      "firstByteMs": 687.3,
+      "domContentLoadedMs": 751.7,
+      "firstChartFrameMs": 834.1,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 692.7000000476837,
+            "lastMutationAt": 1835.8999999761581,
+            "visibleAt": 700,
+            "graphicAt": 828.5,
+            "framePending": true,
+            "interactiveFrameAt": 834.1000000238419
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 774.5,
+            "end": 804.7999999523163
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 774.6000000238419,
+            "end": 774.6000000238419
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 692.7000000476837,
+          "lastMutationAt": 1835.8999999761581,
+          "visibleAt": 700,
+          "graphicAt": 828.5,
+          "framePending": true,
+          "interactiveFrameAt": 834.1000000238419
+        }
+      ],
+      "resourceCount": 67,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 3,
+      "cache": "warm-reload",
+      "firstByteMs": 689.3,
+      "domContentLoadedMs": 707.2,
+      "firstChartFrameMs": 760.6,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 696,
+            "lastMutationAt": 1743.3000000715256,
+            "visibleAt": 698.8999999761581,
+            "graphicAt": 737.8999999761581,
+            "framePending": true,
+            "interactiveFrameAt": 760.6000000238419
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 727.7000000476837,
+            "end": 731.8999999761581
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 727.8000000715256,
+            "end": 727.8999999761581
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 696,
+          "lastMutationAt": 1743.3000000715256,
+          "visibleAt": 698.8999999761581,
+          "graphicAt": 737.8999999761581,
+          "framePending": true,
+          "interactiveFrameAt": 760.6000000238419
+        }
+      ],
+      "resourceCount": 62,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 4,
+      "cache": "cold-browser",
+      "firstByteMs": 744.4,
+      "domContentLoadedMs": 809,
+      "firstChartFrameMs": 868,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 750,
+            "lastMutationAt": 1865.5,
+            "visibleAt": 757.2000000476837,
+            "graphicAt": 865.6000000238419,
+            "framePending": true,
+            "interactiveFrameAt": 868
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 814.8000000715256,
+            "end": 842.3000000715256
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 815,
+            "end": 815.1000000238419
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 750,
+          "lastMutationAt": 1865.5,
+          "visibleAt": 757.2000000476837,
+          "graphicAt": 865.6000000238419,
+          "framePending": true,
+          "interactiveFrameAt": 868
+        }
+      ],
+      "resourceCount": 67,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 4,
+      "cache": "warm-reload",
+      "firstByteMs": 685.3,
+      "domContentLoadedMs": 702.7,
+      "firstChartFrameMs": 755.8,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 691.8000000715256,
+            "lastMutationAt": 1739.6000000238419,
+            "visibleAt": 694.8000000715256,
+            "graphicAt": 733.8999999761581,
+            "framePending": true,
+            "interactiveFrameAt": 755.8000000715256
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 722.3999999761581,
+            "end": 728.5
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 722.6000000238419,
+            "end": 722.6000000238419
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 691.8000000715256,
+          "lastMutationAt": 1739.6000000238419,
+          "visibleAt": 694.8000000715256,
+          "graphicAt": 733.8999999761581,
+          "framePending": true,
+          "interactiveFrameAt": 755.8000000715256
+        }
+      ],
+      "resourceCount": 62,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 5,
+      "cache": "cold-browser",
+      "firstByteMs": 703.7,
+      "domContentLoadedMs": 767,
+      "firstChartFrameMs": 828.2,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 709.2000000476837,
+            "lastMutationAt": 1837.2000000476837,
+            "visibleAt": 716.7000000476837,
+            "graphicAt": 825.9000000953674,
+            "framePending": true,
+            "interactiveFrameAt": 828.2000000476837
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 775,
+            "end": 802.5
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 775.1000000238419,
+            "end": 775.1000000238419
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 709.2000000476837,
+          "lastMutationAt": 1837.2000000476837,
+          "visibleAt": 716.7000000476837,
+          "graphicAt": 825.9000000953674,
+          "framePending": true,
+          "interactiveFrameAt": 828.2000000476837
+        }
+      ],
+      "resourceCount": 67,
+      "errors": []
+    },
+    {
+      "pathname": "/2025/CHA/",
+      "run": 5,
+      "cache": "warm-reload",
+      "firstByteMs": 736.4,
+      "domContentLoadedMs": 753.3,
+      "firstChartFrameMs": 805.6,
+      "initial": {
+        "charts": [
+          {
+            "kind": "team-season-pace",
+            "hostSeenAt": 743,
+            "lastMutationAt": 1786.8000000715256,
+            "visibleAt": 745.7000000476837,
+            "graphicAt": 786.4000000953674,
+            "framePending": true,
+            "interactiveFrameAt": 805.6000000238419
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 774.7000000476837,
+            "end": 780.2000000476837
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 774.8000000715256,
+            "end": 774.8000000715256
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "team-season-pace",
+          "hostSeenAt": 743,
+          "lastMutationAt": 1786.8000000715256,
+          "visibleAt": 745.7000000476837,
+          "graphicAt": 786.4000000953674,
+          "framePending": true,
+          "interactiveFrameAt": 805.6000000238419
+        }
+      ],
+      "resourceCount": 62,
+      "errors": []
+    }
+  ]
+}

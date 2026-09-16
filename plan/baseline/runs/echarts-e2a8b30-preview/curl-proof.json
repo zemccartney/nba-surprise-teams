@@ -1,0 +1,44 @@
+[
+  {
+    "port": 4321,
+    "run": 1,
+    "status": 200,
+    "firstByteMs": 1531.794,
+    "totalMs": 1532.2469999999998
+  },
+  {
+    "port": 4321,
+    "run": 2,
+    "status": 200,
+    "firstByteMs": 1471.398,
+    "totalMs": 1471.5929999999998
+  },
+  {
+    "port": 4321,
+    "run": 3,
+    "status": 200,
+    "firstByteMs": 1439.372,
+    "totalMs": 1439.692
+  },
+  {
+    "port": 4322,
+    "run": 1,
+    "status": 200,
+    "firstByteMs": 2.1670000000000003,
+    "totalMs": 2.354
+  },
+  {
+    "port": 4322,
+    "run": 2,
+    "status": 200,
+    "firstByteMs": 1.7650000000000001,
+    "totalMs": 1.906
+  },
+  {
+    "port": 4322,
+    "run": 3,
+    "status": 200,
+    "firstByteMs": 1.903,
+    "totalMs": 2.013
+  }
+]

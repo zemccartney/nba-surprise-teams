@@ -19,7 +19,19 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: Gum view and typed content mocks
+## Latest: ECharts performance baseline — manual review stop
+
+Before a possible Chart.js migration, measured unchanged `e2a8b30` in isolated
+local dev and built preview. Stats' dev delay is predominantly its ~1.5-second
+HTML first-byte wait; built preview's first chart-ready frame is ~115 ms cold
+and ~45 ms warm. Font waits are short; normal animation adds ~1 second of visual
+activity. This does not establish deferred/live performance. See
+[chart-performance-baseline.md](prelaunch-review/chart-performance-baseline.md)
+for measured sizes/timings, limitations, running URLs and reproduction commands.
+No application changes. Stop for manual review before the archived-data island
+probe, and stop again before the Chart.js pace-chart spike.
+
+## Previous: Gum view and typed content mocks
 
 Committed the preceding live-data work as `6fdba39` with 110 tests/hooks passing.
 The new follow-up adds optional Gum rendering (`--pretty`), keeps JSON unchanged,

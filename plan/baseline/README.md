@@ -40,6 +40,28 @@ Uses the system Google Chrome via Playwright's `channel: "chrome"`. Override wit
 - **Captures:** screenshot/response inventories and production comparisons
   complement those checks, but do not prove keyboard or interaction behavior.
 
+## Chart performance baseline
+
+`chart-performance.mjs` measures the two chart pages against a running server:
+
+```sh
+mise x -- node plan/baseline/chart-performance.mjs --base http://127.0.0.1:4322 --dist /path/to/baseline/dist --revision REVISION --out /tmp/new-chart-capture
+```
+
+Five fresh-context/reload pairs per page by default. Records navigation/resource
+and font-call timings, chart-ready frame proxies, browser errors, screenshots
+and raw/gzip/Brotli build sizes. No CPU/network throttling or production code
+instrumentation. `--paths /stats/`, `--runs 1`, and `--reduced-motion reduce` allow
+focused probes. The revision is an operator-supplied label. Use a new output
+directory; raw captures can be large. `chart-performance-summary.mjs INPUT.json
+NEW-SUMMARY.json` regenerates compact summaries without starting a browser.
+
+See [the ECharts baseline review](../new-season-sweep/prelaunch-review/chart-performance-baseline.md)
+for actual results, exact conditions, running URLs and manual reproduction.
+Capture cold-server first visits separately from warm-server/cold-browser visits;
+keep Sentry, content, hardware and browser settings comparable between libraries.
+These scripts are manual research tools, not CI tests or accessibility checks.
+
 ## Capture
 
 ```sh

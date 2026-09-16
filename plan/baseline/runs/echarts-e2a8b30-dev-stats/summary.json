@@ -1,0 +1,835 @@
+{
+  "capturedAt": "2026-09-16T19:51:10.788Z",
+  "base": "http://127.0.0.1:4321",
+  "revision": "e2a8b30",
+  "browser": "152.0.7977.83",
+  "machine": {
+    "platform": "darwin",
+    "cpu": "Apple M4 Pro"
+  },
+  "settings": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "reducedMotion": "no-preference",
+    "cpuThrottling": "none",
+    "networkThrottling": "none",
+    "cache": "fresh browser context, then reload in that same context",
+    "observation": "initial viewport, followed by scrolling every chart into view"
+  },
+  "groups": [
+    {
+      "pathname": "/stats/",
+      "cache": "cold-browser",
+      "runs": 5,
+      "firstByteMs": {
+        "min": 1492,
+        "median": 1530.7,
+        "max": 1703.3
+      },
+      "firstChartFrameMs": {
+        "min": 1617.9,
+        "median": 1665.3,
+        "max": 1831.9
+      },
+      "responseToChartMs": {
+        "min": 123,
+        "median": 128.6,
+        "max": 134.6
+      },
+      "lastInitialChartMutationMs": {
+        "min": 2617.9,
+        "median": 2667.8,
+        "max": 2833
+      },
+      "longestInitialFontLoadMs": {
+        "min": 28.2,
+        "median": 29,
+        "max": 32.5
+      }
+    },
+    {
+      "pathname": "/stats/",
+      "cache": "warm-reload",
+      "runs": 5,
+      "firstByteMs": {
+        "min": 1417.8,
+        "median": 1481.2,
+        "max": 1664.9
+      },
+      "firstChartFrameMs": {
+        "min": 1478.8,
+        "median": 1545.4,
+        "max": 1740.3
+      },
+      "responseToChartMs": {
+        "min": 61,
+        "median": 75.4,
+        "max": 77.9
+      },
+      "lastInitialChartMutationMs": {
+        "min": 2478.7,
+        "median": 2544.3,
+        "max": 2724.3
+      },
+      "longestInitialFontLoadMs": {
+        "min": 4.2,
+        "median": 5.4,
+        "max": 6
+      }
+    }
+  ],
+  "samples": [
+    {
+      "pathname": "/stats/",
+      "run": 1,
+      "cache": "cold-browser",
+      "firstByteMs": 1703.3,
+      "domContentLoadedMs": 1769.3,
+      "firstChartFrameMs": 1831.9,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1710.2000000476837,
+            "lastMutationAt": 2833,
+            "visibleAt": 1712.8999999761581,
+            "graphicAt": 1830.1000000238419,
+            "framePending": true,
+            "interactiveFrameAt": 1831.8999999761581
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1710.2999999523163,
+            "lastMutationAt": 1765.8999999761581
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1710.5,
+            "lastMutationAt": 1768.6000000238419
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1775.8999999761581,
+            "end": 1807.2000000476837
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1776.1000000238419,
+            "end": 1776.1000000238419
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1710.2000000476837,
+          "lastMutationAt": 2833,
+          "visibleAt": 1712.8999999761581,
+          "graphicAt": 1830.1000000238419,
+          "framePending": true,
+          "interactiveFrameAt": 1831.8999999761581
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1710.2999999523163,
+          "lastMutationAt": 4781,
+          "graphicAt": 3769.7000000476837,
+          "framePending": true,
+          "visibleAt": 3748.2999999523163,
+          "interactiveFrameAt": 3781.899999976158
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1710.5,
+          "lastMutationAt": 4765.700000047684,
+          "graphicAt": 3762.7000000476837,
+          "framePending": true,
+          "visibleAt": 3748.2999999523163,
+          "interactiveFrameAt": 3781.7000000476837
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 1,
+      "cache": "warm-reload",
+      "firstByteMs": 1664.9,
+      "domContentLoadedMs": 1687,
+      "firstChartFrameMs": 1740.3,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1673.6000000238419,
+            "lastMutationAt": 2724.3000000715256,
+            "visibleAt": 1679.2000000476837,
+            "graphicAt": 1721.3000000715256,
+            "framePending": true,
+            "interactiveFrameAt": 1740.3000000715256
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1673.8000000715256,
+            "lastMutationAt": 1686.3000000715256
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1674,
+            "lastMutationAt": 1686.6000000238419
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1709.3999999761581,
+            "end": 1715.3999999761581
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1709.5,
+            "end": 1709.5
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1673.6000000238419,
+          "lastMutationAt": 2724.3000000715256,
+          "visibleAt": 1679.2000000476837,
+          "graphicAt": 1721.3000000715256,
+          "framePending": true,
+          "interactiveFrameAt": 1740.3000000715256
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1673.8000000715256,
+          "lastMutationAt": 4708.300000071526,
+          "graphicAt": 3702.399999976158,
+          "framePending": true,
+          "visibleAt": 3689.899999976158,
+          "interactiveFrameAt": 3723.8000000715256
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1674,
+          "lastMutationAt": 4708,
+          "graphicAt": 3698.399999976158,
+          "framePending": true,
+          "visibleAt": 3689.899999976158,
+          "interactiveFrameAt": 3723.600000023842
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 2,
+      "cache": "cold-browser",
+      "firstByteMs": 1530.7,
+      "domContentLoadedMs": 1602.2,
+      "firstChartFrameMs": 1665.3,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1537.0999999046326,
+            "lastMutationAt": 2667.7999999523163,
+            "visibleAt": 1546.1999999284744,
+            "graphicAt": 1663.0999999046326,
+            "framePending": true,
+            "interactiveFrameAt": 1665.2999999523163
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1537.3999999761581,
+            "lastMutationAt": 1598
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1537.5999999046326,
+            "lastMutationAt": 1601.5
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1608.6999999284744,
+            "end": 1641.1999999284744
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1608.8999999761581,
+            "end": 1608.8999999761581
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1537.0999999046326,
+          "lastMutationAt": 2667.7999999523163,
+          "visibleAt": 1546.1999999284744,
+          "graphicAt": 1663.0999999046326,
+          "framePending": true,
+          "interactiveFrameAt": 1665.2999999523163
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1537.3999999761581,
+          "lastMutationAt": 4583.299999952316,
+          "graphicAt": 3574.899999976158,
+          "framePending": true,
+          "visibleAt": 3565.899999976158,
+          "interactiveFrameAt": 3599
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1537.5999999046326,
+          "lastMutationAt": 4599.199999928474,
+          "graphicAt": 3588,
+          "framePending": true,
+          "visibleAt": 3565.899999976158,
+          "interactiveFrameAt": 3599.6999999284744
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 2,
+      "cache": "warm-reload",
+      "firstByteMs": 1481.2,
+      "domContentLoadedMs": 1503,
+      "firstChartFrameMs": 1545.4,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1489.1000000238419,
+            "lastMutationAt": 2544.3000000715256,
+            "visibleAt": 1494.5,
+            "graphicAt": 1535.8000000715256,
+            "framePending": true,
+            "interactiveFrameAt": 1545.3999999761581
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1489.2000000476837,
+            "lastMutationAt": 1502.2000000476837
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1489.3999999761581,
+            "lastMutationAt": 1502.6000000238419
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1524.1000000238419,
+            "end": 1529.5
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1524.2000000476837,
+            "end": 1524.2000000476837
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1489.1000000238419,
+          "lastMutationAt": 2544.3000000715256,
+          "visibleAt": 1494.5,
+          "graphicAt": 1535.8000000715256,
+          "framePending": true,
+          "interactiveFrameAt": 1545.3999999761581
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1489.2000000476837,
+          "lastMutationAt": 4461,
+          "graphicAt": 3450.3000000715256,
+          "framePending": true,
+          "visibleAt": 3443.899999976158,
+          "interactiveFrameAt": 3479.3000000715256
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1489.3999999761581,
+          "lastMutationAt": 4461.899999976158,
+          "graphicAt": 3460.399999976158,
+          "framePending": true,
+          "visibleAt": 3443.899999976158,
+          "interactiveFrameAt": 3479.899999976158
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 3,
+      "cache": "cold-browser",
+      "firstByteMs": 1496.2,
+      "domContentLoadedMs": 1561.6,
+      "firstChartFrameMs": 1619.2,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1502.2000000476837,
+            "lastMutationAt": 2619,
+            "visibleAt": 1510.5,
+            "graphicAt": 1617.2999999523163,
+            "framePending": true,
+            "interactiveFrameAt": 1619.2000000476837
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1502.2999999523163,
+            "lastMutationAt": 1558
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1502.6000000238419,
+            "lastMutationAt": 1561
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1567.7999999523163,
+            "end": 1596
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1568,
+            "end": 1568.1000000238419
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1502.2000000476837,
+          "lastMutationAt": 2619,
+          "visibleAt": 1510.5,
+          "graphicAt": 1617.2999999523163,
+          "framePending": true,
+          "interactiveFrameAt": 1619.2000000476837
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1502.2999999523163,
+          "lastMutationAt": 4534.399999976158,
+          "graphicAt": 3528.5,
+          "framePending": true,
+          "visibleAt": 3518.5,
+          "interactiveFrameAt": 3552.2999999523163
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1502.6000000238419,
+          "lastMutationAt": 4553.100000023842,
+          "graphicAt": 3544.7000000476837,
+          "framePending": true,
+          "visibleAt": 3518.5,
+          "interactiveFrameAt": 3553
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 3,
+      "cache": "warm-reload",
+      "firstByteMs": 1494.1,
+      "domContentLoadedMs": 1515.1,
+      "firstChartFrameMs": 1572,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1501.8000000715256,
+            "lastMutationAt": 2555.100000023842,
+            "visibleAt": 1507.6000000238419,
+            "graphicAt": 1548.7000000476837,
+            "framePending": true,
+            "interactiveFrameAt": 1572
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1502,
+            "lastMutationAt": 1514.3000000715256
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1502.2000000476837,
+            "lastMutationAt": 1514.7000000476837
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1536.7000000476837,
+            "end": 1542.1000000238419
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1536.7000000476837,
+            "end": 1536.7000000476837
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1501.8000000715256,
+          "lastMutationAt": 2555.100000023842,
+          "visibleAt": 1507.6000000238419,
+          "graphicAt": 1548.7000000476837,
+          "framePending": true,
+          "interactiveFrameAt": 1572
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1502,
+          "lastMutationAt": 4489.700000047684,
+          "visibleAt": 3470.8000000715256,
+          "graphicAt": 3487.8000000715256,
+          "framePending": true,
+          "interactiveFrameAt": 3505.100000023842
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1502.2000000476837,
+          "lastMutationAt": 4489.399999976158,
+          "visibleAt": 3470.8000000715256,
+          "graphicAt": 3482.3000000715256,
+          "framePending": true,
+          "interactiveFrameAt": 3504.899999976158
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 4,
+      "cache": "cold-browser",
+      "firstByteMs": 1492,
+      "domContentLoadedMs": 1559.2,
+      "firstChartFrameMs": 1617.9,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1497.8999999761581,
+            "lastMutationAt": 2617.899999976158,
+            "visibleAt": 1506.3999999761581,
+            "graphicAt": 1615.1000000238419,
+            "framePending": true,
+            "interactiveFrameAt": 1617.8999999761581
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1498.2000000476837,
+            "lastMutationAt": 1555.2999999523163
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1498.3999999761581,
+            "lastMutationAt": 1558.5
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1565.3999999761581,
+            "end": 1593.6000000238419
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1565.6000000238419,
+            "end": 1565.6000000238419
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1497.8999999761581,
+          "lastMutationAt": 2617.899999976158,
+          "visibleAt": 1506.3999999761581,
+          "graphicAt": 1615.1000000238419,
+          "framePending": true,
+          "interactiveFrameAt": 1617.8999999761581
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1498.2000000476837,
+          "lastMutationAt": 4534.399999976158,
+          "graphicAt": 3527.2999999523163,
+          "framePending": true,
+          "visibleAt": 3519.2000000476837,
+          "interactiveFrameAt": 3552.7999999523163
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1498.3999999761581,
+          "lastMutationAt": 4553.299999952316,
+          "graphicAt": 3539.2999999523163,
+          "framePending": true,
+          "visibleAt": 3519.2000000476837,
+          "interactiveFrameAt": 3553.399999976158
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 4,
+      "cache": "warm-reload",
+      "firstByteMs": 1438.1,
+      "domContentLoadedMs": 1460.4,
+      "firstChartFrameMs": 1514.8,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1446.1999999284744,
+            "lastMutationAt": 2498,
+            "visibleAt": 1452.1999999284744,
+            "graphicAt": 1489.7999999523163,
+            "framePending": true,
+            "interactiveFrameAt": 1514.7999999523163
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1446.5,
+            "lastMutationAt": 1459.6000000238419
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1446.6000000238419,
+            "lastMutationAt": 1460
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1479.6999999284744,
+            "end": 1483.8999999761581
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1479.6999999284744,
+            "end": 1479.6999999284744
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1446.1999999284744,
+          "lastMutationAt": 2498,
+          "visibleAt": 1452.1999999284744,
+          "graphicAt": 1489.7999999523163,
+          "framePending": true,
+          "interactiveFrameAt": 1514.7999999523163
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1446.5,
+          "lastMutationAt": 4429.699999928474,
+          "graphicAt": 3420.1999999284744,
+          "framePending": true,
+          "visibleAt": 3412.5,
+          "interactiveFrameAt": 3448
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1446.6000000238419,
+          "lastMutationAt": 4430.600000023842,
+          "graphicAt": 3431.2999999523163,
+          "framePending": true,
+          "visibleAt": 3412.5,
+          "interactiveFrameAt": 3448.6999999284744
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 5,
+      "cache": "cold-browser",
+      "firstByteMs": 1552.4,
+      "domContentLoadedMs": 1618.9,
+      "firstChartFrameMs": 1685.3,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1558.6999999284744,
+            "lastMutationAt": 2685.399999976158,
+            "visibleAt": 1567.5,
+            "graphicAt": 1674.6999999284744,
+            "framePending": true,
+            "interactiveFrameAt": 1685.2999999523163
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1558.8999999761581,
+            "lastMutationAt": 1615.1000000238419
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1559.1000000238419,
+            "lastMutationAt": 1618.3999999761581
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1625,
+            "end": 1654
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1625.1000000238419,
+            "end": 1625.1999999284744
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1558.6999999284744,
+          "lastMutationAt": 2685.399999976158,
+          "visibleAt": 1567.5,
+          "graphicAt": 1674.6999999284744,
+          "framePending": true,
+          "interactiveFrameAt": 1685.2999999523163
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1558.8999999761581,
+          "lastMutationAt": 4600.199999928474,
+          "graphicAt": 3594,
+          "framePending": true,
+          "visibleAt": 3584.6999999284744,
+          "interactiveFrameAt": 3617.2999999523163
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1559.1000000238419,
+          "lastMutationAt": 4618.899999976158,
+          "graphicAt": 3608.1999999284744,
+          "framePending": true,
+          "visibleAt": 3584.6999999284744,
+          "interactiveFrameAt": 3618
+        }
+      ],
+      "resourceCount": 95,
+      "errors": []
+    },
+    {
+      "pathname": "/stats/",
+      "run": 5,
+      "cache": "warm-reload",
+      "firstByteMs": 1417.8,
+      "domContentLoadedMs": 1438.5,
+      "firstChartFrameMs": 1478.8,
+      "initial": {
+        "charts": [
+          {
+            "kind": "surprises-per-season",
+            "hostSeenAt": 1425.5999999046326,
+            "lastMutationAt": 2478.6999999284744,
+            "visibleAt": 1431.0999999046326,
+            "graphicAt": 1470.5,
+            "framePending": true,
+            "interactiveFrameAt": 1478.7999999523163
+          },
+          {
+            "kind": "surprises-by-team",
+            "hostSeenAt": 1425.7999999523163,
+            "lastMutationAt": 1437.5999999046326
+          },
+          {
+            "kind": "team-season-scatter",
+            "hostSeenAt": 1426,
+            "lastMutationAt": 1438
+          }
+        ],
+        "fontLoads": [
+          {
+            "font": "16px \"Iosevka Curly\", monospace",
+            "start": 1460,
+            "end": 1464.6999999284744
+          },
+          {
+            "font": "bold 16px \"Iosevka Curly\", monospace",
+            "start": 1460.0999999046326,
+            "end": 1460.1999999284744
+          }
+        ],
+        "longTasks": []
+      },
+      "chartsAfterScrolling": [
+        {
+          "kind": "surprises-per-season",
+          "hostSeenAt": 1425.5999999046326,
+          "lastMutationAt": 2478.6999999284744,
+          "visibleAt": 1431.0999999046326,
+          "graphicAt": 1470.5,
+          "framePending": true,
+          "interactiveFrameAt": 1478.7999999523163
+        },
+        {
+          "kind": "surprises-by-team",
+          "hostSeenAt": 1425.7999999523163,
+          "lastMutationAt": 4397.299999952316,
+          "visibleAt": 3378.2999999523163,
+          "graphicAt": 3395.5999999046326,
+          "framePending": true,
+          "interactiveFrameAt": 3413.5
+        },
+        {
+          "kind": "team-season-scatter",
+          "hostSeenAt": 1426,
+          "lastMutationAt": 4397,
+          "graphicAt": 3390,
+          "framePending": true,
+          "visibleAt": 3378.2999999523163,
+          "interactiveFrameAt": 3413.2999999523163
+        }
+      ],
+      "resourceCount": 85,
+      "errors": []
+    }
+  ]
+}
