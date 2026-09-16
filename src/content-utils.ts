@@ -1,51 +1,17 @@
 import type { CollectionEntry } from "astro:content";
 
-import { z } from "astro/zod";
 import { getCollection, getEntry } from "astro:content";
 
-export type GameData = CollectionEntry<"games">["data"];
+import { TEAM_CODES, type TeamCode } from "./loaders/live/utils";
 import * as Utils from "./utils";
 
-export const teamCodeSchema = z.enum([
-  "ATL",
-  "BKN",
-  "BOS",
-  "CHA",
-  "CHI",
-  "CLE",
-  "DAL",
-  "DEN",
-  "DET",
-  "GSW",
-  "HOU",
-  "IND",
-  "LAC",
-  "LAL",
-  "MEM",
-  "MIA",
-  "MIL",
-  "MIN",
-  "NJN",
-  "NOH",
-  "NOK",
-  "NOP",
-  "NYK",
-  "OKC",
-  "ORL",
-  "PHI",
-  "PHX",
-  "POR",
-  "SAC",
-  "SAS",
-  "SEA",
-  "TOR",
-  "UTA",
-  "VAN",
-  "WAS",
-]);
+export {
+  TEAM_CODES,
+  type TeamCode,
+  teamCodeSchema,
+} from "./loaders/live/utils";
 
-export const TEAM_CODES = teamCodeSchema.enum;
-export type TeamCode = z.infer<typeof teamCodeSchema>;
+export type GameData = CollectionEntry<"games">["data"];
 
 const STANDARD_SEASON = {
   numGames: 82,

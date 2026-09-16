@@ -13,6 +13,42 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Live-data readability and observability follow-up
+
+Applied Zack's review: two-file loader layout, a readable diagnostic organized
+by named checks, loader-owned requested/upstream season validation, and explicit
+cache decode outcomes. Old versions refresh quietly; unclassifiable/current-
+version corruption is reported without cached payloads. Original refresh errors
+reach Sentry even with fallback, without duplicate wrapper reports. Global
+Vitest cleanup and typed local-module mocks follow its agent guidance. Details:
+`prelaunch-review/live-readability.md`. Finality remains unchanged; scr.ts is
+untouched. No commit, push or deployment.
+
+## Live-data guardrails and standalone diagnostic
+
+Following Zack's approval, retained score-based finality and the preseason
+bypass while adding Cup championship exclusion to both result/refresh paths,
+opaque nbaGameId provenance, normalized-output/KV validation and a loader-owned
+policy-version changelog. Invalid cache is never outage fallback. Fresh empty
+cached results now honor explicit expiry. Both islands share bounded HTTP
+max-age calculation with fake-clock tests. Standalone feed diagnostic runs in
+Node without Astro/KV and is documented in MAINTENANCE with the preseason
+before/during/after TODO. Actual fetch returned 200; offline replay agrees.
+103 tests pass. Details: `prelaunch-review/live-data-guardrails.md`. The user's
+scr.ts remains untouched and currently blocks whole-tree type/format checks.
+No new commit, push or deployment; real-game observations remain necessary.
+
+## Checkpoint and live-action work
+
+Logged deferred consolidation of package.json/hk verification definitions,
+preserving intentional file-scope differences. User authorized checkpoint:
+`1fa273b`, 42 files, hooks and 65 tests passed; no push. Then fixed D2's older-
+season action/latest-only loader mismatch before KV access. Four controlled
+handler tests bring the suite to 69; full build passes. See
+`prelaunch-review/live-action.md`. New work remains uncommitted. NBA schedule
+reads returned HTTP 403 here; completion/eligibility changes await verified
+field semantics and fixture coverage, not guessed values.
+
 ## Review follow-up — bounded cleanup
 
 Zack clarified that DEPLOY_ENABLED is only a temporary cutover interlock.

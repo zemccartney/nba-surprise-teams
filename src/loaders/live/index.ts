@@ -1,56 +1,40 @@
-// astro/zod, not astro:schema: a real package subpath resolves in plain node too,
-// so the archiver can import this file. A bare "zod" import would be an
-// undeclared dependency (pnpm does not hoist) and bundled a second zod copy.
-import { z } from "astro/zod";
+import type { LiveLoaderResponse, TeamCode } from "./utils";
 
-import type { GameData, LoaderResponse, TeamCode } from "../content-utils";
+import * as ContentUtils from "../../content-utils";
+import * as Utils from "../../utils";
+import {
+  CUP_CHAMPIONSHIP_PREFIX,
+  hasScore,
+  includesCandidateTeam,
+  LiveLoaderResponseSchema,
+  NBA_SCHEDULE_HEADERS,
+  NBA_SCHEDULE_URL,
+  SeasonDataSchema,
+  toYYYYMMDD,
+} from "./utils";
 
-import * as ContentUtils from "../content-utils";
-import * as Utils from "../utils";
+/*
+ * Version of the normalized live data's shape AND interpretation, not the NBA
+ * API version or a cryptographic signature. The action stores/checks it in KV.
+ * Change it when old cached results must no longer be used, including as an
+ * outage fallback. Shape validation alone cannot detect changed selection rules
+ * (for example, newly excluding the Cup championship). A bump does not purge
+ * KV replicas or already-cached HTTP responses; it rejects old data on read.
+ *
+ * Changelog (newest first; retain previous IDs and reasons):
+ * - 07423eeb-1ebb-4cf1-89b7-ab05795b5ac1: require opaque nbaGameId on live
+ *   games; exclude Cup championship from results AND refresh scheduling;
+ *   validate normalized output and cache reads. Old data is not a fallback.
+ * - fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0: legacy normalized games/optional
+ *   expiresAt contract. Relocated from the action without changing its value.
+ *
+ * Runtime schemas enforce shape; versioning still covers incompatible meaning.
+ */
+export const LIVE_DATA_VERSION = "07423eeb-1ebb-4cf1-89b7-ab05795b5ac1";
 
-const TeamResultSchema = z.object({
-  score: z.number(),
-  teamTricode: z.string(),
-});
-
-const GameResultSchema = z.object({
-  awayTeam: TeamResultSchema,
-  gameDateTimeUTC: z.string(), // ISO string e.g. "2025-01-05T23:00:00Z"
-  homeTeam: TeamResultSchema,
-});
-
-// This schema should NOT enforce specific values; assume data source has unknown values / might change at any time,
-// leave identification of relevant values and adapting to said contract changes up to mapping code after fetching
-const SeasonDataSchema = z.object({
-  leagueSchedule: z.object({
-    gameDates: z.array(
-      z.object({
-        gameDate: z.string(), // gameDate format: "10/04/2024 00:00:00"
-        games: z.array(GameResultSchema),
-      }),
-    ),
-  }),
-});
-
-// Taking for granted that presence of scores reliably indicates a game has finished and should be counted
-const hasScore = (game: z.infer<typeof GameResultSchema>) =>
-  game.homeTeam.score && game.awayTeam.score;
-
-const includesCandidateTeam = (
-  game: z.infer<typeof GameResultSchema>,
-  tricodes: TeamCode[],
-) =>
-  tricodes.includes(game.awayTeam.teamTricode) ||
-  tricodes.includes(game.homeTeam.teamTricode);
-
-// gameDate format: "10/04/2024 00:00:00"
-const toYYYYMMDD = (gameDate: string) => {
-  // @ts-expect-error : "Object possibly undefined" Not sure why index type of split result is string | undefined
-  const [mm, dd, yyyy] = gameDate.split(" ", 1)[0].split("/", 3);
-  return `${yyyy}-${mm}-${dd}`;
-};
-
-const loader = async (): Promise<LoaderResponse> => {
+const loader = async (
+  expectedSeasonId?: string,
+): Promise<LiveLoaderResponse> => {
   // Assumption: force this function to return
   // Don't solve for missing data; i.e. don't crash your site just b/c you haven't set data "on time"
   // If you don't update in time, then home page will break b/c nothing to do: no next season set, still thinking
@@ -61,16 +45,15 @@ const loader = async (): Promise<LoaderResponse> => {
     throw new Error("Missing season data");
   }
 
-  const res = await fetch(
-    "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
-    {
-      headers: {
-        Accept: "application/json",
-      },
-      // Timeout maybe too high, potentially revisit. Intuition: don't make user wait too long if response hanging, but enough leeway to account for uncertain latency
-      signal: AbortSignal.timeout(10_000),
-    },
-  );
+  if (expectedSeasonId !== undefined && season.id !== expectedSeasonId) {
+    throw new Error("Live loader season differs from the requested season");
+  }
+
+  const res = await fetch(NBA_SCHEDULE_URL, {
+    headers: NBA_SCHEDULE_HEADERS,
+    // Keep requests bounded without introducing retry traffic.
+    signal: AbortSignal.timeout(10_000),
+  });
 
   if (!res.ok) {
     throw new Error(`NBA CDN request failed: ${res.status}`);
@@ -79,6 +62,13 @@ const loader = async (): Promise<LoaderResponse> => {
   const result = await res.json();
 
   const parsed = SeasonDataSchema.parse(result);
+  const expectedSeasonYear = `${season.id}-${String(Number(season.id) + 1).slice(-2)}`;
+
+  // Validate the source before assigning our season ID to normalized games.
+  // The existing date window below guarantees every selected game is in range.
+  if (parsed.leagueSchedule.seasonYear !== expectedSeasonYear) {
+    throw new Error(`NBA schedule season does not match ${expectedSeasonYear}`);
+  }
 
   // I believe data is already ordered like this, more to be explicit / for peace of mind, prove
   // to myself that data is how I need it to be
@@ -105,9 +95,16 @@ const loader = async (): Promise<LoaderResponse> => {
         gameYYYYMMDD >= season.data.startDate &&
         gameYYYYMMDD <= season.data.endDate // equal to b/c we want to include records on the final day
       );
-    });
+    })
+    // Apply eligibility once, before BOTH result selection and next refresh.
+    .map((slate) => ({
+      ...slate,
+      games: slate.games.filter(
+        (game) => !game.gameId.startsWith(CUP_CHAMPIONSHIP_PREFIX),
+      ),
+    }));
 
-  const relevantGames: GameData[] = [];
+  const relevantGames: LiveLoaderResponse["games"] = [];
   let expiresAt;
 
   const teams = await ContentUtils.getTeamsInSeason(season.id);
@@ -117,9 +114,6 @@ const loader = async (): Promise<LoaderResponse> => {
   // on fetching data, we want only the games scheduled through the current date i.e. possibly finished
   // so, we need the yyyy-mm-dd representation of the current data in EST, regardless of the server's time zone
   const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
-
-  // TODO: Doc known limitation of mistakenly including in-season tournament final game; data seems to give ways to ignore,
-  // just didn't deal with it in first run (2024)
 
   const nextRelevantDate = chronologicalSeason.find((slate) => {
     // Find next game day with an incomplete game featuring at least one surprise team i.e. next point
@@ -180,6 +174,7 @@ const loader = async (): Promise<LoaderResponse> => {
                 homeTeam.teamTricode as TeamCode,
               ],
             }),
+            nbaGameId: game.gameId,
             playedOn: gameYYYYMMDD,
             seasonId: season.id,
             teams: [
@@ -198,12 +193,10 @@ const loader = async (): Promise<LoaderResponse> => {
     }
   }
 
-  return {
+  return LiveLoaderResponseSchema.parse({
     games: relevantGames,
-    ...(expiresAt && {
-      expiresAt,
-    }),
-  };
+    ...(expiresAt !== undefined && { expiresAt }),
+  });
 };
 
 export default loader;

@@ -107,14 +107,94 @@ When surprise teams and their odds are announced:
 - **Team/Season detail:** Pages generated for season's teams, no data yet; data loaded via SSR (server island)
 - **Stats:** no effect
 
+### Preseason (~early October): re-check the live data service
+
+The NBA schedule endpoint is undocumented for our purposes. Re-check our working
+assumptions each preseason, independently of Astro's loader and candidate-team
+filtering. Request headers can affect access; the current working request sends
+`Accept: application/json` and `Referer: https://www.nba.com/`.
+
+1. Run [`scripts/check-nba-feed.ts`](scripts/check-nba-feed.ts) to fetch and
+   analyze the schedule directly, without Astro or KV. Supply the expected
+   season, updating it each year:
+
+   ```sh
+   mise x -- node scripts/check-nba-feed.ts --season 2026-27 --save /tmp/nba-preseason-before.json
+   ```
+
+   Use different snapshot filenames for before/during/after observations;
+   `--save` deliberately refuses to overwrite. Re-analyze a saved response
+   without making a request:
+
+   ```sh
+   mise x -- node scripts/check-nba-feed.ts --season 2026-27 --input /tmp/nba-preseason-before.json
+   ```
+
+   Reports include HTTP status (live requests), feed season/timestamp, ID
+   prefixes, labels, statuses, score samples and the first preseason game.
+   Structural errors, duplicate IDs or a mismatched expected season exit 1;
+   working-theory warnings exit 0 but require manual review. A clean report of
+   scheduled games does not verify in-progress/final behavior. No assumptions
+   about ID chronology, contiguous numbering, or a complete published schedule.
+   This is a manual maintenance tool, not an automatic network test in CI/hooks.
+
+2. Confirm the first preseason game's current schedule. For the captured 2026–27
+   feed, it is Miami at Toronto on **October 3, 2026, 7 p.m. Eastern**; re-check
+   rather than hardcoding this date in the diagnostic.
+3. Save observations before tipoff, while a game is underway, and after it ends.
+   **TEMP/TODO: resolve finality behavior.** Do scores update during play? Does
+   `gameStatus` change from 1 to 2 to 3, and does 3 correspond to Final on this
+   endpoint? The current loader treats positive scores for both teams as a
+   completed result; leave that behavior unchanged until these observations are
+   reviewed. Today's all-zero preseason schedule cannot answer this question.
+4. Cross-check Cup championship identification. Our working prefix is `006`;
+   the inspected entry has `gameLabel: Emirates NBA Cup`,
+   `gameSubLabel: Championship`, `seriesText: Neutral Site`, and
+   `gameSubtype: in-season-knockout`. Labels are observations, not contractual
+   requirements. Group, quarterfinal and semifinal games count toward the
+   regular season and must remain included. The loader now excludes `006` from
+   both result selection and next-refresh scheduling, retaining the existing
+   season-date window. Raw provider `gameId` is retained as `nbaGameId` in live
+   output; the site's existing internal `id` is unchanged.
+5. Separately inspect deployed server-island responses/cache headers at season
+   start, then after games finish and cached data becomes stale. Preseason feed
+   inspection does not exercise this path: the current action returns empty
+   games **without expiresAt** before `season.startDate`. Its calculated cache
+   header is therefore absent then. Once active, compare cache duration with the
+   loader's expected completion of the earliest incomplete **candidate-team**
+   game, not necessarily the league's opening game. Check that later requests
+   actually refresh results; one correct header does not prove that transition.
+
+**EXPECT:**
+
+- No changes to source data, KV, or deployed routing from the feed diagnostic.
+- Unknown or contradictory metadata prompts review, not an automatic change to
+  the application's interpretation of NBA data.
+- Cache compatibility has two parts: normalized output is validated by
+  `src/loaders/live/utils.ts` (once on loader return, again when reading
+  persisted data), and the action checks the loader-owned `LIVE_DATA_VERSION`. When changing interpretation or
+  selection rules, consider invalidating old data even if its shape still
+  parses. Record each version change and its reason in the loader's changelog.
+- Invalid/incompatible cached data is never an outage fallback. If no valid
+  backup exists and the feed fails, report failure rather than empty records.
+  An explicit old cache version is an expected, silent refresh. Malformed JSON,
+  a missing version envelope, or invalid current-version data is reported to
+  Sentry before recovery, without cached values in the error. Loader/upstream
+  validation failures are reported even when a valid backup serves the page.
+
 ## Infrastructural Points
 
 - Purpose of KV: be as self-reliant as possible while collecting season in-progress
   - reduce dependency on API (assume unreliable source; endpoint I stumbled on by observing network activity on stats.nba.com; gets me the data I want, but no contract with this service)
   - immediately store results in real time, so we have some backup of live results; use this backup instead of calling out to the API
-    if we know, based on schedule, that our copy of data is up to data (fetching data from API would be a no-op)
+    if we know, based on schedule, that our copy of data is up to date (fetching data from API would be a no-op)
     - fallback if unreliable API disappears; at least we have something to serve, could manually patch results while looking for
       new source
+- KV writes have no storage expiration/TTL. The JSON `expiresAt` is our refresh
+  deadline, not deletion time; expired validated data remains an outage backup.
+  KV replication/edge caching is eventually consistent and separate from that
+  deadline. A version change rejects old values on read; it does not purge
+  replicas or HTTP caches.
 - set caching headers based on approximate calculation of time remaining until new results in data (when games finish)
   - reduce load times for end user, reduce round trips to server to render view based on network call (KV or API call, depending on if data fresh)
   - also, saves on KV usage; fewer calls since cache headers tell browser: results on server won't change for x time, so don't

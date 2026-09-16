@@ -4,6 +4,14 @@ Run `mise x -- pnpm test` from the repository root. Vitest tests also run throug
 normal verify/build commands and the existing test hook. Use `mise run setup`
 first to install dependencies, generate Worker types and install hooks.
 
+Following [Vitest's agent guidance](https://vitest.dev/guide/learn/writing-tests-with-ai.html#common-pitfalls),
+`vitest.config.ts` resets mock implementations/history, restores spies and
+unstubs globals/environment variables before each test. Fake timers still need
+explicit `vi.useRealTimers()` cleanup. Prefer short behavior names and typed
+`vi.mock(import(...))` for application modules. Partial Astro/Worker transport
+shims intentionally use string mocks rather than pretending to implement their
+full framework types. Run tests noninteractively (`pnpm test` uses `--run`).
+
 - `system.test.ts`: source-data lifecycle, completeness, referential integrity
   and top-10 cutoff checks. `content-fixture.ts` reads one fresh JSON snapshot
   per run, preserves duplicates, rejects empty arrays and supplies the real
@@ -21,6 +29,16 @@ first to install dependencies, generate Worker types and install hooks.
 - `preview-alias.test.ts`: valid, bounded, deterministic and collision-resistant
   branch aliases.
 - `svg-optimizer.test.ts`: actual optimizer hooks under an encoded file path.
+- `live-action.test.ts`: actual handler with controlled dates and explicit mocks;
+  latest-only requests, preseason bypass, validated cache/refetch/fallback,
+  expiry transitions and Sentry reporting versus expected version invalidation. `worker-bindings.ts` is a fail-fast Node resolution target,
+  not a KV emulator.
+- `live-loader.test.ts`: actual loader over controlled NBA responses, request
+  headers, provider IDs, Cup exclusion, normalized validation and refresh timing.
+  Finality remains score-based pending preseason observations.
+- `live-cache.test.ts`: the HTTP freshness calculation shared by both islands.
+- `feed-diagnostic.test.ts`: pure feed observations and real offline Node CLI
+  checks. No network requests in tests; live diagnostics are manual.
 - `workflows.test.ts`: deployment-time verification wiring, the shared TypeScript
   ref classifier and actual Node CLI smoke tests. No shell extraction or
   Windows-specific skip; tests never execute deployment commands.

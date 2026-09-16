@@ -41,7 +41,7 @@ The core calculation engine treats **betting lines as truth about expectations**
 - **New Statistical Calculations**: Add to `content-utils.ts` alongside existing functions like `pace()`, `isSurprise()`, `isEliminated()`
 - **UI Components for Team Data**: Follow the pattern in `components/team-stats/` with separate SSR and UI layers
 - **New Season Data**: Goes in `src/content/` JSON files, following the established schema patterns
-- **Live Data Modifications**: Extend `src/loaders/live.ts` loader logic
+- **Live Data Modifications**: Extend `src/loaders/live/index.ts`; shared schemas, request details and cache helpers live in `src/loaders/live/utils.ts`
 - **Archive Logic**: Modify `archiver/script.ts` for end-of-season data processing
 
 **Exploration Path:**
@@ -50,7 +50,7 @@ The core calculation engine treats **betting lines as truth about expectations**
 
 2. **Examine `src/content.config.ts`** - See how the type system enforces data relationships and valid combinations.
 
-3. **Trace a data flow**: Pick either static (`src/content/games.json` → content collections → pages) or dynamic (`src/loaders/live.ts` → KV cache → components) to understand the dual-track approach.
+3. **Trace a data flow**: Pick either static (`src/content/games.json` → content collections → pages) or dynamic (`src/loaders/live/index.ts` → KV cache → components) to understand the dual-track approach.
 
 4. **Review seasonal boundaries**: Look at `getSeasonSurpriseRules()` to understand how shortened seasons are handled differently.
 

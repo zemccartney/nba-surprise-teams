@@ -2,10 +2,20 @@
 import type { UserConfig, UserConfigFnPromise } from "vite";
 
 import { getViteConfig } from "astro/config";
+import { fileURLToPath } from "node:url";
 
 const astroConfig = getViteConfig({
   test: {
+    alias: {
+      "cloudflare:workers": fileURLToPath(
+        new URL("tests/worker-bindings.ts", import.meta.url),
+      ),
+    },
     include: ["tests/**/*.test.ts"],
+    mockReset: true,
+    restoreMocks: true,
+    unstubEnvs: true,
+    unstubGlobals: true,
     watchTriggerPatterns: [
       // rebuild on changes to astro source, since test files don't import directly (and vitest watch watches by import graph) (really, only care about content, consider narrowing)
       {

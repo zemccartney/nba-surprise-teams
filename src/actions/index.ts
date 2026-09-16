@@ -4,31 +4,12 @@ import { ActionError, defineAction } from "astro:actions";
 import { getEntry } from "astro:content";
 import { env } from "cloudflare:workers";
 
-import type { LoaderResponse } from "../content-utils";
+import type { LiveLoaderResponse } from "../loaders/live/utils";
 
-import LiveLoader from "../loaders/live";
+import { getLatestSeason } from "../content-utils";
+import LiveLoader, { LIVE_DATA_VERSION } from "../loaders/live";
+import { decodeLiveCache } from "../loaders/live/utils";
 import * as Utils from "../utils";
-
-/*
-
-Used to prevent workers from returning outdated data from KV.
-
-Given:
-- KV will cache results after read at edge locations
-- If breaking changes made to shape of data at play (as output by loader / stored in KV),
-cached output could result in errors (data not matching consumer contract, unusable)
-- There's no way to force-clear all KV-cached results (letting alone this doesn't solve
-for continued usage repopulating caches)
-
-So, we need a real-time way to verify that KV matches consumer contract, so we "sign" / version the data in KV;
-this version id is a stand-in for the expected data shape i.e. if mismatched with one present on
-cached data, if any, then assume cache is invalid and force refresh
-
-TODO Thinking about it, could switch to parsing output of KV, using schema for expected shape
-Less performant, but more clearly expresses intent, less fragile / difficult to remember to update
-
-*/
-const SCHEMA_ID = "fe5ae574-bb2d-478e-a2b5-d9b9f1458cc0"; // :) https://everyuuid.com/
 
 export const server = {
   getSeasonData: defineAction({
@@ -36,7 +17,7 @@ export const server = {
       seasonId: z.string(),
     }),
     // eslint-disable-next-line perfectionist/sort-objects
-    handler: async (input): Promise<LoaderResponse> => {
+    handler: async (input): Promise<LiveLoaderResponse> => {
       try {
         const season = await getEntry("seasons", input.seasonId);
 
@@ -47,15 +28,22 @@ export const server = {
           });
         }
 
-        // game times are implicitly in EST
-        // on fetching data, we want only the games scheduled through the current date i.e. possibly finished
-        // so, we need the yyyy-mm-dd representation of the current data in EST, regardless of the server's time zone
+        // The upstream loader is latest-season-only. Archive pages use static
+        // data; never read/write an older season's KV key with this loader.
+        const latestSeason = await getLatestSeason();
+        if (season.id !== latestSeason?.id) {
+          throw new ActionError({
+            code: "BAD_REQUEST",
+            message: "Live data is available only for the latest season",
+          });
+        }
+
+        // Compare Eastern calendar dates, independent of the server's timezone.
         const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
 
-        // TODO Document; needed to handle when season-in-waiting i.e. season and over/unders for upcoming set, but season not started (see home page)
-        // Build assumption: allowable / expected that season will be ready data-wise prior to season start date, given
-        // expected data release schedule; past season end not factored here i.e. previous route, pull from static if past season
-        // end, as we don't solve for missing data programmatically; solve for material problems with material
+        // Odds can be published before opening night. Do not fetch or set a
+        // calculated expiry until the season begins (see MAINTENANCE.md).
+        // Archived pages use static data, not a historical live-loader fallback.
         if (currentYYYYMMDD < season.data.startDate) {
           return {
             games: [],
@@ -64,55 +52,57 @@ export const server = {
 
         const now = Date.now();
 
-        const gamesCache = await env.GAMES_KV.get<{
-          data: LoaderResponse;
-          id: string;
-        }>(season.data.id.toString(), "json");
+        const cached = decodeLiveCache(
+          await env.GAMES_KV.get(season.id, "text"),
+          season.id,
+          LIVE_DATA_VERSION,
+        );
 
-        if (
-          // Does it look like KV contains well-formed data?
-          gamesCache?.id === SCHEMA_ID &&
-          Object.hasOwn(gamesCache.data, "games") &&
-          gamesCache.data?.games.length
-        ) {
-          const { expiresAt, games } = gamesCache.data;
+        if (cached.status === "invalid") {
+          Sentry.captureException(cached.error, {
+            tags: { source: "live-cache-validation" },
+          });
+        }
 
-          // No next expiresAt means no more upcoming relevant games this season means no new writes
-          if (!expiresAt) {
-            // TODO Is there a way to force-clear server island caches? Or does that happen on deployment, due to, I assume, changing the params encryption key?
-            return { games };
+        const gamesCache = cached.status === "valid" ? cached.data : undefined;
+
+        if (gamesCache) {
+          const { expiresAt, games } = gamesCache;
+
+          // A timestamp can legitimately accompany zero completed games.
+          if (expiresAt !== undefined && expiresAt > now) {
+            return gamesCache;
           }
 
-          // Our backup of remote data is still fresh; serve
-          if (expiresAt > now) {
-            return gamesCache.data;
+          // No next expiry means a complete nonempty result set. Keep retrying
+          // empty, undated responses rather than declaring a season finished.
+          if (expiresAt === undefined && games.length > 0) {
+            return { games };
           }
         }
 
-        // Cache is empty (no games) or stale (expiresAt <= now); refresh
-        // TODO Refresh in the background if stale results via waitUntil? Review catbox settings
+        // Missing, incompatible, malformed or stale data must be refreshed.
 
         try {
-          const refreshed = await LiveLoader();
+          // The loader validates normalized output once, at its return boundary.
+          const refreshed = await LiveLoader(season.id);
 
-          // expiration without eviction: keep data around as a fallback,
+          // No KV TTL: retain validated data as an outage fallback.
           await env.GAMES_KV.put(
             season.id.toString(),
             JSON.stringify({
               data: refreshed,
-              id: SCHEMA_ID,
+              id: LIVE_DATA_VERSION,
             }),
           );
 
           return refreshed;
         } catch (error) {
-          // Serve our copy of data as a fallback, but report error for remediation
-          // Better to keep site visibly working, even if data outdated
-          if (import.meta.env.PROD) {
-            Sentry?.captureException?.(error);
-          }
+          // Report refresh failures even when a valid backup keeps the page
+          // working. Expected old cache versions are not refresh failures.
+          Sentry.captureException(error);
 
-          if (gamesCache?.id !== SCHEMA_ID) {
+          if (!gamesCache) {
             throw new ActionError({
               code: "INTERNAL_SERVER_ERROR", // TODO Report bug? says not available? code: 'SERVICE_UNAVAILABLE',
               message: "Unable to resolve working games data",
@@ -120,7 +110,7 @@ export const server = {
           }
 
           return {
-            games: gamesCache?.data?.games ?? [],
+            games: gamesCache.games,
           };
         }
       } catch (error) {
@@ -128,7 +118,11 @@ export const server = {
           console.log(error);
         }
 
-        Sentry.captureException?.(error);
+        // Refresh failures were reported above. Expected request rejections
+        // and their ActionError wrappers should not create duplicate alerts.
+        if (!(error instanceof ActionError)) {
+          Sentry.captureException(error);
+        }
 
         throw error;
       }

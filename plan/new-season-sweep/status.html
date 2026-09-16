@@ -1047,7 +1047,13 @@ mise run setup</code></pre>
                     in hooks and verify/build. See the
                     <a href="prelaunch-review/test-tooling-gates.md"
                       >test/tooling review guide</a
-                    >. Live-action/feed work and hosted gates remain open;
+                    >. Latest live-data guardrails and the standalone preseason
+                    diagnostic are implemented. Follow-up cleanup consolidates
+                    the loader, clarifies Sentry reporting and improves tests
+                    and readability. 110 tests/full source-copy build pass; see
+                    <a href="prelaunch-review/live-readability.md"
+                      >the live-data follow-up</a
+                    >. Finality observations and hosted gates remain open;
                     merge/cutover stay gated. See the
                     <a href="prelaunch-review/README.md">reconciled report</a>
                     for priorities, evidence and rejected claims.
@@ -1261,8 +1267,13 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">Re-test server-island caching</p>
                   <p class="item-note">
-                    Once there is a live season. Zack flagged this as finnicky
-                    to get right originally, and the adapter changed under it.
+                    Fake-clock tests now cover loader expiry, KV
+                    refresh/fallback and the shared HTTP max-age calculation.
+                    Actual hosted headers/results through a game-end refresh
+                    still need checking at season activation; the preseason
+                    action bypass intentionally sets no calculated expiry. See
+                    MAINTENANCE.md for the separate standalone feed diagnostic
+                    and preseason status/score observations.
                   </p>
                 </div>
               </li>

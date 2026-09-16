@@ -19,7 +19,56 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: agreed cleanup
+## Latest: live-data readability and reporting review
+
+See [live-readability.md](prelaunch-review/live-readability.md). Consolidated live
+code into index.ts/utils.ts, moved season guarantees to the loader, separated
+quiet version invalidation from reportable cache corruption, and report original
+loader failures even with successful fallback. Reorganized the diagnostic into
+named checks with explicit blocks/spacing. Applied Vitest's global mock cleanup
+and typed application mocks; shortened behavior names. No finality change,
+commit, push or deployment.
+
+## Previous: approved live-data guardrails implemented
+
+See [live-data-guardrails.md](prelaunch-review/live-data-guardrails.md). Exclude
+only the Cup championship before results/refresh selection, retain nbaGameId,
+validate normalized output and cache reads, and version incompatible data with
+a loader-owned changelog. A standalone diagnostic and MAINTENANCE instructions
+cover preseason observations. Fake-clock cache transitions are tested; finality
+and preseason bypass remain unchanged. 103 tests pass; user scratch-file type/
+format issues remain outside this work. No commit, push or deployment.
+
+## Previous: Referer works; discuss feed semantics before changing rules
+
+Zack's Referer-equipped scratch request and my repeat now succeed, with a parsed
+HTTP 200 response. Added the same header to the actual live loader and a request
+regression test. See [feed-semantics.md](prelaunch-review/feed-semantics.md) for
+current payload counts, the Cup championship distinction, and what the finality
+fixture does and does not prove. No finality/eligibility changes; D2 review stays
+pending. 70 tests/direct Astro build pass; full build's format gate flags the
+untouched user scratch file. No commit/push/deployment.
+
+## Previous investigation: upstream NBA access
+
+Zack also reproduced the live CDN 403 in `scr.ts`. Paused action review for an
+access investigation: the schedule page itself is denied in Chrome here;
+upstream nba_api reports the same schedule/CDN problem and inconsistent header
+workarounds. None of those headers restored local access. See
+[nba-feed-access.md](prelaunch-review/nba-feed-access.md). No application or
+scratch-script edits in this investigation. Need a successful ordinary-browser
+capture and coordinated Cloudflare-side verification before selecting a fix.
+
+## Previous: checkpoint and D2 action boundary
+
+Committed approved progress as `1fa273b` (65 tests/hooks passed), without pushing.
+Verification-definition consolidation is logged as deferred. Subsequent D2 work
+rejects older-season live-action requests before touching KV or the latest-only
+loader. 69 tests/full build pass; see [live-action.md](prelaunch-review/live-action.md).
+This handler fix is uncommitted. Feed finality/eligibility remain open; direct
+read-only NBA CDN requests returned 403, not a usable contract sample.
+
+## Previous: agreed cleanup
 
 See [cleanup.md](prelaunch-review/cleanup.md). CI remains full verification at
 preview/production deployment time; the separate verification workflow was
