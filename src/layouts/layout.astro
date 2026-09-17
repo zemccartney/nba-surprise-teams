@@ -2,6 +2,7 @@
 import "@fontsource/iosevka-curly/400.css";
 import "@fontsource/iosevka-curly/700.css";
 import "@fontsource-variable/sixtyfour/full.css";
+import sixtyfourLatinUrl from "@fontsource-variable/sixtyfour/files/sixtyfour-latin-full-normal.woff2?url";
 
 import "../styles/global.css";
 
@@ -19,6 +20,20 @@ const { description, title } = Astro.props;
     <meta charset="utf-8" />
     <meta content="width=device-width" name="viewport" />
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href={sixtyfourLatinUrl}
+      rel="preload"
+      type="font/woff2"
+    />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/fonts/ChicagoKare-Regular.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
 
     <title>{title ? `${title} - NBASTT` : "NBA Surprise Teams Tracker"}</title>
     <meta

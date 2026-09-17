@@ -1,10 +1,12 @@
 # Pre-launch review: full Foundations stack
 
-## Latest: header-font preload review stop
+## Latest: header-font preloads promoted
 
-The [two-font preload experiment](header-font-preloads.md) is on dev 4332 / built 4333. Sampled header geometry shifts disappear across the measured desktop/mobile
-navigations, without CSS/font-display or chart-wait changes. Manual review is
-still required; no application patch has been promoted.
+Zack approved the built preview and requested the [two-font preload patch](header-font-preloads.md)
+in the main checkout. `src/layouts/layout.astro` now contains it; font-display and
+chart waits remain unchanged. The temporary dev copy has a missing installed
+Astro tsconfig, which is present in the main checkout. No Node-prerender or SQLite
+application changes are included.
 
 ## Previous persistence/performance review stop
 

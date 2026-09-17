@@ -1072,13 +1072,14 @@ mise run setup</code></pre>
                     <a href="prelaunch-review/header-font-preloads.md"
                       >header-font preload experiment</a
                     >
-                    is now ready for review on 4332/4333: no sampled header
-                    geometry shifts with two preloads, versus repeated dev
-                    control shifts. No font-display or chart-wait change, and no
-                    application patch promoted. Prior profiling identified
-                    repeated module-runner overhead, while the built fixture
-                    island takes ~9ms per repeated uncached request (~47ms
-                    first). The latest
+                    showed no sampled header geometry shifts with two preloads,
+                    versus repeated dev control shifts. Zack approved the built
+                    appearance; the preloads are now in the main checkout, with
+                    no font-display or chart-wait change. The disposable dev
+                    copy later lost an installed Astro tsconfig; no workaround
+                    is included. Prior profiling identified repeated
+                    module-runner overhead, while the built fixture island takes
+                    ~9ms per repeated uncached request (~47ms first). The latest
                     <a href="prelaunch-review/sqlite-pilot.md">SQLite pilot</a>
                     proves Node SQLite / embedded workerd metadata, dump/odds
                     workflows and runtime exclusion; 127 tests pass. A separate

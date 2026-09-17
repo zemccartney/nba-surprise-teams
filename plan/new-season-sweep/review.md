@@ -19,14 +19,14 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: header-font preloads — review stop
+## Latest: header-font preloads — promoted for main-checkout review
 
-The [preload-only experiment](prelaunch-review/header-font-preloads.md) is ready
-on dev 4332 and built 4333. Navigate Stats → Archive → About → Stats and compare
-with controls 4331/4330. Two header-font preloads eliminate sampled geometry
-changes in the tested desktop/mobile visits; font-display and chart waits are
-unchanged. Sampling is not a guarantee of every painted frame. Root app is not
-yet changed; approve the visual behavior before promotion or another experiment.
+Zack approved the built preview and requested the two preloads in the main
+checkout. They are now in `src/layouts/layout.astro`; font-display and chart waits
+remain unchanged. The disposable dev copy later lost Astro's installed
+`tsconfigs/strictest.json`; the main checkout has the file. No workaround or
+Node-prerender/SQLite promotion is included. See the
+[experiment record](prelaunch-review/header-font-preloads.md).
 
 ## Previous: SQLite pilot and configuration-only control — review stop
 

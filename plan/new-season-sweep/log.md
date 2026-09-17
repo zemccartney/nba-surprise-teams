@@ -13,6 +13,16 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Header-font preloads — promoted after built-preview approval
+
+Zack approved the built appearance and requested a main-checkout commit.
+Promoted exactly the two header preload links and Vite font URL import to
+`src/layouts/layout.astro`. Font-display and chart font waits remain unchanged;
+Node-prerender and SQLite settings are not promoted. The temporary dev server's
+later tsconfig error corresponds to a missing installed Astro strictest.json;
+the main checkout has that file. No speculative tsconfig workaround. No push or
+deployment. See [the updated record](prelaunch-review/header-font-preloads.md).
+
 ## Header-font preload experiment — manual review stop
 
 Responding to navigation jitter, tested only Sixtyfour Latin and ChicagoKare

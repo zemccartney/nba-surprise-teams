@@ -1,8 +1,19 @@
-# Header-font preloads — manual review stop
+# Header-font preloads — promoted after built-preview approval
 
-Only experiment: preload the two existing header fonts. Root application code
-is unchanged; the patch is applied in a new disposable Node-prerender copy.
+Zack approved the built appearance and requested the change in the main checkout.
+The two preload links and Vite font URL import are now in `src/layouts/layout.astro`.
 No font-display, font family, chart font wait, package or rendering changes.
+Node prerender and SQLite remain separate, unpromoted application changes.
+
+The disposable dev server later reported `Tsconfig not found astro/tsconfigs/strictest`;
+its installed Astro `tsconfigs/strictest.json` is now missing, while the main
+checkout's file is present. Why it disappeared is not established. No tsconfig
+workaround is part of this change. The results below describe the earlier
+successful captures.
+
+Promotion validation: a fresh copy using the main checkout's unchanged workerd
+prerender configuration passes generated Worker types, full verify (127 tests),
+and a credential-free build. Both preload links are present in built HTML.
 
 ## Review URLs
 
@@ -92,6 +103,6 @@ mise x -- node plan/baseline/header-font-preloads.mjs --out /tmp/new-header-desk
 mise x -- node plan/baseline/header-font-preloads.mjs --width 390 --runs 1 --out /tmp/new-header-mobile.json
 ```
 
-Output paths must be new. Pause here for manual approval before promoting the
-preloads to the application or trying font-display/metric changes. The SQLite
-migration and Node-only adoption decisions remain separate. No push/deployment.
+Output paths must be new. The retained patch describes the already-promoted change;
+do not apply it again to the current checkout. Further font-display/metric changes,
+SQLite migration and Node-only adoption remain separate decisions. No push/deployment.
