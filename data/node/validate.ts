@@ -3,6 +3,7 @@ import type { DatabaseSync } from "node:sqlite";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 
+import { getEasternYYYYMMDD } from "../../src/data/calendar.ts";
 import { rulesForSeason } from "../../src/data/rules.ts";
 import { readGames, readMetadata, validateDatabase } from "./database.ts";
 
@@ -33,7 +34,7 @@ export function validateDataset(
     const sorted = metadata.seasons.toSorted((a, b) =>
       a.startDate.localeCompare(b.startDate),
     );
-    const today = now.toISOString().slice(0, 10);
+    const today = getEasternYYYYMMDD(now);
     let unfinished = 0;
     for (const [index, season] of sorted.entries()) {
       assert.ok(

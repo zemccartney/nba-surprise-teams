@@ -15,6 +15,7 @@ import Path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
+import { getCurrentEasternYYYYMMDD } from "../src/data/calendar.ts";
 import {
   applyChanges,
   replaceArchive,
@@ -149,7 +150,7 @@ if (command === "restore") {
     } else if (command === "archive-nba") {
       const metadata = readMetadata(db);
       const eligible = metadata.seasons
-        .filter((s) => s.endDate < new Date().toISOString().slice(0, 10))
+        .filter((s) => s.endDate < getCurrentEasternYYYYMMDD())
         .map((s) => s.id)
         .toSorted((a, b) => a.localeCompare(b));
       assert.equal(

@@ -12,35 +12,8 @@ export const signedFormatter = new Intl.NumberFormat("en-US", {
   signDisplay: "always",
 });
 
-const easternFormatter = new Intl.DateTimeFormat("en-US", {
-  day: "2-digit",
-  month: "2-digit",
-  timeZone: "America/New_York",
-  year: "numeric",
-});
-
-/*
-  Given a date in the system timezone, return the current date, formatted as YYYY-MM-DD, 
-  in the US Eastern timezone. Useful for date comparisons given the NBA scheduling data is all relative to that timezone
-
-  https://community.cloudflare.com/t/cf-worker-determine-time-of-day-timezone/179405
-*/
-// TODO Somehow call out that this is suitable only in on-demand-rendered paths?
-export const getEasternYYYYMMDD = (date: Date) => {
-  const parts = easternFormatter.formatToParts(date); // e.g. array representing 03/02/2025
-
-  // formatter should guarantee these parts exist
-  /* eslint-disable @typescript-eslint/no-non-null-assertion */
-  const day = parts.find((p) => p.type === "day")!;
-  const month = parts.find((p) => p.type === "month")!;
-  const year = parts.find((p) => p.type === "year")!;
-  /* eslint-enable @typescript-eslint/no-non-null-assertion */
-
-  return `${year.value}-${month.value}-${day.value}`;
-};
-
-// TODO Somehow call out that this is suitable only in on-demand-rendered paths?
-export const getCurrentEasternYYYYMMDD = () => getEasternYYYYMMDD(new Date());
+// Use the NBA calendar in both Worker requests and Node maintenance.
+export { getCurrentEasternYYYYMMDD, getEasternYYYYMMDD } from "./data/calendar";
 
 /***
  *
