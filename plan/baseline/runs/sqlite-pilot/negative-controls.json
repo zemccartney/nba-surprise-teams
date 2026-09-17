@@ -1,0 +1,6 @@
+{
+  "tamperedArtifactRejected": true,
+  "workingFreshButStagedStaleRejected": true,
+  "restagingFreshDumpPasses": true,
+  "workerSQLiteImportRejectedByGraphAudit": true
+}

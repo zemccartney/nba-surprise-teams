@@ -1070,9 +1070,17 @@ mise run setup</code></pre>
                     rendering experiments remain unstarted. Prior profiling
                     identified repeated module-runner overhead, while the built
                     fixture island takes ~9ms per repeated uncached request
-                    (~47ms first). No application fix or chart migration yet.
-                    Finality observations and hosted gates remain open;
-                    merge/cutover stay gated. See the
+                    (~47ms first). The latest
+                    <a href="prelaunch-review/sqlite-pilot.md">SQLite pilot</a>
+                    proves Node SQLite / embedded workerd metadata, dump/odds
+                    workflows and runtime exclusion; 127 tests pass. A separate
+                    configuration-only Node-prerender control needs no SQLite
+                    and reduces warm Stats/team TTFB from 1,404/621ms to
+                    116/5ms. Pilot review on 4329/4330; Node-only control on
+                    4331. Root app/collections remain unchanged. Pause for
+                    manual review before choosing Node-only adoption or full
+                    migration. Finality observations and hosted gates remain
+                    open; merge/cutover stay gated. See the
                     <a href="prelaunch-review/README.md">reconciled report</a>
                     for priorities, evidence and rejected claims.
                   </p>
@@ -1381,17 +1389,19 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">SQLite content store</p>
                   <p class="item-note">
-                    Deferred: aim for database-enforced referential integrity
-                    and a project-owned query API/types, dropping Astro content
-                    collection queries entirely. Original source-format idea:
-                    human-readable SQL dump; details still need design. Enforce
-                    a build-only database boundary deliberately, accounting for
-                    metadata needed by live islands/actions. No conversion now;
-                    current source-data tests are at a stopping point apart from
-                    small cleanup. See the
-                    <a href="content-lifecycle.md"
-                      >content lifecycle diagrams and future boundary notes</a
-                    >.
+                    Bounded compatibility pilot proven; full migration remains
+                    gated. SQLite-backed Node prerender, generated metadata-only
+                    Worker catalog, deterministic SQL dump/restore, odds
+                    editing, actual staged-dump checks and artifact audit pass.
+                    All current data/chart points match. No active collection
+                    consumer or live path has been replaced. Node prerender
+                    alone fixes most measured dev latency, so persistence
+                    benefits are separate. Review the
+                    <a href="../sqlite-spike/README.md"
+                      >data-management guide</a
+                    >
+                    and <a href="prelaunch-review/sqlite-pilot.md">results</a>
+                    before deciding the next scope.
                   </p>
                 </div>
               </li>

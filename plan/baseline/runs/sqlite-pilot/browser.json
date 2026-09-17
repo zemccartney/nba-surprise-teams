@@ -1,0 +1,186 @@
+{
+  "browser": "152.0.7977.83",
+  "checks": [
+    {
+      "environment": "preview",
+      "mode": "archive",
+      "visit": 0,
+      "chartFrameMs": 155.30000007152557,
+      "documentTTFBMs": 17.300000071525574
+    },
+    {
+      "environment": "preview",
+      "mode": "archive",
+      "visit": 1,
+      "chartFrameMs": 96.39999997615814,
+      "documentTTFBMs": 2.600000023841858
+    },
+    {
+      "environment": "preview",
+      "mode": "archive",
+      "visit": 2,
+      "chartFrameMs": 90.29999995231628,
+      "documentTTFBMs": 2.299999952316284
+    },
+    {
+      "environment": "preview",
+      "mode": "archive",
+      "visit": 3,
+      "chartFrameMs": 90.39999997615814,
+      "documentTTFBMs": 2.3000000715255737
+    },
+    {
+      "environment": "preview",
+      "mode": "archive",
+      "visit": 4,
+      "chartFrameMs": 89.5,
+      "documentTTFBMs": 2.399999976158142
+    },
+    {
+      "environment": "preview",
+      "mode": "archive",
+      "visit": 5,
+      "chartFrameMs": 90.19999992847443,
+      "documentTTFBMs": 2.399999976158142
+    },
+    {
+      "environment": "preview",
+      "mode": "island",
+      "visit": 0,
+      "chartFrameMs": 171.20000004768372,
+      "documentTTFBMs": 2.700000047683716,
+      "islandMs": 23.149
+    },
+    {
+      "environment": "preview",
+      "mode": "island",
+      "visit": 1,
+      "chartFrameMs": 88.39999997615814,
+      "documentTTFBMs": 2.3000000715255737,
+      "islandMs": 6.831
+    },
+    {
+      "environment": "preview",
+      "mode": "island",
+      "visit": 2,
+      "chartFrameMs": 90.10000002384186,
+      "documentTTFBMs": 2.1999999284744263,
+      "islandMs": 6.084
+    },
+    {
+      "environment": "preview",
+      "mode": "island",
+      "visit": 3,
+      "chartFrameMs": 91,
+      "documentTTFBMs": 2.299999952316284,
+      "islandMs": 6.02
+    },
+    {
+      "environment": "preview",
+      "mode": "island",
+      "visit": 4,
+      "chartFrameMs": 106.80000007152557,
+      "documentTTFBMs": 2.3000000715255737,
+      "islandMs": 7.925000000000001
+    },
+    {
+      "environment": "preview",
+      "mode": "island",
+      "visit": 5,
+      "chartFrameMs": 89,
+      "documentTTFBMs": 2.899999976158142,
+      "islandMs": 6.745
+    },
+    {
+      "environment": "dev",
+      "mode": "archive",
+      "visit": 0,
+      "chartFrameMs": 231.19999992847443,
+      "documentTTFBMs": 19.800000071525574
+    },
+    {
+      "environment": "dev",
+      "mode": "archive",
+      "visit": 1,
+      "chartFrameMs": 121.39999997615814,
+      "documentTTFBMs": 3.1999999284744263
+    },
+    {
+      "environment": "dev",
+      "mode": "archive",
+      "visit": 2,
+      "chartFrameMs": 107.29999995231628,
+      "documentTTFBMs": 3.399999976158142
+    },
+    {
+      "environment": "dev",
+      "mode": "archive",
+      "visit": 3,
+      "chartFrameMs": 106.20000004768372,
+      "documentTTFBMs": 3.399999976158142
+    },
+    {
+      "environment": "dev",
+      "mode": "archive",
+      "visit": 4,
+      "chartFrameMs": 106.89999997615814,
+      "documentTTFBMs": 3.5
+    },
+    {
+      "environment": "dev",
+      "mode": "archive",
+      "visit": 5,
+      "chartFrameMs": 106.60000002384186,
+      "documentTTFBMs": 3.399999976158142
+    },
+    {
+      "environment": "dev",
+      "mode": "island",
+      "visit": 0,
+      "chartFrameMs": 1407,
+      "documentTTFBMs": 11.700000047683716,
+      "islandMs": 802.6980000000001
+    },
+    {
+      "environment": "dev",
+      "mode": "island",
+      "visit": 1,
+      "chartFrameMs": 295.5,
+      "documentTTFBMs": 9.200000047683716,
+      "islandMs": 174.809
+    },
+    {
+      "environment": "dev",
+      "mode": "island",
+      "visit": 2,
+      "chartFrameMs": 172.10000002384186,
+      "documentTTFBMs": 9.299999952316284,
+      "islandMs": 57.824999999999996
+    },
+    {
+      "environment": "dev",
+      "mode": "island",
+      "visit": 3,
+      "chartFrameMs": 174.10000002384186,
+      "documentTTFBMs": 7.399999976158142,
+      "islandMs": 53.364000000000004
+    },
+    {
+      "environment": "dev",
+      "mode": "island",
+      "visit": 4,
+      "chartFrameMs": 174,
+      "documentTTFBMs": 6.5,
+      "islandMs": 48.276
+    },
+    {
+      "environment": "dev",
+      "mode": "island",
+      "visit": 5,
+      "chartFrameMs": 157.80000007152557,
+      "documentTTFBMs": 6.399999976158142,
+      "islandMs": 50.397
+    }
+  ],
+  "conditions": "1440×900, normal motion, first visit then warm reloads; chart readiness is slider + two frames, NOT animation completion"
+}

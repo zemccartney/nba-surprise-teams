@@ -19,7 +19,23 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: experiment 1, frontmatter timing — review stop
+## Latest: SQLite pilot and configuration-only control — review stop
+
+Read [SQLite results](prelaunch-review/sqlite-pilot.md), then the
+[hands-on data/verification guide](../sqlite-spike/README.md). The bounded pilot
+proves Node SQLite reads, generated workerd metadata, dump/restore, odds workflows,
+actual staged-dump checks, explicit dev refresh and runtime artifact exclusion.
+127 tests pass; existing app/collections/live KV are not migrated. Dev pilot on
+4329, built pilot on 4330. All fictitious odds were removed.
+
+Most important surprise: **Node prerender alone**, with no SQLite integration,
+reduces warm original-page TTFB from 1,404 to 116ms Stats and 621 to 5ms team.
+That byte-verified configuration-only copy is on 4331. SQLite's relational workflow
+is a separate benefit; do not attribute the environment improvement to SQLite.
+Review both options before further implementation. No fonts/chart-library work,
+package updates, deployment or production binding changes.
+
+## Previous: experiment 1, frontmatter timing — review stop
 
 Timed both frozen stacks in separate copies, without browser JS or font work.
 Warm Stats frontmatter is 212ms old versus 1,436ms current. The current team route

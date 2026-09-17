@@ -1,0 +1,152 @@
+{
+  "revision": "e2a8b30",
+  "change": "Only adapter prerenderEnvironment: node. No SQLite integration, source helper, page, package, or data changes.",
+  "verifiedTrackedFiles": 283,
+  "method": "Serial curl, alternating order, one initial request then five warm requests per environment/path. No JS/fonts/animation.",
+  "measurements": [
+    {
+      "path": "/stats/",
+      "visit": 0,
+      "environment": "workerd",
+      "ttfbMs": 1453.773
+    },
+    {
+      "path": "/stats/",
+      "visit": 0,
+      "environment": "node",
+      "ttfbMs": 589.245
+    },
+    {
+      "path": "/stats/",
+      "visit": 1,
+      "environment": "node",
+      "ttfbMs": 113.67099999999999
+    },
+    {
+      "path": "/stats/",
+      "visit": 1,
+      "environment": "workerd",
+      "ttfbMs": 1403.567
+    },
+    {
+      "path": "/stats/",
+      "visit": 2,
+      "environment": "workerd",
+      "ttfbMs": 1369.991
+    },
+    {
+      "path": "/stats/",
+      "visit": 2,
+      "environment": "node",
+      "ttfbMs": 128.554
+    },
+    {
+      "path": "/stats/",
+      "visit": 3,
+      "environment": "node",
+      "ttfbMs": 117.22200000000001
+    },
+    {
+      "path": "/stats/",
+      "visit": 3,
+      "environment": "workerd",
+      "ttfbMs": 1441.538
+    },
+    {
+      "path": "/stats/",
+      "visit": 4,
+      "environment": "workerd",
+      "ttfbMs": 1543.9080000000001
+    },
+    {
+      "path": "/stats/",
+      "visit": 4,
+      "environment": "node",
+      "ttfbMs": 116.025
+    },
+    {
+      "path": "/stats/",
+      "visit": 5,
+      "environment": "node",
+      "ttfbMs": 113.69200000000001
+    },
+    {
+      "path": "/stats/",
+      "visit": 5,
+      "environment": "workerd",
+      "ttfbMs": 1399.6100000000001
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 0,
+      "environment": "workerd",
+      "ttfbMs": 600.125
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 0,
+      "environment": "node",
+      "ttfbMs": 70.188
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 1,
+      "environment": "node",
+      "ttfbMs": 7.757
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 1,
+      "environment": "workerd",
+      "ttfbMs": 660.2679999999999
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 2,
+      "environment": "workerd",
+      "ttfbMs": 621.032
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 2,
+      "environment": "node",
+      "ttfbMs": 4.955
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 3,
+      "environment": "node",
+      "ttfbMs": 4.983
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 3,
+      "environment": "workerd",
+      "ttfbMs": 645.4879999999999
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 4,
+      "environment": "workerd",
+      "ttfbMs": 593.424
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 4,
+      "environment": "node",
+      "ttfbMs": 4.22
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 5,
+      "environment": "node",
+      "ttfbMs": 3.5239999999999996
+    },
+    {
+      "path": "/2025/CHA/",
+      "visit": 5,
+      "environment": "workerd",
+      "ttfbMs": 619.867
+    }
+  ]
+}

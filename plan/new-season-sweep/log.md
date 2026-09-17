@@ -13,6 +13,27 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## SQLite persistence pilot — compatibility proven, manual review stop
+
+Proved Node SQLite prerender plus a metadata-only workerd island in disposable
+copies; root application/collections/live KV remain unchanged. Added deterministic
+SQL dump/restore, explicit odds entry/update/inspection, staged-index drift checks,
+per-environment module resolution, explicit dev refresh and a final-artifact audit.
+All current records and chart points match; 127 tests in 13 files pass. A real
+Worker SQLite import, tampered artifact and stale staged dump are rejected. Builds
+ignore local DB state, including a successful build with no local DB. Fictitious
+odds used for refresh tests were removed. Review copies: dev 4329, built 4330.
+
+Important independent control: an e2a8b30 copy changing only
+`prerenderEnvironment: "node"` (283 tracked files byte-verified) reduces warm
+original-page TTFB from 1,404 to 116ms Stats and 621 to 5ms team. It contains no
+SQLite code. SQLite is therefore an independent persistence benefit, not required
+for the main dev improvement. Control on 4331; original references untouched.
+See [results](prelaunch-review/sqlite-pilot.md) and the
+[data-management/manual guide](../sqlite-spike/README.md). Pause before choosing
+Node-only adoption or full SQLite migration. No fonts, chart library, package,
+push, deployment or production binding changes.
+
 ## Upstream dev-runtime research — no implementation changes
 
 Researched Astro 6/7 releases, issues and actual merged fixes. Astro 6's move

@@ -1,0 +1,90 @@
+{
+  "checks": [
+    {
+      "port": 4329,
+      "path": "/sqlite-spike/archive/",
+      "width": 390,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4329,
+      "path": "/sqlite-spike/island/",
+      "width": 390,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4330,
+      "path": "/sqlite-spike/archive/",
+      "width": 390,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4330,
+      "path": "/sqlite-spike/island/",
+      "width": 390,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4331,
+      "path": "/2025/CHA/",
+      "width": 390,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4331,
+      "path": "/stats/",
+      "width": 390,
+      "charts": 3,
+      "overflow": 0
+    },
+    {
+      "port": 4329,
+      "path": "/sqlite-spike/archive/",
+      "width": 1440,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4329,
+      "path": "/sqlite-spike/island/",
+      "width": 1440,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4330,
+      "path": "/sqlite-spike/archive/",
+      "width": 1440,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4330,
+      "path": "/sqlite-spike/island/",
+      "width": 1440,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4331,
+      "path": "/2025/CHA/",
+      "width": 1440,
+      "charts": 1,
+      "overflow": 0
+    },
+    {
+      "port": 4331,
+      "path": "/stats/",
+      "width": 1440,
+      "charts": 3,
+      "overflow": 0
+    }
+  ],
+  "browserErrors": [],
+  "httpErrors": []
+}

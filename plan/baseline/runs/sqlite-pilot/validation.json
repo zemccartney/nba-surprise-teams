@@ -1,0 +1,40 @@
+{
+  "node": "26.8.1",
+  "pnpm": "12.3.4",
+  "astro": "7.3.1",
+  "cloudflareAdapter": "14.3.0",
+  "sqlite": "3.53.4",
+  "counts": {
+    "archivedGames": 18607,
+    "teams": 35,
+    "seasons": 30,
+    "teamSeasons": 269
+  },
+  "metadataBytes": 19256,
+  "metadataSha256": "1ae25ce80f2897164e263f8c8a97773208ae65abb7b84096132fa795847c40e1",
+  "dumpSha256": "fab27b8d0f57116d324bcbbd5ed832ad4cbdf56e7efcff435a6baceb73dad720",
+  "finalBuildHadNoLocalDatabase": true,
+  "generatorByteReproductionFiles": 5,
+  "desktopMobileBrowserSmoke": "390/1440px; pilot dev/preview and Node-only original team/Stats; mounted charts, End selection, shown-tooltip Escape, no overflow or browser/HTTP errors",
+  "earlierBuildIgnoredFictitiousLocalOdds": true,
+  "checks": "127 tests / 13 files; full disposable-copy verify, generated Worker types, build and artifact audit passed",
+  "audits": [
+    {
+      "environment": "ssr",
+      "chunks": 74,
+      "forbiddenMatches": [],
+      "pilotModules": [
+        "sqlite-spike/catalog.ts",
+        "\u0000sqlite-pilot:catalog",
+        "src/sqlite-pilot/Panel.astro",
+        "src/sqlite-pilot/Island.astro"
+      ]
+    },
+    {
+      "environment": "client",
+      "chunks": 9,
+      "forbiddenMatches": [],
+      "pilotModules": []
+    }
+  ]
+}

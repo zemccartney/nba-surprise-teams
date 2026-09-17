@@ -1,6 +1,19 @@
 # Pre-launch review: full Foundations stack
 
-## Latest performance review stop
+## Latest persistence/performance review stop
+
+The [SQLite pilot](sqlite-pilot.md) proves the three-context boundary: Node
+prerender queries SQLite, build restores the SQL dump, and workerd uses embedded
+metadata. Odds/dump workflows, actual staged-blob drift checks, explicit dev refresh
+and artifact negative controls pass; 127 tests pass. Root app/live KV are unchanged.
+See the [hands-on guide](../../sqlite-spike/README.md); pilot copies use 4329/4330.
+
+A separate **configuration-only** Node-prerender control on 4331 contains no
+SQLite code and reduces warm original Stats/team TTFB from 1,404/621ms to 116/5ms.
+SQLite is not required for that improvement; its persistence benefits stand
+separately. Stop for review before Node-only adoption or a full migration.
+
+## Previous performance review stop
 
 The [frontmatter timing experiment](frontmatter-performance.md) isolates the
 server-side stages: Stats frontmatter is 212ms old versus 1,436ms current in dev;

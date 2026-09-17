@@ -2,7 +2,11 @@
 
 Project-specific explanation, based on the installed Astro/Vitest/Cloudflare
 implementation and the R2 reproductions. This is not a promise about every Astro
-version. SQLite remains deferred; no migration is started here.
+version. The active application still uses collections. A later bounded
+[SQLite pilot](prelaunch-review/sqlite-pilot.md) proves Node prerender plus
+embedded Worker metadata; full migration remains gated. Its
+[data-management guide](../sqlite-spike/README.md) supersedes the earlier
+format-TBD discussion below, not the current-behavior diagrams.
 
 ## Local collections in this project
 

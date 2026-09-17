@@ -36,3 +36,23 @@ run = [
 [tasks.fix]
 description = "Run every check, applying fixes where a fixer exists"
 run = "hk fix --all"
+
+[tasks.data]
+description = "SQLite pilot commands (not the site's active data source)"
+run = "node plan/sqlite-spike/data.ts"
+
+[tasks."data:restore"]
+description = "Restore the pilot dump; refuse an existing DB"
+run = "node plan/sqlite-spike/data.ts restore"
+
+[tasks."data:dump"]
+description = "Write a deterministic pilot SQL dump for review"
+run = "node plan/sqlite-spike/data.ts dump"
+
+[tasks."data:check"]
+description = "Compare the local pilot DB with its working-tree dump"
+run = "node plan/sqlite-spike/data.ts check"
+
+[tasks."data:notify"]
+description = "Refresh pilot dev metadata after external SQL edits"
+run = "node plan/sqlite-spike/data.ts notify"
