@@ -8,7 +8,10 @@ current team path generation repeats twice per request interval. Built prerender
 does not reproduce the large delay. This follows the
 [historical React comparison](legacy-react-performance.md). Diagnostic copies
 are on 4327/4328; original references remain untouched. Pause for manual review
-before the separate font or rendering experiments.
+before the separate font or rendering experiments. Follow-up
+[upstream research](astro-dev-performance-research.md) links the runtime transition,
+known invalidation bugs, release membership and remaining attribution gaps;
+no upgrades or patches have been applied.
 
 ## Latest cleanup disposition
 

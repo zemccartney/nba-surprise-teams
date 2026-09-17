@@ -29,8 +29,11 @@ whereas the old route caches it after its first visit. Team UI frontmatter is
 build observation, so the large penalty remains dev-specific. Untimed controls,
 clock checks, independent cold-route visits and source reproduction are recorded.
 See [frontmatter-performance.md](prelaunch-review/frontmatter-performance.md) for
-limits, raw evidence and diagnostic URLs on 4327/4328. Pause: fonts and rendering
-changes are not started.
+limits, raw evidence and diagnostic URLs on 4327/4328. Follow-up
+[upstream research](prelaunch-review/astro-dev-performance-research.md) identifies
+the Astro 6 runtime transition and two relevant dev invalidation fixes, without
+applying them or claiming they explain all measured latency. Pause: fonts and
+rendering changes are not started.
 
 ## Previous: historical React / Astro 5 comparison — review stop
 

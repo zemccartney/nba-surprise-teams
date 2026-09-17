@@ -13,6 +13,22 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Upstream dev-runtime research — no implementation changes
+
+Researched Astro 6/7 releases, issues and actual merged fixes. Astro 6's move
+from Node dev rendering to workerd gives repeated module checks a local
+fetch/JSON transport cost; the asset imports existed in Astro 5 too. Found
+middleware invalidation bug #17944 (fixed in 7.3.3) and head-metadata
+self-invalidation #17995/#18007 (merged after the 7.3.3 release; absent from that
+tag). Both affected sites exist in installed 7.3.1; neither fix was tested here.
+Maintainer clarification says getStaticPaths should stay cached; proposed
+per-request clearing #16909 was never merged. Module-identity cache checks offer
+a lead for the repeated calls, not proven attribution. Image traversal/cloning
+optimizations are already included in our version. See
+[upstream research](prelaunch-review/astro-dev-performance-research.md) for exact
+sources, distinctions and a possible separately gated follow-up. No packages,
+patches, restarts or further performance experiments.
+
 ## Experiment 1: frontmatter timing — manual review stop
 
 Per Zack's request, added frontmatter/subphase and getStaticPaths timers only in
