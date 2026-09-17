@@ -1,0 +1,5797 @@
+{
+  "browser": "152.0.7977.83",
+  "width": 1440,
+  "compiledLayoutCssIdentical": true,
+  "measurements": [
+    {
+      "port": 4331,
+      "run": 0,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 197.89999997615814,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 217.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 224
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 224
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 199.70000004768372,
+          "duration": 12.399999976158142,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 199.80000007152557,
+          "duration": 12.399999976158142,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 0,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 23.100000023841858,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 37.300000071525574,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 40
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 40
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 23.5,
+          "duration": 0.7000000476837158,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 23.600000023841858,
+          "duration": 0.7000000476837158,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 0,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 11.5,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 17,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 12.200000047683716,
+          "duration": 0.7999999523162842,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 12.200000047683716,
+          "duration": 0.7999999523162842,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 0,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 181.69999992847443,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 184.29999995231628,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 200
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 200
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 182.29999995231628,
+          "duration": 0.6000000238418579,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 182.29999995231628,
+          "duration": 0.6000000238418579,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 0,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 154.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 164
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 164
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 148.89999997615814,
+          "duration": 5.199999928474426,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 149,
+          "duration": 5.299999952316284,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 0,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 34.60000002384186,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 30.399999976158142,
+          "duration": 1.600000023841858,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 30.399999976158142,
+          "duration": 1.8000000715255737,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 0,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 23.100000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 17.799999952316284,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 17.899999976158142,
+          "duration": 1,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 0,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 157.79999995231628,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 168
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 168
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 151.09999990463257,
+          "duration": 0.9000000953674316,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 151.19999992847443,
+          "duration": 1.100000023841858,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 0,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 14.5,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 36.699999928474426,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 40
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 40
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 15.100000023841858,
+          "duration": 16.199999928474426,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 15.100000023841858,
+          "duration": 16.899999976158142,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 0,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 31.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 30.5,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 30.5,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 0,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 15.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 15,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 15,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 0,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 11.899999976158142,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 12,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 12,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 0,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 31.100000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 56
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 56
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 19.100000023841858,
+          "duration": 8.399999976158142,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 19.200000047683716,
+          "duration": 11.299999952316284,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 0,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 30.899999976158142,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 26,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 26,
+          "duration": 3.1999999284744263,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 0,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 12.900000095367432,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 8.400000095367432,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 8.400000095367432,
+          "duration": 2.899999976158142,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 0,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 30.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 52
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 52
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 9.800000071525574,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 9.800000071525574,
+          "duration": 3.5,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 1,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 132.30000007152557,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 160
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 160
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 125.30000007152557,
+          "duration": 5.399999976158142,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 125.40000009536743,
+          "duration": 5.399999976158142,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 1,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 31,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 27.200000047683716,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 27.300000071525574,
+          "duration": 1.100000023841858,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 1,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 11.800000071525574,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 8.300000071525574,
+          "duration": 0.8999999761581421,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 8.300000071525574,
+          "duration": 1,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 1,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 144.90000009536743,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 152
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 152
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 138,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 138.10000002384186,
+          "duration": 0.8999999761581421,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 1,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 152.60000002384186,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 168.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 168
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 168
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 153.29999995231628,
+          "duration": 8.600000023841858,
+          "transfer": 9700
+        },
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 153.29999995231628,
+          "duration": 8.600000023841858,
+          "transfer": 4536
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 1,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 16.700000047683716,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 30.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 17.100000023841858,
+          "duration": 0.6000000238418579,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 17.200000047683716,
+          "duration": 0.6000000238418579,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 1,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 11.300000071525574,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 17.300000071525574,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 12,
+          "duration": 0.8000000715255737,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 12,
+          "duration": 0.8999999761581421,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 1,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 163.79999995231628,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 166.39999997615814,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 184
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 184
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 164.29999995231628,
+          "duration": 0.40000009536743164,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 164.29999995231628,
+          "duration": 0.5,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 1,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 18.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 36
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 36
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 11.299999952316284,
+          "duration": 3.5,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 11.299999952316284,
+          "duration": 6.600000023841858,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 1,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 29.699999928474426,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 25.199999928474426,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 25.299999952316284,
+          "duration": 2.600000023841858,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 1,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 14,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 9.100000023841858,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 9.100000023841858,
+          "duration": 3.299999952316284,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 1,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 30.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 52
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 52
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 8.799999952316284,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 8.899999976158142,
+          "duration": 3.100000023841858,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 1,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 10.700000047683716,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 47.39999997615814,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 28
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 28
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 11.299999952316284,
+          "duration": 11.100000023841858,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 11.399999976158142,
+          "duration": 11.200000047683716,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 1,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 27.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 26.600000023841858,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 26.600000023841858,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 1,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 14.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 13.899999976158142,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 13.899999976158142,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 1,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 15.800000071525574,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 24
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 24
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 16,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 16,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 2,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 146.89999997615814,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 158.70000004768372,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 168
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 168
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 147.5,
+          "duration": 8.399999976158142,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 147.5,
+          "duration": 8.5,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 2,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 30.5,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 46.89999997615814,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 31,
+          "duration": 0.6999999284744263,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 31,
+          "duration": 0.6999999284744263,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 2,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 13.800000071525574,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 31.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 14.400000095367432,
+          "duration": 0.5999999046325684,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 14.400000095367432,
+          "duration": 0.7999999523162842,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 2,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 166.80000007152557,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 191.60000002384186,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 184
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 184
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 167.30000007152557,
+          "duration": 0.3999999761581421,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 167.30000007152557,
+          "duration": 0.3999999761581421,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 2,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 129.60000002384186,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 140
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 140
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 123.10000002384186,
+          "duration": 5.100000023841858,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 123.10000002384186,
+          "duration": 5.100000023841858,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 2,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 22,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 36
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 36
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 19.200000047683716,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 19.200000047683716,
+          "duration": 1.0999999046325684,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 2,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 15.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 24
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 24
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 12.299999952316284,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 12.299999952316284,
+          "duration": 1.2000000476837158,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 2,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 141.60000002384186,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 152
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 152
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 134.80000007152557,
+          "duration": 0.8999999761581421,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 134.89999997615814,
+          "duration": 0.8000000715255737,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 2,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 12.5,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 47.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 40
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 40
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 12.900000095367432,
+          "duration": 9.399999976158142,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 13,
+          "duration": 10.5,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 2,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 28.799999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 27.799999952316284,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 27.799999952316284,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 2,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 12.200000047683716,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 11.5,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 11.5,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 2,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 12.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 12.799999952316284,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 12.799999952316284,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 2,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 16.200000047683716,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 40
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 40
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 6.100000023841858,
+          "duration": 2.600000023841858,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 6.200000047683716,
+          "duration": 9.199999928474426,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 2,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 46.60000002384186,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 64
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 64
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 25,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 25.199999928474426,
+          "duration": 3.3000000715255737,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 2,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 30.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 9.5,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 9.5,
+          "duration": 3.8000000715255737,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 2,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 47.10000002384186,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 52
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 52
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 18.100000023841858,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 18.200000047683716,
+          "duration": 2.799999952316284,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 3,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 130.29999995231628,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 156
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 156
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 123.39999997615814,
+          "duration": 5.199999928474426,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 123.39999997615814,
+          "duration": 5.299999952316284,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 3,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 30.299999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 27.200000047683716,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 27.299999952316284,
+          "duration": 1.100000023841858,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 3,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 12,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 8.399999976158142,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 8.399999976158142,
+          "duration": 1.2999999523162842,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 3,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 142.19999992847443,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 152
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 152
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 135.69999992847443,
+          "duration": 0.8000000715255737,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 135.69999992847443,
+          "duration": 0.8999999761581421,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 3,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 151.10000002384186,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 162.70000004768372,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 172
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 172
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 151.70000004768372,
+          "duration": 8.299999952316284,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 151.70000004768372,
+          "duration": 8.299999952316284,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 3,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 27.5,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 29.699999928474426,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 28,
+          "duration": 0.5999999046325684,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 28,
+          "duration": 0.7999999523162842,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 3,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 10.399999976158142,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 15.799999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 11,
+          "duration": 0.5,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 11,
+          "duration": 0.6999999284744263,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 3,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 164.29999995231628,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 166.89999997615814,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 184
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 184
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 164.89999997615814,
+          "duration": 0.3999999761581421,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 164.89999997615814,
+          "duration": 0.6000000238418579,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 3,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 11.700000047683716,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 40
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 40
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 5.399999976158142,
+          "duration": 3.3000000715255737,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 5.5,
+          "duration": 5.600000023841858,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 3,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 18.799999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 14.199999928474426,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 14.199999928474426,
+          "duration": 3.5,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 3,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 30.299999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 9.699999928474426,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 9.799999952316284,
+          "duration": 3.799999952316284,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 3,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 31.299999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 52
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 52
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 9.600000023841858,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 9.700000047683716,
+          "duration": 3,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 3,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 9.700000047683716,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 35,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 36
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 36
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 10.400000095367432,
+          "duration": 10.399999976158142,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 10.400000095367432,
+          "duration": 13.5,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 3,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 29.799999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 28.699999928474426,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 28.799999952316284,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 3,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 12.200000047683716,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 11.399999976158142,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 11.399999976158142,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 3,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 16.300000071525574,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 16.40000009536743,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 16.40000009536743,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 4,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 148.5,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 160.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 168
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 168
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 149.09999990463257,
+          "duration": 8.300000071525574,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 149.09999990463257,
+          "duration": 8.400000095367432,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 4,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 28.399999976158142,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 30.399999976158142,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 28.899999976158142,
+          "duration": 0.6000000238418579,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 28.899999976158142,
+          "duration": 0.7000000476837158,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 4,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 11.200000047683716,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 16.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 32
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 32
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 11.800000071525574,
+          "duration": 0.7999999523162842,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 11.800000071525574,
+          "duration": 1,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4331,
+      "run": 4,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 164.39999997615814,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 166.70000004768372,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 184
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 184
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 164.79999995231628,
+          "duration": 0.5,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 164.79999995231628,
+          "duration": 0.5,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 4,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 128.30000007152557,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 140
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 140
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 121.70000004768372,
+          "duration": 5.199999928474426,
+          "transfer": 9700
+        },
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 121.70000004768372,
+          "duration": 5.199999928474426,
+          "transfer": 4536
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 4,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 32.299999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 28.899999976158142,
+          "duration": 0.8999999761581421,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 28.899999976158142,
+          "duration": 1,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 4,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 11.799999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 8.399999976158142,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 8.5,
+          "duration": 1.399999976158142,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4332,
+      "run": 4,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 140.10000002384186,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 152
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 152
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.woff2",
+          "start": 133.89999997615814,
+          "duration": 1,
+          "transfer": 300
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 133.89999997615814,
+          "duration": 1.100000023841858,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 4,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": true,
+      "transitions": [
+        {
+          "ms": 9.699999928474426,
+          "titleWidth": 187.234375,
+          "navX": 379.234375,
+          "navWidth": 392.171875,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loading"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loading"
+            }
+          ]
+        },
+        {
+          "ms": 45.299999952316284,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 36
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 36
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 10.399999976158142,
+          "duration": 10.5,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 10.399999976158142,
+          "duration": 11.5,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 4,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 33.5,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 31.200000047683716,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 31.200000047683716,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 4,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 11.100000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 10.5,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 10.5,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4330,
+      "run": 4,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 12.400000095367432,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 20
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 20
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 12.600000023841858,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 12.600000023841858,
+          "duration": 0,
+          "transfer": 0
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 4,
+      "visit": 0,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 12.899999976158142,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 40
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 40
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 6.300000071525574,
+          "duration": 3.1999999284744263,
+          "transfer": 4536
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 6.399999976158142,
+          "duration": 6,
+          "transfer": 9700
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 4,
+      "visit": 1,
+      "path": "/archive/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 31.200000047683716,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 27,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 27,
+          "duration": 3.200000047683716,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 4,
+      "visit": 2,
+      "path": "/about/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 30.59999990463257,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 48
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 48
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 10.199999928474426,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 10.299999952316284,
+          "duration": 2.799999952316284,
+          "transfer": 300
+        }
+      ]
+    },
+    {
+      "port": 4333,
+      "run": 4,
+      "visit": 3,
+      "path": "/stats/",
+      "geometryChanged": false,
+      "transitions": [
+        {
+          "ms": 21.600000023841858,
+          "titleWidth": 312,
+          "navX": 504,
+          "navWidth": 370.5,
+          "titleFont": "\"Sixtyfour Variable\", monospace",
+          "navFont": "ChicagoKare-Regular, sans-serif",
+          "fonts": [
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "unloaded"
+            },
+            {
+              "family": "Sixtyfour Variable",
+              "status": "loaded"
+            },
+            {
+              "family": "ChicagoKare-Regular",
+              "status": "loaded"
+            }
+          ]
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "start": 36
+        },
+        {
+          "name": "first-contentful-paint",
+          "start": 36
+        }
+      ],
+      "headerFonts": [
+        {
+          "name": "sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 9.200000047683716,
+          "duration": 0,
+          "transfer": 0
+        },
+        {
+          "name": "ChicagoKare-Regular.woff2",
+          "start": 9.299999952316284,
+          "duration": 3,
+          "transfer": 300
+        }
+      ]
+    }
+  ]
+}

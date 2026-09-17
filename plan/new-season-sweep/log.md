@@ -13,6 +13,17 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Header-font preload experiment — manual review stop
+
+Responding to navigation jitter, tested only Sixtyfour Latin and ChicagoKare
+preloads in a new disposable Node-prerender copy. Sampled header geometry shifts
+fall from 20/20 dev and 5/20 built desktop navigations to 0/20 in both candidates;
+390px smoke checks also show no candidate shifts. Built control is already stable
+on warm navigation. Font resource entries are not duplicated; compiled layout CSS
+and chart font waits are unchanged. rAF geometry is not a filmstrip guarantee of
+visible paint: manual review on dev 4332 / built 4333 remains required. No root
+application change. See [results and patch](prelaunch-review/header-font-preloads.md).
+
 ## SQLite persistence pilot — compatibility proven, manual review stop
 
 Proved Node SQLite prerender plus a metadata-only workerd island in disposable

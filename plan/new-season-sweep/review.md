@@ -19,7 +19,16 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: SQLite pilot and configuration-only control — review stop
+## Latest: header-font preloads — review stop
+
+The [preload-only experiment](prelaunch-review/header-font-preloads.md) is ready
+on dev 4332 and built 4333. Navigate Stats → Archive → About → Stats and compare
+with controls 4331/4330. Two header-font preloads eliminate sampled geometry
+changes in the tested desktop/mobile visits; font-display and chart waits are
+unchanged. Sampling is not a guarantee of every painted frame. Root app is not
+yet changed; approve the visual behavior before promotion or another experiment.
+
+## Previous: SQLite pilot and configuration-only control — review stop
 
 Read [SQLite results](prelaunch-review/sqlite-pilot.md), then the
 [hands-on data/verification guide](../sqlite-spike/README.md). The bounded pilot

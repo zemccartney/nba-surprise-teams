@@ -1,6 +1,12 @@
 # Pre-launch review: full Foundations stack
 
-## Latest persistence/performance review stop
+## Latest: header-font preload review stop
+
+The [two-font preload experiment](header-font-preloads.md) is on dev 4332 / built 4333. Sampled header geometry shifts disappear across the measured desktop/mobile
+navigations, without CSS/font-display or chart-wait changes. Manual review is
+still required; no application patch has been promoted.
+
+## Previous persistence/performance review stop
 
 The [SQLite pilot](sqlite-pilot.md) proves the three-context boundary: Node
 prerender queries SQLite, build restores the SQL dump, and workerd uses embedded
