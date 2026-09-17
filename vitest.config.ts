@@ -26,17 +26,21 @@ const astroConfig = getViteConfig({
   },
 });
 
-const isCloudflareDevPlugin = (plugin: unknown) =>
+const isAppRuntimePlugin = (plugin: unknown) =>
   typeof plugin === "object" &&
   plugin !== null &&
   "name" in plugin &&
   typeof plugin.name === "string" &&
-  plugin.name.startsWith("vite-plugin-cloudflare:");
+  (plugin.name.startsWith("vite-plugin-cloudflare:") ||
+    plugin.name === "tracker-sqlite-boundary");
 
 // The adapter supplies Cloudflare development plugins, whose Node-compat import
 // resolver expects a dev dependency optimizer. Vitest disables optimization by
 // default, causing "AssertionError: depsOptimizer is required in dev mode".
-// Keep this suite in Node without that Worker-specific wiring. Astro plugins
+// Keep this suite in Node without that Worker-specific wiring. Database tests
+// are Node maintenance consumers, not Worker SSR. The SQLite boundary tests
+// instantiate real Vite servers/builds with the guard explicitly enabled.
+// Astro plugins
 // still resolve virtual module imports, but tests mock the content API and read
 // source JSON explicitly: this configuration does not refresh content stores.
 // See plan/new-season-sweep/content-lifecycle.md. A smaller Vite configuration
@@ -47,7 +51,7 @@ const config: UserConfigFnPromise = async (env) => {
 
   resolved.plugins = plugins
     .flat(Infinity)
-    .filter((plugin) => !isCloudflareDevPlugin(plugin)) as NonNullable<
+    .filter((plugin) => !isAppRuntimePlugin(plugin)) as NonNullable<
     UserConfig["plugins"]
   >;
 

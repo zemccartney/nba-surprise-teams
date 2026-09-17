@@ -4,6 +4,7 @@ import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 
 import archiver from "./archiver/integration.ts";
+import { sqliteBoundary } from "./data/runtime-boundary.ts";
 import svgOptimizer from "./svg-optimizer/integration.ts";
 
 const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
@@ -27,6 +28,9 @@ export default defineConfig({
     // keeps what the site does today: sharp runs at build time and prerendered
     // pages ship finished files.
     imageService: "compile",
+    // Static routes render in Node in dev as well as builds. Islands/actions
+    // remain in workerd, giving the data boundary a concrete environment.
+    prerenderEnvironment: "node",
   }),
   // The default, written down because it pairs with trailingSlash below: with
   // "directory", Astro.url.pathname ends in "/" at build time as it does in dev
@@ -78,4 +82,5 @@ export default defineConfig({
   // internal links are written with the slash and the nav highlight in
   // subpage.astro compares equal paths.
   trailingSlash: "always",
+  vite: { plugins: [sqliteBoundary()] },
 });
