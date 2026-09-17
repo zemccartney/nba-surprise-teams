@@ -1,0 +1,27 @@
+{
+  "note": "Isolated fictitious 2026 CHA candidate. Full verification/build passed. Not canonical data.",
+  "result": [
+    {
+      "width": 1440,
+      "islands": [
+        {
+          "status": 200,
+          "cache": null
+        }
+      ],
+      "errors": [],
+      "fictitiousOdds": 25.5
+    },
+    {
+      "width": 390,
+      "islands": [
+        {
+          "status": 200,
+          "cache": null
+        }
+      ],
+      "errors": [],
+      "fictitiousOdds": 25.5
+    }
+  ]
+}

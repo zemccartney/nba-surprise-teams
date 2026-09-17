@@ -14,7 +14,9 @@ import { afterAll, describe, expect, it } from "vitest";
 
 import { replaceArchive, saveOdds, transaction } from "../data/node/commands";
 import {
+  createDatabase,
   dumpDatabase,
+  migrate,
   openDatabase,
   readMetadata,
   restoreDatabase,
@@ -39,7 +41,29 @@ describe("SQLite operational contracts", () => {
     mkdirSync(Path.join(repo, "data"), { recursive: true });
     const database = Path.join(repo, "data/tracker.db"),
       sql = Path.join(repo, "data/dump.sql");
-    writeFileSync(sql, dump);
+    // A synthetic current season keeps CLI mechanics independent of real odds
+    // being published or the latest real season becoming archived.
+    const year = String(new Date().getUTCFullYear());
+    const seed = Path.join(directory, "cli-seed.db");
+    createDatabase(seed, (connection) => {
+      migrate(connection);
+      connection
+        .prepare("INSERT INTO teams VALUES('CHA','Charlotte Hornets','hornet')")
+        .run();
+      connection
+        .prepare("INSERT INTO seasons(id,start_date,end_date) VALUES(?,?,?)")
+        .run(
+          year,
+          new Date().toISOString().slice(0, 10),
+          `${Number(year) + 1}-04-30`,
+        );
+    });
+    const connection = openDatabase(seed);
+    try {
+      writeFileSync(sql, dumpDatabase(connection));
+    } finally {
+      connection.close();
+    }
     const git = (...args: string[]) =>
       execFileSync("git", args, { cwd: repo, stdio: "pipe" });
     const cli = (...args: string[]) =>
@@ -60,7 +84,7 @@ describe("SQLite operational contracts", () => {
     expect(cli("check-staged").status).toBe(0);
     expect(cli("restore").status).toBe(0);
     expect(cli("check-staged").status).toBe(0);
-    const odds = ["--season", "2026", "--team", "CHA", "--over-under", "25.5"];
+    const odds = ["--season", year, "--team", "CHA", "--over-under", "25.5"];
     expect(cli("add-team-season", ...odds).status).toBe(0);
     const revision = readFileSync(database + ".revision", "utf8");
     expect(cli("add-team-season", ...odds).status).not.toBe(0);
@@ -68,7 +92,7 @@ describe("SQLite operational contracts", () => {
       cli(
         "update-odds",
         "--season",
-        "2026",
+        year,
         "--team",
         "CHA",
         "--over-under",
@@ -76,9 +100,7 @@ describe("SQLite operational contracts", () => {
       ).status,
     ).not.toBe(0);
     expect(readFileSync(database + ".revision", "utf8")).toBe(revision);
-    expect(cli("list-team-seasons", "--season", "2026").stdout).toContain(
-      "25.5",
-    );
+    expect(cli("list-team-seasons", "--season", year).stdout).toContain("25.5");
     expect(cli("list-team-seasons", "--season", "9999").status).not.toBe(0);
     expect(cli("dump").status).toBe(0);
     expect(cli("check").status).toBe(0);
@@ -143,7 +165,7 @@ describe("SQLite operational contracts", () => {
     ).toThrow("Incomplete archive");
     expect(dumpDatabase(db)).toBe(before);
     expect(() =>
-      transaction(db, () => saveOdds(db, "2026", "CHA", "40", false)),
+      transaction(db, () => saveOdds(db, "2025", "CHA", "40", true)),
     ).toThrow("Not a surprise candidate");
     expect(dumpDatabase(db)).toBe(before);
   });
@@ -154,10 +176,13 @@ describe("SQLite operational contracts", () => {
         "2025",
         "CHA",
       );
-      saveOdds(db, "2026", "CHA", "25.5", false);
-      saveOdds(db, "2026", "CHA", "26.5", true);
+      db.exec(
+        "INSERT INTO seasons(id,start_date,end_date) VALUES('2099','2099-10-01','2100-04-30')",
+      );
+      saveOdds(db, "2099", "CHA", "25.5", false);
+      saveOdds(db, "2099", "CHA", "26.5", true);
       const catalog = metadataCatalog(readMetadata(db));
-      expect(catalog.getTeamSeason("2026", "CHA")?.overUnder).toBe(26.5);
+      expect(catalog.getTeamSeason("2099", "CHA")?.overUnder).toBe(26.5);
       expect(catalog.getTeamSeason("2025", "CHA")).toEqual(old);
     } finally {
       db.exec("ROLLBACK TO odds; RELEASE odds");
