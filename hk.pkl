@@ -25,7 +25,7 @@ local linters = new Mapping<String, Step> {
       check = "pnpm test"
     }
     ["sqlite-dump"] = {
-      check = "node plan/sqlite-spike/data.ts check"
+      check = "node data/cli.ts check"
     }
 }
 
@@ -37,7 +37,7 @@ hooks {
         steps = (linters) {
             ["sqlite-staged-dump"] = {
                 // Compare the actual index blob, not merely a fresh working dump.
-                check = "node plan/sqlite-spike/data.ts check-staged"
+                check = "node data/cli.ts check-staged"
             }
         }
     }

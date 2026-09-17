@@ -1,8 +1,8 @@
 import * as Sentry from "@sentry/cloudflare";
 import { z } from "astro/zod";
 import { ActionError, defineAction } from "astro:actions";
-import { getEntry } from "astro:content";
 import { env } from "cloudflare:workers";
+import { catalog } from "virtual:tracker/catalog";
 
 import type { LiveLoaderResponse } from "../loaders/live/utils";
 
@@ -19,7 +19,7 @@ export const server = {
     // eslint-disable-next-line perfectionist/sort-objects
     handler: async (input): Promise<LiveLoaderResponse> => {
       try {
-        const season = await getEntry("seasons", input.seasonId);
+        const season = catalog.getSeason(input.seasonId);
 
         if (!season) {
           throw new ActionError({
@@ -30,7 +30,7 @@ export const server = {
 
         // The upstream loader is latest-season-only. Archive pages use static
         // data; never read/write an older season's KV key with this loader.
-        const latestSeason = await getLatestSeason();
+        const latestSeason = getLatestSeason();
         if (season.id !== latestSeason?.id) {
           throw new ActionError({
             code: "BAD_REQUEST",
@@ -44,7 +44,7 @@ export const server = {
         // Odds can be published before opening night. Do not fetch or set a
         // calculated expiry until the season begins (see MAINTENANCE.md).
         // Archived pages use static data, not a historical live-loader fallback.
-        if (currentYYYYMMDD < season.data.startDate) {
+        if (currentYYYYMMDD < season.startDate) {
           return {
             games: [],
           };

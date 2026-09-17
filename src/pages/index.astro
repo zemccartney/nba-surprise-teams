@@ -5,16 +5,16 @@ import * as ContentUtils from "../content-utils";
 import Layout from "../layouts/layout.astro";
 import Typography from "../layouts/typography.astro";
 
-const latestSeason = await ContentUtils.getLatestSeason();
+const latestSeason = ContentUtils.getLatestSeason();
 
 if (!latestSeason) {
   throw new Error("Insufficient season data");
 }
 
-const teamsInSeason = await ContentUtils.getTeamsInSeason(latestSeason.id);
+const teamsInSeason = ContentUtils.getTeamsInSeason(latestSeason.id);
 const isSeasonReady = teamsInSeason.length > 0;
 
-const [, mm, dd] = latestSeason.data.startDate.split("-", 3);
+const [, mm, dd] = latestSeason.startDate.split("-", 3);
 ---
 
 <Layout>

@@ -1,97 +1,137 @@
-# SQLite application migration — in progress
+# Tracker data store
 
-Work lives on `sqlite-content-store`, branched from `chart-parity`. The planning
-and prototype material on `chart-parity` has not been edited for this checkpoint.
-**The application still consumes content collections.** Its JSON remains the
-source of truth until the consumer migration and operational gates are complete.
-This directory is the application foundation, not a second live data source.
+**Active application storage.** Astro orchestrates the UI; SQLite owns historical
+and editorial data. Start with the [visual architecture guide](../docs/data-system.html).
+There are no Astro content collections, JSON archives, runtime SQL services or
+new database dependencies. Node 26 supplies `node:sqlite`.
 
-## Execution boundary
+## Three distinct environments
 
-`astro.config.mjs` enables Cloudflare's Node `prerender` environment and installs
-`runtime-boundary.ts`. Islands, actions and on-demand routes remain in workerd's
-`ssr` environment. `import.meta.env.SSR` and production/development flags cannot
-distinguish those roles. A component's filename cannot determine its role either.
+| Context                     | Metadata                               | Archived games                     | Current games           |
+| --------------------------- | -------------------------------------- | ---------------------------------- | ----------------------- |
+| Dev Node prerender          | Snapshot generated from working DB     | Read-only SQL, short-lived handles | Deferred island         |
+| Dev workerd islands/actions | Same generated metadata                | Forbidden                          | NBA schedule + local KV |
+| Build Node prerender        | Fresh DB restored from Git SQL         | Read-only SQL                      | No NBA request          |
+| Built/hosted Worker         | Embedded metadata, fixed until rebuild | Forbidden                          | NBA schedule + KV       |
+| Browser                     | Rendered HTML/chart presentation data  | No database or SQL                 | Island response         |
 
-- `data/node/` owns native SQLite, filesystem operations and Node maintenance code.
-- `virtual:tracker/archive` is reserved for the prerender-only archive facade.
-- `src/data/catalog.ts` owns plain metadata lookups and has no SQLite dependency.
-  The upcoming generated Worker catalog will use it; shared presentation code can
-  use that catalog without accessing SQL.
-- The guard rejects native SQLite imports and Node data modules outside
-  `prerender`, during dev module loading and production compilation. It also
-  checks the build graph, including dynamic import edges.
-- Vite can externalize builtins before resolution/load hooks run. Transformed
-  JavaScript imports, re-exports, literal dynamic imports and literal `require`
-  calls therefore get checked too. This is an architectural guardrail, not a
-  sandbox against deliberately disguised/computed imports.
-- Dependency optimization excludes the archive facade/native builtin because
-  scanning also visits static-route source. Actual runtime imports stay guarded.
-- Native Node maintenance commands are intentionally permitted. Vitest runs the
-  maintenance tests in Node, without the application guard, while dedicated
-  boundary tests instantiate real guarded Vite servers/builds.
+`virtual:tracker/catalog` exports plain metadata lookups. It contains all teams,
+seasons and team seasons (including opponents and historical names), **not games**.
+`virtual:tracker/archive` provides archived games/seasons only in Node prerender.
+Shared `ui.astro` components use metadata and pure calculations, never archives.
+The wrapper `index.astro` chooses static data or `ssr.astro` with `server:defer`.
 
-### Actual Astro negative control
+## Daily workflow
 
-An independent copy (including independent cloned dependencies) used this
-component, unchanged between static and deferred usage:
-
-```astro
----
-import { DatabaseSync } from "node:sqlite";
-const db = new DatabaseSync(":memory:");
-const row = db.prepare("SELECT 42 AS answer").get();
-db.close();
----
-
-<p>SQLite answer: {row.answer}</p>
+```sh
+mise run data:restore                  # once per checkout; refuses overwrite
+mise x -- pnpm exec astro dev --port 4340
+mise run data -- list-team-seasons --season 2026
+mise run data -- add-team-season --season 2026 --team CHA --over-under 25.5
+mise run data -- update-odds --season 2026 --team CHA --over-under 26.5
+mise run data -- remove-team-season --season 2026 --team CHA
+mise run data:dump                     # validate, write deterministic SQL
+mise run data:check                    # restore SQL, validate, check DB drift
 ```
 
-1. Render `<Probe />` from a static page: dev HTTP 200, `SQLite answer: 42`.
-2. Add another page rendering `<Probe server:defer />`.
-3. Request that page, then its generated `/_server-islands/Probe/` URL: island
-   HTTP 500 with `[sqlite-boundary] node:sqlite is prerender-only; attempted access
-from ssr`. The failure came through the actual workerd runner.
-4. Stop dev and build: exit 1 with the same boundary error.
-5. Remove only the deferred-use page and build again: exit 0; static HTML contains
-   `SQLite answer: 42`.
+The odds above are **fictitious review examples**, not actual 2026 odds. Supported
+mutations are transactional, fail without notification on error, and notify dev
+only after commit. Adds never silently replace existing rows; updates fail if
+absent. Removing a historical candidate fails if it invalidates its archive.
 
-These probes are not application routes. The test copy's dev process was stopped.
-This establishes role-based enforcement, not just a filename convention.
+`data/tracker.db` is ignored local working state; `data/dump.sql` is the canonical
+reviewable Git artifact. Stage the dump explicitly. Pre-commit compares the
+**actual staged blob**, not just the working file, against the database. With no
+local DB, checks still restore and validate the dump; only drift comparison is
+skipped. A build restores the working-tree dump into a temporary database and
+ignores local DB edits. A clean deployment checkout thus builds committed bytes.
 
-## Persistence foundation
+External SQL editors are supported. Finish/commit the edit, then run
+`mise run data:notify`. File writes alone deliberately do not refresh metadata.
+Notification validates the database, invalidates catalog modules in both server
+environments and reloads connected browsers. This also regenerates static route
+paths. Archive SQL is read afresh on a Node request; metadata remains a snapshot
+until notification. **Preview never follows local DB changes**: dump and rebuild.
+Do not run dev and build/typecheck/test concurrently in the same checkout.
 
-- `migrations/001-initial.sql` retains the proven prototype relational schema.
-- `002-archive-identifiers.sql` adds optional NBA game IDs and explicit display
-  ordering. Preserving original metadata order protects stable chart/table ties;
-  deterministic dumps still order rows by primary key.
-- `node/database.ts` provides transactional migrations, read snapshots, plain
-  domain decoding, deterministic buffered dumps, and non-overwriting restore.
-  It does not silently create a missing working database during reads/checks.
-- `node/import-json.ts` is a transitional one-time importer, not a build input.
-- `src/data/model.ts` defines plain validated domain records; no Astro collection
-  references or `.data` wrappers are introduced.
+## Editing teams and seasons
 
-Tests compare all existing records and their ordering with the JSON source,
-exercise schema-1 upgrades, preserve optional NBA IDs and check dump/restore
-stability. The native Node importer was also executed without Vite: 269 team
-seasons imported successfully. Full verification: **137 tests / 15 files**, no
-Astro diagnostics, format/lint/workflow checks pass; normal application build
-passes. No push or deployment occurred.
+`mise run data -- export` prints plain metadata JSON; `--output /tmp/metadata.json`
+writes a new file without overwriting. Extract/edit one record, then use:
 
-## Remaining before application review
+```sh
+mise run data -- add-season --input /tmp/season.json
+mise run data -- update-season --input /tmp/season.json
+mise run data -- add-team --input /tmp/team.json
+mise run data -- update-team --input /tmp/team.json
+```
 
-1. Wire Node archive queries and generated metadata to the actual application;
-   build from an isolated database restored from the canonical dump.
-2. Replace every collection consumer with plain records, extracting shared pure
-   domain calculations so SSR helpers cannot import the archive facade indirectly.
-3. Migrate actions/islands/live-loader metadata without changing NBA/KV behavior.
-4. Finish metadata editing, archive ingestion, validation, notification, dump and
-   actual-staged-index checks. Add migration failure/rollback negative controls.
-5. Replace content-shaped mocks; remove collections, duplicate JSON ownership and
-   obsolete prototype machinery only after full source/route/chart parity.
-6. Enforce final artifact exclusions, clean-checkout builds, dev refresh and
-   desktop/mobile/keyboard parity, then stop for integrated-application review.
+Updates replace the **complete record**, including optional fields and historical
+names. Shapes live in `src/data/model.ts`. Season IDs are starting years; dates
+are ISO calendar dates. Episode date/title/URL are supplied together. Team emoji
+and historical logo names must resolve to checked-in SVGs. Brand-new NBA codes
+also require adding the code to `src/loaders/live/utils.ts` and the corresponding
+asset before adding metadata. Team-season odds must be whole/half wins and below
+the season's scaled candidate cutoff. Historical display ordering is explicit;
+new candidate rows append, while tables still apply their usual pace sorting.
 
-The current build still includes the legacy collection machinery. Passing the
-new SQL boundary is **not** a claim that archived JSON is absent from its Worker.
+## Archiving
+
+```sh
+mise x -- pnpm run archive:latest     # explicit NBA historical request + DB write
+# Or one selected season:
+mise run data -- archive-nba --season 2025
+# Offline import of normalized Game[] (e.g. export/review/correction):
+mise run data -- export --season 2025 --output /tmp/games.json
+mise run data -- archive --season 2025 --input /tmp/games.json
+mise run data:dump
+mise x -- pnpm run archive:diff       # ordinary readable SQL Git diff
+```
+
+`archive:all` explicitly refetches all ended seasons; it is not routine maintenance.
+The historical importer runs directly in Node, with a 10-second request timeout
+and NBA Referer. It pairs both team rows, rejects missing/duplicate/conflicting
+rows, preserves provider IDs when supplied, and normalizes legacy tricodes.
+All requested feeds are fetched before one write transaction. Replacing archives
+validates date windows, candidate participation, identities and complete per-team
+game counts; failure restores the previous archive. No network access occurs in
+builds/tests. The historical endpoint's hosted availability remains an external
+risk. Existing archives are not silently refetched to add missing provider IDs.
+
+## Validation, migration and recovery
+
+- STRICT SQL tables enforce types, foreign keys, valid dates, bounded half-win
+  odds, unique identities, distinct opponents and completed non-tied scores.
+- Domain checks enforce chronology, candidate cutoffs, asset availability,
+  historical-name intervals, game identities/provider-ID uniqueness, complete
+  archives and the existing lifecycle conventions (15-day archival grace,
+  at most one unfinished season, next season within 90 days).
+- Date checks can refuse a build, but never silently select a different season
+  or mutate data. Latest/archived UI selection is data-driven.
+- `mise run data -- migrate` applies numbered migrations transactionally. Back up
+  the DB first. A newer/partial schema history fails loudly. Builds do not silently
+  migrate old canonical dumps: migrate locally, dump, review and commit.
+- To discard scratch edits: stop dev, move `data/tracker.db` to a backup outside
+  the checkout, run `data:restore`, then restart dev. Never delete the canonical
+  dump. Do not copy a DB while an editor has an active transaction/WAL.
+
+## Enforcement and regression coverage
+
+`data/runtime-boundary.ts` rejects `data/node/`, the archive facade and native
+SQLite imports outside `prerender`. It checks actual dev loading, transformed
+imports (Vite can externalize builtins before resolve hooks), and build graphs.
+One component can work statically and fail when deferred; filenames and
+`import.meta.env.SSR` are not the boundary. Node maintenance/test code is allowed.
+This is an architectural guardrail, not a sandbox against disguised imports.
+
+Final artifact auditing rejects DB/SQL files, SQL machinery, changed/unreported
+chunks and archived game identities in Worker code. The sealed inventory lives
+in `dist/data-audit.json`, outside deployable directories. Recheck with
+`mise x -- node data/node/audit.ts`. Rendered chart values in static HTML are
+intentional; a whole games database in the Worker is not.
+
+Tests restore fresh SQL every time. Historical golden hashes record approved
+pre-migration games and all 269 chart series, rules, records and historical names.
+Intentional corrections to those archives require reviewing the golden update;
+new seasons after 2025 do not invalidate it. Typed mocks substitute plain catalog
+methods, not a miniature Astro content framework. See `tests/README.md`.

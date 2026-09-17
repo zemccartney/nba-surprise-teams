@@ -1,5 +1,6 @@
 ---
-import { getCollection } from "astro:content";
+import { getArchivedSeasons, getSeasonArchive } from "virtual:tracker/archive";
+import { catalog } from "virtual:tracker/catalog";
 
 import ArrowLeftSvg from "../../assets/images/arrow-line-left.svg";
 import ArrowRightSvg from "../../assets/images/arrow-line-right.svg";
@@ -11,11 +12,11 @@ import Subpage from "../../layouts/subpage.astro";
 import * as Utils from "../../utils";
 
 export const getStaticPaths = async () => {
-  const seasons = await getCollection("seasons");
+  const seasons = catalog.getSeasons();
   const seasonsWithTeams = [];
 
   for (const season of seasons) {
-    const teams = await ContentUtils.getTeamsInSeason(season.id);
+    const teams = ContentUtils.getTeamsInSeason(season.id);
     if (teams.length > 0) {
       seasonsWithTeams.push({
         params: { seasonId: season.id },
@@ -29,7 +30,7 @@ export const getStaticPaths = async () => {
 
 const { season } = Astro.props;
 
-const archivedSeasons = await ContentUtils.getArchivedSeasons();
+const archivedSeasons = getArchivedSeasons();
 archivedSeasons.reverse();
 
 const adjacent = (x: -1 | 1) => {
@@ -42,8 +43,8 @@ const adjacent = (x: -1 | 1) => {
   return archivedSeasons.at(si);
 };
 
-const hasArchive = await ContentUtils.getSeasonArchive(season.id);
-const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season.id);
+const hasArchive = getSeasonArchive(season.id);
+const surpriseRules = ContentUtils.getSeasonSurpriseRules(season.id);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
 
 const seasonBefore = adjacent(-1);
@@ -108,21 +109,15 @@ const seasonAfter = adjacent(1);
     <h1
       class:list={[
         "season-title",
-        season.data.episodeUrl || season.data.shortened
-          ? "spacing-sm"
-          : "spacing-lg",
+        season.episodeUrl || season.shortened ? "spacing-sm" : "spacing-lg",
       ]}
     >
       {`${fmtSeason} Season`}
     </h1>
     {
-      season.data.episodeUrl && (
+      season.episodeUrl && (
         <div class="episode-link-wrapper">
-          <Link
-            class="episode-link"
-            href={season.data.episodeUrl}
-            target="_blank"
-          >
+          <Link class="episode-link" href={season.episodeUrl} target="_blank">
             <span class="italic">Slam N' Jam</span> Episode
           </Link>
           <Popover
@@ -133,22 +128,22 @@ const seasonAfter = adjacent(1);
             id="episode-popover"
           >
             If the link's broken (grumbling about Apple...), you're looking for
-            the episode "{season.data.episodeTitle}" from
+            the episode "{season.episodeTitle}" from
             {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
-            {season.data.episodeDate!.split("-").slice(1).join("/")}/{""}
+            {season.episodeDate!.split("-").slice(1).join("/")}/{""}
             {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
-            {season.data.episodeDate!.split("-", 1)[0]}
+            {season.episodeDate!.split("-", 1)[0]}
           </Popover>
         </div>
       )
     }
     {
-      season.data.shortened && (
+      season.shortened && (
         <section class="shortened-section">
           <h2 class="shortened-title">
-            Shortened season: {season.data.shortened.numGames} games played
+            Shortened season: {season.shortened.numGames} games played
           </h2>
-          <h3 class="shortened-reason">{season.data.shortened.reason}</h3>
+          <h3 class="shortened-reason">{season.shortened.reason}</h3>
           <h3 class="shortened-adjustments">Adjustments</h3>
           <ul class="shortened-list">
             {/* Consistent widths to align bullets while centering */}

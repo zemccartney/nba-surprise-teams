@@ -27,11 +27,13 @@ export const SCHEMA_VERSION = 2;
 const migrationRoot = fileURLToPath(new URL("../migrations/", import.meta.url));
 
 export function assertVersion(db: DatabaseSync): void {
-  assert.equal(
-    db.prepare("SELECT max(version) AS version FROM schema_migrations").get()
-      ?.version,
-    SCHEMA_VERSION,
-    "Unsupported database schema; run data migrate",
+  assert.deepEqual(
+    db
+      .prepare("SELECT version FROM schema_migrations ORDER BY version")
+      .all()
+      .map((row) => row.version),
+    Array.from({ length: SCHEMA_VERSION }, (_, index) => index + 1),
+    "Unsupported or incomplete database schema history; run data migrate",
   );
 }
 export function createDatabase(
@@ -185,15 +187,25 @@ export function readMetadata(db: DatabaseSync): Metadata {
     db.exec("RELEASE metadata_snapshot");
   }
 }
-export function restoreDatabase(filename: string, dump: string): void {
+export function restoreDatabase(
+  filename: string,
+  dump: string,
+  validate?: (db: DatabaseSync) => void,
+): void {
   createDatabase(filename, (db) => {
     db.exec(dump);
     db.exec("PRAGMA foreign_keys=ON");
+    validate?.(db);
   });
 }
 export function validateDatabase(db: DatabaseSync): void {
   assertVersion(db);
-  assert.deepEqual(db.prepare("PRAGMA foreign_key_check").all(), []);
+  const violations = db.prepare("PRAGMA foreign_key_check").all();
+  assert.equal(
+    violations.length,
+    0,
+    `Foreign key violations: ${violations.length}; first: ${JSON.stringify(violations.slice(0, 3))}`,
+  );
   assert.equal(
     db.prepare("PRAGMA integrity_check").get()?.integrity_check,
     "ok",

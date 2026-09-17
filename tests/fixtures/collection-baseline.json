@@ -1,0 +1,2427 @@
+{
+  "charts": [
+    {
+      "hash": "6a06212a4537e44ffe5b891c5e7b7d57dd0f88f62267a1ea1dabd93729997e1b",
+      "id": "1993/DAL",
+      "name": "Dallas Mavericks",
+      "record": {
+        "l": 69,
+        "w": 13
+      }
+    },
+    {
+      "hash": "a38edaa49f7b497e78060017eb0fbd0475847e9cb9bfb00ae5ea1013401d3588",
+      "id": "1993/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "f97ae11d74329d371eb722ec34ce423c7fba74cf02cabccd032ca500d938b42b",
+      "id": "1993/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "6be87d727692400b8b990f99bf53da1456861e2583579c8f71ecedc139087b73",
+      "id": "1993/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "769f6431f85b72feed663c711c7474920cf54de580861048fa79b09e42290b17",
+      "id": "1993/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "5989ce9539327d31d724ee8fa88b7342f329d0ea88d701fb2747dcca374ccb16",
+      "id": "1993/WAS",
+      "name": "Washington Bullets",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "25bd2f4b01eb4db5ddf7b0720401b6508b4037ee75ab6497377a611c6e03e6b6",
+      "id": "1996/BOS",
+      "name": "Boston Celtics",
+      "record": {
+        "l": 67,
+        "w": 15
+      }
+    },
+    {
+      "hash": "1960023ec7c6a3ebe71e89fcb99ec99027c160532e9a6796114752bd5058a0a2",
+      "id": "1996/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "8230a37890248e83bdfd8561f2f071c7aa40e510f596a70537c17a6bcd51bb01",
+      "id": "1996/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 52,
+        "w": 30
+      }
+    },
+    {
+      "hash": "89a80aa28caff2fdbce0f3a8382dc25b7b51f108ac9bbf5beeb146ac32ac5fab",
+      "id": "1996/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "35f097428dcba421658bdcbd85193397b4bd963c6f0d5c6125ded5c3957a1566",
+      "id": "1996/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "2ee72b1bfb3aa33244cccf72e74edf38eb91d58e640530929cb254580e4e0495",
+      "id": "1996/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "561c97ea72fac52e8ecb66397f6277f19dccae89574175dc8f080c6ff458ea56",
+      "id": "1996/NJN",
+      "name": "New Jersey Nets",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "c3921431ae96987538090cfffdb4021c8b3c6ef8a81abbe778eca30b5376d965",
+      "id": "1996/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "aeb02e52020b624a20ed64ff146fa663f660eeb1341e6852d4d9aefb9e2070b6",
+      "id": "1996/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 52,
+        "w": 30
+      }
+    },
+    {
+      "hash": "b7d4d6dcb3edd61c5aa52dac8d271b56bed75796aab3e66abe5c2707cf01020f",
+      "id": "1996/VAN",
+      "name": "Vancouver Grizzlies",
+      "record": {
+        "l": 68,
+        "w": 14
+      }
+    },
+    {
+      "hash": "7736475e459fe2a9b191e435c93560522a50da31b723ac3ae10c61a6cdb30776",
+      "id": "1997/BOS",
+      "name": "Boston Celtics",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "2de30d86fbd2d1be2e2934821592e8876b2ae6b4ea0a28fe8e7f0fb4e372dfa3",
+      "id": "1997/DAL",
+      "name": "Dallas Mavericks",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "ac92818b8ea5b4e3b9a1b7f05ab920bee23bcd27f650c83e0a62dc21322d46fd",
+      "id": "1997/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 71,
+        "w": 11
+      }
+    },
+    {
+      "hash": "83bcbf9704d02f3108925313120adbfaca01867059d199528332071078f53e45",
+      "id": "1997/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "85eb2b3915af88776c461619e1a0723b7f755bcb409200cf3217cf447863a1b7",
+      "id": "1997/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "9f7b958edea8b9cdd0d6b6bcab186d294a7ed7da499cc2c3111081efadcf55da",
+      "id": "1997/NJN",
+      "name": "New Jersey Nets",
+      "record": {
+        "l": 39,
+        "w": 43
+      }
+    },
+    {
+      "hash": "9ca6298fbeb1a24638cba3dba41326e857952bc5f28b5d9589c90137aa776b5f",
+      "id": "1997/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 51,
+        "w": 31
+      }
+    },
+    {
+      "hash": "29efd1a93f4c6d3e5a922e9e8509d13ef9ab7fb1856872cbcce1d72851fe7b69",
+      "id": "1997/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 55,
+        "w": 27
+      }
+    },
+    {
+      "hash": "1bc9b60bf0dbb3ed56a06a6a7b739f924ee8c9deeb65be52e20200272050c3b8",
+      "id": "1997/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 66,
+        "w": 16
+      }
+    },
+    {
+      "hash": "0aeb484ed49de489ee9051126ff691ff7097fa3efbab5047278d6b873b429716",
+      "id": "1997/VAN",
+      "name": "Vancouver Grizzlies",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "a0a6b2b054e5f46a55cf922944ef430c40ffecffdffa945e1bff62838da1ad45",
+      "id": "1999/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "8d032dc617ccc11b7023544b1bfb06da435ba4f74fa62978389310e1d7479756",
+      "id": "1999/DAL",
+      "name": "Dallas Mavericks",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "9f210a07931ace764d524bf9da30a06192994b2f7e39264eb92132c227d9f1ac",
+      "id": "1999/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "25fdebc7a7d333be97d2ebe4ed3ddd58bc028f2098f6ae997d84d33a8bcb458b",
+      "id": "1999/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 67,
+        "w": 15
+      }
+    },
+    {
+      "hash": "76033da7df4a0d2bf2e2b0521a64f54c068edbca84f26670b40a992992b30650",
+      "id": "1999/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "b25e319516ac223da36984647608cbce098a04b828e0b864140902f5d86eb8d2",
+      "id": "1999/SEA",
+      "name": "Seattle Supersonics",
+      "record": {
+        "l": 37,
+        "w": 45
+      }
+    },
+    {
+      "hash": "027f576d5cff8f88d13bbb58a97d2b24384de53c3a7ce1b6a26f2ae0f040444b",
+      "id": "1999/VAN",
+      "name": "Vancouver Grizzlies",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "5fb05c88dd8bb5ffb68aad5192e85ac8bb9c829309d214696f56890374a507fd",
+      "id": "1999/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "454000bd410184ee93a0bd1b5034c47d5a0f39728cdd5941e3689554f5c0a34b",
+      "id": "2000/ATL",
+      "name": "Atlanta Hawks",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "9f1e045ceaf27aca2bc1d82ce98706d662a4c9c5a2ba397d532c70640b80816d",
+      "id": "2000/BOS",
+      "name": "Boston Celtics",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "3bf17f85d18fe4c1b11c3d4f465ced51adae0d52c16107a437a71b33ae9eada3",
+      "id": "2000/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 67,
+        "w": 15
+      }
+    },
+    {
+      "hash": "aabc6df2cdb1fe76c9ff6bc3e596889a9b3264bdc61af34988b8d66b80d30d9b",
+      "id": "2000/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 52,
+        "w": 30
+      }
+    },
+    {
+      "hash": "478b0a5c5b47db4e98fcfde2b270b47fa3a1f7ea848d2a00381c14527035eb2d",
+      "id": "2000/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "fe9456009c987ccc54bfec4ddc3707c9086fc1623952266e9d4bbe56ec1bcdbc",
+      "id": "2000/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 50,
+        "w": 32
+      }
+    },
+    {
+      "hash": "44213701d84022b71dbd100815fdf5bf17ee09703cc39bb26f842970a2e810ab",
+      "id": "2000/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "898b732cc91b3f4b5ffcdb6928ab04270c1cf8fce09752a587e30bd82081c0e2",
+      "id": "2000/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 51,
+        "w": 31
+      }
+    },
+    {
+      "hash": "e1bda3052f13cf794e698ce10e342ff018661eae36d3cd040e38ede138a813fc",
+      "id": "2000/VAN",
+      "name": "Vancouver Grizzlies",
+      "record": {
+        "l": 59,
+        "w": 23
+      }
+    },
+    {
+      "hash": "e401bdab310145f7fbd1bafc9824fdb0e90d1d2e07a9e7bf53f588a28cb628c9",
+      "id": "2000/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "319b09499762a14256ffa7d1bf6dcda5c9214e399ecbf9a4c48b69d0d8f00daa",
+      "id": "2001/BOS",
+      "name": "Boston Celtics",
+      "record": {
+        "l": 33,
+        "w": 49
+      }
+    },
+    {
+      "hash": "77692a7395af5f42f63e6fca496a34fc02ae7168dffb4cd56f2682bf7ad225e0",
+      "id": "2001/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "4def51b3f4d377622dd2002482d8344f2fb46e661e2c70404361f795d0f54138",
+      "id": "2001/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "95f5b51797be9f4f84fdab1431d01007e20ba5403775987b50a490a2cb56b4f3",
+      "id": "2001/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 55,
+        "w": 27
+      }
+    },
+    {
+      "hash": "3b3903d8ea8725fae7a41868c5bafeb369cd31c979f625449bdef001404d5d95",
+      "id": "2001/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 32,
+        "w": 50
+      }
+    },
+    {
+      "hash": "ca5b7ca810647615aa2214661548bca46ade77e01b8e5e19ba0e204c93e9e394",
+      "id": "2001/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "85ef7a13e473d2e096a03ce8ebf58d9c969ecb3c687b45f25a576f7abfa8b2dc",
+      "id": "2001/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 59,
+        "w": 23
+      }
+    },
+    {
+      "hash": "29c1d6917844ca850f4a144a5fc402e445c41a9fda44a887e8253945431de1b3",
+      "id": "2001/NJN",
+      "name": "New Jersey Nets",
+      "record": {
+        "l": 30,
+        "w": 52
+      }
+    },
+    {
+      "hash": "44c4398933719b01110d479933c6bfced680cbce22049b6f043278fe5577b479",
+      "id": "2002/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 52,
+        "w": 30
+      }
+    },
+    {
+      "hash": "0cbbbd4555a885fd321b77076ccdccb1b288a15fad0a74d023326e252a002d31",
+      "id": "2002/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "7b2c6cc8f1c93a0bdeddf28ae2e0625b07962ff9fd2128fd799eb90f9bcd9864",
+      "id": "2002/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "65722ca52fd214d604cc262e2ad331ef88de513bcc08f21fe044cfe3009049fe",
+      "id": "2002/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 44,
+        "w": 38
+      }
+    },
+    {
+      "hash": "6b5293d1e8046c94b467a160888970f7d987e1e062871ba54e78be61274905df",
+      "id": "2002/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "30de3ce2f09199036387015960518b5daccdc0d2ea109d4d7ce760ab42090603",
+      "id": "2002/MIA",
+      "name": "Miami Heat",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "893c14dd1feb8fbcfecab12e9d4f7fcc6a38f9db758337ca9f1662d9afba8bbe",
+      "id": "2002/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 45,
+        "w": 37
+      }
+    },
+    {
+      "hash": "a71751c5a6d8b47ec70651b456e026c67a6b9036e4ec020783e47a03faccdc27",
+      "id": "2002/PHX",
+      "name": "Phoenix Suns",
+      "record": {
+        "l": 38,
+        "w": 44
+      }
+    },
+    {
+      "hash": "55f21a5e828761a506ae141e3e314b80888310525d27eda1610e17631be608e9",
+      "id": "2003/ATL",
+      "name": "Atlanta Hawks",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "3427d73ac0b61655e9eae4cf8a9f017c676aa104b847d546ef586d686fc2da5d",
+      "id": "2003/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "af918bfc2d159b91f344ebe35d7b6c267544dfa136b794bb0be598d3b7bb4ba2",
+      "id": "2003/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 39,
+        "w": 43
+      }
+    },
+    {
+      "hash": "ed178b0d2932d2054e8c1d2d64d23522ad76846d5be54af620bada59d5a6dfcc",
+      "id": "2003/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 45,
+        "w": 37
+      }
+    },
+    {
+      "hash": "6b761f5ca5f68c23f5bcb92c826ddf75b0ded23a800bf27761f080ae5f12b354",
+      "id": "2003/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "e3c8b4f130d87051b86fd8c558958dbb6fd1450eac1d79b9ac8151e4bfb6f157",
+      "id": "2003/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 32,
+        "w": 50
+      }
+    },
+    {
+      "hash": "b5372e7665c4a2507f291f948909ee9410effd0ed3a21e50b63abd8b63dc2267",
+      "id": "2003/MIA",
+      "name": "Miami Heat",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "31f641d93cf79910e7c2d588ab45818d06aaa258ea6e34a1917094b77a07d1a7",
+      "id": "2003/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "4e4bb0491a5e91d25ed02c3b1a268cba565ee110c407bd828f0713f1bd1b3cac",
+      "id": "2003/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 43,
+        "w": 39
+      }
+    },
+    {
+      "hash": "c6a82389a96a5243d5067a82ac3e754b189ef974c10dec975cf8944b32c0561b",
+      "id": "2003/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "8f2d0cf87a47ab11ecdfe8d901d8cd334a3644f1377de28532a2eef613a337d8",
+      "id": "2003/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "c1e86012caca110aa713663b0369a13b7f55de3601e76a96e95cf9fd42bc19ab",
+      "id": "2004/ATL",
+      "name": "Atlanta Hawks",
+      "record": {
+        "l": 69,
+        "w": 13
+      }
+    },
+    {
+      "hash": "f7378b11d400cfa845171ab2f1ff9b29ecbf3050760f8eff31cb2753622e57d0",
+      "id": "2004/CHA",
+      "name": "Charlotte Bobcats",
+      "record": {
+        "l": 64,
+        "w": 18
+      }
+    },
+    {
+      "hash": "42482d0fe229718d9fddf2572169a2fd199de71488f48be46400f827d2fb75d8",
+      "id": "2004/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 35,
+        "w": 47
+      }
+    },
+    {
+      "hash": "49e1f649d5b813df1c21a4f4098551b568d4022db31203d3182237dc26d30f88",
+      "id": "2004/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 48,
+        "w": 34
+      }
+    },
+    {
+      "hash": "8a1c88748bef5923c81ad1a5b0cd3ee923199ef0cd808ff60abdbde6eabc0644",
+      "id": "2004/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 45,
+        "w": 37
+      }
+    },
+    {
+      "hash": "2339cc85f197d657794dac49809219c7150c2658cd52c040b6351d54f95b9975",
+      "id": "2004/NOH",
+      "name": "New Orleans Hornets",
+      "record": {
+        "l": 64,
+        "w": 18
+      }
+    },
+    {
+      "hash": "9339dcab4fa08ed18884688f3af56a546b4059cb27dc575a262acc36dd6c0642",
+      "id": "2004/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "6a4143c2cf8aca895ce57a3876e8194ad070baf5cd0ad4bc59b91314f7c1b096",
+      "id": "2004/SEA",
+      "name": "Seattle Supersonics",
+      "record": {
+        "l": 30,
+        "w": 52
+      }
+    },
+    {
+      "hash": "a9bc03625d472fba33f20479720f9fad339033113bf2fd98ed0038d741325c86",
+      "id": "2004/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "5d988c4c6f281c894299a0668cf559656c65eb366982ed0e5ce00e8e891103dd",
+      "id": "2004/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 37,
+        "w": 45
+      }
+    },
+    {
+      "hash": "acc914f9ea6628758aabdbd78512e174c1c6a21e99b31d2eb2f32b82ecfc0a4e",
+      "id": "2005/ATL",
+      "name": "Atlanta Hawks",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "c69202d679b298a3ad08042d31b09a79c1f38c13576b4e53387fcff94053765c",
+      "id": "2005/CHA",
+      "name": "Charlotte Bobcats",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "081008ad8fa77d119e8b01f8038525995724ba17d180f050de4dc92ba3ddd33d",
+      "id": "2005/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "fc667c1f7ce28dcf1f934b6a96f68e9ddc8a2c9b6f3cf7b2a3fa08cf1fa1ffb0",
+      "id": "2005/NOK",
+      "name": "New Orleans/Oklahoma City Hornets",
+      "record": {
+        "l": 44,
+        "w": 38
+      }
+    },
+    {
+      "hash": "62b5f6ba9ab9e45cb5fd30e42921802e285b167b0ab6d559965ecd5e793296b6",
+      "id": "2005/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "06a78e97dc098fb9f57fd23c76f85d2c6aef22613fcfe8eba60ff83fa591587e",
+      "id": "2005/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "3babb83894fdc56fe8b8d54a244e94fd4f734535c6c68ac51b0fd9ace08df839",
+      "id": "2005/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 55,
+        "w": 27
+      }
+    },
+    {
+      "hash": "67aa2c95dbb0a064eef6465f6fc43f402760a561299ce77e83d63cbc62cce1ac",
+      "id": "2005/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "0376715edb0a3cdbbb250de5dc4df6072dea8c9c86f7693b48fa15113364af02",
+      "id": "2006/ATL",
+      "name": "Atlanta Hawks",
+      "record": {
+        "l": 52,
+        "w": 30
+      }
+    },
+    {
+      "hash": "1dd81434bf91bcb5f299d8c2b22fd70c2e70d4e00f1e38eb6e86f227d3eb1080",
+      "id": "2006/BOS",
+      "name": "Boston Celtics",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "9e9fb6e3f3b7147eacabc43266fddb1ab9ea895e8bd2c018fdbaa3b738fba30d",
+      "id": "2006/CHA",
+      "name": "Charlotte Bobcats",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "0888142a3eb6a12e527d19a62aa30311e1ad829d398e5c78143e687820208b4b",
+      "id": "2006/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "e8507436808147b7972c12ab8a2e4e71ccb0a4547495cd6ac9a76307f458db45",
+      "id": "2006/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "9ff7923a2e0d5de41f383d84785451bcdd8ab4187b00684c1c72d535367b3173",
+      "id": "2006/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "e8cdee43b6192cb4ef22e0c7c8ac4aa6b873f1770de87d0651ca8a2590a14d16",
+      "id": "2006/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 50,
+        "w": 32
+      }
+    },
+    {
+      "hash": "1bba6e97ac1f32c6dc9d1696b0b61ccac702640edf80aa5d355fb91a34ca4eb2",
+      "id": "2006/SEA",
+      "name": "Seattle Supersonics",
+      "record": {
+        "l": 51,
+        "w": 31
+      }
+    },
+    {
+      "hash": "4d5f49eca7c4d9872f913581d42f5bce323a4b886417b6140409a66d9bdcb955",
+      "id": "2006/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 35,
+        "w": 47
+      }
+    },
+    {
+      "hash": "303b966a633468723d18d33d15ee5c84c2d53e4adf3bfd4acc732882fddb8769",
+      "id": "2007/CHA",
+      "name": "Charlotte Bobcats",
+      "record": {
+        "l": 50,
+        "w": 32
+      }
+    },
+    {
+      "hash": "30aaf07a58e21fefef216f44308465062badec0206fe022441eb98607e3e70c1",
+      "id": "2007/IND",
+      "name": "Indiana Pacers",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "875a7135d918f0e8c02aac4e8a312372b8eb1abdfce3e372365ffeb814d001f9",
+      "id": "2007/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 59,
+        "w": 23
+      }
+    },
+    {
+      "hash": "38c4bf6e9ef84d2add5c587a41bc746f246d75db9e8cb34f42790049e50ef032",
+      "id": "2007/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "91fac59aacffb7eb0e61f6163cc3771bf05cff68e658bf558bf2c1c770fcb332",
+      "id": "2007/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "49700063e0cd44c13adcf340e04027424db43860ee186efafe29fedb46777f5b",
+      "id": "2007/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "dfc71acf99983c2c2d06ac4740577fb11fd39c95e300565064c0c406475d9c0d",
+      "id": "2007/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "0a8241d631ac0ac6ed0fc6730c9162e3cec9bbbd2be5eb97ed07fd93dec73191",
+      "id": "2007/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "1ee2a361da1cd440fade84498209e9499580101396ebc2aab4134cbefd945c70",
+      "id": "2007/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 44,
+        "w": 38
+      }
+    },
+    {
+      "hash": "2dc3a0953c86abdcbc119f4ce63b5b8a6e563921593d1ab1d2cf34788eebedfc",
+      "id": "2007/SEA",
+      "name": "Seattle Supersonics",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "06c40ecb9ad819cbcd3891eecccd6a232ffdf05a8301fd870d85a1d5ded6af14",
+      "id": "2008/IND",
+      "name": "Indiana Pacers",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "d971fbc28a3a3eb677fa64112a25fc6b40ee400e5e4393f3596b0b95d9140920",
+      "id": "2008/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "eca2fb0612d510bb37f140b43d81384f15c1d8515300cc4989632aaf87e6293d",
+      "id": "2008/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "0bb5d831d8f109a7dbf9a6ae79e089e494a19d8ec6101f619e5c68c550420ec4",
+      "id": "2008/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 48,
+        "w": 34
+      }
+    },
+    {
+      "hash": "7e9b5a62aa05bf99ef7fe775170ac0fb1cab18d97d0e262d1dc4cc4accb1071b",
+      "id": "2008/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "46505c3158a44759b3ff12952beb5b133fbb9ba6ad060af55b334cdf206be658",
+      "id": "2008/NJN",
+      "name": "New Jersey Nets",
+      "record": {
+        "l": 48,
+        "w": 34
+      }
+    },
+    {
+      "hash": "34332869b11110f855576899bbadb0423a67e7532c53ac0c918f74f31bab8017",
+      "id": "2008/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 50,
+        "w": 32
+      }
+    },
+    {
+      "hash": "24adb5d30dbb17bf41b1f7a60790764e8b94c0a52614a621338b8118b9d296e8",
+      "id": "2008/OKC",
+      "name": "Oklahoma City Thunder",
+      "record": {
+        "l": 59,
+        "w": 23
+      }
+    },
+    {
+      "hash": "c7ea6a3dc3ef04d0a27d89c620cabb89af8884dfa05bcd9ec2d40e6dd70bcbc8",
+      "id": "2008/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "5cfc0ea794f948d4448f04975141b822ac7650c0f4be2941b2c076b18d8320c3",
+      "id": "2009/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "0485e085dfba840ece627e832916ef4118e89cbb30551f6156ded31ed9804a13",
+      "id": "2009/HOU",
+      "name": "Houston Rockets",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "cb3ab3f0000861d509cc3913ffa86a02b6667959f82b9877561d7144ca5b1666",
+      "id": "2009/IND",
+      "name": "Indiana Pacers",
+      "record": {
+        "l": 50,
+        "w": 32
+      }
+    },
+    {
+      "hash": "9a5a02495aab03121413b607c9d0e76623de07fa7c64e434690cd0fde4aa8d30",
+      "id": "2009/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "192919ddbe9ff81ffea6b353f10d1de0e1e3557e7577734cfdbd8c6799821390",
+      "id": "2009/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "614b91e8f410eda76a22f695088e3c0298e49df15dba5485095da5ca255b2d86",
+      "id": "2009/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 36,
+        "w": 46
+      }
+    },
+    {
+      "hash": "0107512cac23ea97bfb77dd78448a376976e43d825c4f336029ce5496e4e1527",
+      "id": "2009/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 67,
+        "w": 15
+      }
+    },
+    {
+      "hash": "c579da565f19a2a22d1519c47cc3137ee7b3695d36f171d721b4abb4d1a3914e",
+      "id": "2009/NJN",
+      "name": "New Jersey Nets",
+      "record": {
+        "l": 70,
+        "w": 12
+      }
+    },
+    {
+      "hash": "887c671f9846678f745411e7c4a453ec140f8619eea608b72b649d45f53ce0c3",
+      "id": "2009/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "19063afe73080e116ef71896c3332a1736a88cda4f98cbc77acfe5e841c15dfc",
+      "id": "2009/OKC",
+      "name": "Oklahoma City Thunder",
+      "record": {
+        "l": 32,
+        "w": 50
+      }
+    },
+    {
+      "hash": "5fc00f4c7148a070225f6d49614ddf66228cfa261d35c5a1aba919dcff292c8a",
+      "id": "2009/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "73b22bd2fe46271d0b173c888a1bc55e11396aab10cf2e1705d5eafb144ced88",
+      "id": "2010/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "8fc50bff3287811a3d0d2b8653424c60b9906f9d28689b8d955cc5aa082c903c",
+      "id": "2010/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 52,
+        "w": 30
+      }
+    },
+    {
+      "hash": "b02f24f09bc29d4eb5dbb4d1391f5956fdd6ed553d88509aa04cea826076a797",
+      "id": "2010/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "5d4fd47c110148958a2469c728c93466a13971548ad1d19b761b040a8c1ad7e4",
+      "id": "2010/IND",
+      "name": "Indiana Pacers",
+      "record": {
+        "l": 45,
+        "w": 37
+      }
+    },
+    {
+      "hash": "889e6fc4e6ccea9eba6ac7d59229ecd79e64ea64b0ec663ac26e46365ced7268",
+      "id": "2010/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "54e2b8a0ac4f48def1fcab65b3be29ddecf6ca1af729c976373b49ac5f559f2d",
+      "id": "2010/NJN",
+      "name": "New Jersey Nets",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "c409d38c81bc14e304adbf40ff604e52369f764abc90c566687661bd249fd5a9",
+      "id": "2010/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "7e3d384ef732c8a324d160b6daef4b995b9a7a593f2a3414f68554ce93c4f123",
+      "id": "2010/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "8554ce949332ab744d26db7c08fda9c185092c7c3e1fdb1818303fba5b2e2a5c",
+      "id": "2010/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "582b0a61d24e9bcfaae85f84e000a4a2bda28980988810642f2a563d3a7a3c2d",
+      "id": "2010/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "dd50825e44fd7c7f69c5eec365bd4ebd3528faf1a886a4de9ec495ad94d3c0f4",
+      "id": "2010/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 59,
+        "w": 23
+      }
+    },
+    {
+      "hash": "218641a4b1662042a8637817500612238031737591316e2c59c5fd784661829f",
+      "id": "2011/CHA",
+      "name": "Charlotte Bobcats",
+      "record": {
+        "l": 59,
+        "w": 7
+      }
+    },
+    {
+      "hash": "03183cb49baef92baa7539d009402debb9fde2ad2c22e1d5ecb31a6656136832",
+      "id": "2011/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 45,
+        "w": 21
+      }
+    },
+    {
+      "hash": "9ee1cfb47c6224244e7806ac553b8074715cfd15730e002538b096453cfd5cbb",
+      "id": "2011/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 41,
+        "w": 25
+      }
+    },
+    {
+      "hash": "a37290535a0c7de20f95dd5871706d005c4a9048dee96e443347764300c560c5",
+      "id": "2011/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 40,
+        "w": 26
+      }
+    },
+    {
+      "hash": "b2e58833ca9b139d79bac47439eb744941ae99d5aa7a1b6e51803cdb9dbe287c",
+      "id": "2011/NJN",
+      "name": "New Jersey Nets",
+      "record": {
+        "l": 44,
+        "w": 22
+      }
+    },
+    {
+      "hash": "0b0e88befc6eb3b55205c2590f0c42b05c2be7d04c90e52043677ce46782ee16",
+      "id": "2011/NOH",
+      "name": "New Orleans Hornets",
+      "record": {
+        "l": 45,
+        "w": 21
+      }
+    },
+    {
+      "hash": "34e47ae580786745d8160ec2969da3d6d1375e8bc63a750ecfad049cf9d97d45",
+      "id": "2011/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 44,
+        "w": 22
+      }
+    },
+    {
+      "hash": "7328df116a1638bcc1cdfc3681623c0f2019c8d79d04874c3cbd90a8f706e8b5",
+      "id": "2011/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 43,
+        "w": 23
+      }
+    },
+    {
+      "hash": "8030cfb89609fe1a8781ef0b21759d35d03b29ce2bcf31d662bf01a963ba31fa",
+      "id": "2011/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 30,
+        "w": 36
+      }
+    },
+    {
+      "hash": "382b45a34f201bad249f6fd111fe81091280535935e15f21ff97407c51799910",
+      "id": "2011/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 46,
+        "w": 20
+      }
+    },
+    {
+      "hash": "f9ce9743cfde99337d6719a68f90da467110e1af5f15766f51fa9180ee6ce119",
+      "id": "2012/CHA",
+      "name": "Charlotte Bobcats",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "914325b55638cac0c82a895a5ac47a0c6e2b6f456762abc5692fe9d9b6c7a7e8",
+      "id": "2012/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "8618560bc8db78f13aab4db1f4c04e6de0fd6686194d7cc6c282021ffd4c7b1d",
+      "id": "2012/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "a5cc1fe484acd9de73692e9b859558ce5717a503d5b0321970df38bb01b04438",
+      "id": "2012/GSW",
+      "name": "Golden State Warriors",
+      "record": {
+        "l": 35,
+        "w": 47
+      }
+    },
+    {
+      "hash": "19b01e17041c78facb5c00d019a19b76c61c2ab0388ecb024c13525e0044acde",
+      "id": "2012/HOU",
+      "name": "Houston Rockets",
+      "record": {
+        "l": 37,
+        "w": 45
+      }
+    },
+    {
+      "hash": "bebc5597e24a1e136af085cfeab0b417c1b4bf3e1454ca3ff30d026d5fba1a72",
+      "id": "2012/NOH",
+      "name": "New Orleans Hornets",
+      "record": {
+        "l": 55,
+        "w": 27
+      }
+    },
+    {
+      "hash": "eb66056ab911944eb3fe3afc230dd7fc47b469ef9f591a6ab1a7597ee02dca05",
+      "id": "2012/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "3064c92c29b4b5bf3053c15cf49a6c4bb256d2a49deb021821ca62200358a8f1",
+      "id": "2012/PHX",
+      "name": "Phoenix Suns",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "10794a4f3c113df86c1abda910a2ff8e3724d3102669b0f62a29f8b4ffbe3ce4",
+      "id": "2012/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "e8699d3368d7d0661c832fc9c37e8d8e538ad0ab9c087cbb54e0246d7166fd7d",
+      "id": "2012/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "644380ed0aa1241e68b1ce405f655b25a4cccd995fdad83092d004afdd94cd01",
+      "id": "2012/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 48,
+        "w": 34
+      }
+    },
+    {
+      "hash": "418d5edd335c6b0f7abf29f006bef747622aa33c4c157048b256426f03616e88",
+      "id": "2012/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "fe9b753d1dccfc8ab3730db2bc2e8c4ecfba4f0166dc4090289e1b292061103b",
+      "id": "2013/BOS",
+      "name": "Boston Celtics",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "c37dfe91e6b08a96341e2ce5b3860b3f559b1d46b69b9fcc2eb313d619c38fa5",
+      "id": "2013/CHA",
+      "name": "Charlotte Bobcats",
+      "record": {
+        "l": 39,
+        "w": 43
+      }
+    },
+    {
+      "hash": "3f2a14dfbb50a6c4e688f85cef54504b6ebe90cd70a3f4123fbde637fab44336",
+      "id": "2013/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 67,
+        "w": 15
+      }
+    },
+    {
+      "hash": "438ae6185ccbd808b93fffcf3194229611ef1fc44922b1d557555a5761d65117",
+      "id": "2013/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 59,
+        "w": 23
+      }
+    },
+    {
+      "hash": "8c00c9923f0360706c7f26a2277ade994e55f7327e0e4929cfd0affb0ebcaf84",
+      "id": "2013/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "ba5964a5a7b5fe5eb10d0a0836ec88ba2fc999d1cf2916a60cc55999f14953d2",
+      "id": "2013/PHX",
+      "name": "Phoenix Suns",
+      "record": {
+        "l": 34,
+        "w": 48
+      }
+    },
+    {
+      "hash": "d287bc79003ef75b80e8e19485f0a122f4e275a7df82bb14b6bc858590e3f208",
+      "id": "2013/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "20b5764437eaa82a38a505fadc31d003f844374bd8cb6de73dafad1ca8da5889",
+      "id": "2013/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 34,
+        "w": 48
+      }
+    },
+    {
+      "hash": "f995357a1c00183c2ded690fc1af83b64289b5dfc656e03d62bff3ee939ed003",
+      "id": "2013/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "7b6d42537077351bf8b5cacb5af82afc5d7f6be8e6715b7317b7af8d8d2d0068",
+      "id": "2014/BOS",
+      "name": "Boston Celtics",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "cfe4db3fdca4d570d7194ee501a56a3f313229dd2e029a508e09938084553744",
+      "id": "2014/IND",
+      "name": "Indiana Pacers",
+      "record": {
+        "l": 44,
+        "w": 38
+      }
+    },
+    {
+      "hash": "d2e3f25b5105de51e3790ca2e1a80ec2d347bfa8884e24f35485224f620d5ce3",
+      "id": "2014/LAL",
+      "name": "Los Angeles Lakers",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "e53afb057bff1225fab0d6912deff3dd7119f3cc425823295d7a156a6910fc94",
+      "id": "2014/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "acafaf4f45ced1d14ea8c6f115d6221dd196758250fb2431fb725e5536063609",
+      "id": "2014/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 66,
+        "w": 16
+      }
+    },
+    {
+      "hash": "2f9dbb6ae53435652169dabcc36959ffce13bb663a2e3d8870e4bbfc1aa0afbd",
+      "id": "2014/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "a94be1246b57d5753f6aae0809ece1bcea5081a4363ee205fd0e6761f4c74e36",
+      "id": "2014/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 64,
+        "w": 18
+      }
+    },
+    {
+      "hash": "bc12d625ccb422d06371ccbf82fc8054c14c56cfdde5620543a46cedc8bc52cc",
+      "id": "2014/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "d65f434a771f2b0982d5c726b3417492aad5ab549332b02f1252b674d5a0acae",
+      "id": "2014/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 44,
+        "w": 38
+      }
+    },
+    {
+      "hash": "167f3772db191d7317ed91baea92dc2dc10674f073499a5268e3b7fcd1d1df1b",
+      "id": "2015/BKN",
+      "name": "Brooklyn Nets",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "441a0217650bc8cf21f532c1f3886dce5a043a04a8d77e7ed3c381681974dc84",
+      "id": "2015/CHA",
+      "name": "Charlotte Hornets",
+      "record": {
+        "l": 34,
+        "w": 48
+      }
+    },
+    {
+      "hash": "b54f14e4b80f721fcf6d37c10ab1d98b07ec276552fefa96c489ac212d021594",
+      "id": "2015/DEN",
+      "name": "Denver Nuggets",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "724c7aaa76abc55ee693a848ac667c5df66fc25a0cc87b4e049a9d19db665dbc",
+      "id": "2015/LAL",
+      "name": "Los Angeles Lakers",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "210a3ec052116591716b6f2f1659f4c61087ee62ca8d585b1db275c664d8c9af",
+      "id": "2015/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "d6079c22e381c3e8ab43c885e6309da83b8f615a892640a680bbb3c7aaec2704",
+      "id": "2015/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 50,
+        "w": 32
+      }
+    },
+    {
+      "hash": "114500c51e04a8d703ce57e864d776ca2f23700b5ccd87d1edf1969e3f892744",
+      "id": "2015/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "aeeca88d6799f897ddcc65988b931d6a0ec6d59f59ff5cfabc4e97bfb08c7ac2",
+      "id": "2015/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 72,
+        "w": 10
+      }
+    },
+    {
+      "hash": "89cc67299c954dec223470b04bf090d69a7103efaeaa2c6e2a91f63264cfc0a5",
+      "id": "2015/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 38,
+        "w": 44
+      }
+    },
+    {
+      "hash": "007607ea0f9b841b2499461c1d7a2a4aade6237deac23e401f7cc909f728b221",
+      "id": "2016/BKN",
+      "name": "Brooklyn Nets",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "f9bd26c9ca6f9cec56c60f9df1894828ee8239c439a30199bf0c4854a47bf08d",
+      "id": "2016/LAL",
+      "name": "Los Angeles Lakers",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "2037740d1cdbf103a59e20463c39d46ee3f57ca5c24f5af4f4c6bee14be92985",
+      "id": "2016/MIA",
+      "name": "Miami Heat",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "e20fd5d13d13f8f9ce73f9b6005839213d6531e88f68cf5e5efa3fc4f00da8d5",
+      "id": "2016/MIL",
+      "name": "Milwaukee Bucks",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "13de18c4f8874a15f8d198a6771e1010e3f983c1626f050f4d419ba72ad898df",
+      "id": "2016/PHI",
+      "name": "Philadelphia 76ers",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "30d14f2c6826f5d3cb759a62f0429b31dbcefd651e4ca11201e18b72083217a2",
+      "id": "2016/PHX",
+      "name": "Phoenix Suns",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "522f56cf5d907899169d33fd1bd7f95565228b0410a5a43be2b57a4dcc3f5124",
+      "id": "2016/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 50,
+        "w": 32
+      }
+    },
+    {
+      "hash": "2bcd705dc4fc91da74c5c9c98c446275f37e77d001f4daaf030c66dce01eff9c",
+      "id": "2017/ATL",
+      "name": "Atlanta Hawks",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "a31e3c7d974b372abe6d985da71cac5705e81f82e37c2a8f2cc2a532a5024904",
+      "id": "2017/BKN",
+      "name": "Brooklyn Nets",
+      "record": {
+        "l": 54,
+        "w": 28
+      }
+    },
+    {
+      "hash": "15d0e09ea53794800a55bbf16bb178d4f199897ba6db062bf4e5dd2f4669a26b",
+      "id": "2017/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 55,
+        "w": 27
+      }
+    },
+    {
+      "hash": "da293b25424c67b3334c40ac4d9df1286a07849f9a5e15f65d0c6e43399f2a1e",
+      "id": "2017/DAL",
+      "name": "Dallas Mavericks",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "180e3eb8a82b7fafc18ed0325ecd27c3162bd31fd590f49c9cfe3e0633471fa9",
+      "id": "2017/IND",
+      "name": "Indiana Pacers",
+      "record": {
+        "l": 34,
+        "w": 48
+      }
+    },
+    {
+      "hash": "9f25e14389089ab2586fae1fc76715965d44410cfb0676b2510c892c913c762a",
+      "id": "2017/LAL",
+      "name": "Los Angeles Lakers",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "466bb11a1490f2f4687ec141c3f409b0d7ce3ee2aece4e574af8f3132bb229ad",
+      "id": "2017/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "997c16f17b6576fdf7f43d758c3ee00b16d9caa1e7af047ca756825cea205d63",
+      "id": "2017/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 57,
+        "w": 25
+      }
+    },
+    {
+      "hash": "f363bdb3cf1112dad18ec9b566a793d715069c380b33ee25747a56dc5c405c26",
+      "id": "2017/PHX",
+      "name": "Phoenix Suns",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "260650f4af9f9bb8009ff71666de60f08f01f0b42305f7592975cbe0a85f5a6c",
+      "id": "2017/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 55,
+        "w": 27
+      }
+    },
+    {
+      "hash": "cd69a1831126bcafb4321f459b216bffb55eadbcf13b9bc7b7b8f100c68ad94a",
+      "id": "2018/ATL",
+      "name": "Atlanta Hawks",
+      "record": {
+        "l": 53,
+        "w": 29
+      }
+    },
+    {
+      "hash": "4d12aefb7e080c022193b0d025e00b3bdf4249319a1a8f0db45f7460b2594831",
+      "id": "2018/BKN",
+      "name": "Brooklyn Nets",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "b7bc3dd2771514ea9dadc2efe4ae0a642d1105545708287982feed1ae7c716c2",
+      "id": "2018/CHA",
+      "name": "Charlotte Hornets",
+      "record": {
+        "l": 43,
+        "w": 39
+      }
+    },
+    {
+      "hash": "0374885c8506e696f90a8b15fd16fecd18684aff17ad310629a9322491de0284",
+      "id": "2018/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "c09ec78916427d06401338835eeffb9b3dfec5cd083e80c286cfabe15bd78fd2",
+      "id": "2018/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "b261c768f13de6bcb543706fedb89676a83c75560059969b86896a9bf8449f41",
+      "id": "2018/DAL",
+      "name": "Dallas Mavericks",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "5664860352912c6e454927769f9e0743e73ca01652755df103d7f567781d2e07",
+      "id": "2018/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 49,
+        "w": 33
+      }
+    },
+    {
+      "hash": "fde4d9166634a43eb46fb9c30e89375f0a6929f0305731eaaf4f28c661a9f026",
+      "id": "2018/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "577c19be010abacfa1cf43523161158810b5bebc9239454850afcae4b5c409e7",
+      "id": "2018/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "879fc41e10b02dfca0473c5536675f1078e68ac52a629b84855500e678df3d53",
+      "id": "2018/PHX",
+      "name": "Phoenix Suns",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "937070e60e9b9829b51d250a4a2152c530c9d6d3da4b3d40c7e70677cfab1bb3",
+      "id": "2018/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 43,
+        "w": 39
+      }
+    },
+    {
+      "hash": "d329c659c84fac8a85240f0542b329532941dc73b5727edb1b5576cc8ed15816",
+      "id": "2020/CHA",
+      "name": "Charlotte Hornets",
+      "record": {
+        "l": 39,
+        "w": 33
+      }
+    },
+    {
+      "hash": "8e46452222659c1f3cbd188bdadea950d8bab50f43bd2241398fd62a915e7749",
+      "id": "2020/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 41,
+        "w": 31
+      }
+    },
+    {
+      "hash": "fa86728ae85421ebf0e9408963b6f410757eacae0288895042f4894cdc8e9817",
+      "id": "2020/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 50,
+        "w": 22
+      }
+    },
+    {
+      "hash": "465b82c024488f9d5f9c64a0c526603457597a833ae47c1631ae104a5ffed3fc",
+      "id": "2020/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 52,
+        "w": 20
+      }
+    },
+    {
+      "hash": "01cdcc7bd4686f15612eadb00336989a2be2f2347e4f573e85a6292e5d0d3604",
+      "id": "2020/MEM",
+      "name": "Memphis Grizzlies",
+      "record": {
+        "l": 34,
+        "w": 38
+      }
+    },
+    {
+      "hash": "6cf846804fa5c76d9d5b5db4b83d52065ddb265daa9c855c32724dd03897f603",
+      "id": "2020/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 49,
+        "w": 23
+      }
+    },
+    {
+      "hash": "4505d2b6ddc80dac41945b1f70337902646e7a438471e4a03169937955b1cd76",
+      "id": "2020/NYK",
+      "name": "New York Knicks",
+      "record": {
+        "l": 31,
+        "w": 41
+      }
+    },
+    {
+      "hash": "781155f096c7083607f2affc4e77f3e5351a778056bd3c0c390cdce4abe5d83d",
+      "id": "2020/OKC",
+      "name": "Oklahoma City Thunder",
+      "record": {
+        "l": 50,
+        "w": 22
+      }
+    },
+    {
+      "hash": "0082056e626b778148099ac0a87561a038c2aff0afd55644cf458788c4664529",
+      "id": "2020/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 51,
+        "w": 21
+      }
+    },
+    {
+      "hash": "e6b6b63f6fba31f610a82c2d1ae4371208de2f58b59b6b78100168272b151208",
+      "id": "2020/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 41,
+        "w": 31
+      }
+    },
+    {
+      "hash": "c45551d7f2490f5f29777f7129021e61b426138a6d57f66d579ecd4edb9dcc05",
+      "id": "2020/SAS",
+      "name": "San Antonio Spurs",
+      "record": {
+        "l": 39,
+        "w": 33
+      }
+    },
+    {
+      "hash": "c585a10196568a9b790f7fe9ec160629996530bd4a1a281bbdfcec52ebdbd86c",
+      "id": "2021/CLE",
+      "name": "Cleveland Cavaliers",
+      "record": {
+        "l": 38,
+        "w": 44
+      }
+    },
+    {
+      "hash": "459074ec567e2d2f09e0bd0d9503503c230b78f8591f53c297766bc7e65876e9",
+      "id": "2021/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 59,
+        "w": 23
+      }
+    },
+    {
+      "hash": "2ba493fd5ae2bda664111067948d019e3630bbebe99dbba1a29bb6e968b16cf6",
+      "id": "2021/HOU",
+      "name": "Houston Rockets",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "77fd0ddd59f740605d6ca7a80be8dd2afee1568506001756c4984a5d9751b395",
+      "id": "2021/MIN",
+      "name": "Minnesota Timberwolves",
+      "record": {
+        "l": 36,
+        "w": 46
+      }
+    },
+    {
+      "hash": "fbc8234e9449ec1ccef3a91fa3a4a2a3b54518bdb35eafb9a83311b112ecd74f",
+      "id": "2021/OKC",
+      "name": "Oklahoma City Thunder",
+      "record": {
+        "l": 58,
+        "w": 24
+      }
+    },
+    {
+      "hash": "ed92d739bac2b8dfc2d89f5e63e05bf9d411cb4ab1f4673359f58c12289a1d56",
+      "id": "2021/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "594d73f21f794ca4a850610fb2d6d7b55fe015054dcace39c0220518eeb395cf",
+      "id": "2021/SAS",
+      "name": "San Antonio Spurs",
+      "record": {
+        "l": 48,
+        "w": 34
+      }
+    },
+    {
+      "hash": "b9e5f42af34a5d2b581a9126f8030c41727ade1b57f8a560ca8d6f97b4a0bcb1",
+      "id": "2021/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "7eda4c4b7a5c2654198f7d4cf091533b141c9b2889e80f0e2239f8afdf92b267",
+      "id": "2022/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "2eab1a718255054c954efb1d5a41deff8b37765d013d8924c7963dbc19830b09",
+      "id": "2022/HOU",
+      "name": "Houston Rockets",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "8263accf8188190514a6907b7afcab7e939a09b96d2dfcc01c592d60225b7eca",
+      "id": "2022/IND",
+      "name": "Indiana Pacers",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "3adccbab1c5460b6821be79103542efdde48a4999410c6cf0e8b9426e24fd5e4",
+      "id": "2022/OKC",
+      "name": "Oklahoma City Thunder",
+      "record": {
+        "l": 42,
+        "w": 40
+      }
+    },
+    {
+      "hash": "db200943f00cdee747f811ebdb1094580eaa7abf619861c5707c65e496dfea3b",
+      "id": "2022/ORL",
+      "name": "Orlando Magic",
+      "record": {
+        "l": 48,
+        "w": 34
+      }
+    },
+    {
+      "hash": "d0f3375a7e56dd8acf8778ac684c35e7af709c3583d21045d293340230597948",
+      "id": "2022/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 34,
+        "w": 48
+      }
+    },
+    {
+      "hash": "cc43c65b74604791aec51b93c22337955f4e4f9f9bdd686f39f9fa13911dec2b",
+      "id": "2022/SAS",
+      "name": "San Antonio Spurs",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "300a3f852011266e134b3b933772614400945a509f40876885333f1de42605a6",
+      "id": "2022/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 45,
+        "w": 37
+      }
+    },
+    {
+      "hash": "b483edb02d441a6724534fd03e279880380e4f126caaeb5d27f5dd218d40c86a",
+      "id": "2022/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 47,
+        "w": 35
+      }
+    },
+    {
+      "hash": "48ef087a66804b83472fd254bda961b829874dc9fffac44140fe0ac17fbb04d0",
+      "id": "2023/CHA",
+      "name": "Charlotte Hornets",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "16c90ecb25094be4b34cb66ca588fcd2addc968b013af7efa23a599b4e1c073b",
+      "id": "2023/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 68,
+        "w": 14
+      }
+    },
+    {
+      "hash": "3700e389257f2a90903a44ab869b893cea239b7206ce89a6d50da4a7f1da3824",
+      "id": "2023/HOU",
+      "name": "Houston Rockets",
+      "record": {
+        "l": 41,
+        "w": 41
+      }
+    },
+    {
+      "hash": "7640ef8e356b3517d09f1433077f8aaac83c41047d256559ef834554054e9ea8",
+      "id": "2023/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 61,
+        "w": 21
+      }
+    },
+    {
+      "hash": "ee6b6cc456d625381d46da5f8c8c3194333180d285abd60bd5d303b9239cdc3b",
+      "id": "2023/SAS",
+      "name": "San Antonio Spurs",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "33e7239bea0a942b842041d8715aebec9c1a5a6283cc18c579a20f56f582cd7d",
+      "id": "2023/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 51,
+        "w": 31
+      }
+    },
+    {
+      "hash": "06a0692559fe7a320902abd272a572586ce34abbebe97e5efd8111b29c7071a9",
+      "id": "2023/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 67,
+        "w": 15
+      }
+    },
+    {
+      "hash": "0dbc7d171719cba5f7b4f503dab492deceec16fc5f20c47ddfa74657d3257fc2",
+      "id": "2024/BKN",
+      "name": "Brooklyn Nets",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "a2eb26b65381274d59951204d19f61a36732872f0a879945eeb35191a0b0a297",
+      "id": "2024/CHA",
+      "name": "Charlotte Hornets",
+      "record": {
+        "l": 63,
+        "w": 19
+      }
+    },
+    {
+      "hash": "a14536d656f106a1da22dbf0628065665214f6145bd262525ef4a15871b2c553",
+      "id": "2024/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 43,
+        "w": 39
+      }
+    },
+    {
+      "hash": "acadd16c17a73617ff21355f80d0bf24664f7f83bb25a7302901ea6e56fbb2f1",
+      "id": "2024/DET",
+      "name": "Detroit Pistons",
+      "record": {
+        "l": 38,
+        "w": 44
+      }
+    },
+    {
+      "hash": "2f809e706329dac5ad287daa587a249775501e60650878199ade833a36b36f29",
+      "id": "2024/LAC",
+      "name": "Los Angeles Clippers",
+      "record": {
+        "l": 32,
+        "w": 50
+      }
+    },
+    {
+      "hash": "d70c4779492c840bd25b1ecd6bbae83fb62ffd43b3feb20ec355e40e00947c28",
+      "id": "2024/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 46,
+        "w": 36
+      }
+    },
+    {
+      "hash": "e3f0adf559c3383f64158117f24dee69743624240bdb7d807728b4beee6495ef",
+      "id": "2024/TOR",
+      "name": "Toronto Raptors",
+      "record": {
+        "l": 52,
+        "w": 30
+      }
+    },
+    {
+      "hash": "7b340101737bc14828b5ef010f4dbbea0ce044746b41a2ff44d1c9e59ae02ecc",
+      "id": "2024/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "50dd34b95dc7405239b18ac0f324a6cd70fe9b3e5f5c86270aab3373f0b2945c",
+      "id": "2024/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 64,
+        "w": 18
+      }
+    },
+    {
+      "hash": "dc2749bb21c596e2cf077489dc2804d126e39e3753d648ed10343203f70ae0e2",
+      "id": "2025/UTA",
+      "name": "Utah Jazz",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    },
+    {
+      "hash": "9c8baf6a5371501c6e26dbeb9650da74810a886f315dcb7caf30f0136bf5d698",
+      "id": "2025/BKN",
+      "name": "Brooklyn Nets",
+      "record": {
+        "l": 62,
+        "w": 20
+      }
+    },
+    {
+      "hash": "871bb28306a9c7ce50c9940b6648e9a0a5a9e9c6a19ee397c5f394a5a01a4fa0",
+      "id": "2025/WAS",
+      "name": "Washington Wizards",
+      "record": {
+        "l": 65,
+        "w": 17
+      }
+    },
+    {
+      "hash": "71195dfd954e2a9f42f3d8bf89684af1c0a954d8a769b61547d7e5d483085ff4",
+      "id": "2025/CHA",
+      "name": "Charlotte Hornets",
+      "record": {
+        "l": 38,
+        "w": 44
+      }
+    },
+    {
+      "hash": "c5fca684368c1856a6b43d47f08f0ac6dacc11e83102ac575d5e88cc99d814bf",
+      "id": "2025/NOP",
+      "name": "New Orleans Pelicans",
+      "record": {
+        "l": 56,
+        "w": 26
+      }
+    },
+    {
+      "hash": "023fb8fc82d9490844bebb0ba752fea89b5209ccc527f2a772a7087f7f5cc670",
+      "id": "2025/PHX",
+      "name": "Phoenix Suns",
+      "record": {
+        "l": 37,
+        "w": 45
+      }
+    },
+    {
+      "hash": "492fb7dcc4529ed5ebab26fa029fe4ff373296c18f8de8090449d36c4caf642f",
+      "id": "2025/CHI",
+      "name": "Chicago Bulls",
+      "record": {
+        "l": 51,
+        "w": 31
+      }
+    },
+    {
+      "hash": "a4986a7b5a2e376b400df65ac93c563e63b160b949ace8bdf416fbaf883e5670",
+      "id": "2025/POR",
+      "name": "Portland Trail Blazers",
+      "record": {
+        "l": 40,
+        "w": 42
+      }
+    },
+    {
+      "hash": "8a54e71e5e82526c1d8d1bdc30aaf19c8a48e35d1a012a08dd8c67f8f8dee4bd",
+      "id": "2025/SAC",
+      "name": "Sacramento Kings",
+      "record": {
+        "l": 60,
+        "w": 22
+      }
+    }
+  ],
+  "games": "2688eaf89c9d3a8fb8df94b1d3c73d4b85cb1c94a90237d7cdd478eeb92edd39",
+  "metadata": "e8965aed821630b15d8afb6c6c09954d90b3ca453ed01f46937f30c68e0388b0"
+}

@@ -70,7 +70,13 @@ export default defineConfig([
       // `cloudflare:*` are workerd built-ins, provided by the runtime
       "import-x/no-unresolved": [
         "error",
-        { ignore: ["^astro:", "^cloudflare:"] },
+        {
+          ignore: [
+            "^astro:",
+            "^cloudflare:",
+            "^virtual:tracker/(catalog|archive)$",
+          ],
+        },
       ],
       // perfectionist/sort-imports owns import ordering
       "import-x/order": "off",

@@ -1,6 +1,6 @@
-import type { CollectionEntry } from "astro:content";
-
 import { describe, expect, test, vi } from "vitest";
+
+import type { Team } from "../src/data/model";
 
 import * as ContentUtils from "../src/content-utils";
 
@@ -15,14 +15,19 @@ const fixture = await vi.hoisted(async () => {
   const { readContentFixture } = await import("./content-fixture");
   return readContentFixture();
 });
-vi.mock(import("astro:content"), () => fixture.api);
-const { games, seasons, teamSeasons } = fixture.entries;
+vi.mock(import("virtual:tracker/catalog"), () => ({
+  catalog: fixture.catalog,
+  metadataHash: "test",
+}));
 const {
+  games,
   games: rawGames,
+  seasons,
   seasons: rawSeasons,
   teams: rawTeams,
+  teamSeasons,
   teamSeasons: rawTeamSeasons,
-} = fixture.raw;
+} = fixture;
 
 describe("system validation", () => {
   describe("season rules", () => {
@@ -31,7 +36,7 @@ describe("system validation", () => {
       const gracePeriodDays = 15;
 
       for (const season of seasons) {
-        const endDate = new Date(season.data.endDate);
+        const endDate = new Date(season.endDate);
         const daysSinceEnd =
           (today.getTime() - endDate.getTime()) / (1000 * 60 * 60 * 24);
 
@@ -44,23 +49,19 @@ describe("system validation", () => {
         }
 
         const seasonTeams = teamSeasons.filter(
-          (ts) => ts.data.season.id === season.id,
+          (ts) => ts.seasonId === season.id,
         );
 
         expect(seasonTeams.length).toBeGreaterThanOrEqual(1);
 
-        const seasonGames = games.filter(
-          (game) => game.data.seasonId === season.id,
-        );
+        const seasonGames = games.filter((game) => game.seasonId === season.id);
 
         // Each surprise team should have 82 games (or 66/72 for shortened seasons)
-        const expectedGames = season.data.shortened?.numGames || 82;
+        const expectedGames = season.shortened?.numGames || 82;
 
         for (const teamSeason of seasonTeams) {
           const teamGames = seasonGames.filter((game) =>
-            game.data.teams.some(
-              (team) => team.teamId === teamSeason.data.team.id,
-            ),
+            game.teams.some((team) => team.teamId === teamSeason.teamId),
           );
 
           expect(teamGames.length).toBe(expectedGames);
@@ -71,13 +72,11 @@ describe("system validation", () => {
     test("current/upcoming seasons must not have static games data", () => {
       const today = new Date();
       const unfinishedSeasons = seasons.filter(
-        (season) => new Date(season.data.endDate) > today,
+        (season) => new Date(season.endDate) > today,
       );
 
       for (const season of unfinishedSeasons) {
-        const seasonGames = games.filter(
-          (game) => game.data.seasonId === season.id,
-        );
+        const seasonGames = games.filter((game) => game.seasonId === season.id);
         expect(seasonGames).toHaveLength(0);
       }
     });
@@ -86,7 +85,7 @@ describe("system validation", () => {
       const today = new Date();
 
       const currentOrUpcoming = seasons.filter((season) => {
-        const endDate = new Date(season.data.endDate);
+        const endDate = new Date(season.endDate);
         return endDate > today;
       });
 
@@ -99,8 +98,7 @@ describe("system validation", () => {
       // implies correct start/end date order, a fact we're verifying here. This is blatant overthinking?
       const sortedSeasons = [...seasons].toSorted(
         (a, b) =>
-          new Date(a.data.startDate).getTime() -
-          new Date(b.data.startDate).getTime(),
+          new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
       );
 
       for (let i = 0; i < sortedSeasons.length - 1; i++) {
@@ -111,20 +109,18 @@ describe("system validation", () => {
 
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const year = Number.parseInt(season.id.split("-")![0]!, 10);
-        expect(season.data.startDate.startsWith(year.toString())).toEqual(true);
-        expect(season.data.endDate.startsWith((year + 1).toString())).toEqual(
-          true,
-        );
+        expect(season.startDate.startsWith(year.toString())).toEqual(true);
+        expect(season.endDate.startsWith((year + 1).toString())).toEqual(true);
 
-        const startMoment = new Date(season.data.startDate).getTime();
-        const endMoment = new Date(season.data.endDate).getTime();
+        const startMoment = new Date(season.startDate).getTime();
+        const endMoment = new Date(season.endDate).getTime();
 
         expect(endMoment).toBeGreaterThan(startMoment);
 
         // Now verify non-overlapping
-        const currentEnd = new Date(season.data.endDate);
+        const currentEnd = new Date(season.endDate);
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const nextStart = new Date(sortedSeasons[i + 1]!.data.startDate);
+        const nextStart = new Date(sortedSeasons[i + 1]!.startDate);
 
         expect(nextStart.getTime()).toBeGreaterThan(currentEnd.getTime());
       }
@@ -135,13 +131,13 @@ describe("system validation", () => {
       const maxDaysAway = 90;
 
       const futureSeasons = seasons.filter(
-        (s) => new Date(s.data.startDate) > today,
+        (s) => new Date(s.startDate) > today,
       );
 
       expect(futureSeasons.length).toBeLessThanOrEqual(1); // partially redundant with "only one current or upcoming season allowed" test (doesn't cover current case)
 
       for (const season of futureSeasons) {
-        const startDate = new Date(season.data.startDate);
+        const startDate = new Date(season.startDate);
         const daysUntilStart =
           (startDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24);
 
@@ -169,7 +165,7 @@ describe("system validation", () => {
       const teamIds = new Set(rawTeams.map((t) => t.id));
 
       for (const teamSeason of rawTeamSeasons) {
-        expect(teamIds).toContain(teamSeason.team);
+        expect(teamIds).toContain(teamSeason.teamId);
         const [, teamId] = teamSeason.id.split("/", 2);
         expect(teamIds).toContain(teamId);
       }
@@ -185,7 +181,7 @@ describe("system validation", () => {
       const seasonIds = new Set(rawSeasons.map((s) => s.id));
 
       for (const teamSeason of rawTeamSeasons) {
-        expect(seasonIds).toContain(teamSeason.season);
+        expect(seasonIds).toContain(teamSeason.seasonId);
         const [seasonId] = teamSeason.id.split("/", 1);
         expect(seasonIds).toContain(seasonId);
       }
@@ -197,23 +193,18 @@ describe("system validation", () => {
 
     test("game participants must be surprise team candidates", async () => {
       const surpriseTeamIdsBySeason = Object.fromEntries(
-        rawSeasons.map(({ id }) => [
-          id,
-          new Set<CollectionEntry<"teams">["id"]>(),
-        ]),
+        rawSeasons.map(({ id }) => [id, new Set<Team["id"]>()]),
       );
       for (const teamSeason of teamSeasons) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        surpriseTeamIdsBySeason[teamSeason.data.season.id]!.add(
-          teamSeason.data.team.id,
-        );
+        surpriseTeamIdsBySeason[teamSeason.seasonId]!.add(teamSeason.teamId);
       }
 
       for (const game of games) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const surpriseTeamIds = surpriseTeamIdsBySeason[game.data.seasonId]!;
+        const surpriseTeamIds = surpriseTeamIdsBySeason[game.seasonId]!;
 
-        const hasSurpriseTeam = game.data.teams.some((team) => {
+        const hasSurpriseTeam = game.teams.some((team) => {
           return surpriseTeamIds.has(team.teamId);
         });
 
@@ -227,28 +218,26 @@ describe("system validation", () => {
   describe("chart hardcoding checks", () => {
     test("stats page top-10 table - no ties at cutoff", async () => {
       // Match Stats: only archived seasons contribute to the ranking.
-      const archivedSeasonIds = new Set(games.map(({ data }) => data.seasonId));
-      const archivedTeams = teamSeasons.filter(({ data }) =>
-        archivedSeasonIds.has(data.season.id),
+      const archivedSeasonIds = new Set(games.map((data) => data.seasonId));
+      const archivedTeams = teamSeasons.filter((data) =>
+        archivedSeasonIds.has(data.seasonId),
       );
       expect(archivedTeams.length).toBeGreaterThan(10);
       const paceArchive = [];
       for (const teamSeason of archivedTeams) {
-        const gamesPlayed = games.filter(({ data }) => {
+        const gamesPlayed = games.filter((data) => {
           return (
-            data.seasonId === teamSeason.data.season.id &&
-            data.teams
-              .map(({ teamId }) => teamId)
-              .includes(teamSeason.data.team.id)
+            data.seasonId === teamSeason.seasonId &&
+            data.teams.map(({ teamId }) => teamId).includes(teamSeason.teamId)
           );
         });
         const record = ContentUtils.calculateTeamRecord(
-          teamSeason.data.team.id,
-          gamesPlayed.map((g) => g.data),
+          teamSeason.teamId,
+          gamesPlayed.map((g) => g),
         );
 
         paceArchive.push({
-          pace: await ContentUtils.pace(teamSeason, record),
+          pace: ContentUtils.pace(teamSeason, record),
           record,
           teamSeason,
         });

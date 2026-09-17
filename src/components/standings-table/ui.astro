@@ -1,9 +1,8 @@
 ---
-import type { CollectionEntry } from "astro:content";
-
-import { getEntry } from "astro:content";
+import { catalog } from "virtual:tracker/catalog";
 
 import type { GameData } from "../../content-utils";
+import type { Season } from "../../data/model";
 
 import * as ContentUtils from "../../content-utils";
 import * as Utils from "../../utils";
@@ -15,25 +14,25 @@ import Table from "../table.astro";
 
 interface Props {
   games: GameData[];
-  seasonId: CollectionEntry<"seasons">["id"];
+  seasonId: Season["id"];
   title?: string;
 }
 
 const { games, seasonId, title } = Astro.props;
 
-const teamsInSeason = await ContentUtils.getTeamsInSeason(seasonId);
+const teamsInSeason = ContentUtils.getTeamsInSeason(seasonId);
 
 const teamRows = [];
 
 for (const team of teamsInSeason) {
   const record = ContentUtils.calculateTeamRecord(team.id, games);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const teamSeason = await getEntry("teamSeasons", `${seasonId}/${team.id}`)!;
+  const teamSeason = catalog.getTeamSeason(seasonId, team.id)!;
 
   teamRows.push({
-    isEliminated: await ContentUtils.isEliminated(teamSeason, record),
-    isSurpriseTeam: await ContentUtils.isSurprise(teamSeason, record),
-    pace: await ContentUtils.pace(teamSeason, record),
+    isEliminated: ContentUtils.isEliminated(teamSeason, record),
+    isSurpriseTeam: ContentUtils.isSurprise(teamSeason, record),
+    pace: ContentUtils.pace(teamSeason, record),
     record,
     team,
     teamSeason,
@@ -48,7 +47,7 @@ for (const team of teamsInSeason) {
 // if not immediately apparent
 teamRows.sort((a, b) => b.pace - a.pace);
 
-const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
+const surpriseRules = ContentUtils.getSeasonSurpriseRules(seasonId);
 ---
 
 <script>
@@ -139,7 +138,7 @@ const surpriseRules = await ContentUtils.getSeasonSurpriseRules(seasonId);
                 </Link>
               </div>
             </th>
-            <td class="text-right">{teamRow.teamSeason.data.overUnder}</td>
+            <td class="text-right">{teamRow.teamSeason.overUnder}</td>
             <td class="text-right">
               {teamRow.record.w + teamRow.record.l === 0
                 ? "—"

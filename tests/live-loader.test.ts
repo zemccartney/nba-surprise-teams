@@ -5,10 +5,10 @@ import loader from "../src/loaders/live";
 
 vi.mock(import("../src/content-utils"), async (importOriginal) => ({
   ...(await importOriginal()),
-  getLatestSeason: async () => ({
-    collection: "seasons" as const,
-    data: { endDate: "2027-04-11", id: "2026", startDate: "2026-10-20" },
+  getLatestSeason: () => ({
+    endDate: "2027-04-11",
     id: "2026",
+    startDate: "2026-10-20",
   }),
   getTeamsInSeason: vi.fn(),
 }));
@@ -39,11 +39,11 @@ const feed = (
 };
 
 beforeEach(() => {
-  vi.mocked(getTeamsInSeason).mockResolvedValue([
+  vi.mocked(getTeamsInSeason).mockReturnValue([
     {
-      collection: "teams",
-      data: { emoji: "test", id: "CHA", name: "Charlotte" },
+      emoji: "test",
       id: "CHA",
+      name: "Charlotte",
     },
   ]);
   vi.useFakeTimers();

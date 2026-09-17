@@ -1,5 +1,6 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getSeasonArchive } from "virtual:tracker/archive";
+import { catalog } from "virtual:tracker/catalog";
 
 import Link from "../../components/link.astro";
 import Logo from "../../components/logo.astro";
@@ -8,13 +9,13 @@ import * as ContentUtils from "../../content-utils";
 import Subpage from "../../layouts/subpage.astro";
 
 export const getStaticPaths = async () => {
-  const teamSeasons = await getCollection("teamSeasons");
+  const teamSeasons = catalog.getTeamSeasons();
   const paths = [];
   for (const ts of teamSeasons) {
-    const team = await getEntry(ts.data.team);
-    const season = await getEntry(ts.data.season);
+    const team = catalog.requireTeam(ts.teamId);
+    const season = catalog.requireSeason(ts.seasonId);
     paths.push({
-      params: { seasonId: ts.data.season.id, teamId: ts.data.team.id },
+      params: { seasonId: ts.seasonId, teamId: ts.teamId },
       props: { season, team },
     });
   }
@@ -23,12 +24,12 @@ export const getStaticPaths = async () => {
 
 const { season, team } = Astro.props;
 
-const hasArchive = await ContentUtils.getSeasonArchive(season.id);
+const hasArchive = getSeasonArchive(season.id);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
 ---
 
 <Subpage
-  description={`${fmtSeason} Season Results for the ${team.data.name}`}
+  description={`${fmtSeason} Season Results for the ${team.name}`}
   title={`${team.id} ${fmtSeason}`}
 >
   {

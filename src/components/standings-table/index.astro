@@ -1,7 +1,8 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { getSeasonArchive } from "virtual:tracker/archive";
+import { catalog } from "virtual:tracker/catalog";
 
-import { getEntry } from "astro:content";
+import type { Season } from "../../data/model";
 
 import * as ContentUtils from "../../content-utils";
 import Loading from "../loading.astro";
@@ -9,19 +10,19 @@ import StandingsTable from "./ssr.astro"; // component name used in requests (de
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: CollectionEntry<"seasons">["id"];
+  seasonId: Season["id"];
   title?: boolean | string;
 }
 
 const { seasonId, title } = Astro.props;
 
-const season = await getEntry("seasons", seasonId);
+const season = catalog.getSeason(seasonId);
 
 if (!season) {
   throw new Error(`[standings-table] Season ${seasonId}`);
 }
 
-const staticGames = await ContentUtils.getSeasonArchive(season.data.id);
+const staticGames = getSeasonArchive(season.id);
 if (import.meta.env.DEV && !staticGames) {
   console.log(
     `[standings-table] Static games data unavailable for season ${seasonId}; will try to render data via server island`,
@@ -39,7 +40,7 @@ if (title === false) {
 {
   staticGames ? (
     <UI
-      games={staticGames.map((entry) => entry.data)}
+      games={staticGames.map((entry) => entry)}
       seasonId={season.id}
       title={resolvedTitle}
     />

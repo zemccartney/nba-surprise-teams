@@ -14,60 +14,36 @@ import {
   validateDatabase,
   writeGame,
 } from "../data/node/database";
-import { importLegacyJson } from "../data/node/import-json";
 import { metadataCatalog } from "../src/data/catalog";
-import { readContentFixture } from "./content-fixture";
-
-const directory = mkdtempSync(Path.join(tmpdir(), "nbastt-database-"));
+const directory = mkdtempSync(Path.join(tmpdir(), "nbastt-db-test-"));
 afterAll(() => rmSync(directory, { force: true, recursive: true }));
-
-describe("application database migration", () => {
-  it("preserves all source records and the original metadata ordering", async () => {
-    const filename = Path.join(directory, "import.db");
-    importLegacyJson(filename);
+const dump = readFileSync(new URL("../data/dump.sql", import.meta.url), "utf8");
+describe("application database", () => {
+  it("restores and dumps deterministically without overwriting existing files", () => {
+    const filename = Path.join(directory, "canonical.db");
+    restoreDatabase(filename, dump);
     const db = openDatabase(filename);
     try {
-      const { raw } = await readContentFixture();
-      const metadata = readMetadata(db);
-      expect(metadata.seasons).toEqual(raw.seasons);
-      expect(metadata.teams).toEqual(raw.teams);
-      expect(metadata.teamSeasons).toEqual(
-        raw.teamSeasons.map((row) => ({
-          id: row.id,
-          overUnder: row.overUnder,
-          seasonId: row.season,
-          teamId: row.team,
-        })),
-      );
-      expect(readGames(db)).toEqual(raw.games);
-      const dump = dumpDatabase(db);
-      const restored = Path.join(directory, "restored.db");
-      restoreDatabase(restored, dump);
-      const copy = openDatabase(restored);
-      try {
-        expect(dumpDatabase(copy)).toBe(dump);
-      } finally {
-        copy.close();
-      }
-      expect(() => restoreDatabase(restored, dump)).toThrow(
+      expect(dumpDatabase(db)).toBe(dump);
+      expect(() => restoreDatabase(filename, dump)).toThrow(
         "Refusing to overwrite",
       );
+      const metadata = readMetadata(db);
       const catalog = metadataCatalog(metadata);
-      expect(catalog.getLatestSeason().id).toBe("2026");
       expect(catalog.getTeam("constructor")).toBeUndefined();
       expect(() => catalog.requireSeason("9999")).toThrow("Unknown season");
+      expect(catalog.getLatestSeason().id).toBe(metadata.seasons.at(-1)?.id);
       expect(catalog.getTeamSeasons("2025").length).toBeGreaterThan(0);
-      expect(catalog.getTeamSeasons("2026")).toEqual([]);
     } finally {
       db.close();
     }
   });
-  it("upgrades schema 1 transactionally, preserves archived NBA identifiers and is idempotent", () => {
-    const filename = Path.join(directory, "upgraded.db");
+  it("upgrades schema 1 transactionally and idempotently", () => {
+    const filename = Path.join(directory, "upgrade.db");
     createDatabase(filename, (db) => {
       db.exec(
         readFileSync(
-          new URL("../plan/sqlite-spike/data/dump.sql", import.meta.url),
+          new URL("../data/migrations/001-initial.sql", import.meta.url),
           "utf8",
         ),
       );
@@ -81,12 +57,6 @@ describe("application database migration", () => {
           .all()
           .map((row) => row.version),
       ).toEqual([1, 2]);
-      const games = readGames(db, "2025");
-      const game = games[0];
-      if (!game) throw new Error("Missing migration fixture");
-      db.prepare("DELETE FROM archived_games WHERE id=?").run(game.id);
-      writeGame(db, { ...game, nbaGameId: "0022500001" });
-      expect(readGames(db, "2025")[0]?.nbaGameId).toBe("0022500001");
       const before = dumpDatabase(db);
       migrate(db);
       validateDatabase(db);
@@ -94,5 +64,46 @@ describe("application database migration", () => {
     } finally {
       db.close();
     }
+  });
+  it("preserves optional NBA identifiers through dump/restore", () => {
+    const filename = Path.join(directory, "nba.db");
+    restoreDatabase(filename, dump);
+    const db = openDatabase(filename, false);
+    try {
+      const game = readGames(db, "2025")[0];
+      if (!game) throw new Error("Missing fixture");
+      db.prepare("DELETE FROM archived_games WHERE id=?").run(game.id);
+      writeGame(db, { ...game, nbaGameId: "0022500001" });
+      const copy = Path.join(directory, "nba-copy.db");
+      restoreDatabase(copy, dumpDatabase(db));
+      const restored = openDatabase(copy);
+      try {
+        expect(readGames(restored, "2025")[0]?.nbaGameId).toBe("0022500001");
+      } finally {
+        restored.close();
+      }
+    } finally {
+      db.close();
+    }
+  });
+  it("rolls back a failed migration without publishing partial schema changes", () => {
+    const filename = Path.join(directory, "broken.db");
+    expect(() =>
+      createDatabase(filename, (db) => {
+        db.exec(
+          readFileSync(
+            new URL("../data/migrations/001-initial.sql", import.meta.url),
+            "utf8",
+          ),
+        );
+        db.exec("ALTER TABLE archived_games ADD COLUMN nba_game_id TEXT");
+        expect(() => migrate(db)).toThrow();
+        expect(
+          db.prepare("SELECT version FROM schema_migrations").all(),
+        ).toHaveLength(1);
+        throw new Error("abort fixture");
+      }),
+    ).toThrow("abort fixture");
+    expect(() => openDatabase(filename)).toThrow("Missing database");
   });
 });

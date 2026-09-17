@@ -1,14 +1,15 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import type { CollectionEntry } from "astro:content";
+
+import type { Season, Team } from "../data/model";
 
 import * as ContentUtils from "../content-utils";
 
 type Props = Pick<HTMLAttributes<"img">, "loading"> & {
   class?: string;
   height?: number;
-  seasonId: CollectionEntry<"seasons">["id"];
-  team: CollectionEntry<"teams">;
+  seasonId: Season["id"];
+  team: Team;
   width?: number;
 };
 
@@ -22,7 +23,7 @@ const {
   ...props
 } = Astro.props;
 
-const alt = `Logo for ${team.data.name}`;
+const alt = `Logo for ${team.name}`;
 
 /*
   Plain <img>, not Astro's <Image>, because every logo is an SVG. The image
@@ -44,7 +45,7 @@ const { default: logo } = await ContentUtils.getTeamSeasonLogo(team, seasonId);
   loading={loading}
   src={logo.src}
   width={width}
-  {...team.data.id === ContentUtils.TEAM_CODES.DET && {
+  {...team.id === ContentUtils.TEAM_CODES.DET && {
     // tweak to slightly improve contrast
     style:
       "filter: drop-shadow(-1rem -1rem 1rem #016270) drop-shadow(1rem 1rem 1rem #016271);",

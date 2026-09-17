@@ -60,6 +60,11 @@ export const gameSchema = z.object({
   seasonId: z.string().regex(/^\d{4}$/),
   teams: z.tuple([score, score]),
 });
+export const metadataSchema = z.object({
+  seasons: seasonSchema.array(),
+  teams: teamSchema.array(),
+  teamSeasons: teamSeasonSchema.array(),
+});
 export type Game = z.infer<typeof gameSchema>;
 export interface Metadata {
   seasons: Season[];

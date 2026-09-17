@@ -1,66 +1,35 @@
-import type { CollectionEntry } from "astro:content";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import Path from "node:path";
 
-import Fs from "node:fs/promises";
+import {
+  readGames,
+  readMetadata,
+  restoreDatabase,
+  withDatabase,
+} from "../data/node/database";
+import { validateDataset } from "../data/node/validate";
+import { metadataCatalog } from "../src/data/catalog";
 
-import { createContentApi } from "./content-api";
-
-type RawTeamSeason = Omit<
-  CollectionEntry<"teamSeasons">["data"],
-  "season" | "team"
-> & {
-  season: string;
-  team: CollectionEntry<"teams">["id"];
-};
-
-// Read on every invocation, not in a module-level cache. Keep arrays intact:
-// unlike Astro's store, a Map would silently swallow duplicate IDs.
-export const readContentFixture = async (
-  directory = new URL("../src/content/", import.meta.url),
+// Every call restores fresh canonical bytes. No Astro store, no working DB, no
+// module-level data cache, and no collection-API mock to mask duplicate IDs.
+export const readContentFixture = (
+  dump = new URL("../data/dump.sql", import.meta.url),
 ) => {
-  const read = async <Data>(name: string): Promise<Data[]> => {
-    const value: unknown = JSON.parse(
-      await Fs.readFile(new URL(name, directory), "utf8"),
-    );
-    if (!Array.isArray(value) || value.length === 0) {
-      throw new Error(`${name}: expected a nonempty content array`);
-    }
-    return value as Data[];
-  };
-  const [games, seasons, teams, teamSeasons] = await Promise.all([
-    read<CollectionEntry<"games">["data"]>("games.json"),
-    read<CollectionEntry<"seasons">["data"]>("seasons.json"),
-    read<CollectionEntry<"teams">["data"]>("teams.json"),
-    read<RawTeamSeason>("teamSeasons.json"),
-  ]);
-  const raw = { games, seasons, teams, teamSeasons };
-  const entries = {
-    games: games.map((data) => ({
-      collection: "games" as const,
-      data,
-      id: data.id,
-    })),
-    seasons: seasons.map((data) => ({
-      collection: "seasons" as const,
-      data,
-      id: data.id,
-    })),
-    teams: teams.map((data) => ({
-      collection: "teams" as const,
-      data,
-      id: data.id,
-    })),
-    teamSeasons: teamSeasons.map((data) => ({
-      collection: "teamSeasons" as const,
-      data: {
-        ...data,
-        season: { collection: "seasons" as const, id: data.season },
-        team: { collection: "teams" as const, id: data.team },
-      },
-      id: data.id,
-    })),
-  };
-  // Only the content API boundary is substituted. Domain calculations still
-  // run the real application helpers against these freshly read entries.
-  const api = createContentApi(entries);
-  return { api, entries, raw };
+  const directory = mkdtempSync(Path.join(tmpdir(), "nbastt-fixture-"));
+  try {
+    const filename = Path.join(directory, "fixture.db");
+    restoreDatabase(filename, readFileSync(dump, "utf8"));
+    return withDatabase(filename, (db) => {
+      validateDataset(db);
+      const metadata = readMetadata(db);
+      return {
+        ...metadata,
+        catalog: metadataCatalog(metadata),
+        games: readGames(db),
+      };
+    });
+  } finally {
+    rmSync(directory, { force: true, recursive: true });
+  }
 };

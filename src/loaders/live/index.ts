@@ -39,7 +39,7 @@ const loader = async (
   // Don't solve for missing data; i.e. don't crash your site just b/c you haven't set data "on time"
   // If you don't update in time, then home page will break b/c nothing to do: no next season set, still thinking
   // in old season
-  const season = await ContentUtils.getLatestSeason();
+  const season = ContentUtils.getLatestSeason();
 
   if (!season) {
     throw new Error("Missing season data");
@@ -92,8 +92,7 @@ const loader = async (
       return (
         // Taking for granted that game and season dates are all in eastern timezone, hence comparable here
         // without time comparison
-        gameYYYYMMDD >= season.data.startDate &&
-        gameYYYYMMDD <= season.data.endDate // equal to b/c we want to include records on the final day
+        gameYYYYMMDD >= season.startDate && gameYYYYMMDD <= season.endDate // equal to b/c we want to include records on the final day
       );
     })
     // Apply eligibility once, before BOTH result selection and next refresh.
@@ -107,7 +106,7 @@ const loader = async (
   const relevantGames: LiveLoaderResponse["games"] = [];
   let expiresAt;
 
-  const teams = await ContentUtils.getTeamsInSeason(season.id);
+  const teams = ContentUtils.getTeamsInSeason(season.id);
   const TRICODES = teams.map((team) => team.id) as TeamCode[];
 
   // game times are implicitly in EST

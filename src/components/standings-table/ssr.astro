@@ -1,14 +1,14 @@
 ---
-import type { CollectionEntry } from "astro:content";
-
 import { actions } from "astro:actions";
+
+import type { Season } from "../../data/model";
 
 import { liveCacheControl } from "../../loaders/live/utils";
 import Crash from "../crash.astro";
 import UI from "./ui.astro";
 
 interface Props {
-  seasonId: CollectionEntry<"seasons">["id"];
+  seasonId: Season["id"];
 }
 
 const { seasonId } = Astro.props;

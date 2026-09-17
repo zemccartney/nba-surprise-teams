@@ -3,7 +3,7 @@ import sentry from "@sentry/astro";
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 
-import archiver from "./archiver/integration.ts";
+import trackerData from "./data/integration.ts";
 import { sqliteBoundary } from "./data/runtime-boundary.ts";
 import svgOptimizer from "./svg-optimizer/integration.ts";
 
@@ -59,7 +59,7 @@ export default defineConfig({
     },
   },
   integrations: [
-    archiver(),
+    trackerData(),
     svgOptimizer(),
     ...(SENTRY_AUTH_TOKEN
       ? [

@@ -1,10 +1,12 @@
 ---
+import { getArchivedSeasons } from "virtual:tracker/archive";
+
 import Link from "../components/link.astro";
 import * as ContentUtils from "../content-utils";
 import Subpage from "../layouts/subpage.astro";
 import Typography from "../layouts/typography.astro";
 
-const archivedSeasons = await ContentUtils.getArchivedSeasons();
+const archivedSeasons = getArchivedSeasons();
 ---
 
 <Subpage

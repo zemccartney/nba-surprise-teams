@@ -1,8 +1,8 @@
 ---
-import type { CollectionEntry } from "astro:content";
-
 import { actions } from "astro:actions";
-import { getEntry } from "astro:content";
+import { catalog } from "virtual:tracker/catalog";
+
+import type { Season, Team } from "../../data/model";
 
 import { liveCacheControl } from "../../loaders/live/utils";
 import Crash from "../crash.astro";
@@ -12,14 +12,14 @@ interface Props {
   // for server islands, important to keep props size small, given used in request params, hence not a full team record
   // Further, these props determine cache key (request URL) for server island i.e. we want different cache entries
   // per team season
-  seasonId: CollectionEntry<"seasons">["id"];
-  teamId: CollectionEntry<"teams">["id"];
+  seasonId: Season["id"];
+  teamId: Team["id"];
 }
 
 const { seasonId, teamId } = Astro.props;
 
 // redundant with index, but assume redundant validation won't hurt, or at least far less than uncaught errors?
-const teamSeason = await getEntry("teamSeasons", `${seasonId}/${teamId}`);
+const teamSeason = catalog.getTeamSeason(seasonId, teamId);
 
 if (!teamSeason) {
   throw new Error(
@@ -28,7 +28,7 @@ if (!teamSeason) {
 }
 
 const { data, error } = await Astro.callAction(actions.getSeasonData, {
-  seasonId: teamSeason.data.season.id,
+  seasonId: teamSeason.seasonId,
 });
 
 if (!error) {

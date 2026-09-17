@@ -7,15 +7,21 @@ import { LIVE_DATA_VERSION } from "../src/loaders/live";
 const mocks = vi.hoisted(() => ({
   captureException: vi.fn(),
   get: vi.fn(),
-  getEntry: vi.fn(),
   getLatestSeason: vi.fn(),
+  getSeason: vi.fn(),
   loader: vi.fn(),
   put: vi.fn(),
 }));
 vi.mock(import("@sentry/cloudflare"), () => ({
   captureException: mocks.captureException,
 }));
-vi.mock(import("astro:content"), () => ({ getEntry: mocks.getEntry }));
+vi.mock(import("virtual:tracker/catalog"), async (importOriginal) => {
+  const original = await importOriginal();
+  return {
+    ...original,
+    catalog: { ...original.catalog, getSeason: mocks.getSeason },
+  };
+});
 vi.mock(import("../src/content-utils"), async (importOriginal) => ({
   ...(await importOriginal()),
   getLatestSeason: mocks.getLatestSeason,
@@ -48,16 +54,17 @@ const run = server.getSeasonData as unknown as (input: {
 }) => Promise<LiveLoaderResponse>;
 
 const latest = {
-  data: { endDate: "2027-04-12", id: "2026", startDate: "2026-10-20" },
+  endDate: "2027-04-12",
   id: "2026",
+  startDate: "2026-10-20",
 };
 
 beforeEach(() => {
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2026-10-22T16:00:00Z"));
   vi.spyOn(console, "log").mockReturnValue(undefined);
-  mocks.getLatestSeason.mockResolvedValue(latest);
-  mocks.getEntry.mockResolvedValue(latest);
+  mocks.getLatestSeason.mockReturnValue(latest);
+  mocks.getSeason.mockReturnValue(latest);
   // KV returns null for an absent key.
   // eslint-disable-next-line unicorn/no-null
   mocks.get.mockResolvedValue(null);
@@ -74,9 +81,10 @@ const expectNoLiveAccess = () => {
 
 describe("latest-season live action contract", () => {
   it("rejects historical requests before live access", async () => {
-    mocks.getEntry.mockResolvedValue({
-      data: { endDate: "2026-04-12", id: "2025", startDate: "2025-10-21" },
+    mocks.getSeason.mockReturnValue({
+      endDate: "2026-04-12",
       id: "2025",
+      startDate: "2025-10-21",
     });
     await expect(run({ seasonId: "2025" })).rejects.toMatchObject({
       code: "BAD_REQUEST",
@@ -85,7 +93,7 @@ describe("latest-season live action contract", () => {
   });
 
   it("returns NOT_FOUND for unknown seasons", async () => {
-    mocks.getEntry.mockResolvedValue(undefined);
+    mocks.getSeason.mockReturnValue(undefined);
     await expect(run({ seasonId: "unknown" })).rejects.toMatchObject({
       code: "NOT_FOUND",
     });

@@ -8,21 +8,31 @@ Following [Vitest's agent guidance](https://vitest.dev/guide/learn/writing-tests
 `vitest.config.ts` resets mock implementations/history, restores spies and
 unstubs globals/environment variables before each test. Fake timers still need
 explicit `vi.useRealTimers()` cleanup. Prefer short behavior names and typed
-`vi.mock(import(...))`; content fixtures use this too, with typed collection
-filters and both reference/ID entry lookups. Only the deliberately partial
+`vi.mock(import(...))`; metadata mocks replace plain catalog methods, not a
+framework content API. Only the deliberately partial
 `astro:actions` transport and `cloudflare:workers` environment shims retain
 string mocks rather than hiding incompatible framework types behind casts. Run tests noninteractively (`pnpm test` uses `--run`).
 
-- `system.test.ts`: source-data lifecycle, completeness, referential integrity
-  and top-10 cutoff checks. `content-fixture.ts` reads one fresh JSON snapshot
-  per run, preserves duplicates, rejects empty arrays and supplies the real
-  domain helpers through mocked Astro lookups. No dev server/content store is
-  needed; Astro's build still performs content schema validation.
-- `content-fixture.test.ts`: isolated-file freshness, empty-input and duplicate
-  regressions. Temporary copies are cleaned automatically.
-- `content-utils.test.ts`: projected-win invariants and historical names, using
-  only seasons/teams JSON plus a synthetic 50-game season. Both data suites
-  share `content-api.ts` lookup plumbing, without making unit tests load games.
+- `system.test.ts`: lifecycle, completeness, referential integrity and top-10
+  cutoff checks. `content-fixture.ts` restores fresh canonical SQL into a temporary
+  database and returns plain records. No working DB or Astro store is consulted.
+- `content-fixture.test.ts`: changed-dump freshness and empty/duplicate negative
+  controls. Duplicate IDs fail before a Map could hide them.
+- `content-utils.test.ts`: projected-win invariants and historical names, with
+  plain metadata and an explicitly synthetic 50-game season.
+- `database.test.ts`: deterministic restore/dump, safe publication, schema upgrades,
+  rollback and optional NBA identifiers.
+- `sqlite-store.test.ts`: real staged-index CLI pass/fail/pass, transactional
+  edits, SQL constraints, metadata serialization and all approved chart/game
+  golden hashes. Future seasons do not change the historical golden.
+- `data-editing.test.ts`: metadata writes, explicit add/update semantics and asset
+  validation with rollback.
+- `nba-archive.test.ts`: paired historical NBA rows, provider identity, incomplete
+  or duplicate/conflicting records, legacy tricodes and Cup exclusion.
+- `sqlite-boundary.test.ts`: actual Vite dev loads/builds reject direct,
+  transitive, dynamic, re-exported and require-based SQL access from SSR.
+- `data-audit.test.ts`: final-artifact hashes, missing/unreported files and
+  SQL/historical-game leakage negative controls.
 - `chart-options.test.ts`: content-independent chart options, descriptions,
   keyboard ordering and active-point styling.
 - `chart-fonts.test.ts`: successful, failed and stalled font readiness, including

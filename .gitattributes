@@ -1,3 +1,2 @@
 pnpm-lock.yaml -diff
-src/content/games.json -diff
 worker-configuration.d.ts -diff

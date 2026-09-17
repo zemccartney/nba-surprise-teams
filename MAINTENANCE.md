@@ -1,5 +1,8 @@
 # About the Data: Guide to site maintenance
 
+For exact commands, recovery and refresh semantics, see [data/README.md](data/README.md).
+For the system anatomy, open [docs/data-system.html](docs/data-system.html).
+
 ## Intuition and Principles
 
 Intuition: We can favor self-reliance, thereby reducing complexity and surface area for errors, because the data at play is eventually static (games end, seasons end, results are final, historical facts). When there's no possibility of new data (out-of-season, but more commonly, in-season and we can tell by looking at the schedule that there haven't been new results since last poll), serve the system's records of data.
@@ -17,14 +20,15 @@ What, then, is the intuition for — literally, running `astro build` — in sit
 
 ## Rules
 
-Rules the data must follow for the site to work. Some of these are enforced by Astro's content system. Some checked
-in render / at dev and build time. Some are conventions, my personal requirements to enforce with custom logic
+Rules are enforced by STRICT SQLite constraints, plain domain schemas, dataset
+validation and system tests. `data/dump.sql` is canonical; `data/tracker.db` is an
+ignored editing workspace. Astro content collections are no longer used.
 
 All individual seasons MUST:
 
 - If in the past (end date is before today):
   - have a set of surprise team candidates (`teamSeasons`)
-  - have static games (in `content/games.json`), representing the complete results of that season (82 games played per surprise team participating)
+  - have archived games (in the SQLite store), representing the complete results of that season (82 games played per surprise team participating)
     - every game MUST have at least one surprise team participating
     - CONVENTION: Leniency for the most recently past season. Factor in grace period to allow for hot fixes, assuming I'll be slow to source data and store in repo, don't block the build during that time
 
@@ -56,8 +60,9 @@ What does this look like in practice? Requirements for keeping the site current 
 
 The day after the season ends (or as close as possible):
 
-1. Create games archive for newly ended season: `pnpm run archive:latest` --> should add to end of `src/content/games.json`
-   - `pnpm run archive:diff` explains the resulting change (ids added, scores corrected); `git diff` can't, the file is one line and marked `-diff`
+1. Run `pnpm run archive:latest` to fetch and transactionally archive the latest ended season.
+   - Run `mise run data:dump`, then `pnpm run archive:diff` to review ordinary SQL changes.
+   - Stage the dump and rebuild; editing the working DB alone never changes preview/production.
 2. Review hardcoded limits on graphs; new data still fits? possible to make less fragile?
 3. Review stats leaderboard; does slicing still work? Way to automate this? (e.g. if items past 10th are same number, collapse into single row listing their count)
 
@@ -73,7 +78,8 @@ The day after the season ends (or as close as possible):
 
 When the NBA releases their schedule:
 
-1. Add a new season to `src/content/seasons.json`
+1. Prepare a plain season record and run `mise run data -- add-season --input /tmp/season.json`.
+2. Dump, review, stage and rebuild. Dev refreshes automatically after the successful edit.
 
 **EXPECT:**
 
@@ -89,11 +95,11 @@ When surprise teams and their odds are announced:
 
 1. For any teams not yet registered i.e. never been a surprise team candidate:
    - create a logo, store under `src/assets/images/emoji`
-   - register the emoji name in `src/content/utils.ts::emojiByTeam`
-   - add team codes (3 letter identifier used in NBA API), to `src/content.config.ts::teamCodeSchema`
-   - add teams to `src/content/teams.json`
+   - add new NBA codes to `src/loaders/live/utils.ts::teamCodeSchema`
+   - add a plain team record (including its emoji asset name) with `mise run data -- add-team --input /tmp/team.json`
 
-2. Add team seasons to `src/content/teamSeasons.json`
+2. Add each candidate with `mise run data -- add-team-season --season YEAR --team CODE --over-under ODDS`.
+3. Dump, review, stage and rebuild. Use `update-odds` explicitly for corrections.
 
 **EXPECT:**
 

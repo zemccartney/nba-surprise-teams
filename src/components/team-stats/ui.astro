@@ -1,10 +1,10 @@
 ---
 import type { ComponentProps } from "astro/types";
-import type { CollectionEntry } from "astro:content";
 
-import { getEntry } from "astro:content";
+import { catalog } from "virtual:tracker/catalog";
 
 import type { GameData } from "../../content-utils";
+import type { TeamSeason } from "../../data/model";
 
 import * as ContentUtils from "../../content-utils";
 import * as Utils from "../../utils";
@@ -15,21 +15,21 @@ import Table from "../table.astro";
 
 interface Props {
   games: GameData[];
-  teamSeason: CollectionEntry<"teamSeasons">;
+  teamSeason: TeamSeason;
 }
 
 const { games, teamSeason } = Astro.props;
 
-const record = ContentUtils.calculateTeamRecord(teamSeason.data.team.id, games);
-const season = await getEntry(teamSeason.data.season);
-const surpriseRules = await ContentUtils.getSeasonSurpriseRules(season.id);
+const record = ContentUtils.calculateTeamRecord(teamSeason.teamId, games);
+const season = catalog.requireSeason(teamSeason.seasonId);
+const surpriseRules = ContentUtils.getSeasonSurpriseRules(season.id);
 const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
-const isSurpriseTeam = await ContentUtils.isSurprise(teamSeason, record);
-const isEliminated = await ContentUtils.isEliminated(teamSeason, record);
-const winsToSurprise = await ContentUtils.winsToSurprise(teamSeason);
-const pace = await ContentUtils.pace(teamSeason, record);
-const projectedWins = await ContentUtils.projectedWins(season.id, record);
-const recordToSurprise = await ContentUtils.recordRemainingToSurprise(
+const isSurpriseTeam = ContentUtils.isSurprise(teamSeason, record);
+const isEliminated = ContentUtils.isEliminated(teamSeason, record);
+const winsToSurprise = ContentUtils.winsToSurprise(teamSeason);
+const pace = ContentUtils.pace(teamSeason, record);
+const projectedWins = ContentUtils.projectedWins(season.id, record);
+const recordToSurprise = ContentUtils.recordRemainingToSurprise(
   teamSeason,
   record,
 );
@@ -37,17 +37,17 @@ const recordToSurprise = await ContentUtils.recordRemainingToSurprise(
 const datapoints: ComponentProps<typeof TeamSeasonPaceChart>["data"] = [];
 
 const teamGames = games.filter(({ teams }) =>
-  teams.some(({ teamId }) => teamId === teamSeason.data.team.id),
+  teams.some(({ teamId }) => teamId === teamSeason.teamId),
 );
 
 for (let i = 0; i < teamGames.length; i++) {
   const gamesToPoint = teamGames.slice(0, i + 1);
   const recordToPoint = ContentUtils.calculateTeamRecord(
-    teamSeason.data.team.id,
+    teamSeason.teamId,
     gamesToPoint,
   );
-  const paceToPoint = await ContentUtils.pace(teamSeason, recordToPoint);
-  const projectedWinsToPoint = await ContentUtils.projectedWins(
+  const paceToPoint = ContentUtils.pace(teamSeason, recordToPoint);
+  const projectedWinsToPoint = ContentUtils.projectedWins(
     season.id,
     recordToPoint,
   );
@@ -274,7 +274,7 @@ for (let i = 0; i < teamGames.length; i++) {
   }
 
   {
-    season.data.shortened && (
+    season.shortened && (
       <h2 class="shortened-notice">
         Stats here have been adjusted to reflect the shortened {fmtSeason}{" "}
         season
@@ -285,9 +285,7 @@ for (let i = 0; i < teamGames.length; i++) {
           }}
           id="shortened-popover"
         >
-          <p class="shortened-popover-content">
-            {season.data.shortened.reason}
-          </p>
+          <p class="shortened-popover-content">{season.shortened.reason}</p>
           <table class="shortened-table">
             <thead>
               <tr>
@@ -300,7 +298,7 @@ for (let i = 0; i < teamGames.length; i++) {
                 <td class="shortened-cell">
                   <span class="shortened-label">Games Played:</span>
                 </td>
-                <td class="shortened-cell">{season.data.shortened.numGames}</td>
+                <td class="shortened-cell">{season.shortened.numGames}</td>
               </tr>
               <tr>
                 <td class="shortened-cell">
@@ -344,7 +342,7 @@ for (let i = 0; i < teamGames.length; i++) {
             <span class="mobile-only">O/U</span>
             <span class="desktop-only">Over/Under</span>
           </th>
-          <td>{teamSeason.data.overUnder}</td>
+          <td>{teamSeason.overUnder}</td>
         </tr>
         <tr>
           <th class="relative" scope="row">

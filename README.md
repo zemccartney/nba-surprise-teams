@@ -27,6 +27,13 @@ version in sync with `mise.toml`. `.node-version` retains the Node major for
 hosting tools that read it; `engines.node` restricts installs to Node 26.
 Never `npm install` here. The deploy workflow installs the locked mise tools.
 
+## Data and architecture
+
+Read [the data workflow](data/README.md) and open [the visual architecture guide](docs/data-system.html).
+Run `mise run data:restore` once before dev (it refuses an existing database).
+Dev reads the local DB; builds restore `data/dump.sql` into an isolated snapshot.
+Dump and review edits before building—preview intentionally ignores undumped edits.
+
 ## Commands
 
 | Command                    | Action                                                                |
@@ -37,7 +44,7 @@ Never `npm install` here. The deploy workflow installs the locked mise tools.
 | `pnpm run preview`         | Preview the build locally, before deploying                           |
 | `pnpm run astro -- --help` | Astro CLI help                                                        |
 | `pnpm run deps`            | Interactive dependency update (`npm-check-updates`)                   |
-| `pnpm run archive:diff`    | Explain what changed in `games.json` (committed vs working tree)      |
+| `pnpm run archive:diff`    | Review canonical SQL changes (committed vs working tree)              |
 
 ## Dependencies and supply chain
 
@@ -105,8 +112,9 @@ present), then run `mise x -- hk install --mise`; preserve unrelated hooks.
 
 The build retains `pnpm run verify`, which discovers files through the tools
 rather than hk's tracked-file list. Both run tests. System checks now read a
-fresh JSON snapshot on every run and preserve duplicate IDs; they do not rely
-on Astro's cached content store. The build still validates Astro schemas.
+fresh SQL restore on every run; duplicate IDs fail at the database boundary.
+No Astro content store is involved. Builds validate domain/schema invariants and
+audit final deployable artifacts for SQL or historical-game leakage.
 `pnpm run lint:workflows` checks all workflows independently of staged files.
 
 CI verification runs at deployment time: `deploy.yml` runs the full build and
@@ -217,7 +225,7 @@ adapter reads it during `astro build`.
   nothing until the repository variable `DEPLOY_ENABLED` is set to `true`, and
   it needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
   and `SENTRY_AUTH_TOKEN` as repository secrets.
-- Dev, prerendering and `astro preview` all run inside workerd now, so anything
-  that needs Node APIs has to live outside a route. That is why the archiver
-  endpoint hands its games back to `archiver/script.ts` instead of writing
-  `src/content/games.json` itself.
+- Static routes prerender in Node, including dev. Islands/actions remain in
+  workerd, and preview serves the built Worker/static assets. SQLite access is
+  guarded at that environment boundary. Maintenance commands run directly in
+  Node; there is no injected archiver endpoint or dev-server dependency.

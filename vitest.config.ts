@@ -10,6 +10,9 @@ const astroConfig = getViteConfig({
       "cloudflare:workers": fileURLToPath(
         new URL("tests/worker-bindings.ts", import.meta.url),
       ),
+      "virtual:tracker/catalog": fileURLToPath(
+        new URL("tests/catalog-fixture.ts", import.meta.url),
+      ),
     },
     include: ["tests/**/*.test.ts"],
     mockReset: true,
@@ -32,7 +35,8 @@ const isAppRuntimePlugin = (plugin: unknown) =>
   "name" in plugin &&
   typeof plugin.name === "string" &&
   (plugin.name.startsWith("vite-plugin-cloudflare:") ||
-    plugin.name === "tracker-sqlite-boundary");
+    plugin.name === "tracker-sqlite-boundary" ||
+    plugin.name === "tracker-data");
 
 // The adapter supplies Cloudflare development plugins, whose Node-compat import
 // resolver expects a dev dependency optimizer. Vitest disables optimization by

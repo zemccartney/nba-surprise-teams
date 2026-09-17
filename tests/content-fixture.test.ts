@@ -1,93 +1,77 @@
-import Fs from "node:fs/promises";
-import Os from "node:os";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import Path from "node:path";
 import { pathToFileURL } from "node:url";
 import { describe, expect, it } from "vitest";
 
-import { createContentApi } from "./content-api";
+import {
+  dumpDatabase,
+  openDatabase,
+  restoreDatabase,
+} from "../data/node/database";
 import { readContentFixture } from "./content-fixture";
 
-it("distinguishes missing IDs from collections omitted by the test", async () => {
-  const api = createContentApi({ seasons: [] });
-  await expect(api.getEntry("seasons", "missing")).resolves.toBeUndefined();
-  await expect(api.getCollection("seasons")).resolves.toEqual([]);
-  await expect(api.getEntry("games", "missing")).rejects.toThrow(
-    "Collection not supplied in fixture: games",
-  );
-  await expect(api.getCollection("games")).rejects.toThrow(
-    "Collection not supplied in fixture: games",
-  );
-});
-
-const withContent = async (check: (url: URL) => Promise<void>) => {
-  const directory = await Fs.mkdtemp(
-    Path.join(Os.tmpdir(), "nbastt-content-test-"),
-  );
+const withCopy = (check: (filename: string, dump: string) => void) => {
+  const dir = mkdtempSync(Path.join(tmpdir(), "nbastt-fixture-test-"));
   try {
-    await Fs.cp(new URL("../src/content/", import.meta.url), directory, {
-      recursive: true,
-    });
-    await check(pathToFileURL(`${directory}/`));
+    const dump = Path.join(dir, "dump.sql"),
+      filename = Path.join(dir, "db");
+    const text = readFileSync(
+      new URL("../data/dump.sql", import.meta.url),
+      "utf8",
+    );
+    writeFileSync(dump, text);
+    restoreDatabase(filename, text);
+    check(filename, dump);
   } finally {
-    await Fs.rm(directory, { force: true, recursive: true });
+    rmSync(dir, { force: true, recursive: true });
   }
 };
-
-describe("fresh content snapshots", () => {
-  it("supports reference lookups and collection filters", async () => {
-    const fixture = await readContentFixture();
-    const season = fixture.entries.seasons[0];
-
-    if (!season) {
-      throw new Error("Expected a season fixture");
-    }
-
-    await expect(
-      fixture.api.getEntry({
-        collection: "seasons",
-        id: season.id,
-      }),
-    ).resolves.toEqual(season);
-
-    await expect(
-      fixture.api.getCollection("seasons", (entry) => entry.id === season.id),
-    ).resolves.toEqual([season]);
+describe("fresh SQL fixtures", () => {
+  it("returns plain records and distinguishes optional from required lookups", () => {
+    const { catalog } = readContentFixture();
+    expect(catalog.getSeason("missing")).toBeUndefined();
+    expect(() => catalog.requireSeason("missing")).toThrow();
+    expect(catalog.getTeamSeasons("missing")).toEqual([]);
+    expect(catalog.getTeam("CHA")).not.toHaveProperty("data");
   });
-
-  it("reads changed games on the next invocation without a dev server", () =>
-    withContent(async (url) => {
-      const first = await readContentFixture(url);
-      const changed = first.raw.games.slice(0, -1);
-      await Fs.writeFile(new URL("games.json", url), JSON.stringify(changed));
-      const second = await readContentFixture(url);
-      expect(second.entries.games).toHaveLength(first.entries.games.length - 1);
+  it("reads changed canonical bytes on the next call without a dev server", () =>
+    withCopy((filename, dump) => {
+      const first = readContentFixture(pathToFileURL(dump));
+      const game = first.games[0];
+      if (!game) throw new Error("Empty fixture");
+      const db = openDatabase(filename, false);
+      try {
+        db.prepare(
+          "UPDATE archived_games SET score1=score1+100 WHERE id=?",
+        ).run(game.id);
+        writeFileSync(dump, dumpDatabase(db));
+      } finally {
+        db.close();
+      }
       expect(
-        second.entries.games.some(
-          ({ id }) => id === first.entries.games.at(-1)?.id,
-        ),
-      ).toBe(false);
+        readContentFixture(pathToFileURL(dump)).games[0]?.teams[0].score,
+      ).toBe(game.teams[0].score + 100);
     }));
-
-  it.each(["games", "seasons", "teams", "teamSeasons"])(
-    "rejects empty %s instead of passing vacuously",
-    (name) =>
-      withContent(async (url) => {
-        await Fs.writeFile(new URL(`${name}.json`, url), "[]");
-        await expect(readContentFixture(url)).rejects.toThrow(
-          "nonempty content array",
+  it.each(["archived_games", "team_seasons", "seasons", "teams"])(
+    "rejects an empty %s rather than passing vacuously",
+    (table) =>
+      withCopy((_filename, dump) => {
+        writeFileSync(
+          dump,
+          readFileSync(dump, "utf8") +
+            `\nPRAGMA foreign_keys=OFF; DELETE FROM ${table};\n`,
         );
+        expect(() => readContentFixture(pathToFileURL(dump))).toThrow();
       }),
   );
-
-  it("preserves duplicate IDs for the integrity assertions", () =>
-    withContent(async (url) => {
-      const original = await readContentFixture(url);
-      const changed = [...original.raw.games, original.raw.games[0]];
-      await Fs.writeFile(new URL("games.json", url), JSON.stringify(changed));
-      const next = await readContentFixture(url);
-      expect(next.entries.games).toHaveLength(changed.length);
-      expect(new Set(next.entries.games.map(({ id }) => id)).size).toBe(
-        changed.length - 1,
+  it("rejects duplicate identities at restore, before a Map can hide them", () =>
+    withCopy((_filename, dump) => {
+      writeFileSync(
+        dump,
+        readFileSync(dump, "utf8") +
+          "\nINSERT INTO teams SELECT * FROM teams LIMIT 1;\n",
       );
+      expect(() => readContentFixture(pathToFileURL(dump))).toThrow();
     }));
 });

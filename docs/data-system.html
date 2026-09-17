@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inside the tracker · Data system field guide</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17353b;
+        --muted: #52686c;
+        --paper: #f4f3ed;
+        --line: #d3dcd5;
+        --teal: #087c75;
+        --gold: #ab6419;
+        --blue: #3957a0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          17px/1.65 ui-sans-serif,
+          system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 1140px;
+        margin: auto;
+        padding: 56px 28px 90px;
+      }
+      a {
+        color: var(--teal);
+        text-underline-offset: 4px;
+      }
+      header {
+        max-width: 850px;
+        margin-bottom: 45px;
+      }
+      .eyebrow {
+        font:
+          700 12px/1.5 ui-monospace,
+          monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--teal);
+      }
+      h1 {
+        font-size: clamp(38px, 6vw, 68px);
+        line-height: 1.07;
+        letter-spacing: -0.045em;
+        margin: 16px 0 23px;
+      }
+      h2 {
+        font-size: 29px;
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+        margin-top: 0;
+      }
+      h3 {
+        font-size: 20px;
+        line-height: 1.3;
+      }
+      .lead {
+        font-size: 21px;
+        color: var(--muted);
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 23px;
+        font-size: 14px;
+        margin-top: 24px;
+      }
+      .pill {
+        display: inline-block;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 3px 11px;
+        font-size: 12px;
+        margin: 4px 5px 4px 0;
+        background: #fff;
+      }
+      section {
+        margin-top: 54px;
+      }
+      .diagram {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow: 0 12px 35px #17353b08;
+        overflow: auto;
+      }
+      .diagram svg {
+        display: block;
+        width: 100%;
+        min-width: 760px;
+        height: auto;
+      }
+      .diagram text {
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        fill: var(--ink);
+      }
+      .diagram .label {
+        font:
+          700 12px ui-monospace,
+          monospace;
+        letter-spacing: 1.5px;
+        fill: var(--muted);
+      }
+      .diagram .sub {
+        font-size: 12px;
+        fill: var(--muted);
+      }
+      .diagram .title {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .diagram .path {
+        fill: none;
+        stroke: #087c75;
+        stroke-width: 2;
+        marker-end: url(#arrow);
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--teal);
+        border-radius: 13px;
+        padding: 22px;
+      }
+      .card.blue {
+        border-top-color: var(--blue);
+      }
+      .card.gold {
+        border-top-color: var(--gold);
+      }
+      .card h3 {
+        margin-top: 0;
+      }
+      .card p {
+        font-size: 15px;
+        margin-bottom: 0;
+      }
+      .number {
+        font:
+          700 12px ui-monospace,
+          monospace;
+        color: var(--teal);
+        display: block;
+        margin-bottom: 12px;
+      }
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 0.85em;
+      }
+      code {
+        overflow-wrap: anywhere;
+      }
+      pre {
+        background: #17353b;
+        color: #ebf4ef;
+        padding: 23px;
+        border-radius: 12px;
+        overflow: auto;
+        line-height: 1.65;
+      }
+      pre code {
+        font-size: inherit;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+      }
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        padding: 13px 12px;
+        vertical-align: top;
+      }
+      th {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+      .note {
+        border-left: 4px solid var(--gold);
+        padding: 16px 22px;
+        background: #fff4e4;
+        border-radius: 0 12px 12px 0;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+      .small {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      li {
+        margin: 8px 0;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        margin-top: 55px;
+        padding-top: 25px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      @media (max-width: 750px) {
+        main {
+          padding: 30px 18px 60px;
+        }
+        .cards,
+        .split {
+          grid-template-columns: 1fr;
+        }
+        .diagram {
+          padding: 12px;
+        }
+        h2 {
+          font-size: 25px;
+        }
+        table {
+          font-size: 12px;
+        }
+        th,
+        td {
+          padding: 10px 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="eyebrow">NBA Surprise Teams · Architecture field guide</div>
+        <h1>A database for building.<br />A Worker for now.</h1>
+        <p class="lead">
+          Astro assembles the experience. SQLite owns the records. A small
+          metadata snapshot crosses into the Worker—but the database does not.
+        </p>
+        <span class="pill">Native Node SQLite</span
+        ><span class="pill">Plain domain records</span
+        ><span class="pill">No runtime SQL service</span>
+        <nav aria-label="Guide sections">
+          <a href="#map">The map</a><a href="#sqlite">What SQLite does</a
+          ><a href="#contexts">Execution contexts</a
+          ><a href="#journeys">Data journeys</a><a href="#safety">Guardrails</a
+          ><a href="#files">Code tour</a>
+        </nav>
+      </header>
+      <section id="map">
+        <h2>One dataset. Two delivery paths.</h2>
+        <div class="diagram">
+          <svg
+            viewBox="0 0 1000 595"
+            role="img"
+            aria-labelledby="flow-title flow-desc"
+          >
+            <title id="flow-title">Author, build and serve data flow</title>
+            <desc id="flow-desc">
+              A local SQLite database is edited through maintenance commands,
+              validated and dumped to Git SQL. Builds restore a fresh database
+              from the dump. Node prerender queries archived games to create
+              static HTML. Small metadata is compiled into the Worker. Server
+              islands call a latest-season action which uses NBA data and KV
+              caching. The browser receives static HTML, charts and live island
+              responses, never SQLite.
+            </desc>
+            <defs>
+              <marker
+                id="arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="7"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0,0 L8,4 L0,8" fill="#087c75" />
+              </marker>
+            </defs>
+            <rect x="0" y="0" width="285" height="540" rx="15" fill="#eef6f0" />
+            <rect
+              x="310"
+              y="0"
+              width="325"
+              height="540"
+              rx="15"
+              fill="#f0f3fa"
+            />
+            <rect
+              x="660"
+              y="0"
+              width="340"
+              height="540"
+              rx="15"
+              fill="#fff6e9"
+            />
+            <text x="20" y="32" class="label">01 / AUTHOR</text>
+            <text x="330" y="32" class="label">02 / BUILD IN NODE</text>
+            <text x="680" y="32" class="label">03 / SERVE</text>
+            <g fill="#fff" stroke="#c6d9cf">
+              <rect x="20" y="65" width="245" height="85" rx="10" />
+              <rect x="20" y="194" width="245" height="90" rx="10" />
+              <rect x="20" y="365" width="245" height="95" rx="10" />
+            </g>
+            <text x="38" y="94" class="title">Maintenance commands</text>
+            <text x="38" y="117" class="sub">
+              Metadata edits · NBA archival
+            </text>
+            <text x="38" y="137" class="sub">
+              Explicit, validated transactions
+            </text>
+            <text x="38" y="225" class="title">data/tracker.db</text>
+            <text x="38" y="249" class="sub">Ignored working database</text>
+            <text x="38" y="270" class="sub">
+              Dev reads here; notify to refresh
+            </text>
+            <text x="38" y="398" class="title">data/dump.sql</text>
+            <text x="38" y="423" class="sub">
+              Deterministic, reviewable Git data
+            </text>
+            <text x="38" y="444" class="sub">
+              Stage deliberately · commit checks
+            </text>
+            <path class="path" d="M142 150V191" />
+            <path class="path" d="M142 284V361" />
+            <text x="157" y="330" class="sub">validate + dump</text>
+            <g fill="#fff" stroke="#cbd3e4">
+              <rect x="335" y="365" width="275" height="95" rx="10" />
+              <rect x="335" y="194" width="275" height="90" rx="10" />
+              <rect x="335" y="65" width="275" height="85" rx="10" />
+            </g>
+            <text x="354" y="398" class="title">Fresh temporary database</text>
+            <text x="354" y="423" class="sub">
+              Restored from SQL, not local DB
+            </text>
+            <text x="354" y="444" class="sub">Schema + domain validation</text>
+            <text x="354" y="225" class="title">Node prerender</text>
+            <text x="354" y="249" class="sub">
+              Read-only SQL → plain records
+            </text>
+            <text x="354" y="270" class="sub">
+              Shared rules → HTML / chart points
+            </text>
+            <text x="354" y="94" class="title">Small metadata snapshot</text>
+            <text x="354" y="117" class="sub">
+              Teams · seasons · candidate odds
+            </text>
+            <text x="354" y="137" class="sub">
+              No archived games, SQL or driver
+            </text>
+            <path class="path" d="M265 412H331" />
+            <path class="path" d="M472 365V288" />
+            <path class="path" d="M472 194V154" />
+            <g fill="#fff" stroke="#e2d0b4">
+              <rect x="685" y="65" width="290" height="85" rx="10" />
+              <rect x="685" y="194" width="290" height="90" rx="10" />
+              <rect x="685" y="365" width="290" height="95" rx="10" />
+            </g>
+            <text x="704" y="94" class="title">Worker islands + actions</text>
+            <text x="704" y="117" class="sub">
+              Built metadata + latest-only live path
+            </text>
+            <text x="704" y="137" class="sub">
+              SQLite import is a build/dev error
+            </text>
+            <text x="704" y="225" class="title">NBA schedule ↔ KV cache</text>
+            <text x="704" y="249" class="sub">
+              Validated fresh data / stale fallback
+            </text>
+            <text x="704" y="270" class="sub">
+              Existing date gates and refresh rules
+            </text>
+            <text x="704" y="398" class="title">Browser</text>
+            <text x="704" y="423" class="sub">
+              Static HTML + ECharts presentation
+            </text>
+            <text x="704" y="444" class="sub">
+              Live island response when needed
+            </text>
+            <path class="path" d="M610 107H681" />
+            <path class="path" d="M830 194V154" />
+            <path class="path" d="M610 248H642V412H681" />
+            <text x="542" y="336" class="sub">static assets</text>
+            <path class="path" d="M975 108H987V345H831V361" />
+            <text x="694" y="331" class="sub">deferred live HTML</text>
+            <text x="22" y="506" class="sub">
+              No automatic live → archive writeback.
+            </text>
+            <text x="332" y="506" class="sub">Build never calls the NBA.</text>
+            <text x="682" y="506" class="sub">
+              Preview stays fixed until rebuild.
+            </text>
+            <text x="12" y="581" class="label">
+              SQL NEVER CROSSES THE NODE → WORKER BOUNDARY
+            </text>
+          </svg>
+        </div>
+        <p class="small">
+          The authoring DB and build DB are separate files. In dev there is no
+          build snapshot: Node archive reads use the working DB, while explicit
+          notifications regenerate metadata for both server environments.
+        </p>
+      </section>
+      <section id="sqlite">
+        <h2>What Node’s SQLite module actually does</h2>
+        <div class="split">
+          <div>
+            <p>
+              <strong>SQLite is an embedded relational engine.</strong> The
+              database is a local file. There is no database server process,
+              network connection, cloud account, ORM, or D1 binding.
+            </p>
+            <p>
+              Node’s built-in <code>node:sqlite</code> exposes
+              <code>DatabaseSync</code>. Opening a handle, preparing a query and
+              reading rows happen synchronously in the current Node process.
+              That is appropriate for bounded local maintenance and static
+              rendering; it is deliberately excluded from request-serving
+              Workers.
+            </p>
+            <p>
+              Queries return rows, then domain schemas decode them into plain
+              <code>Season</code>, <code>Team</code>,
+              <code>TeamSeason</code> and <code>Game</code> records. No
+              <code>.data</code> wrappers or framework references.
+            </p>
+          </div>
+          <div>
+            <pre><code>import { DatabaseSync } from "node:sqlite";
+
+const db = new DatabaseSync(filename, {
+  readOnly: true,
+});
+try {
+  const row = db.prepare(`
+    SELECT over_under_twice
+    FROM team_seasons
+    WHERE season_id = ? AND team_id = ?
+  `).get("2025", "CHA");
+  // Stored in half-win units: 55 means 27.5.
+} finally {
+  db.close();
+}</code></pre>
+            <p class="small">
+              Illustration only. Application callers use the guarded archive
+              facade and shared database helpers. Parameters are bound, not
+              interpolated into SQL.
+            </p>
+          </div>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <span class="number">RELATIONSHIPS</span>
+            <h3>Keys, not references</h3>
+            <p>
+              Teams and seasons are parents. Candidate rows join their IDs with
+              odds and display order. Games reference a season and two teams.
+              Historical names have explicit year intervals.
+            </p>
+          </article>
+          <article class="card blue">
+            <span class="number">TRANSACTIONS</span>
+            <h3>All or nothing</h3>
+            <p>
+              Write → validate → commit. Failed completeness, asset or integrity
+              checks roll the transaction back. Dev notification follows
+              success, never a failed write.
+            </p>
+          </article>
+          <article class="card gold">
+            <span class="number">REPRODUCIBILITY</span>
+            <h3>File for editing. SQL for Git.</h3>
+            <p>
+              Dumps use a read snapshot, primary-key order and escaped literals.
+              Restore validates a temporary file and publishes without
+              overwriting an existing database.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section id="contexts">
+        <h2>The role determines the runtime</h2>
+        <div class="note">
+          <strong
+            >A component is not inherently “static” or “an island.”</strong
+          >
+          The same component imported normally can execute in Node prerender.
+          Used with <code>server:defer</code>, it executes in workerd. Both are
+          server rendering; <code>import.meta.env.SSR</code> cannot distinguish
+          them.
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Allowed data</th>
+              <th>Lifetime</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Static page / wrapper</td>
+              <td>Metadata + Node archive facade</td>
+              <td>Dev request or build prerender</td>
+            </tr>
+            <tr>
+              <td>Shared UI</td>
+              <td>Plain supplied games + metadata + rules</td>
+              <td>Either server environment</td>
+            </tr>
+            <tr>
+              <td>Deferred island / action</td>
+              <td>Metadata + current NBA/KV path</td>
+              <td>Worker request</td>
+            </tr>
+            <tr>
+              <td>Chart controller</td>
+              <td>Serialized chart points and display settings</td>
+              <td>Browser document</td>
+            </tr>
+            <tr>
+              <td>Data CLI</td>
+              <td>Native SQLite, filesystem, explicit historical fetch</td>
+              <td>Maintenance command</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="journeys">
+        <h2>Follow a change through the system</h2>
+        <div class="cards">
+          <article class="card">
+            <span class="number">A / EDIT ODDS</span>
+            <h3>Local first</h3>
+            <p>
+              The CLI commits a valid candidate change and writes a revision
+              marker. Vite invalidates metadata in Node and workerd and reloads
+              the browser. Dump, review and rebuild to make preview reflect the
+              change.
+            </p>
+          </article>
+          <article class="card blue">
+            <span class="number">B / END A SEASON</span>
+            <h3>Make history explicit</h3>
+            <p>
+              A maintenance command fetches historical NBA rows, pairs scores,
+              checks complete game counts and replaces that season
+              transactionally. After dump/rebuild, wrappers render static UI
+              instead of deferring live data.
+            </p>
+          </article>
+          <article class="card gold">
+            <span class="number">C / LIVE RESULT</span>
+            <h3>Nothing writes to SQL</h3>
+            <p>
+              The latest-season action checks date gates and validated KV
+              freshness. It fetches NBA data if needed, updates KV, or serves
+              compatible stale results without an expiry on failure. SQL stays
+              untouched.
+            </p>
+          </article>
+        </div>
+        <p class="note">
+          External SQL edits need <code>mise run data:notify</code>. Merely
+          saving the file intentionally does not reload metadata. Node archive
+          queries can see committed rows before metadata is refreshed; use
+          notification to return the whole dev view to a consistent revision.
+        </p>
+      </section>
+      <section id="safety">
+        <h2>Guardrails that fail loudly</h2>
+        <div class="split">
+          <div>
+            <h3>Before data is published</h3>
+            <ul>
+              <li>
+                STRICT tables, foreign keys, identities and score/odds
+                constraints.
+              </li>
+              <li>
+                Domain checks for dates, candidate cutoffs, historical names,
+                assets and archive completeness.
+              </li>
+              <li>
+                Numbered transactional migrations; no silent missing-DB
+                creation.
+              </li>
+              <li>
+                Actual Git-index dump check—not just a clean-looking working
+                file.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Before code is shipped</h3>
+            <ul>
+              <li>
+                Environment-aware SQL import/load/transform/build-graph checks.
+              </li>
+              <li>
+                Final artifact inventory and hashes; no database/SQL files in
+                deployment output.
+              </li>
+              <li>No archived game identities in Worker code.</li>
+              <li>
+                Fresh-dump tests, live contract tests and approved historical
+                game/chart golden hashes.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="small">
+          These are architectural safeguards, not a hostile-code sandbox.
+          Lifecycle validation can refuse a build as data ages; it never
+          automatically changes the selected season or archives live data.
+        </p>
+      </section>
+      <section id="files">
+        <h2>A short code tour</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Start here</th>
+              <th>What you will learn</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>data/integration.ts</code></td>
+              <td>
+                Build snapshot, virtual modules, metadata generation, dev
+                notifications and final artifact sealing.
+              </td>
+            </tr>
+            <tr>
+              <td><code>data/runtime-boundary.ts</code></td>
+              <td>
+                Why builtin externalization needs transformed-import checks in
+                addition to resolution hooks.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>data/node/database.ts</code><br /><code
+                  >data/migrations/</code
+                >
+              </td>
+              <td>
+                Native handles, prepared queries, restore/dump lifecycle, schema
+                upgrades and row decoding.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>data/cli.ts</code><br /><code>data/node/commands.ts</code>
+              </td>
+              <td>
+                The explicit maintenance surface and transaction ownership.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>src/data/model.ts</code><br /><code
+                  >src/data/catalog.ts</code
+                ><br /><code>src/data/rules.ts</code>
+              </td>
+              <td>
+                Plain record shapes, small metadata lookups and pure surprise
+                arithmetic.
+              </td>
+            </tr>
+            <tr>
+              <td><code>src/components/team-stats/</code></td>
+              <td>
+                Static/deferred wrapper → shared UI → chart presentation data.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>src/actions/index.ts</code><br /><code
+                  >src/loaders/live/</code
+                >
+              </td>
+              <td>The deliberately preserved NBA/KV reliability path.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <footer>
+        Local operations: <a href="../data/README.md">data/README.md</a> ·
+        Seasonal workflow: <a href="../MAINTENANCE.md">MAINTENANCE.md</a> ·
+        Regression coverage: <a href="../tests/README.md">tests/README.md</a
+        ><br />This guide is repository documentation, not a deployed
+        application route. Historical experiments remain in Git; the active
+        implementation lives in <code>data/</code> and <code>src/</code>.
+      </footer>
+    </main>
+  </body>
+</html>
