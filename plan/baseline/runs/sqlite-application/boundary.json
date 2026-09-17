@@ -1,0 +1,7 @@
+{
+  "staticArchiveFacade": 200,
+  "deferredArchiveFacade": 500,
+  "deferredBuild": "rejected",
+  "noWorkingDatabaseBuild": "passed",
+  "fixturesRemoved": true
+}

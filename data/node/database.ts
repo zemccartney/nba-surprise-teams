@@ -239,10 +239,14 @@ export function writeGame(db: DatabaseSync, input: Game): void {
   );
 }
 const identifier = (value: string) => `"${value.replaceAll('"', '""')}"`;
-export function dumpDatabase(db: DatabaseSync): string {
+export function dumpDatabase(
+  db: DatabaseSync,
+  validate?: (db: DatabaseSync) => void,
+): string {
   db.exec("BEGIN");
   try {
     validateDatabase(db);
+    validate?.(db);
     const objects = db
       .prepare(
         "SELECT type,name,sql FROM sqlite_schema WHERE sql IS NOT NULL AND name NOT LIKE 'sqlite_%' ORDER BY CASE type WHEN 'table' THEN 0 ELSE 1 END,name",

@@ -3,7 +3,12 @@ import { tmpdir } from "node:os";
 import Path from "node:path";
 import { expect, it } from "vitest";
 
-import { saveSeason, saveTeam, transaction } from "../data/node/commands";
+import {
+  applyChanges,
+  saveSeason,
+  saveTeam,
+  transaction,
+} from "../data/node/commands";
 import {
   dumpDatabase,
   openDatabase,
@@ -56,6 +61,45 @@ it("edits complete metadata records transactionally and refuses implicit creatio
     ).toThrow();
     expect(() => transaction(db, () => saveTeam(db, team, false))).toThrow();
     expect(dumpDatabase(db)).toBe(before);
+
+    const seasonRecord = {
+      endDate: "1995-04-20",
+      id: "1994",
+      startDate: "1994-11-01",
+    };
+    const candidate = {
+      id: "1994/CHA",
+      overUnder: 20,
+      seasonId: "1994",
+      teamId: "CHA",
+    };
+    const games = Array.from({ length: 82 }, (_, index) => {
+      const playedOn = new Date(Date.parse("1994-11-01") + index * 86_400_000)
+        .toISOString()
+        .slice(0, 10);
+      return {
+        id: `${playedOn}/ATL__CHA`,
+        playedOn,
+        seasonId: "1994",
+        teams: [
+          { score: 90, teamId: "ATL" },
+          { score: 100, teamId: "CHA" },
+        ],
+      };
+    });
+    const changes = [
+      { command: "add-season", record: seasonRecord },
+      { command: "add-team-season", record: candidate },
+      { command: "archive", record: { games, seasonId: "1994" } },
+    ];
+    expect(() =>
+      transaction(db, () => applyChanges(db, changes.slice(0, 2))),
+    ).toThrow("Incomplete archive");
+    expect(dumpDatabase(db)).toBe(before);
+    transaction(db, () => applyChanges(db, changes));
+    expect(readMetadata(db).seasons.some((row) => row.id === "1994")).toBe(
+      true,
+    );
   } finally {
     db.close();
     rmSync(dir, { force: true, recursive: true });

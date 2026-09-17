@@ -1,0 +1,32 @@
+[
+  {
+    "kind": "surprises-per-season",
+    "points": 29,
+    "width": 1440
+  },
+  {
+    "kind": "surprises-by-team",
+    "points": 30,
+    "width": 1440
+  },
+  {
+    "kind": "team-season-scatter",
+    "points": 269,
+    "width": 1440
+  },
+  {
+    "kind": "surprises-per-season",
+    "points": 29,
+    "width": 390
+  },
+  {
+    "kind": "surprises-by-team",
+    "points": 30,
+    "width": 390
+  },
+  {
+    "kind": "team-season-scatter",
+    "points": 269,
+    "width": 390
+  }
+]

@@ -11,7 +11,7 @@ import * as ContentUtils from "../../content-utils.ts";
 import Subpage from "../../layouts/subpage.astro";
 import * as Utils from "../../utils";
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = () => {
   const seasons = catalog.getSeasons();
   const seasonsWithTeams = [];
 

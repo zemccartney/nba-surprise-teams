@@ -75,6 +75,17 @@ asset before adding metadata. Team-season odds must be whole/half wins and below
 the season's scaled candidate cutoff. Historical display ordering is explicit;
 new candidate rows append, while tables still apply their usual pace sorting.
 
+### Atomic backfills and multi-record corrections
+
+For a historical season, adding metadata alone would correctly fail completeness
+validation. Use `mise run data -- apply --input /tmp/changes.json` to apply an
+ordered array of `{ "command": "add-season", "record": { ... } }` operations in
+one transaction. Supported commands are add/update season, add/update team,
+add-team-season/update-odds (plain `TeamSeason` record), and `archive` (record:
+`{ "seasonId": "1994", "games": [...] }`). Add parents before children. Validation
+runs on the complete result; a failure rolls everything back and does not notify
+dev. This avoids weakening lifecycle checks to permit temporary incomplete data.
+
 ## Archiving
 
 ```sh
@@ -101,7 +112,7 @@ risk. Existing archives are not silently refetched to add missing provider IDs.
 ## Validation, migration and recovery
 
 - STRICT SQL tables enforce types, foreign keys, valid dates, bounded half-win
-  odds, unique identities, distinct opponents and completed non-tied scores.
+  odds, unique identities, distinct opponents and nonnegative, non-tied scores.
 - Domain checks enforce chronology, candidate cutoffs, asset availability,
   historical-name intervals, game identities/provider-ID uniqueness, complete
   archives and the existing lifecycle conventions (15-day archival grace,

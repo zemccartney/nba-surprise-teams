@@ -18941,15 +18941,15 @@ INSERT INTO "team_seasons" VALUES('2024','POR',43,256);
 INSERT INTO "team_seasons" VALUES('2024','TOR',59,257);
 INSERT INTO "team_seasons" VALUES('2024','UTA',57,258);
 INSERT INTO "team_seasons" VALUES('2024','WAS',41,259);
-INSERT INTO "team_seasons" VALUES('2025','BKN',41,261);
-INSERT INTO "team_seasons" VALUES('2025','CHA',55,263);
-INSERT INTO "team_seasons" VALUES('2025','CHI',65,266);
-INSERT INTO "team_seasons" VALUES('2025','NOP',61,264);
-INSERT INTO "team_seasons" VALUES('2025','PHX',63,265);
-INSERT INTO "team_seasons" VALUES('2025','POR',69,267);
-INSERT INTO "team_seasons" VALUES('2025','SAC',71,268);
-INSERT INTO "team_seasons" VALUES('2025','UTA',37,260);
-INSERT INTO "team_seasons" VALUES('2025','WAS',43,262);
+INSERT INTO "team_seasons" VALUES('2025','BKN',41,260);
+INSERT INTO "team_seasons" VALUES('2025','CHA',55,261);
+INSERT INTO "team_seasons" VALUES('2025','CHI',65,262);
+INSERT INTO "team_seasons" VALUES('2025','NOP',61,263);
+INSERT INTO "team_seasons" VALUES('2025','PHX',63,264);
+INSERT INTO "team_seasons" VALUES('2025','POR',69,265);
+INSERT INTO "team_seasons" VALUES('2025','SAC',71,266);
+INSERT INTO "team_seasons" VALUES('2025','UTA',37,267);
+INSERT INTO "team_seasons" VALUES('2025','WAS',43,268);
 CREATE TABLE teams (
   id TEXT PRIMARY KEY CHECK (id GLOB '[A-Z][A-Z][A-Z]'),
   name TEXT NOT NULL CHECK (length(name) > 0),
@@ -18984,10 +18984,10 @@ INSERT INTO "teams" VALUES('PHI','Philadelphia 76ers','bell');
 INSERT INTO "teams" VALUES('PHX','Phoenix Suns','sun');
 INSERT INTO "teams" VALUES('POR','Portland Trail Blazers','hiking-boot');
 INSERT INTO "teams" VALUES('SAC','Sacramento Kings','crown');
-INSERT INTO "teams" VALUES('SAS','San Antonio Spurs','saxophone');
+INSERT INTO "teams" VALUES('SAS','San Antonio Spurs','bat');
 INSERT INTO "teams" VALUES('SEA','Seattle Supersonics','space-needle');
 INSERT INTO "teams" VALUES('TOR','Toronto Raptors','raptor');
-INSERT INTO "teams" VALUES('UTA','Utah Jazz','question');
+INSERT INTO "teams" VALUES('UTA','Utah Jazz','saxophone');
 INSERT INTO "teams" VALUES('VAN','Vancouver Grizzlies','bear');
 INSERT INTO "teams" VALUES('WAS','Washington Wizards','wizard');
 CREATE INDEX archived_games_season_date ON archived_games(season_id, played_on, id);

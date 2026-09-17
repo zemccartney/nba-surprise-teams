@@ -33,10 +33,7 @@ if (import.meta.env.DEV && !staticGames) {
 
 {
   staticGames ? (
-    <UI
-      games={staticGames.map((gameEntry) => gameEntry)}
-      teamSeason={teamSeason}
-    />
+    <UI games={staticGames} teamSeason={teamSeason} />
   ) : (
     <TeamStats
       seasonId={teamSeason.seasonId}

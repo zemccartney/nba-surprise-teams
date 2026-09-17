@@ -1,0 +1,5 @@
+{
+  "sqlWatch": "pass -> corrupt canonical SQL bytes fail -> restored bytes pass",
+  "tests": 146,
+  "automaticRerun": true
+}

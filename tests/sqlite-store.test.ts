@@ -180,6 +180,14 @@ describe("plain metadata and approved collection parity", () => {
       expect(catalog.getSeason(season.id)).toEqual(season);
     for (const team of metadata.teamSeasons)
       expect(catalog.getTeamSeason(team.seasonId, team.teamId)).toEqual(team);
+    expect(catalog.getTeam("SAS")?.emoji).toBe("bat");
+    expect(catalog.getTeam("UTA")?.emoji).toBe("saxophone");
+    const renderedOrder = metadata.teamSeasons
+      .filter((row) => Number(row.seasonId) <= 2025)
+      .map((row) => row.id);
+    expect(renderedOrder).toEqual(
+      renderedOrder.toSorted((a, b) => a.localeCompare(b)),
+    );
     expect(catalog.getTeam("constructor")).toBeUndefined();
     expect(catalog.getSeason("9999")).toBeUndefined();
     expect(catalog.getTeamSeason("9999", "CHA")).toBeUndefined();

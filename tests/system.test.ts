@@ -233,7 +233,7 @@ describe("system validation", () => {
         });
         const record = ContentUtils.calculateTeamRecord(
           teamSeason.teamId,
-          gamesPlayed.map((g) => g),
+          gamesPlayed,
         );
 
         paceArchive.push({

@@ -2,6 +2,7 @@
 import type { UserConfig, UserConfigFnPromise } from "vite";
 
 import { getViteConfig } from "astro/config";
+import { readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const astroConfig = getViteConfig({
@@ -20,7 +21,18 @@ const astroConfig = getViteConfig({
     unstubEnvs: true,
     unstubGlobals: true,
     watchTriggerPatterns: [
-      // rebuild on changes to astro source, since test files don't import directly (and vitest watch watches by import graph) (really, only care about content, consider narrowing)
+      {
+        // SQL is read through fs, not imported into Vite's module graph.
+        pattern: /[\\/]data[\\/].*\.sql$/,
+        testsToRun: () =>
+          readdirSync(new URL("tests/", import.meta.url), {
+            encoding: "utf8",
+            recursive: true,
+          })
+            .filter((name) => name.endsWith(".test.ts"))
+            .map((name) => `./tests/${name}`),
+      },
+      // Presentation changes still need dataset-level checks, independently of imports.
       {
         pattern: /src/,
         testsToRun: () => "./tests/system.test.ts",
@@ -44,11 +56,9 @@ const isAppRuntimePlugin = (plugin: unknown) =>
 // Keep this suite in Node without that Worker-specific wiring. Database tests
 // are Node maintenance consumers, not Worker SSR. The SQLite boundary tests
 // instantiate real Vite servers/builds with the guard explicitly enabled.
-// Astro plugins
-// still resolve virtual module imports, but tests mock the content API and read
-// source JSON explicitly: this configuration does not refresh content stores.
-// See plan/new-season-sweep/content-lifecycle.md. A smaller Vite configuration
-// can be considered later; do not expand this into a content-sync harness.
+// The catalog alias restores canonical SQL into a fresh temporary database,
+// independent of the working DB. Other Astro plugins still resolve action and
+// asset modules. No framework content store or collection API is emulated.
 const config: UserConfigFnPromise = async (env) => {
   const resolved = (await astroConfig(env)) as UserConfig;
   const plugins = (resolved.plugins ?? []) as unknown[];

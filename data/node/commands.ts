@@ -1,11 +1,75 @@
 import type { DatabaseSync } from "node:sqlite";
 
+import { z } from "astro/zod";
 /* eslint unicorn/no-null: "off" -- SQLite nullable parameters. */
 import assert from "node:assert/strict";
 
-import { gameSchema, seasonSchema, teamSchema } from "../../src/data/model.ts";
+import {
+  gameSchema,
+  seasonSchema,
+  teamSchema,
+  teamSeasonSchema,
+} from "../../src/data/model.ts";
 import { writeGame } from "./database.ts";
 import { validateDataset } from "./validate.ts";
+
+// Backfills/corrections often need metadata and complete games to change together.
+// The surrounding transaction validates the final dataset, not intermediate rows.
+export function applyChanges(db: DatabaseSync, input: unknown): void {
+  const changes = z
+    .array(
+      z.object({
+        command: z.enum([
+          "add-season",
+          "update-season",
+          "add-team",
+          "update-team",
+          "add-team-season",
+          "update-odds",
+          "archive",
+        ]),
+        record: z.unknown(),
+      }),
+    )
+    .nonempty()
+    .parse(input);
+  const apply = ({ command, record }: (typeof changes)[number]) => {
+    switch (command) {
+      case "add-season":
+      case "update-season": {
+        saveSeason(db, record, command === "update-season");
+
+        break;
+      }
+      case "add-team":
+      case "update-team": {
+        saveTeam(db, record, command === "update-team");
+
+        break;
+      }
+      case "add-team-season":
+      case "update-odds": {
+        const row = teamSeasonSchema.parse(record);
+        saveOdds(
+          db,
+          row.seasonId,
+          row.teamId,
+          String(row.overUnder),
+          command === "update-odds",
+        );
+
+        break;
+      }
+      default: {
+        const row = z
+          .object({ games: gameSchema.array(), seasonId: z.string() })
+          .parse(record);
+        replaceArchive(db, row.seasonId, row.games);
+      }
+    }
+  };
+  for (const change of changes) apply(change);
+}
 
 export function replaceArchive(
   db: DatabaseSync,

@@ -1,0 +1,32 @@
+[
+  {
+    "check": "new route and real deferred island after supported edit",
+    "status": "pass"
+  },
+  {
+    "check": "external SQL alone leaves metadata snapshot stale",
+    "status": "pass"
+  },
+  {
+    "check": "notify reloads open page and updates Worker island metadata",
+    "status": "pass",
+    "islandResponses": [
+      {
+        "status": 200,
+        "cache": null
+      },
+      {
+        "status": 200,
+        "cache": null
+      }
+    ]
+  },
+  {
+    "check": "built preview ignores working DB changes",
+    "status": "pass"
+  },
+  {
+    "check": "removal invalidates static route paths",
+    "status": "pass"
+  }
+]

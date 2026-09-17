@@ -39,11 +39,7 @@ if (title === false) {
 
 {
   staticGames ? (
-    <UI
-      games={staticGames.map((entry) => entry)}
-      seasonId={season.id}
-      title={resolvedTitle}
-    />
+    <UI games={staticGames} seasonId={season.id} title={resolvedTitle} />
   ) : (
     <StandingsTable seasonId={season.id} server:defer>
       <Loading slot="fallback" />

@@ -1,0 +1,12 @@
+{
+  "collections": {
+    "worker_js_files": 68,
+    "worker_js_raw_bytes": 5527523,
+    "sum_gzip_bytes": 1022332
+  },
+  "sqlite": {
+    "worker_js_files": 63,
+    "worker_js_raw_bytes": 1181037,
+    "sum_gzip_bytes": 319175
+  }
+}

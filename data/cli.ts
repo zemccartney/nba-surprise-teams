@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
 import {
+  applyChanges,
   replaceArchive,
   saveOdds,
   saveSeason,
@@ -23,6 +24,7 @@ import {
   transaction,
 } from "./node/commands.ts";
 import {
+  assertVersion,
   dumpDatabase,
   migrate,
   openDatabase,
@@ -129,6 +131,7 @@ if (command === "restore") {
     "add-season",
     "add-team",
     "add-team-season",
+    "apply",
     "archive",
     "archive-nba",
     "migrate",
@@ -139,6 +142,7 @@ if (command === "restore") {
   ]);
   const db = openDatabase(database, !writes.has(command ?? ""));
   try {
+    if (command !== "migrate") assertVersion(db);
     if (command === "migrate") {
       migrate(db);
       notify();
@@ -202,6 +206,10 @@ if (command === "restore") {
             );
             break;
           }
+          case "apply": {
+            applyChanges(db, input());
+            break;
+          }
           case "archive": {
             replaceArchive(db, required(values.season, "season"), input());
             break;
@@ -230,8 +238,7 @@ if (command === "restore") {
     } else
       switch (command) {
         case "dump": {
-          validateDataset(db);
-          atomicWrite(dumpFile, dumpDatabase(db));
+          atomicWrite(dumpFile, dumpDatabase(db, validateDataset));
           console.log(`Wrote ${dumpFile}; review and stage it`);
           break;
         }
