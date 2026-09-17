@@ -19,7 +19,20 @@ Each branch is stacked on the previous
 one, so merging any of them takes everything below it; merge the top one for
 the lot, or bisect by checking out an intermediate branch.
 
-## Latest: historical React / Astro 5 comparison — review stop
+## Latest: experiment 1, frontmatter timing — review stop
+
+Timed both frozen stacks in separate copies, without browser JS or font work.
+Warm Stats frontmatter is 212ms old versus 1,436ms current. The current team route
+repeats `getStaticPaths()` twice per serial request interval (~488ms combined),
+whereas the old route caches it after its first visit. Team UI frontmatter is
+3ms versus 114ms. Current build-time Stats frontmatter is only 110ms in a single
+build observation, so the large penalty remains dev-specific. Untimed controls,
+clock checks, independent cold-route visits and source reproduction are recorded.
+See [frontmatter-performance.md](prelaunch-review/frontmatter-performance.md) for
+limits, raw evidence and diagnostic URLs on 4327/4328. Pause: fonts and rendering
+changes are not started.
+
+## Previous: historical React / Astro 5 comparison — review stop
 
 Your memory of faster repeat local navigation is supported. An untouched
 `f5382f3` copy gives warm dev HTML first byte of 226ms for Stats and 94ms for the

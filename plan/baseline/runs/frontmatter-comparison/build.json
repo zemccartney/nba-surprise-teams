@@ -1,0 +1,360 @@
+[
+  {
+    "stack": "old",
+    "events": [
+      {
+        "name": "stats",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 4902.642,
+        "end": 5117.87075,
+        "ms": 215.22875000000022,
+        "phases": [
+          {
+            "name": "initial collections",
+            "ms": 84.90779100000054
+          },
+          {
+            "name": "top ten",
+            "ms": 41.296875
+          },
+          {
+            "name": "per season",
+            "ms": 9.992041999999856
+          },
+          {
+            "name": "by team",
+            "ms": 36.2061249999997
+          },
+          {
+            "name": "scatter",
+            "ms": 42.78320799999983
+          }
+        ]
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.496708,
+        "end": 5118.5045,
+        "ms": 0.007792000000335975,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.599541,
+        "end": 5118.60425,
+        "ms": 0.004709000000730157,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.634375,
+        "end": 5118.638083,
+        "ms": 0.0037080000001878943,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.661791,
+        "end": 5118.66525,
+        "ms": 0.0034589999995660037,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.690916,
+        "end": 5118.69425,
+        "ms": 0.003333999999995285,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.71375,
+        "end": 5118.716875,
+        "ms": 0.003125000000181899,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.735375,
+        "end": 5118.738208,
+        "ms": 0.002832999999554886,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.757208,
+        "end": 5118.761041,
+        "ms": 0.003832999999758613,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.824583,
+        "end": 5118.829958,
+        "ms": 0.005375000000640284,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 5118.900625,
+        "end": 5118.906,
+        "ms": 0.00537499999973079,
+        "phases": []
+      },
+      {
+        "name": "team-getStaticPaths",
+        "request": null,
+        "path": null,
+        "start": 5129.222291,
+        "end": 5133.508708,
+        "ms": 4.286417000000256,
+        "phases": []
+      },
+      {
+        "name": "team-page",
+        "request": "request-268",
+        "path": "/2025/CHA/",
+        "start": 27885.582833,
+        "end": 27923.608666,
+        "ms": 38.02583299999969,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-268",
+        "path": "/2025/CHA/",
+        "start": 27923.687958,
+        "end": 27923.700833,
+        "ms": 0.012875000000349246,
+        "phases": []
+      },
+      {
+        "name": "team-index",
+        "request": "request-268",
+        "path": "/2025/CHA/",
+        "start": 27923.714833,
+        "end": 27961.513083,
+        "ms": 37.798249999999825,
+        "phases": []
+      },
+      {
+        "name": "team-ui",
+        "request": "request-268",
+        "path": "/2025/CHA/",
+        "start": 27961.60375,
+        "end": 27962.6625,
+        "ms": 1.0587500000001455,
+        "phases": [
+          {
+            "name": "summary helpers",
+            "ms": 0.08750000000145519
+          },
+          {
+            "name": "chart points",
+            "ms": 0.9712079999990237
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "stack": "current",
+    "events": [
+      {
+        "name": "team-getStaticPaths",
+        "request": null,
+        "path": null,
+        "start": 1789609645236,
+        "end": 1789609645266,
+        "ms": 30,
+        "phases": []
+      },
+      {
+        "name": "stats",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645306,
+        "end": 1789609645416,
+        "ms": 110,
+        "phases": [
+          {
+            "name": "initial collections",
+            "ms": 1
+          },
+          {
+            "name": "top ten",
+            "ms": 35
+          },
+          {
+            "name": "per season",
+            "ms": 7
+          },
+          {
+            "name": "by team",
+            "ms": 31
+          },
+          {
+            "name": "scatter",
+            "ms": 36
+          }
+        ]
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645417,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645417,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645417,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645417,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645417,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645417,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645417,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645418,
+        "ms": 1,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645418,
+        "ms": 1,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-4",
+        "path": "/stats/",
+        "start": 1789609645417,
+        "end": 1789609645418,
+        "ms": 1,
+        "phases": []
+      },
+      {
+        "name": "team-page",
+        "request": "request-266",
+        "path": "/2025/CHA/",
+        "start": 1789609646981,
+        "end": 1789609646981,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "team-index",
+        "request": "request-266",
+        "path": "/2025/CHA/",
+        "start": 1789609646981,
+        "end": 1789609646982,
+        "ms": 1,
+        "phases": []
+      },
+      {
+        "name": "logo",
+        "request": "request-266",
+        "path": "/2025/CHA/",
+        "start": 1789609646982,
+        "end": 1789609646982,
+        "ms": 0,
+        "phases": []
+      },
+      {
+        "name": "team-ui",
+        "request": "request-266",
+        "path": "/2025/CHA/",
+        "start": 1789609646982,
+        "end": 1789609646983,
+        "ms": 1,
+        "phases": [
+          {
+            "name": "summary helpers",
+            "ms": 0
+          },
+          {
+            "name": "chart points",
+            "ms": 1
+          }
+        ]
+      }
+    ]
+  }
+]

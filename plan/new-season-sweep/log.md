@@ -13,6 +13,21 @@ production from Step 4 (tooltip image re-requests, pace area coloring,
 surprises-per-season top alignment, axis scales on pace and scatter), logged
 in detail there.
 
+## Experiment 1: frontmatter timing — manual review stop
+
+Per Zack's request, added frontmatter/subphase and getStaticPaths timers only in
+separate f5382f3/e2a8b30 copies. Current Stats frontmatter takes 1,436ms versus
+212ms old on warm dev requests. Current team path generation repeats twice per
+serial request interval (~488ms); old does not repeat after its first visit.
+Team UI frontmatter is 114ms versus 3ms. Build-time Stats is 110ms current versus
+215ms old in one build each, not a production benchmark. Timers preserve streaming;
+untimed controls rule out instrumentation explaining the large gap. A temporary
+CPU-loop route checked local clock behavior and was removed. Both instrumented
+builds/typechecks pass; source generator reproduces exactly and dependency runtime
+is unchanged. Existing reference servers untouched; diagnostic dev on 4327/4328.
+See [review and reproduction](prelaunch-review/frontmatter-performance.md).
+No font, data-helper, chart or deployment changes. Pause before experiment 2.
+
 ## Historical React baseline — manual review stop
 
 At Zack's request, started an untouched `f5382f3` archive with its locked Astro

@@ -2,10 +2,13 @@
 
 ## Latest performance review stop
 
-The [historical React / Astro 5 comparison](legacy-react-performance.md) confirms
-faster repeat dev navigation before this sweep, with similar local built chart
-startup. It includes running old/current URLs, timings, animation differences
-and attribution limits. Pause for manual review before fixes or migration.
+The [frontmatter timing experiment](frontmatter-performance.md) isolates the
+server-side stages: Stats frontmatter is 212ms old versus 1,436ms current in dev;
+current team path generation repeats twice per request interval. Built prerendering
+does not reproduce the large delay. This follows the
+[historical React comparison](legacy-react-performance.md). Diagnostic copies
+are on 4327/4328; original references remain untouched. Pause for manual review
+before the separate font or rendering experiments.
 
 ## Latest cleanup disposition
 

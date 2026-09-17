@@ -1,0 +1,820 @@
+{
+  "createdAt": "2026-09-17T01:41:23.257Z",
+  "settings": {
+    "paths": "/2025/CHA/",
+    "out": "/tmp/nbastt-frontmatter-team.json",
+    "old-base": "http://127.0.0.1:4327",
+    "current-base": "http://127.0.0.1:4328",
+    "old-log": "/tmp/nbastt-frontmatter-old.log",
+    "current-log": "/tmp/nbastt-frontmatter-current.log"
+  },
+  "notes": [
+    "Serial curl requests, no browser JS or fonts.",
+    "Run zero retained separately from five warm repeats.",
+    "getStaticPaths has no request context; null-labelled events belong to the serial capture interval, not a framework request span.",
+    "Frontmatter excludes static imports and template/child rendering. Do not sum potentially overlapping component spans."
+  ],
+  "rows": [
+    {
+      "stack": "old",
+      "pathname": "/2025/CHA/",
+      "run": 0,
+      "id": "old-_2025_CHA_-0",
+      "firstRouteVisit": true,
+      "firstByteMs": 857.367,
+      "totalMs": 861.962,
+      "htmlBytes": 61493,
+      "events": [
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 3467.361083,
+          "end": 3872.261583,
+          "ms": 404.9005000000002,
+          "phases": []
+        },
+        {
+          "name": "team-page",
+          "request": "request-1",
+          "path": "/2025/CHA/",
+          "start": 3902.973708,
+          "end": 3938.287375,
+          "ms": 35.313666999999896,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "request-1",
+          "path": "/2025/CHA/",
+          "start": 3938.774,
+          "end": 3973.431958,
+          "ms": 34.657958000000235,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "request-1",
+          "path": "/2025/CHA/",
+          "start": 3973.825833,
+          "end": 3977.4235,
+          "ms": 3.5976670000000013,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 0.4781670000002123
+            },
+            {
+              "name": "chart points",
+              "ms": 3.1172080000001188
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/2025/CHA/",
+          "start": 3980.664291,
+          "end": 3980.766708,
+          "ms": 0.10241700000005949,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/2025/CHA/",
+      "run": 0,
+      "id": "current-_2025_CHA_-0",
+      "firstRouteVisit": true,
+      "firstByteMs": 1875.237,
+      "totalMs": 1879.711,
+      "htmlBytes": 42001,
+      "events": [
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609275811,
+          "end": 1789609276166,
+          "ms": 355,
+          "phases": []
+        },
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609276180,
+          "end": 1789609276408,
+          "ms": 228,
+          "phases": []
+        },
+        {
+          "name": "team-page",
+          "request": "current-_2025_CHA_-0",
+          "path": "/2025/CHA/",
+          "start": 1789609277363,
+          "end": 1789609277366,
+          "ms": 3,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_2025_CHA_-0",
+          "path": "/2025/CHA/",
+          "start": 1789609277367,
+          "end": 1789609277370,
+          "ms": 3,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "current-_2025_CHA_-0",
+          "path": "/2025/CHA/",
+          "start": 1789609277370,
+          "end": 1789609277372,
+          "ms": 2,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "current-_2025_CHA_-0",
+          "path": "/2025/CHA/",
+          "start": 1789609277373,
+          "end": 1789609277487,
+          "ms": 114,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 5
+            },
+            {
+              "name": "chart points",
+              "ms": 109
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/2025/CHA/",
+      "run": 1,
+      "id": "current-_2025_CHA_-1",
+      "firstRouteVisit": false,
+      "firstByteMs": 789.116,
+      "totalMs": 790.423,
+      "htmlBytes": 42001,
+      "events": [
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609277741,
+          "end": 1789609278052,
+          "ms": 311,
+          "phases": []
+        },
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609278072,
+          "end": 1789609278302,
+          "ms": 230,
+          "phases": []
+        },
+        {
+          "name": "team-page",
+          "request": "current-_2025_CHA_-1",
+          "path": "/2025/CHA/",
+          "start": 1789609278323,
+          "end": 1789609278324,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_2025_CHA_-1",
+          "path": "/2025/CHA/",
+          "start": 1789609278325,
+          "end": 1789609278326,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "current-_2025_CHA_-1",
+          "path": "/2025/CHA/",
+          "start": 1789609278326,
+          "end": 1789609278328,
+          "ms": 2,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "current-_2025_CHA_-1",
+          "path": "/2025/CHA/",
+          "start": 1789609278328,
+          "end": 1789609278445,
+          "ms": 117,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 6
+            },
+            {
+              "name": "chart points",
+              "ms": 111
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/2025/CHA/",
+      "run": 1,
+      "id": "old-_2025_CHA_-1",
+      "firstRouteVisit": false,
+      "firstByteMs": 94.426,
+      "totalMs": 94.482,
+      "htmlBytes": 61496,
+      "events": [
+        {
+          "name": "team-page",
+          "request": "request-2",
+          "path": "/2025/CHA/",
+          "start": 7165.5015,
+          "end": 7208.2045,
+          "ms": 42.70299999999952,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "request-2",
+          "path": "/2025/CHA/",
+          "start": 7208.425541,
+          "end": 7243.398458,
+          "ms": 34.97291700000005,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "request-2",
+          "path": "/2025/CHA/",
+          "start": 7243.516125,
+          "end": 7246.673916,
+          "ms": 3.1577909999996336,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 0.20012500000029831
+            },
+            {
+              "name": "chart points",
+              "ms": 2.954291000000012
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/2025/CHA/",
+          "start": 7247.403458,
+          "end": 7247.43175,
+          "ms": 0.0282919999999649,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/2025/CHA/",
+      "run": 2,
+      "id": "old-_2025_CHA_-2",
+      "firstRouteVisit": false,
+      "firstByteMs": 95.311,
+      "totalMs": 95.36999999999999,
+      "htmlBytes": 61497,
+      "events": [
+        {
+          "name": "team-page",
+          "request": "request-3",
+          "path": "/2025/CHA/",
+          "start": 7421.101458,
+          "end": 7466.161958,
+          "ms": 45.06049999999959,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "request-3",
+          "path": "/2025/CHA/",
+          "start": 7466.357125,
+          "end": 7501.827,
+          "ms": 35.469874999999774,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "request-3",
+          "path": "/2025/CHA/",
+          "start": 7501.942291,
+          "end": 7505.17775,
+          "ms": 3.235458999999537,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 0.1948339999999007
+            },
+            {
+              "name": "chart points",
+              "ms": 3.0364159999999174
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/2025/CHA/",
+          "start": 7505.872208,
+          "end": 7505.901625,
+          "ms": 0.02941700000064884,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/2025/CHA/",
+      "run": 2,
+      "id": "current-_2025_CHA_-2",
+      "firstRouteVisit": false,
+      "firstByteMs": 716.399,
+      "totalMs": 717.5780000000001,
+      "htmlBytes": 42001,
+      "events": [
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609279203,
+          "end": 1789609279469,
+          "ms": 266,
+          "phases": []
+        },
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609279488,
+          "end": 1789609279716,
+          "ms": 228,
+          "phases": []
+        },
+        {
+          "name": "team-page",
+          "request": "current-_2025_CHA_-2",
+          "path": "/2025/CHA/",
+          "start": 1789609279721,
+          "end": 1789609279721,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_2025_CHA_-2",
+          "path": "/2025/CHA/",
+          "start": 1789609279722,
+          "end": 1789609279722,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "current-_2025_CHA_-2",
+          "path": "/2025/CHA/",
+          "start": 1789609279722,
+          "end": 1789609279723,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "current-_2025_CHA_-2",
+          "path": "/2025/CHA/",
+          "start": 1789609279723,
+          "end": 1789609279843,
+          "ms": 120,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 5
+            },
+            {
+              "name": "chart points",
+              "ms": 115
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/2025/CHA/",
+      "run": 3,
+      "id": "current-_2025_CHA_-3",
+      "firstRouteVisit": false,
+      "firstByteMs": 652.9150000000001,
+      "totalMs": 654.08,
+      "htmlBytes": 42001,
+      "events": [
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609280072,
+          "end": 1789609280295,
+          "ms": 223,
+          "phases": []
+        },
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609280313,
+          "end": 1789609280536,
+          "ms": 223,
+          "phases": []
+        },
+        {
+          "name": "team-page",
+          "request": "current-_2025_CHA_-3",
+          "path": "/2025/CHA/",
+          "start": 1789609280542,
+          "end": 1789609280543,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_2025_CHA_-3",
+          "path": "/2025/CHA/",
+          "start": 1789609280543,
+          "end": 1789609280544,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "current-_2025_CHA_-3",
+          "path": "/2025/CHA/",
+          "start": 1789609280544,
+          "end": 1789609280545,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "current-_2025_CHA_-3",
+          "path": "/2025/CHA/",
+          "start": 1789609280545,
+          "end": 1789609280659,
+          "ms": 114,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 4
+            },
+            {
+              "name": "chart points",
+              "ms": 110
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/2025/CHA/",
+      "run": 3,
+      "id": "old-_2025_CHA_-3",
+      "firstRouteVisit": false,
+      "firstByteMs": 93.94,
+      "totalMs": 94.00699999999999,
+      "htmlBytes": 61496,
+      "events": [
+        {
+          "name": "team-page",
+          "request": "request-4",
+          "path": "/2025/CHA/",
+          "start": 9376.430916,
+          "end": 9420.476291,
+          "ms": 44.04537500000151,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "request-4",
+          "path": "/2025/CHA/",
+          "start": 9420.6675,
+          "end": 9456.081541,
+          "ms": 35.414041,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "request-4",
+          "path": "/2025/CHA/",
+          "start": 9456.21875,
+          "end": 9459.421208,
+          "ms": 3.2024579999997513,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 0.19754099999954633
+            },
+            {
+              "name": "chart points",
+              "ms": 3.0010419999998703
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/2025/CHA/",
+          "start": 9459.903625,
+          "end": 9459.929291,
+          "ms": 0.02566599999954633,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/2025/CHA/",
+      "run": 4,
+      "id": "old-_2025_CHA_-4",
+      "firstRouteVisit": false,
+      "firstByteMs": 93.345,
+      "totalMs": 93.409,
+      "htmlBytes": 61496,
+      "events": [
+        {
+          "name": "team-page",
+          "request": "request-5",
+          "path": "/2025/CHA/",
+          "start": 9633.468416,
+          "end": 9677.495958,
+          "ms": 44.02754199999981,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "request-5",
+          "path": "/2025/CHA/",
+          "start": 9677.675958,
+          "end": 9713.303375,
+          "ms": 35.627416999999696,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "request-5",
+          "path": "/2025/CHA/",
+          "start": 9713.45125,
+          "end": 9716.500291,
+          "ms": 3.0490410000002157,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 0.19608300000072632
+            },
+            {
+              "name": "chart points",
+              "ms": 2.8504999999986467
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/2025/CHA/",
+          "start": 9716.891208,
+          "end": 9716.9165,
+          "ms": 0.025292000000263215,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/2025/CHA/",
+      "run": 4,
+      "id": "current-_2025_CHA_-4",
+      "firstRouteVisit": false,
+      "firstByteMs": 663.0930000000001,
+      "totalMs": 664.327,
+      "htmlBytes": 42001,
+      "events": [
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609281393,
+          "end": 1789609281618,
+          "ms": 225,
+          "phases": []
+        },
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609281637,
+          "end": 1789609281880,
+          "ms": 243,
+          "phases": []
+        },
+        {
+          "name": "team-page",
+          "request": "current-_2025_CHA_-4",
+          "path": "/2025/CHA/",
+          "start": 1789609281884,
+          "end": 1789609281885,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_2025_CHA_-4",
+          "path": "/2025/CHA/",
+          "start": 1789609281885,
+          "end": 1789609281886,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "current-_2025_CHA_-4",
+          "path": "/2025/CHA/",
+          "start": 1789609281886,
+          "end": 1789609281887,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "current-_2025_CHA_-4",
+          "path": "/2025/CHA/",
+          "start": 1789609281887,
+          "end": 1789609281998,
+          "ms": 111,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 7
+            },
+            {
+              "name": "chart points",
+              "ms": 104
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/2025/CHA/",
+      "run": 5,
+      "id": "current-_2025_CHA_-5",
+      "firstRouteVisit": false,
+      "firstByteMs": 679.705,
+      "totalMs": 680.825,
+      "htmlBytes": 42001,
+      "events": [
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609282221,
+          "end": 1789609282449,
+          "ms": 228,
+          "phases": []
+        },
+        {
+          "name": "team-getStaticPaths",
+          "request": null,
+          "path": null,
+          "start": 1789609282467,
+          "end": 1789609282727,
+          "ms": 260,
+          "phases": []
+        },
+        {
+          "name": "team-page",
+          "request": "current-_2025_CHA_-5",
+          "path": "/2025/CHA/",
+          "start": 1789609282732,
+          "end": 1789609282733,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_2025_CHA_-5",
+          "path": "/2025/CHA/",
+          "start": 1789609282733,
+          "end": 1789609282734,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "current-_2025_CHA_-5",
+          "path": "/2025/CHA/",
+          "start": 1789609282734,
+          "end": 1789609282735,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "current-_2025_CHA_-5",
+          "path": "/2025/CHA/",
+          "start": 1789609282735,
+          "end": 1789609282845,
+          "ms": 110,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 5
+            },
+            {
+              "name": "chart points",
+              "ms": 105
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/2025/CHA/",
+      "run": 5,
+      "id": "old-_2025_CHA_-5",
+      "firstRouteVisit": false,
+      "firstByteMs": 93.898,
+      "totalMs": 93.962,
+      "htmlBytes": 61497,
+      "events": [
+        {
+          "name": "team-page",
+          "request": "request-6",
+          "path": "/2025/CHA/",
+          "start": 11561.795208,
+          "end": 11606.583166,
+          "ms": 44.7879580000008,
+          "phases": []
+        },
+        {
+          "name": "team-index",
+          "request": "request-6",
+          "path": "/2025/CHA/",
+          "start": 11606.734666,
+          "end": 11642.764,
+          "ms": 36.029333999998926,
+          "phases": []
+        },
+        {
+          "name": "team-ui",
+          "request": "request-6",
+          "path": "/2025/CHA/",
+          "start": 11642.878666,
+          "end": 11646.039916,
+          "ms": 3.1612499999991996,
+          "phases": [
+            {
+              "name": "summary helpers",
+              "ms": 0.1845419999990554
+            },
+            {
+              "name": "chart points",
+              "ms": 2.9761670000007143
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/2025/CHA/",
+          "start": 11646.490791,
+          "end": 11646.517125,
+          "ms": 0.02633400000013353,
+          "phases": []
+        }
+      ]
+    }
+  ]
+}

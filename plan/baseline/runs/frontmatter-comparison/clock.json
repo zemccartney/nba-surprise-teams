@@ -1,0 +1,44 @@
+[
+  {
+    "stack": "old",
+    "run": 0,
+    "cpuIntervalMs": 16.804375000006985,
+    "includingYieldMs": 27.050041999988025,
+    "checksum": 109544508762.22269
+  },
+  {
+    "stack": "current",
+    "run": 0,
+    "cpuIntervalMs": 16,
+    "includingYieldMs": 27,
+    "checksum": 109544508762.22269
+  },
+  {
+    "stack": "old",
+    "run": 1,
+    "cpuIntervalMs": 15.034459000016795,
+    "includingYieldMs": 26.132417000015266,
+    "checksum": 109544508762.22269
+  },
+  {
+    "stack": "current",
+    "run": 1,
+    "cpuIntervalMs": 16,
+    "includingYieldMs": 27,
+    "checksum": 109544508762.22269
+  },
+  {
+    "stack": "old",
+    "run": 2,
+    "cpuIntervalMs": 14.8404589999991,
+    "includingYieldMs": 25.918084000004455,
+    "checksum": 109544508762.22269
+  },
+  {
+    "stack": "current",
+    "run": 2,
+    "cpuIntervalMs": 16,
+    "includingYieldMs": 26,
+    "checksum": 109544508762.22269
+  }
+]

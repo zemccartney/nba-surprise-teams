@@ -1,0 +1,1603 @@
+{
+  "createdAt": "2026-09-17T01:40:44.761Z",
+  "settings": {
+    "paths": "/stats/",
+    "out": "/tmp/nbastt-frontmatter-stats-final.json",
+    "old-base": "http://127.0.0.1:4327",
+    "current-base": "http://127.0.0.1:4328",
+    "old-log": "/tmp/nbastt-frontmatter-old.log",
+    "current-log": "/tmp/nbastt-frontmatter-current.log"
+  },
+  "notes": [
+    "Serial curl requests, no browser JS or fonts.",
+    "Run zero retained separately from five warm repeats.",
+    "getStaticPaths has no request context; null-labelled events belong to the serial capture interval, not a framework request span.",
+    "Frontmatter excludes static imports and template/child rendering. Do not sum potentially overlapping component spans."
+  ],
+  "rows": [
+    {
+      "stack": "old",
+      "pathname": "/stats/",
+      "run": 0,
+      "id": "old-_stats_-0",
+      "firstRouteVisit": true,
+      "firstByteMs": 1057.618,
+      "totalMs": 1057.721,
+      "htmlBytes": 247985,
+      "events": [
+        {
+          "name": "stats",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 3616.1355,
+          "end": 4261.945,
+          "ms": 645.8094999999998,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 483.8156249999997
+            },
+            {
+              "name": "top ten",
+              "ms": 49.54775000000063
+            },
+            {
+              "name": "per season",
+              "ms": 21.641333999999915
+            },
+            {
+              "name": "by team",
+              "ms": 40.89795799999956
+            },
+            {
+              "name": "scatter",
+              "ms": 49.871083
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4263.386959,
+          "end": 4263.396959,
+          "ms": 0.009999999999308784,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4263.933417,
+          "end": 4263.941667,
+          "ms": 0.008249999999861757,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.002959,
+          "end": 4264.008792,
+          "ms": 0.005832999999256572,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.090292,
+          "end": 4264.09625,
+          "ms": 0.005957999999736785,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.192542,
+          "end": 4264.199292,
+          "ms": 0.006750000000465661,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.232459,
+          "end": 4264.238084,
+          "ms": 0.005624999999781721,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.304834,
+          "end": 4264.306917,
+          "ms": 0.0020830000003115856,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.342167,
+          "end": 4264.348084,
+          "ms": 0.005917000000408734,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.419084,
+          "end": 4264.426667,
+          "ms": 0.007582999999613094,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-1",
+          "path": "/stats/",
+          "start": 4264.495542,
+          "end": 4264.502334,
+          "ms": 0.006792000000132248,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/stats/",
+      "run": 0,
+      "id": "current-_stats_-0",
+      "firstRouteVisit": true,
+      "firstByteMs": 2389.568,
+      "totalMs": 2392.831,
+      "htmlBytes": 145878,
+      "events": [
+        {
+          "name": "stats",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609232686,
+          "end": 1789609234171,
+          "ms": 1485,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 62
+            },
+            {
+              "name": "top ten",
+              "ms": 335
+            },
+            {
+              "name": "per season",
+              "ms": 170
+            },
+            {
+              "name": "by team",
+              "ms": 174
+            },
+            {
+              "name": "scatter",
+              "ms": 744
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234172,
+          "end": 1789609234172,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234172,
+          "end": 1789609234173,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234173,
+          "end": 1789609234174,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234174,
+          "end": 1789609234174,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234174,
+          "end": 1789609234175,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234175,
+          "end": 1789609234175,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234175,
+          "end": 1789609234176,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234176,
+          "end": 1789609234177,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234177,
+          "end": 1789609234177,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-0",
+          "path": "/stats/",
+          "start": 1789609234177,
+          "end": 1789609234178,
+          "ms": 1,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/stats/",
+      "run": 1,
+      "id": "current-_stats_-1",
+      "firstRouteVisit": false,
+      "firstByteMs": 1765.0710000000001,
+      "totalMs": 1765.3799999999999,
+      "htmlBytes": 145878,
+      "events": [
+        {
+          "name": "stats",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609234503,
+          "end": 1789609236104,
+          "ms": 1601,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 21
+            },
+            {
+              "name": "top ten",
+              "ms": 337
+            },
+            {
+              "name": "per season",
+              "ms": 262
+            },
+            {
+              "name": "by team",
+              "ms": 211
+            },
+            {
+              "name": "scatter",
+              "ms": 769
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236105,
+          "end": 1789609236105,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236105,
+          "end": 1789609236106,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236106,
+          "end": 1789609236107,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236107,
+          "end": 1789609236108,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236108,
+          "end": 1789609236109,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236109,
+          "end": 1789609236109,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236109,
+          "end": 1789609236110,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236110,
+          "end": 1789609236111,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236111,
+          "end": 1789609236111,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-1",
+          "path": "/stats/",
+          "start": 1789609236111,
+          "end": 1789609236112,
+          "ms": 1,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/stats/",
+      "run": 1,
+      "id": "old-_stats_-1",
+      "firstRouteVisit": false,
+      "firstByteMs": 234.61499999999998,
+      "totalMs": 234.708,
+      "htmlBytes": 247986,
+      "events": [
+        {
+          "name": "stats",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 8941.558209,
+          "end": 9157.0935,
+          "ms": 215.53529100000014,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 86.37749999999869
+            },
+            {
+              "name": "top ten",
+              "ms": 37.56079099999988
+            },
+            {
+              "name": "per season",
+              "ms": 9.16912500000035
+            },
+            {
+              "name": "by team",
+              "ms": 34.727875000000495
+            },
+            {
+              "name": "scatter",
+              "ms": 47.69312499999978
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.398917,
+          "end": 9157.406125,
+          "ms": 0.007207999999081949,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.472459,
+          "end": 9157.509792,
+          "ms": 0.037333000000217,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.548917,
+          "end": 9157.557375,
+          "ms": 0.008458000000246102,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.581375,
+          "end": 9157.58675,
+          "ms": 0.005375000000640284,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.614084,
+          "end": 9157.619625,
+          "ms": 0.005540999998629559,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.718792,
+          "end": 9157.724375,
+          "ms": 0.005583000000115135,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.7455,
+          "end": 9157.746834,
+          "ms": 0.0013339999986783369,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.767167,
+          "end": 9157.771959,
+          "ms": 0.004791999999724794,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.790667,
+          "end": 9157.797042,
+          "ms": 0.006375000000844011,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-2",
+          "path": "/stats/",
+          "start": 9157.816375,
+          "end": 9157.821459,
+          "ms": 0.005084000000351807,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/stats/",
+      "run": 2,
+      "id": "old-_stats_-2",
+      "firstRouteVisit": false,
+      "firstByteMs": 227.763,
+      "totalMs": 227.84099999999998,
+      "htmlBytes": 247986,
+      "events": [
+        {
+          "name": "stats",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9335.370375,
+          "end": 9548.2505,
+          "ms": 212.88012499999968,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 86.2086249999993
+            },
+            {
+              "name": "top ten",
+              "ms": 37.18170900000041
+            },
+            {
+              "name": "per season",
+              "ms": 8.87066600000071
+            },
+            {
+              "name": "by team",
+              "ms": 34.38395899999887
+            },
+            {
+              "name": "scatter",
+              "ms": 46.234458000000814
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.513584,
+          "end": 9548.520334,
+          "ms": 0.006750000000465661,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.5815,
+          "end": 9548.587,
+          "ms": 0.005499999999301508,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.614834,
+          "end": 9548.619334,
+          "ms": 0.004500000000916771,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.642209,
+          "end": 9548.646375,
+          "ms": 0.004166000000623171,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.669917,
+          "end": 9548.674709,
+          "ms": 0.004792000001543784,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.704875,
+          "end": 9548.709375,
+          "ms": 0.004500000000916771,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.728917,
+          "end": 9548.730209,
+          "ms": 0.0012919999990117503,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.749209,
+          "end": 9548.753542,
+          "ms": 0.004333000000769971,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.771792,
+          "end": 9548.777167,
+          "ms": 0.005375000000640284,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-3",
+          "path": "/stats/",
+          "start": 9548.796125,
+          "end": 9548.800584,
+          "ms": 0.0044589999997697305,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/stats/",
+      "run": 2,
+      "id": "current-_stats_-2",
+      "firstRouteVisit": false,
+      "firstByteMs": 1445.319,
+      "totalMs": 1445.661,
+      "htmlBytes": 145878,
+      "events": [
+        {
+          "name": "stats",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609237115,
+          "end": 1789609238504,
+          "ms": 1389,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 11
+            },
+            {
+              "name": "top ten",
+              "ms": 299
+            },
+            {
+              "name": "per season",
+              "ms": 167
+            },
+            {
+              "name": "by team",
+              "ms": 172
+            },
+            {
+              "name": "scatter",
+              "ms": 740
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238504,
+          "end": 1789609238505,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238505,
+          "end": 1789609238506,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238506,
+          "end": 1789609238506,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238506,
+          "end": 1789609238507,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238507,
+          "end": 1789609238507,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238507,
+          "end": 1789609238508,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238508,
+          "end": 1789609238508,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238508,
+          "end": 1789609238509,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238509,
+          "end": 1789609238509,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-2",
+          "path": "/stats/",
+          "start": 1789609238509,
+          "end": 1789609238510,
+          "ms": 1,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/stats/",
+      "run": 3,
+      "id": "current-_stats_-3",
+      "firstRouteVisit": false,
+      "firstByteMs": 1518.709,
+      "totalMs": 1518.899,
+      "htmlBytes": 145878,
+      "events": [
+        {
+          "name": "stats",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609238718,
+          "end": 1789609240188,
+          "ms": 1470,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 2
+            },
+            {
+              "name": "top ten",
+              "ms": 275
+            },
+            {
+              "name": "per season",
+              "ms": 184
+            },
+            {
+              "name": "by team",
+              "ms": 183
+            },
+            {
+              "name": "scatter",
+              "ms": 826
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240188,
+          "end": 1789609240189,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240189,
+          "end": 1789609240189,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240189,
+          "end": 1789609240190,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240190,
+          "end": 1789609240191,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240191,
+          "end": 1789609240191,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240191,
+          "end": 1789609240192,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240192,
+          "end": 1789609240192,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240192,
+          "end": 1789609240193,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240193,
+          "end": 1789609240193,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-3",
+          "path": "/stats/",
+          "start": 1789609240193,
+          "end": 1789609240194,
+          "ms": 1,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/stats/",
+      "run": 3,
+      "id": "old-_stats_-3",
+      "firstRouteVisit": false,
+      "firstByteMs": 227.574,
+      "totalMs": 227.66,
+      "htmlBytes": 247987,
+      "events": [
+        {
+          "name": "stats",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13019.798125,
+          "end": 13231.661167,
+          "ms": 211.86304200000086,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 86.29841699999997
+            },
+            {
+              "name": "top ten",
+              "ms": 35.906833000000915
+            },
+            {
+              "name": "per season",
+              "ms": 9.04804200000035
+            },
+            {
+              "name": "by team",
+              "ms": 34.830541999999696
+            },
+            {
+              "name": "scatter",
+              "ms": 45.77708299999904
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13231.919084,
+          "end": 13231.927417,
+          "ms": 0.008333000001584878,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13231.983625,
+          "end": 13231.989334,
+          "ms": 0.005708999999114894,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.017709,
+          "end": 13232.022792,
+          "ms": 0.005083000000013271,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.045292,
+          "end": 13232.049584,
+          "ms": 0.004291999999622931,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.073667,
+          "end": 13232.07875,
+          "ms": 0.005083000000013271,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.098042,
+          "end": 13232.102375,
+          "ms": 0.004333000000769971,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.121375,
+          "end": 13232.122667,
+          "ms": 0.0012919999990117503,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.141667,
+          "end": 13232.146084,
+          "ms": 0.004417000000103144,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.167375,
+          "end": 13232.172792,
+          "ms": 0.005416999998487881,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-4",
+          "path": "/stats/",
+          "start": 13232.191959,
+          "end": 13232.196542,
+          "ms": 0.004582999999911408,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/stats/",
+      "run": 4,
+      "id": "old-_stats_-4",
+      "firstRouteVisit": false,
+      "firstByteMs": 226.523,
+      "totalMs": 226.62099999999998,
+      "htmlBytes": 247986,
+      "events": [
+        {
+          "name": "stats",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13408.979209,
+          "end": 13619.905417,
+          "ms": 210.92620800000077,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 85.58004100000107
+            },
+            {
+              "name": "top ten",
+              "ms": 36.38324999999895
+            },
+            {
+              "name": "per season",
+              "ms": 8.148084000000381
+            },
+            {
+              "name": "by team",
+              "ms": 34.577541000000565
+            },
+            {
+              "name": "scatter",
+              "ms": 46.23341699999946
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.133042,
+          "end": 13620.14025,
+          "ms": 0.007208000000900938,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.195334,
+          "end": 13620.200709,
+          "ms": 0.005375000000640284,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.228042,
+          "end": 13620.232625,
+          "ms": 0.004582999999911408,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.25425,
+          "end": 13620.258542,
+          "ms": 0.004291999999622931,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.283042,
+          "end": 13620.288125,
+          "ms": 0.005083000000013271,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.30775,
+          "end": 13620.312375,
+          "ms": 0.0046249999995779945,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.348917,
+          "end": 13620.350917,
+          "ms": 0.0020000000004074536,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.371334,
+          "end": 13620.376084,
+          "ms": 0.004750000000058208,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.394792,
+          "end": 13620.400167,
+          "ms": 0.005375000000640284,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-5",
+          "path": "/stats/",
+          "start": 13620.419167,
+          "end": 13620.423959,
+          "ms": 0.004791999999724794,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/stats/",
+      "run": 4,
+      "id": "current-_stats_-4",
+      "firstRouteVisit": false,
+      "firstByteMs": 1485.3970000000002,
+      "totalMs": 1485.809,
+      "htmlBytes": 145878,
+      "events": [
+        {
+          "name": "stats",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609241180,
+          "end": 1789609242616,
+          "ms": 1436,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 4
+            },
+            {
+              "name": "top ten",
+              "ms": 338
+            },
+            {
+              "name": "per season",
+              "ms": 161
+            },
+            {
+              "name": "by team",
+              "ms": 210
+            },
+            {
+              "name": "scatter",
+              "ms": 723
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242616,
+          "end": 1789609242617,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242617,
+          "end": 1789609242618,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242618,
+          "end": 1789609242618,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242618,
+          "end": 1789609242619,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242619,
+          "end": 1789609242619,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242619,
+          "end": 1789609242619,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242620,
+          "end": 1789609242620,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242620,
+          "end": 1789609242621,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242621,
+          "end": 1789609242621,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-4",
+          "path": "/stats/",
+          "start": 1789609242621,
+          "end": 1789609242622,
+          "ms": 1,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "current",
+      "pathname": "/stats/",
+      "run": 5,
+      "id": "current-_stats_-5",
+      "firstRouteVisit": false,
+      "firstByteMs": 1430.656,
+      "totalMs": 1431.048,
+      "htmlBytes": 145878,
+      "events": [
+        {
+          "name": "stats",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609242827,
+          "end": 1789609244209,
+          "ms": 1382,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 3
+            },
+            {
+              "name": "top ten",
+              "ms": 297
+            },
+            {
+              "name": "per season",
+              "ms": 165
+            },
+            {
+              "name": "by team",
+              "ms": 167
+            },
+            {
+              "name": "scatter",
+              "ms": 750
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244210,
+          "end": 1789609244210,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244210,
+          "end": 1789609244211,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244211,
+          "end": 1789609244211,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244211,
+          "end": 1789609244212,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244212,
+          "end": 1789609244213,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244213,
+          "end": 1789609244213,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244213,
+          "end": 1789609244214,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244214,
+          "end": 1789609244214,
+          "ms": 0,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244214,
+          "end": 1789609244215,
+          "ms": 1,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "current-_stats_-5",
+          "path": "/stats/",
+          "start": 1789609244215,
+          "end": 1789609244215,
+          "ms": 0,
+          "phases": []
+        }
+      ]
+    },
+    {
+      "stack": "old",
+      "pathname": "/stats/",
+      "run": 5,
+      "id": "old-_stats_-5",
+      "firstRouteVisit": false,
+      "firstByteMs": 227.249,
+      "totalMs": 227.359,
+      "htmlBytes": 247986,
+      "events": [
+        {
+          "name": "stats",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17040.420042,
+          "end": 17252.788625,
+          "ms": 212.3685829999995,
+          "phases": [
+            {
+              "name": "initial collections",
+              "ms": 86.55249999999796
+            },
+            {
+              "name": "top ten",
+              "ms": 36.18575000000055
+            },
+            {
+              "name": "per season",
+              "ms": 8.388707999998587
+            },
+            {
+              "name": "by team",
+              "ms": 34.60504200000287
+            },
+            {
+              "name": "scatter",
+              "ms": 46.63562499999898
+            }
+          ]
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.02075,
+          "end": 17253.027834,
+          "ms": 0.007084000000759261,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.083792,
+          "end": 17253.089625,
+          "ms": 0.005832999999256572,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.116625,
+          "end": 17253.12125,
+          "ms": 0.004625000001396984,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.143084,
+          "end": 17253.147625,
+          "ms": 0.004541000002063811,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.168959,
+          "end": 17253.173709,
+          "ms": 0.004750000000058208,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.192959,
+          "end": 17253.197167,
+          "ms": 0.004207999998470768,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.215917,
+          "end": 17253.217209,
+          "ms": 0.001291999997192761,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.235709,
+          "end": 17253.240042,
+          "ms": 0.004333000000769971,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.258375,
+          "end": 17253.263792,
+          "ms": 0.005417000000306871,
+          "phases": []
+        },
+        {
+          "name": "logo",
+          "request": "request-6",
+          "path": "/stats/",
+          "start": 17253.285167,
+          "end": 17253.28975,
+          "ms": 0.004583000001730397,
+          "phases": []
+        }
+      ]
+    }
+  ]
+}

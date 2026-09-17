@@ -69,6 +69,18 @@ server code from browser assets. Defaults retain the current ECharts/split-build
 behavior. See [the historical comparison](../new-season-sweep/prelaunch-review/legacy-react-performance.md)
 for frozen versions, measured differences, animation caveats and running URLs.
 
+## Frontmatter comparison
+
+`prepare-frontmatter-profile.mjs EXTERNAL_COPY` instruments a fresh archive of
+`f5382f3` or `e2a8b30` without changing dependencies, calculations or rendering.
+`capture-frontmatter-profile.mjs --out /tmp/new-frontmatter.json` captures serial
+HTTP timings and server-side spans from diagnostic servers on 4327/4328. Optional
+`--paths /stats/` or `--paths /2025/CHA/` separate first-route visits. Keep other
+requests away during capture; `getStaticPaths` is outside the request scope.
+The optional `frontmatter-clock-probe.ts` is a disposable diagnostic route, never
+an application/deployment file. See [the review guide](../new-season-sweep/prelaunch-review/frontmatter-performance.md)
+for exact setup, timer boundaries, overhead/clock controls and results.
+
 ## Server profiling / deferred-render research
 
 `prepare-render-probe.mjs EXTERNAL_COPY` installs diagnostic instrumentation and
