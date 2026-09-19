@@ -53,6 +53,9 @@ const isAppRuntimePlugin = (plugin: unknown) =>
 // The adapter supplies Cloudflare development plugins, whose Node-compat import
 // resolver expects a dev dependency optimizer. Vitest disables optimization by
 // default, causing "AssertionError: depsOptimizer is required in dev mode".
+// trackerData's Astro hooks still select a canonical snapshot and inject types;
+// we remove only its Vite runtime plugin, avoiding a second data owner beside
+// the fixture alias. This is Node unit/maintenance coverage, not island emulation.
 // Keep this suite in Node without that Worker-specific wiring. Database tests
 // are Node maintenance consumers, not Worker SSR. The SQLite boundary tests
 // instantiate real Vite servers/builds with the guard explicitly enabled.

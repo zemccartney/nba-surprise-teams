@@ -221,9 +221,16 @@ describe("plain metadata and approved collection parity", () => {
     const fixture = readContentFixture();
     // Intentional historical corrections require reviewing/updating this golden;
     // newly archived seasons after 2025 do not invalidate it.
-    const approvedGames = fixture.games.filter(
-      (game) => Number(game.seasonId) <= 2025,
-    );
+    // The collection baseline had no NBA IDs. Enrichment must not invalidate
+    // its score/date/team parity proof; provider integrity is tested separately.
+    const approvedGames = fixture.games
+      .filter((game) => Number(game.seasonId) <= 2025)
+      .map(({ id, playedOn, seasonId, teams }) => ({
+        id,
+        playedOn,
+        seasonId,
+        teams,
+      }));
     expect(
       createHash("sha256").update(JSON.stringify(approvedGames)).digest("hex"),
     ).toBe(baseline.games);

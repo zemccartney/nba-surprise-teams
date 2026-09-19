@@ -13,9 +13,14 @@ framework content API. Only the deliberately partial
 `astro:actions` transport and `cloudflare:workers` environment shims retain
 string mocks rather than hiding incompatible framework types behind casts. Run tests noninteractively (`pnpm test` uses `--run`).
 
-- `system.test.ts`: lifecycle, completeness, referential integrity and top-10
-  cutoff checks. `content-fixture.ts` restores fresh canonical SQL into a temporary
-  database and returns plain records. No working DB or Astro store is consulted.
+- `system.test.ts`: presentation-specific top-10 cutoff check. `content-fixture.ts`
+  restores fresh canonical SQL, runs `validateDataset`, and returns plain records.
+  No working DB or Astro store is consulted. Duplicate lifecycle/foreign-key
+  assertions are intentionally not maintained as a second validation engine.
+- `dataset-validation.test.ts`: targeted edits that SQL accepts but domain rules
+  must reject (identity, chronology, cutoffs, game windows, participation/completeness).
+- `data-cli.test.ts`: concise failures, opt-in debug stacks, and offline archive
+  export/import/dump round-trip.
 - `content-fixture.test.ts`: changed-dump freshness and empty/duplicate negative
   controls. Duplicate IDs fail before a Map could hide them.
 - `content-utils.test.ts`: projected-win invariants and historical names, with

@@ -11,8 +11,9 @@ dist/
 
 .wrangler/
 
-# game data files
-src/content/games.json
+# local review notes (preserve user-authored formatting)
+/feedback.md
+/sqlite-review.tmp.html
 
 # auto-generated
 worker-configuration.d.ts

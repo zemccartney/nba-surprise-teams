@@ -4,7 +4,6 @@ import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 
 import trackerData from "./data/integration.ts";
-import { sqliteBoundary } from "./data/runtime-boundary.ts";
 import svgOptimizer from "./svg-optimizer/integration.ts";
 
 const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
@@ -82,5 +81,4 @@ export default defineConfig({
   // internal links are written with the slash and the nav highlight in
   // subpage.astro compares equal paths.
   trailingSlash: "always",
-  vite: { plugins: [sqliteBoundary()] },
 });

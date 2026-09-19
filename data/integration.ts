@@ -21,7 +21,7 @@ import {
   withDatabase,
 } from "./node/database.ts";
 import { validateDataset } from "./node/validate.ts";
-import { assertPrerender } from "./runtime-boundary.ts";
+import { assertPrerender, sqliteBoundary } from "./runtime-boundary.ts";
 
 const here = fileURLToPath(new URL("./", import.meta.url));
 const catalogId = "\0tracker:catalog";
@@ -33,6 +33,7 @@ export default function trackerData(): AstroIntegration {
   let buildDirectory: string | undefined;
   let output = "";
   const plugin: Plugin = {
+    // Vite: DB writes are not reload signals; only explicit revision notifications are.
     config() {
       return {
         server: {
@@ -47,6 +48,7 @@ export default function trackerData(): AstroIntegration {
         },
       };
     },
+    // Vite: keep generated application modules out of each environment's dependency optimizer.
     configEnvironment() {
       return {
         optimizeDeps: {
@@ -54,6 +56,7 @@ export default function trackerData(): AstroIntegration {
         },
       };
     },
+    // Vite dev only: validate the working DB and refresh all server graphs on notification.
     configureServer(server) {
       withDatabase(database, validateDataset);
       const revision = database + ".revision";
@@ -75,15 +78,31 @@ export default function trackerData(): AstroIntegration {
       });
     },
     enforce: "pre",
+    // Vite: supply source for resolved virtual imports, using the selected database.
     load(id) {
       if (id === archiveId) {
         assertPrerender(this.environment.name, id);
         return `import { withDatabase, readGames } from ${JSON.stringify(Path.join(here, "node/database.ts"))};
 import { catalog } from "virtual:tracker/catalog";
 const filename = ${JSON.stringify(database)};
-export const getArchivedGames = (seasonId) => withDatabase(filename, db => readGames(db, seasonId));
-export const getSeasonArchive = (seasonId) => { const games = getArchivedGames(seasonId); return games.length ? games : undefined; };
-export const getArchivedSeasons = () => { const ids = new Set(withDatabase(filename, db => db.prepare("SELECT DISTINCT season_id FROM archived_games").all()).map(row => row.season_id)); return catalog.getSeasons().filter(season => ids.has(season.id)).toSorted((a,b) => b.id.localeCompare(a.id)); };`;
+
+export const getArchivedGames = (seasonId) =>
+  withDatabase(filename, db => readGames(db, seasonId));
+
+export const getSeasonArchive = (seasonId) => {
+  const games = getArchivedGames(seasonId);
+  return games.length ? games : undefined;
+};
+
+export const getArchivedSeasons = () => {
+  const rows = withDatabase(filename, db =>
+    db.prepare("SELECT DISTINCT season_id FROM archived_games").all()
+  );
+  const ids = new Set(rows.map(row => row.season_id));
+  return catalog.getSeasons()
+    .filter(season => ids.has(season.id))
+    .toSorted((a, b) => b.id.localeCompare(a.id));
+};`;
       }
       if (id !== catalogId) return;
       // One metadata snapshot per module generation in both server environments.
@@ -94,6 +113,7 @@ export const catalog = metadataCatalog(${json});
 export const metadataHash = ${JSON.stringify(hash(json))};`;
     },
     name: "tracker-data",
+    // Vite: map public virtual names to internal IDs and reject disallowed environments.
     resolveId(id) {
       if (id !== "virtual:tracker/catalog" && id !== "virtual:tracker/archive")
         return;
@@ -108,6 +128,7 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
   };
   return {
     hooks: {
+      // Astro: seal and audit final deployable artifacts, then release the build snapshot.
       "astro:build:done": () => {
         const files: { file: string; sha256: string }[] = [];
         const walk = (directory: string) => {
@@ -153,9 +174,29 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
         if (buildDirectory)
           rmSync(buildDirectory, { force: true, recursive: true });
       },
-      "astro:config:done": ({ config }) => {
+      // Astro: consume resolved paths and let Astro manage generated virtual-module types.
+      "astro:config:done": ({ config, injectTypes }) => {
         output = fileURLToPath(config.outDir);
+        const source = readFileSync(
+          new URL("virtual.d.ts", import.meta.url),
+          "utf8",
+        );
+        injectTypes({
+          // Generated files live under .astro, not beside this declaration source.
+          content: source.replaceAll(
+            /"(\.\.\/src\/data\/[^"]+)"/g,
+            (_match, relative: string) =>
+              JSON.stringify(
+                fileURLToPath(new URL(relative, import.meta.url)).replaceAll(
+                  "\\",
+                  "/",
+                ),
+              ),
+          ),
+          filename: "virtual.d.ts",
+        });
       },
+      // Astro: choose working versus canonical-snapshot DB before registering Vite plugins.
       "astro:config:setup": ({ command, updateConfig }) => {
         if (command === "build" || command === "sync") {
           buildDirectory = mkdtempSync(
@@ -172,7 +213,7 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
             rmSync(cleanupDirectory, { force: true, recursive: true }),
           );
         }
-        updateConfig({ vite: { plugins: [plugin] } });
+        updateConfig({ vite: { plugins: [plugin, sqliteBoundary()] } });
       },
     },
     name: "tracker-data",

@@ -21,7 +21,7 @@
     "lint:debug": "eslint --flag unstable_native_nodejs_ts_config --inspect-config",
     "lint:workflows": "zizmor --offline --strict-collection .github/workflows",
     "preview": "wrangler types && astro preview",
-    "start": "rm -r .wrangler || true && wrangler types && ASTRO_DEV_BACKGROUND=0 concurrently  --kill-others --names astro,ts -c red,blue \"astro dev\" \"pnpm run typewatch\"",
+    "start": "rm -r .wrangler || true && wrangler types && astro sync && ASTRO_DEV_BACKGROUND=0 concurrently --kill-others --kill-timeout 5000 --names astro,ts -c red,blue \"astro dev\" \"astro check --watch --preserveWatchOutput --noSync\"",
     "test": "vitest --run",
     "typewatch": "astro check --watch --preserveWatchOutput",
     "verify": "pnpm run check && pnpm test"

@@ -421,6 +421,34 @@
           notifications regenerate metadata for both server environments.
         </p>
       </section>
+      <aside class="note" aria-labelledby="virtual-modules-note">
+        <h3 id="virtual-modules-note">
+          Why virtual modules instead of generated JSON?
+        </h3>
+        <p>
+          JSON would work for the small metadata snapshot. Virtual modules are a
+          lifecycle convenience, not a requirement for SQLite or the dev
+          speedup: there is no generated source file to ignore or clean up; Vite
+          asks for fresh module source after explicit invalidation; and builds
+          use the isolated canonical snapshot rather than accidentally reading
+          the working DB.
+        </p>
+        <p>
+          The archive module also exports functions with a private database
+          path. Generated JSON would still need generation, refresh wiring, and
+          that Node-only archive facade. We keep the virtual modules because
+          they fit this integration, not because JSON would be intrinsically
+          slower.
+        </p>
+        <p>
+          A successful edit writes a new UUID to
+          <code>tracker.db.revision</code>. Vite invalidates the catalog and its
+          importers in each environment and sends a full reload. The next load
+          regenerates metadata. This file is a notification signal, not a
+          database version or checksum; external SQL requires
+          <code>data:notify</code> after committing its transaction.
+        </p>
+      </aside>
       <section id="sqlite">
         <h2>What Node’s SQLite module actually does</h2>
         <div class="split">

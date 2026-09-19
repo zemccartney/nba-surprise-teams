@@ -10,7 +10,10 @@ minimum_release_age = "7d"
 gum = "2.0.0"
 hk = "1.56.1"
 node = "26.8.1"
+# Mise 2026.9.1 calls the PyPI backend pipx; uvx selects uv, not pipx.
+"pipx:sqlit-tui" = { version = "1.6.4", uvx = true }
 pnpm = "12.3.4"
+uv = "0.12.13"
 zizmor = "1.30.0"
 
 [hooks]
@@ -44,6 +47,18 @@ run = "node data/cli.ts"
 [tasks."data:restore"]
 description = "Restore canonical SQL; refuse an existing DB"
 run = "node data/cli.ts restore"
+
+[tasks."data:sqlit"]
+description = "Open the existing working database in sqlit (edits require data:notify)"
+dir = "{{config_root}}"
+raw = true
+run = '''
+if [ ! -f data/tracker.db ]; then
+  echo "Missing data/tracker.db; run mise run data:restore explicitly" >&2
+  exit 1
+fi
+exec sqlit connect sqlite --file-path "$PWD/data/tracker.db" --name "NBA tracker (working DB)" --alert write
+'''
 
 [tasks."data:dump"]
 description = "Validate and write a deterministic SQL dump for review"

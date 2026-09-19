@@ -43,6 +43,8 @@ export function sqliteBoundary(): Plugin {
     },
     // Run after Astro/TypeScript transform so this.parse sees JavaScript.
     enforce: "post",
+    // Build: allowed Node graphs need no scan. A forbidden edge in any other
+    // environment deliberately calls assertPrerender to produce the shared error.
     generateBundle() {
       if (this.environment.name === "prerender") return;
       for (const id of this.getModuleIds()) {
@@ -57,15 +59,18 @@ export function sqliteBoundary(): Plugin {
         }
       }
     },
+    // Dev/build: guard resolved Node modules, including transitive imports.
     load(id) {
       if (isSqliteModule(id)) assertPrerender(this.environment.name, id);
     },
     name: "tracker-sqlite-boundary",
+    // Dev/build: fail known public imports before loading wherever resolution sees them.
     resolveId(id) {
       // Catch resolvable imports early; transform also covers builtin externalization.
       if (id === "node:sqlite" || id === "virtual:tracker/archive")
         assertPrerender(this.environment.name, id);
     },
+    // Dev/build: inspect emitted JavaScript to catch imports Vite externalized early.
     transform(code, id) {
       if (this.environment.name === "prerender") return;
       if (isSqliteModule(id)) assertPrerender(this.environment.name, id);

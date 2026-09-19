@@ -90,7 +90,7 @@ it("edits complete metadata records transactionally and refuses implicit creatio
     const changes = [
       { command: "add-season", record: seasonRecord },
       { command: "add-team-season", record: candidate },
-      { command: "archive", record: { games, seasonId: "1994" } },
+      { command: "import-archive", record: { games, seasonId: "1994" } },
     ];
     expect(() =>
       transaction(db, () => applyChanges(db, changes.slice(0, 2))),

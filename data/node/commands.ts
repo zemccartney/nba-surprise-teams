@@ -26,7 +26,7 @@ export function applyChanges(db: DatabaseSync, input: unknown): void {
           "update-team",
           "add-team-season",
           "update-odds",
-          "archive",
+          "import-archive",
         ]),
         record: z.unknown(),
       }),
