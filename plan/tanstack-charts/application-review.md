@@ -19,6 +19,9 @@ ordinary executable chart scripts.
 - `tanstack-options.ts`: definitions, domain descriptions, original-row tooltip
   content, result colors and the threshold annotation.
 - `tanstack-style.ts` and `charts.css`: site colors, typography and tooltip styling.
+- `tanstack-svg.ts`: paints the dark background only within the plot bounds,
+  leaving axis gutters on the page background as before. It does not change
+  margins, plot dimensions, scales or focus geometry.
 - The prior ECharts modules remain temporarily as a comparison/test reference.
   Their data interfaces are imported **type-only**. ECharts and its keyboard
   controller are not imported by the application chart scripts or present in

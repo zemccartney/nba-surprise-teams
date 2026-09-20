@@ -38,6 +38,37 @@ try {
         await host.focus();
         const svg = host.locator('svg[data-renderer="tanstack"]').first();
         await svg.waitFor();
+        const margins =
+          kind === "team-season-pace"
+            ? { bottom: 30, left: 84, right: 0, top: 0 }
+            : {
+                bottom: kind === "surprises-by-team" ? 56 : 76,
+                left: 60,
+                right: 8,
+                top: kind === "surprises-per-season" ? 0 : 12,
+              };
+        const background = await svg
+          .locator(':scope > rect[data-ts-key="tracker-plot-background"]')
+          .evaluate((rect) => ({
+            height: Number(rect.getAttribute("height")),
+            width: Number(rect.getAttribute("width")),
+            x: Number(rect.getAttribute("x")),
+            y: Number(rect.getAttribute("y")),
+          }));
+        const box = await svg.evaluate((element) => ({
+          height: element.viewBox.baseVal.height,
+          width: element.viewBox.baseVal.width,
+        }));
+        assert.deepEqual(background, {
+          height: box.height - margins.top - margins.bottom,
+          width: box.width - margins.left - margins.right,
+          x: margins.left,
+          y: margins.top,
+        });
+        assert.equal(
+          await svg.locator(':scope > rect[data-ts-key="background"]').count(),
+          0,
+        );
         await svg.focus();
         await page.keyboard.press("Home");
         await page.waitForTimeout(50);

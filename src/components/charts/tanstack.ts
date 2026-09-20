@@ -5,10 +5,10 @@ import type {
 } from "@tanstack/charts/types";
 
 import { mountChartRenderer } from "@tanstack/charts/renderer";
-import { renderChartSvg } from "@tanstack/charts/svg";
 import { createSvgChartRenderer } from "@tanstack/charts/svg/renderer";
 
 import { waitForChartFonts } from "./fonts";
+import { renderTrackerSvg } from "./tanstack-svg";
 
 export interface TrackerChart<Row, X extends ChartValue, Y extends ChartValue> {
   // Keep custom annotations beside the definition, not in the input controller.
@@ -70,14 +70,7 @@ export const mountCharts = <
             target.element.replaceChildren(chart.body(point.datum));
         },
         renderer: createSvgChartRenderer<Row, X, Y>((scene, options) => {
-          const markup = renderChartSvg(scene, options).replace(
-            "<svg ",
-            '<svg data-renderer="tanstack" ',
-          );
-          return markup.replace(
-            "</svg>",
-            () => `${chart.annotation?.(scene) ?? ""}</svg>`,
-          );
+          return renderTrackerSvg(scene, options, chart.annotation?.(scene));
         }),
       });
       destroy = () => instance.destroy();

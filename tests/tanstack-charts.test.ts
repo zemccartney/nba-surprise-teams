@@ -13,6 +13,7 @@ import {
   seasonChart,
   teamChart,
 } from "../src/components/charts/tanstack-options";
+import { renderTrackerSvg } from "../src/components/charts/tanstack-svg";
 
 vi.mock(
   import("../src/components/charts/tanstack-style"),
@@ -43,6 +44,50 @@ const render = <Row, X extends ChartValue, Y extends ChartValue>(
 };
 
 describe("application TanStack definitions", () => {
+  it.each([390, 1440])(
+    "paints only the original plotting bounds at %ipx, leaving label gutters transparent",
+    (width) => {
+      const chart = seasonChart(
+        {
+          data: [
+            {
+              numSurprises: 2,
+              seasonId: "2025",
+              seasonRange: "2025–26",
+              surpriseTeams: [],
+            },
+          ],
+          latestSeasonYear: 2025,
+        },
+        600,
+      );
+      const scene = render(chart, width);
+      const nodes = scene.nodes;
+      const markup = renderTrackerSvg(
+        scene,
+        { ariaLabel: chart.label },
+        '<g data-test-annotation=""/>',
+      );
+      const background = markup.match(
+        /<rect[^>]*data-ts-key="tracker-plot-background"[^>]*>/,
+      )?.[0];
+      expect(scene.chart).toEqual({
+        height: 524,
+        width: width - 68,
+        x: 60,
+        y: 0,
+      });
+      expect(background).toContain('x="60"');
+      expect(background).toContain('y="0"');
+      expect(background).toContain(`width="${width - 68}"`);
+      expect(background).toContain('height="524"');
+      expect(markup).not.toContain('data-ts-key="background"');
+      expect(markup).toContain('data-test-annotation=""');
+      expect(markup).toContain('aria-label="Surprises per season"');
+      expect(scene.nodes).toBe(nodes);
+      expect(scene.theme.background).toBe("#020617");
+    },
+  );
   it("orders seasons chronologically while preserving original rows and true zero values", () => {
     const recent = {
       numSurprises: 0,
