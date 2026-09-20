@@ -6,8 +6,7 @@
 }
 
 .chart svg:focus-visible {
-  outline: 2px solid var(--color-lime-400);
-  outline-offset: 4px;
+  outline: none;
 }
 
 /* Reproduce the existing popover appearance on the library-owned surface. */
@@ -27,8 +26,10 @@
   --ts-chart-tooltip-max-width: min(20rem, calc(100% - 16px));
 }
 
-/* Make the chart's keyboard point selector visible without changing layout. */
-.chart:focus-visible {
+/* Paint focus on the host: Stats intentionally clips its descendants to keep
+   tooltips inside the document, which would also clip an SVG-owned outline. */
+.chart:focus-visible,
+.chart:has(svg:focus-visible) {
   outline: 2px solid var(--color-lime-400);
   outline-offset: 4px;
 }

@@ -2,8 +2,20 @@ import { logoAlt } from "../logo-alt";
 
 export const readTheme = () => {
   const style = getComputedStyle(document.documentElement);
-  const color = (name: string) =>
-    style.getPropertyValue(`--color-${name}`).trim();
+  // Match the reference's sRGB palette rather than changing gamut mapping
+  // while replacing the renderer. Resolve once per chart mount.
+  const canvas = document.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  const color = (name: string) => {
+    const value = style.getPropertyValue(`--color-${name}`).trim();
+    if (!context) return value;
+    context.fillStyle = value;
+    context.fillRect(0, 0, 1, 1);
+    const [r = 0, g = 0, b = 0] = context.getImageData(0, 0, 1, 1).data;
+    return `#${[r, g, b].map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
+  };
   return {
     accent: color("indigo-400"),
     background: color("slate-950"),
@@ -25,9 +37,9 @@ export const chartTheme = (t: Theme) => ({
   palette: [t.green, t.red],
 });
 export const axis = (text: string, offset: number) => ({
-  label: { fontSize: 20, fontWeight: 600, offset, text },
+  label: { fontSize: 20, fontWeight: 600, offset, opacity: 1, text },
   line: false as const,
-  tickLabels: { fontSize: 16, fontWeight: 600 },
+  tickLabels: { fontSize: 16, fontWeight: 600, opacity: 1 },
   ticks: { padding: 12, size: 6 },
 });
 export const grid = (t: Theme) => ({

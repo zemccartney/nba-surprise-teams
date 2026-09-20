@@ -45,7 +45,7 @@ const render = <Row, X extends ChartValue, Y extends ChartValue>(
 
 describe("application TanStack definitions", () => {
   it.each([390, 1440])(
-    "paints only the original plotting bounds at %ipx, leaving label gutters transparent",
+    "paints only the configured plotting bounds at %ipx, leaving label gutters transparent",
     (width) => {
       const chart = seasonChart(
         {
@@ -73,13 +73,13 @@ describe("application TanStack definitions", () => {
       )?.[0];
       expect(scene.chart).toEqual({
         height: 524,
-        width: width - 68,
+        width: width - 76,
         x: 60,
         y: 0,
       });
       expect(background).toContain('x="60"');
       expect(background).toContain('y="0"');
-      expect(background).toContain(`width="${width - 68}"`);
+      expect(background).toContain(`width="${width - 76}"`);
       expect(background).toContain('height="524"');
       expect(markup).not.toContain('data-ts-key="background"');
       expect(markup).toContain('data-test-annotation=""');
@@ -88,6 +88,50 @@ describe("application TanStack definitions", () => {
       expect(scene.theme.background).toBe("#020617");
     },
   );
+  it("uses centered five-year ticks and crisp, interior-only grids with opaque labels", () => {
+    const data = Array.from({ length: 14 }, (_, i) => ({
+      numSurprises: i % 4,
+      seasonId: String(1993 + i),
+      seasonRange: String(1993 + i),
+      surpriseTeams: [],
+    }));
+    const chart = seasonChart({ data, latestSeasonYear: 2006 }, 600);
+    const scene = render(chart);
+    expect(scene.scales.x?.ticks.map((tick) => tick.value)).toEqual([
+      "1995",
+      "2000",
+      "2005",
+    ]);
+    const markup = renderTrackerSvg(scene, { ariaLabel: chart.label });
+    const labels = markup
+      .matchAll(/<text[^>]*>/g)
+      .map((match) => match[0])
+      .toArray();
+    expect(labels.length).toBeGreaterThan(0);
+    for (const label of labels) expect(label).toContain('opacity="1"');
+    const tickLabels = labels.filter((label) =>
+      label.includes("x-tick-label:"),
+    );
+    for (const label of tickLabels)
+      expect(label).toContain('text-anchor="middle"');
+    const lines = markup
+      .matchAll(/<line[^>]*data-ts-key="[xy]-grid:[^>]*>/g)
+      .map((match) => match[0])
+      .toArray();
+    expect(lines).toHaveLength(5); // Three verticals and two interior horizontals.
+    for (const line of lines) {
+      const attribute = (name: string) =>
+        Number(line.match(new RegExp(`${name}="([^"]+)"`))?.[1]);
+      const isVertical = attribute("x1") === attribute("x2");
+      const position = attribute(isVertical ? "x1" : "y1");
+      const min = isVertical ? scene.chart.x : scene.chart.y;
+      const max = min + (isVertical ? scene.chart.width : scene.chart.height);
+      expect(position).toBeGreaterThan(min);
+      expect(position).toBeLessThan(max);
+      expect(position % 1).toBe(0.5);
+      expect(line).toContain('stroke-opacity="1"');
+    }
+  });
   it("orders seasons chronologically while preserving original rows and true zero values", () => {
     const recent = {
       numSurprises: 0,
@@ -121,6 +165,9 @@ describe("application TanStack definitions", () => {
     expect(scene.scales.y?.domain).toEqual([-15, 5]);
     expect(scene.points.map((p) => p.yValue)).toEqual([3, -11]);
     expect(scene.points.every((p) => p.datum === row)).toBe(true);
+    const markup = renderTrackerSvg(scene, { ariaLabel: "Teams" });
+    const zero = markup.match(/<line[^>]*stroke-width="4"[^>]*>/)?.[0];
+    expect(zero).toContain('stroke-opacity="1"');
   });
   it("keeps explicit result colors even when an eliminated row is encountered first", () => {
     const eliminated = {
@@ -164,6 +211,10 @@ describe("application TanStack definitions", () => {
       expect(scene.scales.y?.domain).toEqual([0, numGames]);
       expect(scene.points).toHaveLength(1);
       expect(scene.points[0]?.datum).toBe(row);
+      const markup = renderTrackerSvg(scene, { ariaLabel: chart.label });
+      expect(markup.match(/<line[^>]*stroke-width="4"[^>]*>/)?.[0]).toContain(
+        'stroke-opacity="1"',
+      );
       expect(chart.annotation?.(scene)).toContain(
         'aria-label="Surprise threshold: 30 wins"',
       );
@@ -212,7 +263,35 @@ describe("application TanStack definitions", () => {
         data.map((row) => row.date),
         390,
       ),
-    ).toEqual(["game-0", "game-81"]);
+    ).toEqual(["game-0", "game-28", "game-56"]);
+    expect(
+      dateTicks(
+        data.map((row) => row.date),
+        720,
+      ),
+    ).toEqual([
+      "game-0",
+      "game-14",
+      "game-28",
+      "game-42",
+      "game-56",
+      "game-70",
+    ]);
+    for (const width of [320, 390, 720, 1200]) {
+      const scene = render(chart, width);
+      const markup = renderTrackerSvg(scene, { ariaLabel: chart.label });
+      const labels = markup
+        .matchAll(/<text[^>]*data-ts-key="x-tick-label:[^>]*>/g)
+        .toArray();
+      expect(labels.length).toBeGreaterThan(0);
+      for (const [label] of labels) {
+        expect(label).toContain('text-anchor="middle"');
+        expect(
+          Number(label.match(/ x="([^"]+)"/)?.[1]) + 40,
+        ).toBeLessThanOrEqual(width);
+      }
+      expect(scene.points).toHaveLength(82);
+    }
   });
   it("bounds scatter axes beyond exact multiples and handles empty input", () => {
     expect(scatterBounds([-10, 20])).toEqual([-15, 25]);

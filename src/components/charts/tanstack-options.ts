@@ -49,6 +49,11 @@ const escapeSvg = (value: string) =>
 const tooltipOptions = {
   anchor: "point" as const,
   className: "tracker-tooltip",
+  // Clearance for the focused dot and the popover's 12px spread/blur shadow.
+  offset: 28,
+  // Horizontal placement can clamp back over the dot on narrow charts.
+  // Prefer above/below; the library still confines the tooltip to its host.
+  placement: ["top", "bottom"] as const,
   use: tooltip,
 };
 
@@ -88,14 +93,13 @@ export const seasonChart = (
   const max = Math.max(1, ...rows.map((row) => row.numSurprises));
   const visibleTicks = rows
     .map((row) => row.seasonId)
-    .filter(
-      (value, i) => Number(value) % 5 === 0 || i === 0 || i === rows.length - 1,
-    );
+    .filter((value) => Number(value) % 5 === 0);
   return {
     body: seasonBody,
     definition: defineChart({
       focus: "nearest-x",
-      margin: { bottom: 76, left: 60, right: 8, top: 0 },
+      // Half a four-digit tick label fits beyond the final bar's center.
+      margin: { bottom: 76, left: 60, right: 16, top: 0 },
       marks: [
         barY(rows, {
           fill,
@@ -128,14 +132,10 @@ export const seasonChart = (
           axis: {
             ...axis("Season", 56),
             tickLabels: {
-              anchor: ({ value }) =>
-                value === rows[0]?.seasonId
-                  ? "start"
-                  : value === rows.at(-1)?.seasonId
-                    ? "end"
-                    : "middle",
+              anchor: "middle",
               fontSize: 16,
               fontWeight: 600,
+              opacity: 1,
             },
             ticks: { padding: 12, size: 6, values: visibleTicks },
           },
@@ -152,6 +152,7 @@ export const seasonChart = (
               dy: ({ value }) => (value === max ? 10 : 0),
               fontSize: 16,
               fontWeight: 600,
+              opacity: 1,
             },
             ticks: { padding: 12, size: 6, values: ticks(0, max, 1) },
           },
@@ -233,6 +234,7 @@ export const teamChart = ({
         }),
         ruleY([0], {
           stroke: t.yellow,
+          strokeOpacity: 1,
           strokeWidth: 4,
         }),
         crosshair({
@@ -360,15 +362,16 @@ export const scatterChart = ({
 };
 
 export const dateTicks = (dates: string[], width: number): string[] => {
-  const count = Math.min(
-    dates.length,
-    Math.max(2, Math.floor((width - 84) / 150)),
-  );
-  if (count <= 1) return dates;
-  return Array.from(
-    { length: count },
-    (_, index) =>
-      dates[Math.round((index * (dates.length - 1)) / (count - 1))] ?? "",
+  if (dates.length <= 1) return dates;
+  const plotWidth = Math.max(1, width - 84);
+  const count = Math.max(1, Math.floor(plotWidth / 100));
+  const step = Math.ceil(dates.length / count);
+  // Regular intervals, as in the reference. Don't force the last game onto
+  // the axis: its centered date would extend beyond the page's right edge.
+  return dates.filter(
+    (_date, index) =>
+      index % step === 0 &&
+      84 + (index * plotWidth) / (dates.length - 1) + 40 <= width,
   );
 };
 
@@ -439,20 +442,20 @@ export const paceChart = ({
             x: "date",
             y: "projectedWins",
           }),
-          ruleY([winsToSurprise], { stroke: t.lime, strokeWidth: 4 }),
+          ruleY([winsToSurprise], {
+            stroke: t.lime,
+            strokeOpacity: 1,
+            strokeWidth: 4,
+          }),
         ],
         scales: {
           x: {
             axis: {
               ...axis("", 0),
               tickLabels: {
-                anchor: ({ value }) =>
-                  value === data[0]?.date
-                    ? "start"
-                    : value === data.at(-1)?.date
-                      ? "end"
-                      : "middle",
+                anchor: "middle",
                 fontSize: 16,
+                opacity: 1,
                 thin: true,
               },
               ticks: {
@@ -474,6 +477,7 @@ export const paceChart = ({
                 dy: ({ value }) => (value === surpriseRules.numGames ? 10 : 0),
                 fontSize: 16,
                 fontWeight: 600,
+                opacity: 1,
               },
               ticks: {
                 padding: 12,
