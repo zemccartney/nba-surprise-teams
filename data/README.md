@@ -84,6 +84,9 @@ runs sync once first, then runs dev alongside a type-only watcher using
 `astro check --noSync`. Running ordinary `astro check` in parallel would repeat
 sync and race the dev dependency optimizer. The supervisor runs both Astro
 commands directly and allows five seconds for shutdown before force termination.
+It uses `concurrently --raw` so each command retains normal terminal output,
+without supervisor exit summaries appearing after pnpm has returned the shell
+prompt. Astro's own log labels remain; the extra `[astro]`/`[ts]` prefixes do not.
 Standalone `pnpm run typewatch` still synchronizes first; use it only without dev.
 
 ## Adding odds when they are released
