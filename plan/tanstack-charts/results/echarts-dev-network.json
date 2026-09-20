@@ -1,0 +1,694 @@
+{
+  "browser": "153.0.8010.48",
+  "network": {
+    "connectionType": "cellular4g",
+    "downloadThroughput": 1012500,
+    "latency": 165,
+    "offline": false,
+    "uploadThroughput": 168750
+  },
+  "note": "Diagnostic only: full existing Stats page versus simplified four-chart prototype; fonts/layout/animation are not matched.",
+  "results": [
+    {
+      "js": [
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 891.5999999046326,
+          "firstByte": 623.7999999523163,
+          "ms": 272.89999985694885,
+          "name": "/@id/astro/runtime/client/dev-toolbar/entrypoint.js",
+          "request": 619.2000000476837,
+          "start": 618.7000000476837
+        },
+        {
+          "decoded": 2452068,
+          "encoded": 2452068,
+          "end": 10980.5,
+          "firstByte": 2031.0999999046326,
+          "ms": 9100.700000047684,
+          "name": "/node_modules/.vite/deps/echarts_components.js",
+          "request": 2027.5,
+          "start": 1879.7999999523163
+        },
+        {
+          "decoded": 2577977,
+          "encoded": 2577977,
+          "end": 11157.899999856949,
+          "firstByte": 1961.2999999523163,
+          "ms": 9278.099999904633,
+          "name": "/node_modules/.vite/deps/echarts_charts.js",
+          "request": 1956.0999999046326,
+          "start": 1879.7999999523163
+        },
+        {
+          "decoded": 41536,
+          "encoded": 41536,
+          "end": 2406.399999856949,
+          "firstByte": 2032.0999999046326,
+          "ms": 526.5,
+          "name": "/node_modules/.vite/deps/echarts_core.js",
+          "request": 2031.7000000476837,
+          "start": 1879.8999998569489
+        },
+        {
+          "decoded": 286067,
+          "encoded": 286067,
+          "end": 3502.5999999046326,
+          "firstByte": 2036.7999999523163,
+          "ms": 1622.7000000476837,
+          "name": "/node_modules/.vite/deps/echarts_renderers.js",
+          "request": 2036.2000000476837,
+          "start": 1879.8999998569489
+        },
+        {
+          "decoded": 2855,
+          "encoded": 2855,
+          "end": 2844.899999856949,
+          "firstByte": 2664,
+          "ms": 436.69999980926514,
+          "name": "/node_modules/.vite/deps/rolldown-runtime-EAsCxrDo.js",
+          "request": 2663,
+          "start": 2408.2000000476837
+        },
+        {
+          "decoded": 1178401,
+          "encoded": 1178401,
+          "end": 7760.599999904633,
+          "firstByte": 2802.5999999046326,
+          "ms": 5352.299999952316,
+          "name": "/node_modules/.vite/deps/graphic-DmtbJ6dX.js",
+          "request": 2795.2000000476837,
+          "start": 2408.2999999523163
+        },
+        {
+          "decoded": 2667332,
+          "encoded": 2667332,
+          "end": 11781.5,
+          "firstByte": 2830.7999999523163,
+          "ms": 9373.200000047684,
+          "name": "/node_modules/.vite/deps/Axis-SZibq2Xv.js",
+          "request": 2823.2999999523163,
+          "start": 2408.2999999523163
+        },
+        {
+          "decoded": 35629,
+          "encoded": 35629,
+          "end": 3222.7000000476837,
+          "firstByte": 2845.5,
+          "ms": 814.3000001907349,
+          "name": "/node_modules/.vite/deps/createSeriesData-p3fmb-86.js",
+          "request": 2845,
+          "start": 2408.399999856949
+        },
+        {
+          "decoded": 1489988,
+          "encoded": 1489988,
+          "end": 12946.599999904633,
+          "firstByte": 11005.599999904633,
+          "ms": 1945,
+          "name": "/node_modules/.vite/deps/thumbnailBridge-EEr7jZJ9.js",
+          "request": 11002.399999856949,
+          "start": 11001.599999904633
+        },
+        {
+          "decoded": 15708,
+          "encoded": 15708,
+          "end": 13265.299999952316,
+          "firstByte": 13003.599999904633,
+          "ms": 266.7999999523163,
+          "name": "/node_modules/.vite/deps/xray-OfZ4OEkw.js",
+          "request": 12999.399999856949,
+          "start": 12998.5
+        },
+        {
+          "decoded": 54608,
+          "encoded": 54608,
+          "end": 13414.899999856949,
+          "firstByte": 13002,
+          "ms": 416.39999985694885,
+          "name": "/node_modules/.vite/deps/astro-dvMiXcMx.js",
+          "request": 12999,
+          "start": 12998.5
+        },
+        {
+          "decoded": 163359,
+          "encoded": 163359,
+          "end": 13689.099999904633,
+          "firstByte": 13002.799999952316,
+          "ms": 690.5999999046326,
+          "name": "/node_modules/.vite/deps/audit-B1ZUaF_x.js",
+          "request": 12999.200000047684,
+          "start": 12998.5
+        },
+        {
+          "decoded": 18062,
+          "encoded": 18062,
+          "end": 13281.599999904633,
+          "firstByte": 13004.099999904633,
+          "ms": 283,
+          "name": "/node_modules/.vite/deps/settings-BYoebyKN.js",
+          "request": 12999.5,
+          "start": 12998.599999904633
+        },
+        {
+          "decoded": 44738,
+          "encoded": 44738,
+          "end": 13389.799999952316,
+          "firstByte": 13004.299999952316,
+          "ms": 391.2000000476837,
+          "name": "/node_modules/.vite/deps/toolbar-l9vmqRGS.js",
+          "request": 12999.5,
+          "start": 12998.599999904633
+        },
+        {
+          "decoded": 85412,
+          "encoded": 85412,
+          "end": 13508.399999856949,
+          "firstByte": 13004.899999856949,
+          "ms": 509.7999999523163,
+          "name": "/node_modules/.vite/deps/ui-library-Cg9VDmqw.js",
+          "request": 12999.5,
+          "start": 12998.599999904633
+        },
+        {
+          "decoded": 6441,
+          "encoded": 6441,
+          "end": 13576,
+          "firstByte": 13390.700000047684,
+          "ms": 309.90000009536743,
+          "name": "/node_modules/.vite/deps/astro_n_html-escaper.js",
+          "request": 13389.899999856949,
+          "start": 13266.099999904633
+        },
+        {
+          "decoded": 5072,
+          "encoded": 5072,
+          "end": 13597.200000047684,
+          "firstByte": 13415.599999904633,
+          "ms": 331,
+          "name": "/node_modules/.vite/deps/window-KinjsJsb.js",
+          "request": 13415.099999904633,
+          "start": 13266.200000047684
+        },
+        {
+          "decoded": 7611,
+          "encoded": 7611,
+          "end": 13654.899999856949,
+          "firstByte": 13464.899999856949,
+          "ms": 388.69999980926514,
+          "name": "/node_modules/.vite/deps/highlight-Cq3WvrsF.js",
+          "request": 13464.099999904633,
+          "start": 13266.200000047684
+        },
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 13792.5,
+          "firstByte": 13509.399999856949,
+          "ms": 510.2000000476837,
+          "name": "/node_modules/.vite/deps/astro_runtime_client_dev-toolbar_entrypoint__js.js",
+          "request": 13508.5,
+          "start": 13282.299999952316
+        },
+        {
+          "decoded": 117678,
+          "encoded": 117678,
+          "end": 14125.799999952316,
+          "firstByte": 13577.700000047684,
+          "ms": 735,
+          "name": "/node_modules/.vite/deps/icons-Bg-HL-jN.js",
+          "request": 13576.200000047684,
+          "start": 13390.799999952316
+        },
+        {
+          "decoded": 277372,
+          "encoded": 277372,
+          "end": 14752.299999952316,
+          "firstByte": 13695.599999904633,
+          "ms": 1060,
+          "name": "/node_modules/.vite/deps/astro_n_axobject-query.js",
+          "request": 13692.799999952316,
+          "start": 13692.299999952316
+        }
+      ],
+      "kind": "echarts-dev-page",
+      "ready": 14557.700000047684,
+      "run": 0
+    },
+    {
+      "js": [
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 464.2999999523163,
+          "firstByte": 200.70000004768372,
+          "ms": 265.09999990463257,
+          "name": "/@id/astro/runtime/client/dev-toolbar/entrypoint.js",
+          "request": 199.59999990463257,
+          "start": 199.20000004768372
+        },
+        {
+          "decoded": 2577977,
+          "encoded": 2577977,
+          "end": 10736.5,
+          "firstByte": 1537.0999999046326,
+          "ms": 9291.299999952316,
+          "name": "/node_modules/.vite/deps/echarts_charts.js",
+          "request": 1530.7000000476837,
+          "start": 1445.2000000476837
+        },
+        {
+          "decoded": 41536,
+          "encoded": 41536,
+          "end": 1969.2999999523163,
+          "firstByte": 1596.3999998569489,
+          "ms": 524,
+          "name": "/node_modules/.vite/deps/echarts_core.js",
+          "request": 1596.0999999046326,
+          "start": 1445.2999999523163
+        },
+        {
+          "decoded": 286067,
+          "encoded": 286067,
+          "end": 3069.399999856949,
+          "firstByte": 1604,
+          "ms": 1624.0999999046326,
+          "name": "/node_modules/.vite/deps/echarts_renderers.js",
+          "request": 1603.3999998569489,
+          "start": 1445.2999999523163
+        },
+        {
+          "decoded": 2452068,
+          "encoded": 2452068,
+          "end": 10538.299999952316,
+          "firstByte": 1589.8999998569489,
+          "ms": 9093,
+          "name": "/node_modules/.vite/deps/echarts_components.js",
+          "request": 1584.0999999046326,
+          "start": 1445.2999999523163
+        },
+        {
+          "decoded": 2855,
+          "encoded": 2855,
+          "end": 2413.2000000476837,
+          "firstByte": 2227.5,
+          "ms": 441.90000009536743,
+          "name": "/node_modules/.vite/deps/rolldown-runtime-EAsCxrDo.js",
+          "request": 2226.7999999523163,
+          "start": 1971.2999999523163
+        },
+        {
+          "decoded": 1178401,
+          "encoded": 1178401,
+          "end": 7321.299999952316,
+          "firstByte": 2365.2000000476837,
+          "ms": 5349.900000095367,
+          "name": "/node_modules/.vite/deps/graphic-DmtbJ6dX.js",
+          "request": 2360.2000000476837,
+          "start": 1971.3999998569489
+        },
+        {
+          "decoded": 35629,
+          "encoded": 35629,
+          "end": 2791,
+          "firstByte": 2416,
+          "ms": 819.5,
+          "name": "/node_modules/.vite/deps/createSeriesData-p3fmb-86.js",
+          "request": 2413.399999856949,
+          "start": 1971.5
+        },
+        {
+          "decoded": 2667332,
+          "encoded": 2667332,
+          "end": 11363,
+          "firstByte": 2415.5999999046326,
+          "ms": 9391.5,
+          "name": "/node_modules/.vite/deps/Axis-SZibq2Xv.js",
+          "request": 2409.399999856949,
+          "start": 1971.5
+        },
+        {
+          "decoded": 1489988,
+          "encoded": 1489988,
+          "end": 12519.799999952316,
+          "firstByte": 10563.700000047684,
+          "ms": 1959.2999999523163,
+          "name": "/node_modules/.vite/deps/thumbnailBridge-EEr7jZJ9.js",
+          "request": 10561.200000047684,
+          "start": 10560.5
+        },
+        {
+          "decoded": 54608,
+          "encoded": 54608,
+          "end": 12969.700000047684,
+          "firstByte": 12558.399999856949,
+          "ms": 412.5,
+          "name": "/node_modules/.vite/deps/astro-dvMiXcMx.js",
+          "request": 12557.799999952316,
+          "start": 12557.200000047684
+        },
+        {
+          "decoded": 15708,
+          "encoded": 15708,
+          "end": 12820.200000047684,
+          "firstByte": 12559.099999904633,
+          "ms": 262.90000009536743,
+          "name": "/node_modules/.vite/deps/xray-OfZ4OEkw.js",
+          "request": 12558.099999904633,
+          "start": 12557.299999952316
+        },
+        {
+          "decoded": 18062,
+          "encoded": 18062,
+          "end": 12836.5,
+          "firstByte": 12559.299999952316,
+          "ms": 279.2000000476837,
+          "name": "/node_modules/.vite/deps/settings-BYoebyKN.js",
+          "request": 12558.200000047684,
+          "start": 12557.299999952316
+        },
+        {
+          "decoded": 44738,
+          "encoded": 44738,
+          "end": 12945,
+          "firstByte": 12559.399999856949,
+          "ms": 387.7000000476837,
+          "name": "/node_modules/.vite/deps/toolbar-l9vmqRGS.js",
+          "request": 12558.200000047684,
+          "start": 12557.299999952316
+        },
+        {
+          "decoded": 163359,
+          "encoded": 163359,
+          "end": 13243.799999952316,
+          "firstByte": 12558.799999952316,
+          "ms": 686.5,
+          "name": "/node_modules/.vite/deps/audit-B1ZUaF_x.js",
+          "request": 12558,
+          "start": 12557.299999952316
+        },
+        {
+          "decoded": 85412,
+          "encoded": 85412,
+          "end": 13063.200000047684,
+          "firstByte": 12559.599999904633,
+          "ms": 505.80000019073486,
+          "name": "/node_modules/.vite/deps/ui-library-Cg9VDmqw.js",
+          "request": 12558.299999952316,
+          "start": 12557.399999856949
+        },
+        {
+          "decoded": 6441,
+          "encoded": 6441,
+          "end": 13131.200000047684,
+          "firstByte": 12946.5,
+          "ms": 310,
+          "name": "/node_modules/.vite/deps/astro_n_html-escaper.js",
+          "request": 12945.200000047684,
+          "start": 12821.200000047684
+        },
+        {
+          "decoded": 5072,
+          "encoded": 5072,
+          "end": 13152,
+          "firstByte": 12970.399999856949,
+          "ms": 330.7000000476837,
+          "name": "/node_modules/.vite/deps/window-KinjsJsb.js",
+          "request": 12969.799999952316,
+          "start": 12821.299999952316
+        },
+        {
+          "decoded": 7611,
+          "encoded": 7611,
+          "end": 13209.899999856949,
+          "firstByte": 13020.700000047684,
+          "ms": 388.59999990463257,
+          "name": "/node_modules/.vite/deps/highlight-Cq3WvrsF.js",
+          "request": 13019.399999856949,
+          "start": 12821.299999952316
+        },
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 13347.5,
+          "firstByte": 13064.5,
+          "ms": 510.2000000476837,
+          "name": "/node_modules/.vite/deps/astro_runtime_client_dev-toolbar_entrypoint__js.js",
+          "request": 13063.399999856949,
+          "start": 12837.299999952316
+        },
+        {
+          "decoded": 117678,
+          "encoded": 117678,
+          "end": 13683.700000047684,
+          "firstByte": 13132.5,
+          "ms": 737.7000000476837,
+          "name": "/node_modules/.vite/deps/icons-Bg-HL-jN.js",
+          "request": 13131.5,
+          "start": 12946
+        },
+        {
+          "decoded": 277372,
+          "encoded": 277372,
+          "end": 14305.700000047684,
+          "firstByte": 13248,
+          "ms": 1060.2000000476837,
+          "name": "/node_modules/.vite/deps/astro_n_axobject-query.js",
+          "request": 13246,
+          "start": 13245.5
+        }
+      ],
+      "kind": "echarts-dev-page",
+      "ready": 14111,
+      "run": 1
+    },
+    {
+      "js": [
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 458.2000000476837,
+          "firstByte": 193.20000004768372,
+          "ms": 266.5,
+          "name": "/@id/astro/runtime/client/dev-toolbar/entrypoint.js",
+          "request": 192,
+          "start": 191.70000004768372
+        },
+        {
+          "decoded": 2577977,
+          "encoded": 2577977,
+          "end": 10736.099999904633,
+          "firstByte": 1531.8999998569489,
+          "ms": 9295.299999952316,
+          "name": "/node_modules/.vite/deps/echarts_charts.js",
+          "request": 1523.5,
+          "start": 1440.7999999523163
+        },
+        {
+          "decoded": 41536,
+          "encoded": 41536,
+          "end": 1968.8999998569489,
+          "firstByte": 1595.0999999046326,
+          "ms": 528,
+          "name": "/node_modules/.vite/deps/echarts_core.js",
+          "request": 1594.5999999046326,
+          "start": 1440.8999998569489
+        },
+        {
+          "decoded": 2452068,
+          "encoded": 2452068,
+          "end": 10539.5,
+          "firstByte": 1592,
+          "ms": 9098.600000143051,
+          "name": "/node_modules/.vite/deps/echarts_components.js",
+          "request": 1582.7000000476837,
+          "start": 1440.8999998569489
+        },
+        {
+          "decoded": 286067,
+          "encoded": 286067,
+          "end": 3069.399999856949,
+          "firstByte": 1599.5999999046326,
+          "ms": 1628.3999998569489,
+          "name": "/node_modules/.vite/deps/echarts_renderers.js",
+          "request": 1598.0999999046326,
+          "start": 1441
+        },
+        {
+          "decoded": 2855,
+          "encoded": 2855,
+          "end": 2410.2999999523163,
+          "firstByte": 2226.7999999523163,
+          "ms": 440,
+          "name": "/node_modules/.vite/deps/rolldown-runtime-EAsCxrDo.js",
+          "request": 2225.0999999046326,
+          "start": 1970.2999999523163
+        },
+        {
+          "decoded": 1178401,
+          "encoded": 1178401,
+          "end": 7321.099999904633,
+          "firstByte": 2360.0999999046326,
+          "ms": 5350.700000047684,
+          "name": "/node_modules/.vite/deps/graphic-DmtbJ6dX.js",
+          "request": 2355.5999999046326,
+          "start": 1970.3999998569489
+        },
+        {
+          "decoded": 35629,
+          "encoded": 35629,
+          "end": 2787.7999999523163,
+          "firstByte": 2410.7999999523163,
+          "ms": 817.2999999523163,
+          "name": "/node_modules/.vite/deps/createSeriesData-p3fmb-86.js",
+          "request": 2410.399999856949,
+          "start": 1970.5
+        },
+        {
+          "decoded": 2667332,
+          "encoded": 2667332,
+          "end": 11362.799999952316,
+          "firstByte": 2407.5,
+          "ms": 9392.299999952316,
+          "name": "/node_modules/.vite/deps/Axis-SZibq2Xv.js",
+          "request": 2400.0999999046326,
+          "start": 1970.5
+        },
+        {
+          "decoded": 1489988,
+          "encoded": 1489988,
+          "end": 12518.099999904633,
+          "firstByte": 10560.399999856949,
+          "ms": 1961.5,
+          "name": "/node_modules/.vite/deps/thumbnailBridge-EEr7jZJ9.js",
+          "request": 10557.399999856949,
+          "start": 10556.599999904633
+        },
+        {
+          "decoded": 54608,
+          "encoded": 54608,
+          "end": 12969.700000047684,
+          "firstByte": 12556.599999904633,
+          "ms": 414.30000019073486,
+          "name": "/node_modules/.vite/deps/astro-dvMiXcMx.js",
+          "request": 12556,
+          "start": 12555.399999856949
+        },
+        {
+          "decoded": 163359,
+          "encoded": 163359,
+          "end": 13243.700000047684,
+          "firstByte": 12557,
+          "ms": 688.3000001907349,
+          "name": "/node_modules/.vite/deps/audit-B1ZUaF_x.js",
+          "request": 12556.200000047684,
+          "start": 12555.399999856949
+        },
+        {
+          "decoded": 15708,
+          "encoded": 15708,
+          "end": 12819.899999856949,
+          "firstByte": 12557.099999904633,
+          "ms": 264.39999985694885,
+          "name": "/node_modules/.vite/deps/xray-OfZ4OEkw.js",
+          "request": 12556.399999856949,
+          "start": 12555.5
+        },
+        {
+          "decoded": 18062,
+          "encoded": 18062,
+          "end": 12836.399999856949,
+          "firstByte": 12557.200000047684,
+          "ms": 280.89999985694885,
+          "name": "/node_modules/.vite/deps/settings-BYoebyKN.js",
+          "request": 12556.5,
+          "start": 12555.5
+        },
+        {
+          "decoded": 44738,
+          "encoded": 44738,
+          "end": 12944.5,
+          "firstByte": 12557.299999952316,
+          "ms": 389,
+          "name": "/node_modules/.vite/deps/toolbar-l9vmqRGS.js",
+          "request": 12556.5,
+          "start": 12555.5
+        },
+        {
+          "decoded": 85412,
+          "encoded": 85412,
+          "end": 13062.899999856949,
+          "firstByte": 12557.5,
+          "ms": 507.2999999523163,
+          "name": "/node_modules/.vite/deps/ui-library-Cg9VDmqw.js",
+          "request": 12556.599999904633,
+          "start": 12555.599999904633
+        },
+        {
+          "decoded": 6441,
+          "encoded": 6441,
+          "end": 13131.099999904633,
+          "firstByte": 12945.200000047684,
+          "ms": 310.39999985694885,
+          "name": "/node_modules/.vite/deps/astro_n_html-escaper.js",
+          "request": 12944.700000047684,
+          "start": 12820.700000047684
+        },
+        {
+          "decoded": 5072,
+          "encoded": 5072,
+          "end": 13151.799999952316,
+          "firstByte": 12970.299999952316,
+          "ms": 331.09999990463257,
+          "name": "/node_modules/.vite/deps/window-KinjsJsb.js",
+          "request": 12969.899999856949,
+          "start": 12820.700000047684
+        },
+        {
+          "decoded": 7611,
+          "encoded": 7611,
+          "end": 13209.700000047684,
+          "firstByte": 13019.299999952316,
+          "ms": 388.90000009536743,
+          "name": "/node_modules/.vite/deps/highlight-Cq3WvrsF.js",
+          "request": 13018.799999952316,
+          "start": 12820.799999952316
+        },
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 13347.399999856949,
+          "firstByte": 13064.099999904633,
+          "ms": 510.5,
+          "name": "/node_modules/.vite/deps/astro_runtime_client_dev-toolbar_entrypoint__js.js",
+          "request": 13063.200000047684,
+          "start": 12836.899999856949
+        },
+        {
+          "decoded": 117678,
+          "encoded": 117678,
+          "end": 13680.5,
+          "firstByte": 13132.399999856949,
+          "ms": 735.1000001430511,
+          "name": "/node_modules/.vite/deps/icons-Bg-HL-jN.js",
+          "request": 13131.399999856949,
+          "start": 12945.399999856949
+        },
+        {
+          "decoded": 277372,
+          "encoded": 277372,
+          "end": 14305.599999904633,
+          "firstByte": 13249,
+          "ms": 1059.5999999046326,
+          "name": "/node_modules/.vite/deps/astro_n_axobject-query.js",
+          "request": 13246.599999904633,
+          "start": 13246
+        }
+      ],
+      "kind": "echarts-dev-page",
+      "ready": 14108.099999904633,
+      "run": 2
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+import { defineChart } from "@tanstack/charts";
+import { mountChartRenderer } from "@tanstack/charts/renderer";
+import { createSvgChartRenderer } from "@tanstack/charts/svg/renderer";
+import { barY } from "@tanstack/charts/bar";
+import { dot } from "@tanstack/charts/dot";
+import { areaY } from "@tanstack/charts/area";
+import { lineY } from "@tanstack/charts/line";
+import { ruleY } from "@tanstack/charts/rule";
+import { decorative } from "@tanstack/charts/mark/decorative";
+import { scaleLinear } from "@tanstack/charts/scales/linear";
+import { scaleOrdinal } from "@tanstack/charts/scales/ordinal";
+import { scaleBand } from "@tanstack/charts/scales/band";
+import { scalePoint } from "@tanstack/charts/scales/point";
+import { tooltip } from "@tanstack/charts/tooltip";
+import { d3Curve } from "@tanstack/charts/d3/shape";
+import { curveMonotoneX } from "d3-shape";
+import type FixtureRows from "./fixtures.json";
+const payload = document.getElementById("fixtures")?.textContent;
+if (!payload) throw new Error("Missing fixtures");
+const rows: typeof FixtureRows = JSON.parse(payload);
+
+const theme = {
+  background: "#020617",
+  foreground: "#e2e8f0",
+  muted: "#94a3b8",
+  grid: "#334155",
+  palette: ["#15803d", "#b91c1c"],
+};
+const host = (id: string) => {
+  const el = document.getElementById(id);
+  if (!el) throw new Error(id);
+  return el;
+};
+const band = () => scaleBand<string>().padding(0.1);
+const records: Record<
+  string,
+  { focus: unknown; original: boolean; points?: number }
+> = {};
+Object.assign(window, { feasibility: records });
+const image = (name: string, src: string) => {
+  const el = document.createElement("img");
+  el.src = src;
+  el.alt = `Logo for ${name}`;
+  el.className = "logo";
+  return el;
+};
+const heading = (text: string) => {
+  const el = document.createElement("strong");
+  el.textContent = text;
+  return el;
+};
+const seasons = rows["surprises-per-season"].data;
+const season = defineChart({
+  theme,
+  marks: [barY(seasons, { x: "seasonId", y: "numSurprises", fill: "#15803d" })],
+  scales: { x: { scale: band }, y: { scale: scaleLinear, grid: true } },
+  focus: "nearest-x",
+  tooltip: {
+    use: tooltip,
+    format: (p) =>
+      `${p.datum.seasonRange}: ${p.datum.numSurprises} surprise teams`,
+  },
+});
+mountChartRenderer(host("season"), {
+  definition: season,
+  renderer: createSvgChartRenderer<(typeof seasons)[number], string, number>(),
+  height: 320,
+  ariaLabel: "Surprise teams by season",
+  onFocusChange: (p) => {
+    records.season = {
+      focus: p?.datum,
+      original: !p || seasons.includes(p.datum),
+    };
+  },
+  onTooltipBodyChange: (target) => {
+    if (!target) return;
+    const point = target.points[0];
+    if (!point) return;
+    const body = document.createElement("div");
+    body.className = "custom-tip";
+    body.append(heading(point.datum.seasonRange));
+    for (const team of point.datum.surpriseTeams) {
+      const row = document.createElement("div");
+      row.append(
+        image(team.name, team.logoSrc),
+        document.createTextNode(team.name),
+      );
+      body.append(row);
+    }
+    target.element.replaceChildren(body);
+  },
+});
+const teams = rows["surprises-by-team"].data.toSorted((a, b) =>
+  a.teamId.localeCompare(b.teamId),
+);
+const team = defineChart({
+  theme,
+  marks: [
+    barY(teams, { x: "teamId", y: "numSurprised", fill: "#15803d" }),
+    barY(teams, { x: "teamId", y: (d) => -d.numEliminated, fill: "#b91c1c" }),
+    ruleY([0], { stroke: "#facc15", strokeWidth: 4 }),
+  ],
+  scales: { x: { scale: band }, y: { scale: scaleLinear, grid: true } },
+  focus: "group-x",
+  tooltip: {
+    use: tooltip,
+    formatGroup: (p) =>
+      `${p[0]?.datum.name}: ${p[0]?.datum.numSurprised} surprised; ${p[0]?.datum.numEliminated} eliminated`,
+  },
+});
+mountChartRenderer(host("team"), {
+  definition: team,
+  renderer: createSvgChartRenderer<(typeof teams)[number], string, number>(),
+  height: 320,
+  ariaLabel: "Team surprise results",
+  onFocusChange: (p) => {
+    records.team = { focus: p?.datum, original: !p || teams.includes(p.datum) };
+  },
+});
+const points = rows["team-season-scatter"].data;
+const scatter = defineChart({
+  theme,
+  color: {
+    scale: () =>
+      scaleOrdinal(["surprised", "eliminated"], ["#15803d", "#b91c1c"]),
+  },
+  marks: [
+    dot(points, {
+      x: "overUnder",
+      y: "pace",
+      r: 4,
+      color: (d) => (d.isSurpriseTeam ? "surprised" : "eliminated"),
+    }),
+  ],
+  scales: {
+    x: { scale: scaleLinear, grid: true },
+    y: { scale: scaleLinear, grid: true },
+  },
+  tooltip: {
+    use: tooltip,
+    format: (p) => `${p.datum.teamName}: ${p.datum.overUnder}, ${p.datum.pace}`,
+  },
+});
+mountChartRenderer(host("scatter"), {
+  definition: scatter,
+  renderer: createSvgChartRenderer<(typeof points)[number], number, number>(),
+  height: 320,
+  ariaLabel: "Over under and pace by team season",
+  onFocusChange: (p) => {
+    records.scatter = {
+      focus: p?.datum,
+      original: !p || points.includes(p.datum),
+    };
+  },
+});
+const paceRows = rows["team-season-pace"];
+const data = paceRows.data;
+const target = paceRows.winsToSurprise;
+const max = Math.max(target, ...data.map((d) => d.projectedWins));
+const min = Math.min(target, ...data.map((d) => d.projectedWins));
+const stop = (max - target) / (max - min);
+const curve = d3Curve(curveMonotoneX);
+const pace = defineChart({
+  theme,
+  gradients: [
+    {
+      id: "threshold",
+      x1: 0,
+      x2: 0,
+      y1: 0,
+      y2: 1,
+      stops: [
+        { offset: 0, color: "#15803d" },
+        { offset: stop, color: "#15803d" },
+        { offset: stop, color: "#b91c1c" },
+        { offset: 1, color: "#b91c1c" },
+      ],
+    },
+  ],
+  marks: [
+    decorative(
+      areaY(data, {
+        x: "date",
+        y1: target,
+        y2: "projectedWins",
+        fill: "url(#threshold)",
+        fillOpacity: 0.8,
+        curve,
+      }),
+    ),
+    lineY(data, {
+      x: "date",
+      y: "projectedWins",
+      stroke: "#84cc16",
+      strokeWidth: 1.5,
+      curve,
+    }),
+    ruleY([target], { stroke: "#84cc16", strokeWidth: 4 }),
+  ],
+  scales: {
+    x: { scale: scalePoint<string> },
+    y: {
+      scale: () => scaleLinear().domain([0, paceRows.surpriseRules.numGames]),
+    },
+  },
+  focus: "nearest-x",
+  tooltip: {
+    use: tooltip,
+    format: (p) =>
+      `${p.datum.date}: ${p.datum.recordFmt}; projected wins ${p.datum.projectedWins}; pace ${p.datum.pace}`,
+  },
+});
+mountChartRenderer(host("pace"), {
+  definition: pace,
+  renderer: createSvgChartRenderer<(typeof data)[number], string, number>(),
+  height: 300,
+  ariaLabel: "Projected wins",
+  ariaDescription: `Surprise threshold: ${target} wins`,
+  onFocusChange: (p) => {
+    records.pace = { focus: p?.datum, original: !p || data.includes(p.datum) };
+  },
+  onRender: (context) => {
+    records.pace = {
+      focus: null,
+      original: true,
+      points: context.scene.points.length,
+    };
+  },
+});

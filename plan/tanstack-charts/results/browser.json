@@ -1,0 +1,163 @@
+{
+  "errors": [],
+  "logos": [
+    {
+      "alt": "Logo for Charlotte Hornets",
+      "loaded": true
+    },
+    {
+      "alt": "Logo for Phoenix Suns",
+      "loaded": true
+    }
+  ],
+  "mobileOverflow": false,
+  "pace": {
+    "ariaLabel": "Projected wins",
+    "focus": {
+      "date": "2025-10-25",
+      "pace": 3,
+      "projectedWins": 41,
+      "recordFmt": "1 - 1"
+    },
+    "original": true,
+    "tabindex": "0"
+  },
+  "scatter": {
+    "ariaLabel": "Over under and pace by team season",
+    "focus": {
+      "isSurpriseTeam": false,
+      "logoSrc": "/_astro/raptor.Dp3V9C1G.svg",
+      "overUnder": 16.5,
+      "pace": -2,
+      "recordFmt": "23 - 43",
+      "seasonRange": "'11-12",
+      "teamName": "Toronto Raptors"
+    },
+    "original": true,
+    "tabindex": "0"
+  },
+  "season": {
+    "ariaLabel": "Surprise teams by season",
+    "focus": {
+      "numSurprises": 4,
+      "seasonId": "2024",
+      "seasonRange": "'24-25",
+      "surpriseTeams": [
+        {
+          "logoSrc": "/_astro/bull.7NyMbv27.svg",
+          "name": "Chicago Bulls",
+          "teamId": "CHI"
+        },
+        {
+          "logoSrc": "/_astro/piston.3sXXo7gm.svg",
+          "name": "Detroit Pistons",
+          "teamId": "DET"
+        },
+        {
+          "logoSrc": "/_astro/clipper.Ch8_v6Vc.svg",
+          "name": "Los Angeles Clippers",
+          "teamId": "LAC"
+        },
+        {
+          "logoSrc": "/_astro/hiking-boot.RAo7VDyl.svg",
+          "name": "Portland Trail Blazers",
+          "teamId": "POR"
+        }
+      ]
+    },
+    "original": true,
+    "tabindex": "0"
+  },
+  "team": {
+    "ariaLabel": "Team surprise results",
+    "focus": {
+      "history": [
+        {
+          "duration": [1977, 2011],
+          "logoSrc": "/_astro/nets.DFV3hAn6.svg",
+          "name": "New Jersey Nets",
+          "teamId": "NJN"
+        },
+        {
+          "duration": [2012],
+          "logoSrc": "/_astro/dragon.XLCa8u4f.svg",
+          "name": "Brooklyn Nets",
+          "teamId": "BKN"
+        }
+      ],
+      "name": "Brooklyn Nets",
+      "numEliminated": 10,
+      "numSurprised": 3,
+      "teamId": "BKN"
+    },
+    "original": true,
+    "tabindex": "0"
+  },
+  "teamOrder": [
+    "ATL",
+    "BKN",
+    "BOS",
+    "CHA",
+    "CHI",
+    "CLE",
+    "DAL",
+    "DEN",
+    "DET",
+    "GSW",
+    "HOU",
+    "IND",
+    "LAC",
+    "LAL",
+    "MEM",
+    "MIA",
+    "MIL",
+    "MIN",
+    "NOP",
+    "NYK",
+    "OKC",
+    "ORL",
+    "PHI",
+    "PHX",
+    "POR",
+    "SAC",
+    "SAS",
+    "TOR",
+    "UTA",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS",
+    "WAS"
+  ]
+}

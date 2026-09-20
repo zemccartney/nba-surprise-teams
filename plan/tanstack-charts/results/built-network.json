@@ -1,0 +1,217 @@
+{
+  "browser": "153.0.8010.48",
+  "network": {
+    "connectionType": "cellular4g",
+    "downloadThroughput": 1012500,
+    "latency": 165,
+    "offline": false,
+    "uploadThroughput": 168750
+  },
+  "note": "Diagnostic only: full existing Stats page versus simplified four-chart prototype; fonts/layout/animation are not matched.",
+  "results": [
+    {
+      "js": [
+        {
+          "decoded": 2076,
+          "encoded": 1067,
+          "ms": 346.5,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.BA4OHDng.js"
+        },
+        {
+          "decoded": 2260,
+          "encoded": 1098,
+          "ms": 348.19999980926514,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bk3kksh4.js"
+        },
+        {
+          "decoded": 2109,
+          "encoded": 1100,
+          "ms": 348.5,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.Bymi3nko.js"
+        },
+        {
+          "decoded": 215,
+          "encoded": 177,
+          "ms": 350.40000009536743,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js"
+        },
+        {
+          "decoded": 92,
+          "encoded": 94,
+          "ms": 177,
+          "name": "/_astro/logo-alt.2xdYLRSi.js"
+        },
+        {
+          "decoded": 594874,
+          "encoded": 198698,
+          "ms": 576.9000000953674,
+          "name": "/_astro/echarts.Dx6JCQYd.js"
+        },
+        {
+          "decoded": 235,
+          "encoded": 184,
+          "ms": 183.90000009536743,
+          "name": "/_astro/utils.OPGnb1rf.js"
+        },
+        {
+          "decoded": 751,
+          "encoded": 424,
+          "ms": 184.70000004768372,
+          "name": "/_astro/responsive-order.DO_Rai0h.js"
+        }
+      ],
+      "kind": "echarts-built-page",
+      "ready": 2683.2000000476837,
+      "run": 0
+    },
+    {
+      "js": [
+        {
+          "decoded": 133438,
+          "encoded": 45066,
+          "ms": 220.80000019073486,
+          "name": "/assets/index-BFXInxFe.js"
+        }
+      ],
+      "kind": "tanstack-prototype",
+      "ready": 430.60000014305115,
+      "run": 0
+    },
+    {
+      "js": [
+        {
+          "decoded": 2076,
+          "encoded": 1067,
+          "ms": 180.5,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.BA4OHDng.js"
+        },
+        {
+          "decoded": 2260,
+          "encoded": 1098,
+          "ms": 354.2999999523163,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bk3kksh4.js"
+        },
+        {
+          "decoded": 215,
+          "encoded": 177,
+          "ms": 352.2000000476837,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js"
+        },
+        {
+          "decoded": 2109,
+          "encoded": 1100,
+          "ms": 353.2999999523163,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.Bymi3nko.js"
+        },
+        {
+          "decoded": 92,
+          "encoded": 94,
+          "ms": 186.29999995231628,
+          "name": "/_astro/logo-alt.2xdYLRSi.js"
+        },
+        {
+          "decoded": 594874,
+          "encoded": 198698,
+          "ms": 418.7999999523163,
+          "name": "/_astro/echarts.Dx6JCQYd.js"
+        },
+        {
+          "decoded": 751,
+          "encoded": 424,
+          "ms": 184.90000009536743,
+          "name": "/_astro/responsive-order.DO_Rai0h.js"
+        },
+        {
+          "decoded": 235,
+          "encoded": 184,
+          "ms": 336.09999990463257,
+          "name": "/_astro/utils.OPGnb1rf.js"
+        }
+      ],
+      "kind": "echarts-built-page",
+      "ready": 2350.7000000476837,
+      "run": 1
+    },
+    {
+      "js": [
+        {
+          "decoded": 133438,
+          "encoded": 45066,
+          "ms": 221.09999990463257,
+          "name": "/assets/index-BFXInxFe.js"
+        }
+      ],
+      "kind": "tanstack-prototype",
+      "ready": 432.5,
+      "run": 1
+    },
+    {
+      "js": [
+        {
+          "decoded": 2076,
+          "encoded": 1067,
+          "ms": 176.20000004768372,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.BA4OHDng.js"
+        },
+        {
+          "decoded": 2260,
+          "encoded": 1098,
+          "ms": 339,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bk3kksh4.js"
+        },
+        {
+          "decoded": 2109,
+          "encoded": 1100,
+          "ms": 337.7000000476837,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.Bymi3nko.js"
+        },
+        {
+          "decoded": 215,
+          "encoded": 177,
+          "ms": 340.59999990463257,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js"
+        },
+        {
+          "decoded": 594874,
+          "encoded": 198698,
+          "ms": 422.7999999523163,
+          "name": "/_astro/echarts.Dx6JCQYd.js"
+        },
+        {
+          "decoded": 92,
+          "encoded": 94,
+          "ms": 184.5,
+          "name": "/_astro/logo-alt.2xdYLRSi.js"
+        },
+        {
+          "decoded": 235,
+          "encoded": 184,
+          "ms": 193.59999990463257,
+          "name": "/_astro/utils.OPGnb1rf.js"
+        },
+        {
+          "decoded": 751,
+          "encoded": 424,
+          "ms": 333,
+          "name": "/_astro/responsive-order.DO_Rai0h.js"
+        }
+      ],
+      "kind": "echarts-built-page",
+      "ready": 2347.899999856949,
+      "run": 2
+    },
+    {
+      "js": [
+        {
+          "decoded": 133438,
+          "encoded": 45066,
+          "ms": 220.79999995231628,
+          "name": "/assets/index-BFXInxFe.js"
+        }
+      ],
+      "kind": "tanstack-prototype",
+      "ready": 431.7000000476837,
+      "run": 2
+    }
+  ]
+}

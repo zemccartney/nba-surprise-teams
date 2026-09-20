@@ -1,0 +1,19 @@
+{
+  "name": "nbastt-tanstack-feasibility",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@tanstack/charts": "0.18.0",
+    "d3-shape": "3.2.0"
+  },
+  "devDependencies": {
+    "@types/d3-shape": "3.1.8",
+    "typescript": "5.9.3",
+    "vite": "8.2.2"
+  },
+  "scripts": {
+    "audit": "pnpm audit",
+    "build": "vite build",
+    "postinstall": "pnpm audit"
+  }
+}
