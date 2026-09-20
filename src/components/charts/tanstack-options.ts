@@ -6,6 +6,7 @@ import { barY } from "@tanstack/charts/bar";
 import { crosshair } from "@tanstack/charts/crosshair";
 import { d3Curve } from "@tanstack/charts/d3/shape";
 import { dot } from "@tanstack/charts/dot";
+import { focusGuideX } from "@tanstack/charts/focus/guide";
 import { lineY } from "@tanstack/charts/line";
 import { decorative } from "@tanstack/charts/mark/decorative";
 import { ruleY } from "@tanstack/charts/rule";
@@ -395,6 +396,8 @@ export const paceChart = ({
   const top = Math.max(winsToSurprise, ...data.map((r) => r.projectedWins));
   const bottom = Math.min(winsToSurprise, ...data.map((r) => r.projectedWins));
   const stop = top === bottom ? 0 : (top - winsToSurprise) / (top - bottom);
+  const pointColor = (row: Game) =>
+    row.projectedWins < winsToSurprise ? t.brightRed : t.lime;
   const lineTop = Math.max(...data.map((r) => r.projectedWins));
   const lineBottom = Math.min(...data.map((r) => r.projectedWins));
   const isCrossing = lineBottom < winsToSurprise && lineTop > winsToSurprise;
@@ -468,6 +471,19 @@ export const paceChart = ({
             x: "date",
             y: "projectedWins",
           }),
+          focusGuideX(data, {
+            id: "pace-focus",
+            marker: {
+              fill: pointColor,
+              radius: 4,
+              stroke: pointColor,
+              strokeWidth: 1,
+            },
+            x: "date",
+            xRule: false,
+            y: "projectedWins",
+            yRule: false,
+          }),
           ruleY([winsToSurprise], {
             stroke: t.lime,
             strokeOpacity: 1,
@@ -515,15 +531,9 @@ export const paceChart = ({
             scale: scaleLinear().domain([0, surpriseRules.numGames]),
           },
         },
-        theme: {
-          ...chartTheme(t),
-          focusRing: {
-            fill: t.lime,
-            radius: 4,
-            stroke: t.lime,
-            strokeWidth: 1,
-          },
-        },
+        // The native focus guide supplies the data-colored marker instead of
+        // the theme's single-color ring, for both pointer and keyboard focus.
+        theme: chartTheme(t),
       }),
       focus: "nearest-x",
       maxFocusDistance: Infinity,

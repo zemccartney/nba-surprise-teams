@@ -220,13 +220,51 @@ try {
         await page.keyboard.press("Home");
         await page.waitForTimeout(50);
         const first = await host.locator(".tracker-tooltip").textContent();
+        if (kind === "team-season-pace") {
+          const stops = svg.locator("#pace-line-threshold stop");
+          const green = await stops.first().getAttribute("stop-color");
+          const red = await stops.last().getAttribute("stop-color");
+          const seen = new Set();
+          const samples = [];
+          const checkMarker = async () => {
+            const text = await host.locator(".tracker-tooltip").textContent();
+            const wins = Number(text.match(/Projected Wins:([\d.]+)/)?.[1]);
+            assert.ok(Number.isFinite(wins));
+            const expected = wins < 38 ? red : green;
+            const marker = svg.locator(".ts-chart__focus-guide-marker:visible");
+            assert.equal(await marker.count(), 1);
+            assert.equal(await marker.getAttribute("fill"), expected);
+            assert.equal(await marker.getAttribute("stroke"), expected);
+            seen.add(expected);
+            return marker.boundingBox();
+          };
+          for (let i = 0; i < 5; i++) {
+            samples.push(await checkMarker());
+            await page.keyboard.press("ArrowRight");
+          }
+          assert.equal(seen.size, 2);
+          await svg.blur();
+          for (const sample of samples) {
+            assert.ok(sample);
+            await page.mouse.move(0, 0);
+            await page.mouse.move(
+              sample.x + sample.width / 2,
+              sample.y + sample.height / 2,
+            );
+            await page.waitForTimeout(30);
+            await checkMarker();
+          }
+          await page.mouse.move(0, 0);
+          await svg.focus();
+          await page.keyboard.press("Home");
+        }
         const point =
           kind === "team-season-scatter" || kind === "team-season-pace"
             ? await svg
                 .locator(
                   kind === "team-season-scatter"
                     ? 'circle[r="6.3"]'
-                    : 'circle[visibility="visible"]',
+                    : ".ts-chart__focus-guide-marker:visible",
                 )
                 .first()
                 .boundingBox()

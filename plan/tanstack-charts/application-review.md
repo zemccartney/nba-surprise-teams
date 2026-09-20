@@ -88,7 +88,10 @@ comparison implementation.
   use solid colors. No games or interaction points are split or duplicated.
   The red token uses the same +24.1 OKLCH lightness lift as green-700 to lime-500,
   lime's chroma and the red fill's hue, before conversion to sRGB. The horizontal
-  threshold and keyboard focus marker remain lime.
+  threshold remains lime. A native, datum-colored focus guide gives the active
+  dot matching fill and outline: red below the threshold, lime at or above it.
+  Pointer hover and keyboard navigation use the same marker; original game
+  points are not duplicated.
 - Pace dates use regular intervals: six at the 720px chart width, fewer on
   phones. Labels are centered, with no forced final-edge date overflowing the
   page. Every game remains in the plotted/interactive data.
@@ -103,8 +106,8 @@ comparison implementation.
 
 The initial integrated chart bundle was approximately **147 KB raw / 49 KB gzip**, versus
 **595 KB raw / 199 KB gzip** for the former shared ECharts bundle—about **75% less
-compressed chart JavaScript**. After the visual follow-ups it is **148,585 bytes
-raw / 49,427 bytes gzip**, retaining that reduction; startup timings have not
+compressed chart JavaScript**. After the visual follow-ups it is **152,918 bytes
+raw / 50,619 bytes gzip**, retaining that reduction; startup timings have not
 been re-benchmarked. Data remains in the existing HTML payloads.
 
 An initial integration measurement used Chrome 153, three cold browser contexts,

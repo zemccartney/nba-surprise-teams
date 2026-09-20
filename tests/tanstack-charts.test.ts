@@ -1,5 +1,6 @@
 import type { ChartValue } from "@tanstack/charts/types";
 
+import { resolveFocusPresentation } from "@tanstack/charts";
 import { createChartRuntime } from "@tanstack/charts/runtime";
 import { describe, expect, it, vi } from "vitest";
 
@@ -272,6 +273,41 @@ describe("application TanStack definitions", () => {
       );
       expect(markup).toContain(`stroke="${paint}"`);
       expect(markup).toContain('font-weight="700">38</text>');
+    },
+  );
+  it.each(["pointer", "keyboard"] as const)(
+    "matches the pace marker fill and outline to its datum for %s focus",
+    (source) => {
+      const data = [20, 38, 60].map((projectedWins, i) => ({
+        date: `game-${i}`,
+        pace: projectedWins - 38,
+        projectedWins,
+        recordFmt: "1 - 1",
+      }));
+      const chart = paceChart({
+        data,
+        surprisedEmojiSrc: "/emoji.svg",
+        surpriseRules: { numGames: 82, overUnderCutoff: 30, paceTarget: 10 },
+        winsToSurprise: 38,
+      });
+      const scene = render(chart);
+      expect(scene.points).toHaveLength(data.length);
+      for (const point of scene.points) {
+        const presentation = resolveFocusPresentation(scene, {
+          group: [point],
+          pinned: false,
+          primary: point,
+          source,
+        });
+        const markup = renderTrackerSvg(
+          { ...scene, nodes: [...presentation.under, ...presentation.over] },
+          { ariaLabel: chart.label },
+        );
+        const color = point.datum.projectedWins < 38 ? "#ff8073" : "#84cc16";
+        expect(markup).toContain(`fill="${color}"`);
+        expect(markup).toContain(`stroke="${color}"`);
+        expect(markup).toContain('r="4"');
+      }
     },
   );
   it("renders an empty pace season without inventing games or invalid gradients", () => {
