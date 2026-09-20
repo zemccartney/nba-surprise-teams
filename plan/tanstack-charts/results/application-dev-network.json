@@ -1,0 +1,1354 @@
+{
+  "browser": "153.0.8010.48",
+  "network": {
+    "connectionType": "cellular4g",
+    "downloadThroughput": 1012500,
+    "latency": 165,
+    "offline": false,
+    "uploadThroughput": 168750
+  },
+  "note": "Diagnostic only. First SVG plus two animation frames, not animation completion. Counts completed .js resource URLs; excludes .ts entries and HMR client URLs. Full site and simplified prototype differ in fonts/layout/animation. Never interpret as an exact-parity speedup.",
+  "results": [
+    {
+      "js": [
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 491,
+          "firstByte": 229.20000004768372,
+          "ms": 264.5,
+          "name": "/@id/astro/runtime/client/dev-toolbar/entrypoint.js",
+          "request": 226.79999995231628,
+          "start": 226.5
+        },
+        {
+          "decoded": 987,
+          "encoded": 987,
+          "end": 1613.7999999523163,
+          "firstByte": 1447.5,
+          "ms": 182.79999995231628,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_renderer.js",
+          "request": 1446.5,
+          "start": 1431
+        },
+        {
+          "decoded": 761,
+          "encoded": 761,
+          "end": 1685.0999999046326,
+          "firstByte": 1518.5,
+          "ms": 254,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_svg.js",
+          "request": 1517.7000000476837,
+          "start": 1431.0999999046326
+        },
+        {
+          "decoded": 1014,
+          "encoded": 1014,
+          "end": 1698.5999999046326,
+          "firstByte": 1531.5,
+          "ms": 267.5,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_svg_renderer.js",
+          "request": 1530.8999998569489,
+          "start": 1431.0999999046326
+        },
+        {
+          "decoded": 723013,
+          "encoded": 723013,
+          "end": 3876.7999999523163,
+          "firstByte": 1611.0999999046326,
+          "ms": 2358.2000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts.js",
+          "request": 1606.7999999523163,
+          "start": 1518.5999999046326
+        },
+        {
+          "decoded": 18475,
+          "encoded": 18475,
+          "end": 1835.8999998569489,
+          "firstByte": 1614.8999998569489,
+          "ms": 317.19999980926514,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_area.js",
+          "request": 1614,
+          "start": 1518.7000000476837
+        },
+        {
+          "decoded": 818,
+          "encoded": 818,
+          "end": 1854,
+          "firstByte": 1686.7999999523163,
+          "ms": 335.2000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_bar.js",
+          "request": 1685.2999999523163,
+          "start": 1518.7999999523163
+        },
+        {
+          "decoded": 948,
+          "encoded": 948,
+          "end": 1868.5999999046326,
+          "firstByte": 1700,
+          "ms": 349.7999999523163,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_crosshair.js",
+          "request": 1699.0999999046326,
+          "start": 1518.7999999523163
+        },
+        {
+          "decoded": 2409,
+          "encoded": 2409,
+          "end": 1930.5,
+          "firstByte": 1758.7999999523163,
+          "ms": 411.60000014305115,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_d3_shape.js",
+          "request": 1757.7999999523163,
+          "start": 1518.8999998569489
+        },
+        {
+          "decoded": 707,
+          "encoded": 707,
+          "end": 2004.7999999523163,
+          "firstByte": 1838.2999999523163,
+          "ms": 485.90000009536743,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_dot.js",
+          "request": 1836.0999999046326,
+          "start": 1518.8999998569489
+        },
+        {
+          "decoded": 18526,
+          "encoded": 18526,
+          "end": 2088.7999999523163,
+          "firstByte": 1855.8999998569489,
+          "ms": 569.7999999523163,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_line.js",
+          "request": 1854.2999999523163,
+          "start": 1519
+        },
+        {
+          "decoded": 16323,
+          "encoded": 16323,
+          "end": 2097.7000000476837,
+          "firstByte": 1870.2999999523163,
+          "ms": 578.7000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_mark_decorative.js",
+          "request": 1868.8999998569489,
+          "start": 1519
+        },
+        {
+          "decoded": 14307,
+          "encoded": 14307,
+          "end": 2126.0999999046326,
+          "firstByte": 1931.5,
+          "ms": 607.0999999046326,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_rule.js",
+          "request": 1930.7000000476837,
+          "start": 1519
+        },
+        {
+          "decoded": 994,
+          "encoded": 994,
+          "end": 2172.2000000476837,
+          "firstByte": 2005.7000000476837,
+          "ms": 653.1000001430511,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_band.js",
+          "request": 2004.8999998569489,
+          "start": 1519.0999999046326
+        },
+        {
+          "decoded": 18635,
+          "encoded": 18635,
+          "end": 2300.7999999523163,
+          "firstByte": 2088.2000000476837,
+          "ms": 781.7000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_linear.js",
+          "request": 2087.7000000476837,
+          "start": 1519.0999999046326
+        },
+        {
+          "decoded": 1000,
+          "encoded": 1000,
+          "end": 2268.0999999046326,
+          "firstByte": 2098.2999999523163,
+          "ms": 748.8999998569489,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_point.js",
+          "request": 2097.7999999523163,
+          "start": 1519.2000000476837
+        },
+        {
+          "decoded": 4977,
+          "encoded": 4977,
+          "end": 2272.7000000476837,
+          "firstByte": 2089.2999999523163,
+          "ms": 753.5,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_ordinal.js",
+          "request": 2089,
+          "start": 1519.2000000476837
+        },
+        {
+          "decoded": 96541,
+          "encoded": 96541,
+          "end": 2542.2999999523163,
+          "firstByte": 2126.7000000476837,
+          "ms": 1023,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_tooltip.js",
+          "request": 2126.2000000476837,
+          "start": 1519.2999999523163
+        },
+        {
+          "decoded": 13855,
+          "encoded": 13855,
+          "end": 2380.899999856949,
+          "firstByte": 2173.0999999046326,
+          "ms": 861.5,
+          "name": "/node_modules/.vite/deps/d3-shape.js",
+          "request": 2172.399999856949,
+          "start": 1519.3999998569489
+        },
+        {
+          "decoded": 382598,
+          "encoded": 382598,
+          "end": 3934.399999856949,
+          "firstByte": 2301.7000000476837,
+          "ms": 2319.899999856949,
+          "name": "/node_modules/.vite/deps/renderer-BrP6URiH.js",
+          "request": 2301,
+          "start": 1614.5
+        },
+        {
+          "decoded": 35012,
+          "encoded": 35012,
+          "end": 2668.0999999046326,
+          "firstByte": 2382.399999856949,
+          "ms": 982.0999999046326,
+          "name": "/node_modules/.vite/deps/svg-kS91FiE9.js",
+          "request": 2381.2000000476837,
+          "start": 1686
+        },
+        {
+          "decoded": 139519,
+          "encoded": 139519,
+          "end": 3320,
+          "firstByte": 2461,
+          "ms": 1620.4000000953674,
+          "name": "/node_modules/.vite/deps/svg-surface-gTuiZhmX.js",
+          "request": 2459.5,
+          "start": 1699.5999999046326
+        },
+        {
+          "decoded": 47526,
+          "encoded": 47526,
+          "end": 2859.2999999523163,
+          "firstByte": 2466.399999856949,
+          "ms": 1022.2000000476837,
+          "name": "/node_modules/.vite/deps/scales-qUiKrX4N.js",
+          "request": 2465.5999999046326,
+          "start": 1837.0999999046326
+        },
+        {
+          "decoded": 25248,
+          "encoded": 25248,
+          "end": 2840.0999999046326,
+          "firstByte": 2543.7999999523163,
+          "ms": 1002.7999999523163,
+          "name": "/node_modules/.vite/deps/stack-internal-94uOoHDb.js",
+          "request": 2542.7000000476837,
+          "start": 1837.2999999523163
+        },
+        {
+          "decoded": 101319,
+          "encoded": 101319,
+          "end": 3343.7000000476837,
+          "firstByte": 2669.899999856949,
+          "ms": 1488.6000001430511,
+          "name": "/node_modules/.vite/deps/bar-DEbUhsj_.js",
+          "request": 2668.5,
+          "start": 1855.0999999046326
+        },
+        {
+          "decoded": 49771,
+          "encoded": 49771,
+          "end": 3303.7999999523163,
+          "firstByte": 2841.899999856949,
+          "ms": 1434.2000000476837,
+          "name": "/node_modules/.vite/deps/crosshair-BFzkHlbs.js",
+          "request": 2840.5,
+          "start": 1869.5999999046326
+        },
+        {
+          "decoded": 218072,
+          "encoded": 218072,
+          "end": 3888.5999999046326,
+          "firstByte": 2862.7999999523163,
+          "ms": 1957.5,
+          "name": "/node_modules/.vite/deps/src-CA1b7PWG.js",
+          "request": 2859.5999999046326,
+          "start": 1931.0999999046326
+        },
+        {
+          "decoded": 26929,
+          "encoded": 26929,
+          "end": 3596.7000000476837,
+          "firstByte": 3305.2999999523163,
+          "ms": 1591.4000000953674,
+          "name": "/node_modules/.vite/deps/dot-DTAgTzdJ.js",
+          "request": 3304.0999999046326,
+          "start": 2005.2999999523163
+        },
+        {
+          "decoded": 11973,
+          "encoded": 11973,
+          "end": 3553.7000000476837,
+          "firstByte": 3321.7999999523163,
+          "ms": 1381.2000000476837,
+          "name": "/node_modules/.vite/deps/band-kernel-zNGqEglJ.js",
+          "request": 3320.399999856949,
+          "start": 2172.5
+        },
+        {
+          "decoded": 1977,
+          "encoded": 1977,
+          "end": 3525.7999999523163,
+          "firstByte": 3346.5,
+          "ms": 1252.7000000476837,
+          "name": "/node_modules/.vite/deps/intern-CPdqoLik.js",
+          "request": 3344.2000000476837,
+          "start": 2273.0999999046326
+        },
+        {
+          "decoded": 8809,
+          "encoded": 8809,
+          "end": 3802.5999999046326,
+          "firstByte": 3598.399999856949,
+          "ms": 1133.0999999046326,
+          "name": "/node_modules/.vite/deps/renderer-rect-Ca-NkIpL.js",
+          "request": 3597.2000000476837,
+          "start": 2669.5
+        },
+        {
+          "decoded": 26705,
+          "encoded": 26705,
+          "end": 3937.2999999523163,
+          "firstByte": 3702.7999999523163,
+          "ms": 632.4000000953674,
+          "name": "/node_modules/.vite/deps/guide-layout-BzCiheXP.js",
+          "request": 3702.0999999046326,
+          "start": 3304.899999856949
+        },
+        {
+          "decoded": 5332,
+          "encoded": 5332,
+          "end": 3906.2999999523163,
+          "firstByte": 3725.5,
+          "ms": 583.5999999046326,
+          "name": "/node_modules/.vite/deps/default-focus-internal-D_lwrCkz.js",
+          "request": 3724.5999999046326,
+          "start": 3322.7000000476837
+        },
+        {
+          "decoded": 54608,
+          "encoded": 54608,
+          "end": 4353.599999904633,
+          "firstByte": 3947.2999999523163,
+          "ms": 407.39999985694885,
+          "name": "/node_modules/.vite/deps/astro-dvMiXcMx.js",
+          "request": 3946.5999999046326,
+          "start": 3946.2000000476837
+        },
+        {
+          "decoded": 15708,
+          "encoded": 15708,
+          "end": 4205.5,
+          "firstByte": 3947.899999856949,
+          "ms": 259.2000000476837,
+          "name": "/node_modules/.vite/deps/xray-OfZ4OEkw.js",
+          "request": 3946.7999999523163,
+          "start": 3946.2999999523163
+        },
+        {
+          "decoded": 18062,
+          "encoded": 18062,
+          "end": 4221.700000047684,
+          "firstByte": 3948,
+          "ms": 275.40000009536743,
+          "name": "/node_modules/.vite/deps/settings-BYoebyKN.js",
+          "request": 3946.899999856949,
+          "start": 3946.2999999523163
+        },
+        {
+          "decoded": 44738,
+          "encoded": 44738,
+          "end": 4330,
+          "firstByte": 3948.2000000476837,
+          "ms": 383.7000000476837,
+          "name": "/node_modules/.vite/deps/toolbar-l9vmqRGS.js",
+          "request": 3947,
+          "start": 3946.2999999523163
+        },
+        {
+          "decoded": 163359,
+          "encoded": 163359,
+          "end": 4728.200000047684,
+          "firstByte": 3947.7000000476837,
+          "ms": 781.9000000953674,
+          "name": "/node_modules/.vite/deps/audit-B1ZUaF_x.js",
+          "request": 3946.7000000476837,
+          "start": 3946.2999999523163
+        },
+        {
+          "decoded": 85412,
+          "encoded": 85412,
+          "end": 4672.099999904633,
+          "firstByte": 4208.399999856949,
+          "ms": 725.7000000476837,
+          "name": "/node_modules/.vite/deps/ui-library-Cg9VDmqw.js",
+          "request": 4205.700000047684,
+          "start": 3946.399999856949
+        },
+        {
+          "decoded": 6441,
+          "encoded": 6441,
+          "end": 4415.799999952316,
+          "firstByte": 4223.099999904633,
+          "ms": 208.79999995231628,
+          "name": "/node_modules/.vite/deps/astro_n_html-escaper.js",
+          "request": 4221.899999856949,
+          "start": 4207
+        },
+        {
+          "decoded": 5072,
+          "encoded": 5072,
+          "end": 4518.099999904633,
+          "firstByte": 4331.5,
+          "ms": 310.89999985694885,
+          "name": "/node_modules/.vite/deps/window-KinjsJsb.js",
+          "request": 4330.399999856949,
+          "start": 4207.200000047684
+        },
+        {
+          "decoded": 7611,
+          "encoded": 7611,
+          "end": 4553.5,
+          "firstByte": 4355.299999952316,
+          "ms": 346.2999999523163,
+          "name": "/node_modules/.vite/deps/highlight-Cq3WvrsF.js",
+          "request": 4353.899999856949,
+          "start": 4207.200000047684
+        },
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 4762.299999952316,
+          "firstByte": 4417.700000047684,
+          "ms": 539.7000000476837,
+          "name": "/node_modules/.vite/deps/astro_runtime_client_dev-toolbar_entrypoint__js.js",
+          "request": 4416.299999952316,
+          "start": 4222.599999904633
+        },
+        {
+          "decoded": 117678,
+          "encoded": 117678,
+          "end": 5005.200000047684,
+          "firstByte": 4519.799999952316,
+          "ms": 673.6000001430511,
+          "name": "/node_modules/.vite/deps/icons-Bg-HL-jN.js",
+          "request": 4518.399999856949,
+          "start": 4331.599999904633
+        }
+      ],
+      "kind": "tanstack-application-dev",
+      "ready": 5464.799999952316,
+      "run": 0
+    },
+    {
+      "js": [
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 494.7999999523163,
+          "firstByte": 233.20000004768372,
+          "ms": 264.7999999523163,
+          "name": "/@id/astro/runtime/client/dev-toolbar/entrypoint.js",
+          "request": 230.79999995231628,
+          "start": 230
+        },
+        {
+          "decoded": 987,
+          "encoded": 987,
+          "end": 1618,
+          "firstByte": 1451.2000000476837,
+          "ms": 185.89999985694885,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_renderer.js",
+          "request": 1450.4000000953674,
+          "start": 1432.1000001430511
+        },
+        {
+          "decoded": 761,
+          "encoded": 761,
+          "end": 1688.7999999523163,
+          "firstByte": 1522.7999999523163,
+          "ms": 256.69999980926514,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_svg.js",
+          "request": 1521.7000000476837,
+          "start": 1432.1000001430511
+        },
+        {
+          "decoded": 1014,
+          "encoded": 1014,
+          "end": 1702,
+          "firstByte": 1536,
+          "ms": 269.7999999523163,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_svg_renderer.js",
+          "request": 1534.9000000953674,
+          "start": 1432.2000000476837
+        },
+        {
+          "decoded": 723013,
+          "encoded": 723013,
+          "end": 3882,
+          "firstByte": 1613.7000000476837,
+          "ms": 2359,
+          "name": "/node_modules/.vite/deps/@tanstack_charts.js",
+          "request": 1609.2999999523163,
+          "start": 1523
+        },
+        {
+          "decoded": 18475,
+          "encoded": 18475,
+          "end": 1839.7000000476837,
+          "firstByte": 1619.4000000953674,
+          "ms": 316.59999990463257,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_area.js",
+          "request": 1618.2000000476837,
+          "start": 1523.1000001430511
+        },
+        {
+          "decoded": 818,
+          "encoded": 818,
+          "end": 1857.7000000476837,
+          "firstByte": 1689.7000000476837,
+          "ms": 334.5,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_bar.js",
+          "request": 1688.9000000953674,
+          "start": 1523.2000000476837
+        },
+        {
+          "decoded": 948,
+          "encoded": 948,
+          "end": 1870.9000000953674,
+          "firstByte": 1703.2999999523163,
+          "ms": 347.7000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_crosshair.js",
+          "request": 1702.2000000476837,
+          "start": 1523.2000000476837
+        },
+        {
+          "decoded": 2409,
+          "encoded": 2409,
+          "end": 1934.6000001430511,
+          "firstByte": 1762.2000000476837,
+          "ms": 411.30000019073486,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_d3_shape.js",
+          "request": 1761.5,
+          "start": 1523.2999999523163
+        },
+        {
+          "decoded": 707,
+          "encoded": 707,
+          "end": 2008.7000000476837,
+          "firstByte": 1841.5,
+          "ms": 485.40000009536743,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_dot.js",
+          "request": 1840.1000001430511,
+          "start": 1523.2999999523163
+        },
+        {
+          "decoded": 18526,
+          "encoded": 18526,
+          "end": 2093.100000143051,
+          "firstByte": 1859.6000001430511,
+          "ms": 569.8000001907349,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_line.js",
+          "request": 1857.9000000953674,
+          "start": 1523.2999999523163
+        },
+        {
+          "decoded": 16323,
+          "encoded": 16323,
+          "end": 2100.4000000953674,
+          "firstByte": 1872.1000001430511,
+          "ms": 577.1000001430511,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_mark_decorative.js",
+          "request": 1871.1000001430511,
+          "start": 1523.2999999523163
+        },
+        {
+          "decoded": 14307,
+          "encoded": 14307,
+          "end": 2129.9000000953674,
+          "firstByte": 1936.1000001430511,
+          "ms": 606.5,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_rule.js",
+          "request": 1934.9000000953674,
+          "start": 1523.4000000953674
+        },
+        {
+          "decoded": 994,
+          "encoded": 994,
+          "end": 2175.9000000953674,
+          "firstByte": 2009.7999999523163,
+          "ms": 652.5,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_band.js",
+          "request": 2009,
+          "start": 1523.4000000953674
+        },
+        {
+          "decoded": 1000,
+          "encoded": 1000,
+          "end": 2270.7000000476837,
+          "firstByte": 2101.600000143051,
+          "ms": 747.2000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_point.js",
+          "request": 2100.7999999523163,
+          "start": 1523.5
+        },
+        {
+          "decoded": 4977,
+          "encoded": 4977,
+          "end": 2278,
+          "firstByte": 2095.5,
+          "ms": 754.5,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_ordinal.js",
+          "request": 2093.5,
+          "start": 1523.5
+        },
+        {
+          "decoded": 18635,
+          "encoded": 18635,
+          "end": 2306.100000143051,
+          "firstByte": 2094.9000000953674,
+          "ms": 782.6000001430511,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_linear.js",
+          "request": 2092.5,
+          "start": 1523.5
+        },
+        {
+          "decoded": 13855,
+          "encoded": 13855,
+          "end": 2384.600000143051,
+          "firstByte": 2176.7000000476837,
+          "ms": 861,
+          "name": "/node_modules/.vite/deps/d3-shape.js",
+          "request": 2176.100000143051,
+          "start": 1523.6000001430511
+        },
+        {
+          "decoded": 96541,
+          "encoded": 96541,
+          "end": 2544.4000000953674,
+          "firstByte": 2130.7000000476837,
+          "ms": 1020.7999999523163,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_tooltip.js",
+          "request": 2130.100000143051,
+          "start": 1523.6000001430511
+        },
+        {
+          "decoded": 382598,
+          "encoded": 382598,
+          "end": 3938.2000000476837,
+          "firstByte": 2306.9000000953674,
+          "ms": 2319.2999999523163,
+          "name": "/node_modules/.vite/deps/renderer-BrP6URiH.js",
+          "request": 2306.2000000476837,
+          "start": 1618.9000000953674
+        },
+        {
+          "decoded": 35012,
+          "encoded": 35012,
+          "end": 2670.600000143051,
+          "firstByte": 2385.2000000476837,
+          "ms": 981.2000000476837,
+          "name": "/node_modules/.vite/deps/svg-kS91FiE9.js",
+          "request": 2384.7000000476837,
+          "start": 1689.4000000953674
+        },
+        {
+          "decoded": 139519,
+          "encoded": 139519,
+          "end": 3321.9000000953674,
+          "firstByte": 2463,
+          "ms": 1619.2999999523163,
+          "name": "/node_modules/.vite/deps/svg-surface-gTuiZhmX.js",
+          "request": 2461.7999999523163,
+          "start": 1702.6000001430511
+        },
+        {
+          "decoded": 47526,
+          "encoded": 47526,
+          "end": 2862.9000000953674,
+          "firstByte": 2471.600000143051,
+          "ms": 1022.4000000953674,
+          "name": "/node_modules/.vite/deps/scales-qUiKrX4N.js",
+          "request": 2470.7000000476837,
+          "start": 1840.5
+        },
+        {
+          "decoded": 25248,
+          "encoded": 25248,
+          "end": 2842.2999999523163,
+          "firstByte": 2545.100000143051,
+          "ms": 1001.6999998092651,
+          "name": "/node_modules/.vite/deps/stack-internal-94uOoHDb.js",
+          "request": 2544.5,
+          "start": 1840.6000001430511
+        },
+        {
+          "decoded": 101319,
+          "encoded": 101319,
+          "end": 3345.7999999523163,
+          "firstByte": 2673.2999999523163,
+          "ms": 1487.0999999046326,
+          "name": "/node_modules/.vite/deps/bar-DEbUhsj_.js",
+          "request": 2670.7999999523163,
+          "start": 1858.7000000476837
+        },
+        {
+          "decoded": 49771,
+          "encoded": 49771,
+          "end": 3304.600000143051,
+          "firstByte": 2843.600000143051,
+          "ms": 1432.8000001907349,
+          "name": "/node_modules/.vite/deps/crosshair-BFzkHlbs.js",
+          "request": 2842.600000143051,
+          "start": 1871.7999999523163
+        },
+        {
+          "decoded": 218072,
+          "encoded": 218072,
+          "end": 3892.4000000953674,
+          "firstByte": 2865.2999999523163,
+          "ms": 1956.9000000953674,
+          "name": "/node_modules/.vite/deps/src-CA1b7PWG.js",
+          "request": 2863.2000000476837,
+          "start": 1935.5
+        },
+        {
+          "decoded": 26929,
+          "encoded": 26929,
+          "end": 3597.4000000953674,
+          "firstByte": 3306.9000000953674,
+          "ms": 1587.9000000953674,
+          "name": "/node_modules/.vite/deps/dot-DTAgTzdJ.js",
+          "request": 3305.100000143051,
+          "start": 2009.5
+        },
+        {
+          "decoded": 11973,
+          "encoded": 11973,
+          "end": 3556.2999999523163,
+          "firstByte": 3323.600000143051,
+          "ms": 1380,
+          "name": "/node_modules/.vite/deps/band-kernel-zNGqEglJ.js",
+          "request": 3322.100000143051,
+          "start": 2176.2999999523163
+        },
+        {
+          "decoded": 1977,
+          "encoded": 1977,
+          "end": 3528.100000143051,
+          "firstByte": 3346.9000000953674,
+          "ms": 1249.5,
+          "name": "/node_modules/.vite/deps/intern-CPdqoLik.js",
+          "request": 3346.100000143051,
+          "start": 2278.600000143051
+        },
+        {
+          "decoded": 8809,
+          "encoded": 8809,
+          "end": 3803.2999999523163,
+          "firstByte": 3599.2000000476837,
+          "ms": 1130.8999998569489,
+          "name": "/node_modules/.vite/deps/renderer-rect-Ca-NkIpL.js",
+          "request": 3597.7999999523163,
+          "start": 2672.4000000953674
+        },
+        {
+          "decoded": 26705,
+          "encoded": 26705,
+          "end": 3941.100000143051,
+          "firstByte": 3706.4000000953674,
+          "ms": 634.8000001907349,
+          "name": "/node_modules/.vite/deps/guide-layout-BzCiheXP.js",
+          "request": 3705.100000143051,
+          "start": 3306.2999999523163
+        },
+        {
+          "decoded": 5332,
+          "encoded": 5332,
+          "end": 3909.7999999523163,
+          "firstByte": 3728.600000143051,
+          "ms": 584.6999998092651,
+          "name": "/node_modules/.vite/deps/default-focus-internal-D_lwrCkz.js",
+          "request": 3727.4000000953674,
+          "start": 3325.100000143051
+        },
+        {
+          "decoded": 54608,
+          "encoded": 54608,
+          "end": 4357.600000143051,
+          "firstByte": 3952,
+          "ms": 407.10000014305115,
+          "name": "/node_modules/.vite/deps/astro-dvMiXcMx.js",
+          "request": 3951.100000143051,
+          "start": 3950.5
+        },
+        {
+          "decoded": 15708,
+          "encoded": 15708,
+          "end": 4207.900000095367,
+          "firstByte": 3952.5,
+          "ms": 257.2999999523163,
+          "name": "/node_modules/.vite/deps/xray-OfZ4OEkw.js",
+          "request": 3951.2999999523163,
+          "start": 3950.600000143051
+        },
+        {
+          "decoded": 163359,
+          "encoded": 163359,
+          "end": 4730.600000143051,
+          "firstByte": 3952.4000000953674,
+          "ms": 780,
+          "name": "/node_modules/.vite/deps/audit-B1ZUaF_x.js",
+          "request": 3951.2000000476837,
+          "start": 3950.600000143051
+        },
+        {
+          "decoded": 18062,
+          "encoded": 18062,
+          "end": 4224.100000143051,
+          "firstByte": 3952.600000143051,
+          "ms": 273.40000009536743,
+          "name": "/node_modules/.vite/deps/settings-BYoebyKN.js",
+          "request": 3951.5,
+          "start": 3950.7000000476837
+        },
+        {
+          "decoded": 44738,
+          "encoded": 44738,
+          "end": 4332.400000095367,
+          "firstByte": 3952.600000143051,
+          "ms": 381.60000014305115,
+          "name": "/node_modules/.vite/deps/toolbar-l9vmqRGS.js",
+          "request": 3951.7000000476837,
+          "start": 3950.7999999523163
+        },
+        {
+          "decoded": 85412,
+          "encoded": 85412,
+          "end": 4674.299999952316,
+          "firstByte": 4209.900000095367,
+          "ms": 723.5,
+          "name": "/node_modules/.vite/deps/ui-library-Cg9VDmqw.js",
+          "request": 4208.100000143051,
+          "start": 3950.7999999523163
+        },
+        {
+          "decoded": 6441,
+          "encoded": 6441,
+          "end": 4418.400000095367,
+          "firstByte": 4226.100000143051,
+          "ms": 209.60000014305115,
+          "name": "/node_modules/.vite/deps/astro_n_html-escaper.js",
+          "request": 4224.5,
+          "start": 4208.799999952316
+        },
+        {
+          "decoded": 5072,
+          "encoded": 5072,
+          "end": 4521.799999952316,
+          "firstByte": 4334.900000095367,
+          "ms": 312.89999985694885,
+          "name": "/node_modules/.vite/deps/window-KinjsJsb.js",
+          "request": 4332.900000095367,
+          "start": 4208.900000095367
+        },
+        {
+          "decoded": 7611,
+          "encoded": 7611,
+          "end": 4557.299999952316,
+          "firstByte": 4358.799999952316,
+          "ms": 348.39999985694885,
+          "name": "/node_modules/.vite/deps/highlight-Cq3WvrsF.js",
+          "request": 4358,
+          "start": 4208.900000095367
+        },
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 4766.100000143051,
+          "firstByte": 4420.299999952316,
+          "ms": 540.6000001430511,
+          "name": "/node_modules/.vite/deps/astro_runtime_client_dev-toolbar_entrypoint__js.js",
+          "request": 4419,
+          "start": 4225.5
+        },
+        {
+          "decoded": 117678,
+          "encoded": 117678,
+          "end": 5010.5,
+          "firstByte": 4523.100000143051,
+          "ms": 676.7999999523163,
+          "name": "/node_modules/.vite/deps/icons-Bg-HL-jN.js",
+          "request": 4522,
+          "start": 4333.700000047684
+        }
+      ],
+      "kind": "tanstack-application-dev",
+      "ready": 5483.100000143051,
+      "run": 1
+    },
+    {
+      "js": [
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 488.60000014305115,
+          "firstByte": 227.5,
+          "ms": 264.7000000476837,
+          "name": "/@id/astro/runtime/client/dev-toolbar/entrypoint.js",
+          "request": 224.60000014305115,
+          "start": 223.90000009536743
+        },
+        {
+          "decoded": 987,
+          "encoded": 987,
+          "end": 1611.5,
+          "firstByte": 1444.9000000953674,
+          "ms": 186,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_renderer.js",
+          "request": 1444.1000001430511,
+          "start": 1425.5
+        },
+        {
+          "decoded": 761,
+          "encoded": 761,
+          "end": 1682.7000000476837,
+          "firstByte": 1516,
+          "ms": 257,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_svg.js",
+          "request": 1515.1000001430511,
+          "start": 1425.7000000476837
+        },
+        {
+          "decoded": 1014,
+          "encoded": 1014,
+          "end": 1695.6000001430511,
+          "firstByte": 1529.7999999523163,
+          "ms": 269.90000009536743,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_svg_renderer.js",
+          "request": 1528.9000000953674,
+          "start": 1425.7000000476837
+        },
+        {
+          "decoded": 723013,
+          "encoded": 723013,
+          "end": 3873,
+          "firstByte": 1606.2999999523163,
+          "ms": 2356.7000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts.js",
+          "request": 1601.5,
+          "start": 1516.2999999523163
+        },
+        {
+          "decoded": 18475,
+          "encoded": 18475,
+          "end": 1833.4000000953674,
+          "firstByte": 1612.7000000476837,
+          "ms": 317,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_area.js",
+          "request": 1611.9000000953674,
+          "start": 1516.4000000953674
+        },
+        {
+          "decoded": 818,
+          "encoded": 818,
+          "end": 1851.7000000476837,
+          "firstByte": 1683.7999999523163,
+          "ms": 335.2999999523163,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_bar.js",
+          "request": 1682.7999999523163,
+          "start": 1516.4000000953674
+        },
+        {
+          "decoded": 948,
+          "encoded": 948,
+          "end": 1864.6000001430511,
+          "firstByte": 1696.9000000953674,
+          "ms": 348.10000014305115,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_crosshair.js",
+          "request": 1695.9000000953674,
+          "start": 1516.5
+        },
+        {
+          "decoded": 2409,
+          "encoded": 2409,
+          "end": 1931.2000000476837,
+          "firstByte": 1759.1000001430511,
+          "ms": 414.7000000476837,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_d3_shape.js",
+          "request": 1758,
+          "start": 1516.5
+        },
+        {
+          "decoded": 707,
+          "encoded": 707,
+          "end": 2002.2999999523163,
+          "firstByte": 1835,
+          "ms": 485.69999980926514,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_dot.js",
+          "request": 1833.7999999523163,
+          "start": 1516.6000001430511
+        },
+        {
+          "decoded": 18526,
+          "encoded": 18526,
+          "end": 2086.9000000953674,
+          "firstByte": 1853.1000001430511,
+          "ms": 570.2999999523163,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_line.js",
+          "request": 1852,
+          "start": 1516.6000001430511
+        },
+        {
+          "decoded": 16323,
+          "encoded": 16323,
+          "end": 2095.5,
+          "firstByte": 1865.7999999523163,
+          "ms": 578.8999998569489,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_mark_decorative.js",
+          "request": 1864.7999999523163,
+          "start": 1516.6000001430511
+        },
+        {
+          "decoded": 14307,
+          "encoded": 14307,
+          "end": 2125.2000000476837,
+          "firstByte": 1932.2999999523163,
+          "ms": 608.5999999046326,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_rule.js",
+          "request": 1931.4000000953674,
+          "start": 1516.6000001430511
+        },
+        {
+          "decoded": 994,
+          "encoded": 994,
+          "end": 2169.600000143051,
+          "firstByte": 2003,
+          "ms": 652.9000000953674,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_band.js",
+          "request": 2002.2999999523163,
+          "start": 1516.7000000476837
+        },
+        {
+          "decoded": 1000,
+          "encoded": 1000,
+          "end": 2265.7999999523163,
+          "firstByte": 2096.4000000953674,
+          "ms": 749,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_point.js",
+          "request": 2095.7999999523163,
+          "start": 1516.7999999523163
+        },
+        {
+          "decoded": 4977,
+          "encoded": 4977,
+          "end": 2274.600000143051,
+          "firstByte": 2092.100000143051,
+          "ms": 757.8000001907349,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_ordinal.js",
+          "request": 2091.4000000953674,
+          "start": 1516.7999999523163
+        },
+        {
+          "decoded": 18635,
+          "encoded": 18635,
+          "end": 2301.2999999523163,
+          "firstByte": 2088.7999999523163,
+          "ms": 784.5,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_scales_linear.js",
+          "request": 2087.5,
+          "start": 1516.7999999523163
+        },
+        {
+          "decoded": 13855,
+          "encoded": 13855,
+          "end": 2378.4000000953674,
+          "firstByte": 2170.2999999523163,
+          "ms": 861.5,
+          "name": "/node_modules/.vite/deps/d3-shape.js",
+          "request": 2169.7000000476837,
+          "start": 1516.9000000953674
+        },
+        {
+          "decoded": 96541,
+          "encoded": 96541,
+          "end": 2539.9000000953674,
+          "firstByte": 2126.100000143051,
+          "ms": 1023,
+          "name": "/node_modules/.vite/deps/@tanstack_charts_tooltip.js",
+          "request": 2125.4000000953674,
+          "start": 1516.9000000953674
+        },
+        {
+          "decoded": 382598,
+          "encoded": 382598,
+          "end": 3933.4000000953674,
+          "firstByte": 2302.2000000476837,
+          "ms": 2321.100000143051,
+          "name": "/node_modules/.vite/deps/renderer-BrP6URiH.js",
+          "request": 2301.5,
+          "start": 1612.2999999523163
+        },
+        {
+          "decoded": 35012,
+          "encoded": 35012,
+          "end": 2664.2999999523163,
+          "firstByte": 2379.7000000476837,
+          "ms": 981,
+          "name": "/node_modules/.vite/deps/svg-kS91FiE9.js",
+          "request": 2378.7000000476837,
+          "start": 1683.2999999523163
+        },
+        {
+          "decoded": 139519,
+          "encoded": 139519,
+          "end": 3312.9000000953674,
+          "firstByte": 2458,
+          "ms": 1616.7000000476837,
+          "name": "/node_modules/.vite/deps/svg-surface-gTuiZhmX.js",
+          "request": 2455.600000143051,
+          "start": 1696.2000000476837
+        },
+        {
+          "decoded": 47526,
+          "encoded": 47526,
+          "end": 2858.100000143051,
+          "firstByte": 2466.7999999523163,
+          "ms": 1023.3000001907349,
+          "name": "/node_modules/.vite/deps/scales-qUiKrX4N.js",
+          "request": 2465.9000000953674,
+          "start": 1834.7999999523163
+        },
+        {
+          "decoded": 25248,
+          "encoded": 25248,
+          "end": 2838.7999999523163,
+          "firstByte": 2541.9000000953674,
+          "ms": 1003.7999999523163,
+          "name": "/node_modules/.vite/deps/stack-internal-94uOoHDb.js",
+          "request": 2540.2000000476837,
+          "start": 1835
+        },
+        {
+          "decoded": 101319,
+          "encoded": 101319,
+          "end": 3339.600000143051,
+          "firstByte": 2665.7000000476837,
+          "ms": 1487,
+          "name": "/node_modules/.vite/deps/bar-DEbUhsj_.js",
+          "request": 2664.600000143051,
+          "start": 1852.6000001430511
+        },
+        {
+          "decoded": 49771,
+          "encoded": 49771,
+          "end": 3301.2000000476837,
+          "firstByte": 2839.5,
+          "ms": 1435.9000000953674,
+          "name": "/node_modules/.vite/deps/crosshair-BFzkHlbs.js",
+          "request": 2839,
+          "start": 1865.2999999523163
+        },
+        {
+          "decoded": 218072,
+          "encoded": 218072,
+          "end": 3886.100000143051,
+          "firstByte": 2859.2999999523163,
+          "ms": 1954.3000001907349,
+          "name": "/node_modules/.vite/deps/src-CA1b7PWG.js",
+          "request": 2858.2000000476837,
+          "start": 1931.7999999523163
+        },
+        {
+          "decoded": 26929,
+          "encoded": 26929,
+          "end": 3594.2999999523163,
+          "firstByte": 3303.2000000476837,
+          "ms": 1591.5999999046326,
+          "name": "/node_modules/.vite/deps/dot-DTAgTzdJ.js",
+          "request": 3301.600000143051,
+          "start": 2002.7000000476837
+        },
+        {
+          "decoded": 11973,
+          "encoded": 11973,
+          "end": 3547.100000143051,
+          "firstByte": 3314.4000000953674,
+          "ms": 1377.2000000476837,
+          "name": "/node_modules/.vite/deps/band-kernel-zNGqEglJ.js",
+          "request": 3313.2999999523163,
+          "start": 2169.9000000953674
+        },
+        {
+          "decoded": 1977,
+          "encoded": 1977,
+          "end": 3521.7000000476837,
+          "firstByte": 3340.600000143051,
+          "ms": 1246.4000000953674,
+          "name": "/node_modules/.vite/deps/intern-CPdqoLik.js",
+          "request": 3339.9000000953674,
+          "start": 2275.2999999523163
+        },
+        {
+          "decoded": 8809,
+          "encoded": 8809,
+          "end": 3800.600000143051,
+          "firstByte": 3595.2999999523163,
+          "ms": 1134.9000000953674,
+          "name": "/node_modules/.vite/deps/renderer-rect-Ca-NkIpL.js",
+          "request": 3594.5,
+          "start": 2665.7000000476837
+        },
+        {
+          "decoded": 26705,
+          "encoded": 26705,
+          "end": 3935,
+          "firstByte": 3700.100000143051,
+          "ms": 631.5,
+          "name": "/node_modules/.vite/deps/guide-layout-BzCiheXP.js",
+          "request": 3698.600000143051,
+          "start": 3303.5
+        },
+        {
+          "decoded": 5332,
+          "encoded": 5332,
+          "end": 3900.9000000953674,
+          "firstByte": 3718.7999999523163,
+          "ms": 585.1000001430511,
+          "name": "/node_modules/.vite/deps/default-focus-internal-D_lwrCkz.js",
+          "request": 3717.7999999523163,
+          "start": 3315.7999999523163
+        },
+        {
+          "decoded": 15708,
+          "encoded": 15708,
+          "end": 4208.900000095367,
+          "firstByte": 3953.2999999523163,
+          "ms": 257.7000000476837,
+          "name": "/node_modules/.vite/deps/xray-OfZ4OEkw.js",
+          "request": 3952,
+          "start": 3951.2000000476837
+        },
+        {
+          "decoded": 54608,
+          "encoded": 54608,
+          "end": 4357.100000143051,
+          "firstByte": 3952.7999999523163,
+          "ms": 405.90000009536743,
+          "name": "/node_modules/.vite/deps/astro-dvMiXcMx.js",
+          "request": 3951.7000000476837,
+          "start": 3951.2000000476837
+        },
+        {
+          "decoded": 163359,
+          "encoded": 163359,
+          "end": 4730.200000047684,
+          "firstByte": 3953.2000000476837,
+          "ms": 779,
+          "name": "/node_modules/.vite/deps/audit-B1ZUaF_x.js",
+          "request": 3951.7999999523163,
+          "start": 3951.2000000476837
+        },
+        {
+          "decoded": 18062,
+          "encoded": 18062,
+          "end": 4225,
+          "firstByte": 3953.4000000953674,
+          "ms": 273.7000000476837,
+          "name": "/node_modules/.vite/deps/settings-BYoebyKN.js",
+          "request": 3952,
+          "start": 3951.2999999523163
+        },
+        {
+          "decoded": 44738,
+          "encoded": 44738,
+          "end": 4333.400000095367,
+          "firstByte": 3953.600000143051,
+          "ms": 382,
+          "name": "/node_modules/.vite/deps/toolbar-l9vmqRGS.js",
+          "request": 3952.2000000476837,
+          "start": 3951.4000000953674
+        },
+        {
+          "decoded": 85412,
+          "encoded": 85412,
+          "end": 4675.299999952316,
+          "firstByte": 4210.799999952316,
+          "ms": 723.8999998569489,
+          "name": "/node_modules/.vite/deps/ui-library-Cg9VDmqw.js",
+          "request": 4209.200000047684,
+          "start": 3951.4000000953674
+        },
+        {
+          "decoded": 6441,
+          "encoded": 6441,
+          "end": 4419.200000047684,
+          "firstByte": 4225.900000095367,
+          "ms": 209.09999990463257,
+          "name": "/node_modules/.vite/deps/astro_n_html-escaper.js",
+          "request": 4225.200000047684,
+          "start": 4210.100000143051
+        },
+        {
+          "decoded": 5072,
+          "encoded": 5072,
+          "end": 4521.600000143051,
+          "firstByte": 4335.299999952316,
+          "ms": 311.5,
+          "name": "/node_modules/.vite/deps/window-KinjsJsb.js",
+          "request": 4334,
+          "start": 4210.100000143051
+        },
+        {
+          "decoded": 7611,
+          "encoded": 7611,
+          "end": 4556.900000095367,
+          "firstByte": 4358.100000143051,
+          "ms": 346.7000000476837,
+          "name": "/node_modules/.vite/deps/highlight-Cq3WvrsF.js",
+          "request": 4357.400000095367,
+          "start": 4210.200000047684
+        },
+        {
+          "decoded": 48358,
+          "encoded": 48358,
+          "end": 4765.799999952316,
+          "firstByte": 4420.400000095367,
+          "ms": 540.0999999046326,
+          "name": "/node_modules/.vite/deps/astro_runtime_client_dev-toolbar_entrypoint__js.js",
+          "request": 4419.400000095367,
+          "start": 4225.700000047684
+        },
+        {
+          "decoded": 117678,
+          "encoded": 117678,
+          "end": 5011.5,
+          "firstByte": 4523.5,
+          "ms": 676.2000000476837,
+          "name": "/node_modules/.vite/deps/icons-Bg-HL-jN.js",
+          "request": 4521.900000095367,
+          "start": 4335.299999952316
+        }
+      ],
+      "kind": "tanstack-application-dev",
+      "ready": 5483.5,
+      "run": 2
+    }
+  ]
+}

@@ -1,9 +1,14 @@
 # TanStack Charts feasibility checkpoint
 
+**Update:** the application now uses TanStack on this branch. See
+[application review](application-review.md) for normal-app review instructions,
+integration findings and actual-app measurements. The rest of this document
+records the earlier isolated feasibility checkpoint.
+
 **Branch:** `tanstack-charts`, based on `7df53c8`.
 **Decision:** promising enough to proceed; no fundamental vanilla-JS or chart-family blocker found.
 **Status:** isolated prototype, **not an application replacement or visual-parity approval**.
-The site's ECharts implementation and dependencies are unchanged.
+At that checkpoint, the site's ECharts implementation and dependencies were unchanged.
 
 ## Version and isolation
 
@@ -30,6 +35,10 @@ Real payloads extracted from the current built site:
 | Team results    | 30 teams         | Positive/negative bars, zero rule, grouped tooltip, one keyboard step per team  |
 | Scatter         | 269 team-seasons | Numeric scales, result colors, original rows in focus callbacks                 |
 | Pace            | 82 CHA games     | Smooth line, area to a fixed threshold, hard green/red gradient, threshold rule |
+
+Later integration found that configured factories did not preserve explicit
+scale domains/color order; the application now uses configured instances and
+scene-level regression tests. Prototype rendering alone did not prove that parity.
 
 Browser checks cover native focus, arrow navigation, Home/End, custom-tooltip
 pinning/dismissal, original-row identity, image loading/alternatives, resize to

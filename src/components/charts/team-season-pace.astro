@@ -1,6 +1,6 @@
 ---
 /*
-  Chart host + data; the script mounts ECharts on the client. Data travels as a
+  Chart host + data; the script mounts TanStack Charts on the client. Data travels as a
   JSON script block rather than an attribute so it isn't HTML-escaped.
 */
 
@@ -27,22 +27,8 @@ const json = JSON.stringify(data).replaceAll("<", String.raw`\u003c`);
 </div>
 
 <script>
-  import { mountCharts } from "./echarts";
-  import { describePacePoint, option } from "./team-season-pace";
+  import { mountCharts } from "./tanstack";
+  import { paceChart } from "./tanstack-options";
 
-  mountCharts(
-    "team-season-pace",
-    option,
-    {
-      label: "Selected game on the projected wins chart",
-      points: (props) => props.data.map((point) => describePacePoint(point)),
-    },
-    (props) =>
-      new Map([
-        [
-          props.surprisedEmojiSrc,
-          `Surprise threshold: ${props.winsToSurprise} wins`,
-        ],
-      ]),
-  );
+  mountCharts("team-season-pace", paceChart);
 </script>

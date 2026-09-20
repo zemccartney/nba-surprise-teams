@@ -189,14 +189,15 @@ settled on; the site should render exactly as it did under Tailwind 4.1.
 - **Popover and chart tooltip styles are global stylesheets**
   (`src/components/popover.css`, `src/components/charts/charts.css`), imported
   by the component. The popover is a native `[popover]` element in the top
-  layer, positioned with CSS anchor positioning; the chart tooltips are HTML
-  that ECharts builds from strings, so neither can carry a scoped-style
+  layer, positioned with CSS anchor positioning; chart tooltips are DOM content
+  attached to TanStack's tooltip surface. Neither carries an Astro scoped-style
   attribute.
-- **Charts are ECharts**, mounted by a `<script>` in each chart's `.astro`
-  wrapper (`src/components/charts/`). The wrapper serializes the props into a
-  JSON script block; the client module reads it and builds the option. Colors
-  and fonts are read from the design tokens at mount, because SVG attributes
-  can't resolve `var()`.
+- **Charts use TanStack Charts 0.18.0**, pinned exactly and mounted through its
+  vanilla DOM host by ordinary Astro `<script>` tags—no React or `client:*`
+  hydration. Inline JSON carries the original domain rows. TanStack owns focus,
+  keyboard navigation and resize; our definitions retain domain descriptions,
+  image alternatives and design tokens. The prior ECharts modules remain an
+  unshipped comparison reference during [application review](plan/tanstack-charts/application-review.md).
 - **Regression check:** `plan/baseline/` captures screenshots and payload sizes
   for a build and diffs two captures. Run it against a reference before and after
   any styling change; see its README.

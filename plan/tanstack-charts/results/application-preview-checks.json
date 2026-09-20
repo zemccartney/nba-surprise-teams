@@ -1,0 +1,98 @@
+[
+  {
+    "first": "'93-94 SeasonNo surprises this year",
+    "kind": "surprises-per-season",
+    "next": "'96-97 SeasonSurprise Teams: Los Angeles Clippers Minnesota Timberwolves",
+    "svg": {
+      "height": 600,
+      "width": 576,
+      "x": 96,
+      "y": 356
+    },
+    "width": 1440
+  },
+  {
+    "first": " Atlanta HawksSurprise Record: 0 - 7",
+    "kind": "surprises-by-team",
+    "next": " Brooklyn NetsSurprise Record: 3 - 10 New Jersey Nets (1977 - 2012) Brooklyn Nets (2012 - present)",
+    "svg": {
+      "height": 600,
+      "width": 576,
+      "x": 96,
+      "y": 304
+    },
+    "width": 1440
+  },
+  {
+    "first": " '14-15 Philadelphia 76ersPace (Record)-8 (18 - 64)Over/Under:16",
+    "kind": "team-season-scatter",
+    "next": " '11-12 Toronto RaptorsPace (Record)-2 (23 - 43)Over/Under:16.5",
+    "svg": {
+      "height": 600,
+      "width": 576,
+      "x": 768,
+      "y": 304
+    },
+    "width": 1440
+  },
+  {
+    "first": "2025-10-22Record:1 - 0Projected Wins:82Pace:+44",
+    "kind": "team-season-pace",
+    "next": "2025-10-25Record:1 - 1Projected Wins:41Pace:+3",
+    "svg": {
+      "height": 600,
+      "width": 720,
+      "x": 88,
+      "y": 400
+    },
+    "width": 1440
+  },
+  {
+    "first": "'93-94 SeasonNo surprises this year",
+    "kind": "surprises-per-season",
+    "next": "'96-97 SeasonSurprise Teams: Los Angeles Clippers Minnesota Timberwolves",
+    "svg": {
+      "height": 600,
+      "width": 374,
+      "x": 8,
+      "y": 199.703125
+    },
+    "width": 390
+  },
+  {
+    "first": " Atlanta HawksSurprise Record: 0 - 7",
+    "kind": "surprises-by-team",
+    "next": " Brooklyn NetsSurprise Record: 3 - 10 New Jersey Nets (1977 - 2012) Brooklyn Nets (2012 - present)",
+    "svg": {
+      "height": 600,
+      "width": 374,
+      "x": 8,
+      "y": 399.703125
+    },
+    "width": 390
+  },
+  {
+    "first": " '14-15 Philadelphia 76ersPace (Record)-8 (18 - 64)Over/Under:16",
+    "kind": "team-season-scatter",
+    "next": " '11-12 Toronto RaptorsPace (Record)-2 (23 - 43)Over/Under:16.5",
+    "svg": {
+      "height": 600,
+      "width": 374,
+      "x": 8,
+      "y": 303.703125
+    },
+    "width": 390
+  },
+  {
+    "first": "2025-10-22Record:1 - 0Projected Wins:82Pace:+44",
+    "kind": "team-season-pace",
+    "next": "2025-10-25Record:1 - 1Projected Wins:41Pace:+3",
+    "svg": {
+      "height": 600,
+      "width": 374,
+      "x": 8,
+      "y": 304
+    },
+    "width": 390
+  }
+]

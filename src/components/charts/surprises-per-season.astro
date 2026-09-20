@@ -1,6 +1,6 @@
 ---
 /*
-  Chart host + data; the script mounts ECharts on the client. Data travels as a
+  Chart host + data; the script mounts TanStack Charts on the client. Data travels as a
   JSON script block rather than an attribute so it isn't HTML-escaped.
 */
 import type { SurprisesPerSeasonChartProps } from "./surprises-per-season";
@@ -17,8 +17,8 @@ const json = JSON.stringify(Astro.props).replaceAll("<", String.raw`\u003c`);
 </div>
 
 <script>
-  import { mountCharts } from "./echarts";
-  import { keyboard, option } from "./surprises-per-season";
+  import { mountCharts } from "./tanstack";
+  import { seasonChart } from "./tanstack-options";
 
-  mountCharts("surprises-per-season", option, keyboard);
+  mountCharts("surprises-per-season", seasonChart);
 </script>

@@ -38,7 +38,10 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
   transitive, dynamic, re-exported and require-based SQL access from SSR.
 - `data-audit.test.ts`: final-artifact hashes, missing/unreported files and
   SQL/historical-game leakage negative controls.
-- `chart-options.test.ts`: content-independent chart options, descriptions,
+- `tanstack-charts.test.ts`: application scene rendering, explicit domains/colors,
+  original-row identity, zero/empty/shortened seasons, responsive date ticks and
+  escaped SVG threshold alternatives.
+- `chart-options.test.ts`: retained ECharts comparison options, descriptions,
   keyboard ordering, active-point styling, and escaped alternatives for all four
   tooltip logo paths (including historical identities).
 - `chart-fonts.test.ts`: successful, failed and stalled font readiness, including
@@ -69,6 +72,8 @@ for the fresh/stale/missing-game and watch-mode negative controls.
 Browser regressions remain in the standalone `plan/baseline` module. See its
 README for dev/preview commands. `chart-image-labels.mjs` checks real tooltip images,
 SVG emoji names, the control's accessible description and resize persistence.
+`tanstack-application.mjs` checks the current TanStack application; the older
+ECharts-specific keyboard/image harnesses remain comparison references.
 They are not part of Vitest, hooks or CI yet.
 Workflow security linting is separate: `mise x -- pnpm run lint:workflows` runs
 pinned zizmor offline with strict collection, and is included in verify/build.
