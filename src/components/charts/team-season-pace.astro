@@ -30,8 +30,19 @@ const json = JSON.stringify(data).replaceAll("<", String.raw`\u003c`);
   import { mountCharts } from "./echarts";
   import { describePacePoint, option } from "./team-season-pace";
 
-  mountCharts("team-season-pace", option, {
-    label: "Selected game on the projected wins chart",
-    points: (props) => props.data.map((point) => describePacePoint(point)),
-  });
+  mountCharts(
+    "team-season-pace",
+    option,
+    {
+      label: "Selected game on the projected wins chart",
+      points: (props) => props.data.map((point) => describePacePoint(point)),
+    },
+    (props) =>
+      new Map([
+        [
+          props.surprisedEmojiSrc,
+          `Surprise threshold: ${props.winsToSurprise} wins`,
+        ],
+      ]),
+  );
 </script>

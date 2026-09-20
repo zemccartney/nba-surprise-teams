@@ -2,6 +2,7 @@ import type { ChartOption, Theme } from "./echarts";
 import type { ChartKeyboardNavigation } from "./keyboard";
 
 import * as Utils from "../../utils";
+import { logoAlt } from "../logo-alt";
 import { axisBase, escapeHtml, gridBase, tooltipBase } from "./echarts";
 
 export interface TeamSeasonScatterplotProps {
@@ -111,7 +112,7 @@ export const option = (
         }
 
         return [
-          `<h3 class="tooltip-heading-centered"><img class="tooltip-logo" src="${escapeHtml(point.logoSrc)}" width="30"> ${escapeHtml(point.seasonRange)} ${escapeHtml(point.teamName)}</h3>`,
+          `<h3 class="tooltip-heading-centered"><img class="tooltip-logo" alt="${escapeHtml(logoAlt(point.teamName))}" src="${escapeHtml(point.logoSrc)}" width="30"> ${escapeHtml(point.seasonRange)} ${escapeHtml(point.teamName)}</h3>`,
           `<p class="tooltip-para"><span class="tooltip-label">Pace (Record)</span>${Utils.signedFormatter.format(point.pace)} (${escapeHtml(point.recordFmt)})</p>`,
           `<p><span class="tooltip-label">Over/Under:</span>${point.overUnder}</p>`,
         ].join("");

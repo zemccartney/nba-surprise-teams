@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 
-import type { Theme } from "../src/components/charts/echarts";
+import type { ChartOption, Theme } from "../src/components/charts/echarts";
 import type { TeamSeasonPaceChartData } from "../src/components/charts/team-season-pace";
 
 import { axisBase } from "../src/components/charts/echarts";
-import { keyboard as teamKeyboard } from "../src/components/charts/surprises-by-team";
+import {
+  keyboard as teamKeyboard,
+  option as teamOption,
+} from "../src/components/charts/surprises-by-team";
 import {
   keyboard as seasonKeyboard,
   seasonKeyboardOrder,
@@ -45,6 +48,136 @@ const fixture: TeamSeasonPaceChartData = {
   surpriseRules: { numGames: 82, overUnderCutoff: 35, paceTarget: 10 },
   winsToSurprise: 38,
 };
+
+const tooltipHtml = (chart: ChartOption): string => {
+  const tooltip = chart.tooltip;
+  if (
+    !tooltip ||
+    Array.isArray(tooltip) ||
+    typeof tooltip.formatter !== "function"
+  )
+    throw new Error("Expected a tooltip formatter");
+  const result = tooltip.formatter(
+    {
+      $vars: ["seriesName", "name", "value"],
+      componentIndex: 0,
+      componentSubType: "bar",
+      componentType: "series",
+      data: 0,
+      dataIndex: 0,
+      name: "fixture",
+      seriesIndex: 0,
+      seriesName: "fixture",
+      seriesType: "bar",
+      value: 0,
+    },
+    "fixture",
+    () => {
+      throw new Error("Unexpected asynchronous tooltip formatter");
+    },
+  );
+  if (typeof result !== "string") throw new Error("Expected HTML tooltip");
+  return result;
+};
+
+describe("chart logo alternatives", () => {
+  const name = 'Team "quoted" & <historic>';
+  const expected =
+    'alt="Logo for Team &quot;quoted&quot; &amp; &lt;historic&gt;"';
+  it.each(["season", "team", "history", "scatter"])(
+    "labels and escapes every %s tooltip logo",
+    (kind) => {
+      let chart: ChartOption;
+      switch (kind) {
+        case "history": {
+          chart = teamOption(
+            {
+              data: [
+                {
+                  history: [
+                    {
+                      duration: [1995, 2000],
+                      logoSrc: '/logo".svg',
+                      name,
+                      teamId: "CHA",
+                    },
+                  ],
+                  name: "Franchise",
+                  numEliminated: 2,
+                  numSurprised: 1,
+                  teamId: "CHA",
+                },
+              ],
+            },
+            theme,
+          );
+          break;
+        }
+        case "season": {
+          chart = seasonOption(
+            {
+              data: [
+                {
+                  numSurprises: 1,
+                  seasonId: "2025",
+                  seasonRange: "2025–26",
+                  surpriseTeams: [
+                    { logoSrc: '/logo".svg', name, teamId: "CHA" },
+                  ],
+                },
+              ],
+              latestSeasonYear: 2025,
+            },
+            theme,
+          );
+          break;
+        }
+        case "team": {
+          chart = teamOption(
+            {
+              data: [
+                {
+                  logoSrc: '/logo".svg',
+                  name,
+                  numEliminated: 2,
+                  numSurprised: 1,
+                  teamId: "CHA",
+                },
+              ],
+            },
+            theme,
+          );
+          break;
+        }
+        default: {
+          chart = scatterOption(
+            {
+              data: [
+                {
+                  isSurpriseTeam: true,
+                  logoSrc: '/logo".svg',
+                  overUnder: 20,
+                  pace: 1,
+                  recordFmt: "31 - 51",
+                  seasonRange: "2025–26",
+                  teamName: name,
+                },
+              ],
+            },
+            theme,
+          );
+        }
+      }
+      const html = tooltipHtml(chart);
+      const images = html.matchAll(/<img\b[^>]*>/g).toArray();
+      expect(images).toHaveLength(1);
+      for (const [image] of images) {
+        expect(image).toContain(expected);
+        expect(image).toContain('src="/logo&quot;.svg"');
+      }
+    },
+  );
+});
 
 describe("Stats keyboard descriptions and ordering", () => {
   it("explores seasons chronologically while retaining series indices", () => {

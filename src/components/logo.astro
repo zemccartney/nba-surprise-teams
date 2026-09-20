@@ -4,6 +4,7 @@ import type { HTMLAttributes } from "astro/types";
 import type { Season, Team } from "../data/model";
 
 import * as ContentUtils from "../content-utils";
+import { logoAlt } from "./logo-alt";
 
 type Props = Pick<HTMLAttributes<"img">, "loading"> & {
   class?: string;
@@ -23,7 +24,7 @@ const {
   ...props
 } = Astro.props;
 
-const alt = `Logo for ${team.name}`;
+const alt = logoAlt(team.name);
 
 /*
   Plain <img>, not Astro's <Image>, because every logo is an SVG. The image

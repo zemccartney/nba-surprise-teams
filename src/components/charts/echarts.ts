@@ -35,6 +35,7 @@ import { SVGRenderer } from "echarts/renderers";
 import type { ChartKeyboardNavigation } from "./keyboard";
 
 import { waitForChartFonts } from "./fonts";
+import { labelSvgImages } from "./image-labels";
 import { enableChartKeyboard } from "./keyboard";
 import { stableTooltip } from "./tooltip";
 
@@ -181,6 +182,7 @@ export const mountCharts = <Props>(
   kind: string,
   build: (props: Props, theme: Theme) => ChartOption,
   keyboard?: ChartKeyboardNavigation<Props>,
+  imageLabels?: (props: Props) => ReadonlyMap<string, string>,
 ) => {
   for (const host of document.querySelectorAll<HTMLElement>(
     `[data-chart="${CSS.escape(kind)}"]`,
@@ -209,7 +211,7 @@ export const mountCharts = <Props>(
       hasMounted = true;
       observer.disconnect();
       host.removeEventListener("focus", mount);
-      void render(host, props, build, keyboard);
+      void render(host, props, build, keyboard, imageLabels?.(props));
     };
 
     // An offscreen lazy chart must still be reachable by Tab. Focus can mount
@@ -229,6 +231,7 @@ const render = async <Props>(
   props: Props,
   build: (props: Props, theme: Theme) => ChartOption,
   keyboard?: ChartKeyboardNavigation<Props>,
+  imageLabels?: ReadonlyMap<string, string>,
 ) => {
   const theme = readTheme();
 
@@ -237,6 +240,11 @@ const render = async <Props>(
   await waitForChartFonts(document.fonts, theme.fontMono);
 
   const chart = echarts.init(host, undefined, { renderer: "svg" });
+  // ECharts creates SVG images without names and may replace them on redraw.
+  // Only image-bearing charts register this; unchanged labels cause no DOM writes.
+  if (imageLabels?.size) {
+    chart.on("rendered", () => labelSvgImages(host, imageLabels));
+  }
   const pointDescriptions = keyboard?.points(props) ?? [];
   const chartOption = build(props, theme);
   const tooltip = chartOption.tooltip;
@@ -258,7 +266,14 @@ const render = async <Props>(
   if (keyboard) {
     enableChartKeyboard(host, chart, keyboard.label, pointDescriptions, {
       dataIndices: keyboard.dataIndices?.(props) ?? [],
-      orderDescription: keyboard.orderDescription ?? "",
+      // A slider's descendants may be presentational to assistive technology;
+      // retain the SVG imagery's meaning on the accessible control as well.
+      orderDescription: [
+        keyboard.orderDescription,
+        ...(imageLabels?.values() ?? []),
+      ]
+        .filter(Boolean)
+        .join(" "),
       pointLabel: keyboard.pointLabel ?? "Game",
       seriesIndices: keyboard.seriesIndices ?? [0],
     });

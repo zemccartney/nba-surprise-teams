@@ -32,6 +32,8 @@ run = "hk check --all --check"
 description = "Install dependencies, generate Worker types and install git hooks"
 run = [
   "pnpm install --frozen-lockfile",
+  # A no-op pnpm install can skip postinstall; setup still requests a fresh audit.
+  "pnpm run audit",
   "pnpm exec wrangler types",
   "hk install --mise",
 ]

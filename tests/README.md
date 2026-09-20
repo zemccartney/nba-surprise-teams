@@ -39,7 +39,8 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
 - `data-audit.test.ts`: final-artifact hashes, missing/unreported files and
   SQL/historical-game leakage negative controls.
 - `chart-options.test.ts`: content-independent chart options, descriptions,
-  keyboard ordering and active-point styling.
+  keyboard ordering, active-point styling, and escaped alternatives for all four
+  tooltip logo paths (including historical identities).
 - `chart-fonts.test.ts`: successful, failed and stalled font readiness, including
   the timeout/timer cleanup.
 - `preview-alias.test.ts`: valid, bounded, deterministic and collision-resistant
@@ -55,7 +56,10 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
 - `live-cache.test.ts`: the HTTP freshness calculation shared by both islands.
 - `feed-diagnostic.test.ts`: pure feed observations and real offline Node CLI
   checks. No network requests in tests; live diagnostics are manual.
-- `workflows.test.ts`: deployment-time verification wiring, the shared TypeScript
+- `dependency-audit.test.ts`: the real pinned pnpm auditor against a loopback
+  registry; clean reports pass, all actionable severity levels and registry errors fail.
+  No public registry is contacted by these tests. Verification itself does contact it.
+- `workflows.test.ts`: installation/pre-commit/deployment audit wiring, the shared TypeScript
   ref classifier and actual Node CLI smoke tests. No shell extraction or
   Windows-specific skip; tests never execute deployment commands.
 
@@ -63,6 +67,8 @@ See [the test/tooling review](../plan/new-season-sweep/prelaunch-review/test-too
 for the fresh/stale/missing-game and watch-mode negative controls.
 
 Browser regressions remain in the standalone `plan/baseline` module. See its
-README for dev/preview commands. They are not part of Vitest, hooks or CI yet.
+README for dev/preview commands. `chart-image-labels.mjs` checks real tooltip images,
+SVG emoji names, the control's accessible description and resize persistence.
+They are not part of Vitest, hooks or CI yet.
 Workflow security linting is separate: `mise x -- pnpm run lint:workflows` runs
 pinned zizmor offline with strict collection, and is included in verify/build.

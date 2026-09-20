@@ -36,17 +36,24 @@ Dump and review edits before building—preview intentionally ignores undumped e
 
 ## Commands
 
-| Command                    | Action                                                                |
-| :------------------------- | :-------------------------------------------------------------------- |
-| `pnpm start`               | Dev server at `localhost:4321` plus a type-check watcher              |
-| `pnpm run build`           | `verify`, then build the production site to `./dist/`                 |
-| `pnpm run verify`          | Types, format, lint, tests over the whole repo (the CF build runs it) |
-| `pnpm run preview`         | Preview the build locally, before deploying                           |
-| `pnpm run astro -- --help` | Astro CLI help                                                        |
-| `pnpm run deps`            | Interactive dependency update (`npm-check-updates`)                   |
-| `pnpm run archive:diff`    | Review canonical SQL changes (committed vs working tree)              |
+| Command                    | Action                                                                  |
+| :------------------------- | :---------------------------------------------------------------------- |
+| `pnpm start`               | Dev server at `localhost:4321` plus a type-check watcher                |
+| `pnpm run build`           | `verify`, then build the production site to `./dist/`                   |
+| `pnpm run verify`          | Dependency audit, types, format, lint and tests (also gates deployment) |
+| `pnpm run audit`           | Check all dependencies against current vulnerability advisories         |
+| `pnpm run preview`         | Preview the build locally, before deploying                             |
+| `pnpm run astro -- --help` | Astro CLI help                                                          |
+| `pnpm run deps`            | Interactive dependency update (`npm-check-updates`)                     |
+| `pnpm run archive:diff`    | Review canonical SQL changes (committed vs working tree)                |
 
 ## Dependencies and supply chain
+
+Normal installs run `pnpm audit` through `postinstall`. Verification/build and
+pre-commit also audit, failing on vulnerabilities or registry errors. This needs
+network access and is advisory checking, not pre-download malware detection.
+See [dependency security operations](docs/dependency-security.md) for the policy,
+current targeted fixes, offline implications and override-removal guidance.
 
 pnpm's settings live in `pnpm-workspace.yaml` (pnpm ≥ 11 ignores everything but
 registry/auth in `.npmrc`). Each setting is commented there; the ones you'll

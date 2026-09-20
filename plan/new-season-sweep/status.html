@@ -1534,6 +1534,44 @@ mise run setup</code></pre>
               <li class="item s-open">
                 <span class="marker">[ ]</span>
                 <div>
+                  <p class="item-title">
+                    Investigate concurrent Astro dev/check initialization —
+                    upstream repro
+                  </p>
+                  <p class="item-note">
+                    Observed with Astro 7.3.1, Cloudflare adapter 14.3.0 and
+                    Vite 8.2.2: starting <code>astro dev</code> alongside
+                    <code>astro check --watch</code> produced missing dependency
+                    optimizer files in an isolated checkout. Both commands
+                    perform initialization/sync that can touch the same Vite
+                    cache. Current workaround: finish
+                    <code>astro sync</code> first, then run dev with
+                    <code>astro check --watch --noSync</code>. The responsible
+                    layer and any version regression are not yet established; do
+                    not label this a confirmed Astro bug.
+                  </p>
+                  <p class="item-note">
+                    Follow-up: create a minimal project without tracker/SQLite
+                    integrations; compare default and Node prerender, with and
+                    without Cloudflare, concurrent versus sequential startup,
+                    and cold versus warm caches. Capture exact versions,
+                    commands, logs and reproduction frequency. Bisect relevant
+                    versions if reproducible, then consider filing upstream with
+                    the smallest failing example and the working control.
+                  </p>
+                  <p class="item-note">
+                    Keep separate from the Ctrl+C prompt/output race: pnpm
+                    returned the shell prompt before concurrently printed exit
+                    summaries. Interactive-shell reproduction confirmed the
+                    shell remained usable; <code>concurrently --raw</code> fixed
+                    that visible symptom. Neither observation establishes a
+                    SQLite shutdown leak or a shared root cause.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
                   <p class="item-title">Sentry rework</p>
                   <p class="item-note">
                     Zack's standing worry is silently breaking it. Carries three

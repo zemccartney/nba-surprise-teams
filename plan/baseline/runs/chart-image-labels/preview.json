@@ -1,0 +1,51 @@
+{
+  "base": "http://localhost:4348",
+  "errors": [],
+  "reports": [
+    {
+      "images": [
+        {
+          "alt": "Logo for Los Angeles Clippers",
+          "src": "/_astro/clipper.Ch8_v6Vc.svg"
+        },
+        {
+          "alt": "Logo for Minnesota Timberwolves",
+          "src": "/_astro/wolf.DoknumSl.svg"
+        }
+      ],
+      "kind": "surprises-per-season"
+    },
+    {
+      "images": [
+        {
+          "alt": "Logo for New Jersey Nets",
+          "src": "/_astro/nets.DFV3hAn6.svg"
+        },
+        {
+          "alt": "Logo for Brooklyn Nets",
+          "src": "/_astro/dragon.XLCa8u4f.svg"
+        }
+      ],
+      "kind": "surprises-by-team"
+    },
+    {
+      "images": [
+        {
+          "alt": "Logo for Philadelphia 76ers",
+          "src": "/_astro/bell.DwI2A1ek.svg"
+        }
+      ],
+      "kind": "team-season-scatter"
+    },
+    {
+      "kind": "pace-svg",
+      "label": "Surprise threshold: 38 wins",
+      "width": 1440
+    },
+    {
+      "kind": "pace-svg",
+      "label": "Surprise threshold: 38 wins",
+      "width": 390
+    }
+  ]
+}

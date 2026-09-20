@@ -1,6 +1,7 @@
 import type { ChartOption, Theme } from "./echarts";
 import type { ChartKeyboardNavigation } from "./keyboard";
 
+import { logoAlt } from "../logo-alt";
 import { axisBase, escapeHtml, gridBase, tooltipBase } from "./echarts";
 
 export interface SurprisesPerSeasonChartProps {
@@ -82,7 +83,7 @@ export const option = (
                 `<ul class="tooltip-list">`,
                 ...point.surpriseTeams.map(
                   (team) =>
-                    `<li class="tooltip-list-item"><img class="tooltip-logo" src="${escapeHtml(team.logoSrc)}" width="30"> ${escapeHtml(team.name)}</li>`,
+                    `<li class="tooltip-list-item"><img class="tooltip-logo" alt="${escapeHtml(logoAlt(team.name))}" src="${escapeHtml(team.logoSrc)}" width="30"> ${escapeHtml(team.name)}</li>`,
                 ),
                 `</ul>`,
               ]

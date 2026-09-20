@@ -3,6 +3,11 @@ import "package://github.com/jdx/hk/releases/download/v1.56.1/hk@1.56.1#/Builtin
 // Using a coding agent? See https://hk.jdx.dev/agents
 
 local linters = new Mapping<String, Step> {
+    ["audit"] = {
+      // Advisory data can change without a lockfile edit: check every commit.
+      // Network/registry failures deliberately block; do not ignore them.
+      check = "pnpm run audit"
+    }
     ["prettier"] = (Builtins.prettier) {
       check = "pnpm exec prettier --check {{files}}"
       check_list_files = "pnpm exec prettier --list-different {{files}}"

@@ -9,6 +9,15 @@ engineStrict: true
 # (minutes). Matches the `--cooldown 3` in the `deps` script.
 minimumReleaseAge: 4320
 
+# Narrow security overrides until upstream stops pinning affected versions.
+# Remove each when its parent resolves a patched version without the override.
+overrides:
+  # GHSA-8988-4f7v-96qf: unbounded W3C baggage allocation (fixed in 2.8.0).
+  "@opentelemetry/instrumentation-http>@opentelemetry/core": 2.8.0
+  # GHSA-rgj7-g3m4-5g8c: bundled libheif vulnerabilities (fixed in 0.35.4).
+  # Matches our already-tested direct sharp version; no Wrangler/Vite upgrade.
+  "miniflare>sharp": 0.35.4
+
 # Refuse a package version whose publishing trust (provenance attestation
 # or trusted publishing) is weaker than an earlier-published version's. The
 # comparison is by publish date, not semver, so a backport to an old major

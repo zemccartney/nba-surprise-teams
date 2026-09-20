@@ -1,6 +1,7 @@
 import type { ChartOption, Theme } from "./echarts";
 import type { ChartKeyboardNavigation } from "./keyboard";
 
+import { logoAlt } from "../logo-alt";
 import { axisBase, escapeHtml, gridBase, tooltipBase } from "./echarts";
 
 export interface SurprisesByTeamChartProps {
@@ -40,14 +41,14 @@ const tooltipContent = (point: Datapoint) => {
         const [start, end] = hist.duration;
         const range = `${start} - ${end ? end + 1 : "present"}`;
 
-        return `<li class="tooltip-list-item"><img class="tooltip-logo" src="${escapeHtml(hist.logoSrc)}" width="32"> ${escapeHtml(hist.name)} (${range})</li>`;
+        return `<li class="tooltip-list-item"><img class="tooltip-logo" alt="${escapeHtml(logoAlt(hist.name))}" src="${escapeHtml(hist.logoSrc)}" width="32"> ${escapeHtml(hist.name)} (${range})</li>`;
       }),
       `</ul>`,
     ].join("");
   }
 
   return [
-    `<h3 class="tooltip-heading-centered"><img class="tooltip-logo" src="${escapeHtml(point.logoSrc ?? "")}" width="30"> ${escapeHtml(point.name)}</h3>`,
+    `<h3 class="tooltip-heading-centered"><img class="tooltip-logo" alt="${escapeHtml(logoAlt(point.name))}" src="${escapeHtml(point.logoSrc ?? "")}" width="30"> ${escapeHtml(point.name)}</h3>`,
     record,
   ].join("");
 };

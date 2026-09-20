@@ -1,0 +1,51 @@
+{
+  "base": "http://localhost:4347",
+  "errors": [],
+  "reports": [
+    {
+      "images": [
+        {
+          "alt": "Logo for Los Angeles Clippers",
+          "src": "/@fs/private/var/folders/q_/k6rq7q311gq6y36rk2yfhvm80000gn/T/nbastt-audit-fixes-zcu4sea5/repo/src/assets/images/emoji/clipper.svg?origWidth=36&origHeight=36&origFormat=svg"
+        },
+        {
+          "alt": "Logo for Minnesota Timberwolves",
+          "src": "/@fs/private/var/folders/q_/k6rq7q311gq6y36rk2yfhvm80000gn/T/nbastt-audit-fixes-zcu4sea5/repo/src/assets/images/emoji/wolf.svg?origWidth=36&origHeight=36&origFormat=svg"
+        }
+      ],
+      "kind": "surprises-per-season"
+    },
+    {
+      "images": [
+        {
+          "alt": "Logo for New Jersey Nets",
+          "src": "/@fs/private/var/folders/q_/k6rq7q311gq6y36rk2yfhvm80000gn/T/nbastt-audit-fixes-zcu4sea5/repo/src/assets/images/emoji/nets.svg?origWidth=36&origHeight=36&origFormat=svg"
+        },
+        {
+          "alt": "Logo for Brooklyn Nets",
+          "src": "/@fs/private/var/folders/q_/k6rq7q311gq6y36rk2yfhvm80000gn/T/nbastt-audit-fixes-zcu4sea5/repo/src/assets/images/emoji/dragon.svg?origWidth=36&origHeight=36&origFormat=svg"
+        }
+      ],
+      "kind": "surprises-by-team"
+    },
+    {
+      "images": [
+        {
+          "alt": "Logo for Philadelphia 76ers",
+          "src": "/@fs/private/var/folders/q_/k6rq7q311gq6y36rk2yfhvm80000gn/T/nbastt-audit-fixes-zcu4sea5/repo/src/assets/images/emoji/bell.svg?origWidth=36&origHeight=36&origFormat=svg"
+        }
+      ],
+      "kind": "team-season-scatter"
+    },
+    {
+      "kind": "pace-svg",
+      "label": "Surprise threshold: 38 wins",
+      "width": 1440
+    },
+    {
+      "kind": "pace-svg",
+      "label": "Surprise threshold: 38 wins",
+      "width": 390
+    }
+  ]
+}

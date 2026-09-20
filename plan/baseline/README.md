@@ -215,6 +215,23 @@ hover outline surrounds the mouse target. Run on dev and preview;
 use the other probes for changed-point contents, resizing and pace keyboard
 behavior. This is not a general dismissal or screen-reader audit.
 
+## chart-image-labels.mjs
+
+```sh
+mise x -- node plan/baseline/chart-image-labels.mjs http://localhost:4321 /tmp/chart-images-dev.json
+mise x -- node plan/baseline/chart-image-labels.mjs http://localhost:4322 /tmp/chart-images-preview.json
+```
+
+Checks actual tooltip logo alternatives, including historical franchise names,
+and the pace chart's SVG threshold emoji at desktop/mobile widths after resize.
+HTML logos share `Logo for …` wording with `logo.astro`; SVG `<image>` needs
+`role="img"`/`aria-label`, not an HTML `alt` attribute. Its meaning is also included
+in the keyboard control's accessible description because slider descendants can
+be presentational to assistive technology. This is DOM/browser coverage, not a
+claim to have run the WAVE extension or completed screen-reader testing.
+
+Recorded dev/preview checks: `runs/chart-image-labels/`.
+
 ## stats-keyboard.mjs
 
 ```sh
