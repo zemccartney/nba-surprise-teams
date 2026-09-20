@@ -22,6 +22,7 @@ vi.mock(
     readTheme: () => ({
       accent: "#818cf8",
       background: "#020617",
+      brightRed: "#ff8073",
       green: "#15803d",
       lime: "#84cc16",
       pale: "#d9f99d",
@@ -108,7 +109,10 @@ describe("application TanStack definitions", () => {
       .map((match) => match[0])
       .toArray();
     expect(labels.length).toBeGreaterThan(0);
-    for (const label of labels) expect(label).toContain('opacity="1"');
+    for (const label of labels) {
+      expect(label).toContain('opacity="1"');
+      expect(label).toContain('font-weight="700"');
+    }
     const tickLabels = labels.filter((label) =>
       label.includes("x-tick-label:"),
     );
@@ -168,6 +172,8 @@ describe("application TanStack definitions", () => {
     const markup = renderTrackerSvg(scene, { ariaLabel: "Teams" });
     const zero = markup.match(/<line[^>]*stroke-width="4"[^>]*>/)?.[0];
     expect(zero).toContain('stroke-opacity="1"');
+    expect(markup).not.toMatch(/data-ts-key="x-tick:/);
+    expect(markup).toContain(">Team</text>");
   });
   it("keeps explicit result colors even when an eliminated row is encountered first", () => {
     const eliminated = {
@@ -222,6 +228,50 @@ describe("application TanStack definitions", () => {
       expect(
         scene.gradients[0]?.stops.every((stop) => Number.isFinite(stop.offset)),
       ).toBe(true);
+    },
+  );
+  it.each([
+    { paint: "url(#pace-line-threshold)", stop: 0.64, values: [70, 20, 60] },
+    { paint: "#84cc16", stop: 0, values: [60, 70] },
+    { paint: "#ff8073", stop: 0, values: [20, 30] },
+    { paint: "#ff8073", stop: 0, values: [20, 38] },
+    { paint: "#84cc16", stop: 0, values: [38, 60] },
+    { paint: "#84cc16", stop: 0, values: [38, 38] },
+    { paint: "#ff8073", stop: 0, values: [20] },
+  ])(
+    "colors the pace stroke without splitting or changing games: $values",
+    ({ paint, stop, values }) => {
+      const data = values.map((projectedWins, i) => ({
+        date: `game-${i}`,
+        pace: projectedWins - 38,
+        projectedWins,
+        recordFmt: "1 - 1",
+      }));
+      const chart = paceChart({
+        data,
+        surprisedEmojiSrc: "/emoji.svg",
+        surpriseRules: { numGames: 82, overUnderCutoff: 30, paceTarget: 10 },
+        winsToSurprise: 38,
+      });
+      const scene = render(chart);
+      expect(scene.points.map((point) => point.datum)).toEqual(data);
+      expect(
+        scene.gradients.find(
+          (gradient) => gradient.id === "pace-line-threshold",
+        )?.stops,
+      ).toEqual([
+        { color: "#84cc16", offset: 0 },
+        { color: "#84cc16", offset: stop },
+        { color: "#ff8073", offset: stop },
+        { color: "#ff8073", offset: 1 },
+      ]);
+      const markup = renderTrackerSvg(
+        scene,
+        { ariaLabel: chart.label },
+        chart.annotation?.(scene),
+      );
+      expect(markup).toContain(`stroke="${paint}"`);
+      expect(markup).toContain('font-weight="700">38</text>');
     },
   );
   it("renders an empty pace season without inventing games or invalid gradients", () => {

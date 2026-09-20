@@ -71,7 +71,8 @@ comparison implementation.
 ## Follow-up comparison with `chart-parity`
 
 - Axis titles/ticks explicitly use full opacity instead of TanStack's 76%/68%
-  defaults. The theme resolves the same sRGB colors as the reference.
+  defaults. Axis titles, ticks and the threshold annotation use bold (700)
+  weight. The theme resolves the same sRGB colors as the reference.
 - Grids were already opaque; half-pixel alignment avoids softened one-pixel
   strokes. Grid lines at plot boundaries are omitted across all charts.
 - Zero and surprise-threshold rules explicitly use full opacity instead of the
@@ -79,6 +80,15 @@ comparison implementation.
 - Season ticks use five-year labels without forcing 1993 onto the axis. Labels
   are centered; the right gutter increases from 8px to 16px so the final year
   remains readable even on narrow phones.
+- The Team axis has neither tick marks nor tick labels; its title offset is
+  40px rather than 20px, with enough bottom gutter to remain fully visible.
+- The pace stroke is lime above the surprise threshold and bright red below,
+  using a hard gradient stop at the exact crossing of the smoothed curve. Its
+  gradient uses the line's bounds, independent of the area; flat/one-sided lines
+  use solid colors. No games or interaction points are split or duplicated.
+  The red token uses the same +24.1 OKLCH lightness lift as green-700 to lime-500,
+  lime's chroma and the red fill's hue, before conversion to sRGB. The horizontal
+  threshold and keyboard focus marker remain lime.
 - Pace dates use regular intervals: six at the 720px chart width, fewer on
   phones. Labels are centered, with no forced final-edge date overflowing the
   page. Every game remains in the plotted/interactive data.
@@ -93,8 +103,8 @@ comparison implementation.
 
 The initial integrated chart bundle was approximately **147 KB raw / 49 KB gzip**, versus
 **595 KB raw / 199 KB gzip** for the former shared ECharts bundle—about **75% less
-compressed chart JavaScript**. After the visual follow-ups it is **148,197 bytes
-raw / 49,330 bytes gzip**, retaining that reduction; startup timings have not
+compressed chart JavaScript**. After the visual follow-ups it is **148,585 bytes
+raw / 49,427 bytes gzip**, retaining that reduction; startup timings have not
 been re-benchmarked. Data remains in the existing HTML payloads.
 
 An initial integration measurement used Chrome 153, three cold browser contexts,

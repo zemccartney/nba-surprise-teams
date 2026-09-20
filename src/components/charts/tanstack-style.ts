@@ -19,6 +19,7 @@ export const readTheme = () => {
   return {
     accent: color("indigo-400"),
     background: color("slate-950"),
+    brightRed: color("pace-red"),
     green: color("green-700"),
     lime: color("lime-500"),
     pale: color("lime-200"),
@@ -37,9 +38,9 @@ export const chartTheme = (t: Theme) => ({
   palette: [t.green, t.red],
 });
 export const axis = (text: string, offset: number) => ({
-  label: { fontSize: 20, fontWeight: 600, offset, opacity: 1, text },
+  label: { fontSize: 20, fontWeight: 700, offset, opacity: 1, text },
   line: false as const,
-  tickLabels: { fontSize: 16, fontWeight: 600, opacity: 1 },
+  tickLabels: { fontSize: 16, fontWeight: 700, opacity: 1 },
   ticks: { padding: 12, size: 6 },
 });
 export const grid = (t: Theme) => ({

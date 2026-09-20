@@ -134,7 +134,7 @@ export const seasonChart = (
             tickLabels: {
               anchor: "middle",
               fontSize: 16,
-              fontWeight: 600,
+              fontWeight: 700,
               opacity: 1,
             },
             ticks: { padding: 12, size: 6, values: visibleTicks },
@@ -151,7 +151,7 @@ export const seasonChart = (
             tickLabels: {
               dy: ({ value }) => (value === max ? 10 : 0),
               fontSize: 16,
-              fontWeight: 600,
+              fontWeight: 700,
               opacity: 1,
             },
             ticks: { padding: 12, size: 6, values: ticks(0, max, 1) },
@@ -245,7 +245,7 @@ export const teamChart = ({
       maxFocusDistance: Infinity,
       scales: {
         x: {
-          axis: { ...axis("Team", 20), tickLabels: false },
+          axis: { ...axis("Team", 40), tickLabels: false, ticks: false },
           scale: scaleBand<string>()
             .domain(rows.map((r) => r.teamId))
             .paddingInner(0.1)
@@ -395,13 +395,26 @@ export const paceChart = ({
   const top = Math.max(winsToSurprise, ...data.map((r) => r.projectedWins));
   const bottom = Math.min(winsToSurprise, ...data.map((r) => r.projectedWins));
   const stop = top === bottom ? 0 : (top - winsToSurprise) / (top - bottom);
+  const lineTop = Math.max(...data.map((r) => r.projectedWins));
+  const lineBottom = Math.min(...data.map((r) => r.projectedWins));
+  const isCrossing = lineBottom < winsToSurprise && lineTop > winsToSurprise;
+  // Stroke gradients use the line's own bounding box, not the area's box
+  // (which also includes the threshold). Flat/one-sided lines use solid paint.
+  const lineStop = isCrossing
+    ? (lineTop - winsToSurprise) / (lineTop - lineBottom)
+    : 0;
+  const lineStroke = isCrossing
+    ? "url(#pace-line-threshold)"
+    : lineBottom < winsToSurprise
+      ? t.brightRed
+      : t.lime;
   return {
     annotation: ({ scales }) => {
       // eslint-disable-next-line unicorn/no-array-callback-reference -- Numeric scale, not Array.map.
       const y = scales.y?.map(winsToSurprise);
       if (y === undefined || !Number.isFinite(y)) return "";
       // Part of the renderer output so focus and resize cannot remove the label.
-      return `<g data-threshold-label=""><text x="48" y="${y}" text-anchor="end" dominant-baseline="middle" fill="${escapeSvg(t.lime)}" font-size="16">${winsToSurprise}</text><image href="${escapeSvg(surprisedEmojiSrc)}" x="54" y="${y - 8}" width="16" height="16" role="img" aria-label="Surprise threshold: ${winsToSurprise} wins" /></g>`;
+      return `<g data-threshold-label=""><text x="48" y="${y}" text-anchor="end" dominant-baseline="middle" fill="${escapeSvg(t.lime)}" font-size="16" font-weight="700">${winsToSurprise}</text><image href="${escapeSvg(surprisedEmojiSrc)}" x="54" y="${y - 8}" width="16" height="16" role="img" aria-label="Surprise threshold: ${winsToSurprise} wins" /></g>`;
     },
     body: gameBody,
     definition: defineChart({
@@ -414,6 +427,19 @@ export const paceChart = ({
               { color: t.green, offset: stop },
               { color: t.red, offset: stop },
               { color: t.red, offset: 1 },
+            ],
+            x1: 0,
+            x2: 0,
+            y1: 0,
+            y2: 1,
+          },
+          {
+            id: "pace-line-threshold",
+            stops: [
+              { color: t.lime, offset: 0 },
+              { color: t.lime, offset: lineStop },
+              { color: t.brightRed, offset: lineStop },
+              { color: t.brightRed, offset: 1 },
             ],
             x1: 0,
             x2: 0,
@@ -437,7 +463,7 @@ export const paceChart = ({
           lineY(data, {
             curve,
             id: "pace-line",
-            stroke: t.lime,
+            stroke: lineStroke,
             strokeWidth: 1.5,
             x: "date",
             y: "projectedWins",
@@ -455,6 +481,7 @@ export const paceChart = ({
               tickLabels: {
                 anchor: "middle",
                 fontSize: 16,
+                fontWeight: 700,
                 opacity: 1,
                 thin: true,
               },
@@ -476,7 +503,7 @@ export const paceChart = ({
               tickLabels: {
                 dy: ({ value }) => (value === surpriseRules.numGames ? 10 : 0),
                 fontSize: 16,
-                fontWeight: 600,
+                fontWeight: 700,
                 opacity: 1,
               },
               ticks: {

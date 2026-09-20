@@ -115,6 +115,7 @@ try {
           ].map((label) => ({
             fill: getComputedStyle(label).fill,
             fillOpacity: getComputedStyle(label).fillOpacity,
+            fontWeight: getComputedStyle(label).fontWeight,
             opacity: getComputedStyle(label).opacity,
           })),
           rules: [...element.querySelectorAll('line[stroke-width="4"]')].map(
@@ -140,6 +141,7 @@ try {
           assert.deepEqual(label, {
             fill: "rgb(124, 207, 0)",
             fillOpacity: "1",
+            fontWeight: "700",
             opacity: "1",
           });
         for (const line of appearance.grid) {
@@ -153,17 +155,68 @@ try {
           assert.equal(line.opacity, "1");
         }
         for (const opacity of appearance.rules) assert.equal(opacity, "1");
-        if (kind === "surprises-per-season") {
-          assert.ok(
-            appearance.dates.every(
-              (date) => Number(date.text) % 5 === 0 && date.anchor === "middle",
-            ),
-          );
-          assert.ok(appearance.dates.every((date) => date.text !== "1993"));
-        } else if (kind === "team-season-pace") {
-          assert.ok(appearance.dates.every((date) => date.anchor === "middle"));
-          if (width === 1440) assert.equal(appearance.dates.length, 6);
-        }
+        const checkDetails = async () => {
+          switch (kind) {
+            case "surprises-by-team": {
+              assert.equal(
+                await svg.locator('[data-ts-key^="x-tick:"]').count(),
+                0,
+              );
+              const title = await svg
+                .locator("text")
+                .filter({ hasText: /^Team$/ })
+                .boundingBox();
+              assert.ok(title);
+              assert.ok(
+                title.y - (svgBounds.y + background.y + background.height) >=
+                  16,
+              );
+              assert.ok(
+                title.y + title.height <= svgBounds.y + svgBounds.height,
+              );
+
+              break;
+            }
+            case "surprises-per-season": {
+              assert.ok(
+                appearance.dates.every(
+                  (date) =>
+                    Number(date.text) % 5 === 0 && date.anchor === "middle",
+                ),
+              );
+              assert.ok(appearance.dates.every((date) => date.text !== "1993"));
+
+              break;
+            }
+            case "team-season-pace": {
+              assert.equal(
+                await svg
+                  .locator('path[stroke="url(#pace-line-threshold)"]')
+                  .count(),
+                1,
+              );
+              const stops = await svg
+                .locator("#pace-line-threshold stop")
+                .evaluateAll((elements) =>
+                  elements.map((element) => ({
+                    color: element.getAttribute("stop-color"),
+                    offset: element.getAttribute("offset"),
+                  })),
+                );
+              assert.equal(stops.length, 4);
+              assert.equal(stops[1].offset, stops[2].offset);
+              assert.notEqual(stops[1].color, stops[2].color);
+              assert.ok(
+                appearance.dates.every((date) => date.anchor === "middle"),
+              );
+              if (width === 1440) assert.equal(appearance.dates.length, 6);
+
+              break;
+            }
+            // No default
+          }
+        };
+        await checkDetails();
         await page.keyboard.press("Home");
         await page.waitForTimeout(50);
         const first = await host.locator(".tracker-tooltip").textContent();
