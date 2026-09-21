@@ -1,5 +1,10 @@
 # TanStack application review
 
+**Accepted by Zack, 2026-09-21**, including all refinements through `48b4d5e`.
+All test servers are stopped. Next is removal of the unshipped ECharts comparison
+code/dependency and shared-DTO cleanup, followed by revalidation. No merge or
+deployment has been performed.
+
 The actual Astro chart wrappers now mount **TanStack Charts 0.18.0**. Run the
 normal `pnpm start` command on `tanstack-charts`, then review:
 
@@ -59,14 +64,15 @@ checks is not a claim of complete accessibility certification.
 
 ## Review differences
 
-This is a working application port, **not a pixel-identical approval**. In
+The application and the differences below are accepted; this is **not a claim
+of pixel-identical rendering**. In
 particular, the pace curve currently uses D3 monotone-X rather than the ECharts
 smoothing algorithm. Axes use TanStack's text/layout machinery, with matched
 insets, colors and sparse ticks; typography and tick placement can differ.
 The initial chart drawing is immediate rather than the previous entrance
 animation. Native tooltips can be pinned with Enter/click and dismissed with
-Escape. Please review those changes in the real layout before deleting the old
-comparison implementation.
+Escape. The real-layout review is complete; the old comparison implementation
+can now be removed in a separate cleanup pass.
 
 ## Follow-up comparison with `chart-parity`
 

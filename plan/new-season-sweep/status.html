@@ -661,19 +661,17 @@
           <div
             class="bar"
             role="img"
-            aria-label="14 of 38 items done, 1 in progress, 3 blocked, 20 not started"
+            aria-label="19 of 44 items done, 3 blocked, 22 not started"
           >
-            <span class="seg-done" style="flex: 14"></span>
-            <span style="flex: 1; background: var(--info)"></span>
+            <span class="seg-done" style="flex: 19"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 20"></span>
+            <span class="seg-open" style="flex: 22"></span>
           </div>
           <p class="tally">
-            <span class="k-done"><b>14</b> done and verified</span>
+            <span class="k-done"><b>19</b> done and verified</span>
             <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
-            <span style="color: var(--info)"><b>1</b> in progress</span>
-            <span class="k-open"><b>20</b> not started</span>
-            <span>38 tracked</span>
+            <span class="k-open"><b>22</b> not started</span>
+            <span>44 tracked</span>
           </p>
         </div>
       </header>
@@ -688,7 +686,7 @@
               >
             </li>
             <li>
-              <a href="#s1">1 · Foundations<span class="count">11/18</span></a>
+              <a href="#s1">1 · Foundations<span class="count">13/18</span></a>
             </li>
             <li>
               <a href="#s2">2 · Season prep<span class="count">1/4</span></a>
@@ -698,12 +696,12 @@
             </li>
             <li>
               <a href="#s4"
-                >4 · Quality of life<span class="count">2/3</span></a
+                >4 · Quality of life<span class="count">4/4</span></a
               >
             </li>
             <li>
               <a href="#s5"
-                >5 · Infra &amp; deferred<span class="count">0/12</span></a
+                >5 · Infra &amp; deferred<span class="count">1/15</span></a
               >
             </li>
           </ul>
@@ -806,6 +804,26 @@ mise run setup</code></pre>
             </div>
 
             <div class="brief-block">
+              <h3>Current checkpoint — 2026-09-21</h3>
+              <p>
+                Zack approved the TanStack application and all
+                visual/interaction refinements through <code>48b4d5e</code>.
+                SQLite migration and security gates are complete. All local test
+                servers are stopped. No merge or deployment has been performed.
+              </p>
+              <p>
+                Next: remove the retained ECharts comparison implementation and
+                dependency, move shared DTOs into renderer-neutral modules, and
+                retire obsolete harnesses deliberately. Re-run full verification
+                and browser checks before stack reconciliation and the remaining
+                coordinated live/hosted review. See
+                <a href="../tanstack-charts/application-review.md"
+                  >the accepted chart review</a
+                >.
+              </p>
+            </div>
+
+            <div class="brief-block">
               <h3>Branch stack, oldest first</h3>
               <ul class="chain">
                 <li class="base"><code>main</code></li>
@@ -817,7 +835,9 @@ mise run setup</code></pre>
                 <li><code>astro-7</code></li>
                 <li><code>svg-images</code></li>
                 <li><code>mise-setup</code></li>
-                <li class="tip"><code>chart-parity</code></li>
+                <li><code>chart-parity</code></li>
+                <li><code>sqlite-content-store</code></li>
+                <li class="tip"><code>tanstack-charts</code></li>
               </ul>
               <p>
                 Each is stacked on the one before it, so merging the tip takes
@@ -868,7 +888,7 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">01</span>
               <h2>Foundations</h2>
-              <span class="count">11 / 18 done</span>
+              <span class="count">13 / 18 done</span>
             </div>
             <p class="milestone">
               Milestone: the site renders exactly as it does on prod today, no
@@ -976,11 +996,15 @@ mise run setup</code></pre>
 
             <p class="subhead">Follow-ups after Step 10</p>
             <ul class="items">
-              <li class="item s-wip">
-                <span class="marker">[~]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
-                  <p class="item-title">
-                    Chart parity — Step 11 fixes under review
+                  <p class="item-title">Chart parity — checkpoint approved</p>
+                  <p class="item-note">
+                    Zack confirmed chart-parity as the accepted visual
+                    checkpoint. The subsequent TanStack port and refinements are
+                    also approved (2026-09-21). The notes below preserve the
+                    original findings, not unresolved current chart defects.
                   </p>
                   <p class="item-note">
                     Four reported by Zack on 2026-09-11, plus lost keyboard
@@ -1152,17 +1176,19 @@ mise run setup</code></pre>
                   </p>
                 </div>
               </li>
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
                   <p class="item-title">
-                    dev-smoke.mjs only counts &lt;img&gt;
+                    Chart-interior and SVG-image coverage
                   </p>
                   <p class="item-note">
-                    The ECharts chart symbols use imported SVG URLs and are not
-                    <code>&lt;img&gt;</code>, so the check would not have caught
-                    them breaking. Worth fixing regardless of the image
-                    decision.
+                    The old img-only smoke gap is superseded by dedicated chart
+                    harnesses, including <code>tanstack-application.mjs</code>:
+                    actual SVGs, meaningful image alternatives, all four charts,
+                    pointer/keyboard interaction, redraw/resize, label bounds,
+                    colors and overflow at 1440, 390 and 320px in dev and
+                    preview. Full screen-reader review remains separate.
                   </p>
                 </div>
               </li>
@@ -1382,7 +1408,7 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">04</span>
               <h2>Quality of life</h2>
-              <span class="count">2 / 3 done</span>
+              <span class="count">4 / 4 done</span>
             </div>
 
             <ul class="items">
@@ -1393,24 +1419,23 @@ mise run setup</code></pre>
                   <p class="item-note">Landed as Step 7.</p>
                 </div>
               </li>
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
-                  <p class="item-title">SQLite content store</p>
+                  <p class="item-title">
+                    SQLite content store — migration approved
+                  </p>
                   <p class="item-note">
-                    Bounded compatibility pilot proven; full migration remains
-                    gated. SQLite-backed Node prerender, generated metadata-only
-                    Worker catalog, deterministic SQL dump/restore, odds
-                    editing, actual staged-dump checks and artifact audit pass.
-                    All current data/chart points match. No active collection
-                    consumer or live path has been replaced. Node prerender
-                    alone fixes most measured dev latency, so persistence
-                    benefits are separate. Review the
-                    <a href="../sqlite-spike/README.md"
-                      >data-management guide</a
-                    >
-                    and <a href="prelaunch-review/sqlite-pilot.md">results</a>
-                    before deciding the next scope.
+                    All collection consumers migrated. Canonical SQL restores
+                    isolated Node snapshots; the Worker receives metadata only.
+                    Transactional editing, deterministic dumping, validation,
+                    staged-index checks, live contracts and artifact boundaries
+                    are enforced. 18,607 archived games retain NBA IDs. No
+                    database is deployed. Node prerender, rather than SQLite
+                    alone, explains most of the earlier dev-startup improvement.
+                    See
+                    <a href="../../data/README.md">data operations</a> and
+                    <a href="../../docs/data-system.html">architecture</a>.
                   </p>
                 </div>
               </li>
@@ -1418,7 +1443,29 @@ mise run setup</code></pre>
                 <span class="marker">[x]</span>
                 <div>
                   <p class="item-title">Remove React, switch to ECharts</p>
-                  <p class="item-note">Landed as Step 4.</p>
+                  <p class="item-note">
+                    Landed as Step 4; TanStack now replaces ECharts.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">
+                    TanStack charts — application approved
+                  </p>
+                  <p class="item-note">
+                    Exact pin 0.18.0, vanilla DOM, no React. All four charts and
+                    follow-up refinements approved: plot-only backgrounds, bold
+                    opaque labels, crisp interior grids, focus outlines,
+                    centered dates, tooltip clearance, and threshold-colored
+                    pace line/dot. 183 tests, full build/security/artifact
+                    audits and desktop/mobile dev/preview browser checks pass.
+                    Shared chart JS is 152,918 bytes raw / 50,619 gzip versus
+                    approximately 199KB gzip for ECharts. Zack's preliminary
+                    Fast 4G test reports roughly half the load time; this is not
+                    a new controlled benchmark.
+                  </p>
                 </div>
               </li>
             </ul>
@@ -1429,10 +1476,43 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">05</span>
               <h2>Infrastructure and deferred rounds</h2>
-              <span class="count">0 / 12 done</span>
+              <span class="count">1 / 15 done</span>
             </div>
 
             <ul class="items">
+              <li class="item s-done">
+                <span class="marker">[x]</span>
+                <div>
+                  <p class="item-title">
+                    Dependency security gates and chart alternatives
+                  </p>
+                  <p class="item-note">
+                    Audit runs on install, setup, verification/build and
+                    commits; all severities and registry failures fail closed.
+                    Targeted fixes leave no known findings. Logo/emoji
+                    alternatives and safe tooltip construction are tested. See
+                    <a href="../../docs/dependency-security.md"
+                      >security policy</a
+                    >.
+                  </p>
+                </div>
+              </li>
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Remove ECharts comparison scaffolding — next
+                  </p>
+                  <p class="item-note">
+                    With the TanStack review accepted, move shared DTOs out of
+                    reference files; remove unused ECharts, the old controller,
+                    dependency and obsolete tests/harnesses. Keep historical
+                    evidence and the chart-parity checkpoint. Revalidate data,
+                    keyboard/hover behavior, images, layout and bundle
+                    boundaries.
+                  </p>
+                </div>
+              </li>
               <li class="item s-open">
                 <span class="marker">[ ]</span>
                 <div>

@@ -1,5 +1,26 @@
 # New-season sweep: round log
 
+## 2026-09-21 — SQLite/security complete; TanStack review accepted
+
+Zack approved the application and all chart refinements through `48b4d5e`.
+`sqlite-content-store` contains the approved migration and fail-closed security
+checks; `tanstack-charts` adds the exact-pinned vanilla TanStack port and review
+fixes. All four charts retain data, keyboard/hover behavior and image alternatives.
+The pace stroke and active dot share threshold-dependent colors.
+
+Validation: **183 tests**, full build/audit, 374-file artifact audit, and actual
+application dev/preview browser checks at 1440/390/320px. Chart JS is 152,918 bytes
+raw / 50,619 gzip (about 75% less than ECharts). Zack reports a preliminary
+Fast 4G load-time improvement of roughly half; no new controlled timing claim.
+All local test servers, including the isolated chart-parity server and its
+workerd children, are stopped. Current work is being published on the feature
+branch only; no merge, deployment or production-binding change is authorized.
+
+Next: remove unshipped ECharts comparison code/dependency and obsolete harnesses,
+move shared DTOs, then re-run verification. Stack reconciliation, hosted/live
+checks, full screen-reader review and production cutover remain separate.
+See `../tanstack-charts/application-review.md` and the updated `status.html`.
+
 One entry per verified round. Newest first. Each entry says what changed, what
 the baseline comparison showed, and what was decided.
 

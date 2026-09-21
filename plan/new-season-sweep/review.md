@@ -1,5 +1,28 @@
 # Review notes: new-season sweep
 
+## 2026-09-21 — Current accepted checkpoint
+
+**Approved:** SQLite migration, security gates and the TanStack application,
+including all visual/interaction refinements through `48b4d5e`. The historical
+findings below describe prior rounds, not outstanding TanStack chart defects.
+No merge or deployment has taken place. All local comparison/test servers are
+stopped; normal `pnpm start` remains the review entry point.
+
+Read next:
+
+1. `../tanstack-charts/application-review.md` — implementation, accepted
+   differences, tests, evidence and honestly scoped performance measurements.
+2. `../../data/README.md` and `../../docs/data-system.html` — approved authoring,
+   snapshot and Worker-boundary contracts.
+3. `../../docs/dependency-security.md` — audit gates and targeted remediation.
+4. `status.html` — current next steps and coordinated/deferred work.
+
+Latest checks: **183 tests**, full build/security/artifact audits, actual dev and
+preview at 1440/390/320px, including keyboard and pointer dot colors below/at/above
+threshold. Next work is ECharts reference cleanup, not another chart-design round.
+Keep the chart-parity checkpoint and historical evidence; then reverify before
+considering stack merge, hosted integration checks or production cutover.
+
 One running document for the exhaustive review at the end of the batch (Zack,
 2026-09-09: "better to have all things to review in front of me rather than
 slow-walking this"). One section per round, newest first. Each section has the
