@@ -17,11 +17,13 @@ import { scalePoint } from "@tanstack/charts/scales/point";
 import { tooltip } from "@tanstack/charts/tooltip";
 import { curveMonotoneX } from "d3-shape";
 
-import type { SurprisesByTeamChartProps } from "./surprises-by-team";
-import type { SurprisesPerSeasonChartProps } from "./surprises-per-season";
+import type {
+  SurprisesByTeamChartProps,
+  SurprisesPerSeasonChartProps,
+  TeamSeasonPaceChartData,
+  TeamSeasonScatterplotProps,
+} from "./data";
 import type { TrackerChart } from "./tanstack";
-import type { TeamSeasonPaceChartData } from "./team-season-pace";
-import type { TeamSeasonScatterplotProps } from "./team-season-scatter";
 
 import { signedFormatter } from "../../utils";
 import {

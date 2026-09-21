@@ -1,0 +1,37 @@
+{
+  "approvedChartCommit": "48b4d5e",
+  "browserChecks": {
+    "application": "passed",
+    "environments": [
+      "Astro dev",
+      "built static gzip server",
+      "Astro/workerd preview"
+    ],
+    "fontResilience": "passed: blocked and stalled fonts, all four charts",
+    "tooltipSafety": "passed: season, team, history, scatter"
+  },
+  "build": "passed, including security audit and 374-file artifact audit",
+  "chartBundle": {
+    "file": "tanstack-options.DlG-l1lQ.js",
+    "gzipBytes": 50619,
+    "identicalToApprovedBuild": true,
+    "rawBytes": 152918,
+    "sha256": "e734a19e484375769ce27a2537a6f71cba94c77ed9d3f235690d077959cefa66"
+  },
+  "date": "2026-09-21",
+  "dependencyChanges": [
+    "removed echarts@6.1.0",
+    "removed zrender@6.1.0",
+    "removed otherwise-unused tslib@2.3.0"
+  ],
+  "deployment": "none",
+  "screenshots": {
+    "builtStaticIdenticalPngs": 12,
+    "chartsPerViewport": 4,
+    "comparison": "SHA-256 of PNG files against approved pre-cleanup captures",
+    "devIdenticalPngs": 12,
+    "viewports": [1440, 390, 320]
+  },
+  "testServers": "stopped",
+  "tests": { "files": 25, "passed": 180 }
+}

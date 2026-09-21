@@ -1,5 +1,29 @@
 # New-season sweep: round log
 
+## 2026-09-21 — Accepted chart cleanup complete
+
+Moved all four chart payload interfaces into renderer-neutral
+`src/components/charts/data.ts`, retaining the same serialized contracts.
+Removed ECharts, zrender and their otherwise-unused tslib 2.3.0 dependency,
+eight unused renderer/controller/option modules, the legacy option test suite,
+and seven ECharts-specific browser harnesses. No unrelated package upgrades.
+Historical checkpoints, screenshots and measurement reports remain intact;
+`plan/baseline/legacy-notes.md` explains recovery and historical-only probes.
+
+Relevant coverage now uses real TanStack scene tests, current descriptions,
+DOM-construction unit spies for all four tooltip logo paths, actual browser
+malicious-name/quoted-URL fixtures, and blocked/stalled-font checks. Current
+suite: **180 tests**. Full build/security/artifact gates pass. All three current
+browser harnesses pass against dev and built static preview. The shared chart
+bundle and all **24 desktop/mobile dev/preview PNGs are byte-identical** to the
+approved pre-cleanup version. No style, font, lifecycle or chart behavior was
+changed in this cleanup. All test servers and child Workers are stopped.
+
+Next remains stack reconciliation and coordinated hosted/live review, not a
+merge or deployment. The follow-up request to explain styling, fonts and Astro
+lifecycle handling is documentation/assessment, not permission to change those
+accepted behaviors silently.
+
 ## 2026-09-21 — SQLite/security complete; TanStack review accepted
 
 Zack approved the application and all chart refinements through `48b4d5e`.

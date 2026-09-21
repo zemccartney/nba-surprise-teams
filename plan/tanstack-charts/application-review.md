@@ -1,9 +1,16 @@
 # TanStack application review
 
 **Accepted by Zack, 2026-09-21**, including all refinements through `48b4d5e`.
-All test servers are stopped. Next is removal of the unshipped ECharts comparison
-code/dependency and shared-DTO cleanup, followed by revalidation. No merge or
-deployment has been performed.
+The follow-up cleanup removes ECharts, its custom controllers and obsolete
+renderer-specific checks. Shared payload types now live in `data.ts`. No merge
+or deployment has been performed.
+
+Cleanup validation: **180 current tests**, full build/audits, application,
+malicious-tooltip-fixture and blocked/stalled-font browser checks in dev and
+built preview. The shared chart bundle and 24 dev/preview screenshots are
+byte-identical to the approved version. The same browser checks also pass
+under Astro/workerd preview. All test servers are stopped. See
+[cleanup evidence](results/cleanup.json).
 
 The actual Astro chart wrappers now mount **TanStack Charts 0.18.0**. Run the
 normal `pnpm start` command on `tanstack-charts`, then review:
@@ -28,11 +35,10 @@ ordinary executable chart scripts.
   leaving axis gutters on the page background as before. It does not change
   margins, plot dimensions, scales or focus geometry. Dotted grid rules are
   restricted to the plot interior and snapped to half-pixels for crisp strokes.
-- The prior ECharts modules remain temporarily as a comparison/test reference.
-  Their data interfaces are imported **type-only**. ECharts and its keyboard
-  controller are not imported by the application chart scripts or present in
-  the built client JavaScript. Remove the reference and move the shared DTOs
-  once this review is accepted.
+- `data.ts`: renderer-neutral DTOs, imported **type-only** by the Astro wrappers
+  and chart definitions. The ECharts modules, custom controllers, dependency and
+  formatter-option tests are removed. Historical source remains at the accepted
+  checkpoints; current coverage is mapped in `../baseline/README.md`.
 
 ## Preserved and tested
 
@@ -72,7 +78,7 @@ insets, colors and sparse ticks; typography and tick placement can differ.
 The initial chart drawing is immediate rather than the previous entrance
 animation. Native tooltips can be pinned with Enter/click and dismissed with
 Escape. The real-layout review is complete; the old comparison implementation
-can now be removed in a separate cleanup pass.
+has been removed without changing these accepted choices.
 
 ## Follow-up comparison with `chart-parity`
 

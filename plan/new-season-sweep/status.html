@@ -661,16 +661,16 @@
           <div
             class="bar"
             role="img"
-            aria-label="19 of 44 items done, 3 blocked, 22 not started"
+            aria-label="20 of 44 items done, 3 blocked, 21 not started"
           >
-            <span class="seg-done" style="flex: 19"></span>
+            <span class="seg-done" style="flex: 20"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 22"></span>
+            <span class="seg-open" style="flex: 21"></span>
           </div>
           <p class="tally">
-            <span class="k-done"><b>19</b> done and verified</span>
+            <span class="k-done"><b>20</b> done and verified</span>
             <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
-            <span class="k-open"><b>22</b> not started</span>
+            <span class="k-open"><b>21</b> not started</span>
             <span>44 tracked</span>
           </p>
         </div>
@@ -701,7 +701,7 @@
             </li>
             <li>
               <a href="#s5"
-                >5 · Infra &amp; deferred<span class="count">1/15</span></a
+                >5 · Infra &amp; deferred<span class="count">2/15</span></a
               >
             </li>
           </ul>
@@ -812,11 +812,12 @@ mise run setup</code></pre>
                 servers are stopped. No merge or deployment has been performed.
               </p>
               <p>
-                Next: remove the retained ECharts comparison implementation and
-                dependency, move shared DTOs into renderer-neutral modules, and
-                retire obsolete harnesses deliberately. Re-run full verification
-                and browser checks before stack reconciliation and the remaining
-                coordinated live/hosted review. See
+                ECharts cleanup is complete: renderer-neutral DTOs, no old
+                controllers/dependency, and current tests replacing obsolete
+                renderer-specific checks. The chart bundle and 24 dev/preview
+                screenshots are byte-identical to the approved build. Next:
+                reconcile the branch stack and coordinate remaining live/hosted
+                review before any merge or production cutover. See
                 <a href="../tanstack-charts/application-review.md"
                   >the accepted chart review</a
                 >.
@@ -1476,7 +1477,7 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">05</span>
               <h2>Infrastructure and deferred rounds</h2>
-              <span class="count">1 / 15 done</span>
+              <span class="count">2 / 15 done</span>
             </div>
 
             <ul class="items">
@@ -1497,19 +1498,23 @@ mise run setup</code></pre>
                   </p>
                 </div>
               </li>
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
                   <p class="item-title">
-                    Remove ECharts comparison scaffolding — next
+                    ECharts comparison cleanup — complete
                   </p>
                   <p class="item-note">
-                    With the TanStack review accepted, move shared DTOs out of
-                    reference files; remove unused ECharts, the old controller,
-                    dependency and obsolete tests/harnesses. Keep historical
-                    evidence and the chart-parity checkpoint. Revalidate data,
-                    keyboard/hover behavior, images, layout and bundle
-                    boundaries.
+                    DTOs moved to <code>src/components/charts/data.ts</code>.
+                    ECharts, zrender and their unused tslib version removed; no
+                    unrelated dependency upgrades. Old renderer/controllers and
+                    seven browser harnesses retired, with historical Git
+                    checkpoints and evidence retained. Current scene,
+                    description, DOM-construction, browser-safety and
+                    font-resilience tests preserve relevant coverage. 180
+                    current tests, full build and dev/preview checks pass
+                    without visual or chart-bundle changes. All test servers are
+                    stopped.
                   </p>
                 </div>
               </li>

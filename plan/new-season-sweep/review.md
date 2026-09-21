@@ -1,5 +1,23 @@
 # Review notes: new-season sweep
 
+## 2026-09-21 — Cleanup verification
+
+ECharts source, controllers and dependency are removed; chart DTOs are now in
+`src/components/charts/data.ts`. Historical evidence is preserved. See
+`../baseline/README.md` for the current test map and `legacy-notes.md` in that
+folder for retired commands.
+
+**180 current tests** and full build/audits pass. Dev and built-preview checks
+cover all charts, quoted/malicious tooltip fixtures, blocked/stalled fonts and
+normal keyboard/pointer behavior. The chart JS and 24 screenshots are
+byte-identical to the approved version. Test servers are stopped. The differing
+test count reflects replacing the 15-case ECharts option suite with 12 current
+description/DOM-builder cases, not changing or dropping the TanStack scene suite;
+real browser safety/resilience checks supplement those unit gates.
+
+No merge or deployment. Style/font/lifecycle simplifications are an explicit
+follow-up assessment, not included in this behavior-preserving cleanup.
+
 ## 2026-09-21 — Current accepted checkpoint
 
 **Approved:** SQLite migration, security gates and the TanStack application,

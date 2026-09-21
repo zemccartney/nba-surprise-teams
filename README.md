@@ -196,8 +196,9 @@ settled on; the site should render exactly as it did under Tailwind 4.1.
   vanilla DOM host by ordinary Astro `<script>` tags—no React or `client:*`
   hydration. Inline JSON carries the original domain rows. TanStack owns focus,
   keyboard navigation and resize; our definitions retain domain descriptions,
-  image alternatives and design tokens. The prior ECharts modules remain an
-  unshipped comparison reference during [application review](plan/tanstack-charts/application-review.md).
+  image alternatives and design tokens. Renderer-neutral payload types live in
+  `src/components/charts/data.ts`. ECharts and the old custom controllers have
+  been removed after [application review](plan/tanstack-charts/application-review.md).
 - **Regression check:** `plan/baseline/` captures screenshots and payload sizes
   for a build and diffs two captures. Run it against a reference before and after
   any styling change; see its README.

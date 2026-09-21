@@ -41,9 +41,14 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
 - `tanstack-charts.test.ts`: application scene rendering, explicit domains/colors,
   original-row identity, zero/empty/shortened seasons, responsive date ticks and
   escaped SVG threshold alternatives.
-- `chart-options.test.ts`: retained ECharts comparison options, descriptions,
-  keyboard ordering, active-point styling, and escaped alternatives for all four
-  tooltip logo paths (including historical identities).
+- `chart-descriptions.test.ts`: current textual descriptions, signed pace,
+  zero counts, result announcements and historical identity ranges. Domain/order
+  and styling assertions live in `tanstack-charts.test.ts`; actual tooltip DOM
+  safety is exercised by the browser fixture harness below.
+- `chart-tooltip.test.ts`: actual body builders must use literal DOM text,
+  meaningful image alternatives and unchanged source strings for season, team,
+  history and scatter. A construction spy rejects HTML parsing; the separate
+  browser tests verify actual DOM serialization and attribute safety.
 - `chart-fonts.test.ts`: successful, failed and stalled font readiness, including
   the timeout/timer cleanup.
 - `preview-alias.test.ts`: valid, bounded, deterministic and collision-resistant
@@ -70,10 +75,13 @@ See [the test/tooling review](../plan/new-season-sweep/prelaunch-review/test-too
 for the fresh/stale/missing-game and watch-mode negative controls.
 
 Browser regressions remain in the standalone `plan/baseline` module. See its
-README for dev/preview commands. `chart-image-labels.mjs` checks real tooltip images,
-SVG emoji names, the control's accessible description and resize persistence.
-`tanstack-application.mjs` checks the current TanStack application; the older
-ECharts-specific keyboard/image harnesses remain comparison references.
-They are not part of Vitest, hooks or CI yet.
+README for dev/preview commands. `tanstack-application.mjs` checks the current
+application, image alternatives, interaction, colors and resize persistence.
+`tanstack-tooltip-safety.mjs` injects isolated malicious-name/quoted-URL fixtures
+into real chart payloads for all four logo paths, including historical teams.
+`tanstack-resilience.mjs` exercises blocked/stalled fonts in the actual browser.
+The ECharts formatter tests and renderer-specific browser scripts are retired;
+historical source and evidence remain available through Git and `runs/`.
+Browser scripts are not part of Vitest, hooks or CI yet.
 Workflow security linting is separate: `mise x -- pnpm run lint:workflows` runs
 pinned zizmor offline with strict collection, and is included in verify/build.
