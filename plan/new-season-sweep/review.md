@@ -16,7 +16,10 @@ description/DOM-builder cases, not changing or dropping the TanStack scene suite
 real browser safety/resilience checks supplement those unit gates.
 
 No merge or deployment. Style/font/lifecycle simplifications are an explicit
-follow-up assessment, not included in this behavior-preserving cleanup.
+follow-up assessment, not included in this behavior-preserving cleanup. The
+[illustrated implementation guide](../../docs/tanstack-charts.html) explains
+which parts are necessary and identifies three candidates: direct CSS-variable
+paints, relying on native late-font redraw, and removing the unused router hook.
 
 ## 2026-09-21 — Current accepted checkpoint
 

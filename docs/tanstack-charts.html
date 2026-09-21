@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TanStack charts: what the code is doing</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #10151d;
+        --panel: #19212d;
+        --ink: #edf2fa;
+        --muted: #b7c3d4;
+        --accent: #b9ec77;
+        --border: #42516a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          17px/1.65 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 1080px;
+        margin: auto;
+        padding: 2rem 1.25rem 5rem;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        max-width: 20ch;
+      }
+      h2 {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+      h3 {
+        margin-top: 1.5rem;
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 0.2em;
+      }
+      code,
+      pre {
+        font-family: ui-monospace, monospace;
+      }
+      code {
+        font-size: 0.9em;
+        overflow-wrap: anywhere;
+      }
+      pre {
+        padding: 1rem;
+        background: #0b1018;
+        border: 1px solid var(--border);
+        overflow: auto;
+        line-height: 1.5;
+      }
+      pre code {
+        overflow-wrap: normal;
+      }
+      .meta,
+      .note {
+        color: var(--muted);
+      }
+      .callout {
+        border-left: 4px solid var(--accent);
+        padding: 0.25rem 1.25rem;
+        background: var(--panel);
+      }
+      .columns {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+      }
+      .card {
+        background: var(--panel);
+        padding: 1rem 1.25rem;
+        border: 1px solid var(--border);
+      }
+      .card h3 {
+        margin-top: 0;
+      }
+      .flow {
+        padding-left: 1.75rem;
+      }
+      .flow li {
+        padding: 0.65rem 1rem;
+        margin-bottom: 0.6rem;
+        background: var(--panel);
+      }
+      .flow strong {
+        color: var(--accent);
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--border);
+        padding: 0.8rem;
+      }
+      th {
+        color: var(--accent);
+      }
+      td:first-child {
+        min-width: 10rem;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .demo {
+        --demo-color: oklch(76.8% 0.233 130.85);
+        padding: 1rem;
+        background: #080d14;
+        margin-top: 1rem;
+      }
+      #change-token:checked ~ .demo {
+        --demo-color: oklch(67.3% 0.182 276.935);
+      }
+      input {
+        accent-color: var(--accent);
+      }
+      input:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+      details {
+        border: 1px solid var(--border);
+        padding: 1rem;
+        margin-block: 1rem;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+      }
+      @media (max-width: 650px) {
+        .columns {
+          grid-template-columns: 1fr;
+        }
+        main {
+          padding-inline: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="meta">
+        Implementation review · TanStack Charts 0.18.0 · 2026-09-21
+      </p>
+      <h1>What is all this chart code doing?</h1>
+      <p>
+        The chart library supplies the renderer and interaction system. Our code
+        supplies NBA data, the site's presentation rules, and the bridge from
+        Astro's HTML to that library. Those are different responsibilities—and
+        not every compatibility choice we carried over is still necessary.
+      </p>
+      <div class="callout">
+        <p>
+          <strong
+            >Three useful simplifications emerged from checking the actual
+            code:</strong
+          >
+        </p>
+        <ul>
+          <li>
+            <strong>Color conversion:</strong> the SVG renderer can use CSS
+            variables directly. Our one-pixel canvas conversion is a
+            legacy-parity choice, not a TanStack requirement.
+          </li>
+          <li>
+            <strong>Font waiting:</strong> TanStack already invalidates text
+            measurements and redraws when fonts finish loading. Our extra wait
+            favors a stable first layout, but is not required for that recovery.
+          </li>
+          <li>
+            <strong>Astro swap cleanup:</strong> the app does not currently use
+            <code>ClientRouter</code>. The
+            <code>astro:before-swap</code> listener is therefore dormant.
+          </li>
+        </ul>
+        <p>
+          These are findings and proposals,
+          <strong>not changes silently applied to the approved charts</strong>.
+          The ECharts cleanup at <code>c4635b0</code> left the chart bundle and
+          24 comparison screenshots byte-identical.
+        </p>
+      </div>
+      <nav aria-label="Guide sections">
+        <a href="#flow">Rendering flow</a> · <a href="#colors">Colors</a> ·
+        <a href="#fonts">Fonts</a> · <a href="#svg">SVG adjustments</a> ·
+        <a href="#lifecycle">Mounting and Astro</a> ·
+        <a href="#assessment">What earns its keep?</a>
+      </nav>
+
+      <h2 id="flow">1. The rendering flow</h2>
+      <ol class="flow">
+        <li>
+          <strong>Astro wrapper → HTML + data.</strong> Each
+          <code>.astro</code> chart wrapper emits a 600px-tall host and a
+          non-executable <code>application/json</code> script. Ordinary bundled
+          JavaScript starts the chart. No React, framework hydration, or
+          <code>client:*</code> directive is involved.
+        </li>
+        <li>
+          <strong>Mount adapter → start at the right time.</strong>
+          <code>tanstack.ts</code> reads the payload, waits until the chart is
+          visible or focused, currently waits briefly for fonts, then calls the
+          library's <code>mountChartRenderer</code>.
+        </li>
+        <li>
+          <strong>Definition → what the chart means.</strong>
+          <code>tanstack-options.ts</code> chooses bars, lines, area fills,
+          rules, scales, labels, data ordering, tooltip content and threshold
+          colors.
+        </li>
+        <li>
+          <strong>TanStack → layout and interaction.</strong> The library
+          computes a scene, measures text, handles resizing, keyboard/pointer
+          focus, tooltip positioning, pinning and dismissal.
+        </li>
+        <li>
+          <strong>Our SVG adapter → a few appearance corrections.</strong>
+          <code>tanstack-svg.ts</code> limits the background to the plot,
+          removes boundary grid lines, aligns grid strokes, and includes the
+          threshold annotation in every rendered SVG.
+        </li>
+        <li>
+          <strong>Browser → SVG + HTML tooltip.</strong> The chart is SVG; the
+          tooltip is ordinary HTML. CSS already supplies the font family,
+          tooltip appearance and keyboard outline.
+        </li>
+      </ol>
+      <pre><code>Astro's original rows ──→ JSON ──→ chart definition ──→ TanStack scene
+                                                     │
+CSS variables ──→ role mapping / current conversion ──┘
+                                                     │
+                                      small SVG adapter
+                                                     │
+                                           SVG + HTML tooltip
+                                                     ↑
+                                    fonts / global and chart CSS</code></pre>
+      <dl>
+        <dt><strong>Mark</strong></dt>
+        <dd>
+          A visual layer: bars, a line, an area, a dot, or a reference rule.
+        </dd>
+        <dt><strong>Scale</strong></dt>
+        <dd>
+          A mapping from a data value to a coordinate or color. It is not a CSS
+          scale transform.
+        </dd>
+        <dt><strong>Scene</strong></dt>
+        <dd>
+          The library's intermediate drawing recipe: plot bounds, points, text
+          and other nodes. It is not yet DOM.
+        </dd>
+      </dl>
+      <p>
+        <code>data.ts</code> is just the shared TypeScript payload contract.
+        Those interfaces disappear from JavaScript; they do not introduce
+        another runtime data layer.
+      </p>
+
+      <h2 id="colors">2. Why are we “recreating” colors?</h2>
+      <p>
+        <strong>We are not maintaining a second palette.</strong> The values
+        originate in <a href="../src/styles/global.css">global.css</a>. But we
+        currently copy them into a JavaScript role map and convert them into
+        another notation.
+      </p>
+      <pre><code>--color-lime-500: oklch(76.8% 0.233 130.85)
+          │ getComputedStyle(root).getPropertyValue(...)
+          ▼
+       CSS color string
+          │ paint one pixel into an offscreen sRGB canvas
+          │ read its red / green / blue bytes
+          ▼
+        #7ccf00
+          │ chartTheme: foreground; marks: stroke/fill
+          ▼
+     SVG paint attributes</code></pre>
+      <p>
+        The canvas is <strong>not drawing the chart</strong>. It is a one-pixel
+        color converter. ECharts needed resolved colors because its
+        animation/color parser could not handle our OKLCH strings reliably.
+        During the port I retained the reference's sRGB output to minimize color
+        changes.
+      </p>
+      <p>
+        <strong
+          >That parser restriction does not apply to our TanStack SVG
+          renderer.</strong
+        >
+        Its serializer passes paint strings through to SVG. We can instead use:
+      </p>
+      <pre><code>// Proposed simplification—not currently applied.
+const theme = {
+  foreground: "var(--color-lime-500)",
+  muted: "var(--color-lime-500)",
+  grid: "var(--color-lime-200)",
+  palette: ["var(--color-green-700)", "var(--color-red-700)"],
+};</code></pre>
+      <p>
+        The <em>mapping</em> is still useful: CSS defines the palette, but
+        cannot infer that eliminated teams are red, the plot is slate, or a
+        below-threshold focus dot should use the brighter red. The
+        <em>conversion</em> is optional. Direct variables also follow future CSS
+        theme changes automatically; the current JavaScript snapshot does not.
+      </p>
+      <p>
+        The main cause of the muted text you reported was
+        <strong>opacity</strong>, not an inability to use CSS colors. TanStack's
+        axis-title/tick defaults were 76%/68%; reference rules defaulted to 50%.
+        Our explicit opacity values override those. Grid rules were already
+        opaque; fractional stroke positioning softened their appearance.
+      </p>
+      <div class="card">
+        <h3>A live CSS-variable demonstration</h3>
+        <p>
+          This standalone diagram mirrors the lime token for illustration. It
+          does not load or change the app.
+        </p>
+        <input id="change-token" type="checkbox" />
+        <label for="change-token">Change the demo's CSS token to purple</label>
+        <div class="demo">
+          <svg
+            viewBox="0 0 600 135"
+            role="img"
+            aria-labelledby="demo-title demo-desc"
+          >
+            <title id="demo-title">
+              Live CSS variable versus a fixed color snapshot
+            </title>
+            <desc id="demo-desc">
+              The left swatch references a CSS variable and changes with the
+              checkbox. The right swatch contains a fixed hex value and stays
+              lime.
+            </desc>
+            <rect
+              x="20"
+              y="10"
+              width="250"
+              height="65"
+              fill="var(--demo-color)"
+            />
+            <rect x="330" y="10" width="250" height="65" fill="#7ccf00" />
+            <text
+              x="145"
+              y="110"
+              text-anchor="middle"
+              fill="#edf2fa"
+              font-size="17"
+            >
+              fill="var(--demo-color)"
+            </text>
+            <text
+              x="455"
+              y="110"
+              text-anchor="middle"
+              fill="#edf2fa"
+              font-size="17"
+            >
+              fill="#7ccf00"
+            </text>
+          </svg>
+        </div>
+        <p class="note">
+          Direct OKLCH and converted sRGB may look identical on your display, or
+          differ slightly through gamut mapping. Removing conversion deserves a
+          visual comparison—not a claim that variables are unsupported, or a
+          promise of a major speedup.
+        </p>
+      </div>
+      <h3>What is already using CSS directly?</h3>
+      <ul>
+        <li><code>.chart { font-family: var(--font-mono) }</code>.</li>
+        <li>
+          Tooltip background, text, shadow, padding and font via the library's
+          <code>--ts-chart-tooltip-*</code> properties, mapped to our existing
+          tokens.
+        </li>
+        <li>
+          The lime keyboard outline, tooltip headings, list spacing and image
+          styling.
+        </li>
+      </ul>
+      <p>
+        The new <code>--color-pace-red</code> is a genuinely new accent, not a
+        duplicate palette: the red fill's hue, lime's chroma, and the same +24.1
+        OKLCH lightness lift that separates the green fill from the lime line.
+        Conversion to sRGB means this is a design starting point, not an exact
+        on-screen contrast-ratio guarantee.
+      </p>
+
+      <h2 id="fonts">3. Why the font code?</h2>
+      <p>
+        Charts measure text before deciding where to put it. Font choice affects
+        label widths, collisions, tick thinning and whether the final date fits
+        inside the page.
+      </p>
+      <div class="columns">
+        <div class="card">
+          <h3>Without our extra wait</h3>
+          <p>
+            Render using the available font → the webfont arrives → TanStack
+            clears its text-measurement cache and redraws.
+          </p>
+          <p>
+            Earlier chart visibility, but potentially a second layout and a
+            visible change in label spacing.
+          </p>
+        </div>
+        <div class="card">
+          <h3>With the current wait</h3>
+          <p>
+            Request regular and bold chart fonts → wait for completion
+            <em>or 1.5 seconds</em> → render with whichever font is available.
+          </p>
+          <p>
+            Favors stable first layout. Failed fonts are caught; stalled fonts
+            cannot hold the chart indefinitely.
+          </p>
+        </div>
+      </div>
+      <p>
+        <a href="../src/layouts/layout.astro">layout.astro</a> already imports
+        Iosevka Curly 400 and 700.
+        <a href="../src/components/charts/fonts.ts">fonts.ts</a> does not
+        install another font or generate one;
+        <code>document.fonts.load()</code> asks the browser to load those
+        registered faces.
+      </p>
+      <p>
+        <strong>Important correction to the original rationale:</strong> the
+        library already handles late fonts. In 0.18.0,
+        <code>renderer.js</code> listens for
+        <code>document.fonts.loadingdone</code>, calls
+        <code>domText.invalidate()</code>, and schedules a fresh render. Our
+        wait is therefore a <strong>first-paint policy</strong>, not a necessary
+        fix for permanently wrong font measurements.
+      </p>
+      <p>
+        I would test removing that wait and relying on the library. Compare
+        cold/slow font loading, fallback-to-webfont layout, keyboard entry
+        during loading and mobile labels. The maximum added wait is 1.5 seconds
+        per chart activation; that is a possible delay, not a measured saving we
+        can simply subtract from every load.
+      </p>
+      <h3>Why specify font sizes and weight in chart options?</h3>
+      <p>
+        Some styling is also layout input. We request 20px bold titles and 16px
+        bold ticks in the definition so the library measures what it draws.
+        Merely forcing <code>font-size</code> or <code>font-weight</code> onto
+        generated SVG text with CSS could make the painted text differ from the
+        measured text.
+      </p>
+      <p>
+        More inheritance may be possible—the library reads the host's computed
+        typography—but it should be tested as a coordinated simplification. Font
+        family is already inherited. We do not need to duplicate the whole
+        global stylesheet in JavaScript.
+      </p>
+
+      <h2 id="svg">4. Why an SVG adapter?</h2>
+      <p>
+        Our accepted design distinguishes the whole chart box from the plotting
+        rectangle:
+      </p>
+      <svg
+        viewBox="0 0 720 310"
+        role="img"
+        aria-labelledby="plot-title plot-desc"
+      >
+        <title id="plot-title">
+          Axis gutters sit outside the plotting background
+        </title>
+        <desc id="plot-desc">
+          A dark plotting rectangle contains data and interior grid lines. The
+          title and tick labels sit in transparent gutters outside it. An outer
+          outline belongs to the chart host.
+        </desc>
+        <rect
+          x="8"
+          y="8"
+          width="704"
+          height="294"
+          fill="#10240d"
+          stroke="#9ae600"
+          stroke-width="2"
+        />
+        <rect x="120" y="30" width="550" height="215" fill="#020618" />
+        <path
+          d="M120 100H670 M120 175H670 M300 30V245 M480 30V245"
+          stroke="#d8f999"
+          stroke-dasharray="3 3"
+        />
+        <rect x="220" y="135" width="45" height="110" fill="#008236" />
+        <rect x="390" y="65" width="45" height="180" fill="#d8f999" />
+        <text
+          x="400"
+          y="278"
+          fill="#7ccf00"
+          text-anchor="middle"
+          font-size="20"
+          font-weight="700"
+        >
+          X-axis title / date labels
+        </text>
+        <text
+          transform="translate(52 140) rotate(-90)"
+          fill="#7ccf00"
+          text-anchor="middle"
+          font-size="20"
+          font-weight="700"
+        >
+          Y-axis title
+        </text>
+        <text x="648" y="53" fill="#b7c3d4" text-anchor="end" font-size="15">
+          plot only
+        </text>
+      </svg>
+      <ul>
+        <li>
+          <strong>Background:</strong> the default theme background covered the
+          entire SVG. We turn that off and insert a rectangle using the scene's
+          exact plot bounds, leaving the gutters transparent.
+        </li>
+        <li>
+          <strong>Grid:</strong> the default grid uses all scale ticks,
+          including endpoints. We keep endpoint labels but omit grid lines on
+          the plot boundary. This avoids dotted borders.
+        </li>
+        <li>
+          <strong>Crisp strokes:</strong> interior one-pixel grid lines are
+          placed on half-pixels so they do not split their coverage across
+          neighboring pixels. This changes grid presentation, not data
+          positions.
+        </li>
+        <li>
+          <strong>Threshold label and emoji:</strong> our annotation is part of
+          the renderer output. Appending it to the DOM only once would be
+          fragile: focus/resize redraws can replace the SVG and erase it.
+        </li>
+      </ul>
+      <p>
+        These are small scene-presentation adjustments, not our own chart
+        engine. Native configuration should replace them if a suitable API
+        becomes available. A CSS <code>shape-rendering</code> experiment might
+        replace explicit grid snapping; that is a candidate to compare, not a
+        verified equivalent.
+      </p>
+      <h3>The pace line and dot</h3>
+      <pre><code>projected wins &gt;= threshold   → lime line / lime focus dot
+projected wins &lt;  threshold   → bright red line / bright red focus dot
+
+one continuous smoothed path
+    + hard SVG gradient stop at the threshold
+    = exact color crossing, without splitting or duplicating games</code></pre>
+      <p>
+        The line gradient uses the line's own bounding box. For example, top 82,
+        bottom 18, threshold 38 gives a stop of
+        <code>(82 − 38) / (82 − 18) = 68.75%</code> from the top. Flat and
+        one-sided lines use solid colors.
+      </p>
+      <p>
+        The dot needs its own per-row color rule. Reusing the path gradient on a
+        small circle would apply that gradient to the circle's bounding box,
+        potentially splitting the dot into two colors. Instead, a native
+        <code>focusGuideX</code> marker uses the original row's projected wins
+        to select one fill and outline color. TanStack still handles the pointer
+        and arrow keys.
+      </p>
+
+      <h2 id="lifecycle">5. Mounting, focus and astro:before-swap</h2>
+      <h3>Mounting is mostly integration glue</h3>
+      <ul>
+        <li>
+          <strong>Visibility or focus starts the chart.</strong> Lazy mounting
+          avoids doing every chart's layout immediately. Keyboard focus also
+          triggers it, so an offscreen/unmounted chart is not inaccessible.
+        </li>
+        <li>
+          <strong>One tab stop.</strong> Before mounting, the host is the
+          loading target. After mounting, the SVG owns focus. If the user is
+          still on the host, we transfer focus; if they moved away during the
+          font wait, we do not steal it back.
+        </li>
+        <li>
+          <strong>One instance.</strong> The mounted flag prevents visibility
+          and focus events from creating duplicate charts.
+        </li>
+        <li>
+          <strong>Visible failure.</strong> Mounting failures get an alert
+          message instead of a silently empty chart.
+        </li>
+        <li>
+          <strong>Native tooltips.</strong> We supply safe DOM content using the
+          original row; the library handles placement, navigation and dismissal.
+          The helper names <code>node</code>, <code>add</code> and
+          <code>logo</code> are conveniences, not requirements of TanStack.
+        </li>
+      </ul>
+      <p>
+        The focus outline belongs to the <em>host</em> via
+        <code>.chart:has(svg:focus-visible)</code>. Stats deliberately clips
+        descendants to prevent tooltip overflow; an outline on the SVG itself
+        was clipped away. That CSS solves an actual reviewed defect without
+        adding another keyboard controller.
+      </p>
+      <h3>What the Astro event means</h3>
+      <p>
+        <code>astro:before-swap</code> is emitted by Astro's
+        <strong>client-side router</strong> before it replaces the old page DOM
+        during a client navigation. The JavaScript document survives that kind
+        of navigation.
+      </p>
+      <div class="columns">
+        <div class="card">
+          <h3>ClientRouter navigation</h3>
+          <p>
+            Old DOM → before-swap → destroy old chart/listeners/observers →
+            replace DOM → initialize new charts.
+          </p>
+          <p>
+            Explicit cleanup matters because the document and its listeners
+            survive.
+          </p>
+        </div>
+        <div class="card">
+          <h3>This app today</h3>
+          <p>
+            Normal page navigation → browser loads a new document. No
+            <code>ClientRouter</code> is present.
+          </p>
+          <p>
+            Our before-swap listener does not run in normal navigation. The old
+            page is discarded or preserved together in the browser's
+            back/forward cache.
+          </p>
+        </div>
+      </div>
+      <p>
+        The handler disconnects our observer, removes the loading-focus
+        listener, calls TanStack's <code>destroy()</code>, and marks pending
+        asynchronous work as disposed. That would prevent a font wait from later
+        mounting into a discarded host.
+      </p>
+      <p>
+        <strong
+          >My assessment: remove this dormant scaffolding unless client routing
+          is planned.</strong
+        >
+        If we add ClientRouter later, we need a complete lifecycle
+        plan—including initializing new pages, not just destroying old charts.
+        This listener alone does not make the current adapter
+        client-router-ready. It is not a general hook for every Astro update,
+        server island, resize or ordinary page unload.
+      </p>
+
+      <h2 id="assessment">6. What earns its keep?</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Piece</th>
+              <th>Assessment</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Plain DTOs and Astro data wrappers</td>
+              <td>Keep</td>
+              <td>
+                Carry original domain rows and server-resolved asset URLs
+                without importing server/data machinery into the client.
+              </td>
+            </tr>
+            <tr>
+              <td>Marks, scale domains and data ordering</td>
+              <td>Keep</td>
+              <td>
+                These define the chart's meaning. Explicit configured scale
+                instances prevent the domain/color reinference observed with
+                factories.
+              </td>
+            </tr>
+            <tr>
+              <td>Semantic palette mapping</td>
+              <td>Keep, simplify values</td>
+              <td>
+                The library needs to know which token serves each role. The
+                values can be CSS variable references.
+              </td>
+            </tr>
+            <tr>
+              <td>One-pixel color conversion</td>
+              <td>Good removal candidate</td>
+              <td>
+                Legacy parser/parity history, not an SVG requirement. Check
+                gamut and screenshot differences.
+              </td>
+            </tr>
+            <tr>
+              <td>Extra 1.5-second font wait</td>
+              <td>Presentation choice; test removal</td>
+              <td>
+                Native font-load redraw already exists. Compare earlier fallback
+                paint against first-layout stability.
+              </td>
+            </tr>
+            <tr>
+              <td>Axis sizes, bold weight, opacity</td>
+              <td>Keep layout and paint in sync</td>
+              <td>
+                Override unsuitable defaults without making measured text
+                disagree with CSS-painted text.
+              </td>
+            </tr>
+            <tr>
+              <td>Plot-only backdrop, interior grid, annotation</td>
+              <td>Keep for the accepted design</td>
+              <td>
+                Concrete differences from default rendering. Prefer simpler
+                native/CSS replacements only after proving equivalence.
+              </td>
+            </tr>
+            <tr>
+              <td>Lazy mount and focus transfer</td>
+              <td>Keep unless intentionally going eager</td>
+              <td>
+                Useful loading policy plus correct keyboard entry. Not a second
+                interaction controller.
+              </td>
+            </tr>
+            <tr>
+              <td>before-swap handler</td>
+              <td>Remove for today's navigation model</td>
+              <td>
+                No ClientRouter; currently dormant. Revisit alongside actual
+                client navigation support.
+              </td>
+            </tr>
+            <tr>
+              <td>Tooltip DOM builders and image alternatives</td>
+              <td>Keep the safety/content contract</td>
+              <td>
+                Library defaults cannot know our team history, logos or
+                descriptions. Helper organization can be simplified.
+              </td>
+            </tr>
+            <tr>
+              <td>Generic TypeScript parameters</td>
+              <td>Compile-time safety</td>
+              <td>
+                Link each chart's rows and axes to tooltip/focus callbacks. They
+                add no runtime JavaScript.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <strong>A sensible next simplification pass:</strong> remove the dormant
+        router branch, replace color snapshots with CSS references, then
+        separately compare eager/native font recovery against our extra wait.
+        Keep those changes reviewable and do not conflate them with the
+        already-completed ECharts deletion.
+      </p>
+      <p>
+        Re-run the current application, tooltip-safety and font-resilience
+        harnesses. Add a <em>delayed successful</em> font-load comparison before
+        changing the wait—the existing blocked/stalled tests prove availability,
+        not how attractive the eventual font swap is. Check keyboard focus
+        during loading, narrow label bounds, both line/dot colors, and dynamic
+        variable changes. No performance claim without a new measurement.
+      </p>
+
+      <h2>Source map and verification</h2>
+      <ul>
+        <li>
+          <a href="../src/components/charts/tanstack.ts">tanstack.ts</a> — lazy
+          mounting, focus transfer, current wait and cleanup hook.
+        </li>
+        <li>
+          <a href="../src/components/charts/tanstack-options.ts"
+            >tanstack-options.ts</a
+          >
+          — four definitions, descriptions, tooltips, gradients and marker
+          colors.
+        </li>
+        <li>
+          <a href="../src/components/charts/tanstack-style.ts"
+            >tanstack-style.ts</a
+          >
+          — current palette conversion, theme/axis helpers and tooltip DOM
+          conveniences.
+        </li>
+        <li>
+          <a href="../src/components/charts/charts.css">charts.css</a> — direct
+          CSS-variable styling and the host focus outline.
+        </li>
+        <li>
+          <a href="../src/components/charts/fonts.ts">fonts.ts</a> —
+          regular/bold loading with a bounded wait.
+        </li>
+        <li>
+          <a href="../src/components/charts/tanstack-svg.ts">tanstack-svg.ts</a>
+          — presentation-only SVG adjustments.
+        </li>
+        <li>
+          <a href="../plan/baseline/README.md">Validation map</a> and
+          <a href="../plan/tanstack-charts/application-review.md"
+            >accepted application review</a
+          >.
+        </li>
+      </ul>
+      <details>
+        <summary>
+          What was checked in the pinned library and Astro source?
+        </summary>
+        <ul>
+          <li>
+            <code>@tanstack/charts/dist/renderer.js</code>: the loadingdone
+            listener, text-cache invalidation, scheduled redraw and destroy
+            cleanup.
+          </li>
+          <li>
+            <code>dist/dom-text.js</code>: reads host computed typography and
+            uses canvas text measurement. This is separate from our
+            color-conversion canvas; the displayed chart remains SVG.
+          </li>
+          <li>
+            <code>dist/svg.js</code> and <code>dist/svg-renderer.js</code>:
+            paint strings pass through to SVG attributes; known gradient URLs
+            get ID scoping.
+          </li>
+          <li>
+            <code>dist/scene.js</code> and <code>dist/rule.js</code>: the
+            background/grid generation and opacity defaults.
+          </li>
+          <li>
+            <code>astro/dist/transitions/events.js</code> and
+            <code>router.js</code>: before-swap belongs to client navigation.
+            Application source contains no ClientRouter or ViewTransitions
+            component.
+          </li>
+        </ul>
+        <p>
+          These findings apply to the currently pinned versions, not a promise
+          about every future TanStack release or another rendering backend.
+        </p>
+      </details>
+    </main>
+  </body>
+</html>

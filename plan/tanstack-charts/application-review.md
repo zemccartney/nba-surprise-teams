@@ -12,6 +12,12 @@ byte-identical to the approved version. The same browser checks also pass
 under Astro/workerd preview. All test servers are stopped. See
 [cleanup evidence](results/cleanup.json).
 
+For the reasoning behind the adapter, styling and fonts—and the optional code
+we can simplify next—see the [illustrated implementation guide](../../docs/tanstack-charts.html).
+The native library already redraws on font completion, SVG can use CSS variables
+directly, and this app does not use ClientRouter. Those findings are an assessment,
+not changes made during the behavior-preserving cleanup.
+
 The actual Astro chart wrappers now mount **TanStack Charts 0.18.0**. Run the
 normal `pnpm start` command on `tanstack-charts`, then review:
 
