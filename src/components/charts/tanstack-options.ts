@@ -34,7 +34,7 @@ import {
   labeled,
   logo,
   node,
-  readTheme,
+  theme as t,
   ticks,
 } from "./tanstack-style";
 
@@ -89,7 +89,6 @@ export const seasonChart = (
   { data }: SurprisesPerSeasonChartProps,
   height: number,
 ): TrackerChart<Season, string, number> => {
-  const t = readTheme();
   const rows = data.toSorted((a, b) => Number(a.seasonId) - Number(b.seasonId));
   const colors = new Map(data.map((row, i) => [row, i % 2 ? t.pale : t.green]));
   const fill = (row: Season) => colors.get(row) ?? t.green;
@@ -211,7 +210,6 @@ export const teamBody = (row: Team): HTMLElement => {
 export const teamChart = ({
   data,
 }: SurprisesByTeamChartProps): TrackerChart<Team, string, number> => {
-  const t = readTheme();
   const rows = data.toSorted((a, b) => a.teamId.localeCompare(b.teamId));
   const min =
     -Math.ceil(Math.max(1, ...rows.map((r) => r.numEliminated)) / 5) * 5;
@@ -308,7 +306,6 @@ export const scatterBody = (r: Scatter): HTMLElement =>
 export const scatterChart = ({
   data,
 }: TeamSeasonScatterplotProps): TrackerChart<Scatter, number, number> => {
-  const t = readTheme();
   const rows = data.toSorted(
     (a, b) =>
       a.overUnder - b.overUnder ||
@@ -394,7 +391,6 @@ export const paceChart = ({
   surpriseRules,
   winsToSurprise,
 }: TeamSeasonPaceChartData): TrackerChart<Game, string, number> => {
-  const t = readTheme();
   const top = Math.max(winsToSurprise, ...data.map((r) => r.projectedWins));
   const bottom = Math.min(winsToSurprise, ...data.map((r) => r.projectedWins));
   const stop = top === bottom ? 0 : (top - winsToSurprise) / (top - bottom);

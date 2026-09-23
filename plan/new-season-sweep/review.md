@@ -1,5 +1,23 @@
 # Review notes: new-season sweep
 
+## 2026-09-23 — Approved implementation simplification
+
+Applied the three changes Zack approved after reading the guide: direct CSS
+paint references, no application font wait, and no dormant Astro router cleanup.
+Font recovery remains native; charts render with fallback fonts rather than
+waiting for regular/bold faces. Axis metrics, data, interactions and plot-specific
+SVG adjustments are unchanged.
+
+Verification: **180 tests**, full build/audits, dev and workerd-preview application,
+tooltip-safety and expanded font-resilience checks. Native remeasurement and
+selected-point/focus preservation are tested after delayed successful loading,
+as are failed/stalled fonts and live CSS-token updates. Stable screenshots retain
+geometry, with at most one channel step of color difference. No startup-speed
+claim from removing the old timeout. All test servers are stopped.
+
+See `../../docs/tanstack-charts.html` for the updated explanation. The historical
+assessment below preceded this authorization; its candidates are now implemented.
+
 ## 2026-09-21 — Cleanup verification
 
 ECharts source, controllers and dependency are removed; chart DTOs are now in

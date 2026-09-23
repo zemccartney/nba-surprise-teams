@@ -7,7 +7,6 @@ import type {
 import { mountChartRenderer } from "@tanstack/charts/renderer";
 import { createSvgChartRenderer } from "@tanstack/charts/svg/renderer";
 
-import { waitForChartFonts } from "./fonts";
 import { renderTrackerSvg } from "./tanstack-svg";
 
 export interface TrackerChart<Row, X extends ChartValue, Y extends ChartValue> {
@@ -20,7 +19,7 @@ export interface TrackerChart<Row, X extends ChartValue, Y extends ChartValue> {
 }
 
 /**
-Astro owns the payload; TanStack owns rendering, focus, tooltip and resize.
+Astro supplies the payload; TanStack owns rendering, fonts, focus and resize.
 */
 export const mountCharts = <
   Props,
@@ -38,74 +37,54 @@ export const mountCharts = <
       ':scope > script[type="application/json"]',
     )?.textContent;
     if (!payload) continue;
-    const props = JSON.parse(payload) as Props;
     let isMounted = false;
-    let isDisposed = false;
-    let destroy: (() => void) | undefined;
-    const mount = async () => {
-      if (isMounted || isDisposed) return;
+    const mount = () => {
+      if (isMounted || !host.isConnected) return;
       isMounted = true;
       observer.disconnect();
-      host.removeEventListener("focus", onFocus);
-      await waitForChartFonts(
-        document.fonts,
-        getComputedStyle(host).fontFamily,
-      );
-      if (isDisposed || !host.isConnected) return;
-      const chart = build(props, host.clientHeight);
-      const isTransferFocus = document.activeElement === host;
-      // The SVG becomes the sole keyboard target, replacing the lazy placeholder.
-      host.removeAttribute("tabindex");
-      host.removeAttribute("role");
-      host.removeAttribute("aria-label");
-      const instance = mountChartRenderer(host, {
-        ariaDescription: `${chart.description} Use arrow keys to explore, Home and End for the endpoints, Enter to pin a tooltip, and Escape to dismiss it.`,
-        ariaLabel: chart.label,
-        definition: chart.definition,
-        height: host.clientHeight,
-
-        onTooltipBodyChange: (target) => {
-          const point = target?.points[0];
-          if (target && point)
-            target.element.replaceChildren(chart.body(point.datum));
-        },
-        renderer: createSvgChartRenderer<Row, X, Y>((scene, options) => {
-          return renderTrackerSvg(scene, options, chart.annotation?.(scene));
-        }),
-      });
-      destroy = () => instance.destroy();
-      if (isTransferFocus)
-        host.querySelector<SVGSVGElement>(":scope svg")?.focus();
-    };
-    const begin = () => {
-      void mount().catch((error: unknown) => {
-        if (isDisposed) return;
+      host.removeEventListener("focus", mount);
+      try {
+        const chart = build(JSON.parse(payload) as Props, host.clientHeight);
+        const isTransferFocus = document.activeElement === host;
+        // The SVG replaces the lazy placeholder as the sole keyboard target.
+        host.removeAttribute("tabindex");
+        host.removeAttribute("role");
+        host.removeAttribute("aria-label");
+        // Render with available fonts now. TanStack remeasures/redraws on
+        // document.fonts loadingdone; no application timer or font wait needed.
+        mountChartRenderer(host, {
+          ariaDescription: `${chart.description} Use arrow keys to explore, Home and End for the endpoints, Enter to pin a tooltip, and Escape to dismiss it.`,
+          ariaLabel: chart.label,
+          definition: chart.definition,
+          height: host.clientHeight,
+          onTooltipBodyChange: (target) => {
+            const point = target?.points[0];
+            if (target && point)
+              target.element.replaceChildren(chart.body(point.datum));
+          },
+          renderer: createSvgChartRenderer<Row, X, Y>((scene, options) =>
+            renderTrackerSvg(scene, options, chart.annotation?.(scene)),
+          ),
+        });
+        if (isTransferFocus)
+          host.querySelector<SVGSVGElement>(":scope svg")?.focus();
+      } catch (error) {
         host.removeAttribute("aria-label");
         host.removeAttribute("tabindex");
         host.setAttribute("role", "alert");
         host.textContent =
           "Unable to render this chart. Please reload to try again.";
         console.error(`[charts] ${kind} failed to render`, error);
-      });
+      }
     };
-    const onFocus = begin;
     const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) begin();
+      if (entries.some((entry) => entry.isIntersecting)) mount();
     });
     host.tabIndex = 0;
     host.setAttribute("role", "group");
     host.setAttribute("aria-label", "Interactive chart loading");
-    host.addEventListener("focus", onFocus);
+    host.addEventListener("focus", mount);
     observer.observe(host);
-    document.addEventListener(
-      "astro:before-swap",
-      () => {
-        isDisposed = true;
-        observer.disconnect();
-        host.removeEventListener("focus", onFocus);
-        destroy?.();
-      },
-      { once: true },
-    );
+    // Navigation replaces the document; this app does not use ClientRouter.
   }
 };

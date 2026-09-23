@@ -49,8 +49,10 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
   meaningful image alternatives and unchanged source strings for season, team,
   history and scatter. A construction spy rejects HTML parsing; the separate
   browser tests verify actual DOM serialization and attribute safety.
-- `chart-fonts.test.ts`: successful, failed and stalled font readiness, including
-  the timeout/timer cleanup.
+- `chart-theme.test.ts`: semantic CSS-variable mapping and preservation through
+  the actual SVG renderer, without a document or color-conversion canvas.
+  The application font-wait helper and its timer tests are removed; native font
+  recovery is exercised by the expanded browser harness.
 - `preview-alias.test.ts`: valid, bounded, deterministic and collision-resistant
   branch aliases.
 - `svg-optimizer.test.ts`: actual optimizer hooks under an encoded file path.
@@ -79,7 +81,10 @@ README for dev/preview commands. `tanstack-application.mjs` checks the current
 application, image alternatives, interaction, colors and resize persistence.
 `tanstack-tooltip-safety.mjs` injects isolated malicious-name/quoted-URL fixtures
 into real chart payloads for all four logo paths, including historical teams.
-`tanstack-resilience.mjs` exercises blocked/stalled fonts in the actual browser.
+`tanstack-resilience.mjs` exercises blocked/stalled fonts and delayed successful
+loading: rendering before release, native remeasurement, loaded regular/bold
+faces, preserved focus and resize behavior. The application harness also changes
+CSS tokens live and checks existing SVG paints, gradients and focus dots.
 The ECharts formatter tests and renderer-specific browser scripts are retired;
 historical source and evidence remain available through Git and `runs/`.
 Browser scripts are not part of Vitest, hooks or CI yet.

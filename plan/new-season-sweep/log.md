@@ -1,5 +1,26 @@
 # New-season sweep: round log
 
+## 2026-09-23 — CSS paints and native font recovery
+
+Zack authorized all three simplifications in the implementation guide. Chart
+paints now retain CSS-variable references instead of reading/converting colors
+through a one-pixel canvas. Removed the custom 1.5-second font wait and its three
+unit tests; added three direct-paint unit tests. Mounting is synchronous, retains
+lazy visibility/keyboard entry and visible errors, and no longer carries the
+unused before-swap/disposal branch for a ClientRouter this app does not use.
+
+**180 tests** and full build/audits pass. Browser coverage now holds fonts until
+charts render and navigate, releases them successfully, verifies native text
+remeasurement, loaded regular/bold faces, focus/selected-point preservation and
+resize. Blocked and indefinitely stalled fonts also pass. Live CSS token changes
+update existing SVGs, gradients and focus dots. Tooltip safety remains covered.
+
+Settled screenshot geometry is unchanged; checked Chrome RGB channels differ by
+at most 1/255 after dropping the color conversion. Bundle: 152,143 raw / 50,220
+gzip bytes. No new startup benchmark or guaranteed per-page time saving is claimed.
+Guide, status and test instructions are updated; test servers are stopped. No
+merge, deployment or production-binding changes.
+
 ## 2026-09-21 — Accepted chart cleanup complete
 
 Moved all four chart payload interfaces into renderer-neutral

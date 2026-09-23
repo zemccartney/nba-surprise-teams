@@ -166,7 +166,7 @@
   <body>
     <main>
       <p class="meta">
-        Implementation review · TanStack Charts 0.18.0 · 2026-09-21
+        Implementation guide · TanStack Charts 0.18.0 · updated 2026-09-23
       </p>
       <h1>What is all this chart code doing?</h1>
       <p>
@@ -178,32 +178,35 @@
       <div class="callout">
         <p>
           <strong
-            >Three useful simplifications emerged from checking the actual
-            code:</strong
+            >Three simplifications are now applied, following Zack's
+            approval:</strong
           >
         </p>
         <ul>
           <li>
             <strong>Color conversion:</strong> the SVG renderer can use CSS
-            variables directly. Our one-pixel canvas conversion is a
-            legacy-parity choice, not a TanStack requirement.
+            variables directly. The legacy one-pixel canvas conversion has been
+            removed.
           </li>
           <li>
             <strong>Font waiting:</strong> TanStack already invalidates text
-            measurements and redraws when fonts finish loading. Our extra wait
-            favors a stable first layout, but is not required for that recovery.
+            measurements and redraws when fonts finish loading. Our extra
+            1.5-second wait is removed; charts render with available fonts
+            immediately.
           </li>
           <li>
             <strong>Astro swap cleanup:</strong> the app does not currently use
-            <code>ClientRouter</code>. The
-            <code>astro:before-swap</code> listener is therefore dormant.
+            <code>ClientRouter</code>. The dormant
+            <code>astro:before-swap</code> listener and its asynchronous
+            disposal scaffolding are removed.
           </li>
         </ul>
         <p>
-          These are findings and proposals,
-          <strong>not changes silently applied to the approved charts</strong>.
-          The ECharts cleanup at <code>c4635b0</code> left the chart bundle and
-          24 comparison screenshots byte-identical.
+          The separate ECharts cleanup at <code>c4635b0</code> preserved the
+          approved chart bundle and screenshots. This follow-up deliberately
+          simplifies paints and first-font-loading behavior. Delayed successful
+          fonts, failed/stalled fonts, focus, resize and live token changes are
+          covered by browser checks.
         </p>
       </div>
       <nav aria-label="Guide sections">
@@ -225,8 +228,8 @@
         <li>
           <strong>Mount adapter → start at the right time.</strong>
           <code>tanstack.ts</code> reads the payload, waits until the chart is
-          visible or focused, currently waits briefly for fonts, then calls the
-          library's <code>mountChartRenderer</code>.
+          visible or focused, then immediately calls the library's
+          <code>mountChartRenderer</code>. There is no application font wait.
         </li>
         <li>
           <strong>Definition → what the chart means.</strong>
@@ -253,7 +256,7 @@
       </ol>
       <pre><code>Astro's original rows ──→ JSON ──→ chart definition ──→ TanStack scene
                                                      │
-CSS variables ──→ role mapping / current conversion ──┘
+CSS variables ──→ semantic paint references ──────────┘
                                                      │
                                       small SVG adapter
                                                      │
@@ -285,9 +288,9 @@ CSS variables ──→ role mapping / current conversion ──┘
       <h2 id="colors">2. Why are we “recreating” colors?</h2>
       <p>
         <strong>We are not maintaining a second palette.</strong> The values
-        originate in <a href="../src/styles/global.css">global.css</a>. But we
-        currently copy them into a JavaScript role map and convert them into
-        another notation.
+        originate in <a href="../src/styles/global.css">global.css</a>. Today,
+        the JavaScript role map contains direct CSS variable references. The
+        previous conversion pipeline, shown below for context, is removed.
       </p>
       <pre><code>--color-lime-500: oklch(76.8% 0.233 130.85)
           │ getComputedStyle(root).getPropertyValue(...)
@@ -301,8 +304,8 @@ CSS variables ──→ role mapping / current conversion ──┘
           ▼
      SVG paint attributes</code></pre>
       <p>
-        The canvas is <strong>not drawing the chart</strong>. It is a one-pixel
-        color converter. ECharts needed resolved colors because its
+        That canvas was <strong>not drawing the chart</strong>. It was a
+        one-pixel color converter. ECharts needed resolved colors because its
         animation/color parser could not handle our OKLCH strings reliably.
         During the port I retained the reference's sRGB output to minimize color
         changes.
@@ -312,9 +315,10 @@ CSS variables ──→ role mapping / current conversion ──┘
           >That parser restriction does not apply to our TanStack SVG
           renderer.</strong
         >
-        Its serializer passes paint strings through to SVG. We can instead use:
+        Its serializer passes paint strings through to SVG. Our current mapping
+        is equivalent to:
       </p>
-      <pre><code>// Proposed simplification—not currently applied.
+      <pre><code>// Direct CSS paint references; no color snapshot or conversion.
 const theme = {
   foreground: "var(--color-lime-500)",
   muted: "var(--color-lime-500)",
@@ -325,8 +329,9 @@ const theme = {
         The <em>mapping</em> is still useful: CSS defines the palette, but
         cannot infer that eliminated teams are red, the plot is slate, or a
         below-threshold focus dot should use the brighter red. The
-        <em>conversion</em> is optional. Direct variables also follow future CSS
-        theme changes automatically; the current JavaScript snapshot does not.
+        <em>conversion</em> is gone. Direct variables follow future CSS theme
+        changes automatically, including existing SVGs, gradient stops and
+        focused dots.
       </p>
       <p>
         The main cause of the muted text you reported was
@@ -421,7 +426,7 @@ const theme = {
       </p>
       <div class="columns">
         <div class="card">
-          <h3>Without our extra wait</h3>
+          <h3>Current: no extra wait</h3>
           <p>
             Render using the available font → the webfont arrives → TanStack
             clears its text-measurement cache and redraws.
@@ -432,7 +437,7 @@ const theme = {
           </p>
         </div>
         <div class="card">
-          <h3>With the current wait</h3>
+          <h3>Previous: the removed wait</h3>
           <p>
             Request regular and bold chart fonts → wait for completion
             <em>or 1.5 seconds</em> → render with whichever font is available.
@@ -445,11 +450,9 @@ const theme = {
       </div>
       <p>
         <a href="../src/layouts/layout.astro">layout.astro</a> already imports
-        Iosevka Curly 400 and 700.
-        <a href="../src/components/charts/fonts.ts">fonts.ts</a> does not
-        install another font or generate one;
-        <code>document.fonts.load()</code> asks the browser to load those
-        registered faces.
+        Iosevka Curly 400 and 700. The old <code>fonts.ts</code> helper is
+        deleted. It only asked the browser to load those registered faces; it
+        never installed or generated fonts.
       </p>
       <p>
         <strong>Important correction to the original rationale:</strong> the
@@ -457,15 +460,16 @@ const theme = {
         <code>renderer.js</code> listens for
         <code>document.fonts.loadingdone</code>, calls
         <code>domText.invalidate()</code>, and schedules a fresh render. Our
-        wait is therefore a <strong>first-paint policy</strong>, not a necessary
+        former wait was a <strong>first-paint policy</strong>, not a necessary
         fix for permanently wrong font measurements.
       </p>
       <p>
-        I would test removing that wait and relying on the library. Compare
-        cold/slow font loading, fallback-to-webfont layout, keyboard entry
-        during loading and mobile labels. The maximum added wait is 1.5 seconds
-        per chart activation; that is a possible delay, not a measured saving we
-        can simply subtract from every load.
+        The wait is now removed. The browser tests hold fonts until the charts
+        render and navigate, then release them successfully and verify native
+        remeasurement, loaded Iosevka, preserved focus, label bounds and
+        resizing. Blocked and indefinitely stalled fonts also leave charts
+        usable. This removes a possible 1.5-second delay—not a measured saving
+        to subtract from every load.
       </p>
       <h3>Why specify font sizes and weight in chart options?</h3>
       <p>
@@ -602,9 +606,9 @@ one continuous smoothed path
         </li>
         <li>
           <strong>One tab stop.</strong> Before mounting, the host is the
-          loading target. After mounting, the SVG owns focus. If the user is
-          still on the host, we transfer focus; if they moved away during the
-          font wait, we do not steal it back.
+          loading target. After mounting, the SVG owns focus. If the user is on
+          the loading host, we transfer focus immediately. Visibility-triggered
+          mounting does not steal focus from elsewhere.
         </li>
         <li>
           <strong>One instance.</strong> The mounted flag prevents visibility
@@ -654,28 +658,24 @@ one continuous smoothed path
             <code>ClientRouter</code> is present.
           </p>
           <p>
-            Our before-swap listener does not run in normal navigation. The old
-            page is discarded or preserved together in the browser's
-            back/forward cache.
+            The dormant before-swap listener is removed. The old page is
+            discarded or preserved together in the browser's back/forward cache.
           </p>
         </div>
       </div>
       <p>
-        The handler disconnects our observer, removes the loading-focus
-        listener, calls TanStack's <code>destroy()</code>, and marks pending
-        asynchronous work as disposed. That would prevent a font wait from later
-        mounting into a discarded host.
+        The former handler disconnected the observer, removed the loading-focus
+        listener, called TanStack's <code>destroy()</code>, and marked pending
+        asynchronous work as disposed. With no client router or asynchronous
+        font wait, that scaffolding no longer serves the current app.
       </p>
       <p>
-        <strong
-          >My assessment: remove this dormant scaffolding unless client routing
-          is planned.</strong
-        >
+        <strong>Applied: the dormant router branch is removed.</strong>
         If we add ClientRouter later, we need a complete lifecycle
         plan—including initializing new pages, not just destroying old charts.
-        This listener alone does not make the current adapter
-        client-router-ready. It is not a general hook for every Astro update,
-        server island, resize or ordinary page unload.
+        The old listener alone did not make the adapter client-router-ready. It
+        is not a general hook for every Astro update, server island, resize or
+        ordinary page unload.
       </p>
 
       <h2 id="assessment">6. What earns its keep?</h2>
@@ -708,7 +708,7 @@ one continuous smoothed path
             </tr>
             <tr>
               <td>Semantic palette mapping</td>
-              <td>Keep, simplify values</td>
+              <td>Kept with direct CSS references</td>
               <td>
                 The library needs to know which token serves each role. The
                 values can be CSS variable references.
@@ -716,7 +716,7 @@ one continuous smoothed path
             </tr>
             <tr>
               <td>One-pixel color conversion</td>
-              <td>Good removal candidate</td>
+              <td>Removed</td>
               <td>
                 Legacy parser/parity history, not an SVG requirement. Check
                 gamut and screenshot differences.
@@ -724,7 +724,7 @@ one continuous smoothed path
             </tr>
             <tr>
               <td>Extra 1.5-second font wait</td>
-              <td>Presentation choice; test removal</td>
+              <td>Removed; native recovery tested</td>
               <td>
                 Native font-load redraw already exists. Compare earlier fallback
                 paint against first-layout stability.
@@ -756,9 +756,9 @@ one continuous smoothed path
             </tr>
             <tr>
               <td>before-swap handler</td>
-              <td>Remove for today's navigation model</td>
+              <td>Removed</td>
               <td>
-                No ClientRouter; currently dormant. Revisit alongside actual
+                No ClientRouter. Revisit lifecycle handling alongside actual
                 client navigation support.
               </td>
             </tr>
@@ -782,26 +782,25 @@ one continuous smoothed path
         </table>
       </div>
       <p>
-        <strong>A sensible next simplification pass:</strong> remove the dormant
-        router branch, replace color snapshots with CSS references, then
-        separately compare eager/native font recovery against our extra wait.
-        Keep those changes reviewable and do not conflate them with the
-        already-completed ECharts deletion.
+        <strong>This pass is complete:</strong> direct CSS paints, synchronous
+        mounting with native font recovery, and no dormant router branch.
+        Explicit axis metrics, native interaction and the small SVG presentation
+        adapter remain. This is separate from the earlier ECharts deletion.
       </p>
       <p>
-        Re-run the current application, tooltip-safety and font-resilience
-        harnesses. Add a <em>delayed successful</em> font-load comparison before
-        changing the wait—the existing blocked/stalled tests prove availability,
-        not how attractive the eventual font swap is. Check keyboard focus
-        during loading, narrow label bounds, both line/dot colors, and dynamic
-        variable changes. No performance claim without a new measurement.
+        The application, tooltip-safety and expanded font-resilience harnesses
+        cover delayed successful loading as well as blocked/stalled fonts,
+        keyboard focus, narrow label bounds, both line/dot colors and live CSS
+        token changes. Normal settled screenshots retain their geometry; the
+        direct-color change produces at most one RGB channel step (out of 255)
+        in the checked Chrome captures. No new startup-speed claim is made.
       </p>
 
       <h2>Source map and verification</h2>
       <ul>
         <li>
           <a href="../src/components/charts/tanstack.ts">tanstack.ts</a> — lazy
-          mounting, focus transfer, current wait and cleanup hook.
+          synchronous mounting, focus transfer and visible error handling.
         </li>
         <li>
           <a href="../src/components/charts/tanstack-options.ts"
@@ -814,7 +813,7 @@ one continuous smoothed path
           <a href="../src/components/charts/tanstack-style.ts"
             >tanstack-style.ts</a
           >
-          — current palette conversion, theme/axis helpers and tooltip DOM
+          — CSS-backed palette roles, theme/axis helpers and tooltip DOM
           conveniences.
         </li>
         <li>
@@ -822,8 +821,8 @@ one continuous smoothed path
           CSS-variable styling and the host focus outline.
         </li>
         <li>
-          <a href="../src/components/charts/fonts.ts">fonts.ts</a> —
-          regular/bold loading with a bounded wait.
+          <a href="../src/layouts/layout.astro">layout.astro</a> — imports the
+          regular and bold fonts; TanStack handles their eventual availability.
         </li>
         <li>
           <a href="../src/components/charts/tanstack-svg.ts">tanstack-svg.ts</a>
@@ -848,7 +847,7 @@ one continuous smoothed path
           </li>
           <li>
             <code>dist/dom-text.js</code>: reads host computed typography and
-            uses canvas text measurement. This is separate from our
+            uses canvas text measurement. This is separate from our removed
             color-conversion canvas; the displayed chart remains SVG.
           </li>
           <li>

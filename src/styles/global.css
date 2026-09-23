@@ -196,7 +196,7 @@ textarea {
   /* Red */
   --color-red-700: oklch(50.5% 0.213 27.518);
   /* Same +24.1 lightness lift as green-700 → lime-500, with lime's chroma
-     and the red area's hue. The chart resolves this to the sRGB palette. */
+     and the red area's hue. SVG uses this token directly. */
   --color-pace-red: oklch(74.6% 0.233 27.518);
 
   /* Yellow */

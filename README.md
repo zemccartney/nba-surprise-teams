@@ -200,7 +200,7 @@ settled on; the site should render exactly as it did under Tailwind 4.1.
   `src/components/charts/data.ts`. ECharts and the old custom controllers have
   been removed after [application review](plan/tanstack-charts/application-review.md).
   [Illustrated implementation guide](docs/tanstack-charts.html) explains the
-  styling, fonts, lifecycle, rendering flow and simplification candidates.
+  styling, native font recovery, rendering flow and the applied simplifications.
 - **Regression check:** `plan/baseline/` captures screenshots and payload sizes
   for a build and diffs two captures. Run it against a reference before and after
   any styling change; see its README.

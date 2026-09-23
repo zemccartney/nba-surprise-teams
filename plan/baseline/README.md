@@ -23,7 +23,7 @@ mise x -- node plan/baseline/tanstack-resilience.mjs http://localhost:4321
   backgrounds, opaque/bold labels, interior grids, label bounds, real Tab entry,
   Home/End and arrow navigation, Enter/Escape, pointer handoff, original tooltip
   rows, threshold-colored line/dot, tooltip clearance, image alternatives,
-  resize persistence, no document overflow or browser errors. Writes screenshots
+  resize persistence, live CSS token changes, no document overflow or browser errors. Writes screenshots
   and `checks.json`.
 - **`tanstack-tooltip-safety.mjs`**: intercepts only the test browser's HTML
   response to inject isolated season/team/history/scatter fixtures. Actual app
@@ -32,13 +32,17 @@ mise x -- node plan/baseline/tanstack-resilience.mjs http://localhost:4321
   authoring data is changed. Complements the new builder unit tests in place
   of the old ECharts formatter-string tests.
 - **`tanstack-resilience.mjs`**: blocked/stalled WOFF requests must not leave any
-  chart blank or prevent keyboard navigation. Held routes and browsers are released.
+  chart blank or prevent keyboard navigation. Delayed successful requests are
+  released only after charts render and navigate; the harness then checks native
+  remeasurement, loaded regular/bold faces, focus preservation and resizing.
+  It also verifies no application calls to `document.fonts.load`. Held routes
+  and browsers are released.
 - **Unit tests**: `tests/tanstack-charts.test.ts` checks real scenes, data identity,
   ordering, bounds, colors, zero/empty/shortened seasons, grid geometry, date ticks
   and focus marker states. `chart-descriptions.test.ts` checks meaningful textual
   descriptions; `chart-tooltip.test.ts` keeps all four logo/text construction
-  paths in the unit gate and rejects HTML parsing. `chart-fonts.test.ts` covers
-  bounded readiness/timer cleanup.
+  paths in the unit gate and rejects HTML parsing. `chart-theme.test.ts` checks
+  direct CSS-variable paints; the old font-wait helper/timer tests are removed.
   These run through Vitest, verify/build and hooks.
 
 The browser scripts are manual checks, not part of Vitest/hooks/CI. CI adoption
@@ -76,5 +80,5 @@ The standalone feasibility package remains separate and exactly pinned.
 Cleanup coverage mapping: option/domain/ordering assertions → current scene tests;
 spoken descriptions → description tests; escaped logo HTML → actual tooltip DOM
 fixtures; keyboard/image/layout checks → application browser harness; blocked and
-stalled fonts → resilience harness plus font unit tests. Historical pixel evidence
+stalled and delayed successful fonts → native-recovery browser checks. Historical pixel evidence
 and corrected data assertions are retained, not regenerated or discarded.

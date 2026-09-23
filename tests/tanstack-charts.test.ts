@@ -20,7 +20,7 @@ vi.mock(
   import("../src/components/charts/tanstack-style"),
   async (importOriginal) => ({
     ...(await importOriginal()),
-    readTheme: () => ({
+    theme: {
       accent: "#818cf8",
       background: "#020617",
       brightRed: "#ff8073",
@@ -30,7 +30,7 @@ vi.mock(
       red: "#b91c1c",
       slate: "#94a3b8",
       yellow: "#facc15",
-    }),
+    },
   }),
 );
 const render = <Row, X extends ChartValue, Y extends ChartValue>(

@@ -12,11 +12,14 @@ byte-identical to the approved version. The same browser checks also pass
 under Astro/workerd preview. All test servers are stopped. See
 [cleanup evidence](results/cleanup.json).
 
-For the reasoning behind the adapter, styling and fonts—and the optional code
-we can simplify next—see the [illustrated implementation guide](../../docs/tanstack-charts.html).
-The native library already redraws on font completion, SVG can use CSS variables
-directly, and this app does not use ClientRouter. Those findings are an assessment,
-not changes made during the behavior-preserving cleanup.
+**Simplifications authorized and applied, 2026-09-23:** paints now reference CSS
+variables directly; the extra font wait and dormant Astro router cleanup are
+removed. TanStack renders with available fonts and remeasures when fonts load.
+The expanded browser checks verify delayed successful recovery, selected-point
+and focus preservation, resize, and live CSS-token updates. This is separate from
+the byte-identical cleanup above. See the updated
+[illustrated implementation guide](../../docs/tanstack-charts.html) and
+[simplification evidence](results/simplification.json).
 
 The actual Astro chart wrappers now mount **TanStack Charts 0.18.0**. Run the
 normal `pnpm start` command on `tanstack-charts`, then review:
@@ -31,9 +34,10 @@ ordinary executable chart scripts.
 
 ## Ownership
 
-- `src/components/charts/tanstack.ts`: lazy mounting, bounded font readiness,
-  native DOM renderer, tooltip-body attachment and cleanup. TanStack owns keyboard
-  interaction, pointer focus, pinning, dismissal and responsive layout.
+- `src/components/charts/tanstack.ts`: synchronous lazy mounting, focus transfer,
+  native DOM renderer, safe tooltip-body attachment and visible error handling.
+  TanStack owns font-load recovery, keyboard/pointer focus, pinning, dismissal
+  and responsive layout. Normal document navigation needs no router hook.
 - `tanstack-options.ts`: definitions, domain descriptions, original-row tooltip
   content, result colors and the threshold annotation.
 - `tanstack-style.ts` and `charts.css`: site colors, typography and tooltip styling.
@@ -90,7 +94,9 @@ has been removed without changing these accepted choices.
 
 - Axis titles/ticks explicitly use full opacity instead of TanStack's 76%/68%
   defaults. Axis titles, ticks and the threshold annotation use bold (700)
-  weight. The theme resolves the same sRGB colors as the reference.
+  weight. Paints use global CSS variables directly, rather than a converted
+  sRGB snapshot. Settled Chrome screenshot comparisons show unchanged geometry
+  and at most one RGB channel step (out of 255) of color difference.
 - Grids were already opaque; half-pixel alignment avoids softened one-pixel
   strokes. Grid lines at plot boundaries are omitted across all charts.
 - Zero and surprise-threshold rules explicitly use full opacity instead of the
@@ -105,7 +111,7 @@ has been removed without changing these accepted choices.
   gradient uses the line's bounds, independent of the area; flat/one-sided lines
   use solid colors. No games or interaction points are split or duplicated.
   The red token uses the same +24.1 OKLCH lightness lift as green-700 to lime-500,
-  lime's chroma and the red fill's hue, before conversion to sRGB. The horizontal
+  lime's chroma and the red fill's hue, rendered directly by SVG. The horizontal
   threshold remains lime. A native, datum-colored focus guide gives the active
   dot matching fill and outline: red below the threshold, lime at or above it.
   Pointer hover and keyboard navigation use the same marker; original game
@@ -124,8 +130,8 @@ has been removed without changing these accepted choices.
 
 The initial integrated chart bundle was approximately **147 KB raw / 49 KB gzip**, versus
 **595 KB raw / 199 KB gzip** for the former shared ECharts bundle—about **75% less
-compressed chart JavaScript**. After the visual follow-ups it is **152,918 bytes
-raw / 50,619 bytes gzip**, retaining that reduction; startup timings have not
+compressed chart JavaScript**. After the visual follow-ups and simplification it is **152,143 bytes
+raw / 50,220 bytes gzip**, retaining that reduction; startup timings have not
 been re-benchmarked. Data remains in the existing HTML payloads.
 
 An initial integration measurement used Chrome 153, three cold browser contexts,

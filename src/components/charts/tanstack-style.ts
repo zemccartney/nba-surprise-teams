@@ -1,34 +1,18 @@
 import { logoAlt } from "../logo-alt";
 
-export const readTheme = () => {
-  const style = getComputedStyle(document.documentElement);
-  // Match the reference's sRGB palette rather than changing gamut mapping
-  // while replacing the renderer. Resolve once per chart mount.
-  const canvas = document.createElement("canvas");
-  canvas.width = 1;
-  canvas.height = 1;
-  const context = canvas.getContext("2d", { willReadFrequently: true });
-  const color = (name: string) => {
-    const value = style.getPropertyValue(`--color-${name}`).trim();
-    if (!context) return value;
-    context.fillStyle = value;
-    context.fillRect(0, 0, 1, 1);
-    const [r = 0, g = 0, b = 0] = context.getImageData(0, 0, 1, 1).data;
-    return `#${[r, g, b].map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
-  };
-  return {
-    accent: color("indigo-400"),
-    background: color("slate-950"),
-    brightRed: color("pace-red"),
-    green: color("green-700"),
-    lime: color("lime-500"),
-    pale: color("lime-200"),
-    red: color("red-700"),
-    slate: color("slate-400"),
-    yellow: color("yellow-400"),
-  };
+// Keep paints connected to the site's CSS tokens, including future theme changes.
+export const theme = {
+  accent: "var(--color-indigo-400)",
+  background: "var(--color-slate-950)",
+  brightRed: "var(--color-pace-red)",
+  green: "var(--color-green-700)",
+  lime: "var(--color-lime-500)",
+  pale: "var(--color-lime-200)",
+  red: "var(--color-red-700)",
+  slate: "var(--color-slate-400)",
+  yellow: "var(--color-yellow-400)",
 };
-export type Theme = ReturnType<typeof readTheme>;
+export type Theme = typeof theme;
 export const chartTheme = (t: Theme) => ({
   background: t.background,
   focusRing: false as const,

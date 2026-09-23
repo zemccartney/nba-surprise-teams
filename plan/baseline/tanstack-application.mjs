@@ -32,6 +32,18 @@ try {
       ["/2025/CHA/", ["team-season-pace"]],
     ]) {
       await page.goto(new URL(path, base).href, { waitUntil: "networkidle" });
+      const palette = await page.evaluate(() => {
+        const probe = document.createElement("span");
+        probe.style.display = "none";
+        document.body.append(probe);
+        const color = (token) => {
+          probe.style.color = `var(--color-${token})`;
+          return getComputedStyle(probe).color;
+        };
+        const colors = { lime: color("lime-500"), pale: color("lime-200") };
+        probe.remove();
+        return colors;
+      });
       for (const kind of kinds) {
         const host = page.locator(`[data-chart="${kind}"]`);
         await host.scrollIntoViewIfNeeded();
@@ -139,7 +151,7 @@ try {
         assert.ok(appearance.labels.length > 0);
         for (const label of appearance.labels)
           assert.deepEqual(label, {
-            fill: "rgb(124, 207, 0)",
+            fill: palette.lime,
             fillOpacity: "1",
             fontWeight: "700",
             opacity: "1",
@@ -151,7 +163,7 @@ try {
           const max = min + (isVertical ? background.width : background.height);
           assert.ok(position > min && position < max);
           assert.equal(position % 1, 0.5);
-          assert.equal(line.stroke, "rgb(216, 249, 153)");
+          assert.equal(line.stroke, palette.pale);
           assert.equal(line.opacity, "1");
         }
         for (const opacity of appearance.rules) assert.equal(opacity, "1");
@@ -332,6 +344,91 @@ try {
           );
         }
         assert.equal(await host.locator("img:not([alt])").count(), 0);
+        // Existing SVG paint must follow token changes, not a mount-time snapshot.
+        const previous = await page.evaluate(() => {
+          const root = document.documentElement;
+          return Object.entries({
+            "--color-lime-200": "#fedcba",
+            "--color-lime-500": "#abcdef",
+            "--color-pace-red": "#d62728",
+            "--color-slate-950": "#010203",
+          }).map(([name, value]) => {
+            const old = {
+              name,
+              priority: root.style.getPropertyPriority(name),
+              value: root.style.getPropertyValue(name),
+            };
+            root.style.setProperty(name, value);
+            return old;
+          });
+        });
+        try {
+          assert.equal(
+            await svg
+              .locator('[data-ts-key="axes"] text')
+              .first()
+              .evaluate((element) => getComputedStyle(element).fill),
+            "rgb(171, 205, 239)",
+          );
+          assert.equal(
+            await svg
+              .locator('[data-ts-key="tracker-plot-background"]')
+              .evaluate((element) => getComputedStyle(element).fill),
+            "rgb(1, 2, 3)",
+          );
+          if (appearance.grid.length > 0)
+            assert.equal(
+              await svg
+                .locator(".ts-chart__grid line")
+                .first()
+                .evaluate((element) => getComputedStyle(element).stroke),
+              "rgb(254, 220, 186)",
+            );
+          if (kind === "team-season-pace") {
+            assert.equal(
+              await svg
+                .locator("#pace-line-threshold stop")
+                .last()
+                .evaluate((element) => getComputedStyle(element).stopColor),
+              "rgb(214, 39, 40)",
+            );
+            await svg.focus();
+            await page.keyboard.press("Home");
+            const marker = svg.locator(".ts-chart__focus-guide-marker:visible");
+            assert.equal(
+              await marker.evaluate(
+                (element) => getComputedStyle(element).fill,
+              ),
+              "rgb(171, 205, 239)",
+            );
+            let wins = Infinity;
+            for (let i = 0; i < 5 && wins >= 38; i++) {
+              await page.keyboard.press("ArrowRight");
+              const text = await host.locator(".tracker-tooltip").textContent();
+              wins = Number(text.match(/Projected Wins:([\d.]+)/)?.[1]);
+            }
+            assert.ok(wins < 38, "navigate to an actual below-threshold game");
+            assert.equal(
+              await marker.evaluate(
+                (element) => getComputedStyle(element).fill,
+              ),
+              "rgb(214, 39, 40)",
+            );
+            await svg.blur();
+          }
+        } finally {
+          await page.evaluate((entries) => {
+            for (const { name, priority, value } of entries) {
+              if (value)
+                document.documentElement.style.setProperty(
+                  name,
+                  value,
+                  priority,
+                );
+              else document.documentElement.style.removeProperty(name);
+            }
+          }, previous);
+        }
         reports.push({
           appearance,
           first,
