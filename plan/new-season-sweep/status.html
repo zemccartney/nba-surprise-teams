@@ -661,16 +661,16 @@
           <div
             class="bar"
             role="img"
-            aria-label="20 of 44 items done, 3 blocked, 21 not started"
+            aria-label="21 of 44 items done, 3 blocked, 20 not started"
           >
-            <span class="seg-done" style="flex: 20"></span>
+            <span class="seg-done" style="flex: 21"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 21"></span>
+            <span class="seg-open" style="flex: 20"></span>
           </div>
           <p class="tally">
-            <span class="k-done"><b>20</b> done and verified</span>
+            <span class="k-done"><b>21</b> done and verified</span>
             <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
-            <span class="k-open"><b>21</b> not started</span>
+            <span class="k-open"><b>20</b> not started</span>
             <span>44 tracked</span>
           </p>
         </div>
@@ -686,7 +686,7 @@
               >
             </li>
             <li>
-              <a href="#s1">1 · Foundations<span class="count">13/18</span></a>
+              <a href="#s1">1 · Foundations<span class="count">14/18</span></a>
             </li>
             <li>
               <a href="#s2">2 · Season prep<span class="count">1/4</span></a>
@@ -892,7 +892,7 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">01</span>
               <h2>Foundations</h2>
-              <span class="count">13 / 18 done</span>
+              <span class="count">14 / 18 done</span>
             </div>
             <p class="milestone">
               Milestone: the site renders exactly as it does on prod today, no
@@ -1199,26 +1199,29 @@ mise run setup</code></pre>
               <li class="item s-open">
                 <span class="marker">[ ]</span>
                 <div>
-                  <p class="item-title">Disable the Sentry middleware in dev</p>
+                  <p class="item-title">
+                    Disable the Sentry middleware in dev — deferred
+                  </p>
                   <p class="item-note">
                     Zack: "sentry middleware should be disabled in dev, can
                     address later." It is the cause of the workerd
                     cross-request-promise warning, which is dev-only — zero
                     occurrences under <code>astro preview</code>. Belongs to the
-                    Sentry round.
+                    Sentry round. Zack reaffirmed deferral after approving the
+                    chart simplifications: not a Workers cutover blocker.
                   </p>
                 </div>
               </li>
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
                   <p class="item-title">
                     Bump compatibility_date in wrangler.jsonc
                   </p>
                   <p class="item-note">
-                    To the present day. Currently pinned to
-                    <code>2025-03-21</code>, the date the Pages build used.
-                    Zack: "fine to do later."
+                    Updated to <code>2026-09-10</code>, within the installed
+                    workerd runtime's supported range. Node compatibility is
+                    implicit at this date. Build and workerd preview verified.
                   </p>
                 </div>
               </li>
@@ -1684,6 +1687,25 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">Production cutover to Workers</p>
                   <p class="item-note">
+                    Next release work: inventory the existing Pages domain and
+                    rollback path; reconcile the branch stack; provision Worker
+                    bindings/secrets and settle preview KV isolation. Verify
+                    first-Worker bootstrap and run the actual GitHub/Linux
+                    pipeline against a non-production URL before switching the
+                    domain. Pause the old Pages auto-build path before merging
+                    the Workers-only stack into main.
+                  </p>
+                  <p class="item-note">
+                    Hosted checks must cover NBA access, live actions and KV
+                    fallback, cache headers, redirects, charts/keyboard
+                    behavior, and production Sentry reporting/source maps.
+                    Dev-only Sentry changes and unrelated feature work remain
+                    deferred. After production cutover, verify and observe the
+                    Worker before deleting Pages; retain the old deployment for
+                    an agreed rollback window. Domain transfer is not project
+                    teardown.
+                  </p>
+                  <p class="item-note">
                     Needs his Cloudflare account. Blockers, all deliberate:
                     <code>wrangler.jsonc</code> has the placeholder
                     <code>REPLACE_WITH_REAL_KV_ID</code>;
@@ -1782,15 +1804,12 @@ mise run setup</code></pre>
             </ul>
 
             <p class="coda">
-              <strong>Looked at and set aside:</strong>
-              <code>prerenderEnvironment: 'node'</code> (builds fine and is
-              faster, but changes CSS output — drops two
-              <code>-webkit-text-decoration</code> prefixes and leaves two
-              nested <code>&amp;</code> selectors unflattened),
+              Node prerender is now adopted for the SQLite build boundary;
+              content-collection storage options no longer apply.
+              <strong>Still set aside:</strong>
               <code>experimental.svgOptimizer</code> (only applies to SVG
               components, not our asset pipeline),
-              <code>experimental.incrementalBuild</code>,
-              <code>collectionStorage: 'chunked'</code>, custom/JSON logging,
+              <code>experimental.incrementalBuild</code>, custom/JSON logging,
               advanced routing (<code>src/fetch.ts</code>, Hono middleware), and
               <code>astro dev --background</code>.
             </p>
