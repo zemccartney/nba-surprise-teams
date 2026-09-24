@@ -39,6 +39,24 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  if (new URL(request.url).searchParams.has("loader-only")) {
+    try {
+      const data = await LiveLoader("2026");
+      return Response.json(
+        { expiresAt: data.expiresAt, games: data.games.length, ok: true },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    } catch (error) {
+      return Response.json(
+        {
+          error: error instanceof Error ? error.message : "Loader failed",
+          ok: false,
+        },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
+  }
+
   const profile = new URL(request.url).searchParams.get("network");
   if (profile) {
     const agents: Record<string, string> = {

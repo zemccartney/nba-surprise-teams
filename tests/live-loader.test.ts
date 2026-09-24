@@ -53,7 +53,7 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-it("sends the NBA Referer header", async () => {
+it("sends the hosted-compatible NBA request headers", async () => {
   const fetch = feed([]);
 
   await expect(loader()).resolves.toEqual({ games: [] });
@@ -63,7 +63,9 @@ it("sends the NBA Referer header", async () => {
     {
       headers: {
         Accept: "application/json",
+        Origin: "https://www.nba.com",
         Referer: "https://www.nba.com/",
+        "User-Agent": expect.stringContaining("Mozilla/5.0"),
       },
       signal: expect.any(AbortSignal),
     },

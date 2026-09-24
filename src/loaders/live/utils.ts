@@ -47,9 +47,15 @@ export type TeamCode = z.infer<typeof teamCodeSchema>;
 export const NBA_SCHEDULE_URL =
   "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json";
 
+// Hosted cutover probe: Referer alone (and Node UA + Origin) received 403.
+// This browser-compatible request returned the validated 2026-27 feed from
+// the Worker. These are compatibility headers, not an authentication contract.
 export const NBA_SCHEDULE_HEADERS = {
   Accept: "application/json",
+  Origin: "https://www.nba.com",
   Referer: "https://www.nba.com/",
+  "User-Agent":
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
 };
 
 // Working theory: 001 preseason, 002 regular season, 006 Cup championship.
