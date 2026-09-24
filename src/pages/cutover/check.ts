@@ -42,14 +42,21 @@ export const POST: APIRoute = async ({ request }) => {
   const profile = new URL(request.url).searchParams.get("network");
   if (profile) {
     const agents: Record<string, string> = {
+      browser:
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
       identified: "NBASTT/1.0 (+https://nbastt.grepco.net/)",
       node: "node",
+      origin: "node",
     };
     const agent = agents[profile];
     if (!agent) return new Response("Unknown profile", { status: 400 });
     try {
       const response = await fetch(NBA_SCHEDULE_URL, {
-        headers: { ...NBA_SCHEDULE_HEADERS, "User-Agent": agent },
+        headers: {
+          ...NBA_SCHEDULE_HEADERS,
+          "User-Agent": agent,
+          ...(["browser", "origin"].includes(profile) && { Origin: "https://www.nba.com" }),
+        },
         signal: AbortSignal.timeout(10_000),
       });
       const text = await response.text();
