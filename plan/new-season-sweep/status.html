@@ -821,9 +821,13 @@ mise run setup</code></pre>
                 screenshots were byte-identical after cleanup. The separately
                 approved simplification now uses direct CSS paints, native font
                 recovery and no dormant router hook. Delayed fonts, keyboard
-                selection and live token changes are verified. Next: provision
-                an isolated Workers preview and coordinate hosted checks before
-                production cutover. Read the
+                selection and live token changes are verified. The isolated
+                <a href="https://nbastt-preview.zemccartney.workers.dev"
+                  >Workers preview</a
+                >
+                is now deployed: GitHub/Linux verification, 192 tests and hosted
+                chart/font checks pass. Production cutover is still pending.
+                Read the
                 <a href="workers-cutover.md"
                   >verified Cloudflare inventory and cutover plan</a
                 >. See
@@ -1710,17 +1714,18 @@ mise run setup</code></pre>
                     teardown.
                   </p>
                   <p class="item-note">
-                    Needs his Cloudflare account. Blockers, all deliberate:
+                    Account access and isolated preview deployment are verified.
+                    Production blockers remain deliberate:
                     <code>wrangler.jsonc</code> has the placeholder
                     <code>REPLACE_WITH_REAL_KV_ID</code>;
                     <code>.github/workflows/deploy.yml</code> is written,
-                    SHA-pinned and zizmor-clean but gated off behind
-                    <code>vars.DEPLOY_ENABLED == 'true'</code>; the custom
-                    domain has to move. The gate is a temporary cutover
+                    SHA-pinned and zizmor-clean, with automatic publishing gated
+                    behind <code>vars.DEPLOY_ENABLED == 'true'</code>; the
+                    custom domain has to move. The gate is a temporary cutover
                     interlock, to retire after migration. Per Zack's workflow,
                     CI runs full verification at deployment time, not in a
-                    separate every-push/PR workflow. First actual GitHub/Linux
-                    execution is still pending.
+                    separate every-push/PR workflow. The first GitHub/Linux
+                    execution passed and published only the isolated preview.
                   </p>
                   <p class="item-note">
                     Also settle here: trailing-slash redirects become

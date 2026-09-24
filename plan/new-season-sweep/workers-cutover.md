@@ -1,5 +1,38 @@
 # Workers cutover
 
+## Current checkpoint — isolated preview live
+
+- URL: **https://nbastt-preview.zemccartney.workers.dev**
+- Deployed commit: `93ce78c98b0628f58556fae3c6b7e0f1261190da`.
+- Worker version: `05755fbd-df75-4018-b784-dfcc1c42bc01`.
+- [GitHub/Linux run 35945190784](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35945190784)
+  passed: installation audit, full verification, **192 tests**, build,
+  375-file artifact audit (Sentry-enabled build), target guard and deployment.
+- Hosted application checks pass at 1440/390/320px; tooltip-safety and all six
+  blocked/stalled/delayed-font cases pass. The first application run measured
+  one tooltip during remote logo resizing; the harness now waits for image
+  decoding and native repositioning before checking settled clearance, without
+  lowering the threshold or changing application rendering.
+- Home, Stats, archive, About and archived team routes return 200; unknown routes
+  return 404 after slash normalization. `/stats` redirects 307 to `/stats/`.
+  Fingerprinted assets have immutable one-year caching.
+- Actual hosted action: latest preseason returns empty games without expiry;
+  historical and unknown seasons return 400 and 404 respectively.
+- API readback confirms preview-only KV and no preview custom domains. Pages
+  production deployment remains unchanged and Git-disconnected. Production
+  deployment gate is still absent/off. No production KV or DNS changes.
+
+**Still before production cutover:** verify NBA fetch/KV fallback on a coordinated
+fixture or live scenario (the real preseason action intentionally skips both),
+Sentry event delivery and source-mapped stacks, screen-reader review, and domain
+routing/rollback. Source-map uploads succeeded in CI, but one build pass emitted
+an unmatched-debug-ID-sources warning; upload success alone is not proof of
+runtime event mapping. Existing Sentry integration-option deprecation warnings
+remain deferred, as does dev-only middleware work. Compare final custom-domain
+security headers; workers.dev does not share the production zone's settings.
+
+The following sections preserve the preparation sequence.
+
 ## 2026-09-24 — Main merged; read-only Cloudflare inventory
 
 Zack disconnected the Pages Git integration and authorized merging the approved

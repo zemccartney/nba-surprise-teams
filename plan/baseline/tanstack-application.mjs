@@ -270,6 +270,18 @@ try {
           await svg.focus();
           await page.keyboard.press("Home");
         }
+        // Remote logos can resize a tooltip after it first appears. Measure
+        // settled geometry after decoding and the native resize/position pass.
+        await host.locator(".tracker-tooltip").evaluate(async (tooltip) => {
+          await Promise.all(
+            Array.from(tooltip.querySelectorAll("img"), (image) =>
+              image.decode(),
+            ),
+          );
+          await new Promise((resolve) =>
+            requestAnimationFrame(() => requestAnimationFrame(resolve)),
+          );
+        });
         const point =
           kind === "team-season-scatter" || kind === "team-season-pace"
             ? await svg

@@ -53,6 +53,8 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
   the actual SVG renderer, without a document or color-conversion canvas.
   The application font-wait helper and its timer tests are removed; native font
   recovery is exercised by the expanded browser harness.
+- `preview-target.test.ts`: generated preview configuration must select only the
+  isolated Worker and preview KV, with workers.dev enabled and no domain routes.
 - `preview-alias.test.ts`: valid, bounded, deterministic and collision-resistant
   branch aliases.
 - `svg-optimizer.test.ts`: actual optimizer hooks under an encoded file path.
