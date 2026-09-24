@@ -1572,13 +1572,14 @@ mise run setup</code></pre>
                 <span class="marker">[ ]</span>
                 <div>
                   <p class="item-title">
-                    Reduce Iosevka font payload — deferred
+                    Reduce Iosevka font payload — post-season-start audit
                   </p>
                   <p class="item-note">
-                    Zack explicitly deferred this until the end of the sweep,
-                    alongside other deprioritized work (2026-09-13 UTC). Not a
-                    Foundations merge/deploy blocker. Regular and bold WOFF2
-                    total 1,972,808 bytes (1.88 MiB), unchanged from production.
+                    Zack deferred focused performance work until after season
+                    start (2026-09-24), superseding the brief promotion to
+                    Season prep. Not a cutover blocker. Two static weights
+                    (400/700), already labelled Latin, total 1,972,808 bytes
+                    (1.88 MiB). We are not loading every weight.
                   </p>
                   <p class="item-note">
                     Start with a measured subsetting experiment that preserves
@@ -1587,7 +1588,13 @@ mise run setup</code></pre>
                     chart and tooltip text. Existing files are already labelled
                     Latin. See <code>walkthrough.md</code> for measurements.
                     Separate from adopting Astro's Fonts API below; that alone
-                    does not guarantee smaller font binaries.
+                    does not guarantee smaller font binaries. See the
+                    <a href="../performance/README.md"
+                      >post-season performance audit notes</a
+                    >
+                    for the Lighthouse report, controlled experiments and
+                    rejected CSS/preload tweaks. No performance tweak was
+                    deployed.
                   </p>
                 </div>
               </li>
@@ -1749,12 +1756,13 @@ mise run setup</code></pre>
               <li class="item s-open">
                 <span class="marker">[ ]</span>
                 <div>
-                  <p class="item-title">Fonts API — stable 6.0</p>
+                  <p class="item-title">Fonts API — post-season-start audit</p>
                   <p class="item-note">
                     Would replace the two <code>@fontsource/*</code> CSS imports
                     with declarative config that also emits preloads and
-                    metric-matched fallbacks. Prerequisite for the OG image
-                    work.
+                    metric-matched fallbacks. Evaluate during the focused
+                    post-season-start performance audit, alongside subsetting;
+                    not a prerequisite for this cutover.
                   </p>
                 </div>
               </li>

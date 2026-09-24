@@ -22,6 +22,21 @@
   production deployment remains unchanged and Git-disconnected. Production
   deployment gate is still absent/off. No production KV or DNS changes.
 
+### Subsequent checks and deferred performance work
+
+- The DNS screenshot confirms both custom hostnames are proxied CNAMEs to
+  `nba-surprise-teams.pages.dev`, TTL Auto. No DNS changes were made.
+- Browser Sentry smoke event `bbae8c8b7a194cd382579dec3ea07468` was accepted
+  by ingestion (HTTP 200), environment `preview`, release
+  `93ce78c98b0628f58556fae3c6b7e0f1261190da`. Marker:
+  `NBASTT preview cutover smoke 2026-09-24T03:09:03.937Z`.
+  Dashboard confirmation remains pending. This deliberately injected browser
+  error does not prove application source-map mapping or server error delivery.
+- Zack deferred focused performance work until after season start. The unshipped
+  CSS/preload experiments were reverted; deployed preview is unchanged. See
+  [performance audit notes](../performance/README.md). No performance blocker
+  is being added to this cutover.
+
 **Still before production cutover:** verify NBA fetch/KV fallback on a coordinated
 fixture or live scenario (the real preseason action intentionally skips both),
 Sentry event delivery and source-mapped stacks, screen-reader review, and domain

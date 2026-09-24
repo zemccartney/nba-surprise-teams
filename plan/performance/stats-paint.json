@@ -1,0 +1,1623 @@
+{
+  "browser": "153.0.8010.53",
+  "cpuSlowdown": 4,
+  "network": {
+    "connectionType": "cellular4g",
+    "downloadThroughput": 200000,
+    "latency": 150,
+    "offline": false,
+    "uploadThroughput": 93750
+  },
+  "note": "Three rotated cold-context runs per real build, cache disabled, local gzip HTTP. No Sentry integration in these builds. CDP throttling is not Lighthouse's simulated model; results are not a PSI score or chart-interactivity metric. Does not measure repeat-navigation caching benefits.",
+  "path": "/stats/",
+  "results": [
+    {
+      "cls": 0.0021264393028846153,
+      "document": [
+        {
+          "encoded": 9511,
+          "end": 203.19999980926514
+        }
+      ],
+      "errors": [],
+      "fcp": 528,
+      "lcp": 656,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 384.39999985694885,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 173.19999980926514
+        },
+        {
+          "encoded": 9400,
+          "end": 458.09999990463257,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 175.39999985694885
+        },
+        {
+          "encoded": 10556,
+          "end": 480.69999980926514,
+          "name": "/_astro/layout.q5X898wk.css",
+          "start": 190
+        },
+        {
+          "encoded": 295,
+          "end": 368.69999980926514,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 192
+        },
+        {
+          "encoded": 1137,
+          "end": 376.7999999523163,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 192
+        },
+        {
+          "encoded": 560,
+          "end": 549.7999999523163,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 192.09999990463257
+        },
+        {
+          "encoded": 827,
+          "end": 646.3999998569489,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 192.09999990463257
+        },
+        {
+          "encoded": 376,
+          "end": 713.5999999046326,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 192.09999990463257
+        },
+        {
+          "encoded": 934,
+          "end": 819.1999998092651,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 192.09999990463257
+        },
+        {
+          "encoded": 369,
+          "end": 698.1999998092651,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 192.89999985694885
+        },
+        {
+          "encoded": 1167,
+          "end": 728.0999999046326,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 192.89999985694885
+        },
+        {
+          "encoded": 1084,
+          "end": 893.3999998569489,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 193.09999990463257
+        },
+        {
+          "encoded": 135,
+          "end": 390.7999999523163,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 194.39999985694885
+        },
+        {
+          "encoded": 134,
+          "end": 525.8999998569489,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 194.79999995231628
+        },
+        {
+          "encoded": 134,
+          "end": 533.5,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 206.09999990463257
+        },
+        {
+          "encoded": 176,
+          "end": 540.7999999523163,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 206.19999980926514
+        },
+        {
+          "encoded": 50267,
+          "end": 1110.7999999523163,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 391.59999990463257
+        },
+        {
+          "encoded": 989740,
+          "end": 5865.799999952316,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 489.69999980926514
+        },
+        {
+          "encoded": 424,
+          "end": 870.8999998569489,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 541.3999998569489
+        },
+        {
+          "encoded": 866,
+          "end": 6076.399999856949,
+          "name": "/favicon.svg",
+          "start": 5914.099999904633
+        }
+      ],
+      "run": 0,
+      "variant": "baseline"
+    },
+    {
+      "cls": 0.1354215065304487,
+      "document": [
+        {
+          "encoded": 19995,
+          "end": 250.09999990463257
+        }
+      ],
+      "errors": [],
+      "fcp": 348,
+      "lcp": 784,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 348.7999999523163,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 163.79999995231628
+        },
+        {
+          "encoded": 9400,
+          "end": 407.5,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 163.90000009536743
+        },
+        {
+          "encoded": 295,
+          "end": 385.7999999523163,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 221.09999990463257
+        },
+        {
+          "encoded": 1137,
+          "end": 392.09999990463257,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 221.09999990463257
+        },
+        {
+          "encoded": 560,
+          "end": 400.90000009536743,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 221.09999990463257
+        },
+        {
+          "encoded": 934,
+          "end": 580.0999999046326,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 221.20000004768372
+        },
+        {
+          "encoded": 376,
+          "end": 595.2000000476837,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 221.20000004768372
+        },
+        {
+          "encoded": 827,
+          "end": 767.2000000476837,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 221.20000004768372
+        },
+        {
+          "encoded": 1167,
+          "end": 715.9000000953674,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 221.79999995231628
+        },
+        {
+          "encoded": 369,
+          "end": 722.0999999046326,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 221.79999995231628
+        },
+        {
+          "encoded": 1084,
+          "end": 888.5999999046326,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 221.90000009536743
+        },
+        {
+          "encoded": 135,
+          "end": 415.7000000476837,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 227.29999995231628
+        },
+        {
+          "encoded": 134,
+          "end": 550.2000000476837,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 235.90000009536743
+        },
+        {
+          "encoded": 134,
+          "end": 557.2000000476837,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 251.5
+        },
+        {
+          "encoded": 176,
+          "end": 573.5999999046326,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 251.5
+        },
+        {
+          "encoded": 989740,
+          "end": 5777.599999904633,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 317.7999999523163
+        },
+        {
+          "encoded": 50267,
+          "end": 1255.0999999046326,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 416.5
+        },
+        {
+          "encoded": 424,
+          "end": 752.5,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 574.2000000476837
+        },
+        {
+          "encoded": 866,
+          "end": 5979.900000095367,
+          "name": "/favicon.svg",
+          "start": 5823
+        }
+      ],
+      "run": 0,
+      "variant": "inline"
+    },
+    {
+      "cls": 0.0021264393028846153,
+      "document": [
+        {
+          "encoded": 9541,
+          "end": 198.59999990463257
+        }
+      ],
+      "errors": [],
+      "fcp": 672,
+      "lcp": 748,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 401.7000000476837,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 165.29999995231628
+        },
+        {
+          "encoded": 9400,
+          "end": 499.09999990463257,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 165.79999995231628
+        },
+        {
+          "encoded": 989740,
+          "end": 5764.599999904633,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 166
+        },
+        {
+          "encoded": 10556,
+          "end": 536.0999999046326,
+          "name": "/_astro/layout.q5X898wk.css",
+          "start": 169
+        },
+        {
+          "encoded": 295,
+          "end": 356.2000000476837,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 170.09999990463257
+        },
+        {
+          "encoded": 1137,
+          "end": 693.2999999523163,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 170.20000004768372
+        },
+        {
+          "encoded": 560,
+          "end": 716.2000000476837,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 170.20000004768372
+        },
+        {
+          "encoded": 827,
+          "end": 739.5999999046326,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 170.20000004768372
+        },
+        {
+          "encoded": 934,
+          "end": 754.7000000476837,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 170.20000004768372
+        },
+        {
+          "encoded": 376,
+          "end": 889.5999999046326,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 171.09999990463257
+        },
+        {
+          "encoded": 369,
+          "end": 911.7999999523163,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 171.09999990463257
+        },
+        {
+          "encoded": 1167,
+          "end": 933.4000000953674,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 171.09999990463257
+        },
+        {
+          "encoded": 1084,
+          "end": 1039.0999999046326,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 171.09999990463257
+        },
+        {
+          "encoded": 135,
+          "end": 393.2000000476837,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 176.79999995231628
+        },
+        {
+          "encoded": 134,
+          "end": 528.2000000476837,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 184.90000009536743
+        },
+        {
+          "encoded": 134,
+          "end": 559.4000000953674,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 199.40000009536743
+        },
+        {
+          "encoded": 176,
+          "end": 574.4000000953674,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 199.5
+        },
+        {
+          "encoded": 50267,
+          "end": 1226.7000000476837,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 394.2999999523163
+        },
+        {
+          "encoded": 424,
+          "end": 866.2000000476837,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 575.5
+        },
+        {
+          "encoded": 866,
+          "end": 5965.799999952316,
+          "name": "/favicon.svg",
+          "start": 5809.700000047684
+        }
+      ],
+      "run": 0,
+      "variant": "preload"
+    },
+    {
+      "cls": 0.1354215065304487,
+      "document": [
+        {
+          "encoded": 20004,
+          "end": 258.19999980926514
+        }
+      ],
+      "errors": [],
+      "fcp": 360,
+      "lcp": 604,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 370.69999980926514,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 173.19999980926514
+        },
+        {
+          "encoded": 9400,
+          "end": 460.69999980926514,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 173.79999995231628
+        },
+        {
+          "encoded": 989740,
+          "end": 5704.399999856949,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 173.79999995231628
+        },
+        {
+          "encoded": 295,
+          "end": 400.19999980926514,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 229.69999980926514
+        },
+        {
+          "encoded": 1137,
+          "end": 409,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 229.79999995231628
+        },
+        {
+          "encoded": 560,
+          "end": 873.6999998092651,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 229.79999995231628
+        },
+        {
+          "encoded": 827,
+          "end": 596.3999998569489,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 230.29999995231628
+        },
+        {
+          "encoded": 934,
+          "end": 701.5,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 230.29999995231628
+        },
+        {
+          "encoded": 376,
+          "end": 626.8999998569489,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 230.5
+        },
+        {
+          "encoded": 369,
+          "end": 738,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 230.5
+        },
+        {
+          "encoded": 1167,
+          "end": 767.5999999046326,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 230.5
+        },
+        {
+          "encoded": 1084,
+          "end": 904.0999999046326,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 230.5
+        },
+        {
+          "encoded": 135,
+          "end": 431.2999999523163,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 236.29999995231628
+        },
+        {
+          "encoded": 134,
+          "end": 535.5,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 243.39999985694885
+        },
+        {
+          "encoded": 134,
+          "end": 559.2999999523163,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 259.09999990463257
+        },
+        {
+          "encoded": 176,
+          "end": 572.7999999523163,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 259.5
+        },
+        {
+          "encoded": 50267,
+          "end": 1255.0999999046326,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 432.69999980926514
+        },
+        {
+          "encoded": 424,
+          "end": 798,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 573.3999998569489
+        },
+        {
+          "encoded": 866,
+          "end": 5912.899999856949,
+          "name": "/favicon.svg",
+          "start": 5750.199999809265
+        }
+      ],
+      "run": 0,
+      "variant": "both"
+    },
+    {
+      "cls": 0.1354215065304487,
+      "document": [
+        {
+          "encoded": 19995,
+          "end": 259.39999985694885
+        }
+      ],
+      "errors": [],
+      "fcp": 368,
+      "lcp": 788,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 356.7999999523163,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 174.20000004768372
+        },
+        {
+          "encoded": 9400,
+          "end": 415.39999985694885,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 174.29999995231628
+        },
+        {
+          "encoded": 295,
+          "end": 393.09999990463257,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 230.70000004768372
+        },
+        {
+          "encoded": 1137,
+          "end": 401.89999985694885,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 230.79999995231628
+        },
+        {
+          "encoded": 560,
+          "end": 408.09999990463257,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 230.79999995231628
+        },
+        {
+          "encoded": 934,
+          "end": 588.7000000476837,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 230.79999995231628
+        },
+        {
+          "encoded": 827,
+          "end": 776.8999998569489,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 230.79999995231628
+        },
+        {
+          "encoded": 376,
+          "end": 603.2000000476837,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 231.29999995231628
+        },
+        {
+          "encoded": 369,
+          "end": 738.8999998569489,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 231.29999995231628
+        },
+        {
+          "encoded": 1167,
+          "end": 723.5999999046326,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 231.5
+        },
+        {
+          "encoded": 1084,
+          "end": 889,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 231.5
+        },
+        {
+          "encoded": 135,
+          "end": 424.2000000476837,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 236.59999990463257
+        },
+        {
+          "encoded": 134,
+          "end": 558.7000000476837,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 244.20000004768372
+        },
+        {
+          "encoded": 134,
+          "end": 573.5,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 260.2000000476837
+        },
+        {
+          "encoded": 176,
+          "end": 581.7999999523163,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 260.2999999523163
+        },
+        {
+          "encoded": 989740,
+          "end": 5786.799999952316,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 326.89999985694885
+        },
+        {
+          "encoded": 50267,
+          "end": 1271.7999999523163,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 425.09999990463257
+        },
+        {
+          "encoded": 424,
+          "end": 761.2000000476837,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 582.5
+        },
+        {
+          "encoded": 866,
+          "end": 5988.200000047684,
+          "name": "/favicon.svg",
+          "start": 5831.700000047684
+        }
+      ],
+      "run": 1,
+      "variant": "inline"
+    },
+    {
+      "cls": 0.0021264393028846153,
+      "document": [
+        {
+          "encoded": 9541,
+          "end": 205.09999990463257
+        }
+      ],
+      "errors": [],
+      "fcp": 680,
+      "lcp": 748,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 408.5,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 172.29999995231628
+        },
+        {
+          "encoded": 9400,
+          "end": 506.09999990463257,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 172.90000009536743
+        },
+        {
+          "encoded": 989740,
+          "end": 5770.599999904633,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 172.90000009536743
+        },
+        {
+          "encoded": 10556,
+          "end": 543,
+          "name": "/_astro/layout.q5X898wk.css",
+          "start": 175.40000009536743
+        },
+        {
+          "encoded": 295,
+          "end": 363,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 176.29999995231628
+        },
+        {
+          "encoded": 1137,
+          "end": 708.5,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 176.29999995231628
+        },
+        {
+          "encoded": 560,
+          "end": 723.0999999046326,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 177
+        },
+        {
+          "encoded": 827,
+          "end": 738.0999999046326,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 177
+        },
+        {
+          "encoded": 934,
+          "end": 753,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 177
+        },
+        {
+          "encoded": 369,
+          "end": 902.9000000953674,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 177
+        },
+        {
+          "encoded": 376,
+          "end": 910.7999999523163,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 177
+        },
+        {
+          "encoded": 1167,
+          "end": 933,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 177
+        },
+        {
+          "encoded": 1084,
+          "end": 1053,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 177.5
+        },
+        {
+          "encoded": 135,
+          "end": 393.09999990463257,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 183.90000009536743
+        },
+        {
+          "encoded": 134,
+          "end": 535.2000000476837,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 190.5
+        },
+        {
+          "encoded": 134,
+          "end": 558.7000000476837,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 206.40000009536743
+        },
+        {
+          "encoded": 176,
+          "end": 573,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 206.5
+        },
+        {
+          "encoded": 50267,
+          "end": 1232.9000000953674,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 393.5
+        },
+        {
+          "encoded": 424,
+          "end": 880.4000000953674,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 573.9000000953674
+        },
+        {
+          "encoded": 866,
+          "end": 5972.5,
+          "name": "/favicon.svg",
+          "start": 5816.400000095367
+        }
+      ],
+      "run": 1,
+      "variant": "preload"
+    },
+    {
+      "cls": 0.1354215065304487,
+      "document": [
+        {
+          "encoded": 20004,
+          "end": 258.2000000476837
+        }
+      ],
+      "errors": [],
+      "fcp": 360,
+      "lcp": 596,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 371.2000000476837,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 173.09999990463257
+        },
+        {
+          "encoded": 9400,
+          "end": 460.7999999523163,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 173.20000004768372
+        },
+        {
+          "encoded": 989740,
+          "end": 5703.200000047684,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 173.20000004768372
+        },
+        {
+          "encoded": 295,
+          "end": 400.5,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 229.29999995231628
+        },
+        {
+          "encoded": 1137,
+          "end": 409,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 229.79999995231628
+        },
+        {
+          "encoded": 827,
+          "end": 589.0999999046326,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 229.89999985694885
+        },
+        {
+          "encoded": 376,
+          "end": 618.2999999523163,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 229.89999985694885
+        },
+        {
+          "encoded": 934,
+          "end": 701.5,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 229.89999985694885
+        },
+        {
+          "encoded": 560,
+          "end": 873.7999999523163,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 229.89999985694885
+        },
+        {
+          "encoded": 369,
+          "end": 745.8999998569489,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 230
+        },
+        {
+          "encoded": 1167,
+          "end": 768.2999999523163,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 230
+        },
+        {
+          "encoded": 1084,
+          "end": 919.0999999046326,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 230
+        },
+        {
+          "encoded": 135,
+          "end": 431.5,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 236.09999990463257
+        },
+        {
+          "encoded": 134,
+          "end": 536,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 243.89999985694885
+        },
+        {
+          "encoded": 134,
+          "end": 558.2999999523163,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 258.2999999523163
+        },
+        {
+          "encoded": 176,
+          "end": 573.2999999523163,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 259.09999990463257
+        },
+        {
+          "encoded": 50267,
+          "end": 1255.2999999523163,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 432
+        },
+        {
+          "encoded": 424,
+          "end": 790.3999998569489,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 574.3999998569489
+        },
+        {
+          "encoded": 866,
+          "end": 5905.5,
+          "name": "/favicon.svg",
+          "start": 5750.5
+        }
+      ],
+      "run": 1,
+      "variant": "both"
+    },
+    {
+      "cls": 0.0021264393028846153,
+      "document": [
+        {
+          "encoded": 9511,
+          "end": 206.5
+        }
+      ],
+      "errors": [],
+      "fcp": 532,
+      "lcp": 656,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 401.09999990463257,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 172.59999990463257
+        },
+        {
+          "encoded": 9400,
+          "end": 469.2999999523163,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 172.69999980926514
+        },
+        {
+          "encoded": 10556,
+          "end": 483.59999990463257,
+          "name": "/_astro/layout.q5X898wk.css",
+          "start": 176
+        },
+        {
+          "encoded": 295,
+          "end": 356.09999990463257,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 1137,
+          "end": 364.19999980926514,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 560,
+          "end": 633.0999999046326,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 827,
+          "end": 649.5,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 934,
+          "end": 693.0999999046326,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 376,
+          "end": 821.0999999046326,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 369,
+          "end": 799.3999998569489,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 177.89999985694885
+        },
+        {
+          "encoded": 1167,
+          "end": 724.3999998569489,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 178.5
+        },
+        {
+          "encoded": 1084,
+          "end": 896.0999999046326,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 178.5
+        },
+        {
+          "encoded": 135,
+          "end": 394.5,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 184.19999980926514
+        },
+        {
+          "encoded": 134,
+          "end": 513.1999998092651,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 191.39999985694885
+        },
+        {
+          "encoded": 134,
+          "end": 521.0999999046326,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 207.29999995231628
+        },
+        {
+          "encoded": 176,
+          "end": 551.0999999046326,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 207.69999980926514
+        },
+        {
+          "encoded": 50267,
+          "end": 1023.0999999046326,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 396.39999985694885
+        },
+        {
+          "encoded": 989740,
+          "end": 5816.5,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 489.2999999523163
+        },
+        {
+          "encoded": 424,
+          "end": 859.5999999046326,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 551.8999998569489
+        },
+        {
+          "encoded": 866,
+          "end": 6018.099999904633,
+          "name": "/favicon.svg",
+          "start": 5861.199999809265
+        }
+      ],
+      "run": 1,
+      "variant": "baseline"
+    },
+    {
+      "cls": 0.0021264393028846153,
+      "document": [
+        {
+          "encoded": 9541,
+          "end": 206.59999990463257
+        }
+      ],
+      "errors": [],
+      "fcp": 680,
+      "lcp": 748,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 409.2999999523163,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 173.39999985694885
+        },
+        {
+          "encoded": 9400,
+          "end": 506.59999990463257,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 173.89999985694885
+        },
+        {
+          "encoded": 989740,
+          "end": 5771.700000047684,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 173.89999985694885
+        },
+        {
+          "encoded": 10556,
+          "end": 543.3999998569489,
+          "name": "/_astro/layout.q5X898wk.css",
+          "start": 177
+        },
+        {
+          "encoded": 295,
+          "end": 363.59999990463257,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 178.09999990463257
+        },
+        {
+          "encoded": 1137,
+          "end": 708.2000000476837,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 178.29999995231628
+        },
+        {
+          "encoded": 560,
+          "end": 723.7000000476837,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 178.29999995231628
+        },
+        {
+          "encoded": 827,
+          "end": 739.5,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 178.29999995231628
+        },
+        {
+          "encoded": 934,
+          "end": 753.8999998569489,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 178.29999995231628
+        },
+        {
+          "encoded": 376,
+          "end": 896.5999999046326,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 178.29999995231628
+        },
+        {
+          "encoded": 369,
+          "end": 919.5999999046326,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 178.79999995231628
+        },
+        {
+          "encoded": 1167,
+          "end": 934.5999999046326,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 178.79999995231628
+        },
+        {
+          "encoded": 1084,
+          "end": 1046.7000000476837,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 178.89999985694885
+        },
+        {
+          "encoded": 135,
+          "end": 394.59999990463257,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 184.59999990463257
+        },
+        {
+          "encoded": 134,
+          "end": 536.7000000476837,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 192.5
+        },
+        {
+          "encoded": 134,
+          "end": 559.5999999046326,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 208.39999985694885
+        },
+        {
+          "encoded": 176,
+          "end": 573.5,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 208.5
+        },
+        {
+          "encoded": 50267,
+          "end": 1233,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 396
+        },
+        {
+          "encoded": 424,
+          "end": 874.5,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 573.8999998569489
+        },
+        {
+          "encoded": 866,
+          "end": 5981.700000047684,
+          "name": "/favicon.svg",
+          "start": 5819
+        }
+      ],
+      "run": 2,
+      "variant": "preload"
+    },
+    {
+      "cls": 0.1354215065304487,
+      "document": [
+        {
+          "encoded": 20004,
+          "end": 258.40000009536743
+        }
+      ],
+      "errors": [],
+      "fcp": 360,
+      "lcp": 596,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 370.2999999523163,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 168.90000009536743
+        },
+        {
+          "encoded": 9400,
+          "end": 460.2999999523163,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 169
+        },
+        {
+          "encoded": 989740,
+          "end": 5703.200000047684,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 169.09999990463257
+        },
+        {
+          "encoded": 295,
+          "end": 401.59999990463257,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 230.09999990463257
+        },
+        {
+          "encoded": 1137,
+          "end": 409,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 230.20000004768372
+        },
+        {
+          "encoded": 827,
+          "end": 589,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 230.20000004768372
+        },
+        {
+          "encoded": 376,
+          "end": 618.5999999046326,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 230.20000004768372
+        },
+        {
+          "encoded": 934,
+          "end": 700.9000000953674,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 230.20000004768372
+        },
+        {
+          "encoded": 560,
+          "end": 866,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 230.20000004768372
+        },
+        {
+          "encoded": 369,
+          "end": 745.9000000953674,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 230.79999995231628
+        },
+        {
+          "encoded": 1167,
+          "end": 768.4000000953674,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 230.90000009536743
+        },
+        {
+          "encoded": 1084,
+          "end": 919.0999999046326,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 230.90000009536743
+        },
+        {
+          "encoded": 135,
+          "end": 430.40000009536743,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 235.79999995231628
+        },
+        {
+          "encoded": 134,
+          "end": 535.9000000953674,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 243.59999990463257
+        },
+        {
+          "encoded": 134,
+          "end": 558,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 259.09999990463257
+        },
+        {
+          "encoded": 176,
+          "end": 573.4000000953674,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 259.2000000476837
+        },
+        {
+          "encoded": 50267,
+          "end": 1249.4000000953674,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 431.59999990463257
+        },
+        {
+          "encoded": 424,
+          "end": 790.4000000953674,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 574
+        },
+        {
+          "encoded": 866,
+          "end": 5905.5,
+          "name": "/favicon.svg",
+          "start": 5749.799999952316
+        }
+      ],
+      "run": 2,
+      "variant": "both"
+    },
+    {
+      "cls": 0.0021264393028846153,
+      "document": [
+        {
+          "encoded": 9511,
+          "end": 206.19999980926514
+        }
+      ],
+      "errors": [],
+      "fcp": 512,
+      "lcp": 656,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 401.5,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 172.39999985694885
+        },
+        {
+          "encoded": 9400,
+          "end": 469.39999985694885,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 173.09999990463257
+        },
+        {
+          "encoded": 10556,
+          "end": 483,
+          "name": "/_astro/layout.q5X898wk.css",
+          "start": 176.5
+        },
+        {
+          "encoded": 295,
+          "end": 357.09999990463257,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 177.59999990463257
+        },
+        {
+          "encoded": 1137,
+          "end": 363,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 177.59999990463257
+        },
+        {
+          "encoded": 560,
+          "end": 634.7999999523163,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 177.69999980926514
+        },
+        {
+          "encoded": 827,
+          "end": 649.5999999046326,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 177.69999980926514
+        },
+        {
+          "encoded": 369,
+          "end": 693.3999998569489,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 376,
+          "end": 724.5,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 1167,
+          "end": 805.5999999046326,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 934,
+          "end": 828.0999999046326,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 177.79999995231628
+        },
+        {
+          "encoded": 1084,
+          "end": 896.7999999523163,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 177.89999985694885
+        },
+        {
+          "encoded": 135,
+          "end": 393.39999985694885,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 183.79999995231628
+        },
+        {
+          "encoded": 134,
+          "end": 513.0999999046326,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 191.79999995231628
+        },
+        {
+          "encoded": 134,
+          "end": 520.3999998569489,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 207
+        },
+        {
+          "encoded": 176,
+          "end": 551.5,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 207.79999995231628
+        },
+        {
+          "encoded": 50267,
+          "end": 1016.5999999046326,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 394.5
+        },
+        {
+          "encoded": 989740,
+          "end": 5815.5,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 488.19999980926514
+        },
+        {
+          "encoded": 424,
+          "end": 859.5999999046326,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 552.7999999523163
+        },
+        {
+          "encoded": 866,
+          "end": 6025.5,
+          "name": "/favicon.svg",
+          "start": 5865.099999904633
+        }
+      ],
+      "run": 2,
+      "variant": "baseline"
+    },
+    {
+      "cls": 0.1354779219150641,
+      "document": [
+        {
+          "encoded": 19995,
+          "end": 251.70000004768372
+        }
+      ],
+      "errors": [],
+      "fcp": 360,
+      "lcp": 792,
+      "overflow": false,
+      "resources": [
+        {
+          "encoded": 4236,
+          "end": 356.09999990463257,
+          "name": "/_astro/sixtyfour-latin-full-normal.tQka_-Xx.woff2",
+          "start": 167.29999995231628
+        },
+        {
+          "encoded": 9400,
+          "end": 424.09999990463257,
+          "name": "/fonts/ChicagoKare-Regular.woff2",
+          "start": 167.70000004768372
+        },
+        {
+          "encoded": 295,
+          "end": 385.7999999523163,
+          "name": "/_astro/sun.CEO0JfTo.svg",
+          "start": 223.90000009536743
+        },
+        {
+          "encoded": 1137,
+          "end": 393.2999999523163,
+          "name": "/_astro/nets.DFV3hAn6.svg",
+          "start": 224
+        },
+        {
+          "encoded": 560,
+          "end": 401.59999990463257,
+          "name": "/_astro/tophat.BC_YR4tj.svg",
+          "start": 224
+        },
+        {
+          "encoded": 934,
+          "end": 596.2999999523163,
+          "name": "/_astro/deer.ZNlwXJOD.svg",
+          "start": 224
+        },
+        {
+          "encoded": 827,
+          "end": 783.2000000476837,
+          "name": "/_astro/piston.3sXXo7gm.svg",
+          "start": 224
+        },
+        {
+          "encoded": 376,
+          "end": 589.5999999046326,
+          "name": "/_astro/grizzly.BfN3JQTy.svg",
+          "start": 224.5
+        },
+        {
+          "encoded": 369,
+          "end": 731.7000000476837,
+          "name": "/_astro/space-needle.B6zSds96.svg",
+          "start": 224.59999990463257
+        },
+        {
+          "encoded": 1167,
+          "end": 754.2000000476837,
+          "name": "/_astro/bobcat.DgdiZcyR.svg",
+          "start": 224.59999990463257
+        },
+        {
+          "encoded": 1084,
+          "end": 903.2999999523163,
+          "name": "/_astro/whammer.BVrAxoBB.svg",
+          "start": 224.59999990463257
+        },
+        {
+          "encoded": 135,
+          "end": 417.40000009536743,
+          "name": "/_astro/surprises-per-season.astro_astro_type_script_index_0_lang.CKXaOcKk.js",
+          "start": 228.59999990463257
+        },
+        {
+          "encoded": 134,
+          "end": 543.4000000953674,
+          "name": "/_astro/surprises-by-team.astro_astro_type_script_index_0_lang.Bta4XZWg.js",
+          "start": 236.59999990463257
+        },
+        {
+          "encoded": 134,
+          "end": 559.4000000953674,
+          "name": "/_astro/team-season-scatter.astro_astro_type_script_index_0_lang.BcNuIXM7.js",
+          "start": 253.5
+        },
+        {
+          "encoded": 176,
+          "end": 573.2999999523163,
+          "name": "/_astro/stats.astro_astro_type_script_index_0_lang.FeVlhR5U.js",
+          "start": 253.59999990463257
+        },
+        {
+          "encoded": 989740,
+          "end": 5786.799999952316,
+          "name": "/_astro/iosevka-curly-latin-700-normal.DPFD4ub_.woff2",
+          "start": 319.90000009536743
+        },
+        {
+          "encoded": 50267,
+          "end": 1233.7999999523163,
+          "name": "/_astro/tanstack-options.ACWX7E_K.js",
+          "start": 418.59999990463257
+        },
+        {
+          "encoded": 424,
+          "end": 768.2999999523163,
+          "name": "/_astro/responsive-order.DO_Rai0h.js",
+          "start": 574.7999999523163
+        },
+        {
+          "encoded": 866,
+          "end": 5996,
+          "name": "/favicon.svg",
+          "start": 5834.5
+        }
+      ],
+      "run": 2,
+      "variant": "inline"
+    }
+  ]
+}

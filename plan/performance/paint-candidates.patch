@@ -1,0 +1,75 @@
+diff --git i/astro.config.mjs w/astro.config.mjs
+index 9380dd5..31da257 100644
+--- i/astro.config.mjs
++++ w/astro.config.mjs
+@@ -36,6 +36,8 @@ export default defineConfig({
+   // (https://docs.astro.build/en/reference/configuration-reference/#effect-on-astrourl).
+   build: {
+     format: "directory",
++    // Avoid a render-blocking stylesheet request; let Astro process/inline CSS.
++    inlineStylesheets: "always",
+   },
+   // Astro 7 defaults this to "jsx", which collapses newlines between inline
+   // elements. "true" is the 5.x behaviour and keeps the built HTML identical;
+diff --git i/src/layouts/layout.astro w/src/layouts/layout.astro
+index c5bacd8..2ec0d6d 100644
+--- i/src/layouts/layout.astro
++++ w/src/layouts/layout.astro
+@@ -1,6 +1,7 @@
+ ---
+ import "@fontsource/iosevka-curly/400.css";
+ import "@fontsource/iosevka-curly/700.css";
++import iosevkaBoldUrl from "@fontsource/iosevka-curly/files/iosevka-curly-latin-700-normal.woff2?url";
+ import "@fontsource-variable/sixtyfour/full.css";
+ import sixtyfourLatinUrl from "@fontsource-variable/sixtyfour/files/sixtyfour-latin-full-normal.woff2?url";
+ 
+@@ -8,10 +9,11 @@ import "../styles/global.css";
+ 
+ interface Props {
+   description?: string;
++  preloadMonoBold?: boolean;
+   title?: string;
+ }
+ 
+-const { description, title } = Astro.props;
++const { description, preloadMonoBold = false, title } = Astro.props;
+ ---
+ 
+ <!doctype html>
+@@ -35,6 +37,12 @@ const { description, title } = Astro.props;
+       type="font/woff2"
+     />
+ 
++    {
++      preloadMonoBold && (
++        <link as="font" crossorigin="anonymous" href={iosevkaBoldUrl} rel="preload" type="font/woff2" />
++      )
++    }
++
+     <title>{title ? `${title} - NBASTT` : "NBA Surprise Teams Tracker"}</title>
+     <meta
+       content={description ||
+diff --git i/src/pages/[seasonId]/[teamId].astro w/src/pages/[seasonId]/[teamId].astro
+index 65ad473..f319b3c 100644
+--- i/src/pages/[seasonId]/[teamId].astro
++++ w/src/pages/[seasonId]/[teamId].astro
+@@ -30,6 +30,7 @@ const fmtSeason = ContentUtils.abbreviateSeasonRange(season, { compact: true });
+ 
+ <Subpage
+   description={`${fmtSeason} Season Results for the ${team.name}`}
++  preloadMonoBold
+   title={`${team.id} ${fmtSeason}`}
+ >
+   {
+diff --git i/src/pages/stats.astro w/src/pages/stats.astro
+index a2496e0..8a537af 100644
+--- i/src/pages/stats.astro
++++ w/src/pages/stats.astro
+@@ -271,6 +271,7 @@ for (const teamSeason of teamSeasons) {
+ 
+ <Subpage
+   description="Stats and insights from surprise team history"
++  preloadMonoBold
+   title="Stats"
+ >
+   <h1 class="page-title">Stats</h1>
