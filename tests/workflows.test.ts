@@ -23,6 +23,29 @@ it("keeps full verification before publishing behind the temporary cutover gate"
   );
 });
 
+it("allows only explicit non-main manual preview publishing while the production gate stays closed", () => {
+  expect(deploy).toContain(
+    "github.event_name == 'workflow_dispatch' && inputs.preview_deploy && github.ref != 'refs/heads/main'",
+  );
+  expect(deploy).toContain('elif [[ "$PREVIEW_DEPLOY" == true ]]; then');
+  expect(deploy).toContain(
+    "Manual preview publishing cannot target production",
+  );
+  expect(deploy.indexOf("export CLOUDFLARE_ENV=preview")).toBeLessThan(
+    deploy.indexOf("pnpm run build"),
+  );
+  const guard = deploy.indexOf(
+    "node scripts/assert-preview-target.ts dist/server/wrangler.json",
+  );
+  expect(guard).toBeGreaterThan(deploy.indexOf("pnpm run build"));
+  expect(guard).toBeLessThan(
+    deploy.indexOf("pnpm exec wrangler deploy --env preview"),
+  );
+  expect(guard).toBeLessThan(
+    deploy.indexOf("pnpm exec wrangler versions upload --env preview"),
+  );
+});
+
 it("audits all dependencies after installation and before verification/deployment, including pre-commit", async () => {
   expect(packageJson.scripts.audit).toBe("pnpm audit");
   expect(packageJson.scripts.postinstall).toBe("pnpm run audit");

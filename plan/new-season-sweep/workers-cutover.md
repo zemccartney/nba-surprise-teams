@@ -48,7 +48,21 @@ teardown has occurred. Follow-up work is on `workers-cutover`.
    bootstrap `nbastt` as written.
 4. The actual GitHub/Linux verification and publishing path has not run.
 
-### Proposed next step — requires deployment approval
+### Preview deployment authorized
+
+Zack approved isolated preview deployment and requested merged-branch cleanup.
+Deleted 5 local and 11 remote branches fully contained in main; preserved main,
+workers-cutover, light-mode and the separate image-service worktree.
+
+Configuration now selects `nbastt-preview` and the existing preview namespace
+with `CLOUDFLARE_ENV=preview`. Its origin is the workers.dev URL below. An explicit
+non-main `preview_deploy` workflow dispatch bootstraps/updates this Worker without
+turning on `DEPLOY_ENABLED`. Normal future preview version uploads target the
+same isolated preview Worker. A generated-config guard rejects production KV,
+wrong Worker names and domain routes. Local preview build, dry-run, artifact
+audit and **192 tests** pass; hosted execution is the next gate.
+
+### Approved next step
 
 Prepare a separate `nbastt-preview` Worker using the existing preview KV and
 only its workers.dev address (`nbastt-preview.zemccartney.workers.dev`). Keep
@@ -56,6 +70,22 @@ production KV, both public domains, the existing dashboard Worker and Pages
 untouched. Update preview configuration/origin and provide an explicit initial
 preview-deployment path, then exercise the GitHub/Linux pipeline and hosted
 checks. Do not enable automatic main deployment merely to bootstrap preview.
+
+### Manual DNS inspection and eventual cutover
+
+In Cloudflare, open the `grepco.net` zone → DNS → Records. Filter for
+`nbastt.grepco.net` and `nba-surprise-teams.grepco.net`. Record each record's type,
+content/target, proxy status and TTL (a screenshot is fine). Do not change or
+delete them yet. Pages → nba-surprise-teams → Custom domains should still show
+both names. These details establish the rollback recipe; they are not required
+to deploy the workers.dev preview.
+
+The current Wrangler OAuth login cannot read DNS records. Manual dashboard
+operation is sufficient. Alternatively, create a separate custom API token
+restricted to the `grepco.net` zone with Zone / DNS / Read. DNS / Edit is only
+needed if authorizing API changes later. A DNS-only token should not replace the
+working deployment credential; use it only for DNS API requests. Do not paste
+tokens into chat or commit them to the repository.
 
 After hosted NBA/KV/cache/chart/accessibility/Sentry checks, agree on domain
 routing and rollback, deploy production, transfer traffic, observe, and only

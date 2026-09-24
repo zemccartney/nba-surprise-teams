@@ -13,7 +13,7 @@ const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
 );
 
 const siteByEnv = {
-  preview: "https://dev.nba-surprise-teams.pages.dev",
+  preview: "https://nbastt-preview.zemccartney.workers.dev",
   production: "https://nbastt.grepco.net",
 };
 

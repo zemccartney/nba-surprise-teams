@@ -1,7 +1,7 @@
 # Deploys the Worker build: a safe, hashed preview alias for branches,
-# a production release only for refs/heads/main. Inert until the repository
-# variable DEPLOY_ENABLED is set to "true" (Settings -> Secrets and variables
-# -> Actions -> Variables), so pushing this file does not touch Cloudflare.
+# a production release only for refs/heads/main. Automatic deployment stays
+# gated by DEPLOY_ENABLED. A manual preview_deploy dispatch from a non-main
+# branch can bootstrap/update the isolated preview Worker without opening that gate.
 # Needs CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, PUBLIC_SENTRY_DSN and
 # SENTRY_AUTH_TOKEN as repository secrets, and a real GAMES_KV id in
 # wrangler.jsonc.
@@ -9,6 +9,11 @@ name: deploy
 
 on:
   workflow_dispatch:
+    inputs:
+      preview_deploy:
+        description: Deploy the isolated preview Worker (non-main branches only)
+        type: boolean
+        default: false
   push:
     branches: ["**"]
 
@@ -17,7 +22,10 @@ permissions:
 
 jobs:
   deploy:
-    if: vars.DEPLOY_ENABLED == 'true' && startsWith(github.ref, 'refs/heads/')
+    if: >-
+      startsWith(github.ref, 'refs/heads/') &&
+      (vars.DEPLOY_ENABLED == 'true' ||
+      (github.event_name == 'workflow_dispatch' && inputs.preview_deploy && github.ref != 'refs/heads/main'))
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -37,15 +45,27 @@ jobs:
         shell: bash
         env:
           BRANCH: ${{ github.ref_name }}
+          PREVIEW_DEPLOY: ${{ inputs.preview_deploy || false }}
         run: |
           # Separate assignment preserves a classifier failure under bash -e.
           # JavaScript comparisons are case-sensitive, unlike GitHub expressions.
           PUBLIC_DEPLOY_ENV="$(node scripts/deployment-target.ts "$GITHUB_REF")"
           export PUBLIC_DEPLOY_ENV
+          if [[ "$PUBLIC_DEPLOY_ENV" == preview ]]; then
+            export CLOUDFLARE_ENV=preview
+          elif [[ "$PREVIEW_DEPLOY" == true ]]; then
+            echo "Manual preview publishing cannot target production" >&2
+            exit 1
+          fi
           pnpm run build
           if [[ "$PUBLIC_DEPLOY_ENV" == production ]]; then
             pnpm exec wrangler deploy
           else
-            ALIAS="$(node scripts/preview-alias.ts)"
-            pnpm exec wrangler versions upload --preview-alias "$ALIAS"
+            node scripts/assert-preview-target.ts dist/server/wrangler.json
+            if [[ "$PREVIEW_DEPLOY" == true ]]; then
+              pnpm exec wrangler deploy --env preview
+            else
+              ALIAS="$(node scripts/preview-alias.ts)"
+              pnpm exec wrangler versions upload --env preview --preview-alias "$ALIAS"
+            fi
           fi

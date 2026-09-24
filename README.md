@@ -128,7 +128,11 @@ CI verification runs at deployment time: `deploy.yml` runs the full build and
 whole-repository checks before either preview or production publishing. There
 is no separate every-push/PR verification workflow. `DEPLOY_ENABLED` is a
 **temporary cutover interlock**, to retire after migration; while it is unset,
-the deploy job (including its verification) is skipped and checks remain local.
+automatic deployment is skipped. An explicit `workflow_dispatch` with
+`preview_deploy=true` on a non-main branch can bootstrap/update only the isolated
+preview Worker, including full Linux verification, without opening the production
+gate. Preview builds set `CLOUDFLARE_ENV=preview`; a generated-config guard rejects
+wrong Worker names, production KV or domain routes before publishing.
 `scripts/deployment-target.ts` selects production only for case-sensitive
 `refs/heads/main`; other branch refs select preview and non-branch refs fail.
 Preview aliases are normalized, length-bounded and hashed from the original
@@ -227,14 +231,16 @@ adapter reads it during `astro build`.
 - Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
   Review them semi-regularly:
   https://developers.cloudflare.com/workers/configuration/compatibility-flags/
-- `GAMES_KV` needs the real namespace id in `wrangler.jsonc`. Local dev ignores
-  it and uses `.wrangler/state`.
+- Production `GAMES_KV` still needs its real namespace id in `wrangler.jsonc`.
+  `env.preview` uses the existing preview namespace and Worker `nbastt-preview`,
+  with workers.dev enabled and no domain routes. Local dev uses `.wrangler/state`.
 - No `SESSION` namespace is provisioned, because `session: false` is set in
   `astro.config.mjs`. Remove that line if the site ever uses sessions.
 - `.github/workflows/deploy.yml` builds and deploys: a preview version aliased
   to the branch name for any branch, a production release for `main`. It does
-  nothing until the repository variable `DEPLOY_ENABLED` is set to `true`, and
-  it needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
+  no automatic publishing until `DEPLOY_ENABLED` is set to `true`. Explicit
+  non-main `preview_deploy` dispatches may deploy the isolated preview first.
+  It needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
   and `SENTRY_AUTH_TOKEN` as repository secrets.
 - Static routes prerender in Node, including dev. Islands/actions remain in
   workerd, and preview serves the built Worker/static assets. SQLite access is

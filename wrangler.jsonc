@@ -12,6 +12,18 @@
   // Node compatibility is implicit from 2026-08-04. Keep the date within the
   // installed workerd runtime's supported range (currently through 2026-09-10).
   "compatibility_date": "2026-09-10",
+  // Preview is isolated from production: no custom domains/routes and its own KV.
+  "env": {
+    "preview": {
+      "kv_namespaces": [
+        { "binding": "GAMES_KV", "id": "6a0d30705c634691873dd1dd122969e3" }
+      ],
+      "name": "nbastt-preview",
+      "preview_urls": true,
+      "routes": [],
+      "workers_dev": true
+    }
+  },
   // TODO Fill in the real namespace id from the Cloudflare dashboard before the
   // first Workers deploy. Local dev ignores it and uses .wrangler/state.
   "kv_namespaces": [{ "binding": "GAMES_KV", "id": "REPLACE_WITH_REAL_KV_ID" }],
