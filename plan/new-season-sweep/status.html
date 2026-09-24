@@ -804,12 +804,15 @@ mise run setup</code></pre>
             </div>
 
             <div class="brief-block">
-              <h3>Current checkpoint — 2026-09-23</h3>
+              <h3>Current checkpoint — 2026-09-24</h3>
               <p>
                 Zack approved the TanStack application and all
                 visual/interaction refinements through <code>48b4d5e</code>.
                 SQLite migration and security gates are complete. All local test
-                servers are stopped. No merge or deployment has been performed.
+                servers are stopped. The consolidated stack is now merged and
+                pushed to main at <code>a9a7952</code>. Pages Git integration is
+                disconnected; Workers deployment remains gated off. Production
+                still serves the retained Pages deployment.
               </p>
               <p>
                 ECharts cleanup is complete: renderer-neutral DTOs, no old
@@ -818,9 +821,12 @@ mise run setup</code></pre>
                 screenshots were byte-identical after cleanup. The separately
                 approved simplification now uses direct CSS paints, native font
                 recovery and no dormant router hook. Delayed fonts, keyboard
-                selection and live token changes are verified. Next: reconcile
-                the branch stack and coordinate remaining live/hosted review
-                before any merge or production cutover. See
+                selection and live token changes are verified. Next: provision
+                an isolated Workers preview and coordinate hosted checks before
+                production cutover. Read the
+                <a href="workers-cutover.md"
+                  >verified Cloudflare inventory and cutover plan</a
+                >. See
                 <a href="../tanstack-charts/application-review.md"
                   >the accepted chart review</a
                 >.
@@ -828,7 +834,7 @@ mise run setup</code></pre>
             </div>
 
             <div class="brief-block">
-              <h3>Branch stack, oldest first</h3>
+              <h3>Branch stack, oldest first — now consolidated in main</h3>
               <ul class="chain">
                 <li class="base"><code>main</code></li>
                 <li><code>tooling</code></li>
@@ -878,8 +884,8 @@ mise run setup</code></pre>
               <span class="marker">[!]</span>
               <p>
                 <strong>Deployment gate.</strong> Production still runs on
-                Pages. The Astro 7 stack needs the coordinated Workers cutover;
-                do not merge it into the current Pages build path alone.
+                Pages. Its Git integration was disconnected before the main
+                merge. Keep it disconnected while preparing the Workers cutover.
                 <code>DEPLOY_ENABLED</code> remains gated off. The earlier
                 <code>wrangler types &amp;&amp;</code> edits were committed in
                 Step 9, not left as local changes.
@@ -895,12 +901,10 @@ mise run setup</code></pre>
               <span class="count">14 / 18 done</span>
             </div>
             <p class="milestone">
-              Milestone: the site renders exactly as it does on prod today, no
-              user-facing changes, ready to launch. Rounds through Step 10 are
-              committed. Step 11's visual walkthrough is approved. Independent
-              full-stack review found remaining test-validity, interaction and
-              deployment-safety issues; fixes/commit and cutover are still
-              gated. The stacked branches are not merged.
+              Milestone: the application, data migration and chart refinements
+              are approved and verified locally. The reviewed fixes and branch
+              stack are merged into main. Hosted verification and production
+              cutover remain pending; merging did not deploy the application.
             </p>
 
             <ul class="items">
