@@ -28,10 +28,10 @@ vi.mock(import("../src/loaders/live"), async (original) => ({
   default: mocks.loader,
 }));
 
-const { POST } = await import("../src/pages/_cutover/check");
+const { POST } = await import("../src/pages/cutover/check");
 const run = (token?: string) =>
   POST({
-    request: new Request("https://preview.invalid/_cutover/check/", {
+    request: new Request("https://preview.invalid/cutover/check/", {
       headers: token ? { authorization: `Bearer ${token}` } : {},
       method: "POST",
     }),
