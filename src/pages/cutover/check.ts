@@ -7,7 +7,12 @@ import { env } from "cloudflare:workers";
 import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 
 import LiveLoader, { LIVE_DATA_VERSION } from "../../loaders/live";
-import { decodeLiveCache } from "../../loaders/live/utils";
+import {
+  decodeLiveCache,
+  NBA_SCHEDULE_HEADERS,
+  NBA_SCHEDULE_URL,
+  SeasonDataSchema,
+} from "../../loaders/live/utils";
 
 // Astro requires this export name.
 // eslint-disable-next-line unicorn/consistent-boolean-name
@@ -32,6 +37,47 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { "Cache-Control": "no-store" },
       status: 404,
     });
+  }
+
+  const profile = new URL(request.url).searchParams.get("network");
+  if (profile) {
+    const agents: Record<string, string> = {
+      identified: "NBASTT/1.0 (+https://nbastt.grepco.net/)",
+      node: "node",
+    };
+    const agent = agents[profile];
+    if (!agent) return new Response("Unknown profile", { status: 400 });
+    try {
+      const response = await fetch(NBA_SCHEDULE_URL, {
+        headers: { ...NBA_SCHEDULE_HEADERS, "User-Agent": agent },
+        signal: AbortSignal.timeout(10_000),
+      });
+      const text = await response.text();
+      const details = response.ok
+        ? {
+            bytes: text.length,
+            seasonYear: SeasonDataSchema.parse(JSON.parse(text)).leagueSchedule
+              .seasonYear,
+          }
+        : { denial: text.slice(0, 500) };
+      return Response.json(
+        {
+          profile,
+          server: response.headers.get("server"),
+          status: response.status,
+          ...details,
+        },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    } catch (error) {
+      return Response.json(
+        {
+          error: error instanceof Error ? error.message : "Request failed",
+          profile,
+        },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
   }
 
   const marker = `NBASTT server cutover smoke ${new Date().toISOString()}`;
