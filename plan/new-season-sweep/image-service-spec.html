@@ -624,24 +624,36 @@
             </p>
 
             <div class="callout">
-              <span class="marker">!</span>
+              <span class="marker">i</span>
               <p>
                 <strong
-                  >The bolded cell looks like an adapter bug, and it is the one
-                  we papered over by hand.</strong
+                  >The bolded cell is deliberate, not an oversight.</strong
                 >
-                Under <code>compile</code> the runtime service is
-                <code>passthrough</code>, yet
-                <code>command === "dev"</code> hardcodes the Cloudflare Images
-                endpoint anyway — the adapter routes dev at a product its own
-                configuration says nothing should reach. The
-                <code>passthrough</code> and <code>cloudflare</code> branches
-                immediately above it both special-case dev to
-                <code>GENERIC_ENDPOINT</code>; <code>compile</code> does not.
-                One line, mirroring its neighbours, would make the Step 8 dev
-                shim unnecessary for everyone. Worth filing upstream.
+                <code>index.js:121</code> sets
+                <code
+                  >needsImagesBindingForDev = (isCompile || isBindingBuild)
+                  &amp;&amp; command === "dev"</code
+                >, provisioning the local Images binding in dev on purpose so
+                that dev approximates production's build-time optimization;
+                withastro/astro#15435 states that intent. An earlier draft of
+                this spec called it a one-line bug and proposed mirroring the
+                <code>passthrough</code> branch — that was wrong and would have
+                broken the intent.
                 <span class="tag t-verified">verified</span>
-                <span class="cite">dist/utils/image-config.js:31-63</span>
+                <span class="cite"
+                  >dist/index.js:121,130 and
+                  dist/utils/image-config.js:31-63</span
+                >
+              </p>
+              <p>
+                The genuine defect is narrower and sits one file over: the
+                transform endpoint's hardcoded
+                <code>supportedFormats</code> omits <code>svg</code>, so the
+                request 400s before <code>images.input()</code> is called —
+                stricter than Cloudflare Images itself. Written up ready to file
+                in <code>upstream-issue-svg.md</code>. It does not change the
+                case for this service: the paid-binding default and runtime
+                raster in workerd are untouched by it.
               </p>
             </div>
 
