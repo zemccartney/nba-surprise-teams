@@ -30,17 +30,22 @@
   by ingestion (HTTP 200), environment `preview`, release
   `93ce78c98b0628f58556fae3c6b7e0f1261190da`. Marker:
   `NBASTT preview cutover smoke 2026-09-24T03:09:03.937Z`.
-  Dashboard confirmation remains pending. This deliberately injected browser
-  error does not prove application source-map mapping or server error delivery.
+  Zack confirmed receipt. This deliberately injected browser error does not
+  prove application source-map mapping or server error delivery.
 - Zack deferred focused performance work until after season start. The unshipped
   CSS/preload experiments were reverted; deployed preview is unchanged. See
   [performance audit notes](../performance/README.md). No performance blocker
   is being added to this cutover.
 
-**Still before production cutover:** verify NBA fetch/KV fallback on a coordinated
-fixture or live scenario (the real preseason action intentionally skips both),
-Sentry event delivery and source-mapped stacks, screen-reader review, and domain
-routing/rollback. Source-map uploads succeeded in CI, but one build pass emitted
+**Hosted Worker checks:** preview KV round-trip/decoding/cleanup passed. The
+original NBA request failed with 403 from the Worker; tested browser-compatible
+headers fixed access, and the actual loader passed twice. A server Sentry smoke
+event was captured/flushed. See [full results and diagnostic cleanup](hosted-cutover-checks.md).
+
+**Still before production cutover:** server Sentry dashboard/source-map
+confirmation, screen-reader review, and domain routing/rollback. Real
+in-progress/final-game behavior and the actual post-preseason action refresh path
+remain season-activation checks, with current unit coverage. Source-map uploads succeeded in CI, but one build pass emitted
 an unmatched-debug-ID-sources warning; upload success alone is not proof of
 runtime event mapping. Existing Sentry integration-option deprecation warnings
 remain deferred, as does dev-only middleware work. Compare final custom-domain

@@ -118,7 +118,13 @@ When surprise teams and their odds are announced:
 The NBA schedule endpoint is undocumented for our purposes. Re-check our working
 assumptions each preseason, independently of Astro's loader and candidate-team
 filtering. Request headers can affect access; the current working request sends
-`Accept: application/json` and `Referer: https://www.nba.com/`.
+`Accept: application/json`, the NBA `Referer` and `Origin`, and a browser-compatible
+User-Agent. These live in `NBA_SCHEDULE_HEADERS`, shared by the loader and this
+diagnostic. During hosted cutover checks, Referer alone and Node UA + Origin
+received 403 from the Worker; the complete header set returned the validated
+2026-27 feed. Headers are compatibility measures, not a supported API contract.
+Test from the deployed Worker too: a successful local fetch does not prove
+Cloudflare-origin access.
 
 1. Run [`scripts/check-nba-feed.ts`](scripts/check-nba-feed.ts) to fetch and
    analyze the schedule directly, without Astro or KV. Supply the expected
