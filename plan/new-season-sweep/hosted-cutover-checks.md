@@ -60,7 +60,12 @@ Setup corrections, retained for operational clarity:
 The probe route, temporary tests and secret are removed after checking. The local
 token file is deleted and temporary KV keys are absent. The only permanent
 application change is the tested shared NBA header set and its regression test.
-Cleanup preview deployment must pass before considering this round complete.
+[Cleanup deployment 35953718772](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35953718772)
+passed with **192 tests** and a 375-file artifact audit. Deployed commit `6f833db`,
+Worker version `c7311ac7-558c-4a0b-a413-c8c54446c876`. Post-deploy checks confirm the
+route is absent (normal 404 page), the secret and extra stub are absent, preview
+KV remains isolated, the preseason action is unchanged, and Pages production is
+still the original deployment. The automatic production gate remains off.
 
 ## Scope still requiring coordination
 

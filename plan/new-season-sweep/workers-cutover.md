@@ -3,8 +3,11 @@
 ## Current checkpoint — isolated preview live
 
 - URL: **https://nbastt-preview.zemccartney.workers.dev**
-- Deployed commit: `93ce78c98b0628f58556fae3c6b7e0f1261190da`.
-- Worker version: `05755fbd-df75-4018-b784-dfcc1c42bc01`.
+- Current deployed commit: `6f833db` (NBA header fix; diagnostic removed).
+- Worker version: `c7311ac7-558c-4a0b-a413-c8c54446c876`.
+- [Cleanup deployment 35953718772](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35953718772)
+  passed full verification with 192 tests. Temporary route/secret/key cleanup
+  and unchanged Pages production were verified afterward.
 - [GitHub/Linux run 35945190784](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35945190784)
   passed: installation audit, full verification, **192 tests**, build,
   375-file artifact audit (Sentry-enabled build), target guard and deployment.
