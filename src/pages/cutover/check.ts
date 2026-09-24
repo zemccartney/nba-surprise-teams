@@ -55,7 +55,9 @@ export const POST: APIRoute = async ({ request }) => {
         headers: {
           ...NBA_SCHEDULE_HEADERS,
           "User-Agent": agent,
-          ...(["browser", "origin"].includes(profile) && { Origin: "https://www.nba.com" }),
+          ...(["browser", "origin"].includes(profile) && {
+            Origin: "https://www.nba.com",
+          }),
         },
         signal: AbortSignal.timeout(10_000),
       });
