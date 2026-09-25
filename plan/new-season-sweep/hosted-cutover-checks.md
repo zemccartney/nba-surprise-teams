@@ -18,7 +18,9 @@
   The user's exported event confirmed receipt but **failed mapping**:
   `missing_sourcemap` errors despite valid debug IDs; runtime release was null.
   See [source-map investigation and fresh preview test](sentry-source-maps.md)
-  for the delayed-cleanup fix and pending new-event mapping confirmation.
+  for the delayed-cleanup fix. The fresh event export confirms all seven frames
+  mapped, including `src/pages/cutover/sourcemaps.ts:42:39`, with no processing
+  errors. The hosted server source-map check now passes.
 - **NBA access:** the original hosted loader failed with HTTP 403 even though
   the same URL/headers fetched the expected 2026-27 schedule locally.
   A bounded request comparison found:
@@ -76,6 +78,6 @@ It does **not** replay the actual action's post-opening-night cache-refresh/stal
 fallback path: preseason intentionally bypasses that branch. Those contracts have
 unit coverage; observe real scheduled/in-progress/final data at season activation.
 
-Server Sentry dashboard/source-map confirmation, screen-reader review and the
-production domain/rollback decision remain separate. Production Worker bindings,
+Server Sentry receipt and source-map resolution are verified. Screen-reader
+review and the production domain/rollback decision remain separate. Production Worker bindings,
 production KV, Pages deployment and both custom domains are unchanged.

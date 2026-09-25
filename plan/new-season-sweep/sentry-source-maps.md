@@ -54,7 +54,13 @@ A temporary preview-only, bearer-authenticated POST route captured one event:
 - Marker: `NBASTT server source-map lifecycle smoke 2026-09-25T00:18:55.973Z`
 - Event: `00d6680115c0404fa60b511738d133ac`
 - Expected original frame: `src/pages/cutover/sourcemaps.ts` from `dc803df`
-- Capture and flush succeeded. Dashboard mapping confirmation is pending.
+- Capture and flush succeeded. The user's exported event confirms **all seven
+  frames symbolicated**, with no processing errors. The application error maps
+  to `src/pages/cutover/sourcemaps.ts:42:39`, including the original statement.
+  Frames report `resolved_with: debug-id`; the probe map name ends in `-62.js.map`,
+  matching the **second upload**. Artifact bundle: `518573091`.
+- Runtime release remains null, demonstrating that release tagging is not
+  required for this successful debug-ID resolution.
 
 Missing/wrong credentials and production/missing-secret rejection were tested.
 Hosted unauthenticated/wrong-token calls returned 404. The request used the
@@ -85,6 +91,7 @@ that is not our GitHub Actions deployment. Its configuration was not changed.
   debug-ID symptoms, but caused by empty maps; not our confirmed local behavior.
 
 No exact confirmed upstream report of the later incomplete bundle masking an
-older complete one was found. Do not claim the hosted issue resolved until the
-fresh event's original frames are verified. Runtime release tagging is a separate
-known omission and was deliberately left unchanged for this experiment.
+older complete one was found. The controlled hosted follow-up now verifies that
+retaining maps through both uploads fixes source resolution for the tested event.
+Runtime release tagging remains a separate known omission and was deliberately
+left unchanged for this experiment.
