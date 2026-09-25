@@ -15,8 +15,10 @@
 - **Server Sentry:** captured a labelled exception inside the real Worker request
   middleware; flush completed. Event `c0867439996b40d79b8f11a26ec8148c`, marker
   `NBASTT server cutover smoke 2026-09-24T03:43:08.657Z`.
-  Await user confirmation that it arrived with a source-mapped stack pointing to
-  `src/pages/cutover/check.ts` from commit `f351486`.
+  The user's exported event confirmed receipt but **failed mapping**:
+  `missing_sourcemap` errors despite valid debug IDs; runtime release was null.
+  See [source-map investigation and fresh preview test](sentry-source-maps.md)
+  for the delayed-cleanup fix and pending new-event mapping confirmation.
 - **NBA access:** the original hosted loader failed with HTTP 403 even though
   the same URL/headers fetched the expected 2026-27 schedule locally.
   A bounded request comparison found:
