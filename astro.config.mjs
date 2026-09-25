@@ -4,6 +4,7 @@ import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 
 import trackerData from "./data/integration.ts";
+import cleanBuildSourcemapsIntegration from "./scripts/clean-build-sourcemaps.ts";
 import svgOptimizer from "./svg-optimizer/integration.ts";
 
 const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
@@ -58,6 +59,8 @@ export default defineConfig({
     },
   },
   integrations: [
+    // Cleanup after all uploads but before trackerData seals the artifact list.
+    cleanBuildSourcemapsIntegration(),
     trackerData(),
     svgOptimizer(),
     ...(SENTRY_AUTH_TOKEN
@@ -67,7 +70,7 @@ export default defineConfig({
             environment: PUBLIC_DEPLOY_ENV,
             sourcemaps: {
               // All Vite environments scan dist; keep earlier maps for later uploads.
-              // The build script removes them once every upload has finished.
+              // The final Astro hook removes them before the artifact audit seal.
               filesToDeleteAfterUpload: [],
             },
             sourceMapsUploadOptions: {
