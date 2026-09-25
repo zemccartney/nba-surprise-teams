@@ -65,6 +65,11 @@ export default defineConfig({
           sentry({
             dsn: PUBLIC_SENTRY_DSN,
             environment: PUBLIC_DEPLOY_ENV,
+            sourcemaps: {
+              // All Vite environments scan dist; keep earlier maps for later uploads.
+              // The build script removes them once every upload has finished.
+              filesToDeleteAfterUpload: [],
+            },
             sourceMapsUploadOptions: {
               authToken: SENTRY_AUTH_TOKEN,
               project: "nba-surprise-team-tracker",

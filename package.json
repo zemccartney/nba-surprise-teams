@@ -9,7 +9,7 @@
     "archive:latest": "node data/cli.ts archive-nba --latest",
     "astro": "astro",
     "audit": "pnpm audit",
-    "build": "wrangler types && pnpm run verify && astro build && node data/node/audit.ts",
+    "build": "wrangler types && pnpm run verify && astro build && node scripts/clean-build-sourcemaps.ts && node data/node/audit.ts",
     "cf:wip": "git commit -m \"[CF-Pages-Skip] WIP\" && git push",
     "check": "astro check && pnpm run fmt:check && pnpm run lint && pnpm run lint:workflows",
     "deps": "ncu -i --cooldown 3 -p pnpm",
