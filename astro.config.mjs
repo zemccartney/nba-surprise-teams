@@ -7,7 +7,7 @@ import trackerData from "./data/integration.ts";
 import cleanBuildSourcemapsIntegration from "./scripts/clean-build-sourcemaps.ts";
 import svgOptimizer from "./svg-optimizer/integration.ts";
 
-const { PUBLIC_DEPLOY_ENV, PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN } = loadEnv(
+const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
   "",
@@ -66,16 +66,15 @@ export default defineConfig({
     ...(SENTRY_AUTH_TOKEN
       ? [
           sentry({
-            dsn: PUBLIC_SENTRY_DSN,
-            environment: PUBLIC_DEPLOY_ENV,
+            authToken: SENTRY_AUTH_TOKEN,
+            // The custom Worker entry owns server initialization and requests.
+            autoInstrumentation: { requestHandler: false },
+            enabled: { client: true, server: false },
+            project: "nba-surprise-team-tracker",
             sourcemaps: {
               // All Vite environments scan dist; keep earlier maps for later uploads.
               // The final Astro hook removes them before the artifact audit seal.
               filesToDeleteAfterUpload: [],
-            },
-            sourceMapsUploadOptions: {
-              authToken: SENTRY_AUTH_TOKEN,
-              project: "nba-surprise-team-tracker",
             },
           }),
         ]

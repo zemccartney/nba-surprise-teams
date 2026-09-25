@@ -27,7 +27,7 @@
   // TODO Fill in the real namespace id from the Cloudflare dashboard before the
   // first Workers deploy. Local dev ignores it and uses .wrangler/state.
   "kv_namespaces": [{ "binding": "GAMES_KV", "id": "REPLACE_WITH_REAL_KV_ID" }],
-  "main": "@astrojs/cloudflare/entrypoints/server",
+  "main": "./sentry.server.config.ts",
   "name": "nbastt",
   "observability": {
     "enabled": true
