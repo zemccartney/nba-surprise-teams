@@ -66,15 +66,17 @@ export default defineConfig({
     ...(SENTRY_AUTH_TOKEN
       ? [
           sentry({
-            authToken: SENTRY_AUTH_TOKEN,
             // The custom Worker entry owns server initialization and requests.
             autoInstrumentation: { requestHandler: false },
             enabled: { client: true, server: false },
-            project: "nba-surprise-team-tracker",
             sourcemaps: {
               // All Vite environments scan dist; keep earlier maps for later uploads.
               // The final Astro hook removes them before the artifact audit seal.
               filesToDeleteAfterUpload: [],
+            },
+            sourceMapsUploadOptions: {
+              authToken: SENTRY_AUTH_TOKEN,
+              project: "nba-surprise-team-tracker",
             },
           }),
         ]

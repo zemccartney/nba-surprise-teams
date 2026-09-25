@@ -1208,15 +1208,16 @@ mise run setup</code></pre>
                 <span class="marker">[ ]</span>
                 <div>
                   <p class="item-title">
-                    Disable the Sentry middleware in dev — deferred
+                    Dev-only Sentry instrumentation — deferred
                   </p>
                   <p class="item-note">
                     Zack: "sentry middleware should be disabled in dev, can
-                    address later." It is the cause of the workerd
-                    cross-request-promise warning, which is dev-only — zero
-                    occurrences under <code>astro preview</code>. Belongs to the
-                    Sentry round. Zack reaffirmed deferral after approving the
-                    chart simplifications: not a Workers cutover blocker.
+                    address later." The old middleware was associated with the
+                    dev-only workerd cross-request-promise warning. It has now
+                    been replaced by the documented Worker entry wrapper; dev
+                    behavior needs reassessment rather than assuming that
+                    warning persists. Intentional dev enablement remains
+                    deferred and is not a Workers cutover blocker.
                   </p>
                 </div>
               </li>
@@ -1687,13 +1688,16 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">Sentry rework</p>
                   <p class="item-note">
-                    Zack's standing worry is silently breaking it. Carries three
-                    items from above: disabling the middleware in dev, the
-                    <code>globalThis.process</code> banner in
-                    <code>astro.config.mjs</code>, and the
-                    <code>CF_VERSION_METADATA</code> binding (adapter 14.2.5),
-                    which is how Sentry detects releases and also adds a version
-                    cache tag and weak ETag.
+                    The source-map lifecycle fix is verified hosted. The
+                    approved custom Worker entry now owns server initialization,
+                    explicitly excluding Astro's server instrumentation. Its
+                    active release matches the browser's build SHA; the new
+                    received event still needs confirmation. Dev-only behavior
+                    remains deferred. A
+                    <code>CF_VERSION_METADATA</code> deployment UUID is not
+                    needed for Sentry release tagging; cache/version metadata is
+                    separate. See
+                    <a href="sentry-worker-entry.md">entry-point evidence</a>.
                   </p>
                 </div>
               </li>
