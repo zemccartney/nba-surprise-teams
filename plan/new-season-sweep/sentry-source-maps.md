@@ -62,8 +62,12 @@ preview Origin and JSON content type; Astro's normal origin checks remain on.
 The random token existed only in memory and the exact preview Worker secret;
 headers/body were removed from the event. The secret was deleted immediately
 after capture and its absence confirmed through the API. No KV calls were made.
-The temporary route and five temporary safety tests are removed in the cleanup
-commit; its deployment result will be recorded after completion.
+[Cleanup run 36077104299](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36077104299)
+deployed `0e3cc34` as version `41d9429f-5c81-4b2b-a63c-6e17912756a6`:
+195 tests, 72 maps removed and a 375-file artifact audit. The temporary route and
+five temporary tests are removed. Post-deploy checks confirmed the normal 404
+page at its URL, absent secret, isolated preview KV, unchanged original Pages
+deployment, main pages returning 200 and the normal empty preseason action.
 
 Production KV, domains and Pages remain untouched. The separate dashboard
 Worker's Git build failed on `npm run build` because this repo requires pnpm;

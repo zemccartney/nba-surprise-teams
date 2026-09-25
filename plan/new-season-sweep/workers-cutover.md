@@ -3,11 +3,14 @@
 ## Current checkpoint — isolated preview live
 
 - URL: **https://nbastt-preview.zemccartney.workers.dev**
-- Current deployed commit: `6f833db` (NBA header fix; diagnostic removed).
-- Worker version: `c7311ac7-558c-4a0b-a413-c8c54446c876`.
-- [Cleanup deployment 35953718772](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35953718772)
-  passed full verification with 192 tests. Temporary route/secret/key cleanup
-  and unchanged Pages production were verified afterward.
+- Current deployed commit: `0e3cc34` (source-map lifecycle fix; diagnostic removed).
+- Worker version: `41d9429f-5c81-4b2b-a63c-6e17912756a6`.
+- [Cleanup deployment 36077104299](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36077104299)
+  passed full verification with **195 tests**, removed 72 maps before artifact
+  sealing and passed the 375-file audit. Temporary route/secret cleanup,
+  isolated preview KV and unchanged Pages production were verified afterward.
+  [Source-map experiment](sentry-source-maps.md): the fresh server event still
+  needs dashboard confirmation; release tagging was deliberately unchanged.
 - [GitHub/Linux run 35945190784](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35945190784)
   passed: installation audit, full verification, **192 tests**, build,
   375-file artifact audit (Sentry-enabled build), target guard and deployment.
@@ -48,9 +51,10 @@ event was captured/flushed. See [full results and diagnostic cleanup](hosted-cut
 **Still before production cutover:** server Sentry dashboard/source-map
 confirmation, screen-reader review, and domain routing/rollback. Real
 in-progress/final-game behavior and the actual post-preseason action refresh path
-remain season-activation checks, with current unit coverage. Source-map uploads succeeded in CI, but one build pass emitted
-an unmatched-debug-ID-sources warning; upload success alone is not proof of
-runtime event mapping. Existing Sentry integration-option deprecation warnings
+remain season-activation checks, with current unit coverage. The original server
+event had valid debug IDs but missing maps and no runtime release. Delayed
+cleanup now preserves application maps in both uploads; a fresh event was
+captured/flushed. Upload success alone still does not prove runtime mapping. Existing Sentry integration-option deprecation warnings
 remain deferred, as does dev-only middleware work. Compare final custom-domain
 security headers; workers.dev does not share the production zone's settings.
 
