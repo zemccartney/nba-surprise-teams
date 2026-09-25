@@ -63,8 +63,18 @@ interaction, tooltip settlement and layout bounds. All browser sessions closed.
 Missing/wrong credentials returned 404 before the probe. The token lived only in
 memory and in the exact preview Worker secret; headers/body were removed from
 the event, and no KV operations were used. The secret was deleted immediately
-after the event and absence verified. The temporary route and five temporary
-safety tests are removed in the cleanup commit; final deployment evidence follows.
+after the event and absence verified.
+
+[Cleanup run 36136581744](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36136581744)
+deployed `2ab844a2082386a611de2a2e755da62d2a505d5a` as Worker version
+`bbd21a27-21d1-49ba-a00c-9b04ff68913a`. **197 tests**, 70 maps removed and a
+374-file artifact audit passed. The temporary route and five temporary tests
+are removed. The earlier additional-runtime-options warnings are absent.
+
+Post-deploy checks confirm normal 404 at the probe URL, absent secret, preview KV
+isolation, unchanged Pages production, main pages returning 200 and the empty
+preseason action returning 200. A browser Home check has no page errors or HTTP
+5xx responses and reports the cleanup build SHA. Personal-file hashes are intact.
 
 The response verifies runtime options and flushing, **not Sentry's received event**.
 User-exported event JSON is still needed to confirm release, source mapping and

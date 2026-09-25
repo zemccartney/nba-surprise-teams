@@ -207,6 +207,16 @@ Cloudflare-origin access.
 
 ## Infrastructural Points
 
+- Sentry server ownership: Wrangler's `main` points at `sentry.server.config.ts`,
+  which wraps Astro's Worker handler with `@sentry/cloudflare.withSentry`.
+  Astro's integration handles browser initialization and map uploads; its server
+  initialization and automatic request middleware are explicitly disabled.
+  Do not add a second request wrapper in `src/middleware.ts`.
+- Server events explicitly read the plugin-injected build release, matching the
+  browser/upload Git SHA rather than a Cloudflare deployment UUID. No upload token
+  is shipped to the Worker. Maps remain on disk through all upload passes, then
+  the final cleanup hook removes them before the artifact inventory is sealed.
+
 - Purpose of KV: be as self-reliant as possible while collecting season in-progress
   - reduce dependency on API (assume unreliable source; endpoint I stumbled on by observing network activity on stats.nba.com; gets me the data I want, but no contract with this service)
   - immediately store results in real time, so we have some backup of live results; use this backup instead of calling out to the API

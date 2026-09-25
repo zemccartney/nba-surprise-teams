@@ -78,6 +78,8 @@ It does **not** replay the actual action's post-opening-night cache-refresh/stal
 fallback path: preseason intentionally bypasses that branch. Those contracts have
 unit coverage; observe real scheduled/in-progress/final data at season activation.
 
-Server Sentry receipt and source-map resolution are verified. Screen-reader
-review and the production domain/rollback decision remain separate. Production Worker bindings,
+Server Sentry receipt and source-map resolution were verified after the cleanup
+fix. The subsequent [Worker entry migration](sentry-worker-entry.md) now supplies
+the matching runtime release; its fresh received event still needs confirmation.
+Screen-reader review and the production domain/rollback decision remain separate. Production Worker bindings,
 production KV, Pages deployment and both custom domains are unchanged.

@@ -3,15 +3,18 @@
 ## Current checkpoint — isolated preview live
 
 - URL: **https://nbastt-preview.zemccartney.workers.dev**
-- Current deployed commit: `0e3cc34` (source-map lifecycle fix; diagnostic removed).
-- Worker version: `41d9429f-5c81-4b2b-a63c-6e17912756a6`.
-- [Cleanup deployment 36077104299](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36077104299)
-  passed full verification with **195 tests**, removed 72 maps before artifact
-  sealing and passed the 375-file audit. Temporary route/secret cleanup,
+- Current deployed commit: `2ab844a` (documented Sentry Worker entry; diagnostic removed).
+- Worker version: `bbd21a27-21d1-49ba-a00c-9b04ff68913a`.
+- [Cleanup deployment 36136581744](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36136581744)
+  passed full verification with **197 tests**, removed 70 maps before artifact
+  sealing and passed the 374-file audit. Temporary route/secret cleanup,
   isolated preview KV and unchanged Pages production were verified afterward.
   [Source-map experiment](sentry-source-maps.md): the user's fresh event export
   confirms all seven frames mapped, including the original TypeScript error
-  statement, with no processing errors. Runtime release tagging remains unset.
+  statement, with no processing errors.
+- [Worker entry migration](sentry-worker-entry.md): the server now explicitly
+  receives the same build SHA as browser events/uploads. Active runtime options
+  and browser release match; the new received event still needs confirmation.
 - [GitHub/Linux run 35945190784](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35945190784)
   passed: installation audit, full verification, **192 tests**, build,
   375-file artifact audit (Sentry-enabled build), target guard and deployment.
@@ -49,15 +52,17 @@ original NBA request failed with 403 from the Worker; tested browser-compatible
 headers fixed access, and the actual loader passed twice. A server Sentry smoke
 event was captured/flushed. See [full results and diagnostic cleanup](hosted-cutover-checks.md).
 
-**Still before production cutover:** screen-reader review and domain
-routing/rollback. Real
+**Still before production cutover:** confirm the fresh event after the Worker
+entry migration, screen-reader review and domain routing/rollback. Real
 in-progress/final-game behavior and the actual post-preseason action refresh path
 remain season-activation checks, with current unit coverage. The original server
 event had valid debug IDs but missing maps and no runtime release. Delayed
 cleanup now preserves application maps in both uploads; the fresh exported event
 confirms successful debug-ID mapping using the second upload, without a release
-value. The hosted server source-map check is passed. Existing Sentry integration-option deprecation warnings
-remain deferred, as does dev-only middleware work. Compare final custom-domain
+value. That hosted source-map check passed; the subsequent Worker-entry event
+still needs received-event confirmation. Runtime init now lives in the respective
+client/Worker config files, removing the integration's runtime-option warnings.
+Dev-only instrumentation behavior remains deferred. Compare final custom-domain
 security headers; workers.dev does not share the production zone's settings.
 
 The following sections preserve the preparation sequence.
