@@ -1,5 +1,30 @@
 # Review notes: new-season sweep
 
+## Light mode — checkpoint 2
+
+Start with [the current tour and decisions](light-mode.md#current-tour--checkpoint-2).
+Read `src/styles/global.css` (semantic dark/light paints), shared table/popover
+styles, then `src/components/charts/tanstack-style.ts` and the new browser harness
+`plan/baseline/light-mode.mjs`. Other page edits replace literal palette references
+with their roles. Toggle behavior is unchanged from checkpoint 1.
+
+Review the [built team page](http://localhost:4344/2025/CHA/) and
+[Stats](http://localhost:4344/stats/) in both themes; open popovers and use keyboard
+chart selection. The plan lists palette/plot/popover decisions to flip, coverage
+and artifact paths. Two findings changed the prototype: slightly deeper purple
+links for 4.5:1 on stripes, and a below-360px column adjustment to remove overflow.
+Dark screenshot comparisons are not claimed to be byte-identical. Showdown and
+production remain untouched. This checkpoint awaits Zack's styling feedback.
+
+## Light mode — checkpoint 1
+
+Read [the plan and tour](light-mode.md), then
+`src/components/color-scheme-toggle.astro`, `src/layouts/layout.astro`, and the
+light palette bridge in `src/styles/global.css`. Surprise: the original light
+background was lavender, not the declared light-emerald token. Decisions to
+flip and manual checks are in the plan. Review palette, bulb glow and placement
+at http://localhost:4341/2025/; chart/popover paints are explicitly pending.
+
 ## 2026-09-23 — Approved implementation simplification
 
 Applied the three changes Zack approved after reading the guide: direct CSS

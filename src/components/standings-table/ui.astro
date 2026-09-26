@@ -198,6 +198,16 @@ const surpriseRules = ContentUtils.getSeasonSurpriseRules(seasonId);
     }
   }
 
+  /* At 320px the old 1/6 pace column was narrower than its padded heading. */
+  @media (max-width: 359px) {
+    .title-cell {
+      width: 48%;
+    }
+    .ou-col {
+      width: 30%;
+    }
+  }
+
   .pace-col {
     position: relative;
     text-align: right;
@@ -278,7 +288,7 @@ const surpriseRules = ContentUtils.getSeasonSurpriseRules(seasonId);
   .legend-label {
     font-size: var(--text-xl);
     line-height: var(--text-xl--line-height);
-    color: var(--color-lime-400);
+    color: var(--ink-heading);
     font-style: italic;
   }
 

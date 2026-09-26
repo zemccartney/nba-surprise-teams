@@ -11,11 +11,12 @@
 
 /* Reproduce the existing popover appearance on the library-owned surface. */
 .tracker-tooltip {
-  --ts-chart-tooltip-background: var(--color-blurple-glow);
-  --ts-chart-tooltip-color: var(--color-green-200);
+  --ts-chart-tooltip-background: var(--popover-surface);
+  --ts-chart-tooltip-color: var(--popover-ink);
+  outline: var(--popover-outline);
   --ts-chart-tooltip-border: 0;
   --ts-chart-tooltip-border-radius: 0;
-  --ts-chart-tooltip-shadow: var(--shadow-popover);
+  --ts-chart-tooltip-shadow: var(--popover-shadow);
   --ts-chart-tooltip-padding: 28px;
   --ts-chart-tooltip-font: 400 20px/28px var(--font-mono);
   --ts-chart-tooltip-max-width: min(36rem, calc(100% - 16px));
@@ -30,7 +31,7 @@
    tooltips inside the document, which would also clip an SVG-owned outline. */
 .chart:focus-visible,
 .chart:has(svg:focus-visible) {
-  outline: 2px solid var(--color-lime-400);
+  outline: 2px solid var(--ink-heading);
   outline-offset: 4px;
 }
 

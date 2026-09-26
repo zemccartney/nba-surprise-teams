@@ -5,6 +5,7 @@ import "@fontsource-variable/sixtyfour/full.css";
 import sixtyfourLatinUrl from "@fontsource-variable/sixtyfour/files/sixtyfour-latin-full-normal.woff2?url";
 
 import "../styles/global.css";
+import ColorSchemeToggle from "../components/color-scheme-toggle.astro";
 
 interface Props {
   description?: string;
@@ -18,6 +19,21 @@ const { description, title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+      // Resolve before first paint. Preserve the original branch's storage key.
+      let theme;
+      try {
+        theme = localStorage.getItem("theme");
+      } catch {
+        // Fall back to the system preference when storage is unavailable.
+      }
+      document.documentElement.dataset.theme =
+        theme === "light" || theme === "dark"
+          ? theme
+          : matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    </script>
     <meta content="width=device-width" name="viewport" />
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
     <link
@@ -47,6 +63,7 @@ const { description, title } = Astro.props;
       <div class="container">
         <header class="header">
           <slot name="header" />
+          <ColorSchemeToggle />
         </header>
         <slot />
       </div>
@@ -56,7 +73,7 @@ const { description, title } = Astro.props;
 
 <style>
   .page-bg {
-    background-color: var(--color-dark-emerald);
+    background-color: var(--surface-page);
     min-height: 100%;
   }
 

@@ -26,11 +26,12 @@ const {
   .NBASurpriseTracker-Table {
     table-layout: fixed;
     border-collapse: collapse;
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--table-shadow);
+    outline: var(--table-outline);
 
     > thead,
     > tfoot {
-      background-color: var(--color-slate-950);
+      background-color: var(--surface-table-head);
     }
 
     > thead th,
@@ -41,7 +42,7 @@ const {
       text-align: right;
       font-size: var(--text-3xl);
       line-height: var(--text-3xl--line-height);
-      color: var(--color-lime-400);
+      color: var(--ink-heading);
     }
 
     @media (min-width: 1024px) {
@@ -57,7 +58,7 @@ const {
       padding: 2rem 1rem;
       font-size: var(--text-3xl);
       line-height: var(--text-3xl--line-height);
-      color: var(--color-green-200);
+      color: var(--ink-primary);
     }
 
     @media (min-width: 1024px) {
@@ -69,7 +70,7 @@ const {
     }
 
     &.compact {
-      box-shadow: var(--shadow-glow-sm);
+      box-shadow: var(--table-shadow-compact);
 
       > thead th,
       > thead td {
@@ -102,15 +103,19 @@ const {
         position: sticky;
         top: 0;
         z-index: 10;
-        background-color: var(--color-slate-950);
+        background-color: var(--surface-table-head);
       }
     }
+  }
+
+  .NBASurpriseTracker-Table > :is(thead, tfoot) :global(:is(th, td)) {
+    outline: var(--table-outline);
   }
 
   /* Rows arrive through the body slot and carry the caller's scope attribute,
      not Table's. Keep the table/tbody scoped, but cross that slot boundary. */
   .NBASurpriseTracker-Table > tbody > :global(tr:nth-of-type(2n + 1)) {
-    background-color: var(--color-lime-950);
+    background-color: var(--surface-row);
   }
 </style>
 

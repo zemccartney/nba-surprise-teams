@@ -1,5 +1,28 @@
 # New-season sweep: round log
 
+## Light mode — checkpoint 2, awaiting styling feedback
+
+Zack requested full surface coverage before collecting design notes. Replaced
+the palette bridge with semantic paints; completed four charts, live tooltip
+repainting, popovers, season controls and loading/error/404 styling. Deepened
+light links for striped-row contrast and corrected the 320px Pace-column overflow.
+
+Check/build and 220 tests pass. Dev smoke checks 47 images without problems.
+Both dev and built preview pass 48 page/theme/width checks and both-theme chart
+interaction matrices. Dark chart control comparisons show no mismatches at the
+standard 0.1 threshold, with small strict-pixel differences recorded explicitly.
+Review at http://localhost:4344/2025/CHA/ (dev still on 4341).
+See [the plan, evidence and decisions](light-mode.md). No merge/deployment.
+
+## Light mode — checkpoint 1, awaiting design review
+
+Isolated `feature/light-mode` from main at `626171e`. Recovered the historical
+palette from `origin/light-mode`, added an accessible persisted bulb toggle and
+first-paint theme selection. Dev tour runs at http://localhost:4341/2025/.
+Chromium toggle/reload/mobile smoke and Astro check pass; targeted lint passes.
+This is a palette/glow prototype, not a merge-ready feature. Plan, limitations
+and remaining checkpoints: [light-mode.md](light-mode.md).
+
 ## 2026-09-23 — CSS paints and native font recovery
 
 Zack authorized all three simplifications in the implementation guide. Chart

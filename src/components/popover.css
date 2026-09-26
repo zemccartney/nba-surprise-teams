@@ -2,15 +2,16 @@
    centered in the viewport; that stays as the fallback for browsers without
    anchor positioning. */
 .popover-body {
-  box-shadow: var(--shadow-popover);
-  background-color: var(--color-blurple-glow);
+  box-shadow: var(--popover-shadow);
+  outline: var(--popover-outline);
+  background-color: var(--popover-surface);
   width: fit-content;
   max-width: 20rem;
   padding: 1.75rem;
   font-family: var(--font-mono);
   font-size: var(--text-xl);
   line-height: var(--text-xl--line-height);
-  color: var(--color-green-200);
+  color: var(--popover-ink);
 
   /* The popover stays where it's authored (often a bold, right-aligned table
      header), so reset the inherited text properties that the old portal-to-body
@@ -40,13 +41,13 @@
   font-family: var(--font-mono);
   font-size: var(--text-base);
   line-height: var(--text-base--line-height);
-  color: var(--color-indigo-500);
+  color: var(--help-ink);
   background: none;
   border: none;
 }
 
 .popover-trigger:hover {
-  color: var(--color-indigo-300);
+  color: var(--help-ink-hover);
 }
 
 @media (min-width: 768px) {
@@ -64,13 +65,13 @@
   font-family: var(--font-mono);
   font-size: var(--text-2xl);
   line-height: var(--text-2xl--line-height);
-  color: var(--color-lime-400);
+  color: var(--close-ink);
   background: none;
   border: none;
 }
 
 .popover-close:hover {
-  color: var(--color-lime-600);
+  color: var(--close-ink-hover);
 }
 
 /* Override variants used by consuming components */
