@@ -77,13 +77,35 @@ Only the preview-URL enablement flag changed on the parent.
   sessions closed. This is deployed-binding readback and current-season behavior,
   not a replay of post-opening-night refresh/stale-cache paths.
 
-The old `nbastt-preview` Worker was retained during verification. Retirement and
-final configuration deployment results will be recorded after completion. Its
-KV namespace must remain: the native branch Preview intentionally reuses it.
+## Final configuration and legacy Worker retirement
+
+[Run 36265152847](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36265152847)
+deployed `66de885`: 202 tests, 73 maps cleaned and the 376-file artifact audit
+passed again. Native deployment `86545e05-8516-49bc-82f6-caf4ff493f6e`;
+immutable URL https://86545e05-nba-surprise-teams.zemccartney.workers.dev.
+The stable branch URL is unchanged. Source now records preview URL enablement,
+keeps production workers.dev disabled and removes the old `env.preview` block.
+
+After verifying the native replacement, deleted **only** `nbastt-preview`, as
+requested. Before deletion, checked that it still had our last deployed version
+`54b1a567-bb01-48bf-99b6-ba8a6ed81563`, only preview KV, no secrets and no custom
+domains. API now reports the Worker absent. The **KV namespace remains intact**
+and is bound to the native Preview. The original `nba-surprise-teams` Worker's
+production module hashes, deployments and bindings still match the pre-migration
+inventory, and Pages still serves its original retained deployment. The retired
+URL returns 404. Re-ran all three chart harnesses after cleanup; they pass. The
+final browser release is `66de885f750507ee3029e67bb0f51c92902aa2d7` with no page
+errors; slash normalization remains 307 and fingerprinted assets retain immutable
+one-year caching. As in earlier hosted checks, use an identifying User-Agent:
+Python's default urllib User-Agent received an edge 403 on the redirect check.
 
 ## Production remains separate
 
 Pages and both production custom domains are untouched. The parent Worker's
 existing production code is untouched. A production deployment still needs
 approved production KV/configuration and the agreed domain/rollback sequence.
-Native Preview success does not authorize or perform that cutover.
+Native Preview success does not authorize or perform that cutover. Confirm that
+any unused dashboard Git build integration is disconnected before enabling
+production automation; this migration did not configure or repair Workers Builds.
+When retiring a merged branch, remove its native Preview—not the parent Worker or
+shared test KV. No branch-deletion automation was added during this migration.

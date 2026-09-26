@@ -822,7 +822,8 @@ mise run setup</code></pre>
                 approved simplification now uses direct CSS paints, native font
                 recovery and no dormant router hook. Delayed fonts, keyboard
                 selection and live token changes are verified. The isolated
-                <a href="https://nbastt-preview.zemccartney.workers.dev"
+                <a
+                  href="https://workers-cutover-63d134855ea4-nba-surprise-teams.zemccartney.workers.dev"
                   >Workers preview</a
                 >
                 is now deployed: GitHub/Linux verification, 192 tests and hosted
@@ -1745,9 +1746,15 @@ mise run setup</code></pre>
                     teardown.
                   </p>
                   <p class="item-note">
-                    Account access and isolated preview deployment are verified.
-                    Production blockers remain deliberate:
-                    <code>wrangler.jsonc</code> has the placeholder
+                    <a href="native-previews.md">Native branch Previews</a> now
+                    run under the existing
+                    <code>nba-surprise-teams</code> Worker using explicit
+                    preview KV. Wrangler 4.137.0, 202 tests and hosted
+                    chart/action checks passed. The standalone
+                    <code>nbastt-preview</code> Worker was deleted after
+                    verification; preview KV was retained. Parent production
+                    code and Pages remain unchanged. Production blockers remain
+                    deliberate: <code>wrangler.jsonc</code> has the placeholder
                     <code>REPLACE_WITH_REAL_KV_ID</code>;
                     <code>.github/workflows/deploy.yml</code> is written,
                     SHA-pinned and zizmor-clean, with automatic publishing gated

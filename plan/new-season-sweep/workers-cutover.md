@@ -1,15 +1,21 @@
 # Workers cutover
 
-## Current checkpoint — isolated preview live
+## Current checkpoint — native branch Preview live
 
-- URL: **https://nbastt-preview.zemccartney.workers.dev**
-- Current deployed commit: `b5dc2c3` (SDK Astro middleware added; diagnostic removed).
-- Worker version: `54b1a567-bb01-48bf-99b6-ba8a6ed81563`.
-- [Cleanup deployment 36259989991](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36259989991)
-  passed full verification with **199 tests**, removed 73 maps before artifact
-  sealing and passed the 376-file audit. Temporary route/secret cleanup,
-  isolated preview KV and unchanged Pages production were verified afterward.
-  [Source-map experiment](sentry-source-maps.md): the user's fresh event export
+- URL: **https://workers-cutover-63d134855ea4-nba-surprise-teams.zemccartney.workers.dev**
+- Current deployed commit: `66de885`; native deployment
+  `86545e05-8516-49bc-82f6-caf4ff493f6e`.
+- [Native Previews migration](native-previews.md): Wrangler 4.137.0; branch
+  Previews under the existing `nba-surprise-teams` Worker with explicit test KV.
+  The parent's production code/deployments/bindings remain unchanged. Only its
+  preview URLs were enabled; production workers.dev stays disabled.
+- [Deployment 36265152847](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36265152847)
+  passed **202 tests**, removed 73 maps before artifact sealing and passed the
+  376-file audit. Hosted chart/tooltip/font checks and actions pass; API readback
+  confirms preview KV. The old `nbastt-preview` Worker was deleted after native
+  verification; its KV namespace remains for the native Previews. No diagnostic
+  routes, secrets or fake data were introduced by this migration.
+- Earlier [source-map experiment](sentry-source-maps.md): the user's fresh event export
   confirms all seven frames mapped, including the original TypeScript error
   statement, with no processing errors.
 - [Worker entry migration](sentry-worker-entry.md): the server now explicitly
@@ -127,7 +133,7 @@ Zack approved isolated preview deployment and requested merged-branch cleanup.
 Deleted 5 local and 11 remote branches fully contained in main; preserved main,
 workers-cutover, light-mode and the separate image-service worktree.
 
-Configuration now selects `nbastt-preview` and the existing preview namespace
+The initial standalone configuration selected `nbastt-preview` and the existing preview namespace
 with `CLOUDFLARE_ENV=preview`. Its origin is the workers.dev URL below. An explicit
 non-main `preview_deploy` workflow dispatch bootstraps/updates this Worker without
 turning on `DEPLOY_ENABLED`. Normal future preview version uploads target the
@@ -137,7 +143,8 @@ audit and **192 tests** pass; hosted execution is the next gate.
 
 ### Approved next step
 
-Prepare a separate `nbastt-preview` Worker using the existing preview KV and
+Original staging plan (superseded by [native Previews](native-previews.md)):
+prepare a separate `nbastt-preview` Worker using the existing preview KV and
 only its workers.dev address (`nbastt-preview.zemccartney.workers.dev`). Keep
 production KV, both public domains, the existing dashboard Worker and Pages
 untouched. Update preview configuration/origin and provide an explicit initial
