@@ -224,24 +224,32 @@ Need to update our action's `SCHEMA_ID` if shape of data stored in KV ever chang
 
 ### Cloudflare
 
-The site deploys as a Worker, not a Pages project: `@astrojs/cloudflare` 13
-dropped Pages support. `wrangler.jsonc` is the build and deploy config, and the
-adapter reads it during `astro build`.
+The build targets Workers: `@astrojs/cloudflare` 13 dropped Pages support.
+Live production remains on the retained Pages deployment until the coordinated
+cutover. `wrangler.jsonc` is the build/deploy config and targets the existing
+`nba-surprise-teams` Worker; the adapter reads it during `astro build`.
 
 - Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
   Review them semi-regularly:
   https://developers.cloudflare.com/workers/configuration/compatibility-flags/
 - Production `GAMES_KV` still needs its real namespace id in `wrangler.jsonc`.
-  `env.preview` uses the existing preview namespace and Worker `nbastt-preview`,
-  with workers.dev enabled and no domain routes. Local dev uses `.wrangler/state`.
+  The `previews` block selects the existing test KV namespace for native branch
+  Previews under that same Worker. Branches share preview KV, not production KV;
+  KV is not automatically cloned per branch. Local dev uses `.wrangler/state`.
+  `preview_urls: true` enables preview URLs; production `workers_dev` remains
+  disabled until production deployment is approved.
 - No `SESSION` namespace is provisioned, because `session: false` is set in
   `astro.config.mjs`. Remove that line if the site ever uses sessions.
-- `.github/workflows/deploy.yml` builds and deploys: a preview version aliased
-  to the branch name for any branch, a production release for `main`. It does
-  no automatic publishing until `DEPLOY_ENABLED` is set to `true`. Explicit
-  non-main `preview_deploy` dispatches may deploy the isolated preview first.
+- `.github/workflows/deploy.yml` uses `wrangler preview` for branches and
+  `wrangler deploy` only for `main`. Preview names are DNS-safe branch slugs with
+  collision-resistant hashes. The workflow sets the preview origin before
+  building, verifies the generated `previews` bindings, and ignores dashboard
+  base configuration so only the reviewed binding settings apply.
+  Automatic publishing remains gated by `DEPLOY_ENABLED`; explicit non-main
+  `preview_deploy` dispatches may publish Previews without opening production.
   It needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
-  and `SENTRY_AUTH_TOKEN` as repository secrets.
+  and `SENTRY_AUTH_TOKEN` as repository secrets. Wrangler 4.137.0 is locked; native
+  Previews require 4.135.0+. See [migration evidence](plan/new-season-sweep/native-previews.md).
 - Static routes prerender in Node, including dev. Islands/actions remain in
   workerd, and preview serves the built Worker/static assets. SQLite access is
   guarded at that environment boundary. Maintenance commands run directly in
