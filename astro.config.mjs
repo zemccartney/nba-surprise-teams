@@ -7,14 +7,14 @@ import trackerData from "./data/integration.ts";
 import cleanBuildSourcemapsIntegration from "./scripts/clean-build-sourcemaps.ts";
 import svgOptimizer from "./svg-optimizer/integration.ts";
 
-const { PUBLIC_DEPLOY_ENV, SENTRY_AUTH_TOKEN } = loadEnv(
+const { PUBLIC_DEPLOY_ENV, PUBLIC_PREVIEW_ORIGIN, SENTRY_AUTH_TOKEN } = loadEnv(
   process.env.NODE_ENV,
   process.cwd(),
   "",
 );
 
 const siteByEnv = {
-  preview: "https://nbastt-preview.zemccartney.workers.dev",
+  preview: PUBLIC_PREVIEW_ORIGIN,
   production: "https://nbastt.grepco.net",
 };
 

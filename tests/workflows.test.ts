@@ -18,9 +18,10 @@ it("keeps full verification before publishing behind the temporary cutover gate"
   const build = deploy.indexOf("pnpm run build");
   expect(build).toBeGreaterThan(-1);
   expect(deploy.indexOf("pnpm exec wrangler deploy")).toBeGreaterThan(build);
-  expect(deploy.indexOf("pnpm exec wrangler versions upload")).toBeGreaterThan(
+  expect(deploy.indexOf("pnpm exec wrangler preview --name")).toBeGreaterThan(
     build,
   );
+  expect(deploy).not.toContain("wrangler versions upload");
 });
 
 it("allows only explicit non-main manual preview publishing while the production gate stays closed", () => {
@@ -31,7 +32,9 @@ it("allows only explicit non-main manual preview publishing while the production
   expect(deploy).toContain(
     "Manual preview publishing cannot target production",
   );
-  expect(deploy.indexOf("export CLOUDFLARE_ENV=preview")).toBeLessThan(
+  expect(deploy).toContain("unset CLOUDFLARE_ENV");
+  expect(deploy).not.toContain("--env preview");
+  expect(deploy.indexOf("export PUBLIC_PREVIEW_ORIGIN=")).toBeLessThan(
     deploy.indexOf("pnpm run build"),
   );
   const guard = deploy.indexOf(
@@ -39,10 +42,10 @@ it("allows only explicit non-main manual preview publishing while the production
   );
   expect(guard).toBeGreaterThan(deploy.indexOf("pnpm run build"));
   expect(guard).toBeLessThan(
-    deploy.indexOf("pnpm exec wrangler deploy --env preview"),
+    deploy.indexOf("pnpm exec wrangler preview --name"),
   );
-  expect(guard).toBeLessThan(
-    deploy.indexOf("pnpm exec wrangler versions upload --env preview"),
+  expect(deploy).toContain(
+    'pnpm exec wrangler preview --name "$PREVIEW_NAME" --ignore-base-config',
   );
 });
 

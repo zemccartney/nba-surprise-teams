@@ -4,25 +4,29 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
 /**
-Fail closed before publishing: inspect the generated config, not just source.
+Inspect generated native Preview settings before `wrangler preview`, never deploy.
 */
 export const assertPreviewTarget = (value: unknown): void => {
+  const previews = isRecord(value) ? value.previews : undefined;
   if (
     !isRecord(value) ||
-    value.name !== "nbastt-preview" ||
-    value.workers_dev !== true ||
-    value.preview_urls !== true ||
-    value.route !== undefined ||
-    !Array.isArray(value.routes) ||
-    value.routes.length > 0 ||
-    !Array.isArray(value.kv_namespaces) ||
-    value.kv_namespaces.length !== 1 ||
-    !isRecord(value.kv_namespaces[0]) ||
-    value.kv_namespaces[0].binding !== "GAMES_KV" ||
-    value.kv_namespaces[0].id !== "6a0d30705c634691873dd1dd122969e3"
+    value.name !== "nba-surprise-teams" ||
+    !isRecord(previews) ||
+    Object.keys(previews).some(
+      (key) => !["kv_namespaces", "vars"].includes(key),
+    ) ||
+    !Array.isArray(previews.kv_namespaces) ||
+    previews.kv_namespaces.length !== 1 ||
+    !isRecord(previews.kv_namespaces[0]) ||
+    Object.keys(previews.kv_namespaces[0]).length !== 2 ||
+    previews.kv_namespaces[0].binding !== "GAMES_KV" ||
+    previews.kv_namespaces[0].id !== "6a0d30705c634691873dd1dd122969e3" ||
+    !isRecord(previews.vars) ||
+    Object.keys(previews.vars).length !== 1 ||
+    previews.vars.PUBLIC_DEPLOY_ENV !== "preview"
   )
     throw new Error(
-      "Refusing to publish: expected the isolated preview Worker, preview KV and no routes",
+      "Refusing to publish: expected native Preview settings with only preview KV and environment",
     );
 };
 
@@ -31,7 +35,9 @@ if (import.meta.main) {
     assertPreviewTarget(
       JSON.parse(readFileSync(process.argv[2] ?? "", "utf8")),
     );
-    console.log("Verified isolated preview deployment target");
+    console.log(
+      "Verified native Preview target and isolated KV; production settings are not used",
+    );
   } catch {
     console.error(
       "Refusing to publish: missing, invalid or unsafe preview configuration",

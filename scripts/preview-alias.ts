@@ -1,5 +1,4 @@
 import { createHash } from "node:crypto";
-import Fs from "node:fs/promises";
 
 // Git refs allow characters and lengths that a Cloudflare DNS alias does not.
 // Hash the original ref so normalization/truncation does not merge branches.
@@ -24,20 +23,7 @@ export const previewAlias = (branch: string, workerName: string): string => {
 };
 
 if (import.meta.main) {
-  // Use the actual generated deployment name, including any environment suffix.
-  const config: unknown = JSON.parse(
-    await Fs.readFile(
-      new URL("../dist/server/wrangler.json", import.meta.url),
-      "utf8",
-    ),
-  );
-  if (
-    typeof config !== "object" ||
-    config === null ||
-    !("name" in config) ||
-    typeof config.name !== "string"
-  ) {
-    throw new Error("Build first: generated Worker config must contain a name");
-  }
-  console.log(previewAlias(process.env.BRANCH ?? "", config.name));
+  // Compute before building so Astro's site origin matches the branch hostname.
+  // The generated-config guard independently verifies the target before upload.
+  console.log(previewAlias(process.env.BRANCH ?? "", process.argv[2] ?? ""));
 }

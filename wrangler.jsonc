@@ -12,7 +12,7 @@
   // Node compatibility is implicit from 2026-08-04. Keep the date within the
   // installed workerd runtime's supported range (currently through 2026-09-10).
   "compatibility_date": "2026-09-10",
-  // Preview is isolated from production: no custom domains/routes and its own KV.
+  // Legacy standalone preview remains available during native Preview verification.
   "env": {
     "preview": {
       "kv_namespaces": [
@@ -28,8 +28,18 @@
   // first Workers deploy. Local dev ignores it and uses .wrangler/state.
   "kv_namespaces": [{ "binding": "GAMES_KV", "id": "REPLACE_WITH_REAL_KV_ID" }],
   "main": "./sentry.server.config.ts",
-  "name": "nbastt",
+  "name": "nba-surprise-teams",
   "observability": {
     "enabled": true
+  },
+  // Native branch Previews use test resources, never the production binding above.
+  // Branches share this preview namespace; KV is not automatically cloned per branch.
+  "previews": {
+    "kv_namespaces": [
+      { "binding": "GAMES_KV", "id": "6a0d30705c634691873dd1dd122969e3" }
+    ],
+    "vars": {
+      "PUBLIC_DEPLOY_ENV": "preview"
+    }
   }
 }
