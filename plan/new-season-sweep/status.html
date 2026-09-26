@@ -179,6 +179,14 @@
         background: var(--warn);
       }
 
+      .bar .seg-wip {
+        background: var(--info);
+      }
+
+      .tally .k-wip b {
+        color: var(--info);
+      }
+
       .bar .seg-open {
         background: var(--raised);
         border: 1px solid var(--rule-soft);
@@ -661,17 +669,21 @@
           <div
             class="bar"
             role="img"
-            aria-label="21 of 44 items done, 3 blocked, 20 not started"
+            aria-label="22 of 45 items done, 1 in progress, 3 blocked, 19 not started"
           >
-            <span class="seg-done" style="flex: 21"></span>
+            <span class="seg-done" style="flex: 22"></span>
+            <span class="seg-wip" style="flex: 1"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 20"></span>
+            <span class="seg-open" style="flex: 19"></span>
           </div>
           <p class="tally">
-            <span class="k-done"><b>21</b> done and verified</span>
-            <span class="k-blocked"><b>3</b> waiting on a call from Zack</span>
-            <span class="k-open"><b>20</b> not started</span>
-            <span>44 tracked</span>
+            <span class="k-done"><b>22</b> done and verified</span>
+            <span class="k-wip"><b>1</b> in progress</span>
+            <span class="k-blocked"
+              ><b>3</b> waiting on a decision or rollback window</span
+            >
+            <span class="k-open"><b>19</b> not started</span>
+            <span>45 tracked</span>
           </p>
         </div>
       </header>
@@ -701,7 +713,7 @@
             </li>
             <li>
               <a href="#s5"
-                >5 · Infra &amp; deferred<span class="count">2/15</span></a
+                >5 · Infra &amp; deferred<span class="count">3/16</span></a
               >
             </li>
           </ul>
@@ -804,7 +816,7 @@ mise run setup</code></pre>
             </div>
 
             <div class="brief-block">
-              <h3>Current checkpoint — 2026-09-24</h3>
+              <h3>Current checkpoint — 2026-09-26</h3>
               <p>
                 Zack approved the TanStack application and all
                 visual/interaction refinements through <code>48b4d5e</code>.
@@ -854,10 +866,18 @@ mise run setup</code></pre>
                 <li class="tip"><code>tanstack-charts</code></li>
               </ul>
               <p>
-                Each is stacked on the one before it, so merging the tip takes
-                the lot; check out an intermediate branch to bisect. Nothing has
-                been merged to <code>main</code> yet. <code>light-mode</code> is
-                a separate WIP branch off an older <code>main</code>.
+                This is the historical stack: it is merged into
+                <code>main</code>, and the merged branches were retired. The
+                later <code>workers-cutover</code> and automatic-deployment test
+                branches were also merged and removed. Preserve unrelated work,
+                including <code>light-mode</code> and the image-service
+                worktree.
+                <strong
+                  >Showdown is now owned by a separate active agent.</strong
+                >
+                Coordinate before touching its branch/worktree or
+                <code>plan/showdown/</code>; this status update does not change
+                that work.
               </p>
             </div>
 
@@ -887,12 +907,15 @@ mise run setup</code></pre>
             <div class="flag">
               <span class="marker">[!]</span>
               <p>
-                <strong>Deployment gate.</strong> Production still runs on
-                Pages. Its Git integration was disconnected before the main
-                merge. Keep it disconnected while preparing the Workers cutover.
-                <code>DEPLOY_ENABLED</code> remains gated off. The earlier
-                <code>wrangler types &amp;&amp;</code> edits were committed in
-                Step 9, not left as local changes.
+                <strong>Live deployment and rollback.</strong> Canonical
+                production runs on the Worker; the legacy hostname keeps its 301
+                Bulk Redirect. Automatic publishing on main is verified, with
+                220 tests and hosted checks passing. Bootstrap inputs and
+                <code>DEPLOY_ENABLED</code> are removed; disable the deploy
+                workflow to pause publishing. Keep Pages through at least
+                <strong>October 3, 2026, 21:12 UTC</strong>
+                and obtain Zack's approval before deletion. Neither Cloudflare
+                project has a Git connection.
               </p>
             </div>
           </section>
@@ -1124,10 +1147,10 @@ mise run setup</code></pre>
                     configuration-only Node-prerender control needs no SQLite
                     and reduces warm Stats/team TTFB from 1,404/621ms to
                     116/5ms. Pilot review on 4329/4330; Node-only control on
-                    4331. Root app/collections remain unchanged. Pause for
-                    manual review before choosing Node-only adoption or full
-                    migration. Finality observations and hosted gates remain
-                    open; merge/cutover stay gated. See the
+                    4331. At that spike checkpoint, root app/collections were
+                    unchanged and adoption awaited review. SQLite adoption,
+                    hosted verification and cutover have since completed; real
+                    season-activation observations remain separate. See the
                     <a href="prelaunch-review/README.md">reconciled report</a>
                     for priorities, evidence and rejected claims.
                   </p>
@@ -1245,7 +1268,7 @@ mise run setup</code></pre>
                   <p class="item-title">Step 10 — mise, pnpm 12, hk</p>
                   <p class="item-note">
                     Branch <code>mise-setup</code> on <code>svg-images</code>.
-                    Locked toolchain locally and in the gated deploy workflow;
+                    Locked toolchain locally and in the deploy workflow;
                     staged-file auto-fixes, whole-project types and tests. Clean
                     install/build, dev smoke and partial-staging success and
                     failure paths verified. See <code>review.md</code> for
@@ -1385,17 +1408,29 @@ mise run setup</code></pre>
                   </p>
                 </div>
               </li>
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-wip">
+                <span class="marker">[~]</span>
                 <div>
-                  <p class="item-title">Surprise Showdown page</p>
+                  <p class="item-title">
+                    Surprise Showdown page — feature branch awaiting merge
+                  </p>
+                  <p class="item-note">
+                    The other agent's implementation is published on
+                    <code>feature/showdown</code> at <code>688b2ba</code>.
+                    Feature review/merge remains separate; it is not deployed on
+                    main. Coordinate with that agent before touching its work.
+                    Only its temporary-Git-repository test isolation fix was
+                    brought to main to unblock commit hooks; no feature code was
+                    merged.
+                  </p>
                   <p class="item-note">
                     A per-year page of matchups between surprise teams. Full
                     spec in <code>plan.md</code>: title, icon set (favicon face,
                     two punching bags, the clown), a question-mark dialog with
                     his copy, a standings table, and matchups grouped by date
                     with enlarged team emoji either side of an <code>@</code>.
-                    Needs design input; do not start it alone.
+                    Design decisions remain with Zack and the implementing
+                    agent.
                   </p>
                 </div>
               </li>
@@ -1494,7 +1529,7 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">05</span>
               <h2>Infrastructure and deferred rounds</h2>
-              <span class="count">2 / 15 done</span>
+              <span class="count">3 / 16 done</span>
             </div>
 
             <ul class="items">
@@ -1723,32 +1758,38 @@ mise run setup</code></pre>
                   </p>
                 </div>
               </li>
-              <li class="item s-blocked">
-                <span class="marker">[!]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
-                  <p class="item-title">Production cutover to Workers</p>
-                  <p class="item-note">
-                    Next release work: inventory the existing Pages domain and
-                    rollback path; reconcile the branch stack; provision Worker
-                    bindings/secrets and settle preview KV isolation. Verify
-                    first-Worker bootstrap and run the actual GitHub/Linux
-                    pipeline against a non-production URL before switching the
-                    domain. Pause the old Pages auto-build path before merging
-                    the Workers-only stack into main.
+                  <p class="item-title">
+                    Production cutover to Workers — complete
                   </p>
                   <p class="item-note">
-                    Hosted checks must cover NBA access, live actions and KV
-                    fallback, cache headers, redirects, charts/keyboard
-                    behavior, and production Sentry reporting/source maps.
-                    Dev-only Sentry changes and unrelated feature work remain
-                    deferred. After production cutover, verify and observe the
-                    Worker before deleting Pages; retain the old deployment for
-                    an agreed rollback window. Domain transfer is not project
-                    teardown.
+                    Main-first merge, controlled production deployment, both
+                    domain transfers and a real docs-only automatic-deployment
+                    merge test are complete. Canonical is
+                    <code>nbastt.grepco.net</code>; the old hostname retains its
+                    path/query-preserving 301. Latest verified checkpoint:
+                    <code>0bac673</code>,
+                    <a
+                      href="https://github.com/zemccartney/nba-surprise-teams/actions/runs/36273432912"
+                      >run 36273432912</a
+                    >, 220 tests and the 376-file artifact audit. Subsequent
+                    main commits publish automatically; Actions records the
+                    latest release.
                   </p>
                   <p class="item-note">
-                    <a href="native-previews.md">Native branch Previews</a> now
-                    run under the existing
+                    Canonical charts, tooltips, font resilience, actions,
+                    cache/security headers and production Sentry release/source
+                    mapping are verified. Screen-reader review is explicitly
+                    deferred. Actual in-season refresh/stale fallback remains a
+                    season-activation check. Pages retirement is tracked
+                    separately below; cutover completion does not authorize
+                    deletion.
+                  </p>
+                  <p class="item-note">
+                    <a href="native-previews.md">Native branch Previews</a> are
+                    available under the existing
                     <code>nba-surprise-teams</code> Worker using explicit
                     preview KV. Wrangler 4.137.0, 202 tests and hosted
                     chart/action checks passed. The standalone
@@ -1791,13 +1832,36 @@ mise run setup</code></pre>
                     isolated preview.
                   </p>
                   <p class="item-note">
-                    Also settle here: trailing-slash redirects become
+                    Verified behavior: trailing-slash redirects are
                     <strong>307</strong> on Workers vs 308 on Pages —
                     <code>html_handling: "force-trailing-slash"</code> does not
                     change it, tested. The deploy workflow keeps its full
                     whole-repository verification before either preview or
                     production publishing. The classifier is a shared tested
                     TypeScript CLI, not inline shell scraped by tests.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <ul class="items">
+              <li class="item s-blocked">
+                <span class="marker">[!]</span>
+                <div>
+                  <p class="item-title">
+                    Retire retained Pages deployment — rollback window
+                  </p>
+                  <p class="item-note">
+                    Keep project <code>nba-surprise-teams</code> and deployment
+                    <code>c005800c-5863-4495-b64a-fb5c36a78014</code> through at
+                    least <strong>October 3, 2026, 21:12 UTC</strong>. No custom
+                    domains or Git connection remain on Pages. Retirement still
+                    requires Zack's explicit approval; extend the window if
+                    regressions appear. Preserve production KV and the legacy
+                    Bulk Redirect. See the
+                    <a href="production-cutover-checklist.md"
+                      >rollback checklist</a
+                    >.
                   </p>
                 </div>
               </li>
