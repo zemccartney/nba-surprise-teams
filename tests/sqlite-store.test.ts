@@ -64,8 +64,22 @@ describe("SQLite operational contracts", () => {
     } finally {
       connection.close();
     }
+    // Git hooks export repository-local variables (including a worktree's
+    // GIT_DIR). The fixture's subprocesses must target their own repository.
+    const localGitVariables = new Set(
+      execFileSync("git", ["rev-parse", "--local-env-vars"], {
+        encoding: "utf8",
+      })
+        .trim()
+        .split("\n"),
+    );
+    const env = Object.fromEntries(
+      Object.entries(process.env).filter(
+        ([key]) => !localGitVariables.has(key),
+      ),
+    );
     const git = (...args: string[]) =>
-      execFileSync("git", args, { cwd: repo, stdio: "pipe" });
+      execFileSync("git", args, { cwd: repo, env, stdio: "pipe" });
     const cli = (...args: string[]) =>
       spawnSync(
         process.execPath,
@@ -77,7 +91,7 @@ describe("SQLite operational contracts", () => {
           "--dump",
           sql,
         ],
-        { cwd: repo, encoding: "utf8" },
+        { cwd: repo, encoding: "utf8", env },
       );
     git("init", "-q");
     git("add", "data/dump.sql");

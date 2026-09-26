@@ -1,0 +1,290 @@
+---
+import { catalog } from "virtual:tracker/catalog";
+
+import type { Game } from "../../data/model";
+
+import * as ContentUtils from "../../content-utils";
+import {
+  showdownDates,
+  showdownGames,
+  showdownStandings,
+} from "../../data/showdown";
+import Link from "../link.astro";
+import Logo from "../logo.astro";
+import Table from "../table.astro";
+
+interface Props {
+  games: Game[];
+  seasonId: string;
+}
+const { games, seasonId } = Astro.props;
+const teams = ContentUtils.getTeamsInSeason(seasonId);
+const selected = showdownGames(
+  games,
+  seasonId,
+  new Set(teams.map((team) => team.id)),
+);
+const rows = showdownStandings(teams, selected);
+const dates = showdownDates(selected);
+const formatDate = (date: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+    month: "long",
+    timeZone: "UTC",
+    weekday: "short",
+    year: "numeric",
+  }).format(new Date(`${date}T12:00:00Z`));
+---
+
+<script>
+  const mediaQueryList = globalThis.matchMedia(
+    "not all and (min-width: 640px)",
+  );
+  function updateTableSize() {
+    document
+      .querySelector("#showdown-standings")
+      ?.classList.toggle("compact", mediaQueryList.matches);
+  }
+  updateTableSize();
+  mediaQueryList.addEventListener("change", updateTableSize);
+</script>
+
+<div class="showdown-results">
+  <section aria-label="Head-to-head standings" class="standings-section">
+    <Table
+      aria-label="Surprise candidate head-to-head standings"
+      class="stickyHeader showdown-table"
+      id="showdown-standings"
+    >
+      <Fragment slot="head">
+        <tr
+          ><td class="team-column"></td><th class="record-column" scope="col"
+            >W</th
+          ><th class="record-column" scope="col">L</th><th
+            class="pct-column"
+            scope="col">PCT</th
+          ></tr
+        >
+      </Fragment>
+      <Fragment slot="body">
+        {
+          rows.map(({ l, pct, team, w }) => (
+            <tr>
+              <th scope="row">
+                <div class="team-cell">
+                  <Logo seasonId={seasonId} team={team} />
+                  <Link href={`/${seasonId}/${team.id}/`}>
+                    <span class="team-name-full">
+                      {ContentUtils.resolveTeamName(team, seasonId)}
+                    </span>
+                    <span class="team-name-short">{team.id}</span>
+                  </Link>
+                </div>
+              </th>
+              <>
+                <td>{w}</td>
+                <td>{l}</td>
+                <td>
+                  {pct === undefined ? "—" : pct.toFixed(3).replace(/^0/, "")}
+                </td>
+              </>
+            </tr>
+          ))
+        }
+      </Fragment>
+    </Table>
+  </section>
+
+  <section aria-label="Matchups by date" class="calendar">
+    {dates.length === 0 && <p class="empty">No completed Showdowns yet.</p>}
+    {
+      dates.map(([date, slate]) => (
+        <section aria-labelledby={`date-${date}`} class="slate">
+          <h2 id={`date-${date}`}>
+            <time datetime={date}>{formatDate(date)}</time>
+          </h2>
+          <ul class="matchup-list">
+            {slate.map((game) => (
+              <li class="matchup">
+                {game.teams.map(({ score, teamId }, index) => {
+                  const team = catalog.requireTeam(teamId);
+                  return (
+                    <>
+                      {index === 1 && <span class="versus">vs.</span>}
+                      <a
+                        class:list={[
+                          "opponent",
+                          {
+                            winner:
+                              score ===
+                              Math.max(
+                                ...game.teams.map((entry) => entry.score),
+                              ),
+                          },
+                        ]}
+                        href={`/${seasonId}/${team.id}/`}
+                      >
+                        <Logo
+                          height={80}
+                          seasonId={seasonId}
+                          team={team}
+                          width={80}
+                        />
+                        <span
+                          class="team-code"
+                          title={ContentUtils.resolveTeamName(team, seasonId)}
+                        >
+                          {teamId}
+                        </span>
+                        <span class="score">{score}</span>
+                      </a>
+                    </>
+                  );
+                })}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </section>
+</div>
+
+<style>
+  .showdown-results {
+    max-width: 62rem;
+    margin-inline: auto;
+  }
+  .standings-section {
+    max-width: 56rem;
+    margin: 0 auto 6rem;
+  }
+  .standings-section :global(.showdown-table) {
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  th,
+  td {
+    text-align: right;
+  }
+  .team-column {
+    width: 42%;
+  }
+  .record-column {
+    width: 16%;
+  }
+  .pct-column {
+    width: 26%;
+  }
+  .team-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+  }
+  .team-name-full {
+    display: none;
+  }
+  .team-name-short {
+    display: inline;
+  }
+  a:hover .team-code {
+    text-decoration: underline;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--color-showdown-red);
+    outline-offset: 5px;
+  }
+  .slate {
+    margin-bottom: 5rem;
+  }
+  h2 {
+    position: relative;
+    padding-bottom: 1rem;
+    color: var(--color-showdown-red);
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    text-wrap: balance;
+  }
+  h2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: 0 12px 40px 12px
+      color-mix(in srgb, var(--color-showdown-red) 70%, transparent);
+    clip-path: inset(100% -80px -80px);
+    pointer-events: none;
+  }
+  .matchup-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .matchup {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    padding: 1.5rem 0.5rem 0.75rem;
+  }
+  .opponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+    text-align: center;
+  }
+  .opponent :global(img) {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  .team-code {
+    font-size: var(--text-2xl);
+    line-height: var(--text-2xl--line-height);
+  }
+  .score {
+    font-size: var(--text-3xl);
+    font-variant-numeric: tabular-nums;
+  }
+  .winner .score {
+    color: var(--color-lime-400);
+  }
+  .versus {
+    align-self: start;
+    margin-top: 1.5rem;
+    font-size: var(--text-xl);
+    color: var(--color-showdown-red);
+  }
+  .empty {
+    text-align: center;
+  }
+  @media (max-width: 639px) {
+    .standings-section {
+      margin-inline: -1rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .team-name-full {
+      display: inline;
+    }
+    .team-name-short {
+      display: none;
+    }
+    .team-column {
+      width: 58%;
+    }
+    .record-column {
+      width: 12%;
+    }
+    .pct-column {
+      width: 18%;
+    }
+    h2 {
+      font-size: var(--text-2xl);
+    }
+  }
+</style>
