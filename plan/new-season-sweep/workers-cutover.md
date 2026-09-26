@@ -26,6 +26,9 @@ Git integrations remain disconnected.
 
 ### Earlier native Preview checkpoint (before production deployment)
 
+The merged cutover branch and its Preview were subsequently retired; URLs below
+are historical. The parent Worker and shared preview KV remain intact.
+
 - URL: **https://workers-cutover-63d134855ea4-nba-surprise-teams.zemccartney.workers.dev**
 - Current deployed commit: `66de885`; native deployment
   `86545e05-8516-49bc-82f6-caf4ff493f6e`.
@@ -89,7 +92,8 @@ original NBA request failed with 403 from the Worker; tested browser-compatible
 headers fixed access, and the actual loader passed twice. A server Sentry smoke
 event was captured/flushed. See [full results and diagnostic cleanup](hosted-cutover-checks.md).
 
-**Still before production cutover:** screen-reader review and domain routing/rollback. Real
+**Remaining after production cutover:** observe the seven-day rollback window and
+obtain approval before retiring Pages. Screen-reader review is explicitly deferred. Real
 in-progress/final-game behavior and the actual post-preseason action refresh path
 remain season-activation checks, with current unit coverage. The original server
 event had valid debug IDs but missing maps and no runtime release. Delayed

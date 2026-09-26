@@ -89,5 +89,23 @@ disable the `deploy.yml` workflow and inspect/cancel or await any in-flight runs
 before changing domain associations. See the rollback checklist. Pages retirement
 is still separately gated by the seven-day window and explicit approval.
 
+Normal-workflow push [run 36273016320](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36273016320)
+then passed **220 tests** and the 376-file artifact audit: commit `ccdcb1c`, version
+`063b9fce-06f8-4577-a584-d8e43c5206de`. API bindings/domains and canonical browser
+release/environment/header checks passed again. Removed the unused repository
+variable after that success. The latest successful Actions run remains the source
+of truth for newer automatically published commits.
+
+## Merged-work cleanup
+
+Removed only the fully merged local/remote `workers-cutover` and
+`verify-auto-deploy` branches. Retired their unused cutover Preview
+`workers-cutover-63d134855ea4` after verifying its unchanged deployment ID.
+Production deployment history was unchanged by Preview deletion; shared preview KV
+and Pages remain intact. New feature branches can create fresh native Previews.
+Unrelated branches/worktrees and personal files were left alone. Existing work
+branches should incorporate current main before publishing to inherit the new
+workflow rather than the obsolete cutover gate.
+
 Screen-reader review remains explicitly deferred. Performance/font work,
 season-activation checks and upstream Sentry reports remain separate follow-ups.

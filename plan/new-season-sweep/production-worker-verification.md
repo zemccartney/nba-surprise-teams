@@ -17,7 +17,9 @@ into main (not a manual dispatch). The rollback clock has **not started**.
   rejects all custom-domain routes. Update it alongside the exact two approved
   route entries after domain transfer, before another production deployment.
 - Preserved personal files, unrelated branches and worktrees. `workers-cutover`
-  is retained at the merged revision; subsequent production work is on main.
+  was retained through initial verification, then retired after the completed
+  [domain cutover and automatic-deployment proof](production-domain-cutover.md).
+  Subsequent production work is on main.
 
 ## Initial deployment and clean current deployment
 

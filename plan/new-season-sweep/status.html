@@ -811,8 +811,9 @@ mise run setup</code></pre>
                 SQLite migration and security gates are complete. All local test
                 servers are stopped. The consolidated stack is now merged and
                 pushed to main at <code>a9a7952</code>. Pages Git integration is
-                disconnected; Workers deployment remains gated off. Production
-                still serves the retained Pages deployment.
+                disconnected. The subsequent Workers migration is complete:
+                canonical production is live, automatic deployment is verified,
+                and Pages is retained for the agreed rollback window.
               </p>
               <p>
                 ECharts cleanup is complete: renderer-neutral DTOs, no old
@@ -821,13 +822,11 @@ mise run setup</code></pre>
                 screenshots were byte-identical after cleanup. The separately
                 approved simplification now uses direct CSS paints, native font
                 recovery and no dormant router hook. Delayed fonts, keyboard
-                selection and live token changes are verified. The isolated
-                <a
-                  href="https://workers-cutover-63d134855ea4-nba-surprise-teams.zemccartney.workers.dev"
-                  >Workers preview</a
-                >
-                is now deployed: GitHub/Linux verification, 192 tests and hosted
-                chart/font checks pass. Production cutover is still pending.
+                selection and live token changes are verified. The
+                <a href="https://nbastt.grepco.net">production Worker</a>
+                is live: GitHub/Linux verification, 220 tests and canonical
+                chart/font/action checks pass. The merged cutover Preview was
+                retired; its shared test KV remains for future branch Previews.
                 Read the
                 <a href="workers-cutover.md"
                   >verified Cloudflare inventory and cutover plan</a
@@ -909,7 +908,9 @@ mise run setup</code></pre>
               Milestone: the application, data migration and chart refinements
               are approved and verified locally. The reviewed fixes and branch
               stack are merged into main. Hosted verification and production
-              cutover remain pending; merging did not deploy the application.
+              cutover are complete, including a real automatic-deployment merge
+              test. Pages remains retained for rollback; retirement is not yet
+              approved.
             </p>
 
             <ul class="items">

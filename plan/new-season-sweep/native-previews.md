@@ -1,5 +1,11 @@
 # Native Worker Previews — 2026-09-26
 
+**Later lifecycle update:** after production cutover and automatic-deployment
+verification, the merged cutover branch and its native Preview were retired.
+The URLs below are historical, not a current QA endpoint. The parent Worker and
+shared preview KV remain; future feature branches receive fresh native Previews.
+See [production cutover](production-domain-cutover.md).
+
 ## Decision and toolchain
 
 The user chose Cloudflare's new native branch Previews rather than a separate

@@ -226,5 +226,5 @@ needed by the restored site as part of a rushed rollback.
       publishing again if this fails. This is the agreed automatic-deployment test.
 - [x] After successful cutover, reconcile any remaining branch changes, remove
       temporary deployment gates/bootstrap controls, and retain ref/isolation checks.
-- [ ] Retire the merged branch's native Preview if no longer needed; retain the
+- [x] Retire the merged branch's native Preview if no longer needed; retain the
       parent Worker and shared preview KV. Preserve useful unmerged branches/worktrees.
