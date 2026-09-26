@@ -83,6 +83,7 @@ describe("Cup eligibility", () => {
         id: "2026-10-22/CHA__POR",
         nbaGameId: id,
         seasonId: "2026",
+        venue: { awayTeamId: "CHA", homeTeamId: "POR" },
       });
     },
   );

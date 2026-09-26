@@ -7,6 +7,7 @@ import * as ContentUtils from "../../content-utils";
 import {
   showdownDates,
   showdownGames,
+  showdownOpponents,
   showdownStandings,
 } from "../../data/showdown";
 import Link from "../link.astro";
@@ -106,11 +107,13 @@ const formatDate = (date: string) =>
           <ul class="matchup-list">
             {slate.map((game) => (
               <li class="matchup">
-                {game.teams.map(({ score, teamId }, index) => {
+                {showdownOpponents(game).map(({ score, teamId }, index) => {
                   const team = catalog.requireTeam(teamId);
                   return (
                     <>
-                      {index === 1 && <span class="versus">vs.</span>}
+                      {index === 1 && (
+                        <span class="versus">{game.venue ? "@" : "vs."}</span>
+                      )}
                       <a
                         class:list={[
                           "opponent",

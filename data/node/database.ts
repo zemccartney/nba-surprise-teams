@@ -23,7 +23,7 @@ import {
   teamSeasonSchema,
 } from "../../src/data/model.ts";
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 const migrationRoot = fileURLToPath(new URL("../migrations/", import.meta.url));
 
 export function assertVersion(db: DatabaseSync): void {
@@ -106,7 +106,7 @@ export function openDatabase(
 export function readGames(db: DatabaseSync, seasonId?: string): Game[] {
   return db
     .prepare(
-      "SELECT * FROM archived_games WHERE (? IS NULL OR season_id=?) ORDER BY played_on,id",
+      "SELECT archived_games.*, away_team_id, home_team_id FROM archived_games LEFT JOIN archived_game_venues ON game_id=id WHERE (? IS NULL OR season_id=?) ORDER BY played_on,id",
     )
     .all(seasonId ?? null, seasonId ?? null)
     .map((row) =>
@@ -115,6 +115,9 @@ export function readGames(db: DatabaseSync, seasonId?: string): Game[] {
         playedOn: row.played_on,
         seasonId: row.season_id,
         ...(row.nba_game_id !== null && { nbaGameId: row.nba_game_id }),
+        ...(row.home_team_id !== null && {
+          venue: { awayTeamId: row.away_team_id, homeTeamId: row.home_team_id },
+        }),
         teams: [
           { score: row.score1, teamId: row.team1_id },
           { score: row.score2, teamId: row.team2_id },
@@ -237,6 +240,16 @@ export function writeGame(db: DatabaseSync, input: Game): void {
     game.teams[1].score,
     game.nbaGameId ?? null,
   );
+  if (game.venue) writeVenue(db, game.id, game.venue);
+}
+export function writeVenue(
+  db: DatabaseSync,
+  gameId: string,
+  venue: NonNullable<Game["venue"]>,
+): void {
+  db.prepare(
+    "INSERT INTO archived_game_venues(game_id,away_team_id,home_team_id) VALUES(?,?,?) ON CONFLICT(game_id) DO UPDATE SET away_team_id=excluded.away_team_id,home_team_id=excluded.home_team_id",
+  ).run(gameId, venue.awayTeamId, venue.homeTeamId);
 }
 const identifier = (value: string) => `"${value.replaceAll('"', '""')}"`;
 export function dumpDatabase(

@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
 import { getCurrentEasternYYYYMMDD } from "../src/data/calendar.ts";
+import { backfillVenues } from "./node/backfill-venues.ts";
 import {
   applyChanges,
   replaceArchive,
@@ -140,6 +141,7 @@ async function main(): Promise<void> {
       "add-team-season",
       "apply",
       "archive-nba",
+      "archive-venues",
       "import-archive",
       "migrate",
       "remove-team-season",
@@ -153,7 +155,7 @@ async function main(): Promise<void> {
       if (command === "migrate") {
         migrate(db);
         notify();
-      } else if (command === "archive-nba") {
+      } else if (command === "archive-nba" || command === "archive-venues") {
         const metadata = readMetadata(db);
         const eligible = metadata.seasons
           .filter((s) => s.endDate < getCurrentEasternYYYYMMDD())
@@ -187,8 +189,11 @@ async function main(): Promise<void> {
           archives.push({ games: await fetchArchive(id, metadata), id });
         }
         transaction(db, () => {
-          for (const archive of archives)
-            replaceArchive(db, archive.id, archive.games);
+          for (const archive of archives) {
+            if (command === "archive-venues")
+              backfillVenues(db, archive.id, archive.games);
+            else replaceArchive(db, archive.id, archive.games);
+          }
         });
         notify();
         console.log(

@@ -30,6 +30,12 @@ export function showdownGames(
     );
 }
 
+export function showdownOpponents(game: Game) {
+  return game.venue?.awayTeamId === game.teams[1].teamId
+    ? ([game.teams[1], game.teams[0]] as const)
+    : game.teams;
+}
+
 /**
 Only completed head-to-head games belong here, never scheduled games.
 */

@@ -22,6 +22,7 @@ import {
  * KV replicas or already-cached HTTP responses; it rejects old data on read.
  *
  * Changelog (newest first; retain previous IDs and reasons):
+ * - 9fa64b72-17d9-49d8-977f-e32ec8df6527: preserve explicit home/away identities.
  * - 07423eeb-1ebb-4cf1-89b7-ab05795b5ac1: require opaque nbaGameId on live
  *   games; exclude Cup championship from results AND refresh scheduling;
  *   validate normalized output and cache reads. Old data is not a fallback.
@@ -30,7 +31,7 @@ import {
  *
  * Runtime schemas enforce shape; versioning still covers incompatible meaning.
  */
-export const LIVE_DATA_VERSION = "07423eeb-1ebb-4cf1-89b7-ab05795b5ac1";
+export const LIVE_DATA_VERSION = "9fa64b72-17d9-49d8-977f-e32ec8df6527";
 
 const loader = async (
   expectedSeasonId?: string,
@@ -186,6 +187,10 @@ const loader = async (
                 teamId: homeTeam.teamTricode as TeamCode,
               },
             ],
+            venue: {
+              awayTeamId: awayTeam.teamTricode as TeamCode,
+              homeTeamId: homeTeam.teamTricode as TeamCode,
+            },
           });
         }
       }

@@ -102,6 +102,25 @@ export const includesCandidateTeam = (
       code === game.awayTeam.teamTricode || code === game.homeTeam.teamTricode,
   );
 
+export const venueSchema = z
+  .object({
+    awayTeamId: teamCodeSchema,
+    homeTeamId: teamCodeSchema,
+  })
+  .refine(
+    (venue) => venue.awayTeamId !== venue.homeTeamId,
+    "Venue teams must differ",
+  );
+
+export const isVenueValid = (game: {
+  teams: { teamId: string }[];
+  venue?: undefined | z.infer<typeof venueSchema>;
+}) =>
+  !game.venue ||
+  [game.venue.awayTeamId, game.venue.homeTeamId].every((id) =>
+    game.teams.some(({ teamId }) => teamId === id),
+  );
+
 const CalendarDateSchema = z.iso.date();
 
 // Feed slates use Eastern calendar dates, e.g. "10/04/2024 00:00:00".
@@ -127,21 +146,24 @@ const TeamScoreSchema = z.object({
 export const LiveLoaderResponseSchema = z.object({
   expiresAt: z.number().int().nonnegative().optional(),
   games: z.array(
-    z.object({
-      id: z.string().min(1),
-      // Deliberate expansion beyond games in content.config.ts: ideally the
-      // schemas would agree, but preserving this provider ID enables the useful
-      // championship refinement below without rewriting historical archives.
-      nbaGameId: z
-        .string()
-        .min(1)
-        .refine((id) => !id.startsWith(CUP_CHAMPIONSHIP_PREFIX), {
-          message: "Cup championship is not a regular-season result",
-        }),
-      playedOn: CalendarDateSchema,
-      seasonId: z.string().min(1),
-      teams: z.tuple([TeamScoreSchema, TeamScoreSchema]),
-    }),
+    z
+      .object({
+        id: z.string().min(1),
+        // Deliberate expansion beyond games in content.config.ts: ideally the
+        // schemas would agree, but preserving this provider ID enables the useful
+        // championship refinement below without rewriting historical archives.
+        nbaGameId: z
+          .string()
+          .min(1)
+          .refine((id) => !id.startsWith(CUP_CHAMPIONSHIP_PREFIX), {
+            message: "Cup championship is not a regular-season result",
+          }),
+        playedOn: CalendarDateSchema,
+        seasonId: z.string().min(1),
+        teams: z.tuple([TeamScoreSchema, TeamScoreSchema]),
+        venue: venueSchema.optional(),
+      })
+      .refine(isVenueValid, "Venue must match game teams"),
   ),
 });
 

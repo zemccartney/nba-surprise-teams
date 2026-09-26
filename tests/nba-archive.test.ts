@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import { decodeArchive } from "../data/node/nba-archive";
+import { decodeArchive, fetchArchive } from "../data/node/nba-archive";
 import { readContentFixture } from "./content-fixture";
 const metadata = readContentFixture();
 const headers = ["GAME_DATE", "MATCHUP", "PTS", "TEAM_ABBREVIATION", "GAME_ID"];
@@ -28,13 +28,59 @@ describe("historical NBA archive decoder", () => {
           { score: 99, teamId: "ATL" },
           { score: 101, teamId: "CHA" },
         ],
+        venue: { awayTeamId: "CHA", homeTeamId: "ATL" },
       },
     ]);
   });
+  it.each([false, true])(
+    "resolves conflicting venues only with a matching NBA box score (mismatch=%s)",
+    async (mismatch) => {
+      const conflicting = row("ATL", 99);
+      conflicting[1] = "ATL @ CHA";
+      const request = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValueOnce(Response.json(feed([row(), conflicting])))
+        .mockResolvedValueOnce(
+          Response.json({
+            game: {
+              awayTeam: { score: 101, teamTricode: "CHA" },
+              gameId: "0022500001",
+              homeTeam: { score: mismatch ? 98 : 99, teamTricode: "ATL" },
+            },
+          }),
+        );
+      const outcome = await fetchArchive("2025", metadata)
+        .then((games) => games[0]?.venue)
+        .catch((error: Error) => error.message.split("\n", 1)[0]);
+      expect(outcome).toEqual(
+        mismatch
+          ? "Venue box score team/score mismatch"
+          : {
+              awayTeamId: "CHA",
+              homeTeamId: "ATL",
+            },
+      );
+      expect(request).toHaveBeenCalledTimes(2);
+      expect(request.mock.calls[1]?.[0]).toBe(
+        "https://cdn.nba.com/static/json/liveData/boxscore/boxscore_0022500001.json",
+      );
+    },
+  );
   it("does not turn a missing opponent row into a zero score", () =>
     expect(() => decodeArchive(feed([row()]), "2025", metadata)).toThrow(
       "Incomplete NBA matchup",
     ));
+  it("rejects conflicting venue assignments and unknown separators", () => {
+    const conflicting = row("ATL", 99);
+    conflicting[1] = "ATL @ CHA";
+    expect(() =>
+      decodeArchive(feed([row(), conflicting]), "2025", metadata),
+    ).toThrow("Conflicting NBA home/away");
+    conflicting[1] = "ATL versus CHA";
+    expect(() =>
+      decodeArchive(feed([row(), conflicting]), "2025", metadata),
+    ).toThrow("Unknown matchup separator");
+  });
   it("rejects duplicate team rows", () =>
     expect(() => decodeArchive(feed([row(), row()]), "2025", metadata)).toThrow(
       "Duplicate NBA team row",

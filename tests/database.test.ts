@@ -56,7 +56,7 @@ describe("application database", () => {
           .prepare("SELECT version FROM schema_migrations ORDER BY version")
           .all()
           .map((row) => row.version),
-      ).toEqual([1, 2]);
+      ).toEqual([1, 2, 3]);
       const before = dumpDatabase(db);
       migrate(db);
       validateDatabase(db);

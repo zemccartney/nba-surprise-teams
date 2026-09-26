@@ -2,7 +2,27 @@ import { z } from "astro/zod";
 import assert from "node:assert/strict";
 
 import { type Game, gameSchema, type Metadata } from "../../src/data/model.ts";
-import { teamCodeSchema } from "../../src/loaders/live/utils.ts";
+import {
+  NBA_SCHEDULE_HEADERS,
+  teamCodeSchema,
+} from "../../src/loaders/live/utils.ts";
+
+class VenueConflictError extends Error {
+  readonly nbaGameId: string;
+  readonly scores: Map<string, number>;
+  constructor(nbaGameId: string, scores: Map<string, number>) {
+    super(`Conflicting NBA home/away assignments: ${nbaGameId}`);
+    this.nbaGameId = nbaGameId;
+    this.scores = scores;
+  }
+}
+const boxTeam = z.object({
+  score: z.number().int().positive(),
+  teamTricode: teamCodeSchema,
+});
+const boxSchema = z.object({
+  game: z.object({ awayTeam: boxTeam, gameId: z.string(), homeTeam: boxTeam }),
+});
 const responseSchema = z.object({
   resultSets: z
     .array(
@@ -29,6 +49,7 @@ export function decodeArchive(
   input: unknown,
   seasonId: string,
   metadata: Metadata,
+  verifiedVenues: ReadonlyMap<string, NonNullable<Game["venue"]>> = new Map(),
 ): Game[] {
   const result = responseSchema.parse(input).resultSets[0];
   assert.ok(result);
@@ -55,6 +76,7 @@ export function decodeArchive(
       ids: string[];
       nbaGameId: string | undefined;
       scores: Map<string, number>;
+      venue: NonNullable<Game["venue"]>;
     }
   >();
   for (const row of result.rowSet) {
@@ -74,14 +96,38 @@ export function decodeArchive(
     const id = `${date}/${ids.join("__")}`;
     const team = normalize(z.string().parse(row[teamIndex]));
     assert.ok(ids.includes(team), "Team row does not match matchup");
+    assert.equal(
+      team,
+      normalize(matchup[0] ?? ""),
+      "Team row must lead matchup",
+    );
+    assert.ok(
+      matchup[1] === "@" || matchup[1] === "vs.",
+      "Unknown matchup separator",
+    );
+    const first = teamCodeSchema.parse(normalize(matchup[0] ?? ""));
+    const second = teamCodeSchema.parse(normalize(matchup[2] ?? ""));
+    const venue =
+      (nbaGameId && verifiedVenues.get(nbaGameId)) ||
+      (matchup[1] === "@"
+        ? { awayTeamId: first, homeTeamId: second }
+        : { awayTeamId: second, homeTeamId: first });
     const score = z.number().int().positive().parse(row[pointsIndex]);
     const game = paired.get(id) ?? {
       date,
       ids,
       nbaGameId,
       scores: new Map<string, number>(),
+      venue,
     };
     assert.equal(game.nbaGameId, nbaGameId, "Conflicting NBA identities");
+    if (game.venue.homeTeamId !== venue.homeTeamId) {
+      assert.ok(nbaGameId, `Conflicting venue with no NBA identity: ${id}`);
+      throw new VenueConflictError(
+        nbaGameId,
+        new Map([...game.scores, [team, score]]),
+      );
+    }
     assert.ok(!game.scores.has(team), `Duplicate NBA team row ${id}/${team}`);
     game.scores.set(team, score);
     paired.set(id, game);
@@ -98,6 +144,7 @@ export function decodeArchive(
           score: game.scores.get(teamId),
           teamId: teamCodeSchema.parse(teamId),
         })),
+        venue: game.venue,
       });
     })
     .toSorted((a, b) => a.id.localeCompare(b.id));
@@ -126,5 +173,54 @@ export async function fetchArchive(
   );
   if (!response.ok)
     throw new Error(`NBA archive request failed: ${response.status}`);
-  return decodeArchive(await response.json(), seasonId, metadata);
+  const source: unknown = await response.json();
+  const verifiedVenues = new Map<string, NonNullable<Game["venue"]>>();
+  // Neutral-site game logs can mark both teams away (e.g. Mexico City 2024).
+  // Only an independently validated NBA box score may resolve a conflict.
+  for (;;) {
+    try {
+      return decodeArchive(source, seasonId, metadata, verifiedVenues);
+    } catch (error) {
+      if (
+        !(error instanceof VenueConflictError) ||
+        verifiedVenues.has(error.nbaGameId)
+      )
+        throw error;
+      assert.match(error.nbaGameId, /^\d+$/);
+      const boxResponse = await fetch(
+        `https://cdn.nba.com/static/json/liveData/boxscore/boxscore_${error.nbaGameId}.json`,
+        {
+          headers: NBA_SCHEDULE_HEADERS,
+          signal: AbortSignal.timeout(10_000),
+        },
+      );
+      if (!boxResponse.ok)
+        throw new Error(
+          `NBA venue box score request failed: ${boxResponse.status}`,
+          { cause: error },
+        );
+      const { game } = boxSchema.parse(await boxResponse.json());
+      assert.equal(
+        game.gameId,
+        error.nbaGameId,
+        "Venue box score identity mismatch",
+      );
+      assert.equal(
+        error.scores.size,
+        2,
+        "Venue conflict must have two team scores",
+      );
+      for (const team of [game.awayTeam, game.homeTeam]) {
+        assert.equal(
+          error.scores.get(team.teamTricode),
+          team.score,
+          "Venue box score team/score mismatch",
+        );
+      }
+      verifiedVenues.set(game.gameId, {
+        awayTeamId: game.awayTeam.teamTricode,
+        homeTeamId: game.homeTeam.teamTricode,
+      });
+    }
+  }
 }
