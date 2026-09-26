@@ -18,7 +18,8 @@
   frames mapped and no processing errors.
 - [SDK Astro middleware](sentry-astro-middleware.md): local workerd controls prove
   route enrichment and automatic capture of errors Astro handles as 500s. A fresh
-  hosted automatic-error probe needs received-event confirmation. Integration
+  hosted event export confirms automatic capture, release, route naming and all
+  three frames mapped, with no processing errors. Integration
   server initialization remains disabled: enabling it demonstrably breaks our
   Node prerender build by importing the Worker entry.
 - [GitHub/Linux run 35945190784](https://github.com/zemccartney/nba-surprise-teams/actions/runs/35945190784)
@@ -58,15 +59,14 @@ original NBA request failed with 403 from the Worker; tested browser-compatible
 headers fixed access, and the actual loader passed twice. A server Sentry smoke
 event was captured/flushed. See [full results and diagnostic cleanup](hosted-cutover-checks.md).
 
-**Still before production cutover:** confirm the new automatic middleware error
-event, screen-reader review and domain routing/rollback. Real
+**Still before production cutover:** screen-reader review and domain routing/rollback. Real
 in-progress/final-game behavior and the actual post-preseason action refresh path
 remain season-activation checks, with current unit coverage. The original server
 event had valid debug IDs but missing maps and no runtime release. Delayed
 cleanup now preserves application maps in both uploads; the fresh exported event
 confirms successful debug-ID mapping using the second upload, without a release
 value. That hosted source-map check and the subsequent Worker-entry event with
-release tagging both passed. The new middleware automatic-capture test is pending. Runtime init now lives in the respective
+release tagging both passed. The middleware automatic-capture event is also verified. Runtime init now lives in the respective
 client/Worker config files, removing the integration's runtime-option warnings.
 Dev-only instrumentation behavior remains deferred. Compare final custom-domain
 security headers; workers.dev does not share the production zone's settings.

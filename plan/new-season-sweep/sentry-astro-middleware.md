@@ -100,8 +100,13 @@ call returned the expected 500 at 2026-09-26T17:39:00Z, with marker:
 A request-isolation event processor removes headers/body before transmission.
 The token existed only in memory and the exact preview Worker secret, which was
 deleted immediately afterward and absence verified. No KV operations were used.
-The 500 alone does not prove ingestion: await the received event JSON to confirm
-`auto.middleware.astro`, release, original frames and no duplicate error event.
+The user's exported event `4443935fd581421295868bbaf9c16411` confirms ingestion:
+`auto.middleware.astro`, handled false, environment preview, release
+`902bfb7f6380fae7f783fba4e9b4b5770a103c6c`, all three frames symbolicated and no
+processing errors. The original throw resolves to
+`src/pages/cutover/middleware.ts:43:9`; transaction is `POST /cutover/middleware`.
+The hosted automatic-capture check passes. A single export cannot establish
+project-wide absence of duplicates; exact-once capture was verified locally.
 [Cleanup run 36259989991](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36259989991)
 deployed `b5dc2c3`, Worker version `54b1a567-bb01-48bf-99b6-ba8a6ed81563`:
 **199 tests**, 73 maps removed, 376-file artifact audit; upload 1219.02 KiB raw /
