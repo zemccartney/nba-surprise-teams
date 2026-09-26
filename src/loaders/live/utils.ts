@@ -74,6 +74,9 @@ const GameResultSchema = z.object({
   awayTeam: TeamResultSchema,
   gameDateTimeUTC: z.string(),
   gameId: z.string().min(1),
+  gameStatus: z.number().int(),
+  gameStatusText: z.string().optional(),
+  gameTimeTBD: z.union([z.boolean(), z.number()]).optional(),
   homeTeam: TeamResultSchema,
 });
 
@@ -89,9 +92,9 @@ export const SeasonDataSchema = z.object({
   }),
 });
 
-// Deliberately unchanged pending the preseason observations in MAINTENANCE.md.
+// Positive scores can be published during play. Only NBA final status counts.
 export const hasScore = (game: z.infer<typeof GameResultSchema>) =>
-  game.homeTeam.score && game.awayTeam.score;
+  game.gameStatus === 3 && game.homeTeam.score > 0 && game.awayTeam.score > 0;
 
 export const includesCandidateTeam = (
   game: z.infer<typeof GameResultSchema>,
@@ -142,6 +145,20 @@ const TeamScoreSchema = z.object({
   teamId: teamCodeSchema,
 });
 
+export const scheduledGameSchema = z.object({
+  id: z.string().min(1),
+  nbaGameId: z
+    .string()
+    .min(1)
+    .refine((id) => !id.startsWith(CUP_CHAMPIONSHIP_PREFIX)),
+  playedOn: CalendarDateSchema,
+  seasonId: z.string().min(1),
+  startsAt: z.iso.datetime().optional(),
+  status: z.enum(["scheduled", "pending", "postponed", "final"]),
+  venue: venueSchema,
+});
+export type ScheduledGame = z.infer<typeof scheduledGameSchema>;
+
 // Our normalized data contract, distinct from the upstream schedule schema.
 export const LiveLoaderResponseSchema = z.object({
   expiresAt: z.number().int().nonnegative().optional(),
@@ -165,6 +182,7 @@ export const LiveLoaderResponseSchema = z.object({
       })
       .refine(isVenueValid, "Venue must match game teams"),
   ),
+  schedule: z.array(scheduledGameSchema).optional(),
 });
 
 export type LiveLoaderResponse = z.infer<typeof LiveLoaderResponseSchema>;
@@ -188,6 +206,7 @@ export const decodeLiveCache = (
   raw: null | string,
   seasonId: string,
   version: string,
+  requiresSchedule = false,
 ): CacheReadResult => {
   if (raw === null) {
     return { status: "missing" };
@@ -233,9 +252,13 @@ export const decodeLiveCache = (
     };
   }
 
-  const hasWrongSeason = parsed.data.games.some(
-    (game) => game.seasonId !== seasonId,
-  );
+  if (requiresSchedule && parsed.data.schedule === undefined) {
+    return { status: "incompatible" };
+  }
+  const hasWrongSeason = [
+    ...parsed.data.games,
+    ...(parsed.data.schedule ?? []),
+  ].some((game) => game.seasonId !== seasonId);
 
   if (hasWrongSeason) {
     return {

@@ -50,6 +50,7 @@ vi.mock("astro:actions", () => ({
 
 const { server } = await import("../src/actions/index");
 const run = server.getSeasonData as unknown as (input: {
+  includeSchedule?: boolean;
   seasonId: string;
 }) => Promise<LiveLoaderResponse>;
 
@@ -150,6 +151,69 @@ const saved: LiveLoaderResponse = {
 };
 const encode = (data: unknown, id = LIVE_DATA_VERSION) =>
   JSON.stringify({ data, id });
+
+describe("schedule-aware live action", () => {
+  const scheduled: LiveLoaderResponse = {
+    games: [],
+    schedule: [
+      {
+        id: "2026-10-22/CHA__POR",
+        nbaGameId: "0022600001",
+        playedOn: "2026-10-22",
+        seasonId: "2026",
+        status: "scheduled",
+        venue: { awayTeamId: "CHA", homeTeamId: "POR" },
+      },
+    ],
+  };
+  it("fetches a preseason schedule without altering the results-only key", async () => {
+    vi.setSystemTime(new Date("2026-09-26T12:00:00Z"));
+    mocks.loader.mockResolvedValue(scheduled);
+    await expect(
+      run({ includeSchedule: true, seasonId: "2026" }),
+    ).resolves.toEqual(scheduled);
+    expect(mocks.get).toHaveBeenCalledWith("2026:schedule", "text");
+    expect(mocks.loader).toHaveBeenCalledWith("2026", {
+      includeSchedule: true,
+    });
+    expect(mocks.put).toHaveBeenCalledWith("2026:schedule", encode(scheduled));
+  });
+  it("does not accept results-only cached data for a schedule request", async () => {
+    mocks.get.mockResolvedValue(
+      encode({ ...saved, expiresAt: Date.now() + 300_000 }),
+    );
+    mocks.loader.mockResolvedValue(scheduled);
+    await expect(
+      run({ includeSchedule: true, seasonId: "2026" }),
+    ).resolves.toEqual(scheduled);
+    expect(mocks.loader).toHaveBeenCalledOnce();
+  });
+  it("preserves cached schedules on refresh failure without claiming freshness", async () => {
+    mocks.get.mockResolvedValue(
+      encode({ ...scheduled, expiresAt: Date.now() - 1 }),
+    );
+    mocks.loader.mockRejectedValue(new Error("offline"));
+    await expect(
+      run({ includeSchedule: true, seasonId: "2026" }),
+    ).resolves.toEqual(scheduled);
+    expect(mocks.put).not.toHaveBeenCalled();
+  });
+  it("rejects a cached schedule from another season", async () => {
+    mocks.get.mockResolvedValue(
+      encode({
+        ...scheduled,
+        schedule: scheduled.schedule?.map((game) => ({
+          ...game,
+          seasonId: "2025",
+        })),
+      }),
+    );
+    mocks.loader.mockRejectedValue(new Error("offline"));
+    await expect(
+      run({ includeSchedule: true, seasonId: "2026" }),
+    ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
+  });
+});
 
 describe("validated KV freshness and fallback", () => {
   it.each([

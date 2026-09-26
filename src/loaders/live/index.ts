@@ -1,4 +1,6 @@
-import type { LiveLoaderResponse, TeamCode } from "./utils";
+import { z } from "astro/zod";
+
+import type { LiveLoaderResponse, ScheduledGame, TeamCode } from "./utils";
 
 import * as ContentUtils from "../../content-utils";
 import * as Utils from "../../utils";
@@ -22,6 +24,8 @@ import {
  * KV replicas or already-cached HTTP responses; it rejects old data on read.
  *
  * Changelog (newest first; retain previous IDs and reasons):
+ * - 17b5fcb9-f572-427a-bd28-58cb9468b98b: optional scoreless full schedule;
+ *   completed results require NBA final status 3 (not just positive scores).
  * - 9fa64b72-17d9-49d8-977f-e32ec8df6527: preserve explicit home/away identities.
  * - 07423eeb-1ebb-4cf1-89b7-ab05795b5ac1: require opaque nbaGameId on live
  *   games; exclude Cup championship from results AND refresh scheduling;
@@ -31,10 +35,11 @@ import {
  *
  * Runtime schemas enforce shape; versioning still covers incompatible meaning.
  */
-export const LIVE_DATA_VERSION = "9fa64b72-17d9-49d8-977f-e32ec8df6527";
+export const LIVE_DATA_VERSION = "17b5fcb9-f572-427a-bd28-58cb9468b98b";
 
 const loader = async (
   expectedSeasonId?: string,
+  { includeSchedule = false }: { includeSchedule?: boolean } = {},
 ): Promise<LiveLoaderResponse> => {
   // Assumption: force this function to return
   // Don't solve for missing data; i.e. don't crash your site just b/c you haven't set data "on time"
@@ -105,6 +110,7 @@ const loader = async (
     }));
 
   const relevantGames: LiveLoaderResponse["games"] = [];
+  const schedule: ScheduledGame[] = [];
   let expiresAt;
 
   const teams = ContentUtils.getTeamsInSeason(season.id);
@@ -161,6 +167,36 @@ const loader = async (
 
   for (const slate of chronologicalSeason) {
     const gameYYYYMMDD = toYYYYMMDD(slate.gameDate);
+    if (includeSchedule) {
+      const candidateGames = slate.games.filter((game) =>
+        includesCandidateTeam(game, TRICODES),
+      );
+      for (const game of candidateGames) {
+        const venue = {
+          awayTeamId: game.awayTeam.teamTricode as TeamCode,
+          homeTeamId: game.homeTeam.teamTricode as TeamCode,
+        };
+        const time = z.iso.datetime().safeParse(game.gameDateTimeUTC);
+        schedule.push({
+          id: ContentUtils.formatGameId({
+            playedOn: gameYYYYMMDD,
+            teams: [venue.awayTeamId, venue.homeTeamId],
+          }),
+          nbaGameId: game.gameId,
+          playedOn: gameYYYYMMDD,
+          seasonId: season.id,
+          ...(time.success && !game.gameTimeTBD && { startsAt: time.data }),
+          status: hasScore(game)
+            ? "final"
+            : /postponed/i.test(game.gameStatusText ?? "")
+              ? "postponed"
+              : game.gameStatus === 1
+                ? "scheduled"
+                : "pending",
+          venue,
+        });
+      }
+    }
     if (gameYYYYMMDD <= currentYYYYMMDD) {
       for (const game of slate.games) {
         const { awayTeam, homeTeam } = game;
@@ -197,8 +233,19 @@ const loader = async (
     }
   }
 
+  // Schedules can change before the next tipoff; never cache one for weeks.
+  if (
+    includeSchedule &&
+    (schedule.length === 0 || schedule.some((game) => game.status !== "final"))
+  ) {
+    expiresAt = Math.min(
+      expiresAt ?? Infinity,
+      Date.now() + 6 * 60 * 60 * 1000,
+    );
+  }
   return LiveLoaderResponseSchema.parse({
     games: relevantGames,
+    ...(includeSchedule && { schedule }),
     ...(expiresAt !== undefined && { expiresAt }),
   });
 };

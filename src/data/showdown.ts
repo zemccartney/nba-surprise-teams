@@ -1,7 +1,7 @@
 import type { Game, Team } from "./model";
 
-export function showdownDates(games: Game[]) {
-  const dates = new Map<string, Game[]>();
+export function showdownDates<T extends { playedOn: string }>(games: T[]) {
+  const dates = new Map<string, T[]>();
   for (const game of games) {
     const slate = dates.get(game.playedOn) ?? [];
     slate.push(game);
@@ -30,7 +30,10 @@ export function showdownGames(
     );
 }
 
-export function showdownOpponents(game: Game) {
+export function showdownOpponents<T extends { teamId: string }>(game: {
+  teams: readonly [T, T];
+  venue?: Game["venue"];
+}) {
   return game.venue?.awayTeamId === game.teams[1].teamId
     ? ([game.teams[1], game.teams[0]] as const)
     : game.teams;

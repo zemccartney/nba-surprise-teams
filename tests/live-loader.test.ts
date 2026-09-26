@@ -21,7 +21,10 @@ const game = (id: string, score = 100) => ({
   homeTeam: { score: score > 0 ? score + 1 : 0, teamTricode: "POR" },
 });
 const feed = (
-  games: ReturnType<typeof game>[],
+  games: (ReturnType<typeof game> & {
+    gameStatusText?: string;
+    gameTimeTBD?: number;
+  })[],
   gameDate = "10/22/2026 00:00:00",
 ) => {
   const fetch = vi.fn().mockImplementation(() =>
@@ -104,12 +107,56 @@ describe("Cup eligibility", () => {
   });
 });
 
-it("preserves score-based finality pending observation", async () => {
+it("never includes in-progress scores in completed results", async () => {
   feed([{ ...game("0022600085", 49), gameStatus: 2 }]);
-
   const result = await loader();
+  expect(result.games).toHaveLength(0);
+});
 
+it("optionally returns the whole scoreless schedule from the same request", async () => {
+  const request = feed([
+    game("0022600001"),
+    game("0022600002", 0),
+    game("0062600001", 0),
+  ]);
+  const result = await loader("2026", { includeSchedule: true });
+  expect(request).toHaveBeenCalledTimes(1);
   expect(result.games).toHaveLength(1);
+  expect(result.schedule).toHaveLength(2);
+  expect(result.schedule?.map((entry) => entry.status)).toEqual([
+    "final",
+    "scheduled",
+  ]);
+  expect(result.schedule?.[1]).not.toHaveProperty("teams");
+  expect(result.schedule?.[1]).toMatchObject({
+    startsAt: "2026-10-22T23:00:00Z",
+    venue: { awayTeamId: "CHA", homeTeamId: "POR" },
+  });
+});
+
+it("exposes future fixtures before opening night and caps schedule freshness", async () => {
+  vi.setSystemTime(new Date("2026-09-26T12:00:00Z"));
+  feed([game("0022600001", 0)]);
+  const result = await loader("2026", { includeSchedule: true });
+  expect(result.games).toEqual([]);
+  expect(result.schedule).toHaveLength(1);
+  expect(result.expiresAt).toBe(Date.now() + 6 * 60 * 60 * 1000);
+});
+
+it("keeps TBD, postponed and in-progress fixtures unscored", async () => {
+  feed([
+    { ...game("0022600001", 0), gameTimeTBD: 1 },
+    { ...game("0022600002", 0), gameStatusText: "Postponed" },
+    { ...game("0022600003", 50), gameStatus: 2 },
+  ]);
+  const result = await loader("2026", { includeSchedule: true });
+  expect(result.games).toEqual([]);
+  expect(result.schedule?.map((entry) => entry.status)).toEqual([
+    "scheduled",
+    "postponed",
+    "pending",
+  ]);
+  expect(result.schedule?.[0]?.startsAt).toBeUndefined();
 });
 
 it("retries five minutes after the estimated finish", async () => {

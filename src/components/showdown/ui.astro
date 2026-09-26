@@ -2,23 +2,27 @@
 import { catalog } from "virtual:tracker/catalog";
 
 import type { Game } from "../../data/model";
+import type { ScheduledGame } from "../../loaders/live/utils";
 
 import * as ContentUtils from "../../content-utils";
+import { getCurrentEasternYYYYMMDD } from "../../data/calendar";
 import {
   showdownDates,
   showdownGames,
   showdownOpponents,
   showdownStandings,
 } from "../../data/showdown";
+import { showdownCalendar } from "../../data/showdown-calendar";
 import Link from "../link.astro";
 import Logo from "../logo.astro";
 import Table from "../table.astro";
 
 interface Props {
   games: Game[];
+  schedule?: ScheduledGame[];
   seasonId: string;
 }
-const { games, seasonId } = Astro.props;
+const { games, schedule = [], seasonId } = Astro.props;
 const teams = ContentUtils.getTeamsInSeason(seasonId);
 const selected = showdownGames(
   games,
@@ -26,7 +30,24 @@ const selected = showdownGames(
   new Set(teams.map((team) => team.id)),
 );
 const rows = showdownStandings(teams, selected);
-const dates = showdownDates(selected);
+const calendar = showdownCalendar(
+  games,
+  schedule,
+  seasonId,
+  new Set(teams.map((team) => team.id)),
+);
+const dates = showdownDates(calendar);
+const today = getCurrentEasternYYYYMMDD();
+const next = calendar.find(
+  (game) => game.status !== "final" && game.playedOn >= today,
+);
+const formatTime = (date: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/New_York",
+    timeZoneName: "short",
+  }).format(new Date(date));
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat("en-US", {
     day: "numeric",
@@ -97,7 +118,18 @@ const formatDate = (date: string) =>
   </section>
 
   <section aria-label="Matchups by date" class="calendar">
-    {dates.length === 0 && <p class="empty">No completed Showdowns yet.</p>}
+    {
+      next && (
+        <p class="next-link">
+          <Link href={`#date-${next.playedOn}`}>Jump to next matchup</Link>
+        </p>
+      )
+    }
+    {
+      dates.length === 0 && (
+        <p class="empty">No Showdown matchups available yet.</p>
+      )
+    }
     {
       dates.map(([date, slate]) => (
         <section aria-labelledby={`date-${date}`} class="slate">
@@ -119,10 +151,13 @@ const formatDate = (date: string) =>
                           "opponent",
                           {
                             winner:
+                              score !== undefined &&
                               score ===
-                              Math.max(
-                                ...game.teams.map((entry) => entry.score),
-                              ),
+                                Math.max(
+                                  ...game.teams.map(
+                                    (entry) => entry.score ?? -Infinity,
+                                  ),
+                                ),
                           },
                         ]}
                         href={`/${seasonId}/${team.id}/`}
@@ -139,11 +174,24 @@ const formatDate = (date: string) =>
                         >
                           {teamId}
                         </span>
-                        <span class="score">{score}</span>
+                        {score !== undefined && (
+                          <span class="score">{score}</span>
+                        )}
                       </a>
                     </>
                   );
                 })}
+                {game.status !== "final" && (
+                  <p class="schedule-status">
+                    {game.status === "postponed"
+                      ? "Postponed · date/time subject to change"
+                      : game.status === "pending" || game.playedOn < today
+                        ? "Awaiting final result"
+                        : game.startsAt
+                          ? formatTime(game.startsAt)
+                          : "Time TBD"}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
@@ -262,8 +310,22 @@ const formatDate = (date: string) =>
     font-size: var(--text-xl);
     color: var(--color-showdown-red);
   }
-  .empty {
+  .empty,
+  .next-link,
+  .schedule-status {
     text-align: center;
+  }
+  .next-link {
+    margin-bottom: 3rem;
+    font-size: var(--text-xl);
+  }
+  .schedule-status {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    font-size: var(--text-lg);
+  }
+  .slate {
+    scroll-margin-top: 2rem;
   }
   @media (max-width: 639px) {
     .standings-section {

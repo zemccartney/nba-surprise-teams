@@ -10,6 +10,7 @@ interface Props {
 }
 const { seasonId } = Astro.props;
 const { data, error } = await Astro.callAction(actions.getSeasonData, {
+  includeSchedule: true,
   seasonId,
 });
 if (!error) {
@@ -18,4 +19,10 @@ if (!error) {
 }
 ---
 
-{error ? <Crash /> : <UI games={data.games} seasonId={seasonId} />}
+{
+  error ? (
+    <Crash />
+  ) : (
+    <UI games={data.games} schedule={data.schedule ?? []} seasonId={seasonId} />
+  )
+}
