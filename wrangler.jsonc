@@ -12,9 +12,11 @@
   // Node compatibility is implicit from 2026-08-04. Keep the date within the
   // installed workerd runtime's supported range (currently through 2026-09-10).
   "compatibility_date": "2026-09-10",
-  // TODO Fill in the real namespace id from the Cloudflare dashboard before the
-  // first Workers deploy. Local dev ignores it and uses .wrangler/state.
-  "kv_namespaces": [{ "binding": "GAMES_KV", "id": "REPLACE_WITH_REAL_KV_ID" }],
+  // Existing Pages production cache, reused only by an approved production deploy.
+  // Local dev uses .wrangler/state; native Previews override this binding below.
+  "kv_namespaces": [
+    { "binding": "GAMES_KV", "id": "6061594acc5c4fb6b3846b0c78f9e5a3" }
+  ],
   "main": "./sentry.server.config.ts",
   "name": "nba-surprise-teams",
   "observability": {
@@ -31,6 +33,7 @@
       "PUBLIC_DEPLOY_ENV": "preview"
     }
   },
-  // Keep the existing parent's production URL disabled until production approval.
-  "workers_dev": false
+  // Prepared for the approved initial deploy: verify this URL before moving domains.
+  // This file does not change the live setting until production is deployed.
+  "workers_dev": true
 }

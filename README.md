@@ -232,12 +232,15 @@ cutover. `wrangler.jsonc` is the build/deploy config and targets the existing
 - Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
   Review them semi-regularly:
   https://developers.cloudflare.com/workers/configuration/compatibility-flags/
-- Production `GAMES_KV` still needs its real namespace id in `wrangler.jsonc`.
-  The `previews` block selects the existing test KV namespace for native branch
+- Production `GAMES_KV` is configured to reuse the existing Pages production
+  namespace. This is preparation, not a live deployment. The `previews` block
+  selects the existing test KV namespace for native branch
   Previews under that same Worker. Branches share preview KV, not production KV;
   KV is not automatically cloned per branch. Local dev uses `.wrangler/state`.
-  `preview_urls: true` enables preview URLs; production `workers_dev` remains
-  disabled until production deployment is approved.
+  `preview_urls: true` enables preview URLs. Source `workers_dev: true` prepares
+  the initial production verification URL; the live production URL remains
+  disabled until an approved deployment. No custom domains are in the initial
+  configuration. Follow the [cutover checklist](plan/new-season-sweep/production-cutover-checklist.md).
 - No `SESSION` namespace is provisioned, because `session: false` is set in
   `astro.config.mjs`. Remove that line if the site ever uses sessions.
 - `.github/workflows/deploy.yml` uses `wrangler preview` for branches and

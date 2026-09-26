@@ -1753,9 +1753,13 @@ mise run setup</code></pre>
                     chart/action checks passed. The standalone
                     <code>nbastt-preview</code> Worker was deleted after
                     verification; preview KV was retained. Parent production
-                    code and Pages remain unchanged. Production blockers remain
-                    deliberate: <code>wrangler.jsonc</code> has the placeholder
-                    <code>REPLACE_WITH_REAL_KV_ID</code>;
+                    code and Pages remain unchanged. The
+                    <a href="production-cutover-checklist.md"
+                      >production configuration and rollback checklist</a
+                    >
+                    are prepared, not deployed. Zack confirms both Cloudflare
+                    Git integrations disconnected. Screen-reader review/deferral
+                    and execution approval remain open;
                     <code>.github/workflows/deploy.yml</code> is written,
                     SHA-pinned and zizmor-clean, with automatic publishing gated
                     behind <code>vars.DEPLOY_ENABLED == 'true'</code>; the

@@ -2,6 +2,12 @@
 
 ## Current checkpoint — native branch Preview live
 
+Production preparation: [execution and rollback checklist](production-cutover-checklist.md).
+Zack confirms Worker and Pages Git connections are both disconnected. Source now
+has the real production KV binding and enables workers.dev for the eventual first
+production deploy; neither change has been deployed. Live production remains
+unchanged. Screen-reader review/explicit deferral and execution approval remain open.
+
 - URL: **https://workers-cutover-63d134855ea4-nba-surprise-teams.zemccartney.workers.dev**
 - Current deployed commit: `66de885`; native deployment
   `86545e05-8516-49bc-82f6-caf4ff493f6e`.
