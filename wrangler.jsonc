@@ -33,7 +33,12 @@
       "PUBLIC_DEPLOY_ENV": "preview"
     }
   },
-  // Prepared for the approved initial deploy: verify this URL before moving domains.
-  // This file does not change the live setting until production is deployed.
+  // Both associations were transferred manually and verified before declaring them.
+  // The legacy hostname keeps its existing zone-level Bulk Redirect to canonical.
+  "routes": [
+    { "custom_domain": true, "pattern": "nbastt.grepco.net" },
+    { "custom_domain": true, "pattern": "nba-surprise-teams.grepco.net" }
+  ],
+  // Retain the direct verification URL during the rollback window.
   "workers_dev": true
 }

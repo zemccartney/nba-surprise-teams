@@ -4,7 +4,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
 /**
-Initial deployment must not take over either public hostname.
+Preserve the approved production bindings and both custom-domain associations.
 */
 export const assertProductionTarget = (value: unknown): void => {
   if (
@@ -17,8 +17,25 @@ export const assertProductionTarget = (value: unknown): void => {
     value.kv_namespaces[0].binding !== "GAMES_KV" ||
     value.kv_namespaces[0].id !== "6061594acc5c4fb6b3846b0c78f9e5a3" ||
     value.route !== undefined ||
-    (value.routes !== undefined &&
-      (!Array.isArray(value.routes) || value.routes.length > 0))
+    !Array.isArray(value.routes) ||
+    value.routes.length !== 2 ||
+    value.routes.some(
+      (route) =>
+        !(
+          isRecord(route) &&
+          Object.keys(route).length === 2 &&
+          route.custom_domain === true &&
+          typeof route.pattern === "string" &&
+          ["nba-surprise-teams.grepco.net", "nbastt.grepco.net"].includes(
+            route.pattern,
+          )
+        ),
+    ) ||
+    new Set(
+      value.routes.map((route) =>
+        isRecord(route) ? route.pattern : undefined,
+      ),
+    ).size !== 2
   ) {
     throw new Error(
       "Refusing production deployment: unexpected Worker, KV, URL settings or domain routes",
@@ -30,5 +47,5 @@ if (import.meta.main) {
   assertProductionTarget(
     JSON.parse(readFileSync(process.argv[2] ?? "", "utf8")),
   );
-  console.log("Verified initial production target; no custom-domain routes");
+  console.log("Verified production target, KV and both custom domains");
 }
