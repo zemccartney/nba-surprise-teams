@@ -27,6 +27,36 @@ or deployment is authorized; this checkpoint is ready for that design review.
 The same paths work on dev port 4341. Local storage is origin-specific: dev and
 preview choices do not synchronize with one another, but tabs on the same port do.
 
+## Styling feedback round — implemented, ready for another look
+
+Zack requested these light-only refinements:
+
+- Actual collapsed 2px borders on every table cell, including body cells and
+  nested popover tables; replace the prior perimeter/header-only outlines.
+- Remove Detroit's turquoise contrast halo in light mode. The exact original
+  drop shadows remain in dark mode via `--detroit-logo-filter`.
+- Reuse dark mode's `--color-yellow-400` warm accent for the team-results zero
+  line and the scatter's focused-dot ring. Purple popover borders are unchanged.
+- Give surprise scatter dots their own semantic token, using the lighter green
+  from the alternating bars; do not also brighten the pace chart's strokes.
+- Replace muddy notice/warning ink with saturated orange, `oklch(48.5% 0.17 45)`.
+  It remains above 4.5:1 against the lavender page.
+
+Contrast tradeoff: the exact requested gold is only **1.36:1** against the pale
+plot. Its zero line and focus ring are explicit visual-review exceptions, not
+3:1 passes. The browser harness records these ratios and checks exact shade
+fidelity; normal text and data-mark contrast requirements remain enforced.
+
+The [2011 season](http://localhost:4344/2011/) shows the borders, Detroit logo
+and orange notice together. [Stats](http://localhost:4344/stats/) shows the gold
+zero line and lighter dots; use keyboard or pointer selection to see the ring.
+
+Verification: check/build and 220 tests pass; 48 page/theme/width combinations
+pass in dev and built preview, now including every light table cell border and
+Detroit's theme-specific filter. Light chart interaction matrices also pass in
+both runtimes. Artifacts: `/tmp/nbastt-light-feedback/`, including
+`focused-scatter.png`. No merge or deployment.
+
 ## Checkpoint 1 — palette and bulb (historical)
 
 Recovered the actual WIP palette: indigo-200 ground, indigo-300 stripes,

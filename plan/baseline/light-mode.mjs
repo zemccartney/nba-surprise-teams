@@ -46,6 +46,31 @@ try {
           content: "astro-dev-toolbar { display: none !important; }",
         });
         assert.equal(await themeOf(page), theme);
+        if (theme === "light") {
+          const borders = await page.locator("th, td").evaluateAll((cells) =>
+            cells.every((cell) => {
+              const style = getComputedStyle(cell);
+              return [
+                style.borderTopWidth,
+                style.borderRightWidth,
+                style.borderBottomWidth,
+                style.borderLeftWidth,
+              ].every((width) => width === "2px");
+            }),
+          );
+          assert.ok(borders, "all light table cells have borders");
+        }
+        const detroitFilters = await page
+          .locator('img[style*="--detroit-logo-filter"]')
+          .evaluateAll((images) =>
+            images.map((image) => getComputedStyle(image).filter),
+          );
+        for (const filter of detroitFilters)
+          assert.equal(
+            filter === "none",
+            theme === "light",
+            "Detroit halo only in dark mode",
+          );
         const hosts = await page.locator("[data-chart]").all();
         for (const host of hosts) {
           await host.scrollIntoViewIfNeeded();
@@ -151,10 +176,21 @@ try {
         "chart-alternate",
         "chart-positive-line",
         "chart-negative-line",
-        "chart-highlight",
-        "chart-zero",
+        "chart-surprise-dot",
       ].map((fg) => [fg, "chart-surface", 3]),
+      // Zack requested the exact dark-theme yellow for these accents. Report
+      // their contrast honestly; they do not meet 3:1 against the pale plot.
+      ...["chart-highlight", "chart-zero"].map((fg) => [
+        fg,
+        "chart-surface",
+        undefined,
+      ]),
     ];
+    for (const accent of ["chart-highlight", "chart-zero"])
+      if (String(rgb(accent)) !== String(rgb("color-yellow-400")))
+        throw new Error(
+          `${accent} must retain the requested dark-theme accent`,
+        );
     const results = pairs.map(([fg, bg, minimum]) => {
       const a = luminance(rgb(fg));
       const b = luminance(rgb(bg));
@@ -172,11 +208,13 @@ try {
     Path.join(output, "contrast.json"),
     JSON.stringify(contrast, undefined, 2),
   );
-  for (const { bg, fg, minimum, ratio } of contrast)
+  for (const { bg, fg, minimum, ratio } of contrast) {
+    if (minimum === undefined) continue;
     assert.ok(
       ratio >= minimum,
       `${fg} on ${bg}: ${ratio.toFixed(2)} < ${minimum}`,
     );
+  }
 
   // Toggle with an open chart tooltip: the existing SVG node must repaint, not remount.
   const host = page.locator('[data-chart="team-season-pace"]');

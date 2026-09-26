@@ -251,7 +251,8 @@ textarea {
   --ink-link: var(--color-indigo-400);
   --ink-link-hover: var(--color-indigo-100);
   --rule: var(--color-slate-800);
-  --table-outline: none;
+  --detroit-logo-filter: drop-shadow(-1rem -1rem 1rem #016270)
+    drop-shadow(1rem 1rem 1rem #016271);
   --table-shadow: var(--shadow-glow);
   --table-shadow-compact: var(--shadow-glow-sm);
   --popover-surface: var(--color-blurple-glow);
@@ -274,6 +275,7 @@ textarea {
   --chart-positive: var(--color-green-700);
   --chart-negative: var(--color-red-700);
   --chart-positive-line: var(--color-lime-500);
+  --chart-surprise-dot: var(--color-lime-500);
   --chart-negative-line: var(--color-pace-red);
   --chart-alternate: var(--color-lime-200);
   --chart-highlight: var(--color-indigo-400);
@@ -289,14 +291,14 @@ textarea {
   --surface-row: var(--color-indigo-300);
   --ink-primary: var(--color-slate-950);
   --ink-heading: var(--color-slate-950);
-  --ink-notice: oklch(38% 0.075 60);
-  --ink-warning: oklch(42.1% 0.095 57.708);
+  --ink-notice: oklch(48.5% 0.17 45);
+  --ink-warning: var(--ink-notice);
   /* Slightly deeper than the WIP's indigo-700: links also need 4.5:1
      against the darker striped rows, not just against the page. */
   --ink-link: oklch(42% 0.21 277.023);
   --ink-link-hover: oklch(35.9% 0.144 278.697);
   --rule: oklch(45% 0.07 275);
-  --table-outline: 2px solid var(--color-slate-950);
+  --detroit-logo-filter: none;
   --table-shadow: none;
   --table-shadow-compact: none;
   --popover-surface: oklch(97% 0.015 275);
@@ -321,9 +323,16 @@ textarea {
   --chart-positive-line: oklch(35% 0.1 150);
   --chart-negative-line: oklch(35% 0.13 27.5);
   --chart-alternate: oklch(61% 0.13 150);
-  --chart-highlight: var(--ink-link);
+  --chart-surprise-dot: var(--chart-alternate);
+  --chart-highlight: var(--color-yellow-400);
   --chart-band: oklch(65% 0.06 275);
-  --chart-zero: oklch(40% 0.085 80);
+  --chart-zero: var(--color-yellow-400);
+}
+
+/* Collapsed borders cover body cells and nested popover tables too. Keep
+   the established borderless dark tables unchanged. */
+:root[data-theme="light"] :is(th, td) {
+  border: 2px solid var(--ink-primary);
 }
 
 /* ========================================

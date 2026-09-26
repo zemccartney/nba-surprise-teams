@@ -321,7 +321,7 @@ export const scatterChart = ({
     body: scatterBody,
     definition: defineChart({
       color: {
-        scale: scaleOrdinal(["surprise", "eliminated"], [t.lime, t.red]),
+        scale: scaleOrdinal(["surprise", "eliminated"], [t.surpriseDot, t.red]),
       },
       margin: { bottom: 76, left: 60, right: 8, top: 12 },
       marks: [

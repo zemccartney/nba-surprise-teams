@@ -31,6 +31,7 @@ vi.mock(
       lime: "#84cc16",
       red: "#b91c1c",
       slate: "#94a3b8",
+      surpriseDot: "#84cc16",
       yellow: "#facc15",
     },
   }),

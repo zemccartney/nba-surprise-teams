@@ -1,5 +1,17 @@
 # New-season sweep: round log
 
+## Light mode — styling feedback round
+
+Implemented Zack's five light-only refinements: all-cell borders, no Detroit
+halo, original gold zero line and scatter focus ring, lighter green scatter
+dots, and more saturated orange notices. Dark colors/halo/borders are unchanged.
+The new orange passes text contrast; the requested exact gold is an explicitly
+recorded 1.36:1 plot-background exception, not an accessibility pass.
+
+Check/build, 220 tests and dev/preview page matrices pass, including new
+border/filter assertions; light chart matrices pass in both runtimes. Refreshed
+built tour on 4344. [Details and evidence](light-mode.md#styling-feedback-round--implemented-ready-for-another-look).
+
 ## Light mode — checkpoint 2, awaiting styling feedback
 
 Zack requested full surface coverage before collecting design notes. Replaced

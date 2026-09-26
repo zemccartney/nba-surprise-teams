@@ -78,6 +78,7 @@ describe("CSS-backed chart paints", () => {
       lime: "var(--chart-positive-line)",
       red: "var(--chart-negative)",
       slate: "var(--chart-band)",
+      surpriseDot: "var(--chart-surprise-dot)",
       yellow: "var(--chart-zero)",
     });
   });

@@ -1,5 +1,15 @@
 # Review notes: new-season sweep
 
+## Light mode — styling feedback round
+
+[2011 season](http://localhost:4344/2011/): all-cell borders, no Detroit halo,
+more saturated orange notice. [Stats](http://localhost:4344/stats/): original
+warm gold zero line/focus ring and lighter green surprise dots. Flip back to
+dark to compare. Color/contrast decisions and test evidence are in
+[the updated plan](light-mode.md#styling-feedback-round--implemented-ready-for-another-look).
+The exact gold has low contrast against the pale plot (1.36:1); retained as
+requested for visual review, not silently passed through the contrast gate.
+
 ## Light mode — checkpoint 2
 
 Start with [the current tour and decisions](light-mode.md#current-tour--checkpoint-2).

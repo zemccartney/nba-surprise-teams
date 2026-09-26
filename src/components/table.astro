@@ -27,7 +27,6 @@ const {
     table-layout: fixed;
     border-collapse: collapse;
     box-shadow: var(--table-shadow);
-    outline: var(--table-outline);
 
     > thead,
     > tfoot {
@@ -106,10 +105,6 @@ const {
         background-color: var(--surface-table-head);
       }
     }
-  }
-
-  .NBASurpriseTracker-Table > :is(thead, tfoot) :global(:is(th, td)) {
-    outline: var(--table-outline);
   }
 
   /* Rows arrive through the body slot and carry the caller's scope attribute,

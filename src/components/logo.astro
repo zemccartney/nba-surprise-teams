@@ -47,9 +47,8 @@ const { default: logo } = await ContentUtils.getTeamSeasonLogo(team, seasonId);
   src={logo.src}
   width={width}
   {...team.id === ContentUtils.TEAM_CODES.DET && {
-    // tweak to slightly improve contrast
-    style:
-      "filter: drop-shadow(-1rem -1rem 1rem #016270) drop-shadow(1rem 1rem 1rem #016271);",
+    // The dark horse needs a halo on dark surfaces, but not in light mode.
+    style: "filter: var(--detroit-logo-filter);",
   }}
   {...props}
 />

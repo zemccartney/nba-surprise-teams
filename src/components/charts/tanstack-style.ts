@@ -12,6 +12,7 @@ export const theme = {
   lime: "var(--chart-positive-line)",
   red: "var(--chart-negative)",
   slate: "var(--chart-band)",
+  surpriseDot: "var(--chart-surprise-dot)",
   yellow: "var(--chart-zero)",
 };
 export type Theme = typeof theme;
