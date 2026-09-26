@@ -1690,14 +1690,18 @@ mise run setup</code></pre>
                   <p class="item-note">
                     The source-map lifecycle fix is verified hosted. The
                     approved custom Worker entry now owns server initialization,
-                    explicitly excluding Astro's server instrumentation. Its
-                    active release matches the browser's build SHA; the new
-                    received event still needs confirmation. Dev-only behavior
-                    remains deferred. A
+                    excluding only integration-owned server initialization. The
+                    received event confirms the build SHA and source maps. SDK
+                    Astro middleware now adds route context and catches
+                    framework-handled exceptions: local workerd checks pass; the
+                    hosted automatic-error event needs confirmation. Dev-only
+                    behavior remains deferred. A
                     <code>CF_VERSION_METADATA</code> deployment UUID is not
                     needed for Sentry release tagging; cache/version metadata is
                     separate. See
-                    <a href="sentry-worker-entry.md">entry-point evidence</a>.
+                    <a href="sentry-worker-entry.md">entry-point evidence</a>
+                    and
+                    <a href="sentry-astro-middleware.md">middleware checks</a>.
                   </p>
                 </div>
               </li>

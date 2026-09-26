@@ -1,5 +1,11 @@
 # Sentry Worker entry — 2026-09-25
 
+**Follow-up:** the [Astro middleware experiment](sentry-astro-middleware.md)
+corrects the initial decision to omit framework middleware. The Worker wrapper
+still owns initialization; SDK Astro middleware now adds route context and catches
+errors Astro handles internally. The redundant auto-instrumentation setting was
+removed. The chronology below records the initial migration.
+
 ## Decision and implementation
 
 The user approved replacing the manual request-wrapper middleware with the
@@ -77,8 +83,9 @@ preseason action returning 200. A browser Home check has no page errors or HTTP
 5xx responses and reports the cleanup build SHA. Personal-file hashes are intact.
 
 The response verifies runtime options and flushing, **not Sentry's received event**.
-User-exported event JSON is still needed to confirm release, source mapping and
-processing errors after this entry-point change. This intentional capture does
+The user's subsequent export of this event confirms the expected release and
+preview environment, all seven frames mapped (including the error at line 42),
+and no processing errors. The explicit-capture entry-point check is verified. This intentional capture does
 not establish capture of every framework-handled 500 response.
 
 Production deployment/bindings, KV, Pages and domains remain untouched. Dev-only

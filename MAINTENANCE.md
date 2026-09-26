@@ -209,9 +209,11 @@ Cloudflare-origin access.
 
 - Sentry server ownership: Wrangler's `main` points at `sentry.server.config.ts`,
   which wraps Astro's Worker handler with `@sentry/cloudflare.withSentry`.
-  Astro's integration handles browser initialization and map uploads; its server
-  initialization and automatic request middleware are explicitly disabled.
-  Do not add a second request wrapper in `src/middleware.ts`.
+  Astro's integration handles browser initialization and map uploads. Its server
+  initialization is disabled to avoid importing the Worker entry into Node
+  prerendering. `src/middleware.ts` delegates to the SDK's Astro middleware for
+  route/trace context and errors Astro handles as 500 responses; it does not
+  initialize another SDK or own a request wrapper.
 - Server events explicitly read the plugin-injected build release, matching the
   browser/upload Git SHA rather than a Cloudflare deployment UUID. No upload token
   is shipped to the Worker. Maps remain on disk through all upload passes, then
