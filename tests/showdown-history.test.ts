@@ -139,8 +139,14 @@ describe("historic Showdown standings", () => {
         { ariaLabel: chart.label },
         chart.annotation?.(scene),
       );
-      expect(svg).toContain("8–2 · 80.0%");
-      expect(svg).toContain("0–0 · —");
+      expect(svg).toContain("8–2 | 80.0%");
+      expect(svg).toContain("0–0 | —");
+      expect(scene.points.map((point) => point.color)).toEqual([
+        "var(--color-showdown-red)",
+        "var(--color-red-700)",
+      ]);
+      expect(chart.annotation?.(scene)).toContain(`x="${scene.chart.x + 8}"`);
+      expect(scene.chart.width).toBe(390 - 56 - 16);
       expect(
         describeShowdownHistory({
           l: 0,

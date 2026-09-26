@@ -50,9 +50,19 @@ export const showdownHistoryFocus: ChartFocusStrategy<
 export function showdownHistoryChart({
   data,
 }: ShowdownHistoryProps): TrackerChart<ShowdownHistoryPoint, number, string> {
+  const colors = new Map(
+    data.map((row, index) => [
+      row,
+      index % 2 ? theme.red : "var(--color-showdown-red)",
+    ]),
+  );
+  const max = Math.max(
+    0.25,
+    Math.ceil(Math.max(0, ...data.map((row) => row.pct ?? 0)) * 4) / 4,
+  );
   return {
     annotation: (scene) =>
-      `<g aria-hidden="true" fill="var(--color-green-200)" font-size="14" font-family="var(--font-mono)"><text x="${scene.chart.x + scene.chart.width + 12}" y="18">W–L · PCT</text>${scene.points.map((point) => `<text x="${scene.chart.x + scene.chart.width + 12}" y="${point.y}" dominant-baseline="middle">${point.datum.w}–${point.datum.l} · ${showdownPct(point.datum.pct)}</text>`).join("")}</g>`,
+      `<g data-showdown-labels="" aria-hidden="true" pointer-events="none" fill="var(--color-green-200)" stroke="${theme.background}" stroke-width="3" stroke-linejoin="round" paint-order="stroke" font-size="${scene.chart.width < 480 ? 16 : 20}" font-weight="700" font-family="var(--font-mono)">${scene.points.map((point) => `<text x="${scene.chart.x + 8}" y="${point.y}" dominant-baseline="middle">${point.datum.w}–${point.datum.l} | ${showdownPct(point.datum.pct)}</text>`).join("")}</g>`,
     body: (row) =>
       add(
         node("div"),
@@ -65,12 +75,12 @@ export function showdownHistoryChart({
       ),
     definition: defineChart({
       focus: showdownHistoryFocus,
-      margin: { bottom: 60, left: 56, right: 156, top: 32 },
+      margin: { bottom: 60, left: 56, right: 16, top: 16 },
       marks: [
         barX(data, {
-          fill: "var(--color-showdown-red)",
+          fill: (row) => colors.get(row) ?? "var(--color-showdown-red)",
           id: "showdown-history",
-          maxThickness: 24,
+          maxThickness: 40,
           x: (row) => row.pct ?? 0,
           y: "teamId",
         }),
@@ -88,11 +98,14 @@ export function showdownHistoryChart({
             ticks: {
               format: (value) => `${Number(value) * 100}%`,
               padding: 8,
-              values: [0, 0.25, 0.5, 0.75, 1],
+              values: Array.from(
+                { length: max * 4 + 1 },
+                (_, index) => index / 4,
+              ),
             },
           },
           grid: grid(theme),
-          scale: scaleLinear().domain([0, 1]),
+          scale: scaleLinear().domain([0, max]),
         },
         y: {
           axis: {
@@ -101,7 +114,7 @@ export function showdownHistoryChart({
           },
           scale: scaleBand<string>()
             .domain(data.map((row) => row.teamId))
-            .paddingInner(0.25)
+            .paddingInner(0.2)
             .paddingOuter(0.1),
         },
       },

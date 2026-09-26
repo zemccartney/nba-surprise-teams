@@ -1,7 +1,6 @@
 ---
 import type { ShowdownHistoryProps } from "./showdown-standings";
 
-import { showdownPct } from "./showdown-standings";
 import "./charts.css";
 
 type Props = ShowdownHistoryProps;
@@ -12,74 +11,13 @@ const json = JSON.stringify({ data }).replaceAll("<", String.raw`\u003c`);
 <div
   class="chart"
   data-chart="showdown-history"
-  style={`height: ${data.length * 36 + 92}px`}
+  style={`height: ${data.length * 52 + 76}px`}
 >
   <script is:inline set:html={json} type="application/json" />
 </div>
-<details>
-  <summary>View all head-to-head records</summary>
-  <table>
-    <caption
-      >Historic Showdown standings — archived seasons, grouped by franchise</caption
-    >
-    <thead
-      ><tr
-        ><th scope="col">Team</th><th scope="col">W</th><th scope="col">L</th
-        ><th scope="col">Games</th><th scope="col">PCT</th></tr
-      ></thead
-    >
-    <tbody
-      >{
-        data.map((row) => (
-          <tr>
-            <>
-              <th scope="row">{row.name}</th>
-              <td>{row.w}</td>
-              <td>{row.l}</td>
-              <td>{row.w + row.l}</td>
-              <td>{showdownPct(row.pct)}</td>
-            </>
-          </tr>
-        ))
-      }</tbody
-    >
-  </table>
-</details>
 
 <script>
   import { showdownHistoryChart } from "./showdown-standings";
   import { mountCharts } from "./tanstack";
   mountCharts("showdown-history", showdownHistoryChart);
 </script>
-
-<style>
-  details {
-    margin-top: 1.5rem;
-    font-family: var(--font-mono);
-  }
-  summary {
-    color: var(--color-indigo-400);
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  table {
-    width: 100%;
-    margin-top: 1rem;
-    font-variant-numeric: tabular-nums;
-  }
-  caption {
-    text-align: left;
-    margin-bottom: 0.75rem;
-  }
-  th,
-  td {
-    padding: 0.5rem 0.25rem;
-    text-align: right;
-  }
-  th:first-child {
-    text-align: left;
-  }
-  tr {
-    border-bottom: 1px solid var(--color-green-700);
-  }
-</style>

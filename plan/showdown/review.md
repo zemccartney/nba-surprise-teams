@@ -117,6 +117,17 @@ This includes the final visual revisions below.
 - Targeted ESLint and diff whitespace checks passed; refreshed desktop/mobile
   screenshots, no horizontal overflow, shared popover behavior still verified.
 
+## Historic-chart visual revision
+
+- Enlarged matchup `@` symbols to 36px.
+- Removed the chart's supplemental accordion/table.
+- Bars alternate the Showdown red with the charts' existing dark red.
+- Increased row height to 52px and bar thickness to 40px. Records/percentages
+  are overlaid on bars as `W–L | PCT`, at 16px on narrow plots and 20px on wide
+  plots, with an outline for contrast. Removed the separate labels gutter.
+- Browser recheck: all 30 bars, keyboard tooltips and no horizontal overflow at
+  390px and 1440px; no runtime exceptions.
+
 ## Remaining review / operational follow-up
 
 - User visual/code review of the new historic Stats chart and data/cache changes.

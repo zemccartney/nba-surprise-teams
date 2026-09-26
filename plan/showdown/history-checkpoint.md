@@ -6,9 +6,13 @@
   Stats charts. Only archived seasons and games between that season's candidate
   pair count. Wins/losses are summed before calculating percentage; this is not
   an average of seasonal percentages.
-- Ranked horizontal bars, visible W–L/PCT labels, and full-name/game-count
-  tooltips. No-game teams sort last with an em dash, distinct from 0%.
-- Expandable server-rendered table exposes every record without JavaScript.
+- Ranked horizontal bars alternate Showdown red and the existing charts' dark
+  red. Thicker bars carry larger overlaid `W–L | PCT` labels; full-name/game-count
+  tooltips remain. The axis retains zero and rounds its maximum up to a quarter
+  so labels have more room, especially on phones.
+- The extra accordion/table was removed after visual review. Keyboard chart
+  descriptions still expose each record. No-game teams sort last with an em dash,
+  distinct from 0%.
 - Keyboard navigation follows the ranked visual order, not alphabetical tricodes;
   Home focuses the leader, arrows explore, Enter pins and Escape dismisses.
 
