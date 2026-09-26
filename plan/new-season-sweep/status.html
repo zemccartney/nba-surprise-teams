@@ -1756,31 +1756,36 @@ mise run setup</code></pre>
                     <a href="production-worker-verification.md"
                       >production Worker</a
                     >
-                    is now deployed at its workers.dev URL: clean commit
-                    <code>499ee33</code>, 213 tests and hosted checks passed.
-                    The legacy alias is now attached to the Worker; its existing
-                    Bulk Redirect still sends 301s to the canonical hostname,
-                    preserving path/query. Canonical still serves Pages. The
-                    received production Sentry event confirms automatic capture,
-                    correct release and all three mapped frames with no
-                    processing errors reported. Canonical domain transfer and
-                    full app checks are next; alias redirects do not exercise
-                    the Worker behind the rule. Zack confirmed both Git
-                    integrations disconnected, deferred screen-reader review and
-                    approved a seven-day Pages rollback window after both
-                    domains pass. The
+                    now serves canonical production. The
+                    <a href="production-domain-cutover.md"
+                      >controlled domain deployment</a
+                    >
+                    passed 219 tests and hosted checks; both associations are
+                    enforced by the production target guard. The legacy alias is
+                    now attached to the Worker; its existing Bulk Redirect still
+                    sends 301s to the canonical hostname, preserving path/query.
+                    Canonical serves the Worker. The received production Sentry
+                    event confirms automatic capture, correct release and all
+                    three mapped frames with no processing errors reported.
+                    Canonical charts, actions and headers pass; alias redirects
+                    do not exercise the Worker behind the rule. Zack confirmed
+                    both Git integrations disconnected, deferred screen-reader
+                    review and approved a seven-day Pages rollback window after
+                    both domains pass: retain Pages through at least October 3,
+                    2026, 21:12 UTC, and obtain approval before deletion. The
                     <a href="production-cutover-checklist.md"
                       >cutover checklist</a
                     >
                     records the approved main-first/manual deployment sequence;
                     <code>.github/workflows/deploy.yml</code> is written,
                     SHA-pinned and zizmor-clean, with automatic publishing gated
-                    behind <code>vars.DEPLOY_ENABLED == 'true'</code>; the
-                    custom domain has to move. The gate is a temporary cutover
-                    interlock, to retire after migration. Per Zack's workflow,
-                    CI runs full verification at deployment time, not in a
-                    separate every-push/PR workflow. The first GitHub/Linux
-                    execution passed and published only the isolated preview.
+                    behind <code>vars.DEPLOY_ENABLED == 'true'</code> pending
+                    the agreed docs-only automatic-deployment test. The gate is
+                    a temporary cutover interlock, to retire after migration.
+                    Per Zack's workflow, CI runs full verification at deployment
+                    time, not in a separate every-push/PR workflow. The first
+                    GitHub/Linux execution passed and published only the
+                    isolated preview.
                   </p>
                   <p class="item-note">
                     Also settle here: trailing-slash redirects become

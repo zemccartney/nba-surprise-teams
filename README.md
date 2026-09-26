@@ -225,25 +225,24 @@ Need to update our action's `SCHEMA_ID` if shape of data stored in KV ever chang
 ### Cloudflare
 
 The build targets Workers: `@astrojs/cloudflare` 13 dropped Pages support.
-Live production remains on the retained Pages deployment until the coordinated
-cutover. `wrangler.jsonc` is the build/deploy config and targets the existing
-`nba-surprise-teams` Worker; the adapter reads it during `astro build`.
+Production at `https://nbastt.grepco.net` runs on Worker `nba-surprise-teams`.
+The legacy hostname keeps its existing 301 Bulk Redirect to canonical, preserving
+path/query. Pages is retained only for the seven-day rollback window; deletion
+requires approval. See [cutover evidence](plan/new-season-sweep/production-domain-cutover.md).
+`wrangler.jsonc` is the build/deploy config; the adapter reads it during `astro build`.
 
 - Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
   Review them semi-regularly:
   https://developers.cloudflare.com/workers/configuration/compatibility-flags/
 - The initial production Worker reuses the existing Pages production `GAMES_KV`
-  namespace. Canonical `nbastt.grepco.net` still serves Pages during the handoff;
-  the legacy hostname is attached to the Worker but retains its existing 301 Bulk
-  Redirect to canonical. Preserve that redirect. The `previews` block
+  namespace. Both custom-domain associations are declared in config and enforced
+  by the production target guard. Preserve the legacy Bulk Redirect. The `previews` block
   selects the existing test KV namespace for native branch
   Previews under that same Worker. Branches share preview KV, not production KV;
   KV is not automatically cloned per branch. Local dev uses `.wrangler/state`.
   `preview_urls: true` enables preview URLs. Source `workers_dev: true` prepares
-  the production verification URL, now deployed and enabled. No custom domains are in the initial
-  configuration. Do not deploy again during the partial domain handoff; persist
-  both associations and update the production guard first, following the
-  [cutover checklist](plan/new-season-sweep/production-cutover-checklist.md).
+  the direct production verification URL, retained during the rollback window.
+  Follow the [cutover/rollback checklist](plan/new-season-sweep/production-cutover-checklist.md).
 - No `SESSION` namespace is provisioned, because `session: false` is set in
   `astro.config.mjs`. Remove that line if the site ever uses sessions.
 - `.github/workflows/deploy.yml` uses `wrangler preview` for branches and
@@ -254,7 +253,8 @@ cutover. `wrangler.jsonc` is the build/deploy config and targets the existing
   Automatic publishing remains gated by `DEPLOY_ENABLED`; explicit non-main
   `preview_deploy` dispatches may publish Previews without opening production.
   During cutover, an explicit main-only `production_deploy` dispatch publishes
-  production behind a generated-config guard; automatic publishing stays off.
+  production behind a generated-config guard. The temporary gate is being
+  retired after the agreed automatic-deployment proof.
   It needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
   and `SENTRY_AUTH_TOKEN` as repository secrets. Wrangler 4.137.0 is locked; native
   Previews require 4.135.0+. See [migration evidence](plan/new-season-sweep/native-previews.md).

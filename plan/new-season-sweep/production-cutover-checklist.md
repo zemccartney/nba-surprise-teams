@@ -5,6 +5,16 @@ sequence, deferred screen-reader testing and agreed a seven-day rollback window.
 Neither Worker nor Pages has a Git connection. Automatic publishing remains
 disabled for initial deployment and domain coordination.
 
+## Current execution state
+
+Canonical now serves the Worker; the legacy alias retains its existing 301 Bulk
+Redirect. Both associations are persisted in config and required by the production
+guard. [Domain verification and rollback window](production-domain-cutover.md):
+Pages remains through at least **2026-10-03 21:12 UTC**, pending retirement approval.
+Sections B/C below record the completed initial bootstrap, not the current
+production route configuration. Never redeploy the earlier no-routes config.
+Automatic publishing is next verified by a real docs-only merge into main.
+
 ## Prepared target
 
 | Setting                      | Value                                                         |
@@ -139,15 +149,15 @@ association, stop and restore Pages rather than guessing at DNS records.
       301 to canonical; a test query string is preserved. API confirms the alias is
       attached to the production Worker and removed from Pages. This verifies the
       association and redirect, not execution of the Worker behind the redirect.
-- [ ] On failure, follow rollback below. On success, explicitly proceed with
+- [x] On failure, follow rollback below. On success, explicitly proceed with
       `nbastt.grepco.net` using the same sequence. Keep its canonical-origin role;
       do not introduce a new alias redirect policy during the migration.
-- [ ] Verify the canonical app: routes, same-origin actions, assets, security/cache
+- [x] Verify the canonical app: routes, same-origin actions, assets, security/cache
       headers, charts, keyboard behavior, Sentry release/environment and error rates.
       Verify the legacy alias still redirects to it, preserving path/query.
       Screen-reader testing remains explicitly deferred. Record timestamps, version,
       DNS and domain state; then start the agreed seven-day rollback window.
-- [ ] Before any subsequent production deployment, persist the two verified
+- [x] Before any subsequent production deployment, persist the two verified
       associations in `wrangler.jsonc` as `routes` entries:
 
   ```json

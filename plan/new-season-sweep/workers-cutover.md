@@ -1,22 +1,24 @@
 # Workers cutover
 
-## Current checkpoint — production Worker live, public domains still on Pages
+## Current checkpoint — canonical Worker cutover verified
 
 [Production verification](production-worker-verification.md) and
 [execution/rollback checklist](production-cutover-checklist.md).
-Main-first merge and manual deployment are complete. Current clean production:
-**https://nba-surprise-teams.zemccartney.workers.dev**, commit `499ee33`, version
-`4f372575-6416-46ae-ab79-9cd48ed62794`; **213 tests**, 73 maps cleaned, 376-file
-audit. Production KV and hosted charts/actions/browser Sentry options verified.
+Main-first merge and domain transfer are complete. Canonical production:
+**https://nbastt.grepco.net**, controlled deployment `4782251`, version
+`494390f9-959d-45bd-a180-dc101b92d69e`; **219 tests**, 376-file audit.
+Both custom domains and production KV are enforced by the generated-config guard.
+[Domain checks and rollback window](production-domain-cutover.md) are recorded;
+the docs-only merge will verify automatic deployment next.
 Temporary server-error route and secret removed. Received production Sentry event
 `848c64873c7844559c9e3fb8fba6f679` confirms automatic Astro capture, the diagnostic
 Git release and all three mapped frames with no processing errors reported.
 The legacy alias is now attached to the Worker and retains its existing Bulk
-Redirect (301, preserving path/query) to `nbastt.grepco.net`. Canonical still serves
-retained Pages. Alias redirect checks do not exercise the Worker behind the rule.
-Canonical transfer/full app checks are next; automatic publishing stays off.
-Zack deferred screen-reader review and agreed a seven-day rollback window after
-both domains pass; that window has not started. Both Git integrations are disconnected.
+Redirect (301, preserving path/query) to `nbastt.grepco.net`. Canonical now serves the Worker; full chart/action/header checks pass there.
+Alias redirect checks do not exercise the Worker behind the rule.
+Pages is retained through at least **2026-10-03 21:12 UTC**, with explicit approval
+required before retirement. Screen-reader review is deferred. Both Cloudflare
+Git integrations remain disconnected.
 
 ### Earlier native Preview checkpoint (before production deployment)
 
