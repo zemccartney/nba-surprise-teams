@@ -6,6 +6,7 @@ import { catalog } from "virtual:tracker/catalog";
 
 import type { TeamCode } from "../content-utils";
 
+import ShowdownStandingsChart from "../components/charts/showdown-standings.astro";
 import SurprisesByTeamChart from "../components/charts/surprises-by-team.astro";
 import SurprisesPerSeasonChart from "../components/charts/surprises-per-season.astro";
 import TeamSeasonScatterPlot from "../components/charts/team-season-scatter.astro";
@@ -14,6 +15,7 @@ import Logo from "../components/logo.astro";
 import Popover from "../components/popover.astro";
 import Table from "../components/table.astro";
 import * as ContentUtils from "../content-utils";
+import { historicShowdownStandings } from "../data/showdown-history";
 import Subpage from "../layouts/subpage.astro";
 import * as Utils from "../utils";
 
@@ -267,6 +269,26 @@ for (const teamSeason of teamSeasons) {
 }
 
 // END Team Season scatterplot
+
+const franchiseIds = new Map(
+  teams.map((team) => {
+    const history = ContentUtils.getTeamHistory(team.id);
+    return [team.id, (history && history.at(-1)?.teamId) || team.id];
+  }),
+);
+const showdownRows = historicShowdownStandings({
+  archivedSeasonIds: archivedIds,
+  franchiseIds,
+  games,
+  teams,
+  teamSeasons,
+});
+const showdownHistory = await Promise.all(
+  showdownRows.map(async ({ l, pct, team, w }) => {
+    const { default: logo } = await ContentUtils.getTeamLogo(team.id);
+    return { l, logoSrc: logo.src, name: team.name, pct, teamId: team.id, w };
+  }),
+);
 ---
 
 <Subpage
@@ -353,6 +375,16 @@ for (const teamSeason of teamSeasons) {
     <section class="section-scatter">
       <h2 class="section-title">Pace x Over/Under</h2>
       <TeamSeasonScatterPlot data={scatterPoints} />
+    </section>
+
+    <section class="section-showdown" id="showdown-history">
+      <h2 class="section-title">Historic Showdown Standings</h2>
+      <p class="showdown-note">
+        Head-to-head results between surprise candidates. Archived seasons only;
+        franchise histories combined. Ranked by total wins ÷ games played, not
+        an average of season percentages.
+      </p>
+      <ShowdownStandingsChart data={showdownHistory} />
     </section>
   </div>
 </Subpage>
@@ -445,6 +477,18 @@ for (const teamSeason of teamSeasons) {
 
   .section-scatter {
     order: 4;
+  }
+
+  .section-showdown {
+    order: 5;
+    grid-column: 1 / -1;
+  }
+  .showdown-note {
+    max-width: 48rem;
+    margin: 0 auto 2rem;
+    text-align: center;
+    text-wrap: balance;
+    font-size: var(--text-lg);
   }
 
   .section-title {

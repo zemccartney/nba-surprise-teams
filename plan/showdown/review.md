@@ -1,9 +1,25 @@
-# Checkpoint 1 — visual slice
+# Showdown review
+
+## Current execution status
+
+All implementation checkpoints are complete: reviewed season UI, verified
+home/away backfill for all 18,607 archived games, scoreless upcoming schedules
+and isolated caching, and the 30-franchise historic Stats chart. See
+`venue-backfill.md`, `schedule-checkpoint.md`, and `history-checkpoint.md` for
+scope and evidence. The notes below preserve the sequence of visual reviews.
+
+The new chart still needs user visual review. The latest season currently has
+no published candidates; no invented odds are included in this branch. Hosted
+active-season refresh must be rechecked after real candidates are published
+(local workerd's NBA request is 403; Node fetch succeeds, and local cached
+island/schedule behavior was browser-tested).
 
 ## Review
 
-Local dev server: **http://127.0.0.1:4341** (separate worktree and local DB).
-Log: `/tmp/showdown-dev.log`. Find the current PID with `lsof -iTCP:4341 -sTCP:LISTEN`.
+Local dev server: **http://127.0.0.1:4343** (separate worktree and local DB).
+Ports 4341/4342 are now used by the parallel light-mode work; those servers were
+left untouched. Log: `/tmp/showdown-dev.log`. Find the current PID with
+`lsof -iTCP:4343 -sTCP:LISTEN`.
 
 - `/2025/showdown/`: latest archived season, nine candidates, full result calendar.
 - `/2024/showdown/`: another candidate set.
@@ -101,16 +117,14 @@ This includes the final visual revisions below.
 - Targeted ESLint and diff whitespace checks passed; refreshed desktop/mobile
   screenshots, no horizontal overflow, shared popover behavior still verified.
 
-## Deliberately unfinished
+## Remaining review / operational follow-up
 
-- Historic venue extraction/backfill: matchups honestly display `vs.` for now.
-- Explicit venue fields, schedule-enabled loader and schedule-aware caching.
-- Upcoming games, status/time display and jump-to-next shortcut.
-- Archived-only all-time standings chart on Stats.
-- Checkpoints 2/3 remain follow-up work; this PR is the reviewed visual slice.
-  Full-repository verification and integration of production updates passed for
-  this slice (see PR preparation above).
+- User visual/code review of the new historic Stats chart and data/cache changes.
+- Recheck real hosted schedule/results transitions after candidate odds are
+  published, including finality status observations already tracked in MAINTENANCE.
+- Merge/deploy only after approval; this branch never publishes production.
 
-No production settings, canonical data, or main-checkout files were changed.
+No production settings or main-checkout files were changed. Canonical venue
+metadata was enriched; all existing result rows remain identical.
 Stop this server before running sync/build/tests in this worktree; restart with
-`pnpm exec astro dev --host 127.0.0.1 --port 4341` afterward.
+`pnpm exec astro dev --host 127.0.0.1 --port 4343` afterward.
