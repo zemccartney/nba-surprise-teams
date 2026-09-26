@@ -18,6 +18,15 @@ The initial baseline was cleared with Sentry 10.27.0 and narrow overrides for
 OpenTelemetry core 2.8.0 and Miniflare's sharp 0.35.4. Remove the overrides once
 upstream resolves fixed versions itself. See [dependency security operations](../docs/dependency-security.md).
 
+## Sentry/Astro/Cloudflare upstream reports — TODO
+
+Deferred follow-up, not a Workers cutover blocker: recheck current published
+versions and file the Node-prerender documentation gap, static-output middleware
+registration gap, and middleware declaration packaging bug. No reports filed yet.
+[Findings, reproductions, likely repositories and filing checklist](new-season-sweep/findings-sentry-upstream.md)
+are linked from the existing Sentry status item. Keep the application pinned
+while investigating newer versions in isolated fixtures.
+
 ## Constellater
 
 Explore extracting the SQLite snapshot/prerender architecture as a reusable Astro
