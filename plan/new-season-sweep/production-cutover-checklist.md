@@ -103,7 +103,7 @@ Only after the publishing mechanism and deployment are approved:
 - [x] Check same-origin actions: latest preseason empty result 200, historical 400,
       unknown 404. At preseason this does not exercise a live refresh/stale fallback.
       Those remain season-activation checks; never fabricate games in production KV.
-- [ ] Verify browser/server Sentry environment `production`, matching Git SHA and
+- [x] Verify browser/server Sentry environment `production`, matching Git SHA and
       mapped original source. If a temporary server-error probe is needed, agree it,
       authenticate it, keep it off normal routes, then remove its route and secret
       and verify a clean deployment **before domain transfer**. Do not add a public

@@ -49,7 +49,7 @@ remains. The original parent Worker was updated in place, not recreated.
   page errors. All browser sessions closed.
 - Final removed diagnostic returns the normal application's HTML 404.
 
-## Production server Sentry check — receipt/mapping confirmation pending
+## Production server Sentry check — received and mapped
 
 Diagnostic [run 36268914983](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36268914983)
 deployed `841e8912e34e3eb16cc81a1b69c50c305b80f484`: 220 tests, 75 maps cleaned,
@@ -60,11 +60,14 @@ there was **no explicit captureException call**.
 
 - Unauthorized request returned 404; authenticated request returned the expected 500.
 - Marker: **`NBASTT production middleware smoke 63e8b5260db0c23366018f49`**.
-- Expected event: environment `production`, release
+- Received event **`848c64873c7844559c9e3fb8fba6f679`**: environment `production`, release
   `841e8912e34e3eb16cc81a1b69c50c305b80f484`, automatic Astro middleware mechanism,
   original `src/pages/cutover/production.ts:44`, no source-map processing errors.
-- Await the received Sentry event export before claiming ingestion or mapping.
-  An HTTP 500 alone does not prove capture.
+- User-supplied event JSON confirms all **three frames mapped** with original
+  source context, including the throw at line 44:9. Mechanism
+  `auto.middleware.astro`, `handled: false`, transaction `POST /cutover/production`.
+  No processing errors reported; request headers/body are absent. This establishes
+  received automatic capture and mapping, not a project-wide duplicate-event audit.
 - First attempt shortly after secret publication still returned 404. Retried
   after a longer propagation wait; only the successful attempt threw the error.
   Every secret was deleted in `finally`. No token was logged or committed.
@@ -81,6 +84,6 @@ Pages deployment `c005800c-5863-4495-b64a-fb5c36a78014` remains intact; both pub
 hostnames and the retained deployment URL return 200. No DNS/custom-domain changes
 were made. Unrelated Worker domains in the account were left untouched.
 
-Next: confirm the production Sentry event, coordinate the alias-first dashboard
-transfer using the [cutover checklist](production-cutover-checklist.md), then
+Next: coordinate the alias-first dashboard transfer using the
+[cutover checklist](production-cutover-checklist.md), then
 move the canonical hostname. Keep automatic publishing off until both pass.

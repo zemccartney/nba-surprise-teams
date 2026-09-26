@@ -8,8 +8,9 @@ Main-first merge and manual deployment are complete. Current clean production:
 **https://nba-surprise-teams.zemccartney.workers.dev**, commit `499ee33`, version
 `4f372575-6416-46ae-ab79-9cd48ed62794`; **213 tests**, 73 maps cleaned, 376-file
 audit. Production KV and hosted charts/actions/browser Sentry options verified.
-Temporary server-error route and secret removed; received Sentry event export
-is still needed to confirm production automatic capture and source mapping.
+Temporary server-error route and secret removed. Received production Sentry event
+`848c64873c7844559c9e3fb8fba6f679` confirms automatic Astro capture, the diagnostic
+Git release and all three mapped frames with no processing errors reported.
 Both public domains remain on retained Pages, and automatic publishing stays off.
 Zack deferred screen-reader review and agreed a seven-day rollback window after
 both domains pass; that window has not started. Both Git integrations are disconnected.
