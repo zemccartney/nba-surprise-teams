@@ -250,11 +250,13 @@ requires approval. See [cutover evidence](plan/new-season-sweep/production-domai
   collision-resistant hashes. The workflow sets the preview origin before
   building, verifies the generated `previews` bindings, and ignores dashboard
   base configuration so only the reviewed binding settings apply.
-  Automatic publishing remains gated by `DEPLOY_ENABLED`; explicit non-main
-  `preview_deploy` dispatches may publish Previews without opening production.
-  During cutover, an explicit main-only `production_deploy` dispatch publishes
-  production behind a generated-config guard. The temporary gate is being
-  retired after the agreed automatic-deployment proof.
+  Pushes publish automatically: only exact `main` deploys production; other
+  branches publish native Previews. Manual retries use the same selection:
+  `mise x -- gh workflow run deploy.yml --ref main`. Deleted/non-branch refs are
+  skipped; deployments are serialized per ref without cancelling in-flight work.
+  Temporary cutover gates/bootstrap inputs are removed. To pause publishing,
+  disable the workflow (`mise x -- gh workflow disable deploy.yml`) and check for
+  in-flight runs; recreating the old `DEPLOY_ENABLED` variable has no effect.
   It needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
   and `SENTRY_AUTH_TOKEN` as repository secrets. Wrangler 4.137.0 is locked; native
   Previews require 4.135.0+. See [migration evidence](plan/new-season-sweep/native-previews.md).

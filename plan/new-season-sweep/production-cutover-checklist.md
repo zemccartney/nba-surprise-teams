@@ -2,8 +2,9 @@
 
 Prepared 2026-09-26. Zack approved the main-first, manual-production deployment
 sequence, deferred screen-reader testing and agreed a seven-day rollback window.
-Neither Worker nor Pages has a Git connection. Automatic publishing remains
-disabled for initial deployment and domain coordination.
+Neither Worker nor Pages has a Git connection. Automatic publishing was disabled
+for initial deployment/domain coordination; the docs-only merge subsequently
+proved it works, and the temporary bootstrap controls are now removed.
 
 ## Current execution state
 
@@ -13,7 +14,9 @@ guard. [Domain verification and rollback window](production-domain-cutover.md):
 Pages remains through at least **2026-10-03 21:12 UTC**, pending retirement approval.
 Sections B/C below record the completed initial bootstrap, not the current
 production route configuration. Never redeploy the earlier no-routes config.
-Automatic publishing is next verified by a real docs-only merge into main.
+Automatic publishing was verified by docs-only merge `b257eee`, push-triggered
+run 36272421438. Normal publishing now uses the same ref/resource guards without
+the temporary gate or bootstrap inputs.
 
 ## Prepared target
 
@@ -180,7 +183,10 @@ hostname to Pages: the legacy alias can remain attached to the Worker and redire
 to the restored canonical site. Restore the alias association too only if needed;
 its expected behavior remains a redirect, never a second app hostname.
 
-1. Stop further production deployments; keep the automatic gate closed.
+1. Disable the GitHub workflow: `mise x -- gh workflow disable deploy.yml`.
+   Inspect running/queued deployments and ensure they cannot race the rollback
+   before changing domain associations. Disabling does not cancel an active run.
+   The old `DEPLOY_ENABLED` variable was retired and is no longer a pause switch.
 2. For each transferred hostname, remove **only** its Worker Custom Domain. Check
    whether its Worker-managed DNS record was removed; clear any remaining
    conflicting record for that exact hostname before restoring the saved CNAME.
@@ -213,12 +219,12 @@ needed by the restored site as part of a rushed rollback.
 - [ ] At season activation, check real refresh/expiry/stale fallback behavior with
       authentic NBA data; keep performance/font and dev-only Sentry work separate.
 - [ ] Obtain approval before deleting Pages. Keep Git disconnected throughout.
-- [ ] After both domains are stable, enable automatic publishing and merge a
+- [x] After both domains are stable, enable automatic publishing and merge a
       small useful docs-only change into main, without a manual dispatch. Verify
       that the push-triggered run deploys that SHA, production bindings remain
       correct, Sentry release matches, and both domains pass smoke checks. Disable
       publishing again if this fails. This is the agreed automatic-deployment test.
-- [ ] After successful cutover, reconcile any remaining branch changes, remove
+- [x] After successful cutover, reconcile any remaining branch changes, remove
       temporary deployment gates/bootstrap controls, and retain ref/isolation checks.
 - [ ] Retire the merged branch's native Preview if no longer needed; retain the
       parent Worker and shared preview KV. Preserve useful unmerged branches/worktrees.

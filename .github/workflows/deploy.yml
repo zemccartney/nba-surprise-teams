@@ -1,6 +1,5 @@
 # Deploys native branch Previews with test KV under the same Worker; only main
-# can deploy production. Automatic publishing remains gated during cutover.
-# Explicit manual dispatches can publish previews or main-only production.
+# can deploy production. Manual retries use the same branch selection and guards.
 # Needs CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, PUBLIC_SENTRY_DSN and
 # SENTRY_AUTH_TOKEN as repository secrets, and a real GAMES_KV id in
 # wrangler.jsonc.
@@ -8,28 +7,21 @@ name: deploy
 
 on:
   workflow_dispatch:
-    inputs:
-      production_deploy:
-        description: Publish production from main (coordinated cutover only)
-        type: boolean
-        default: false
-      preview_deploy:
-        description: Publish a native branch Preview (non-main branches only)
-        type: boolean
-        default: false
   push:
     branches: ["**"]
 
 permissions:
   contents: read
 
+# Serialize each branch without interrupting an in-flight publication.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   deploy:
     if: >-
-      startsWith(github.ref, 'refs/heads/') &&
-      (vars.DEPLOY_ENABLED == 'true' ||
-      (github.event_name == 'workflow_dispatch' && inputs.preview_deploy && github.ref != 'refs/heads/main') ||
-      (github.event_name == 'workflow_dispatch' && inputs.production_deploy && github.ref == 'refs/heads/main'))
+      startsWith(github.ref, 'refs/heads/') && github.event.deleted != true
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -49,8 +41,6 @@ jobs:
         shell: bash
         env:
           BRANCH: ${{ github.ref_name }}
-          PREVIEW_DEPLOY: ${{ inputs.preview_deploy || false }}
-          PRODUCTION_DEPLOY: ${{ inputs.production_deploy || false }}
         run: |
           # Separate assignment preserves a classifier failure under bash -e.
           # JavaScript comparisons are case-sensitive, unlike GitHub expressions.
@@ -58,16 +48,9 @@ jobs:
           export PUBLIC_DEPLOY_ENV
           # Native Previews target the top-level Worker, not a named Wrangler env.
           unset CLOUDFLARE_ENV PUBLIC_PREVIEW_ORIGIN
-          if [[ "$PRODUCTION_DEPLOY" == true && "$PUBLIC_DEPLOY_ENV" != production ]]; then
-            echo "Manual production publishing requires main" >&2
-            exit 1
-          fi
           if [[ "$PUBLIC_DEPLOY_ENV" == preview ]]; then
             PREVIEW_NAME="$(node scripts/preview-alias.ts nba-surprise-teams)"
             export PUBLIC_PREVIEW_ORIGIN="https://${PREVIEW_NAME}-nba-surprise-teams.zemccartney.workers.dev"
-          elif [[ "$PREVIEW_DEPLOY" == true ]]; then
-            echo "Manual preview publishing cannot target production" >&2
-            exit 1
           fi
           pnpm run build
           if [[ "$PUBLIC_DEPLOY_ENV" == production ]]; then

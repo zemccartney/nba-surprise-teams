@@ -8,8 +8,12 @@ Main-first merge and domain transfer are complete. Canonical production:
 **https://nbastt.grepco.net**, controlled deployment `4782251`, version
 `494390f9-959d-45bd-a180-dc101b92d69e`; **219 tests**, 376-file audit.
 Both custom domains and production KV are enforced by the generated-config guard.
-[Domain checks and rollback window](production-domain-cutover.md) are recorded;
-the docs-only merge will verify automatic deployment next.
+[Domain checks and rollback window](production-domain-cutover.md) are recorded.
+Automatic production publishing passed with docs-only merge `b257eee`, push run
+36272421438; browser release matched the merge SHA. Temporary gate/bootstrap
+inputs are removed; ref/resource guards and per-ref deployment serialization remain.
+These are verified milestones; the latest successful Actions run identifies the
+current deployment as subsequent commits publish automatically.
 Temporary server-error route and secret removed. Received production Sentry event
 `848c64873c7844559c9e3fb8fba6f679` confirms automatic Astro capture, the diagnostic
 Git release and all three mapped frames with no processing errors reported.

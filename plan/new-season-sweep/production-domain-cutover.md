@@ -60,13 +60,34 @@ Normally restore only canonical to Pages and preserve the legacy Bulk Redirect.
 The old/new cache versions differ, but the latest-season action skips KV before
 2026-10-20; this agreed window ends before opening night. Reassess if dates change.
 
-## Automatic deployment proof — pending this merge
+## Automatic deployment proof — passed
 
-This documentation-only branch is the agreed test change. After the controlled
-checks above, enable automatic publishing and merge it into main without manual
-dispatch. Verify the push-triggered run, its exact merge SHA, production binding
-and domain readback, browser release, actions and redirect. Record the result
-before removing temporary cutover gates/manual-bootstrap inputs.
+Enabled `DEPLOY_ENABLED` only after the controlled checks, then merged the
+`verify-auto-deploy` branch with a real merge commit. Its diff contained only
+README and cutover documentation, no runtime/configuration changes.
+
+[Run 36272421438](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36272421438)
+was triggered by **push**, not workflow dispatch:
+
+- Merge/release: `b257eee88219b5f77e01f4578a198bb742d47dda`
+- Worker version: `f0e3ea75-afe9-44f8-a45e-770b6c21159e`
+- **219 tests**, 376-file artifact audit; both custom domains and production KV
+  verified by API readback afterward.
+- Canonical browser SDK reports that exact merge SHA and `production`; no page
+  errors, no noindex directive, and the referrer policy is intact.
+
+## Normal workflow after cutover
+
+Removed the temporary gate and `preview_deploy` / `production_deploy` bootstrap
+inputs. Pushes deploy production only for exact `main`, native Previews for other
+branches. Manual dispatch uses that same classifier and generated-config guards.
+Per-ref concurrency serializes publishes without cancelling an active deployment;
+deleted-branch push events and non-branch refs are skipped.
+
+The old `DEPLOY_ENABLED` variable is no longer a pause switch. To stop publishing,
+disable the `deploy.yml` workflow and inspect/cancel or await any in-flight runs
+before changing domain associations. See the rollback checklist. Pages retirement
+is still separately gated by the seven-day window and explicit approval.
 
 Screen-reader review remains explicitly deferred. Performance/font work,
 season-activation checks and upstream Sentry reports remain separate follow-ups.

@@ -1778,11 +1778,13 @@ mise run setup</code></pre>
                     >
                     records the approved main-first/manual deployment sequence;
                     <code>.github/workflows/deploy.yml</code> is written,
-                    SHA-pinned and zizmor-clean, with automatic publishing gated
-                    behind <code>vars.DEPLOY_ENABLED == 'true'</code> pending
-                    the agreed docs-only automatic-deployment test. The gate is
-                    a temporary cutover interlock, to retire after migration.
-                    Per Zack's workflow, CI runs full verification at deployment
+                    SHA-pinned and zizmor-clean. Automatic production deployment
+                    passed with docs-only merge <code>b257eee</code> and
+                    push-triggered run 36272421438; browser release matched.
+                    Temporary gate/bootstrap inputs are removed. Ref/resource
+                    guards remain; per-ref concurrency prevents overlapping
+                    publishes, and branch-deletion events are skipped. Per
+                    Zack's workflow, CI runs full verification at deployment
                     time, not in a separate every-push/PR workflow. The first
                     GitHub/Linux execution passed and published only the
                     isolated preview.

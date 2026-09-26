@@ -11,8 +11,10 @@ const deploy = await Fs.readFile(
   "utf8",
 );
 
-it("keeps full verification before publishing behind the temporary cutover gate", () => {
-  expect(deploy).toContain("vars.DEPLOY_ENABLED == 'true'");
+it("keeps full verification before publishing after removing cutover controls", () => {
+  expect(deploy).not.toContain("DEPLOY_ENABLED");
+  expect(deploy).not.toContain("inputs.preview_deploy");
+  expect(deploy).not.toContain("inputs.production_deploy");
   expect(deploy).toContain('branches: ["**"]');
   expect(deploy).toContain('node scripts/deployment-target.ts "$GITHUB_REF"');
   const build = deploy.indexOf("pnpm run build");
@@ -24,14 +26,7 @@ it("keeps full verification before publishing behind the temporary cutover gate"
   expect(deploy).not.toContain("wrangler versions upload");
 });
 
-it("allows only explicit non-main manual preview publishing while the production gate stays closed", () => {
-  expect(deploy).toContain(
-    "github.event_name == 'workflow_dispatch' && inputs.preview_deploy && github.ref != 'refs/heads/main'",
-  );
-  expect(deploy).toContain('elif [[ "$PREVIEW_DEPLOY" == true ]]; then');
-  expect(deploy).toContain(
-    "Manual preview publishing cannot target production",
-  );
+it("guards native Preview resources independently of production", () => {
   expect(deploy).toContain("unset CLOUDFLARE_ENV");
   expect(deploy).not.toContain("--env preview");
   expect(deploy.indexOf("export PUBLIC_PREVIEW_ORIGIN=")).toBeLessThan(
@@ -49,19 +44,21 @@ it("allows only explicit non-main manual preview publishing while the production
   );
 });
 
-it("allows explicit main-only production dispatch with a generated-target guard", () => {
-  expect(deploy).toContain(
-    "github.event_name == 'workflow_dispatch' && inputs.production_deploy && github.ref == 'refs/heads/main'",
-  );
-  expect(deploy).toContain(
-    'if [[ "$PRODUCTION_DEPLOY" == true && "$PUBLIC_DEPLOY_ENV" != production ]]; then',
-  );
-  expect(deploy).toContain("Manual production publishing requires main");
+it("guards production resources before publishing", () => {
+  expect(deploy).toContain('if [[ "$PUBLIC_DEPLOY_ENV" == production ]]; then');
   const guard = deploy.indexOf(
     "node scripts/assert-production-target.ts dist/server/wrangler.json",
   );
   expect(guard).toBeGreaterThan(deploy.indexOf("pnpm run build"));
   expect(guard).toBeLessThan(deploy.indexOf("pnpm exec wrangler deploy"));
+});
+
+it("serializes branch deployments and skips deleted/non-branch refs", () => {
+  expect(deploy).toContain(
+    "startsWith(github.ref, 'refs/heads/') && github.event.deleted != true",
+  );
+  expect(deploy).toContain("group: deploy-${{ github.ref }}");
+  expect(deploy).toContain("cancel-in-progress: false");
 });
 
 it("audits all dependencies after installation and before verification/deployment, including pre-commit", async () => {
