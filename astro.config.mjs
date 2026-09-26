@@ -66,8 +66,8 @@ export default defineConfig({
     ...(SENTRY_AUTH_TOKEN
       ? [
           sentry({
-            // The custom Worker entry owns server initialization and requests.
-            autoInstrumentation: { requestHandler: false },
+            // Do not inject the Worker entry into Node prerender initialization.
+            // withSentry initializes the Worker; src/middleware.ts adds Astro context.
             enabled: { client: true, server: false },
             sourcemaps: {
               // All Vite environments scan dist; keep earlier maps for later uploads.

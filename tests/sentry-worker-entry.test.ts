@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({
@@ -40,17 +40,22 @@ it("wraps the actual adapter handler once and reads the build release per reques
   expect(options().release).toBe("build-commit-sha");
 });
 
-it("uses one explicit server instrumentation path", () => {
+it("pairs Worker initialization with the SDK's Astro middleware", () => {
   const config = readFileSync(
     new URL("../astro.config.mjs", import.meta.url),
     "utf8",
   );
   expect(config).toContain("enabled: { client: true, server: false }");
-  expect(config).toContain("autoInstrumentation: { requestHandler: false }");
+  expect(config).not.toContain("autoInstrumentation:");
   expect(config).toContain("filesToDeleteAfterUpload: []");
-  expect(existsSync(new URL("../src/middleware.ts", import.meta.url))).toBe(
-    false,
+  const middleware = readFileSync(
+    new URL("../src/middleware.ts", import.meta.url),
+    "utf8",
   );
+  expect(middleware).toContain(
+    'export { onRequest } from "@sentry/astro/middleware"',
+  );
+  expect(middleware).not.toContain("wrapRequestHandler");
   const wrangler = readFileSync(
     new URL("../wrangler.jsonc", import.meta.url),
     "utf8",
