@@ -1,12 +1,20 @@
 # Workers cutover
 
-## Current checkpoint — native branch Preview live
+## Current checkpoint — production Worker live, public domains still on Pages
 
-Production preparation: [execution and rollback checklist](production-cutover-checklist.md).
-Zack confirms Worker and Pages Git connections are both disconnected. Source now
-has the real production KV binding and enables workers.dev for the eventual first
-production deploy; neither change has been deployed. Live production remains
-unchanged. Screen-reader review/explicit deferral and execution approval remain open.
+[Production verification](production-worker-verification.md) and
+[execution/rollback checklist](production-cutover-checklist.md).
+Main-first merge and manual deployment are complete. Current clean production:
+**https://nba-surprise-teams.zemccartney.workers.dev**, commit `499ee33`, version
+`4f372575-6416-46ae-ab79-9cd48ed62794`; **213 tests**, 73 maps cleaned, 376-file
+audit. Production KV and hosted charts/actions/browser Sentry options verified.
+Temporary server-error route and secret removed; received Sentry event export
+is still needed to confirm production automatic capture and source mapping.
+Both public domains remain on retained Pages, and automatic publishing stays off.
+Zack deferred screen-reader review and agreed a seven-day rollback window after
+both domains pass; that window has not started. Both Git integrations are disconnected.
+
+### Earlier native Preview checkpoint (before production deployment)
 
 - URL: **https://workers-cutover-63d134855ea4-nba-surprise-teams.zemccartney.workers.dev**
 - Current deployed commit: `66de885`; native deployment

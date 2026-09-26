@@ -29,6 +29,14 @@ middleware registration gap, and declaration packaging bug. No reports filed yet
 are linked from the existing Sentry status item. Keep the application pinned
 while investigating newer versions in isolated fixtures.
 
+## Manual screen-reader review — deferred
+
+Zack explicitly deferred this review for the Workers cutover (2026-09-26).
+Keyboard/focus and automated checks have passed, but do not replace a real
+VoiceOver or comparable screen-reader pass. Check reading order, chart/table
+alternatives and live loading/error/empty-state announcements. No manual
+screen-reader pass is claimed; this is not a cutover blocker after that deferral.
+
 ## Constellater
 
 Explore extracting the SQLite snapshot/prerender architecture as a reusable Astro

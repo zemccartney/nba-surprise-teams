@@ -1752,14 +1752,21 @@ mise run setup</code></pre>
                     preview KV. Wrangler 4.137.0, 202 tests and hosted
                     chart/action checks passed. The standalone
                     <code>nbastt-preview</code> Worker was deleted after
-                    verification; preview KV was retained. Parent production
-                    code and Pages remain unchanged. The
-                    <a href="production-cutover-checklist.md"
-                      >production configuration and rollback checklist</a
+                    verification; preview KV was retained. The
+                    <a href="production-worker-verification.md"
+                      >production Worker</a
                     >
-                    are prepared, not deployed. Zack confirms both Cloudflare
-                    Git integrations disconnected. Screen-reader review/deferral
-                    and execution approval remain open;
+                    is now deployed at its workers.dev URL: clean commit
+                    <code>499ee33</code>, 213 tests and hosted checks passed.
+                    Both public domains remain on Pages. Production Sentry event
+                    receipt/mapping confirmation and coordinated domain transfer
+                    remain next. Zack confirmed both Git integrations
+                    disconnected, deferred screen-reader review and approved a
+                    seven-day Pages rollback window after both domains pass. The
+                    <a href="production-cutover-checklist.md"
+                      >cutover checklist</a
+                    >
+                    records the approved main-first/manual deployment sequence;
                     <code>.github/workflows/deploy.yml</code> is written,
                     SHA-pinned and zizmor-clean, with automatic publishing gated
                     behind <code>vars.DEPLOY_ENABLED == 'true'</code>; the

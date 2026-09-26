@@ -18,9 +18,10 @@ disabled for initial deployment and domain coordination.
 | Production build environment | `PUBLIC_DEPLOY_ENV=production`; no named Wrangler environment |
 | Sentry release               | Build Git SHA, shared by browser, server and map uploads      |
 
-Source `wrangler.jsonc` now supplies production KV and `workers_dev: true` for
-initial verification. **The live parent's production URL remains disabled until
-an approved production deploy.** Native Previews still use their explicit test
+Source `wrangler.jsonc` supplies production KV and `workers_dev: true` for
+initial verification. **The approved initial production deployment is now live
+at that URL**; see [execution evidence](production-worker-verification.md).
+Native Previews still use their explicit test
 bindings; publishing a Preview does not deploy these production settings.
 
 No production routes/custom domains are in the initial config. That is deliberate:
@@ -86,20 +87,20 @@ mutations, production deployments or workflow dispatches were performed in this 
 
 Only after the publishing mechanism and deployment are approved:
 
-- [ ] Build the approved `main` revision in the audited CI environment with all four
+- [x] Build the approved `main` revision in the audited CI environment with all four
       existing repository secrets. Set `PUBLIC_DEPLOY_ENV=production`, unset
       `CLOUDFLARE_ENV` and preview-origin overrides. Keep source-map upload/cleanup
       and artifact sealing enabled; do not substitute an uninstrumented local build.
-- [ ] Pass installation audit, full verification, build and artifact audit. Inspect
+- [x] Pass installation audit, full verification, build and artifact audit. Inspect
       generated `dist/server/wrangler.json`: correct Worker name, production KV,
       `workers_dev: true`, no custom-domain routes; native preview overrides remain
       test-only. Confirm production origin and release identity in the built output.
-- [ ] Deploy the **production build** with `wrangler deploy`. Record its version,
+- [x] Deploy the **production build** with `wrangler deploy`. Record its version,
       commit and CI run. API-read back actual production bindings and URL settings.
-- [ ] At the initial workers.dev URL check home, Stats, archive, About, an archived
+- [x] At the initial workers.dev URL check home, Stats, archive, About, an archived
       team, unknown-route 404, `/stats` → `/stats/` 307, immutable fingerprinted assets,
       images, chart interactions at desktop/mobile widths, keyboard and tooltips.
-- [ ] Check same-origin actions: latest preseason empty result 200, historical 400,
+- [x] Check same-origin actions: latest preseason empty result 200, historical 400,
       unknown 404. At preseason this does not exercise a live refresh/stale fallback.
       Those remain season-activation checks; never fabricate games in production KV.
 - [ ] Verify browser/server Sentry environment `production`, matching Git SHA and
@@ -107,7 +108,7 @@ Only after the publishing mechanism and deployment are approved:
       authenticate it, keep it off normal routes, then remove its route and secret
       and verify a clean deployment **before domain transfer**. Do not add a public
       deliberate-crash route or mutate production data to manufacture an error.
-- [ ] Confirm Pages and both public hosts still serve the old production unchanged.
+- [x] Confirm Pages and both public hosts still serve the old production unchanged.
 - [ ] Stop on unexpected bindings, unmapped errors, functional failures or traffic
       changes. Successful Worker URL testing does not itself authorize domain transfer.
 

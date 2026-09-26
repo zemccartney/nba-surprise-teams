@@ -232,14 +232,13 @@ cutover. `wrangler.jsonc` is the build/deploy config and targets the existing
 - Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
   Review them semi-regularly:
   https://developers.cloudflare.com/workers/configuration/compatibility-flags/
-- Production `GAMES_KV` is configured to reuse the existing Pages production
-  namespace. This is preparation, not a live deployment. The `previews` block
+- The initial production Worker reuses the existing Pages production `GAMES_KV`
+  namespace. Public custom domains remain on Pages until coordinated transfer. The `previews` block
   selects the existing test KV namespace for native branch
   Previews under that same Worker. Branches share preview KV, not production KV;
   KV is not automatically cloned per branch. Local dev uses `.wrangler/state`.
   `preview_urls: true` enables preview URLs. Source `workers_dev: true` prepares
-  the initial production verification URL; the live production URL remains
-  disabled until an approved deployment. No custom domains are in the initial
+  the production verification URL, now deployed and enabled. No custom domains are in the initial
   configuration. Follow the [cutover checklist](plan/new-season-sweep/production-cutover-checklist.md).
 - No `SESSION` namespace is provisioned, because `session: false` is set in
   `astro.config.mjs`. Remove that line if the site ever uses sessions.
@@ -250,6 +249,8 @@ cutover. `wrangler.jsonc` is the build/deploy config and targets the existing
   base configuration so only the reviewed binding settings apply.
   Automatic publishing remains gated by `DEPLOY_ENABLED`; explicit non-main
   `preview_deploy` dispatches may publish Previews without opening production.
+  During cutover, an explicit main-only `production_deploy` dispatch publishes
+  production behind a generated-config guard; automatic publishing stays off.
   It needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
   and `SENTRY_AUTH_TOKEN` as repository secrets. Wrangler 4.137.0 is locked; native
   Previews require 4.135.0+. See [migration evidence](plan/new-season-sweep/native-previews.md).

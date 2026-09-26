@@ -1,0 +1,86 @@
+# Initial production Worker verification — 2026-09-26
+
+## Approved sequence and scope
+
+Zack deferred the manual screen-reader check, agreed **seven days of Pages
+rollback retention after both domains pass**, and approved main-first merge,
+manual production deployment, then coordinated domain transfer. After domains
+are stable, enable automatic publishing and prove it with a real docs-only merge
+into main (not a manual dispatch). The rollback clock has **not started**.
+
+- Both Cloudflare Git integrations are disconnected.
+- `main` was fast-forwarded to `cff76cb`; the push run
+  [36268495530](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36268495530)
+  correctly **skipped** deployment. `DEPLOY_ENABLED` remains absent.
+- Added explicit `production_deploy` manual input, allowed only on main, with
+  runtime ref checks and a generated production-target guard. The initial guard
+  rejects all custom-domain routes. Update it alongside the exact two approved
+  route entries after domain transfer, before another production deployment.
+- Preserved personal files, unrelated branches and worktrees. `workers-cutover`
+  is retained at the merged revision; subsequent production work is on main.
+
+## Initial deployment and clean current deployment
+
+Initial [run 36268506232](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36268506232):
+commit `cff76cb3ba1c3a07bcbce792f5c815c7632e9ad0`, version
+`d645d402-16e6-4597-a021-d13fa0f347dd`.
+
+Current clean [run 36269258345](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36269258345):
+commit **`499ee33d3668bfcbeae4e21633d83b28209778be`**, version
+**`4f372575-6416-46ae-ab79-9cd48ed62794`**.
+
+Both passed **213 tests**, uploaded source maps before removing 73 maps, and
+passed the **376-file** artifact audit. Production URL:
+**https://nba-surprise-teams.zemccartney.workers.dev**.
+
+API readback confirms exactly `ASSETS` and production `GAMES_KV`
+(`6061594acc5c4fb6b3846b0c78f9e5a3`), with workers.dev enabled. No probe secret
+remains. The original parent Worker was updated in place, not recreated.
+
+## Hosted checks
+
+- Chart application passes at 1440/390/320px; tooltip safety and all six
+  blocked/stalled/delayed-font cases pass.
+- Home, Stats, archive, About and an archived team return 200; unknown path 404.
+- Latest preseason action: normal empty payload, 200. Historical 400, unknown 404.
+  No fake data, KV probes or NBA fetches were used to manufacture production tests.
+- Browser SDK active options confirm `production` and the actual build SHA.
+  Final clean deployment: release `499ee33d3668bfcbeae4e21633d83b28209778be`, no
+  page errors. All browser sessions closed.
+- Final removed diagnostic returns the normal application's HTML 404.
+
+## Production server Sentry check — receipt/mapping confirmation pending
+
+Diagnostic [run 36268914983](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36268914983)
+deployed `841e8912e34e3eb16cc81a1b69c50c305b80f484`: 220 tests, 75 maps cleaned,
+379-file artifact audit. A temporary POST endpoint was gated by a random secret,
+production environment and the exact workers.dev hostname. It never accessed KV
+or the NBA feed. It stripped request headers/body from the event before throwing;
+there was **no explicit captureException call**.
+
+- Unauthorized request returned 404; authenticated request returned the expected 500.
+- Marker: **`NBASTT production middleware smoke 63e8b5260db0c23366018f49`**.
+- Expected event: environment `production`, release
+  `841e8912e34e3eb16cc81a1b69c50c305b80f484`, automatic Astro middleware mechanism,
+  original `src/pages/cutover/production.ts:44`, no source-map processing errors.
+- Await the received Sentry event export before claiming ingestion or mapping.
+  An HTTP 500 alone does not prove capture.
+- First attempt shortly after secret publication still returned 404. Retried
+  after a longer propagation wait; only the successful attempt threw the error.
+  Every secret was deleted in `finally`. No token was logged or committed.
+- Removed the route and its seven temporary tests, then deployed the clean commit
+  above. The temporary secret is gone; the endpoint is now a normal HTML 404.
+  Secret updates generated additional Worker versions, but the Sentry release is
+  the diagnostic **Git SHA**, not those deployment IDs. Do not select diagnostic
+  or secret-update versions as rollback targets; use a recorded clean app version.
+
+## Unchanged public production / next checkpoint
+
+Both custom domains still belong to Pages. API inventory and HTTP checks confirm
+Pages deployment `c005800c-5863-4495-b64a-fb5c36a78014` remains intact; both public
+hostnames and the retained deployment URL return 200. No DNS/custom-domain changes
+were made. Unrelated Worker domains in the account were left untouched.
+
+Next: confirm the production Sentry event, coordinate the alias-first dashboard
+transfer using the [cutover checklist](production-cutover-checklist.md), then
+move the canonical hostname. Keep automatic publishing off until both pass.
