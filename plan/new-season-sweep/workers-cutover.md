@@ -11,7 +11,10 @@ audit. Production KV and hosted charts/actions/browser Sentry options verified.
 Temporary server-error route and secret removed. Received production Sentry event
 `848c64873c7844559c9e3fb8fba6f679` confirms automatic Astro capture, the diagnostic
 Git release and all three mapped frames with no processing errors reported.
-Both public domains remain on retained Pages, and automatic publishing stays off.
+The legacy alias is now attached to the Worker and retains its existing Bulk
+Redirect (301, preserving path/query) to `nbastt.grepco.net`. Canonical still serves
+retained Pages. Alias redirect checks do not exercise the Worker behind the rule.
+Canonical transfer/full app checks are next; automatic publishing stays off.
 Zack deferred screen-reader review and agreed a seven-day rollback window after
 both domains pass; that window has not started. Both Git integrations are disconnected.
 

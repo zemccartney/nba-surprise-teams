@@ -233,13 +233,17 @@ cutover. `wrangler.jsonc` is the build/deploy config and targets the existing
   Review them semi-regularly:
   https://developers.cloudflare.com/workers/configuration/compatibility-flags/
 - The initial production Worker reuses the existing Pages production `GAMES_KV`
-  namespace. Public custom domains remain on Pages until coordinated transfer. The `previews` block
+  namespace. Canonical `nbastt.grepco.net` still serves Pages during the handoff;
+  the legacy hostname is attached to the Worker but retains its existing 301 Bulk
+  Redirect to canonical. Preserve that redirect. The `previews` block
   selects the existing test KV namespace for native branch
   Previews under that same Worker. Branches share preview KV, not production KV;
   KV is not automatically cloned per branch. Local dev uses `.wrangler/state`.
   `preview_urls: true` enables preview URLs. Source `workers_dev: true` prepares
   the production verification URL, now deployed and enabled. No custom domains are in the initial
-  configuration. Follow the [cutover checklist](plan/new-season-sweep/production-cutover-checklist.md).
+  configuration. Do not deploy again during the partial domain handoff; persist
+  both associations and update the production guard first, following the
+  [cutover checklist](plan/new-season-sweep/production-cutover-checklist.md).
 - No `SESSION` namespace is provisioned, because `session: false` is set in
   `astro.config.mjs`. Remove that line if the site ever uses sessions.
 - `.github/workflows/deploy.yml` uses `wrangler preview` for branches and

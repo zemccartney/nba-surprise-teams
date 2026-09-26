@@ -77,13 +77,25 @@ there was **no explicit captureException call**.
   the diagnostic **Git SHA**, not those deployment IDs. Do not select diagnostic
   or secret-update versions as rollback targets; use a recorded clean app version.
 
-## Unchanged public production / next checkpoint
+## Domain handoff — legacy alias transferred, canonical still on Pages
 
-Both custom domains still belong to Pages. API inventory and HTTP checks confirm
-Pages deployment `c005800c-5863-4495-b64a-fb5c36a78014` remains intact; both public
-hostnames and the retained deployment URL return 200. No DNS/custom-domain changes
-were made. Unrelated Worker domains in the account were left untouched.
+Zack removed the legacy alias from Pages and attached it to the Worker. No leftover
+Pages CNAME was visible. API readback confirms `nba-surprise-teams.grepco.net`
+belongs to Worker `nba-surprise-teams`, environment `production`; Pages retains
+`nbastt.grepco.net` and its project URL. Pages deployment
+`c005800c-5863-4495-b64a-fb5c36a78014` remains intact.
 
-Next: coordinate the alias-first dashboard transfer using the
-[cutover checklist](production-cutover-checklist.md), then
-move the canonical hostname. Keep automatic publishing off until both pass.
+Zack clarified the longstanding **Bulk Redirect**: the old hostname is redirect-only;
+`nbastt.grepco.net` is the sole canonical app hostname. Preserve this rule unchanged.
+Direct HTTPS checks confirm 301 for `/` and `/stats/`, and preservation of the query
+in `/stats/?cutover_check=1`. These responses are edge redirects, not Worker app
+execution. Earlier HTTP checks that followed redirects to 200 did not establish
+that the alias independently served the app. Canonical still returns 200 from Pages.
+Unrelated Worker domains were left untouched.
+
+Next: transfer the canonical hostname using the [cutover checklist](production-cutover-checklist.md),
+then verify the app there and recheck the alias redirect. Keep automatic publishing
+off, and do not deploy the stale no-routes config during this partial handoff.
+Persist both associations and update the production guard before another deployment.
+The seven-day rollback window starts only after canonical app and alias redirect
+checks pass.

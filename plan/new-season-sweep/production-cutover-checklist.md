@@ -114,6 +114,14 @@ Only after the publishing mechanism and deployment are approved:
 
 ## D. Coordinated custom-domain transfer
 
+**Existing redirect policy confirmed by Zack:** `nba-surprise-teams.grepco.net`
+is a redirect-only legacy alias. Preserve its existing Cloudflare Bulk Redirect
+(301 to `https://nbastt.grepco.net`, retaining path/query). `nbastt.grepco.net`
+is the only canonical application hostname. Do not disable the rule for testing
+or add a competing application redirect. A redirect response does not exercise
+the Worker behind the alias; full custom-domain app checks must use the canonical
+hostname after its transfer.
+
 Use **Worker Custom Domains**, not a blind DNS CNAME edit or a broad zone route.
 The old Pages association must be released before the same name can be attached
 to the Worker. This is not assumed atomic; allow for certificate provisioning and
@@ -121,20 +129,24 @@ coordinate a maintenance window. If the dashboard cannot establish the expected
 association, stop and restore Pages rather than guessing at DNS records.
 
 - [ ] Approve transfer of both names and recheck the rollback snapshot.
-- [ ] Move the alias `nba-surprise-teams.grepco.net` first: remove only that Pages
+- [x] Move the alias `nba-surprise-teams.grepco.net` first: remove only that Pages
       custom-domain association. Inspect DNS: if its old Pages CNAME remains, remove
       **only that exact recorded CNAME** immediately before adding the Worker Custom
       Domain. Cloudflare does not allow a Custom Domain over an existing CNAME.
       Add the hostname under Worker → Settings → Domains & Routes → Custom Domain.
       Let Cloudflare provision its record/certificate; do not delete the Pages project.
-- [ ] Wait for active domain/TLS status; verify HTTPS, representative routes,
-      same-origin actions, assets and response/security headers. Compare with the
-      existing zone behavior; workers.dev checks do not establish zone-level headers.
+- [x] Verify alias HTTPS and existing redirect behavior: root and `/stats/` return
+      301 to canonical; a test query string is preserved. API confirms the alias is
+      attached to the production Worker and removed from Pages. This verifies the
+      association and redirect, not execution of the Worker behind the redirect.
 - [ ] On failure, follow rollback below. On success, explicitly proceed with
       `nbastt.grepco.net` using the same sequence. Keep its canonical-origin role;
       do not introduce a new alias redirect policy during the migration.
-- [ ] Verify both hosts, Sentry release/environment/mapping, cache headers, charts,
-      accessibility and error rates. Record timestamps, version, DNS and domain state.
+- [ ] Verify the canonical app: routes, same-origin actions, assets, security/cache
+      headers, charts, keyboard behavior, Sentry release/environment and error rates.
+      Verify the legacy alias still redirects to it, preserving path/query.
+      Screen-reader testing remains explicitly deferred. Record timestamps, version,
+      DNS and domain state; then start the agreed seven-day rollback window.
 - [ ] Before any subsequent production deployment, persist the two verified
       associations in `wrangler.jsonc` as `routes` entries:
 
@@ -152,6 +164,11 @@ association, stop and restore Pages rather than guessing at DNS records.
 
 Trigger rollback for persistent 5xx/action failures, broken assets/charts, TLS or
 routing failures, unsafe binding/data behavior, or an agreed observability failure.
+
+Preserve the Bulk Redirect throughout rollback. Normally restore only the canonical
+hostname to Pages: the legacy alias can remain attached to the Worker and redirect
+to the restored canonical site. Restore the alias association too only if needed;
+its expected behavior remains a redirect, never a second app hostname.
 
 1. Stop further production deployments; keep the automatic gate closed.
 2. For each transferred hostname, remove **only** its Worker Custom Domain. Check

@@ -1758,13 +1758,17 @@ mise run setup</code></pre>
                     >
                     is now deployed at its workers.dev URL: clean commit
                     <code>499ee33</code>, 213 tests and hosted checks passed.
-                    Both public domains remain on Pages. The received production
-                    Sentry event confirms automatic capture, correct release and
-                    all three mapped frames with no processing errors reported.
-                    Coordinated alias-first domain transfer is next. Zack
-                    confirmed both Git integrations disconnected, deferred
-                    screen-reader review and approved a seven-day Pages rollback
-                    window after both domains pass. The
+                    The legacy alias is now attached to the Worker; its existing
+                    Bulk Redirect still sends 301s to the canonical hostname,
+                    preserving path/query. Canonical still serves Pages. The
+                    received production Sentry event confirms automatic capture,
+                    correct release and all three mapped frames with no
+                    processing errors reported. Canonical domain transfer and
+                    full app checks are next; alias redirects do not exercise
+                    the Worker behind the rule. Zack confirmed both Git
+                    integrations disconnected, deferred screen-reader review and
+                    approved a seven-day Pages rollback window after both
+                    domains pass. The
                     <a href="production-cutover-checklist.md"
                       >cutover checklist</a
                     >
