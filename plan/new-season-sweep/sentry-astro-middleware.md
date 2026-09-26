@@ -102,8 +102,15 @@ The token existed only in memory and the exact preview Worker secret, which was
 deleted immediately afterward and absence verified. No KV operations were used.
 The 500 alone does not prove ingestion: await the received event JSON to confirm
 `auto.middleware.astro`, release, original frames and no duplicate error event.
-The temporary endpoint and six safety tests are removed in the cleanup commit;
-its deployment result will be recorded after completion.
+[Cleanup run 36259989991](https://github.com/zemccartney/nba-surprise-teams/actions/runs/36259989991)
+deployed `b5dc2c3`, Worker version `54b1a567-bb01-48bf-99b6-ba8a6ed81563`:
+**199 tests**, 73 maps removed, 376-file artifact audit; upload 1219.02 KiB raw /
+309.26 KiB gzip. The temporary endpoint and six safety tests are removed.
+Post-deploy checks confirm its normal 404, absent secret, isolated preview KV,
+main pages returning 200, normal empty preseason action and unchanged original
+Pages deployment. No production or DNS changes were made. Local test ports are
+closed. Remaining personal-file hashes match the prior manifest; `feedback.md`
+was absent at the final check and was not touched by this work.
 
 ## Prior Worker-entry event is verified
 

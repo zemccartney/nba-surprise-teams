@@ -80,6 +80,8 @@ unit coverage; observe real scheduled/in-progress/final data at season activatio
 
 Server Sentry receipt and source-map resolution were verified after the cleanup
 fix. The subsequent [Worker entry migration](sentry-worker-entry.md) now supplies
-the matching runtime release; its fresh received event still needs confirmation.
+the matching runtime release, confirmed in the received event along with mapped
+frames. The [SDK Astro middleware test](sentry-astro-middleware.md) adds automatic
+capture of framework-handled errors; its fresh hosted event needs confirmation.
 Screen-reader review and the production domain/rollback decision remain separate. Production Worker bindings,
 production KV, Pages deployment and both custom domains are unchanged.
