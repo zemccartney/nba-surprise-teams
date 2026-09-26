@@ -49,6 +49,21 @@ it("allows only explicit non-main manual preview publishing while the production
   );
 });
 
+it("allows explicit main-only production dispatch with a generated-target guard", () => {
+  expect(deploy).toContain(
+    "github.event_name == 'workflow_dispatch' && inputs.production_deploy && github.ref == 'refs/heads/main'",
+  );
+  expect(deploy).toContain(
+    'if [[ "$PRODUCTION_DEPLOY" == true && "$PUBLIC_DEPLOY_ENV" != production ]]; then',
+  );
+  expect(deploy).toContain("Manual production publishing requires main");
+  const guard = deploy.indexOf(
+    "node scripts/assert-production-target.ts dist/server/wrangler.json",
+  );
+  expect(guard).toBeGreaterThan(deploy.indexOf("pnpm run build"));
+  expect(guard).toBeLessThan(deploy.indexOf("pnpm exec wrangler deploy"));
+});
+
 it("audits all dependencies after installation and before verification/deployment, including pre-commit", async () => {
   expect(packageJson.scripts.audit).toBe("pnpm audit");
   expect(packageJson.scripts.postinstall).toBe("pnpm run audit");

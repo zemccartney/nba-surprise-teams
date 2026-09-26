@@ -1,8 +1,9 @@
 # Production cutover checklist
 
-Prepared 2026-09-26. **Configuration only; no production deployment or domain
-change authorized or performed.** Zack confirms neither Worker nor Pages has a
-Git connection. GitHub automatic publishing remains disabled.
+Prepared 2026-09-26. Zack approved the main-first, manual-production deployment
+sequence, deferred screen-reader testing and agreed a seven-day rollback window.
+Neither Worker nor Pages has a Git connection. Automatic publishing remains
+disabled for initial deployment and domain coordination.
 
 ## Prepared target
 
@@ -39,24 +40,26 @@ mutations, production deployments or workflow dispatches were performed in this 
 ## A. Decisions and authorization before execution
 
 - [x] User confirms both Cloudflare Git integrations disconnected.
-- [ ] Complete manual screen-reader review, or record an explicit user deferral.
+- [x] User explicitly deferred manual screen-reader review for now.
       Check VoiceOver/Safari or another real screen reader: navigation/reading order,
       chart descriptions and table alternatives, live loading/error/empty-state
       announcements, and whether changing views leaves focus understandable.
       Keyboard/focus and automated checks already passed; this is not a request to
       redesign charts. No screen-reader pass is claimed yet.
-- [ ] Agree a rollback window. **Proposed: seven days after both domains pass**;
+- [x] Agreed rollback window: **seven days after both domains pass**;
       extend if errors appear. Do not delete Pages automatically on a timer.
 - [ ] Approve the exact production revision, initial Worker deployment, then the
       separate domain move. Approval of this checklist is not execution approval.
-- [ ] Settle first-production publishing mechanics. The existing workflow only
+- [x] Agreed first-production publishing mechanics. The workflow only
       permits production from `main`, and its automatic gate is off. Recommended:
       approve merging the reviewed branch into main with that gate still off, then
       add/use an explicitly authorized **main-only manual production dispatch**.
-      That dispatch is not implemented in this preparation. Do not use
+      The main-only `production_deploy` dispatch is now implemented, with an
+      initial generated-config guard rejecting custom-domain routes. Do not use
       `preview_deploy=true`, loosen the ref classifier, or open automatic publishing
       just to bootstrap. This requires adjusting the earlier merge-after-cutover
-      sequence, so agree it first. Branch deletion/cleanup can remain after cutover.
+      sequence; Zack approved this adjustment. Branch deletion/cleanup remains
+      after cutover.
 
 ## B. Capture rollback state immediately before deploying
 
@@ -182,6 +185,11 @@ needed by the restored site as part of a rushed rollback.
 - [ ] At season activation, check real refresh/expiry/stale fallback behavior with
       authentic NBA data; keep performance/font and dev-only Sentry work separate.
 - [ ] Obtain approval before deleting Pages. Keep Git disconnected throughout.
+- [ ] After both domains are stable, enable automatic publishing and merge a
+      small useful docs-only change into main, without a manual dispatch. Verify
+      that the push-triggered run deploys that SHA, production bindings remain
+      correct, Sentry release matches, and both domains pass smoke checks. Disable
+      publishing again if this fails. This is the agreed automatic-deployment test.
 - [ ] After successful cutover, reconcile any remaining branch changes, remove
       temporary deployment gates/bootstrap controls, and retain ref/isolation checks.
 - [ ] Retire the merged branch's native Preview if no longer needed; retain the
