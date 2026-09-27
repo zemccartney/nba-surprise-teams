@@ -1,5 +1,13 @@
 # Review notes: new-season sweep
 
+## Light mode — eliminated emoji contrast
+
+[2011 standings](http://localhost:4344/2011/) now show darker slate skulls on
+both purples; [Portland](http://localhost:4344/2025/POR/) shows the larger status
+emoji and have-to-go cell. Flip themes to confirm the original skull returns in
+dark mode. One shared CSS filter, no new asset or layout change.
+[Evidence](light-mode.md#eliminated-emoji--stronger-light-mode-contrast).
+
 ## Light mode — purple seasonal bars
 
 [Stats](http://localhost:4344/stats/): seasonal bars now take link purple and

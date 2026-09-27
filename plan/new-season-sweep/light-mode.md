@@ -27,6 +27,26 @@ or deployment is authorized; this checkpoint is ready for that design review.
 The same paths work on dev port 4341. Local storage is origin-specific: dev and
 preview choices do not synchronize with one another, but tabs on the same port do.
 
+## Eliminated emoji — stronger light-mode contrast
+
+The skull's pale gray silhouette was getting lost against both lavender table
+backgrounds. In light mode only, `brightness(0.5) contrast(1.5)` deepens the
+existing SVG to slate skull/bones with black eye sockets. Sampled solid pixels
+are approximately `#596065` (skull) and `#3f4a51` (bones). No halo, badge, asset
+fork, size change, or altered alternative text. Other result emoji and dark
+mode retain their original appearance. The shared component covers standings,
+legends, team status and have-to-go cells, including server-island output.
+
+Review [2011 standings](http://localhost:4344/2011/) at mobile or desktop size,
+and the [eliminated Portland team](http://localhost:4344/2025/POR/). The theme
+switch repaints the existing image without changing its source or dimensions.
+
+Check/build and 220 tests pass. The browser matrix now includes an eliminated
+team page: 54 page/theme/width combinations pass in dev and built preview, with
+assertions that only eliminated emoji get the treatment and only in light mode.
+Dev smoke: 47 images, no problems. Screenshots and before/after crops:
+`/tmp/nbastt-light-skull/`. No production deployment.
+
 ## Season bars — link purple and table-stripe purple
 
 Latest request supersedes the green seasonal-bar experiment: in light mode,

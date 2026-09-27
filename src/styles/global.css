@@ -251,6 +251,7 @@ textarea {
   --ink-link: var(--color-indigo-400);
   --ink-link-hover: var(--color-indigo-100);
   --rule: var(--color-slate-800);
+  --eliminated-emoji-filter: none;
   --detroit-logo-filter: drop-shadow(-1rem -1rem 1rem #016270)
     drop-shadow(1rem 1rem 1rem #016271);
   --table-shadow: var(--shadow-glow);
@@ -300,6 +301,7 @@ textarea {
   --ink-link-hover: oklch(35.9% 0.144 278.697);
   --rule: oklch(45% 0.07 275);
   --detroit-logo-filter: none;
+  --eliminated-emoji-filter: brightness(0.5) contrast(1.5);
   --table-shadow: none;
   --table-shadow-compact: none;
   --popover-surface: oklch(97% 0.015 275);

@@ -60,6 +60,7 @@ const resolvedHeight = Number(
 
 <img
   alt={emojiConf[name].alt}
+  data-result-emoji={name}
   decoding="async"
   height={resolvedHeight}
   loading="lazy"
@@ -67,3 +68,11 @@ const resolvedHeight = Number(
   width={resolvedWidth}
   {...attrs}
 />
+
+<style>
+  /* Keep the original SVG and layout. Only light mode deepens the skull's
+     gray silhouette and eye sockets; other result emoji are untouched. */
+  img[data-result-emoji="eliminated"] {
+    filter: var(--eliminated-emoji-filter);
+  }
+</style>

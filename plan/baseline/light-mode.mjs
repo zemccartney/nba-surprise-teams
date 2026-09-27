@@ -13,6 +13,7 @@ const pages = [
   "/",
   "/2025/",
   "/2025/CHA/",
+  "/2025/POR/",
   "/archive/",
   "/stats/",
   "/about/",
@@ -70,6 +71,22 @@ try {
             filter === "none",
             theme === "light",
             "Detroit halo only in dark mode",
+          );
+        const emojiPaints = await page
+          .locator("img[data-result-emoji]")
+          .evaluateAll((images) =>
+            images.map((image) => ({
+              filter: getComputedStyle(image).filter,
+              name: image.dataset.resultEmoji,
+            })),
+          );
+        for (const { filter, name } of emojiPaints)
+          assert.equal(
+            filter,
+            theme === "light" && name === "eliminated"
+              ? "brightness(0.5) contrast(1.5)"
+              : "none",
+            "Only eliminated emoji receive the light-mode contrast treatment",
           );
         const hosts = await page.locator("[data-chart]").all();
         for (const host of hosts) {

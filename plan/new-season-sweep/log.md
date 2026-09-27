@@ -1,5 +1,14 @@
 # New-season sweep: round log
 
+## Light mode — more legible eliminated emoji
+
+Added a light-only brightness/contrast filter to the shared eliminated emoji:
+slate skull/bones, stronger eye sockets, no asset/dimension/alt-text changes.
+Dark mode and other result emoji untouched. Check/build and 220 tests pass;
+expanded dev/preview matrices cover 54 page/theme/width cases, including an
+eliminated team page. Dev smoke reports 47 good images and zero problems.
+[Review and before/after evidence](light-mode.md#eliminated-emoji--stronger-light-mode-contrast).
+
 ## Light mode — purple seasonal bars
 
 Per Zack, season bars now use link purple and table-stripe purple. Separate
