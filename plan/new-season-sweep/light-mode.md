@@ -27,6 +27,25 @@ or deployment is authorized; this checkpoint is ready for that design review.
 The same paths work on dev port 4341. Local storage is origin-specific: dev and
 preview choices do not synchronize with one another, but tabs on the same port do.
 
+## Accepted styling checkpoint and separate chart-alignment trial
+
+Zack approved the light-mode styling through `d32fab3` ("all looks good"). His
+next request is a separate Stats layout refinement: bottom-align Surprises ×
+Teams with Pace × Over/Under, including their x-axis titles.
+
+The team chart now reserves the same 76px bottom gutter as the scatter chart,
+with a 56px title offset. Its lack of interval labels leaves intentional empty
+space above “Team.” Plot tops/bottoms and the “Team”/“Over/Under” title baselines
+now match. This applies in both themes; no data, domains or colors changed.
+
+Review [Stats](http://localhost:4344/stats/). Build/check and **223 tests** pass
+(three new geometry regressions). All four chart interaction checks pass in
+both themes, dev and preview, at 1440/390/320px. Browser assertions check actual
+paired plot/title bounds; desktop sample plot bottoms both 828px and title tops
+both 865px. Screenshot: `/tmp/nbastt-chart-alignment/paired-charts.png`; geometry
+and per-theme captures are in that directory. This alignment trial awaits visual
+feedback; nothing is merged or deployed.
+
 ## Glowing skull eyes, quieter navigation toggle, and sticky header edge
 
 Latest requests are implemented together:

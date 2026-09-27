@@ -221,7 +221,9 @@ export const teamChart = ({
     body: teamBody,
     definition: defineChart({
       focus: "group-x",
-      margin: { bottom: 56, left: 60, right: 8, top: 12 },
+      // Match the adjacent scatter plot, reserving its tick-label gutter
+      // even though this axis intentionally has no team-code ticks.
+      margin: { bottom: 76, left: 60, right: 8, top: 12 },
       marks: [
         barY(rows, {
           fill: t.green,
@@ -248,7 +250,7 @@ export const teamChart = ({
       maxFocusDistance: Infinity,
       scales: {
         x: {
-          axis: { ...axis("Team", 40), tickLabels: false, ticks: false },
+          axis: { ...axis("Team", 56), tickLabels: false, ticks: false },
           scale: scaleBand<string>()
             .domain(rows.map((r) => r.teamId))
             .paddingInner(0.1)

@@ -1,5 +1,14 @@
 # New-season sweep: round log
 
+## Styling accepted; separate Stats chart-alignment trial
+
+Zack approved light-mode styling through `d32fab3`, then requested aligned bottoms
+for Surprises × Teams and Pace × Over/Under. The team chart now reserves the
+scatter's 76px bottom gutter and 56px title offset, leaving its missing tick row
+empty. Both plot bottoms and x-axis titles align in both themes. Build/check and
+223 tests pass; both-theme dev/preview chart matrices pass at three widths with
+new real-browser alignment assertions. [Review/evidence](light-mode.md#accepted-styling-checkpoint-and-separate-chart-alignment-trial).
+
 ## Light mode — glowing eyes, nav placement, sticky header edge
 
 Implemented the successive requests together: inline skull eyes share the bulb's

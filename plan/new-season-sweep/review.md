@@ -1,5 +1,13 @@
 # Review notes: new-season sweep
 
+## Stats chart-alignment trial (styling through d32fab3 approved)
+
+[Stats](http://localhost:4344/stats/): compare the bottom plot edges and the
+“Team” / “Over/Under” titles. The team plot now leaves room for the scatter's
+interval-label row, intentionally empty on the left. Only team-chart bottom
+margin/title offset changed, in both themes. Three unit regressions and browser
+alignment assertions added. [Evidence](light-mode.md#accepted-styling-checkpoint-and-separate-chart-alignment-trial).
+
 ## Light mode — eyes, navigation, sticky edge
 
 [2011 standings](http://localhost:4344/2011/): eyes glow pale yellow; scroll to

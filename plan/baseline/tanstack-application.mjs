@@ -55,7 +55,7 @@ try {
           kind === "team-season-pace"
             ? { bottom: 30, left: 84, right: 0, top: 0 }
             : {
-                bottom: kind === "surprises-by-team" ? 56 : 76,
+                bottom: 76,
                 left: 60,
                 right: kind === "surprises-per-season" ? 16 : 8,
                 top: kind === "surprises-per-season" ? 0 : 12,
@@ -452,6 +452,36 @@ try {
           svg: await svg.boundingBox(),
           width,
         });
+      }
+      if (path === "/stats/") {
+        const paired = await page.evaluate(() =>
+          ["surprises-by-team", "team-season-scatter"].map((kind) => {
+            const host = document.querySelector(
+              `[data-chart="${CSS.escape(kind)}"]`,
+            );
+            const box = host.getBoundingClientRect();
+            const plot = host
+              .querySelector('[data-ts-key="tracker-plot-background"]')
+              .getBoundingClientRect();
+            const title = host
+              .querySelector('[data-ts-key="x-label"]')
+              .getBoundingClientRect();
+            return {
+              bottom: plot.bottom,
+              plotOffset: plot.bottom - box.top,
+              titleOffset: title.top - box.top,
+              titleTop: title.top,
+            };
+          }),
+        );
+        assert.ok(Math.abs(paired[0].plotOffset - paired[1].plotOffset) < 0.5);
+        assert.ok(
+          Math.abs(paired[0].titleOffset - paired[1].titleOffset) < 0.5,
+        );
+        if (width >= 1280) {
+          assert.ok(Math.abs(paired[0].bottom - paired[1].bottom) < 0.5);
+          assert.ok(Math.abs(paired[0].titleTop - paired[1].titleTop) < 0.5);
+        }
       }
       assert.equal(
         await page.evaluate(
