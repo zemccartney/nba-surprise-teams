@@ -186,6 +186,13 @@ This includes the final visual revisions below.
   the shared chart style: 16px, bold, full-opacity lime. Renderer tests verify
   these SVG attributes and the absence of bar annotations.
 
+## Light-mode integration
+
+See [light-mode-integration.md](./light-mode-integration.md) for the stacked PR
+base, semantic role decisions, both-runtime theme matrices, pending #18 follow-up
+and a suggested data/cache/code-review walkthrough. Review-only pushes skip
+hosted deployment; use this worktree's local ports 4343 (dev) / 4345 (built).
+
 ## Remaining review / operational follow-up
 
 - User visual/code review of the new historic Stats chart and data/cache changes.

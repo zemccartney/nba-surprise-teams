@@ -90,8 +90,10 @@ export const seasonChart = (
   height: number,
 ): TrackerChart<Season, string, number> => {
   const rows = data.toSorted((a, b) => Number(a.seasonId) - Number(b.seasonId));
-  const colors = new Map(data.map((row, i) => [row, i % 2 ? t.pale : t.green]));
-  const fill = (row: Season) => colors.get(row) ?? t.green;
+  const colors = new Map(
+    data.map((row, i) => [row, i % 2 ? t.alternate : t.season]),
+  );
+  const fill = (row: Season) => colors.get(row) ?? t.season;
   const max = Math.max(1, ...rows.map((row) => row.numSurprises));
   const visibleTicks = rows
     .map((row) => row.seasonId)
@@ -219,7 +221,9 @@ export const teamChart = ({
     body: teamBody,
     definition: defineChart({
       focus: "group-x",
-      margin: { bottom: 56, left: 60, right: 8, top: 12 },
+      // Match the adjacent scatter plot, reserving its tick-label gutter
+      // even though this axis intentionally has no team-code ticks.
+      margin: { bottom: 76, left: 60, right: 8, top: 12 },
       marks: [
         barY(rows, {
           fill: t.green,
@@ -246,7 +250,7 @@ export const teamChart = ({
       maxFocusDistance: Infinity,
       scales: {
         x: {
-          axis: { ...axis("Team", 40), tickLabels: false, ticks: false },
+          axis: { ...axis("Team", 56), tickLabels: false, ticks: false },
           scale: scaleBand<string>()
             .domain(rows.map((r) => r.teamId))
             .paddingInner(0.1)
@@ -319,7 +323,7 @@ export const scatterChart = ({
     body: scatterBody,
     definition: defineChart({
       color: {
-        scale: scaleOrdinal(["surprise", "eliminated"], [t.green, t.red]),
+        scale: scaleOrdinal(["surprise", "eliminated"], [t.surpriseDot, t.red]),
       },
       margin: { bottom: 76, left: 60, right: 8, top: 12 },
       marks: [
@@ -415,7 +419,7 @@ export const paceChart = ({
       const y = scales.y?.map(winsToSurprise);
       if (y === undefined || !Number.isFinite(y)) return "";
       // Part of the renderer output so focus and resize cannot remove the label.
-      return `<g data-threshold-label=""><text x="48" y="${y}" text-anchor="end" dominant-baseline="middle" fill="${escapeSvg(t.lime)}" font-size="16" font-weight="700">${winsToSurprise}</text><image href="${escapeSvg(surprisedEmojiSrc)}" x="54" y="${y - 8}" width="16" height="16" role="img" aria-label="Surprise threshold: ${winsToSurprise} wins" /></g>`;
+      return `<g data-threshold-label=""><text x="48" y="${y}" text-anchor="end" dominant-baseline="middle" fill="${escapeSvg(t.axis)}" font-size="16" font-weight="700">${winsToSurprise}</text><image href="${escapeSvg(surprisedEmojiSrc)}" x="54" y="${y - 8}" width="16" height="16" role="img" aria-label="Surprise threshold: ${winsToSurprise} wins" /></g>`;
     },
     body: gameBody,
     definition: defineChart({

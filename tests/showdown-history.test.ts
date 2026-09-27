@@ -228,11 +228,11 @@ describe("historic Showdown standings", () => {
         expect(tick).toContain('font-size="16"');
         expect(tick).toContain('font-weight="700"');
         expect(tick).toContain('opacity="1"');
-        expect(tick).toContain('fill="var(--color-lime-500)"');
+        expect(tick).toContain('fill="var(--chart-axis)"');
       }
       expect(scene.points.map((point) => point.color)).toEqual([
-        "var(--color-green-700)",
-        "var(--color-lime-200)",
+        "var(--chart-season)",
+        "var(--chart-alternate)",
       ]);
       expect(scene.chart.width).toBe(390 - 56 - 16);
       const scatter = showdownScatterChart({
@@ -287,8 +287,8 @@ describe("historic Showdown standings", () => {
         ).toEqual([]);
         expect(showdownScatterFocus.navigation(nearby)).toEqual(nearby);
         expect(scene.points.map((point) => point.color)).toEqual([
-          "var(--color-green-700)",
-          "var(--color-green-700)",
+          "var(--chart-surprise-dot)",
+          "var(--chart-surprise-dot)",
         ]);
         expect(
           scene.points.map((point) => [point.xValue, point.yValue]),

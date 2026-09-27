@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import Path from "node:path";
 import { chromium } from "playwright-core";
-const [base, output] = process.argv.slice(2);
+const [base, output, colorScheme = "dark"] = process.argv.slice(2);
 if (!base || !output)
   throw new Error(
-    "Usage: node tanstack-application.mjs <base-url> <output-directory>",
+    "Usage: node tanstack-application.mjs <base-url> <output-directory> [dark|light]",
   );
 mkdirSync(output, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome" });
@@ -13,6 +13,7 @@ const reports = [];
 try {
   for (const width of [1440, 390, 320]) {
     const page = await browser.newPage({
+      colorScheme,
       reducedMotion: "reduce",
       viewport: { height: 1000, width },
     });
@@ -37,10 +38,10 @@ try {
         probe.style.display = "none";
         document.body.append(probe);
         const color = (token) => {
-          probe.style.color = `var(--color-${token})`;
+          probe.style.color = `var(--chart-${token})`;
           return getComputedStyle(probe).color;
         };
-        const colors = { lime: color("lime-500"), pale: color("lime-200") };
+        const colors = { lime: color("axis"), pale: color("grid") };
         probe.remove();
         return colors;
       });
@@ -54,7 +55,7 @@ try {
           kind === "team-season-pace"
             ? { bottom: 30, left: 84, right: 0, top: 0 }
             : {
-                bottom: kind === "surprises-by-team" ? 56 : 76,
+                bottom: 76,
                 left: 60,
                 right: kind === "surprises-per-season" ? 16 : 8,
                 top: kind === "surprises-per-season" ? 0 : 12,
@@ -360,10 +361,11 @@ try {
         const previous = await page.evaluate(() => {
           const root = document.documentElement;
           return Object.entries({
-            "--color-lime-200": "#fedcba",
-            "--color-lime-500": "#abcdef",
-            "--color-pace-red": "#d62728",
-            "--color-slate-950": "#010203",
+            "--chart-axis": "#abcdef",
+            "--chart-grid": "#fedcba",
+            "--chart-negative-line": "#d62728",
+            "--chart-positive-line": "#abcdef",
+            "--chart-surface": "#010203",
           }).map(([name, value]) => {
             const old = {
               name,
@@ -450,6 +452,36 @@ try {
           svg: await svg.boundingBox(),
           width,
         });
+      }
+      if (path === "/stats/") {
+        const paired = await page.evaluate(() =>
+          ["surprises-by-team", "team-season-scatter"].map((kind) => {
+            const host = document.querySelector(
+              `[data-chart="${CSS.escape(kind)}"]`,
+            );
+            const box = host.getBoundingClientRect();
+            const plot = host
+              .querySelector('[data-ts-key="tracker-plot-background"]')
+              .getBoundingClientRect();
+            const title = host
+              .querySelector('[data-ts-key="x-label"]')
+              .getBoundingClientRect();
+            return {
+              bottom: plot.bottom,
+              plotOffset: plot.bottom - box.top,
+              titleOffset: title.top - box.top,
+              titleTop: title.top,
+            };
+          }),
+        );
+        assert.ok(Math.abs(paired[0].plotOffset - paired[1].plotOffset) < 0.5);
+        assert.ok(
+          Math.abs(paired[0].titleOffset - paired[1].titleOffset) < 0.5,
+        );
+        if (width >= 1280) {
+          assert.ok(Math.abs(paired[0].bottom - paired[1].bottom) < 0.5);
+          assert.ok(Math.abs(paired[0].titleTop - paired[1].titleTop) < 0.5);
+        }
       }
       assert.equal(
         await page.evaluate(

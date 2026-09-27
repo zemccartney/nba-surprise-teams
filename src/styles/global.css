@@ -164,6 +164,7 @@ textarea {
    ======================================== */
 
 :root {
+  color-scheme: dark;
   /* Colors — all oklch
      Spacing scale (rem): 0.25 / 0.5 / 0.75 / 1 / 1.5 / 1.75 / 2 / 3 / 4 / 5 / 6 */
 
@@ -239,22 +240,147 @@ textarea {
   --text-7xl--line-height: 1;
 }
 
+/* Semantic paints. Primitives above never change meaning between themes.
+   Keep the dark values identical to the accepted dark-only application. */
+:root {
+  --surface-page: var(--color-dark-emerald);
+  --surface-table-head: var(--color-slate-950);
+  --surface-row: var(--color-lime-950);
+  --ink-primary: var(--color-green-200);
+  --ink-heading: var(--color-lime-400);
+  --ink-positive: var(--color-lime-400);
+  --ink-notice: var(--color-yellow-200);
+  --ink-warning: var(--color-yellow-400);
+  --ink-link: var(--color-indigo-400);
+  --ink-link-hover: var(--color-indigo-100);
+  --ink-showdown: var(--color-showdown-red);
+  --ink-showdown-hover: var(--color-showdown-hover);
+  --showdown-glow: color-mix(in srgb, var(--ink-showdown) 70%, transparent);
+  --showdown-title-shadow: 0 3px 0 #620f20;
+  --rule: var(--color-slate-800);
+  --bulb-light: oklch(97.3% 0.071 103.193);
+  --skull-head: #ccd6dd;
+  --skull-bones: #aab8c2;
+  --skull-eyes: #292f33;
+  --skull-nose: #292f33;
+  --skull-eye-glow: none;
+  --detroit-logo-filter: drop-shadow(-1rem -1rem 1rem #016270)
+    drop-shadow(1rem 1rem 1rem #016271);
+  --table-shadow: var(--shadow-glow);
+  --table-shadow-compact: var(--shadow-glow-sm);
+  --table-sticky-edge: none;
+  --popover-surface: var(--color-blurple-glow);
+  --popover-ink: var(--color-green-200);
+  --popover-outline: none;
+  --popover-shadow: var(--shadow-popover);
+  --help-ink: var(--color-indigo-500);
+  --help-ink-hover: var(--color-indigo-300);
+  --close-ink: var(--color-lime-400);
+  --close-ink-hover: var(--color-lime-600);
+  --button-surface: var(--color-slate-950);
+  --button-ink: var(--color-lime-500);
+  --button-border: var(--color-indigo-500);
+  --button-hover-surface: var(--color-lime-500);
+  --button-hover-ink: var(--color-slate-950);
+  --button-hover-border: var(--color-slate-950);
+  --chart-surface: var(--color-slate-950);
+  --chart-axis: var(--color-lime-500);
+  --chart-grid: var(--color-lime-200);
+  --chart-positive: var(--color-green-700);
+  --chart-negative: var(--color-red-700);
+  --chart-positive-line: var(--color-lime-500);
+  /* Both Stats scatters use the standard positive fill, not the pace stroke. */
+  --chart-surprise-dot: var(--chart-positive);
+  --chart-negative-line: var(--color-pace-red);
+  --chart-season: var(--color-green-700);
+  --chart-alternate: var(--color-lime-200);
+  --chart-highlight: var(--color-indigo-400);
+  --chart-band: var(--color-slate-400);
+  --chart-zero: var(--color-yellow-400);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  /* Lavender ground and stripes recovered from origin/light-mode. */
+  --surface-page: oklch(87% 0.065 274.039);
+  --surface-table-head: var(--surface-page);
+  --surface-row: var(--color-indigo-300);
+  --ink-primary: var(--color-slate-950);
+  --ink-heading: var(--color-slate-950);
+  --ink-positive: #14532d;
+  --ink-notice: oklch(48.5% 0.17 45);
+  --ink-warning: var(--ink-notice);
+  /* Slightly deeper than the WIP's indigo-700: links also need 4.5:1
+     against the darker striped rows, not just against the page. */
+  --ink-link: oklch(42% 0.21 277.023);
+  --ink-link-hover: oklch(35.9% 0.144 278.697);
+  --ink-showdown: #881337;
+  --ink-showdown-hover: #701a35;
+  --showdown-glow: color-mix(in srgb, var(--ink-showdown) 20%, transparent);
+  --showdown-title-shadow: none;
+  --rule: oklch(45% 0.07 275);
+  --detroit-logo-filter: none;
+  --skull-head: #596065;
+  --skull-bones: #3f4a51;
+  --skull-eyes: var(--bulb-light);
+  --skull-nose: #000;
+  --skull-eye-glow: drop-shadow(0 0 1.2px var(--bulb-light));
+  --table-shadow: none;
+  --table-shadow-compact: none;
+  --table-sticky-edge: inset 0 -2px 0 var(--ink-primary);
+  --popover-surface: oklch(97% 0.015 275);
+  --popover-ink: var(--color-slate-950);
+  --popover-outline: 2px solid var(--ink-link);
+  --popover-shadow: 0 4px 16px oklch(30% 0.08 275 / 0.22);
+  --help-ink: var(--ink-link);
+  --help-ink-hover: var(--ink-link-hover);
+  --close-ink: var(--ink-link);
+  --close-ink-hover: var(--ink-link-hover);
+  --button-surface: var(--surface-page);
+  --button-ink: var(--ink-link);
+  --button-border: var(--ink-link);
+  --button-hover-surface: var(--ink-link);
+  --button-hover-ink: var(--color-indigo-100);
+  --button-hover-border: var(--ink-link);
+  --chart-surface: oklch(95% 0.025 275);
+  --chart-axis: var(--ink-primary);
+  --chart-grid: oklch(61% 0.045 275);
+  /* Softer base fills; the former base colors provide contrasting
+     strokes/focus dots. Season bars use the site's two purples instead. */
+  --chart-positive: oklch(61% 0.13 150);
+  --chart-negative: oklch(64% 0.18 27.5);
+  --chart-positive-line: oklch(45% 0.12 150);
+  --chart-negative-line: oklch(48% 0.18 27.5);
+  --chart-season: var(--ink-link);
+  --chart-alternate: var(--surface-row);
+  --chart-surprise-dot: var(--chart-positive);
+  --chart-highlight: var(--color-yellow-400);
+  --chart-band: oklch(65% 0.06 275);
+  --chart-zero: var(--color-yellow-400);
+}
+
+/* Collapsed borders cover body cells and nested popover tables too. Keep
+   the established borderless dark tables unchanged. */
+:root[data-theme="light"] :is(th, td) {
+  border: 2px solid var(--ink-primary);
+}
+
 /* ========================================
    Base Styles
    ======================================== */
 
 .showdown-link {
-  color: var(--color-showdown-red);
+  color: var(--ink-showdown);
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
 
 .showdown-link:hover {
-  color: var(--color-showdown-hover);
+  color: var(--ink-showdown-hover);
 }
 
 .showdown-link:focus-visible {
-  outline: 2px solid var(--color-showdown-red);
+  outline: 2px solid var(--ink-showdown);
   outline-offset: 5px;
 }
 
@@ -266,5 +392,12 @@ body {
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-green-200);
+  color: var(--ink-primary);
+  background-color: var(--surface-page);
+}
+
+/* Use a consistent visible focus ring without animating theme changes. */
+:where(a, button):focus-visible {
+  outline: 2px solid var(--ink-link);
+  outline-offset: 4px;
 }

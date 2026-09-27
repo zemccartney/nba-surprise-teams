@@ -669,20 +669,20 @@
           <div
             class="bar"
             role="img"
-            aria-label="22 of 45 items done, 1 in progress, 3 blocked, 19 not started"
+            aria-label="22 of 45 items done, 2 in progress, 3 blocked, 18 not started"
           >
             <span class="seg-done" style="flex: 22"></span>
-            <span class="seg-wip" style="flex: 1"></span>
+            <span class="seg-wip" style="flex: 2"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 19"></span>
+            <span class="seg-open" style="flex: 18"></span>
           </div>
           <p class="tally">
             <span class="k-done"><b>22</b> done and verified</span>
-            <span class="k-wip"><b>1</b> in progress</span>
+            <span class="k-wip"><b>2</b> in progress</span>
             <span class="k-blocked"
               ><b>3</b> waiting on a decision or rollback window</span
             >
-            <span class="k-open"><b>19</b> not started</span>
+            <span class="k-open"><b>18</b> not started</span>
             <span>45 tracked</span>
           </p>
         </div>
@@ -1391,10 +1391,43 @@ mise run setup</code></pre>
             </div>
 
             <ul class="items">
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-wip">
+                <span class="marker">[~]</span>
                 <div>
                   <p class="item-title">Light mode</p>
+                  <p class="item-note">
+                    Checkpoint 2 on isolated <code>feature/light-mode</code>:
+                    semantic light/dark paints, all four charts, popovers and
+                    page states are ready for styling feedback. First feedback
+                    round adds all-cell borders, light-only Detroit halo
+                    removal, gold chart accents, lighter scatter dots and orange
+                    notices. Next palette experiment: lighter base green/red,
+                    prior base shades for pace strokes/focus dots and
+                    contrasting seasonal bars. Check/build, 220 tests and
+                    dev/preview checks pass. The exact gold's low contrast
+                    against the pale plot is documented. Latest refinement:
+                    seasonal bars use link purple and table-stripe purple; other
+                    charts remain green/red. Eliminated skull emoji now use a
+                    stronger slate silhouette only in light mode; 54 dev/preview
+                    page cases pass. Latest: light skull eyes share the bulb's
+                    yellow glow; a smaller switch sits beside About, and sticky
+                    light-table headers retain their bottom edge when scrolled.
+                    Zack approved styling through <code>d32fab3</code>. A
+                    separate Stats trial now aligns the team/scatter plot
+                    bottoms and x-axis titles; 223 tests and dev/preview chart
+                    checks pass. Styling and alignment through
+                    <code>059af4a</code> are approved; checkpoint 3 preference
+                    verification is in progress. Zack requested a review PR and
+                    a shared base for Showdown.
+                    <a href="light-mode-handoff.md">Showdown theming handoff</a
+                    >. Review-only pushes skip automatic Cloudflare publishing.
+                    <a href="light-mode.md">Plan, evidence and decisions</a>;
+                    <a href="http://localhost:4344/2025/CHA/"
+                      >built local tour</a
+                    >
+                    (dev on 4341). Not merged or deployed. Historical notes
+                    follow.
+                  </p>
                   <p class="item-note">
                     Partly done on the <code>light-mode</code> branch — four WIP
                     commits off an older <code>main</code> — which has the

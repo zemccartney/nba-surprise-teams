@@ -1,4 +1,5 @@
 ---
+import ColorSchemeToggle from "../components/color-scheme-toggle.astro";
 import Link from "../components/link.astro";
 import StandingsTable from "../components/standings-table/index.astro";
 import * as ContentUtils from "../content-utils";
@@ -24,6 +25,7 @@ const [, mm, dd] = latestSeason.startDate.split("-", 3);
       <Link class="home-nav-link" href="/archive/">Archive</Link>
       <Link class="home-nav-link" href="/stats/">Stats</Link>
       <Link class="home-nav-link" href="/about/">About</Link>
+      <ColorSchemeToggle />
     </nav>
   </Fragment>
   <main class="home-main">
@@ -69,7 +71,7 @@ const [, mm, dd] = latestSeason.startDate.split("-", 3);
     font-size: var(--text-3xl);
     line-height: var(--text-3xl--line-height);
     text-wrap: balance;
-    color: var(--color-lime-400);
+    color: var(--ink-heading);
   }
 
   @media (min-width: 768px) {
@@ -90,6 +92,7 @@ const [, mm, dd] = latestSeason.startDate.split("-", 3);
     margin-top: 2rem;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: center;
     gap: 1rem;
   }
@@ -160,7 +163,7 @@ const [, mm, dd] = latestSeason.startDate.split("-", 3);
     font-size: var(--text-2xl);
     line-height: var(--text-2xl--line-height);
     text-wrap: balance;
-    color: var(--color-lime-400);
+    color: var(--ink-heading);
   }
 
   @media (min-width: 768px) {
@@ -173,7 +176,7 @@ const [, mm, dd] = latestSeason.startDate.split("-", 3);
   .body-text {
     font-size: var(--text-2xl);
     line-height: var(--text-2xl--line-height);
-    color: var(--color-green-200);
+    color: var(--ink-primary);
   }
 
   .nowrap {

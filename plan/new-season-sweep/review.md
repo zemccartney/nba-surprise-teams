@@ -1,5 +1,93 @@
 # Review notes: new-season sweep
 
+## Light mode — published review baseline / checkpoint 3 in progress
+
+Visuals and paired-chart alignment through `059af4a` are approved. Review
+`feature/light-mode` against main, starting with
+[the Showdown integration handoff](light-mode-handoff.md), then the semantic
+roles in `src/styles/global.css`, shared components, and chart role mappings.
+Preference edge-case verification is ongoing and will be reported separately;
+publishing this branch does not claim those checks are complete. Review pushes
+skip the repository's auto-deploy workflow to avoid unauthorized Cloudflare
+Preview creation. No main merge/deployment.
+
+## Stats chart-alignment trial (styling through d32fab3 approved)
+
+[Stats](http://localhost:4344/stats/): compare the bottom plot edges and the
+“Team” / “Over/Under” titles. The team plot now leaves room for the scatter's
+interval-label row, intentionally empty on the left. Only team-chart bottom
+margin/title offset changed, in both themes. Three unit regressions and browser
+alignment assertions added. [Evidence](light-mode.md#accepted-styling-checkpoint-and-separate-chart-alignment-trial).
+
+## Light mode — eyes, navigation, sticky edge
+
+[2011 standings](http://localhost:4344/2011/): eyes glow pale yellow; scroll to
+verify the header's bottom border. [Home](http://localhost:4344/) and subpages:
+smaller bulb aligned after About, including at 320px. [Portland](http://localhost:4344/2025/POR/)
+shows the larger skull. Toggle dark to confirm the original unlit skull.
+
+Read the shared bulb/skull tokens, `result-emoji.astro`, the SVG's separated eye
+and nose paths, nav placements, and `table.astro`'s sticky-cell shadow. Browser
+checks now inspect the inline SVG, accessible image description, navigation
+alignment and real pixels on the scrolled edge. [Evidence](light-mode.md#glowing-skull-eyes-quieter-navigation-toggle-and-sticky-header-edge).
+
+## Light mode — eliminated emoji contrast
+
+[2011 standings](http://localhost:4344/2011/) now show darker slate skulls on
+both purples; [Portland](http://localhost:4344/2025/POR/) shows the larger status
+emoji and have-to-go cell. Flip themes to confirm the original skull returns in
+dark mode. One shared CSS filter, no new asset or layout change.
+[Evidence](light-mode.md#eliminated-emoji--stronger-light-mode-contrast).
+
+## Light mode — purple seasonal bars
+
+[Stats](http://localhost:4344/stats/): seasonal bars now take link purple and
+striped-table purple directly from their semantic tokens. Other charts and dark
+mode are unchanged. [Evidence and contrast note](light-mode.md#season-bars--link-purple-and-table-stripe-purple).
+
+## Light mode — lighter chart palette experiment
+
+[Team pace](http://localhost:4344/2025/CHA/) now has lighter green/red areas with
+previous base shades on the stroke and active dot. Hover both sides of the
+threshold, or Tab into the chart and use Home/arrow keys. [Stats](http://localhost:4344/stats/)
+uses the same lighter bases; the seasonal bar contrast is the old green.
+Only light-theme tokens changed. [Exact colors and evidence](light-mode.md#chart-palette-experiment--lighter-bases-former-bases-as-contrast).
+
+## Light mode — styling feedback round
+
+[2011 season](http://localhost:4344/2011/): all-cell borders, no Detroit halo,
+more saturated orange notice. [Stats](http://localhost:4344/stats/): original
+warm gold zero line/focus ring and lighter green surprise dots. Flip back to
+dark to compare. Color/contrast decisions and test evidence are in
+[the updated plan](light-mode.md#styling-feedback-round--implemented-ready-for-another-look).
+The exact gold has low contrast against the pale plot (1.36:1); retained as
+requested for visual review, not silently passed through the contrast gate.
+
+## Light mode — checkpoint 2
+
+Start with [the current tour and decisions](light-mode.md#current-tour--checkpoint-2).
+Read `src/styles/global.css` (semantic dark/light paints), shared table/popover
+styles, then `src/components/charts/tanstack-style.ts` and the new browser harness
+`plan/baseline/light-mode.mjs`. Other page edits replace literal palette references
+with their roles. Toggle behavior is unchanged from checkpoint 1.
+
+Review the [built team page](http://localhost:4344/2025/CHA/) and
+[Stats](http://localhost:4344/stats/) in both themes; open popovers and use keyboard
+chart selection. The plan lists palette/plot/popover decisions to flip, coverage
+and artifact paths. Two findings changed the prototype: slightly deeper purple
+links for 4.5:1 on stripes, and a below-360px column adjustment to remove overflow.
+Dark screenshot comparisons are not claimed to be byte-identical. Showdown and
+production remain untouched. This checkpoint awaits Zack's styling feedback.
+
+## Light mode — checkpoint 1
+
+Read [the plan and tour](light-mode.md), then
+`src/components/color-scheme-toggle.astro`, `src/layouts/layout.astro`, and the
+light palette bridge in `src/styles/global.css`. Surprise: the original light
+background was lavender, not the declared light-emerald token. Decisions to
+flip and manual checks are in the plan. Review palette, bulb glow and placement
+at http://localhost:4341/2025/; chart/popover paints are explicitly pending.
+
 ## 2026-09-23 — Approved implementation simplification
 
 Applied the three changes Zack approved after reading the guide: direct CSS

@@ -8,10 +8,10 @@
   Stats charts. Only archived seasons and games between that season's candidate
   pair count. Wins/losses are summed before calculating percentage; this is not
   an average of seasonal percentages.
-- Ranked horizontal bars alternate the standard positive green and pale green,
-  matching Surprises × Season. Bars have no overlaid labels; records remain in
+- Ranked horizontal bars share Surprises × Season's semantic season/alternate
+  paints: green/pale green in dark mode, purple/lavender in light mode. Bars have no overlaid labels; records remain in
   tooltips. The axis retains zero and rounds its maximum up to a quarter.
-  Percentage ticks use the shared 16px bold, full-opacity lime chart-axis style.
+  Percentage ticks use the shared 16px bold, full-opacity semantic axis style.
 - The shared subtitle is “Results of every surprise team candidate head-to-head”.
 - Both charts share concise logo/name and `W–L | PCT (n games played)` content.
   Both include full name-era breakdowns immediately on hover; pinning is optional.
@@ -44,7 +44,7 @@ checks. Browser tested at 1440px and 390px: all rows, no horizontal overflow,
 working keyboard tooltip and no runtime exceptions.
 
 Final full build/verification passed: dependency audit, Astro check,
-formatting/lint/workflow checks, **256 tests across 35 files**, production build
+formatting/lint/workflow checks, **259 tests across 35 files**, production build
 and artifact audit (**412 files**). No database drift or uncommitted fake odds.
 
 Review this new chart separately from the already approved season page layout.

@@ -243,7 +243,7 @@ const formatDate = (date: string) =>
     text-decoration: underline;
   }
   a:focus-visible {
-    outline: 2px solid var(--color-showdown-red);
+    outline: 2px solid var(--ink-showdown);
     outline-offset: 5px;
   }
   .slate {
@@ -252,7 +252,7 @@ const formatDate = (date: string) =>
   h2 {
     position: relative;
     padding-bottom: 1rem;
-    color: var(--color-showdown-red);
+    color: var(--ink-showdown);
     font-family: var(--font-title);
     text-align: center;
     font-size: var(--text-lg);
@@ -263,8 +263,7 @@ const formatDate = (date: string) =>
     content: "";
     position: absolute;
     inset: 0;
-    box-shadow: 0 12px 40px 12px
-      color-mix(in srgb, var(--color-showdown-red) 70%, transparent);
+    box-shadow: 0 12px 40px 12px var(--showdown-glow);
     clip-path: inset(100% -80px -80px);
     pointer-events: none;
   }
@@ -302,14 +301,14 @@ const formatDate = (date: string) =>
     font-variant-numeric: tabular-nums;
   }
   .winner .score {
-    color: var(--color-lime-400);
+    color: var(--ink-positive);
   }
   .versus {
     align-self: start;
     margin-top: 1rem;
     font-size: var(--text-4xl);
     line-height: var(--text-4xl--line-height);
-    color: var(--color-showdown-red);
+    color: var(--ink-showdown);
   }
   .empty,
   .next-link,
