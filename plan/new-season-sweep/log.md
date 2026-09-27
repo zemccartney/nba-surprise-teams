@@ -1,5 +1,14 @@
 # New-season sweep: round log
 
+## Light mode — lighter chart palette experiment
+
+Per Zack's next review: lighter base green/red, with the previous base colors
+used for pace strokes/focus dots and the contrasting seasonal bars. Dark mode
+and gold accents unchanged. Opaque bases still clear 3:1 against the plot.
+Check/build, 220 tests, dev/preview 48-page matrices and light chart matrices pass.
+Explicitly checked both positive and negative pace focus markers in built preview.
+[Palette and evidence](light-mode.md#chart-palette-experiment--lighter-bases-former-bases-as-contrast).
+
 ## Light mode — styling feedback round
 
 Implemented Zack's five light-only refinements: all-cell borders, no Detroit

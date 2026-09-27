@@ -1,5 +1,13 @@
 # Review notes: new-season sweep
 
+## Light mode — lighter chart palette experiment
+
+[Team pace](http://localhost:4344/2025/CHA/) now has lighter green/red areas with
+previous base shades on the stroke and active dot. Hover both sides of the
+threshold, or Tab into the chart and use Home/arrow keys. [Stats](http://localhost:4344/stats/)
+uses the same lighter bases; the seasonal bar contrast is the old green.
+Only light-theme tokens changed. [Exact colors and evidence](light-mode.md#chart-palette-experiment--lighter-bases-former-bases-as-contrast).
+
 ## Light mode — styling feedback round
 
 [2011 season](http://localhost:4344/2011/): all-cell borders, no Detroit halo,

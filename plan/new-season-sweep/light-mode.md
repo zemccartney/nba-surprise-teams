@@ -27,6 +27,29 @@ or deployment is authorized; this checkpoint is ready for that design review.
 The same paths work on dev port 4341. Local storage is origin-specific: dev and
 preview choices do not synchronize with one another, but tabs on the same port do.
 
+## Chart palette experiment — lighter bases, former bases as contrast
+
+Latest feedback: lighten both base chart colors and try the previous base shades
+for contrasting tones. Light mode now uses green `oklch(61% 0.13 150)` and red
+`oklch(64% 0.18 27.5)`. Pace strokes and hover/keyboard dots use the prior green
+`oklch(45% 0.12 150)` and red `oklch(48% 0.18 27.5)`, replacing the almost-black
+strokes. Seasonal bars alternate between the new base green and old base green.
+Scatter uses the new base shades; its green is the same lighter green as the
+previous feedback round. Gold accents, the pale plotting surface, and dark mode
+are unchanged.
+
+The opaque bases retain 3.11:1 (green) and 3.15:1 (red) against the plot. No
+additional contrast exceptions were introduced; the existing gold exception
+remains. Check/build and 220 tests pass. Dev and built preview pass the 48-page
+matrix and all four light-chart interaction checks at three widths. Explicit
+positive and negative pace selection checks confirm the old base shades are
+used by the focused dots. Evidence: `/tmp/nbastt-light-palette/`, including
+`positive-focus.png` and `negative-focus.png`.
+
+Compare [the pace chart](http://localhost:4344/2025/CHA/) and
+[Stats](http://localhost:4344/stats/). This is a color experiment awaiting Zack's
+feedback, not an approved final palette.
+
 ## Styling feedback round — implemented, ready for another look
 
 Zack requested these light-only refinements:
