@@ -1,5 +1,14 @@
 # New-season sweep: round log
 
+## Light mode — reconcile concurrent main documentation before final review
+
+Main advanced to `84dde84` while checkpoint 3 ran. Merged that documentation-only
+commit into `feature/light-mode`, not the reverse. Preserved its Foundations
+review sign-off, seasonal-readiness notes and plan/tooling audit card alongside
+the light-mode PR/report entry. The sole conflict was the progress tally:
+combined 25 done, 2 in progress, 3 blocked, 16 open = 46 tracked. No application
+code or other agent worktree changed. Review-only push still skips publishing.
+
 ## Light mode — checkpoint 3 verified; PR #18 open
 
 Published `feature/light-mode` and

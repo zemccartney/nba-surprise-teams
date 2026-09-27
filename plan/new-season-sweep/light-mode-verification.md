@@ -5,7 +5,13 @@
 
 **Automated verification passes.** The approved visual design is unchanged.
 Awaiting Zack's PR/everyday-browser review and explicit integration approval.
-No main merge, hosted preview creation or production deployment.
+No merge into main, hosted preview creation or production deployment.
+
+Main advanced to documentation-only `84dde84` during verification. That commit
+is merged **into this feature branch**, preserving its Foundations sign-off,
+seasonal-readiness and tooling-review notes. The only conflict was the shared
+status-board tally; combined totals are 25 done / 2 in progress / 3 blocked /
+16 open, 46 tracked. No application code changed during reconciliation.
 
 ## Preference, keyboard and first-paint results
 
