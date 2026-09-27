@@ -91,9 +91,9 @@ export const seasonChart = (
 ): TrackerChart<Season, string, number> => {
   const rows = data.toSorted((a, b) => Number(a.seasonId) - Number(b.seasonId));
   const colors = new Map(
-    data.map((row, i) => [row, i % 2 ? t.alternate : t.green]),
+    data.map((row, i) => [row, i % 2 ? t.alternate : t.season]),
   );
-  const fill = (row: Season) => colors.get(row) ?? t.green;
+  const fill = (row: Season) => colors.get(row) ?? t.season;
   const max = Math.max(1, ...rows.map((row) => row.numSurprises));
   const visibleTicks = rows
     .map((row) => row.seasonId)

@@ -77,6 +77,7 @@ describe("CSS-backed chart paints", () => {
       grid: "var(--chart-grid)",
       lime: "var(--chart-positive-line)",
       red: "var(--chart-negative)",
+      season: "var(--chart-season)",
       slate: "var(--chart-band)",
       surpriseDot: "var(--chart-surprise-dot)",
       yellow: "var(--chart-zero)",
@@ -98,6 +99,12 @@ describe("CSS-backed chart paints", () => {
               seasonRange: "2025–26",
               surpriseTeams: [],
             },
+            {
+              numSurprises: 2,
+              seasonId: "2024",
+              seasonRange: "2024–25",
+              surpriseTeams: [],
+            },
           ],
           latestSeasonYear: 2025,
         },
@@ -109,7 +116,8 @@ describe("CSS-backed chart paints", () => {
       });
       const markup = renderTrackerSvg(scene, { ariaLabel: chart.label });
       expect(markup).toContain('fill="var(--chart-axis)"');
-      expect(markup).toContain('fill="var(--chart-positive)"');
+      expect(markup).toContain('fill="var(--chart-season)"');
+      expect(markup).toContain('fill="var(--chart-alternate)"');
       expect(markup).toContain('fill="var(--chart-surface)"');
     } finally {
       runtime.destroy();

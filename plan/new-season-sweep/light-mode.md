@@ -27,6 +27,22 @@ or deployment is authorized; this checkpoint is ready for that design review.
 The same paths work on dev port 4341. Local storage is origin-specific: dev and
 preview choices do not synchronize with one another, but tabs on the same port do.
 
+## Season bars — link purple and table-stripe purple
+
+Latest request supersedes the green seasonal-bar experiment: in light mode,
+`--chart-season` aliases `--ink-link`, and `--chart-alternate` aliases
+`--surface-row`. Other chart colors and dark mode are unchanged. A dedicated
+season token keeps this choice independent of positive green elsewhere.
+
+Check/build and 220 tests pass. All four light-chart interaction checks pass in
+dev and built preview at three widths. Browser checks verify rendered bar fills
+match the actual link/stripe tokens and toggle back to the original dark green.
+SVG unit coverage checks both seasonal paints. Artifacts: `/tmp/nbastt-light-purple/`.
+The exact table-stripe shade is another explicitly recorded below-3:1 contrast
+exception against the pale plot; the requested shade is preserved for review.
+
+Review [Stats](http://localhost:4344/stats/).
+
 ## Chart palette experiment — lighter bases, former bases as contrast
 
 Latest feedback: lighten both base chart colors and try the previous base shades

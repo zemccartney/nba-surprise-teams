@@ -1,5 +1,14 @@
 # New-season sweep: round log
 
+## Light mode — purple seasonal bars
+
+Per Zack, season bars now use link purple and table-stripe purple. Separate
+season token avoids changing positive green elsewhere; dark mode unchanged.
+Check/build, 220 tests and dev/preview light chart matrices pass. Actual SVG
+fills verified against both site tokens; both paints covered in the renderer
+test. The exact stripe shade's low contrast is recorded in the plan.
+[Review and evidence](light-mode.md#season-bars--link-purple-and-table-stripe-purple).
+
 ## Light mode — lighter chart palette experiment
 
 Per Zack's next review: lighter base green/red, with the previous base colors

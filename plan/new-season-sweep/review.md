@@ -1,5 +1,11 @@
 # Review notes: new-season sweep
 
+## Light mode — purple seasonal bars
+
+[Stats](http://localhost:4344/stats/): seasonal bars now take link purple and
+striped-table purple directly from their semantic tokens. Other charts and dark
+mode are unchanged. [Evidence and contrast note](light-mode.md#season-bars--link-purple-and-table-stripe-purple).
+
 ## Light mode — lighter chart palette experiment
 
 [Team pace](http://localhost:4344/2025/CHA/) now has lighter green/red areas with

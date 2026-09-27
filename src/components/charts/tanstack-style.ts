@@ -11,6 +11,7 @@ export const theme = {
   grid: "var(--chart-grid)",
   lime: "var(--chart-positive-line)",
   red: "var(--chart-negative)",
+  season: "var(--chart-season)",
   slate: "var(--chart-band)",
   surpriseDot: "var(--chart-surprise-dot)",
   yellow: "var(--chart-zero)",

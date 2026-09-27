@@ -173,14 +173,14 @@ try {
       ...[
         "chart-positive",
         "chart-negative",
-        "chart-alternate",
+        "chart-season",
         "chart-positive-line",
         "chart-negative-line",
         "chart-surprise-dot",
       ].map((fg) => [fg, "chart-surface", 3]),
-      // Zack requested the exact dark-theme yellow for these accents. Report
-      // their contrast honestly; they do not meet 3:1 against the pale plot.
-      ...["chart-highlight", "chart-zero"].map((fg) => [
+      // Exact requested gold accents and table-stripe season bars do not
+      // meet 3:1 against the pale plot. Report these explicit exceptions.
+      ...["chart-highlight", "chart-zero", "chart-alternate"].map((fg) => [
         fg,
         "chart-surface",
         undefined,
@@ -191,6 +191,12 @@ try {
         throw new Error(
           `${accent} must retain the requested dark-theme accent`,
         );
+    for (const [bar, source] of [
+      ["chart-season", "ink-link"],
+      ["chart-alternate", "surface-row"],
+    ])
+      if (String(rgb(bar)) !== String(rgb(source)))
+        throw new Error(`${bar} must match ${source}`);
     const results = pairs.map(([fg, bg, minimum]) => {
       const a = luminance(rgb(fg));
       const b = luminance(rgb(bg));
