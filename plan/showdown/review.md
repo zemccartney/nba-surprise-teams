@@ -142,6 +142,15 @@ This includes the final visual revisions below.
   correctly, and Washington/New Orleans multi-era tooltips fit within both chart
   hosts without clipping. No horizontal overflow or runtime exceptions.
 
+## Chart palette consistency revision
+
+- Standings bars now use the same standard-green/pale-green alternation as
+  Surprises × Season.
+- Showdown scatter dots use standard positive green. Pace × Over/Under's
+  positive dots now use that same green instead of lime; eliminated dots remain
+  red. Pace area, line and threshold styling are otherwise unchanged.
+- Renderer tests explicitly verify all three updated color mappings.
+
 ## Remaining review / operational follow-up
 
 - User visual/code review of the new historic Stats chart and data/cache changes.

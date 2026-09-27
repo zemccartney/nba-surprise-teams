@@ -99,10 +99,7 @@ export function showdownHistoryChart({
   data,
 }: ShowdownHistoryProps): TrackerChart<ShowdownHistoryPoint, number, string> {
   const colors = new Map(
-    data.map((row, index) => [
-      row,
-      index % 2 ? theme.red : "var(--color-showdown-red)",
-    ]),
+    data.map((row, index) => [row, index % 2 ? theme.pale : theme.green]),
   );
   const max = Math.max(
     0.25,
@@ -117,7 +114,7 @@ export function showdownHistoryChart({
       margin: { bottom: 60, left: 56, right: 16, top: 16 },
       marks: [
         barX(data, {
-          fill: (row) => colors.get(row) ?? "var(--color-showdown-red)",
+          fill: (row) => colors.get(row) ?? theme.green,
           id: "showdown-history",
           maxThickness: 40,
           x: (row) => row.pct ?? 0,

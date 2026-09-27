@@ -222,8 +222,8 @@ describe("historic Showdown standings", () => {
       );
       expect(chart.annotation?.(scene)).not.toContain('stroke-width="3"');
       expect(scene.points.map((point) => point.color)).toEqual([
-        "var(--color-showdown-red)",
-        "var(--color-red-700)",
+        "var(--color-green-700)",
+        "var(--color-lime-200)",
       ]);
       expect(chart.annotation?.(scene)).toContain(`x="${scene.chart.x + 8}"`);
       expect(scene.chart.width).toBe(390 - 56 - 16);
@@ -251,6 +251,10 @@ describe("historic Showdown standings", () => {
           width: 390,
         });
         expect(scene.points).toHaveLength(2);
+        expect(scene.points.map((point) => point.color)).toEqual([
+          "var(--color-green-700)",
+          "var(--color-green-700)",
+        ]);
         expect(
           scene.points.map((point) => [point.xValue, point.yValue]),
         ).toEqual([

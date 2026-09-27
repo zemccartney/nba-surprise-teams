@@ -40,7 +40,7 @@ export function showdownScatterChart({
       margin: { bottom: 76, left: 68, right: 16, top: 16 },
       marks: [
         dot(rows, {
-          fill: "var(--color-showdown-red)",
+          fill: theme.green,
           id: "showdown-franchises",
           r: 6,
           states: [

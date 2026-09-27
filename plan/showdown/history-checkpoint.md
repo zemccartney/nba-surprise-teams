@@ -8,8 +8,8 @@
   Stats charts. Only archived seasons and games between that season's candidate
   pair count. Wins/losses are summed before calculating percentage; this is not
   an average of seasonal percentages.
-- Ranked horizontal bars alternate Showdown red and the existing charts' dark
-  red. Thicker bars carry larger overlaid `W–L | PCT` labels; full-name/game-count
+- Ranked horizontal bars alternate the standard positive green and pale green,
+  matching Surprises × Season. Thicker bars carry larger overlaid `W–L | PCT` labels; full-name/game-count
   tooltips remain. The axis retains zero and rounds its maximum up to a quarter
   so labels have more room, especially on phones.
 - Bar labels now use the chart's dark background color without outlines.
@@ -20,6 +20,9 @@
   displayed end years include the final season's ending year. All era W/L sums
   are tested against franchise totals. Washington's Bullets/Wizards transition
   and repeated Charlotte/New Orleans eras remain separate runs.
+- Both the Showdown scatter and the positive dots in Pace × Over/Under use
+  standard positive green (the pace area's fill), not lime. Eliminated dots
+  remain red; pace lines/threshold accents are unchanged.
 - Scatter omits undefined percentages (no qualifying games), but retains real
   0% records. Axis ticks use whole game counts, and both plots are keyboard usable.
 - The extra accordion/table was removed after visual review. Keyboard chart
