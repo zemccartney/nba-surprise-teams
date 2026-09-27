@@ -4,8 +4,11 @@
 
 Base your integration on **`origin/feature/light-mode`**, not the historical
 `origin/light-mode` branch. Zack approved the visual work through `059af4a`,
-including the paired Stats-chart alignment. Preference/accessibility final
-verification is in progress; follow-up fixes will land on this same branch.
+including the paired Stats-chart alignment. Checkpoint 3 now passes 180
+cross-browser preference/accessibility/first-paint scenario runs plus full
+regression checks; a session-storage event isolation fix is included. See the
+[verification report](light-mode-verification.md) and
+[PR #18](https://github.com/zemccartney/nba-surprise-teams/pull/18).
 No merge to main has been authorized.
 
 From your own Showdown worktree, after preserving your current work:

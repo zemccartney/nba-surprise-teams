@@ -1396,37 +1396,33 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">Light mode</p>
                   <p class="item-note">
-                    Checkpoint 2 on isolated <code>feature/light-mode</code>:
-                    semantic light/dark paints, all four charts, popovers and
-                    page states are ready for styling feedback. First feedback
-                    round adds all-cell borders, light-only Detroit halo
-                    removal, gold chart accents, lighter scatter dots and orange
-                    notices. Next palette experiment: lighter base green/red,
-                    prior base shades for pace strokes/focus dots and
-                    contrasting seasonal bars. Check/build, 220 tests and
-                    dev/preview checks pass. The exact gold's low contrast
-                    against the pale plot is documented. Latest refinement:
-                    seasonal bars use link purple and table-stripe purple; other
-                    charts remain green/red. Eliminated skull emoji now use a
-                    stronger slate silhouette only in light mode; 54 dev/preview
-                    page cases pass. Latest: light skull eyes share the bulb's
-                    yellow glow; a smaller switch sits beside About, and sticky
-                    light-table headers retain their bottom edge when scrolled.
-                    Zack approved styling through <code>d32fab3</code>. A
-                    separate Stats trial now aligns the team/scatter plot
-                    bottoms and x-axis titles; 223 tests and dev/preview chart
-                    checks pass. Styling and alignment through
-                    <code>059af4a</code> are approved; checkpoint 3 preference
-                    verification is in progress. Zack requested a review PR and
-                    a shared base for Showdown.
+                    Published <code>feature/light-mode</code> and
+                    <a
+                      href="https://github.com/zemccartney/nba-surprise-teams/pull/18"
+                      >PR #18</a
+                    >
+                    for Zack's review and the Showdown agent's integration.
+                    Semantic paints cover pages, tables, popovers and all four
+                    charts. Styling and paired Stats plot/title alignment
+                    through
+                    <code>059af4a</code> are approved. Checkpoint 3 passes 180
+                    preference/accessibility/first-paint scenario runs across
+                    Chromium, Firefox and WebKit, dev and built preview. One
+                    session-storage event isolation bug is fixed; no new visual
+                    changes. Full build/check, 223 tests, both 54-case page
+                    matrices, chart matrices and dev smoke pass. Requested gold
+                    and alternate-bar contrast exceptions remain documented.
+                    <a href="light-mode-verification.md"
+                      >Verification and limits</a
+                    >;
                     <a href="light-mode-handoff.md">Showdown theming handoff</a
-                    >. Review-only pushes skip automatic Cloudflare publishing.
-                    <a href="light-mode.md">Plan, evidence and decisions</a>;
+                    >; <a href="light-mode.md">Plan and decisions</a>;
                     <a href="http://localhost:4344/2025/CHA/"
                       >built local tour</a
                     >
-                    (dev on 4341). Not merged or deployed. Historical notes
-                    follow.
+                    (dev on 4341). Review pushes skip automatic Cloudflare
+                    publishing. Awaiting PR/everyday-browser review; not merged
+                    or deployed. Historical branch notes follow.
                   </p>
                   <p class="item-note">
                     Partly done on the <code>light-mode</code> branch — four WIP
