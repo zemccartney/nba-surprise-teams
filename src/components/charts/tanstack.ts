@@ -12,7 +12,7 @@ import { renderTrackerSvg } from "./tanstack-svg";
 export interface TrackerChart<Row, X extends ChartValue, Y extends ChartValue> {
   // Keep custom annotations beside the definition, not in the input controller.
   annotation?: (scene: ChartScene<Row, X, Y>) => string;
-  body: (row: Row, context?: { pinned: boolean }) => HTMLElement;
+  body: (row: Row) => HTMLElement;
   definition: DomChartDefinition<Row, X, Y>;
   description: string;
   label: string;
@@ -60,9 +60,7 @@ export const mountCharts = <
           onTooltipBodyChange: (target) => {
             const point = target?.points[0];
             if (target && point)
-              target.element.replaceChildren(
-                chart.body(point.datum, { pinned: target.pinned }),
-              );
+              target.element.replaceChildren(chart.body(point.datum));
           },
           renderer: createSvgChartRenderer<Row, X, Y>((scene, options) =>
             renderTrackerSvg(scene, options, chart.annotation?.(scene)),

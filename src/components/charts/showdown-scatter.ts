@@ -11,11 +11,12 @@ import type {
 } from "./showdown-standings";
 import type { TrackerChart } from "./tanstack";
 
+import { scatterTooltipPortal } from "./scatter-tooltip";
 import {
   describeShowdownHistory,
   showdownHistoryBody,
 } from "./showdown-standings";
-import { add, axis, chartTheme, grid, node, theme } from "./tanstack-style";
+import { axis, chartTheme, grid, theme } from "./tanstack-style";
 
 type ScatterPoint = ShowdownHistoryPoint & { gamesPlayed: number; pct: number };
 
@@ -42,24 +43,6 @@ export const showdownScatterFocus: ChartFocusStrategy<
   },
 };
 
-export function showdownScatterBody(
-  row: ShowdownHistoryPoint,
-  { pinned = false }: { pinned?: boolean } = {},
-): HTMLElement {
-  const { history, ...summary } = row;
-  const body = showdownHistoryBody(pinned ? row : summary);
-  if (!pinned && history && history.length > 1) {
-    add(
-      body,
-      node(
-        "p",
-        "showdown-tooltip-hint",
-        "Click or press Enter for name history.",
-      ),
-    );
-  }
-  return body;
-}
 export function showdownScatterChart({
   data,
 }: ShowdownHistoryProps): TrackerChart<ScatterPoint, number, number> {
@@ -79,7 +62,7 @@ export function showdownScatterChart({
   const tickStep = Math.max(25, Math.ceil(observedMax / 100) * 25);
   const maxGames = Math.ceil(observedMax / tickStep) * tickStep;
   return {
-    body: showdownScatterBody,
+    body: showdownHistoryBody,
     definition: defineChart({
       focus: showdownScatterFocus,
       margin: { bottom: 76, left: 68, right: 16, top: 16 },
@@ -130,15 +113,15 @@ export function showdownScatterChart({
       theme: chartTheme(theme),
       tooltip: {
         anchor: "point",
-        className: "tracker-tooltip",
+        className: "tracker-tooltip scatter-tooltip",
         format: (point) => describeShowdownHistory(point.datum),
-        offset: 28,
-        placement: ["top", "bottom"],
+        offset: 40,
+        portal: scatterTooltipPortal,
         use: tooltip,
       },
     }),
     description:
-      "Archived candidate head-to-head records by franchise. Games played on the horizontal axis; winning percentage on the vertical axis. Franchises without qualifying games have no percentage and are omitted. Hover shows the overall record; click or press Enter for name history. Keyboard order is games played, then percentage.",
+      "Archived candidate head-to-head records by franchise. Games played on the horizontal axis; winning percentage on the vertical axis. Franchises without qualifying games have no percentage and are omitted. Hover shows the overall record and full name history. Keyboard order is games played, then percentage.",
     label: "Showdown win percentage versus games played",
   };
 }

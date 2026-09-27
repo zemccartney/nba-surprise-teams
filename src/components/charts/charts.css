@@ -26,11 +26,11 @@
   --ts-chart-tooltip-max-width: min(20rem, calc(100% - 16px));
 }
 
-.showdown-tooltip-hint {
-  margin-top: 0.5rem;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
+/* Escape the chart's clipping box, but never widen the document. */
+.scatter-tooltip {
+  --ts-chart-tooltip-max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  width: min(32rem, calc(100vw - 32px));
 }
 
 /* Compact historical-name breakdowns shared by both Showdown charts. */

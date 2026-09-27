@@ -163,6 +163,29 @@ This includes the final visual revisions below.
   selects the correct team and its tooltip clears a 24px neighborhood around
   the dot. Charlotte's click-to-pin, Enter-to-pin and Escape dismissal pass.
 
+## Full-history hover placement revision (supersedes compact hover)
+
+- Restored complete history on hover; no click/Enter hint or detail gate.
+- The default chart-confined placer was the underlying issue: oversized boxes
+  were shifted back over their anchor. A document-level tooltip portal now
+  preserves a 40px gap, prefers side placement, and allows vertical extension
+  rather than shifting onto the hovered dot. Width is always viewport-bounded.
+- The shared tooltip body and simpler renderer contract are restored; nearest-
+  center scatter picking and the larger subtitle remain.
+- Browser checks at 1440px/390px cover all 30 hover targets with full histories,
+  clear 36px neighborhoods, no horizontal overflow, and optional pin/keyboard
+  operation. Charlotte's long mobile history is readable via ordinary page
+  scrolling, without pinning. Geometry tests cover 320–1440px widths, 568–1000px
+  heights, edge points, and histories taller than the viewport.
+
+## Standings label cleanup
+
+- Removed all overlaid W–L/percentage labels from the bars; the same records
+  remain available in tooltips.
+- Removed the percentage axis's small-font override. Its tick labels now use
+  the shared chart style: 16px, bold, full-opacity lime. Renderer tests verify
+  these SVG attributes and the absence of bar annotations.
+
 ## Remaining review / operational follow-up
 
 - User visual/code review of the new historic Stats chart and data/cache changes.

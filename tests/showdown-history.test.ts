@@ -218,17 +218,22 @@ describe("historic Showdown standings", () => {
         { ariaLabel: chart.label },
         chart.annotation?.(scene),
       );
-      expect(svg).toContain("8–2 | 80.0%");
-      expect(svg).toContain("0–0 | —");
-      expect(chart.annotation?.(scene)).toContain(
-        'fill="var(--color-slate-950)"',
-      );
-      expect(chart.annotation?.(scene)).not.toContain('stroke-width="3"');
+      expect(chart.annotation).toBeUndefined();
+      expect(svg).not.toContain("data-showdown-labels");
+      const ticks = svg
+        .matchAll(/<text[^>]*data-ts-key="x-tick-label:[^>]*>/g)
+        .toArray();
+      expect(ticks.length).toBeGreaterThan(0);
+      for (const [tick] of ticks) {
+        expect(tick).toContain('font-size="16"');
+        expect(tick).toContain('font-weight="700"');
+        expect(tick).toContain('opacity="1"');
+        expect(tick).toContain('fill="var(--color-lime-500)"');
+      }
       expect(scene.points.map((point) => point.color)).toEqual([
         "var(--color-green-700)",
         "var(--color-lime-200)",
       ]);
-      expect(chart.annotation?.(scene)).toContain(`x="${scene.chart.x + 8}"`);
       expect(scene.chart.width).toBe(390 - 56 - 16);
       const scatter = showdownScatterChart({
         data: [
@@ -296,9 +301,8 @@ describe("historic Showdown standings", () => {
             Number.isSafeInteger(tick.value),
           ),
         ).toBe(true);
-        expect(scatter.description).toContain(
-          "click or press Enter for name history",
-        );
+        expect(scatter.body).toBe(chart.body);
+        expect(scatter.definition.tooltip).toMatchObject({ offset: 40 });
       } finally {
         scatterRuntime.destroy();
       }

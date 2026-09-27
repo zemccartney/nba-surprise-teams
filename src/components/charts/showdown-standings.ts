@@ -106,8 +106,6 @@ export function showdownHistoryChart({
     Math.ceil(Math.max(0, ...data.map((row) => row.pct ?? 0)) * 4) / 4,
   );
   return {
-    annotation: (scene) =>
-      `<g data-showdown-labels="" aria-hidden="true" pointer-events="none" fill="${theme.background}" font-size="${scene.chart.width < 480 ? 16 : 20}" font-weight="700" font-family="var(--font-mono)">${scene.points.map((point) => `<text x="${scene.chart.x + 8}" y="${point.y}" dominant-baseline="middle"${point.datum.pct ? "" : ' fill="var(--color-green-200)"'}>${point.datum.w}–${point.datum.l} | ${showdownPct(point.datum.pct)}</text>`).join("")}</g>`,
     body: showdownHistoryBody,
     definition: defineChart({
       focus: showdownHistoryFocus,
@@ -130,7 +128,6 @@ export function showdownHistoryChart({
         x: {
           axis: {
             ...axis("Win percentage", 42),
-            tickLabels: { fontSize: 12 },
             ticks: {
               format: (value) => `${Number(value) * 100}%`,
               padding: 8,
@@ -165,7 +162,7 @@ export function showdownHistoryChart({
       },
     }),
     description:
-      "All franchises ranked by head-to-head winning percentage in archived seasons. Only matchups between that season's surprise candidates count. No-game teams appear last with an em dash, not a zero percentage.",
+      "All franchises ranked by head-to-head winning percentage in archived seasons. Only matchups between that season's surprise candidates count. No-game teams appear last; their tooltips show an em dash, not a zero percentage.",
     label: "Historic Showdown standings",
   };
 }
