@@ -27,7 +27,43 @@ or deployment is authorized; this checkpoint is ready for that design review.
 The same paths work on dev port 4341. Local storage is origin-specific: dev and
 preview choices do not synchronize with one another, but tabs on the same port do.
 
-## Eliminated emoji — stronger light-mode contrast
+## Glowing skull eyes, quieter navigation toggle, and sticky header edge
+
+Latest requests are implemented together:
+
+- Only the two skull eyes glow in light mode, using the same `--bulb-light`
+  pale yellow as the switch. The slate head/bones remain and the nose stays
+  dark. The skull now renders inline from the same SVG source so those parts
+  can be painted separately; the right eye and nose were separated into paths
+  without changing geometry. `role="img"` and the previous accessible description
+  replace the external image's `alt`. Other emoji remain normal images.
+- The bulb sits immediately after About, vertically centered with the nav links
+  on home and subpages. Artwork is 24px with a restrained glow; the hit target
+  remains 44×44px. Narrow-header padding lets the row fit at 320px. The separate
+  centered bulb row is gone. This layout refinement applies in both themes.
+- Light sticky header cells carry their own inset 2px bottom edge, rather than
+  relying on collapsed borders that remain in the scrolling table layer.
+  Normal cell borders are retained; dark headers remain borderless.
+
+Review [2011 standings](http://localhost:4344/2011/): inspect the eyes, then
+scroll the table until its header sticks. Also check [home navigation](http://localhost:4344/)
+and [Portland's larger skull](http://localhost:4344/2025/POR/).
+
+Verification: check/build and 220 tests pass. Both dev and built preview pass
+54 page/theme/width cases, with explicit eye-color/glow/nose/accessible-name
+checks, nav alignment and hit-target checks, and actual screenshot pixels proving
+the bottom edge survives scrolling at 1440/390/320px. Header popovers still work
+while stuck. Dark inline skull renders have **zero pixel differences** against
+the original image at 18/20/32px. Dev smoke reports 32 external images and zero
+problems; 15 skull image instances are now inline SVGs, covered by the new checks.
+
+Artifacts: `/tmp/nbastt-nav-skull/` (dev/preview pages and sticky-header captures)
+and `/tmp/nbastt-skull-eyes/` (eye review and dark glyph comparisons). Astro dev
+retained the old SVG module during the initial asset edit; a server restart was
+required, after which dev and built preview rendered the same updated paths.
+No production deployment or merge.
+
+## Eliminated emoji — stronger light-mode contrast (prior checkpoint)
 
 The skull's pale gray silhouette was getting lost against both lavender table
 backgrounds. In light mode only, `brightness(0.5) contrast(1.5)` deepens the

@@ -1,5 +1,17 @@
 # Review notes: new-season sweep
 
+## Light mode — eyes, navigation, sticky edge
+
+[2011 standings](http://localhost:4344/2011/): eyes glow pale yellow; scroll to
+verify the header's bottom border. [Home](http://localhost:4344/) and subpages:
+smaller bulb aligned after About, including at 320px. [Portland](http://localhost:4344/2025/POR/)
+shows the larger skull. Toggle dark to confirm the original unlit skull.
+
+Read the shared bulb/skull tokens, `result-emoji.astro`, the SVG's separated eye
+and nose paths, nav placements, and `table.astro`'s sticky-cell shadow. Browser
+checks now inspect the inline SVG, accessible image description, navigation
+alignment and real pixels on the scrolled edge. [Evidence](light-mode.md#glowing-skull-eyes-quieter-navigation-toggle-and-sticky-header-edge).
+
 ## Light mode — eliminated emoji contrast
 
 [2011 standings](http://localhost:4344/2011/) now show darker slate skulls on

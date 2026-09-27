@@ -1,5 +1,18 @@
 # New-season sweep: round log
 
+## Light mode — glowing eyes, nav placement, sticky header edge
+
+Implemented the successive requests together: inline skull eyes share the bulb's
+pale-yellow glow in light mode; a smaller bulb sits beside About rather than on
+its own row; sticky light-table headers retain a painted bottom edge on scroll.
+Dark skull renders are pixel-identical to the old image at 18/20/32px. Header
+placement changes in both themes; dark palette/header borders stay unchanged.
+
+Check/build, 220 tests and 54-case dev/preview page matrices pass, including
+actual scrolled-edge pixel assertions, eye/nose/ARIA checks and navigation alignment.
+Dev smoke: 32 external images, zero problems; skulls are now separately checked
+inline SVGs. [Tour and evidence](light-mode.md#glowing-skull-eyes-quieter-navigation-toggle-and-sticky-header-edge).
+
 ## Light mode — more legible eliminated emoji
 
 Added a light-only brightness/contrast filter to the shared eliminated emoji:

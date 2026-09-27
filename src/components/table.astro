@@ -103,6 +103,9 @@ const {
         top: 0;
         z-index: 10;
         background-color: var(--surface-table-head);
+        /* Collapsed table borders stay in the table's scrolling layer.
+           Paint an edge on the sticky cell itself so it travels with it. */
+        box-shadow: var(--table-sticky-edge);
       }
     }
   }

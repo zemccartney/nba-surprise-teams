@@ -5,7 +5,6 @@ import "@fontsource-variable/sixtyfour/full.css";
 import sixtyfourLatinUrl from "@fontsource-variable/sixtyfour/files/sixtyfour-latin-full-normal.woff2?url";
 
 import "../styles/global.css";
-import ColorSchemeToggle from "../components/color-scheme-toggle.astro";
 
 interface Props {
   description?: string;
@@ -63,7 +62,6 @@ const { description, title } = Astro.props;
       <div class="container">
         <header class="header">
           <slot name="header" />
-          <ColorSchemeToggle />
         </header>
         <slot />
       </div>
@@ -106,6 +104,12 @@ const { description, title } = Astro.props;
   }
 
   .header {
-    padding: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .header {
+      padding-inline: 2rem;
+    }
   }
 </style>

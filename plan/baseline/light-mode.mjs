@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync } from "node:fs";
 import Path from "node:path";
 import { chromium } from "playwright-core";
+import { PNG } from "pngjs";
 
 const [base, output] = process.argv.slice(2);
 if (!base || !output)
@@ -72,22 +73,54 @@ try {
             theme === "light",
             "Detroit halo only in dark mode",
           );
+        const bulbColor = await page
+          .locator("#theme-toggle .bulb-fill")
+          .evaluate((element) => getComputedStyle(element).color);
         const emojiPaints = await page
-          .locator("img[data-result-emoji]")
+          .locator("[data-result-emoji]")
           .evaluateAll((images) =>
             images.map((image) => ({
+              eyes: [...image.querySelectorAll(".skull-eye")].map((eye) => ({
+                fill: getComputedStyle(eye).fill,
+                filter: getComputedStyle(eye).filter,
+              })),
               filter: getComputedStyle(image).filter,
+              label: image.getAttribute("aria-label"),
               name: image.dataset.resultEmoji,
+              nose: image.querySelector(".skull-nose")
+                ? getComputedStyle(image.querySelector(".skull-nose")).fill
+                : undefined,
+              role: image.getAttribute("role"),
             })),
           );
-        for (const { filter, name } of emojiPaints)
+        for (const { eyes, filter, label, name, nose, role } of emojiPaints) {
           assert.equal(
             filter,
-            theme === "light" && name === "eliminated"
-              ? "brightness(0.5) contrast(1.5)"
-              : "none",
-            "Only eliminated emoji receive the light-mode contrast treatment",
+            "none",
+            "No whole-emoji filter dims the yellow eyes",
           );
+          if (name === "eliminated") {
+            assert.equal(role, "img");
+            assert.match(
+              label,
+              /Skull and crossbones emoji, indicating a team is eliminated/,
+            );
+            assert.equal(eyes.length, 2, "Only the two eye sockets glow");
+            assert.equal(
+              nose,
+              theme === "light" ? "rgb(0, 0, 0)" : "rgb(41, 47, 51)",
+            );
+            for (const eye of eyes) {
+              assert.equal(
+                eye.fill,
+                theme === "light" ? bulbColor : "rgb(41, 47, 51)",
+              );
+              assert.equal(eye.filter === "none", theme === "dark");
+            }
+          } else {
+            assert.equal(eyes.length, 0);
+          }
+        }
         const hosts = await page.locator("[data-chart]").all();
         for (const host of hosts) {
           await host.scrollIntoViewIfNeeded();
@@ -104,6 +137,23 @@ try {
         );
         // Ensure the added bulb does not overlap legacy negative-margin season navigation.
         const toggle = await page.locator("#theme-toggle").boundingBox();
+        const about = await page
+          .locator('header a[href="/about/"]')
+          .boundingBox();
+        assert.equal(await page.locator("nav #theme-toggle").count(), 1);
+        assert.ok(
+          toggle.x >= about.x + about.width,
+          "Bulb sits beside the last navigation link",
+        );
+        assert.ok(
+          Math.abs(toggle.y + toggle.height / 2 - about.y - about.height / 2) <
+            1,
+          "Bulb is vertically aligned with the navigation links",
+        );
+        assert.ok(
+          toggle.width >= 44 && toggle.height >= 44,
+          "Retain a comfortable hit target",
+        );
         const seasonLinks = await page.locator(".season-button").all();
         for (const link of seasonLinks) {
           const box = await link.boundingBox();
@@ -135,6 +185,61 @@ try {
           });
           await page.keyboard.press("Escape");
           assert.equal(await popover.count(), 0);
+        }
+        if (path === "/2011/") {
+          // Compact tables need a shorter viewport to allow enough scroll travel.
+          await page.setViewportSize({ height: 600, width });
+          await page
+            .locator("#standings")
+            .evaluate((table) =>
+              scrollTo(0, scrollY + table.getBoundingClientRect().top + 100),
+            );
+          const headers = await page
+            .locator("#standings > thead > tr > :is(th, td)")
+            .evaluateAll((cells) =>
+              cells.map((cell) => ({
+                ...cell.getBoundingClientRect().toJSON(),
+                shadow: getComputedStyle(cell).boxShadow,
+              })),
+            );
+          const screenshot = await page.screenshot({
+            path: Path.join(output, `${theme}-sticky-header-${width}.png`),
+          });
+          for (const header of headers) {
+            assert.ok(
+              Math.abs(header.y) <= 1,
+              "Header sticks to the viewport top after scrolling",
+            );
+            if (theme === "light") {
+              assert.match(
+                header.shadow,
+                /inset/,
+                "Sticky cell carries its own bottom rule",
+              );
+              const pixels = PNG.sync.read(screenshot);
+              const x = Math.floor(header.x + header.width / 2);
+              // Sample the actual scrolled bottom edge, not just CSS declarations.
+              const hasEdge = [1, 2].some((offset) => {
+                const y = Math.floor(header.y + header.height) - offset;
+                const start = (y * pixels.width + x) * 4;
+                return [2, 6, 23].every(
+                  (value, channel) =>
+                    Math.abs(pixels.data[start + channel] - value) <= 1,
+                );
+              });
+              assert.ok(
+                hasEdge,
+                "Visible slate bottom border in the scrolled screenshot",
+              );
+            } else {
+              assert.equal(header.shadow, "none");
+            }
+          }
+          await page.locator("#standings .popover-trigger").click();
+          await page.locator("[popover]:popover-open").waitFor();
+          await page.keyboard.press("Escape");
+          assert.equal(await page.locator("[popover]:popover-open").count(), 0);
+          await page.setViewportSize({ height: 1000, width });
         }
         report.push({ overflow, path, theme, width });
       }
