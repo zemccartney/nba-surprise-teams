@@ -1,5 +1,18 @@
 # New-season sweep: round log
 
+## Light mode — publish review branch and Showdown handoff
+
+Zack approved visuals/alignment through `059af4a`, authorized checkpoint 3, then
+requested a pushed branch and PR for his review and the Showdown agent. Fetched
+main is still `626171e`; no rebase is needed. A merge-tree dry run against
+Showdown `71f95d6` identifies one textual conflict plus semantic paint updates,
+including removed `theme.pale`. [Agent handoff](light-mode-handoff.md).
+
+Review pushes use `[skip ci]`: the only hosted workflow would otherwise create a
+Cloudflare Preview on every branch push. Local checks through the approved
+checkpoint pass; new preference probes/fixes remain in progress and are not yet
+claimed complete. No main merge or Cloudflare creation is authorized.
+
 ## Styling accepted; separate Stats chart-alignment trial
 
 Zack approved light-mode styling through `d32fab3`, then requested aligned bottoms

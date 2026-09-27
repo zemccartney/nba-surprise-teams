@@ -1,5 +1,16 @@
 # Review notes: new-season sweep
 
+## Light mode — published review baseline / checkpoint 3 in progress
+
+Visuals and paired-chart alignment through `059af4a` are approved. Review
+`feature/light-mode` against main, starting with
+[the Showdown integration handoff](light-mode-handoff.md), then the semantic
+roles in `src/styles/global.css`, shared components, and chart role mappings.
+Preference edge-case verification is ongoing and will be reported separately;
+publishing this branch does not claim those checks are complete. Review pushes
+skip the repository's auto-deploy workflow to avoid unauthorized Cloudflare
+Preview creation. No main merge/deployment.
+
 ## Stats chart-alignment trial (styling through d32fab3 approved)
 
 [Stats](http://localhost:4344/stats/): compare the bottom plot edges and the

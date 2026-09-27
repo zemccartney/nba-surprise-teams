@@ -10,10 +10,13 @@
 - Local dev: http://localhost:4341/ (only while the checkpoint server runs).
 - Built workerd preview: http://localhost:4344/ (no dev toolbar).
 
-## Current tour — checkpoint 2
+## Current tour — approved visuals, checkpoint 3 in progress
 
-Zack asked to finish surface coverage before collecting styling notes. No merge
-or deployment is authorized; this checkpoint is ready for that design review.
+Zack approved the styling and paired-chart alignment through `059af4a`. Final
+preference/accessibility verification is in progress. He requested publication
+of `feature/light-mode` and a PR so the Showdown agent can integrate this theme
+system. Read the [agent handoff](light-mode-handoff.md). No merge to main or
+Cloudflare publishing is authorized; review pushes skip the auto-deploy workflow.
 
 1. [Team + pace chart](http://localhost:4344/2025/CHA/): toggle themes, hover the
    chart, use Tab/arrows/Home/End, open the table's question-mark popovers.
