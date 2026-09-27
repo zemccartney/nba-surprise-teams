@@ -5,7 +5,9 @@ import { getArchivedGames, getArchivedSeasons } from "virtual:tracker/archive";
 import { catalog } from "virtual:tracker/catalog";
 
 import type { TeamCode } from "../content-utils";
+import type { ShowdownEra } from "../data/showdown-history";
 
+import ShowdownScatterChart from "../components/charts/showdown-scatter.astro";
 import ShowdownStandingsChart from "../components/charts/showdown-standings.astro";
 import SurprisesByTeamChart from "../components/charts/surprises-by-team.astro";
 import SurprisesPerSeasonChart from "../components/charts/surprises-per-season.astro";
@@ -270,23 +272,64 @@ for (const teamSeason of teamSeasons) {
 
 // END Team Season scatterplot
 
+const showdownHistories = new Map<TeamCode, ShowdownEra[]>();
 const franchiseIds = new Map(
   teams.map((team) => {
     const history = ContentUtils.getTeamHistory(team.id);
-    return [team.id, (history && history.at(-1)?.teamId) || team.id];
+    const id = (history && history.at(-1)?.teamId) || team.id;
+    if (history)
+      showdownHistories.set(
+        id,
+        history.map((era) => {
+          const firstSeason = era.duration[0];
+          if (firstSeason === undefined)
+            throw new Error(`Missing history start for ${era.name}`);
+          return {
+            firstSeason,
+            lastSeason: era.duration[1],
+            logo: era.logo,
+            name: era.name,
+            teamId: era.teamId,
+          };
+        }),
+      );
+    return [team.id, id];
   }),
 );
 const showdownRows = historicShowdownStandings({
   archivedSeasonIds: archivedIds,
   franchiseIds,
   games,
+  histories: showdownHistories,
   teams,
   teamSeasons,
 });
 const showdownHistory = await Promise.all(
-  showdownRows.map(async ({ l, pct, team, w }) => {
+  showdownRows.map(async ({ history, l, pct, team, w }) => {
     const { default: logo } = await ContentUtils.getTeamLogo(team.id);
-    return { l, logoSrc: logo.src, name: team.name, pct, teamId: team.id, w };
+    const eras = await Promise.all(
+      history.map(async (era) => {
+        const { default: image } = await Utils.getEmoji(era.logo);
+        return {
+          firstSeason: era.firstSeason,
+          l: era.l,
+          lastSeason: era.lastSeason,
+          logoSrc: image.src,
+          name: era.name,
+          pct: era.pct,
+          w: era.w,
+        };
+      }),
+    );
+    return {
+      history: eras,
+      l,
+      logoSrc: logo.src,
+      name: team.name,
+      pct,
+      teamId: team.id,
+      w,
+    };
   }),
 );
 ---
@@ -380,11 +423,14 @@ const showdownHistory = await Promise.all(
     <section class="section-showdown" id="showdown-history">
       <h2 class="section-title">Historic Showdown Standings</h2>
       <p class="showdown-note">
-        Head-to-head results between surprise candidates. Archived seasons only;
-        franchise histories combined. Ranked by total wins ÷ games played, not
-        an average of season percentages.
+        Results of every surprise team candidate head-to-head
       </p>
-      <ShowdownStandingsChart data={showdownHistory} />
+      <div class="showdown-charts">
+        <ShowdownStandingsChart data={showdownHistory} />
+        <div class="showdown-scatter-panel">
+          <ShowdownScatterChart data={showdownHistory} />
+        </div>
+      </div>
     </section>
   </div>
 </Subpage>
@@ -482,6 +528,28 @@ const showdownHistory = await Promise.all(
   .section-showdown {
     order: 5;
     grid-column: 1 / -1;
+  }
+  .showdown-charts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+  .showdown-scatter-panel {
+    min-width: 0;
+  }
+  @media (min-width: 1280px) {
+    .showdown-charts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .showdown-scatter-panel {
+      align-self: start;
+    }
+  }
+  @media (min-width: 1280px) and (min-height: 700px) {
+    .showdown-scatter-panel {
+      position: sticky;
+      top: 2rem;
+    }
   }
   .showdown-note {
     max-width: 48rem;

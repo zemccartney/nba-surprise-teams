@@ -20,7 +20,17 @@ import {
   theme,
 } from "./tanstack-style";
 
+export interface ShowdownHistoryEra {
+  firstSeason: number;
+  l: number;
+  lastSeason?: number | undefined;
+  logoSrc: string;
+  name: string;
+  pct?: number | undefined;
+  w: number;
+}
 export interface ShowdownHistoryPoint {
+  history?: ShowdownHistoryEra[];
   l: number;
   logoSrc: string;
   name: string;
@@ -34,8 +44,46 @@ export interface ShowdownHistoryProps {
 
 export const showdownPct = (pct: number | undefined) =>
   pct === undefined ? "—" : `${(pct * 100).toFixed(1)}%`;
+export const showdownRecord = (
+  row: Pick<ShowdownHistoryPoint, "l" | "pct" | "w">,
+) =>
+  `${row.w}–${row.l} | ${showdownPct(row.pct)} (${row.w + row.l} ${row.w + row.l === 1 ? "game" : "games"} played)`;
+export const showdownEraYears = (era: ShowdownHistoryEra) =>
+  `${era.firstSeason}–${era.lastSeason === undefined ? "present" : era.lastSeason + 1}`;
 export const describeShowdownHistory = (row: ShowdownHistoryPoint) =>
-  `${row.name}. ${row.w} wins, ${row.l} losses in ${row.w + row.l} head-to-head games. ${row.pct === undefined ? "No qualifying games." : `Winning percentage ${showdownPct(row.pct)}.`} Archived seasons only; includes franchise history.`;
+  `${row.name}. ${showdownRecord(row)}.${row.pct === undefined ? " No qualifying games." : ""}${(row.history ?? []).map((era) => ` ${era.name}, ${showdownEraYears(era)}: ${showdownRecord(era)}.`).join("")}`;
+
+export function showdownHistoryBody(row: ShowdownHistoryPoint): HTMLElement {
+  const body = add(
+    node("div"),
+    add(
+      node("h3", "tooltip-heading-centered"),
+      logo(row.name, row.logoSrc),
+      document.createTextNode(` ${row.name}`),
+    ),
+    node("p", "tooltip-centered", showdownRecord(row)),
+  );
+  if (row.history && row.history.length > 1) {
+    const history = node("ul", "showdown-tooltip-history");
+    for (const era of row.history) {
+      add(
+        history,
+        add(
+          node("li"),
+          add(
+            node("h4", "showdown-era-title"),
+            logo(era.name, era.logoSrc, 24),
+            document.createTextNode(` ${era.name}`),
+          ),
+          node("p", "showdown-era-years", showdownEraYears(era)),
+          node("p", "showdown-era-record", showdownRecord(era)),
+        ),
+      );
+    }
+    add(body, history);
+  }
+  return body;
+}
 
 export const showdownHistoryFocus: ChartFocusStrategy<
   ShowdownHistoryPoint,
@@ -62,17 +110,8 @@ export function showdownHistoryChart({
   );
   return {
     annotation: (scene) =>
-      `<g data-showdown-labels="" aria-hidden="true" pointer-events="none" fill="var(--color-green-200)" stroke="${theme.background}" stroke-width="3" stroke-linejoin="round" paint-order="stroke" font-size="${scene.chart.width < 480 ? 16 : 20}" font-weight="700" font-family="var(--font-mono)">${scene.points.map((point) => `<text x="${scene.chart.x + 8}" y="${point.y}" dominant-baseline="middle">${point.datum.w}–${point.datum.l} | ${showdownPct(point.datum.pct)}</text>`).join("")}</g>`,
-    body: (row) =>
-      add(
-        node("div"),
-        add(
-          node("h3", "tooltip-heading-centered"),
-          logo(row.name, row.logoSrc),
-          document.createTextNode(` ${row.name}`),
-        ),
-        node("p", "", describeShowdownHistory(row)),
-      ),
+      `<g data-showdown-labels="" aria-hidden="true" pointer-events="none" fill="${theme.background}" font-size="${scene.chart.width < 480 ? 16 : 20}" font-weight="700" font-family="var(--font-mono)">${scene.points.map((point) => `<text x="${scene.chart.x + 8}" y="${point.y}" dominant-baseline="middle"${point.datum.pct ? "" : ' fill="var(--color-green-200)"'}>${point.datum.w}–${point.datum.l} | ${showdownPct(point.datum.pct)}</text>`).join("")}</g>`,
+    body: showdownHistoryBody,
     definition: defineChart({
       focus: showdownHistoryFocus,
       margin: { bottom: 60, left: 56, right: 16, top: 16 },

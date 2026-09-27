@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { showdownHistoryBody } from "../src/components/charts/showdown-standings";
 import {
   scatterBody,
   seasonBody,
@@ -92,6 +93,44 @@ describe("chart tooltip DOM construction", () => {
   });
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+  it("renders concise Showdown records and name-era breakdowns without HTML parsing", () => {
+    showdownHistoryBody({
+      history: [
+        {
+          firstSeason: 1974,
+          l: 3,
+          lastSeason: 1996,
+          logoSrc: "/bullets.svg",
+          name: "Washington Bullets",
+          pct: 0.25,
+          w: 1,
+        },
+        {
+          firstSeason: 1997,
+          l: 3,
+          logoSrc: "/wizards.svg",
+          name: "Washington Wizards",
+          pct: 0.5,
+          w: 3,
+        },
+      ],
+      l: 6,
+      logoSrc,
+      name,
+      pct: 0.4,
+      teamId: "WAS",
+      w: 4,
+    });
+    expect(nodes.filter((node) => node.tag === "img")).toHaveLength(3);
+    const text = nodes.map((node) => node.textContent).join(" ");
+    expect(text).toContain("4–6 | 40.0% (10 games played)");
+    expect(text).toContain("Washington Bullets");
+    expect(text).toContain("1974–1997");
+    expect(text).toContain("1–3 | 25.0% (4 games played)");
+    expect(text).toContain("1997–present");
+    expect(text).toContain("3–3 | 50.0% (6 games played)");
+    expect(text).not.toContain("Archived seasons only");
   });
   it.each(cases)(
     "preserves literal names, sources and meaningful alternatives for $name",

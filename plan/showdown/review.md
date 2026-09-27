@@ -128,6 +128,20 @@ This includes the final visual revisions below.
 - Browser recheck: all 30 bars, keyboard tooltips and no horizontal overflow at
   390px and 1440px; no runtime exceptions.
 
+## Paired-chart and tooltip revision
+
+- Showdown links hover light pink rather than green.
+- Bar labels use the chart dark background color without outlines; the subtitle
+  is now “Results of every surprise team candidate head-to-head”.
+- Shared tooltips show logo/name and `W–L | PCT (n games played)`. Franchises with
+  multiple names add separate records for each named era and its years run.
+  Tests ensure these era wins/losses sum exactly to each franchise's total.
+- Added games-played vs win-percentage scatter alongside the bars at desktop
+  widths, stacked below on mobile; it uses the same data and tooltip builder.
+- Browser checks at 1440px/390px confirm both charts render, the layout switches
+  correctly, and Washington/New Orleans multi-era tooltips fit within both chart
+  hosts without clipping. No horizontal overflow or runtime exceptions.
+
 ## Remaining review / operational follow-up
 
 - User visual/code review of the new historic Stats chart and data/cache changes.
