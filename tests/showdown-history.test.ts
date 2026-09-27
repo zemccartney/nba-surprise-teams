@@ -5,7 +5,10 @@ import type { ShowdownHistoryPoint } from "../src/components/charts/showdown-sta
 import type { Game, Team, TeamSeason } from "../src/data/model";
 import type { ShowdownEra } from "../src/data/showdown-history";
 
-import { showdownScatterChart } from "../src/components/charts/showdown-scatter";
+import {
+  showdownScatterChart,
+  showdownScatterFocus,
+} from "../src/components/charts/showdown-scatter";
 import {
   describeShowdownHistory,
   showdownHistoryChart,
@@ -251,6 +254,33 @@ describe("historic Showdown standings", () => {
           width: 390,
         });
         expect(scene.points).toHaveLength(2);
+        const nearby = scene.points.map((point, i) => ({
+          ...point,
+          x: 100 + i * 4,
+          y: 100,
+        }));
+        expect(
+          showdownScatterFocus.resolve(nearby, {
+            maxDistance: 48,
+            x: 100,
+            y: 100,
+          }),
+        ).toEqual([nearby[0]]);
+        expect(
+          showdownScatterFocus.resolve(nearby, {
+            maxDistance: 48,
+            x: 104,
+            y: 100,
+          }),
+        ).toEqual([nearby[1]]);
+        expect(
+          showdownScatterFocus.resolve(nearby, {
+            maxDistance: 48,
+            x: 1000,
+            y: 100,
+          }),
+        ).toEqual([]);
+        expect(showdownScatterFocus.navigation(nearby)).toEqual(nearby);
         expect(scene.points.map((point) => point.color)).toEqual([
           "var(--color-green-700)",
           "var(--color-green-700)",
@@ -266,7 +296,9 @@ describe("historic Showdown standings", () => {
             Number.isSafeInteger(tick.value),
           ),
         ).toBe(true);
-        expect(scatter.body).toBe(chart.body);
+        expect(scatter.description).toContain(
+          "click or press Enter for name history",
+        );
       } finally {
         scatterRuntime.destroy();
       }

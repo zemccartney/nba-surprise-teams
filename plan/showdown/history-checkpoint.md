@@ -14,8 +14,12 @@
   so labels have more room, especially on phones.
 - Bar labels now use the chart's dark background color without outlines.
   The shared subtitle is “Results of every surprise team candidate head-to-head”.
-- Both charts share a concise tooltip: logo/name, `W–L | PCT (n games played)`,
-  then per-name/era logo, years and records where the franchise has name history.
+- Both charts share concise logo/name and `W–L | PCT (n games played)` content.
+  The bar tooltip includes name-era breakdowns immediately. Scatter hover stays
+  compact; clicking or pressing Enter reveals per-name/era logos, years and
+  records, with a visible hint when history is available. Escape dismisses it.
+  Scatter selection uses nearest centers so overlapping/focused circles cannot
+  capture a neighboring dot's hover target. The subtitle is now 20px.
   Era totals are calculated from qualifying games in each inclusive season range;
   displayed end years include the final season's ending year. All era W/L sums
   are tested against franchise totals. Washington's Bullets/Wizards transition
@@ -37,7 +41,7 @@ checks. Browser tested at 1440px and 390px: all rows, no horizontal overflow,
 working keyboard tooltip and no runtime exceptions.
 
 Final full build/verification passed: dependency audit, Astro check,
-formatting/lint/workflow checks, **250 tests across 34 files**, production build
+formatting/lint/workflow checks, **252 tests across 34 files**, production build
 and artifact audit (**412 files**). No database drift or uncommitted fake odds.
 
 Review this new chart separately from the already approved season page layout.

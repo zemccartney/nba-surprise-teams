@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { showdownScatterBody } from "../src/components/charts/showdown-scatter";
 import { showdownHistoryBody } from "../src/components/charts/showdown-standings";
 import {
   scatterBody,
@@ -132,6 +133,38 @@ describe("chart tooltip DOM construction", () => {
     expect(text).toContain("3–3 | 50.0% (6 games played)");
     expect(text).not.toContain("Archived seasons only");
   });
+  it.each([false, true])(
+    "shows scatter history only when pinned: %s",
+    (pinned) => {
+      const era = {
+        firstSeason: 1990,
+        l: 2,
+        logoSrc,
+        name: "Historical name",
+        pct: 0.5,
+        w: 2,
+      };
+      showdownScatterBody(
+        {
+          ...team,
+          history: [era, { ...era, firstSeason: 2000 }],
+          l: 4,
+          pct: 0.5,
+          w: 4,
+        },
+        { pinned },
+      );
+      const text = nodes.map((node) => node.textContent).join(" ");
+      expect(text).toContain("4–4 | 50.0% (8 games played)");
+      expect(text.includes("Historical name")).toBe(pinned);
+      expect(text.includes("Click or press Enter for name history.")).toBe(
+        !pinned,
+      );
+      expect(nodes.filter((node) => node.tag === "img")).toHaveLength(
+        pinned ? 3 : 1,
+      );
+    },
+  );
   it.each(cases)(
     "preserves literal names, sources and meaningful alternatives for $name",
     ({ build }) => {

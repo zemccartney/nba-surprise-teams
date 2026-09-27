@@ -151,6 +151,18 @@ This includes the final visual revisions below.
   red. Pace area, line and threshold styling are otherwise unchanged.
 - Renderer tests explicitly verify all three updated color mappings.
 
+## Scatter hover revision
+
+- Subtitle increased from 18px to 20px.
+- Scatter hover shows only the franchise summary and, where applicable, a
+  click/Enter hint for full name history. Pinned tooltips retain the complete
+  breakdown; the standings chart's tooltip remains unchanged.
+- Nearest-center focus replaces topmost-circle hit testing, which otherwise
+  lets overlapping or enlarged focused dots capture neighboring hover targets.
+- Desktop/mobile pointer checks cover all 30 franchises: each exact center
+  selects the correct team and its tooltip clears a 24px neighborhood around
+  the dot. Charlotte's click-to-pin, Enter-to-pin and Escape dismissal pass.
+
 ## Remaining review / operational follow-up
 
 - User visual/code review of the new historic Stats chart and data/cache changes.

@@ -26,6 +26,13 @@
   --ts-chart-tooltip-max-width: min(20rem, calc(100% - 16px));
 }
 
+.showdown-tooltip-hint {
+  margin-top: 0.5rem;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+}
+
 /* Compact historical-name breakdowns shared by both Showdown charts. */
 .showdown-tooltip-history {
   margin-top: 1rem;
