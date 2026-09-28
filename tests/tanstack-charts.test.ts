@@ -32,7 +32,7 @@ vi.mock(
       red: "#b91c1c",
       season: "#15803d",
       slate: "#94a3b8",
-      surpriseDot: "#84cc16",
+      surpriseDot: "#15803d",
       yellow: "#facc15",
     },
   }),
@@ -244,7 +244,7 @@ describe("application TanStack definitions", () => {
       teamName: "B",
     };
     const scene = render(scatterChart({ data: [surprised, eliminated] }));
-    expect(scene.points.map((p) => p.color)).toEqual(["#b91c1c", "#84cc16"]);
+    expect(scene.points.map((p) => p.color)).toEqual(["#b91c1c", "#15803d"]);
     expect(scene.points[0]?.datum).toBe(eliminated);
     expect(scene.scales.x?.domain).toEqual([15, 25]);
     expect(scene.scales.y?.domain).toEqual([-10, 15]);

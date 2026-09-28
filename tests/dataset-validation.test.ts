@@ -46,7 +46,7 @@ it.each([
   ],
   [
     "game identity",
-    "UPDATE archived_games SET id='wrong' WHERE id=(SELECT id FROM archived_games LIMIT 1)",
+    "DELETE FROM archived_game_venues WHERE game_id=(SELECT id FROM archived_games LIMIT 1); UPDATE archived_games SET id='wrong' WHERE id=(SELECT id FROM archived_games LIMIT 1)",
     "Game identity mismatch",
   ],
   [

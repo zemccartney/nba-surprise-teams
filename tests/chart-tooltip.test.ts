@@ -1,5 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { showdownScatterChart } from "../src/components/charts/showdown-scatter";
+import { showdownHistoryBody } from "../src/components/charts/showdown-standings";
 import {
   scatterBody,
   seasonBody,
@@ -92,6 +94,67 @@ describe("chart tooltip DOM construction", () => {
   });
   afterEach(() => {
     vi.unstubAllGlobals();
+  });
+  it("renders concise Showdown records and name-era breakdowns without HTML parsing", () => {
+    showdownHistoryBody({
+      history: [
+        {
+          firstSeason: 1974,
+          l: 3,
+          lastSeason: 1996,
+          logoSrc: "/bullets.svg",
+          name: "Washington Bullets",
+          pct: 0.25,
+          w: 1,
+        },
+        {
+          firstSeason: 1997,
+          l: 3,
+          logoSrc: "/wizards.svg",
+          name: "Washington Wizards",
+          pct: 0.5,
+          w: 3,
+        },
+      ],
+      l: 6,
+      logoSrc,
+      name,
+      pct: 0.4,
+      teamId: "WAS",
+      w: 4,
+    });
+    expect(nodes.filter((node) => node.tag === "img")).toHaveLength(3);
+    const text = nodes.map((node) => node.textContent).join(" ");
+    expect(text).toContain("4–6 | 40.0% (10 games played)");
+    expect(text).toContain("Washington Bullets");
+    expect(text).toContain("1974–1997");
+    expect(text).toContain("1–3 | 25.0% (4 games played)");
+    expect(text).toContain("1997–present");
+    expect(text).toContain("3–3 | 50.0% (6 games played)");
+    expect(text).not.toContain("Archived seasons only");
+  });
+  it("shows complete scatter history without pinning", () => {
+    const era = {
+      firstSeason: 1990,
+      l: 2,
+      logoSrc,
+      name: "Historical name",
+      pct: 0.5,
+      w: 2,
+    };
+    showdownScatterChart({ data: [] }).body({
+      ...team,
+      gamesPlayed: 8,
+      history: [era, { ...era, firstSeason: 2000 }],
+      l: 4,
+      pct: 0.5,
+      w: 4,
+    });
+    const text = nodes.map((node) => node.textContent).join(" ");
+    expect(text).toContain("4–4 | 50.0% (8 games played)");
+    expect(text).toContain("Historical name");
+    expect(text).not.toContain("Click or press Enter");
+    expect(nodes.filter((node) => node.tag === "img")).toHaveLength(3);
   });
   it.each(cases)(
     "preserves literal names, sources and meaningful alternatives for $name",

@@ -1,0 +1,109 @@
+---
+import { getSeasonArchive } from "virtual:tracker/archive";
+import { catalog } from "virtual:tracker/catalog";
+
+import ShowdownArt from "../../assets/images/showdown.svg";
+import Link from "../../components/link.astro";
+import Loading from "../../components/loading.astro";
+import ShowdownInfo from "../../components/showdown/info.astro";
+import LiveShowdown from "../../components/showdown/ssr.astro";
+import UI from "../../components/showdown/ui.astro";
+import * as ContentUtils from "../../content-utils";
+import Subpage from "../../layouts/subpage.astro";
+
+export function getStaticPaths() {
+  return catalog
+    .getSeasons()
+    .filter((season) => ContentUtils.getTeamsInSeason(season.id).length > 0)
+    .map((season) => ({ params: { seasonId: season.id }, props: { season } }));
+}
+const { season } = Astro.props;
+const games = getSeasonArchive(season.id);
+const seasonLabel = ContentUtils.abbreviateSeasonRange(season, {
+  compact: true,
+});
+---
+
+<Subpage
+  description={`Head-to-head matchups between the ${seasonLabel} surprise team candidates`}
+  title={`Showdown ${seasonLabel}`}
+>
+  <div class="showdown-page">
+    <nav aria-label="Season" class="season-navigation">
+      <Link href={`/${season.id}/`}>Back to {seasonLabel} Season</Link>
+    </nav>
+    <header class="showdown-header">
+      <div class="title-row">
+        <h1>SHOWDOWN <span>{seasonLabel}</span></h1>
+        <ShowdownInfo />
+      </div>
+      <ShowdownArt aria-hidden="true" class="showdown-art" />
+    </header>
+    {
+      games ? (
+        <UI games={games} seasonId={season.id} />
+      ) : (
+        <LiveShowdown seasonId={season.id} server:defer>
+          <Loading slot="fallback" />
+        </LiveShowdown>
+      )
+    }
+  </div>
+</Subpage>
+
+<style>
+  .showdown-page {
+    padding-inline: 1rem;
+  }
+  .season-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+    font-size: var(--text-2xl);
+  }
+  .showdown-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 3rem auto 4rem;
+  }
+  .title-row {
+    position: relative;
+    width: min-content;
+    max-width: calc(100% - 2rem);
+  }
+  h1 {
+    color: var(--ink-showdown);
+    font-family: var(--font-title);
+    font-size: clamp(1.5rem, 4.7vw, 3.5rem);
+    text-wrap: balance;
+    line-height: 1.5;
+    text-shadow: var(--showdown-title-shadow);
+  }
+  .showdown-art {
+    width: min(18rem, 80%);
+    height: auto;
+    margin-block: 1rem;
+  }
+  h1 span {
+    white-space: nowrap;
+  }
+  @media (min-width: 640px) {
+    .title-row {
+      width: fit-content;
+    }
+  }
+  @media (min-width: 768px) {
+    .season-navigation {
+      font-size: var(--text-3xl);
+    }
+    .showdown-header {
+      margin-top: 4rem;
+    }
+    .showdown-art {
+      width: 21rem;
+    }
+  }
+</style>

@@ -195,6 +195,8 @@ textarea {
   --color-indigo-500: oklch(58.5% 0.233 277.117);
 
   /* Red */
+  --color-showdown-red: #ef4c5b;
+  --color-showdown-hover: #ffb3be;
   --color-red-700: oklch(50.5% 0.213 27.518);
   /* Same +24.1 lightness lift as green-700 → lime-500, with lime's chroma
      and the red area's hue. SVG uses this token directly. */
@@ -246,10 +248,15 @@ textarea {
   --surface-row: var(--color-lime-950);
   --ink-primary: var(--color-green-200);
   --ink-heading: var(--color-lime-400);
+  --ink-positive: var(--color-lime-400);
   --ink-notice: var(--color-yellow-200);
   --ink-warning: var(--color-yellow-400);
   --ink-link: var(--color-indigo-400);
   --ink-link-hover: var(--color-indigo-100);
+  --ink-showdown: var(--color-showdown-red);
+  --ink-showdown-hover: var(--color-showdown-hover);
+  --showdown-glow: color-mix(in srgb, var(--ink-showdown) 70%, transparent);
+  --showdown-title-shadow: 0 3px 0 #620f20;
   --rule: var(--color-slate-800);
   --bulb-light: oklch(97.3% 0.071 103.193);
   --skull-head: #ccd6dd;
@@ -282,7 +289,8 @@ textarea {
   --chart-positive: var(--color-green-700);
   --chart-negative: var(--color-red-700);
   --chart-positive-line: var(--color-lime-500);
-  --chart-surprise-dot: var(--color-lime-500);
+  /* Both Stats scatters use the standard positive fill, not the pace stroke. */
+  --chart-surprise-dot: var(--chart-positive);
   --chart-negative-line: var(--color-pace-red);
   --chart-season: var(--color-green-700);
   --chart-alternate: var(--color-lime-200);
@@ -299,12 +307,17 @@ textarea {
   --surface-row: var(--color-indigo-300);
   --ink-primary: var(--color-slate-950);
   --ink-heading: var(--color-slate-950);
+  --ink-positive: #14532d;
   --ink-notice: oklch(48.5% 0.17 45);
   --ink-warning: var(--ink-notice);
   /* Slightly deeper than the WIP's indigo-700: links also need 4.5:1
      against the darker striped rows, not just against the page. */
   --ink-link: oklch(42% 0.21 277.023);
   --ink-link-hover: oklch(35.9% 0.144 278.697);
+  --ink-showdown: #881337;
+  --ink-showdown-hover: #701a35;
+  --showdown-glow: color-mix(in srgb, var(--ink-showdown) 20%, transparent);
+  --showdown-title-shadow: none;
   --rule: oklch(45% 0.07 275);
   --detroit-logo-filter: none;
   --skull-head: #596065;
@@ -355,6 +368,21 @@ textarea {
 /* ========================================
    Base Styles
    ======================================== */
+
+.showdown-link {
+  color: var(--ink-showdown);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.showdown-link:hover {
+  color: var(--ink-showdown-hover);
+}
+
+.showdown-link:focus-visible {
+  outline: 2px solid var(--ink-showdown);
+  outline-offset: 5px;
+}
 
 html,
 body {

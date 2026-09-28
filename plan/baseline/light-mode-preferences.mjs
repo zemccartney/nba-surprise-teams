@@ -128,8 +128,16 @@ try {
     const context = await createContext("no-preference");
     const page = await context.newPage();
     await page.goto(url("/about/"));
-    await assertTheme(page, "light");
-    cases.push({ check: "no system preference defaults to light" });
+    // Chromium can treat Playwright's "no-preference" as no override and
+    // expose the host OS scheme (including its time-of-day setting).
+    const expected = await page.evaluate(() =>
+      matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
+    );
+    await assertTheme(page, expected);
+    cases.push({
+      check: "unforced scheme follows browser-reported preference",
+      expected,
+    });
     await context.close();
   }
 

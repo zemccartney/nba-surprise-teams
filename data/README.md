@@ -164,6 +164,24 @@ game counts; failure restores the previous archive. No network access occurs in
 builds/tests. The historical endpoint's hosted availability remains an external
 risk. Existing archives are not silently refetched to add missing provider IDs.
 
+### Home/away enrichment
+
+Games carry optional explicit `venue` identities; never infer venue from the
+ordered scores array. Migration 3 stores venue metadata separately from approved
+result rows. `archive-nba` preserves venues on new imports. To enrich existing
+results without replacing scores/IDs, run:
+
+```sh
+mise run data -- archive-venues --all
+mise run data:dump
+```
+
+`--season YYYY` and `--latest` are also supported. Every selected source must
+exactly match its existing archive before writes. Paired game-log venue conflicts
+are resolved only through an official NBA box score with matching identity,
+teams and scores; unavailable/conflicting verification fails without publishing.
+See [Showdown backfill evidence](../plan/showdown/venue-backfill.md).
+
 ## Validation, migration and recovery
 
 CLI failures print their message to stderr and exit with status 1, without Node's

@@ -1,0 +1,10 @@
+- new feature: adding a surprise team head to head calendar i.e. a page per year, that shows match ups between surprise teams. thinking of this as a fun, very dumb feature, effectively showcasing some of the worst matchups of the schedule
+  - structure would be
+    - title: SHOWDOWN (in a red text, evocative of blood)
+    - icon: the image in the favicon (a face with basketballs over its eyes), two punching bag emojis facing each other, the clown emoji (I can download and provide) (see in showndown.svg)
+    - standings table: showing each team's wins and losses
+    - a list of the matchups
+      - date in a big heading (same blood red text)
+        - each match up on that date: each team emoji, enlarged, @ symbol between them
+        - scores beneath respective icons
+- Add a new chart to the stats page, bottom row: historic standings, list all teams, ordered by head-to-head win percentage

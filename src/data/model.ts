@@ -1,6 +1,10 @@
 import { z } from "astro/zod";
 
-import { teamCodeSchema } from "../loaders/live/utils.ts";
+import {
+  isVenueValid,
+  teamCodeSchema,
+  venueSchema,
+} from "../loaders/live/utils.ts";
 
 const date = z.iso.date();
 export const teamSchema = z.object({
@@ -53,13 +57,16 @@ const score = z.object({
   score: z.number().int().min(0),
   teamId: teamCodeSchema,
 });
-export const gameSchema = z.object({
-  id: z.string(),
-  nbaGameId: z.string().min(1).optional(),
-  playedOn: date,
-  seasonId: z.string().regex(/^\d{4}$/),
-  teams: z.tuple([score, score]),
-});
+export const gameSchema = z
+  .object({
+    id: z.string(),
+    nbaGameId: z.string().min(1).optional(),
+    playedOn: date,
+    seasonId: z.string().regex(/^\d{4}$/),
+    teams: z.tuple([score, score]),
+    venue: venueSchema.optional(),
+  })
+  .refine(isVenueValid, "Venue must match game teams");
 export const metadataSchema = z.object({
   seasons: seasonSchema.array(),
   teams: teamSchema.array(),

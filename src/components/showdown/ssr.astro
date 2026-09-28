@@ -1,0 +1,28 @@
+---
+import { actions } from "astro:actions";
+
+import { liveCacheControl } from "../../loaders/live/utils";
+import Crash from "../crash.astro";
+import UI from "./ui.astro";
+
+interface Props {
+  seasonId: string;
+}
+const { seasonId } = Astro.props;
+const { data, error } = await Astro.callAction(actions.getSeasonData, {
+  includeSchedule: true,
+  seasonId,
+});
+if (!error) {
+  const cacheControl = liveCacheControl(data.expiresAt);
+  if (cacheControl) Astro.response.headers.set("Cache-Control", cacheControl);
+}
+---
+
+{
+  error ? (
+    <Crash />
+  ) : (
+    <UI games={data.games} schedule={data.schedule ?? []} seasonId={seasonId} />
+  )
+}

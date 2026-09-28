@@ -29,7 +29,18 @@ const [, mm, dd] = latestSeason.startDate.split("-", 3);
     </nav>
   </Fragment>
   <main class="home-main">
-    {isSeasonReady && <StandingsTable seasonId={latestSeason.id} />}
+    {
+      isSeasonReady && (
+        <>
+          <div class="home-showdown">
+            <a class="showdown-link" href={`/${latestSeason.id}/showdown/`}>
+              This season’s Showdown
+            </a>
+          </div>
+          <StandingsTable seasonId={latestSeason.id} />
+        </>
+      )
+    }
     {
       !isSeasonReady && (
         <Typography class="content-narrow">
@@ -110,6 +121,12 @@ const [, mm, dd] = latestSeason.startDate.split("-", 3);
       font-size: var(--text-4xl);
       line-height: var(--text-4xl--line-height);
     }
+  }
+
+  .home-showdown {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: var(--text-xl);
   }
 
   .home-main {

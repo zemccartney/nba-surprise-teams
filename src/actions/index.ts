@@ -14,6 +14,7 @@ import * as Utils from "../utils";
 export const server = {
   getSeasonData: defineAction({
     input: z.object({
+      includeSchedule: z.boolean().optional(),
       seasonId: z.string(),
     }),
     // eslint-disable-next-line perfectionist/sort-objects
@@ -41,21 +42,26 @@ export const server = {
         // Compare Eastern calendar dates, independent of the server's timezone.
         const currentYYYYMMDD = Utils.getCurrentEasternYYYYMMDD();
 
-        // Odds can be published before opening night. Do not fetch or set a
-        // calculated expiry until the season begins (see MAINTENANCE.md).
+        // Results remain empty before opening night. Showdown explicitly opts
+        // into schedule fetching as soon as candidates are published.
         // Archived pages use static data, not a historical live-loader fallback.
-        if (currentYYYYMMDD < season.startDate) {
+        if (currentYYYYMMDD < season.startDate && !input.includeSchedule) {
           return {
             games: [],
           };
         }
 
         const now = Date.now();
-
+        // Keep schedule-capable entries separate from the existing results key.
+        // Missing schedule data can never satisfy a Showdown request.
+        const cacheKey = input.includeSchedule
+          ? `${season.id}:schedule`
+          : season.id;
         const cached = decodeLiveCache(
-          await env.GAMES_KV.get(season.id, "text"),
+          await env.GAMES_KV.get(cacheKey, "text"),
           season.id,
           LIVE_DATA_VERSION,
+          input.includeSchedule,
         );
 
         if (cached.status === "invalid") {
@@ -67,7 +73,7 @@ export const server = {
         const gamesCache = cached.status === "valid" ? cached.data : undefined;
 
         if (gamesCache) {
-          const { expiresAt, games } = gamesCache;
+          const { expiresAt, games, schedule } = gamesCache;
 
           // A timestamp can legitimately accompany zero completed games.
           if (expiresAt !== undefined && expiresAt > now) {
@@ -76,8 +82,12 @@ export const server = {
 
           // No next expiry means a complete nonempty result set. Keep retrying
           // empty, undated responses rather than declaring a season finished.
-          if (expiresAt === undefined && games.length > 0) {
-            return { games };
+          if (
+            expiresAt === undefined &&
+            games.length > 0 &&
+            (!schedule || schedule.every((game) => game.status === "final"))
+          ) {
+            return { games, ...(schedule && { schedule }) };
           }
         }
 
@@ -85,11 +95,13 @@ export const server = {
 
         try {
           // The loader validates normalized output once, at its return boundary.
-          const refreshed = await LiveLoader(season.id);
+          const refreshed = input.includeSchedule
+            ? await LiveLoader(season.id, { includeSchedule: true })
+            : await LiveLoader(season.id);
 
           // No KV TTL: retain validated data as an outage fallback.
           await env.GAMES_KV.put(
-            season.id.toString(),
+            cacheKey,
             JSON.stringify({
               data: refreshed,
               id: LIVE_DATA_VERSION,
@@ -101,6 +113,9 @@ export const server = {
           // Report refresh failures even when a valid backup keeps the page
           // working. Expected old cache versions are not refresh failures.
           Sentry.captureException(error);
+          if (import.meta.env.DEV && error instanceof Error) {
+            console.error("Live refresh failed:", error.message);
+          }
 
           if (!gamesCache) {
             throw new ActionError({
@@ -111,6 +126,7 @@ export const server = {
 
           return {
             games: gamesCache.games,
+            ...(gamesCache.schedule && { schedule: gamesCache.schedule }),
           };
         }
       } catch (error) {

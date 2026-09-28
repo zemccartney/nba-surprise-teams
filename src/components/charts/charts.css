@@ -27,6 +27,31 @@
   --ts-chart-tooltip-max-width: min(20rem, calc(100% - 16px));
 }
 
+/* Escape the chart's clipping box, but never widen the document. */
+.scatter-tooltip {
+  --ts-chart-tooltip-max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  width: min(32rem, calc(100vw - 32px));
+}
+
+/* Compact historical-name breakdowns shared by both Showdown charts. */
+.showdown-tooltip-history {
+  margin-top: 1rem;
+}
+.showdown-tooltip-history > li + li {
+  margin-top: 0.75rem;
+}
+.showdown-era-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.showdown-era-years {
+  font-size: 16px;
+}
+.showdown-era-record {
+  font-size: 18px;
+}
+
 /* Paint focus on the host: Stats intentionally clips its descendants to keep
    tooltips inside the document, which would also clip an SVG-owned outline. */
 .chart:focus-visible,

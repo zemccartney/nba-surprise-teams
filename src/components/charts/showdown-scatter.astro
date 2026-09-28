@@ -1,0 +1,18 @@
+---
+import type { ShowdownHistoryProps } from "./showdown-standings";
+
+import "./charts.css";
+
+type Props = ShowdownHistoryProps;
+const json = JSON.stringify(Astro.props).replaceAll("<", String.raw`\u003c`);
+---
+
+<div class="chart" data-chart="showdown-scatter">
+  <script is:inline set:html={json} type="application/json" />
+</div>
+
+<script>
+  import { showdownScatterChart } from "./showdown-scatter";
+  import { mountCharts } from "./tanstack";
+  mountCharts("showdown-scatter", showdownScatterChart);
+</script>
