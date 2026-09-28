@@ -669,21 +669,21 @@
           <div
             class="bar"
             role="img"
-            aria-label="22 of 45 items done, 2 in progress, 3 blocked, 18 not started"
+            aria-label="25 of 46 items done, 2 in progress, 3 blocked, 16 not started"
           >
-            <span class="seg-done" style="flex: 22"></span>
+            <span class="seg-done" style="flex: 25"></span>
             <span class="seg-wip" style="flex: 2"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 18"></span>
+            <span class="seg-open" style="flex: 16"></span>
           </div>
           <p class="tally">
-            <span class="k-done"><b>22</b> done and verified</span>
+            <span class="k-done"><b>25</b> done and verified</span>
             <span class="k-wip"><b>2</b> in progress</span>
             <span class="k-blocked"
               ><b>3</b> waiting on a decision or rollback window</span
             >
-            <span class="k-open"><b>18</b> not started</span>
-            <span>45 tracked</span>
+            <span class="k-open"><b>16</b> not started</span>
+            <span>46 tracked</span>
           </p>
         </div>
       </header>
@@ -698,7 +698,7 @@
               >
             </li>
             <li>
-              <a href="#s1">1 · Foundations<span class="count">14/18</span></a>
+              <a href="#s1">1 · Foundations<span class="count">17/18</span></a>
             </li>
             <li>
               <a href="#s2">2 · Season prep<span class="count">1/4</span></a>
@@ -713,7 +713,7 @@
             </li>
             <li>
               <a href="#s5"
-                >5 · Infra &amp; deferred<span class="count">3/16</span></a
+                >5 · Infra &amp; deferred<span class="count">3/17</span></a
               >
             </li>
           </ul>
@@ -925,7 +925,7 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">01</span>
               <h2>Foundations</h2>
-              <span class="count">14 / 18 done</span>
+              <span class="count">17 / 18 done</span>
             </div>
             <p class="milestone">
               Milestone: the application, data migration and chart refinements
@@ -1233,16 +1233,20 @@ mise run setup</code></pre>
                 <span class="marker">[ ]</span>
                 <div>
                   <p class="item-title">
-                    Dev-only Sentry instrumentation — deferred
+                    Make Sentry explicitly off in local development
                   </p>
                   <p class="item-note">
-                    Zack: "sentry middleware should be disabled in dev, can
-                    address later." The old middleware was associated with the
-                    dev-only workerd cross-request-promise warning. It has now
-                    been replaced by the documented Worker entry wrapper; dev
-                    behavior needs reassessment rather than assuming that
-                    warning persists. Intentional dev enablement remains
-                    deferred and is not a Workers cutover blocker.
+                    Non-blocking cleanup: reassess whether the old workerd
+                    cross-request-promise warning survives the middleware
+                    replacement, then explicitly disable local-dev
+                    instrumentation while preserving deployed preview and
+                    production capture.
+                    <code>SENTRY_AUTH_TOKEN</code> gates the Astro integration
+                    and authorizes source-map uploads; it is not a global
+                    runtime switch. The Worker wrapper and SDK middleware are
+                    separate, and the DSN supplies the event destination. Verify
+                    both local behavior and hosted instrumentation; do not
+                    merely silence warnings with a compatibility flag.
                   </p>
                 </div>
               </li>
@@ -1280,30 +1284,46 @@ mise run setup</code></pre>
 
             <p class="subhead">Zack's exhaustive review of Foundations</p>
             <ul class="items">
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
                   <p class="item-title">Work review.md end to end</p>
                   <p class="item-note">
-                    Steps 4 through 10 each have a manual test checklist that
-                    has not been ticked. Steps 1 to 3 were reviewed as they
-                    landed.
+                    Zack confirmed his exhaustive Foundations review complete.
+                    Historical round checklists are evidence, not fresh
+                    blockers. The explicitly deferred manual screen-reader pass
+                    remains separate; this sign-off does not claim it was
+                    performed.
                   </p>
                 </div>
               </li>
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
                   <p class="item-title">
                     Decide the "decisions you may flip" items per round
                   </p>
+                  <p class="item-note">
+                    Current choices accepted or superseded by later work: keep
+                    hook auto-fixing, dependency pins, full deployment
+                    verification, SVG/image handling, HTML whitespace behavior
+                    and verified 307 trailing-slash redirects.
+                    Compatibility-date/dependency work has landed. Dev-only
+                    Sentry and post-season-start performance work remain
+                    explicit follow-ups, not reasons to reopen review.
+                  </p>
                 </div>
               </li>
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-done">
+                <span class="marker">[x]</span>
                 <div>
                   <p class="item-title">
                     Merge the stack into main once satisfied
+                  </p>
+                  <p class="item-note">
+                    Foundations merged into main and deployed to the production
+                    Worker. Separate feature branches are not part of this
+                    sign-off.
                   </p>
                 </div>
               </li>
@@ -1318,9 +1338,12 @@ mise run setup</code></pre>
               <span class="count">1 / 4 done</span>
             </div>
             <p class="milestone">
-              Milestone: the bare minimum to have the site ready for the new
-              season. Time-boxed by the real calendar, unlike everything else
-              here.
+              Foundations are complete and production is ready for seasonal
+              maintenance. Next: enter published candidate teams/odds, verify
+              their pages, then check authentic hosted refresh/expiry/stale
+              fallback at season activation. Odds entry is manual; subsequent
+              game data is fetched automatically. Pages retirement is separate
+              housekeeping.
             </p>
 
             <ul class="items">
@@ -1329,8 +1352,9 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">Schedule release</p>
                   <p class="item-note">
-                    2026-27 season registered in
-                    <code>src/content/seasons.json</code> (Step 2).
+                    2026-27 season registered and migrated to SQLite:
+                    <code>data/tracker.db</code>, with canonical tracked
+                    <code>data/dump.sql</code>.
                   </p>
                 </div>
               </li>
@@ -1339,14 +1363,18 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">Odds release, mid-September</p>
                   <p class="item-note">
-                    The next real deadline. Per <code>MAINTENANCE.md</code>:
-                    register any never-before-surprising teams — logo under
-                    <code>src/assets/images/emoji</code>, emoji name in
-                    <code>src/content/utils.ts</code>, team code in
-                    <code>src/content.config.ts</code>, team in
-                    <code>src/content/teams.json</code> — then add the team
-                    seasons to <code>src/content/teamSeasons.json</code>.
-                    Waiting on the odds being published.
+                    Waiting on published selections and odds. Follow
+                    <code>MAINTENANCE.md</code> and <code>data/README.md</code>:
+                    register any new team with its emoji asset, NBA code in
+                    <code>src/loaders/live/utils.ts::teamCodeSchema</code>, and
+                    <code>mise run data -- add-team --input /tmp/team.json</code
+                    >. Add candidates with
+                    <code
+                      >mise run data -- add-team-season --season YEAR --team
+                      CODE --over-under ODDS</code
+                    >. Dump, review, stage and rebuild/deploy; use
+                    <code>update-odds</code> for corrections. Do not edit the
+                    retired content-collection JSON files.
                   </p>
                 </div>
               </li>
@@ -1396,37 +1424,33 @@ mise run setup</code></pre>
                 <div>
                   <p class="item-title">Light mode</p>
                   <p class="item-note">
-                    Checkpoint 2 on isolated <code>feature/light-mode</code>:
-                    semantic light/dark paints, all four charts, popovers and
-                    page states are ready for styling feedback. First feedback
-                    round adds all-cell borders, light-only Detroit halo
-                    removal, gold chart accents, lighter scatter dots and orange
-                    notices. Next palette experiment: lighter base green/red,
-                    prior base shades for pace strokes/focus dots and
-                    contrasting seasonal bars. Check/build, 220 tests and
-                    dev/preview checks pass. The exact gold's low contrast
-                    against the pale plot is documented. Latest refinement:
-                    seasonal bars use link purple and table-stripe purple; other
-                    charts remain green/red. Eliminated skull emoji now use a
-                    stronger slate silhouette only in light mode; 54 dev/preview
-                    page cases pass. Latest: light skull eyes share the bulb's
-                    yellow glow; a smaller switch sits beside About, and sticky
-                    light-table headers retain their bottom edge when scrolled.
-                    Zack approved styling through <code>d32fab3</code>. A
-                    separate Stats trial now aligns the team/scatter plot
-                    bottoms and x-axis titles; 223 tests and dev/preview chart
-                    checks pass. Styling and alignment through
-                    <code>059af4a</code> are approved; checkpoint 3 preference
-                    verification is in progress. Zack requested a review PR and
-                    a shared base for Showdown.
+                    Published <code>feature/light-mode</code> and
+                    <a
+                      href="https://github.com/zemccartney/nba-surprise-teams/pull/18"
+                      >PR #18</a
+                    >
+                    for Zack's review and the Showdown agent's integration.
+                    Semantic paints cover pages, tables, popovers and all four
+                    charts. Styling and paired Stats plot/title alignment
+                    through
+                    <code>059af4a</code> are approved. Checkpoint 3 passes 180
+                    preference/accessibility/first-paint scenario runs across
+                    Chromium, Firefox and WebKit, dev and built preview. One
+                    session-storage event isolation bug is fixed; no new visual
+                    changes. Full build/check, 223 tests, both 54-case page
+                    matrices, chart matrices and dev smoke pass. Requested gold
+                    and alternate-bar contrast exceptions remain documented.
+                    <a href="light-mode-verification.md"
+                      >Verification and limits</a
+                    >;
                     <a href="light-mode-handoff.md">Showdown theming handoff</a
-                    >. Review-only pushes skip automatic Cloudflare publishing.
-                    <a href="light-mode.md">Plan, evidence and decisions</a>;
+                    >; <a href="light-mode.md">Plan and decisions</a>;
                     <a href="http://localhost:4344/2025/CHA/"
                       >built local tour</a
                     >
-                    (dev on 4341). Not merged or deployed. Historical notes
-                    follow.
+                    (dev on 4341). Review pushes skip automatic Cloudflare
+                    publishing. Awaiting PR/everyday-browser review; not merged
+                    or deployed. Historical branch notes follow.
                   </p>
                   <p class="item-note">
                     Partly done on the <code>light-mode</code> branch — four WIP
@@ -1562,7 +1586,7 @@ mise run setup</code></pre>
             <div class="section-head">
               <span class="section-num">05</span>
               <h2>Infrastructure and deferred rounds</h2>
-              <span class="count">3 / 16 done</span>
+              <span class="count">3 / 17 done</span>
             </div>
 
             <ul class="items">
@@ -1821,6 +1845,13 @@ mise run setup</code></pre>
                     deletion.
                   </p>
                   <p class="item-note">
+                    Web Analytics stays on grepco.net's automatic injection;
+                    filter that property's Hostname to
+                    <code>nbastt.grepco.net</code>. Collection was observed in
+                    the browser. No manual snippet or new analytics property is
+                    needed for this cutover.
+                  </p>
+                  <p class="item-note">
                     <a href="native-previews.md">Native branch Previews</a> are
                     available under the existing
                     <code>nba-surprise-teams</code> Worker using explicit
@@ -1895,6 +1926,35 @@ mise run setup</code></pre>
                     <a href="production-cutover-checklist.md"
                       >rollback checklist</a
                     >.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <ul class="items">
+              <li class="item s-open">
+                <span class="marker">[ ]</span>
+                <div>
+                  <p class="item-title">
+                    Review plan/ context and tooling after this work
+                  </p>
+                  <p class="item-note">
+                    The folder began as persistent repository context, then grew
+                    testing harnesses, experiments and temporary development
+                    tools. Inventory it after the current work: distinguish
+                    durable context and useful regression checks from historical
+                    evidence, one-off probes, obsolete scripts and generated
+                    artifacts.
+                  </p>
+                  <p class="item-note">
+                    Evaluate which tools merit long-term maintenance and a
+                    clearer home, documentation and runnable commands.
+                    Consolidate/archive historical context where useful; propose
+                    removal of dead tooling rather than retaining it by default.
+                    Check references and active branch/agent dependencies before
+                    moving or deleting anything. Preserve valuable evidence and
+                    reproducibility without accruing temporary-tooling debt.
+                    This card authorizes a review, not a purge.
                   </p>
                 </div>
               </li>

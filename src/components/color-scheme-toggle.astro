@@ -27,8 +27,10 @@
     const root = document.documentElement;
     const system = globalThis.matchMedia("(prefers-color-scheme: dark)");
     let preference: string | undefined;
+    let storage: Storage | undefined;
     try {
-      const saved = localStorage.getItem("theme");
+      storage = globalThis.localStorage;
+      const saved = storage.getItem("theme");
       if (saved === "light" || saved === "dark") preference = saved;
     } catch {
       // Storage may be unavailable; the toggle still works in memory.
@@ -44,7 +46,7 @@
     button.addEventListener("click", () => {
       preference = root.dataset.theme === "light" ? "dark" : "light";
       try {
-        localStorage.setItem("theme", preference);
+        storage?.setItem("theme", preference);
       } catch {
         // In-memory fallback.
       }
@@ -52,6 +54,9 @@
     });
     system.addEventListener("change", apply);
     globalThis.addEventListener("storage", (event) => {
+      // A same-origin iframe can also emit sessionStorage events. Only the
+      // site's local preference should affect the theme in this document.
+      if (!storage || event.storageArea !== storage) return;
       if (event.key !== "theme" && event.key !== null) return;
       preference =
         event.newValue === "light" || event.newValue === "dark"

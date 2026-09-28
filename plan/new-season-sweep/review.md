@@ -1,5 +1,21 @@
 # Review notes: new-season sweep
 
+## Light mode — checkpoint 3 verified / PR #18
+
+[Review PR #18](https://github.com/zemccartney/nba-surprise-teams/pull/18), the
+[preference/accessibility verification report](light-mode-verification.md) and
+[Showdown handoff](light-mode-handoff.md). 180 cross-browser/runtime scenario
+runs, 223 unit tests, full build/check and all page/chart/dev-smoke regressions
+pass. Only application change since visual approval is storage-event isolation:
+session-storage events cannot overwrite a document's local theme preference.
+
+Scope is explicit: third-party podcast internals are excluded; full getter
+storage denial runs on built preview rather than Astro's dev toolbar; true
+BFCache restoration and screen reader operation are not claimed. Exact requested
+gold/alternate-bar contrast exceptions remain recorded. No new styling or
+behavior decision is needed; Zack's final everyday-browser/PR review is next.
+Review pushes skip automatic Cloudflare publishing. No merge or deployment.
+
 ## Light mode — published review baseline / checkpoint 3 in progress
 
 Visuals and paired-chart alignment through `059af4a` are approved. Review

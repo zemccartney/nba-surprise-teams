@@ -1,5 +1,39 @@
 # New-season sweep: round log
 
+## Light mode — reconcile concurrent main documentation before final review
+
+Main advanced to `84dde84` while checkpoint 3 ran. Merged that documentation-only
+commit into `feature/light-mode`, not the reverse. Preserved its Foundations
+review sign-off, seasonal-readiness notes and plan/tooling audit card alongside
+the light-mode PR/report entry. The sole conflict was the progress tally:
+combined 25 done, 2 in progress, 3 blocked, 16 open = 46 tracked. No application
+code or other agent worktree changed. Review-only push still skips publishing.
+
+## Light mode — checkpoint 3 verified; PR #18 open
+
+Published `feature/light-mode` and
+[PR #18](https://github.com/zemccartney/nba-surprise-teams/pull/18) at Zack's
+request. The Showdown handoff describes the semantic role contract, one merge
+conflict and the removed `theme.pale` reference; neither other worktree was
+changed. Review pushes skip automatic Cloudflare publishing.
+
+Final preference probes found one real bug: a same-origin iframe's
+`sessionStorage.theme` event could override the parent's local preference.
+The toggle now checks `event.storageArea` against its available local-storage
+reference. The real-event regression passes in Chromium/Firefox/WebKit.
+
+**180 scenario runs pass** across those three engines, dev and built preview:
+default/invalid/saved preferences, live OS changes, persistence/navigation,
+keyboard/ARIA/focus, local-vs-session event isolation, cross-tab set/remove/clear,
+denied reads/writes/getter, no-JS fallback and six first-paint combinations per
+runtime/engine. No application errors. See the complete
+[verification report and scope limits](light-mode-verification.md).
+
+Full build/check, 223 tests, both 54-case page matrices, both-theme chart matrices
+at 1440/390/320px in both runtimes and dev image smoke pass. No visual changes
+since the approved alignment. Local artifacts: `/tmp/nbastt-light-cp3/`.
+Awaiting Zack's PR/everyday-browser review; no main merge or deployment.
+
 ## Light mode — publish review branch and Showdown handoff
 
 Zack approved visuals/alignment through `059af4a`, authorized checkpoint 3, then

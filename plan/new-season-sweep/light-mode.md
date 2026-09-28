@@ -10,13 +10,17 @@
 - Local dev: http://localhost:4341/ (only while the checkpoint server runs).
 - Built workerd preview: http://localhost:4344/ (no dev toolbar).
 
-## Current tour — approved visuals, checkpoint 3 in progress
+## Current tour — verified, awaiting PR review
 
-Zack approved the styling and paired-chart alignment through `059af4a`. Final
-preference/accessibility verification is in progress. He requested publication
-of `feature/light-mode` and a PR so the Showdown agent can integrate this theme
-system. Read the [agent handoff](light-mode-handoff.md). No merge to main or
-Cloudflare publishing is authorized; review pushes skip the auto-deploy workflow.
+Zack approved the styling and paired-chart alignment through `059af4a`.
+[PR #18](https://github.com/zemccartney/nba-surprise-teams/pull/18) publishes
+`feature/light-mode` for his review and the Showdown agent's integration.
+Checkpoint 3 passes **180 preference/accessibility/first-paint scenario runs**
+across Chromium, Firefox and WebKit in dev and built preview, plus the full
+regression suite. A session-storage event isolation bug is fixed; no styling
+changed. Read the [verification report and limits](light-mode-verification.md)
+and [Showdown handoff](light-mode-handoff.md). No merge to main or Cloudflare
+publishing is authorized; review pushes skip the auto-deploy workflow.
 
 1. [Team + pace chart](http://localhost:4344/2025/CHA/): toggle themes, hover the
    chart, use Tab/arrows/Home/End, open the table's question-mark popovers.
@@ -30,7 +34,7 @@ Cloudflare publishing is authorized; review pushes skip the auto-deploy workflow
 The same paths work on dev port 4341. Local storage is origin-specific: dev and
 preview choices do not synchronize with one another, but tabs on the same port do.
 
-## Accepted styling checkpoint and separate chart-alignment trial
+## Accepted styling and chart-alignment checkpoints
 
 Zack approved the light-mode styling through `d32fab3` ("all looks good"). His
 next request is a separate Stats layout refinement: bottom-align Surprises ×
@@ -46,8 +50,8 @@ Review [Stats](http://localhost:4344/stats/). Build/check and **223 tests** pass
 both themes, dev and preview, at 1440/390/320px. Browser assertions check actual
 paired plot/title bounds; desktop sample plot bottoms both 828px and title tops
 both 865px. Screenshot: `/tmp/nbastt-chart-alignment/paired-charts.png`; geometry
-and per-theme captures are in that directory. This alignment trial awaits visual
-feedback; nothing is merged or deployed.
+and per-theme captures are in that directory. Zack subsequently approved the
+alignment through `059af4a`; nothing is merged or deployed.
 
 ## Glowing skull eyes, quieter navigation toggle, and sticky header edge
 

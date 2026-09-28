@@ -2,16 +2,17 @@
 
 ## Review/landing state
 
-- Showdown baseline: `71f95d6`; integrated light-mode base: `db8552a` from
+- Showdown baseline: `71f95d6`; integrated light-mode base: `41eef71` from
   `origin/feature/light-mode` (PR #18). Do not use historical `origin/light-mode`.
-- PR #17 is stacked against `feature/light-mode`, remains draft for Zack's code
-  review, and must not be merged/published without approval. Land #18 first;
-  then retarget #17 to main and verify the final diff and checks.
-- #18's preference/accessibility final verification was still in progress at
-  integration time. Fetch and incorporate its follow-up commits before landing;
-  this checkpoint is not a claim that those follow-ups have been reviewed.
-- Review-only commit uses `[skip ci]`, per #18's handoff. No hosted deployment is
-  claimed for this integration; the old hosted Showdown preview is stale.
+- Zack authorized production landing after final checks and deferred the broader
+  code review. Land #18 first, then retarget #17 from `feature/light-mode` to
+  main and verify the final diff and checks. Do not drop the later review.
+- Incorporated #18's completed preference/accessibility verification, its
+  session-versus-local-storage event fix (`b174eb5`), and main's documentation
+  reconciliation (`84dde84`). This final merge had no conflicts.
+- Feature-branch checkpoint pushes retain `[skip ci]` to avoid unnecessary
+  preview publication. Authorized main merge messages must not contain a skip
+  marker: those merges should run the normal production deployment workflow.
 - Only the Showdown worktree was changed. Light-mode ports 4341/4344 and the
   other agents' branches, working databases and build outputs were untouched.
 
@@ -41,6 +42,13 @@
 
 - Full build, formatting/lint/workflow lint, dependency audit, **259 tests in
   35 files**, and artifact audit (**412 files**) pass.
+- Final landing preflight reran all **180** preference/accessibility/first-paint
+  scenarios on the combined tree: Chromium, Firefox and WebKit, dev and built
+  workerd. Also reran the 36-case Showdown matrix in each runtime.
+- Corrected one test assumption, not app behavior: Chromium's Playwright
+  `no-preference` can expose the host OS's current dark/light setting instead of
+  forcing light. The unforced-scheme case now checks the browser-reported media
+  preference. The explicit dark/light, storage and first-paint tests are intact.
 - Shared light-mode harness: 54 page/theme/viewport cases in **each** runtime,
   including preference persistence, denied storage, cross-tab updates, nav,
   light table borders, skull paints, contrast and live chart repaint.
