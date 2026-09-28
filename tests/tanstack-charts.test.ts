@@ -22,13 +22,17 @@ vi.mock(
     ...(await importOriginal()),
     theme: {
       accent: "#818cf8",
+      alternate: "#d9f99d",
+      axis: "#84cc16",
       background: "#020617",
       brightRed: "#ff8073",
       green: "#15803d",
+      grid: "#d9f99d",
       lime: "#84cc16",
-      pale: "#d9f99d",
       red: "#b91c1c",
+      season: "#15803d",
       slate: "#94a3b8",
+      surpriseDot: "#84cc16",
       yellow: "#facc15",
     },
   }),
@@ -176,6 +180,52 @@ describe("application TanStack definitions", () => {
     expect(markup).not.toMatch(/data-ts-key="x-tick:/);
     expect(markup).toContain(">Team</text>");
   });
+  it.each([320, 390, 1440])(
+    "aligns paired Stats plot bottoms and x-axis titles at %ipx",
+    (width) => {
+      const team = render(
+        teamChart({
+          data: [
+            {
+              name: "Charlotte Hornets",
+              numEliminated: 11,
+              numSurprised: 3,
+              teamId: "CHA",
+            },
+          ],
+        }),
+        width,
+      );
+      const scatter = render(
+        scatterChart({
+          data: [
+            {
+              isSurpriseTeam: true,
+              logoSrc: "/a.svg",
+              overUnder: 24,
+              pace: 10,
+              recordFmt: "44 - 38",
+              seasonRange: "2025–26",
+              teamName: "Charlotte Hornets",
+            },
+          ],
+        }),
+        width,
+      );
+      expect(team.chart).toEqual(scatter.chart);
+      expect(team.chart.y + team.chart.height).toBe(524);
+      const titles = [
+        renderTrackerSvg(team, { ariaLabel: "Teams" }),
+        renderTrackerSvg(scatter, { ariaLabel: "Scatter" }),
+      ].map((markup) => {
+        const tag = markup.match(/<text[^>]*data-ts-key="x-label"[^>]*>/)?.[0];
+        const y = Number(tag?.match(/\sy="([^"]+)"/)?.[1]);
+        expect(Number.isFinite(y)).toBe(true);
+        return y;
+      });
+      expect(titles[0]).toBe(titles[1]);
+    },
+  );
   it("keeps explicit result colors even when an eliminated row is encountered first", () => {
     const eliminated = {
       isSurpriseTeam: false,

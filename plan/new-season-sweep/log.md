@@ -1,5 +1,136 @@
 # New-season sweep: round log
 
+## Light mode — reconcile concurrent main documentation before final review
+
+Main advanced to `84dde84` while checkpoint 3 ran. Merged that documentation-only
+commit into `feature/light-mode`, not the reverse. Preserved its Foundations
+review sign-off, seasonal-readiness notes and plan/tooling audit card alongside
+the light-mode PR/report entry. The sole conflict was the progress tally:
+combined 25 done, 2 in progress, 3 blocked, 16 open = 46 tracked. No application
+code or other agent worktree changed. Review-only push still skips publishing.
+
+## Light mode — checkpoint 3 verified; PR #18 open
+
+Published `feature/light-mode` and
+[PR #18](https://github.com/zemccartney/nba-surprise-teams/pull/18) at Zack's
+request. The Showdown handoff describes the semantic role contract, one merge
+conflict and the removed `theme.pale` reference; neither other worktree was
+changed. Review pushes skip automatic Cloudflare publishing.
+
+Final preference probes found one real bug: a same-origin iframe's
+`sessionStorage.theme` event could override the parent's local preference.
+The toggle now checks `event.storageArea` against its available local-storage
+reference. The real-event regression passes in Chromium/Firefox/WebKit.
+
+**180 scenario runs pass** across those three engines, dev and built preview:
+default/invalid/saved preferences, live OS changes, persistence/navigation,
+keyboard/ARIA/focus, local-vs-session event isolation, cross-tab set/remove/clear,
+denied reads/writes/getter, no-JS fallback and six first-paint combinations per
+runtime/engine. No application errors. See the complete
+[verification report and scope limits](light-mode-verification.md).
+
+Full build/check, 223 tests, both 54-case page matrices, both-theme chart matrices
+at 1440/390/320px in both runtimes and dev image smoke pass. No visual changes
+since the approved alignment. Local artifacts: `/tmp/nbastt-light-cp3/`.
+Awaiting Zack's PR/everyday-browser review; no main merge or deployment.
+
+## Light mode — publish review branch and Showdown handoff
+
+Zack approved visuals/alignment through `059af4a`, authorized checkpoint 3, then
+requested a pushed branch and PR for his review and the Showdown agent. Fetched
+main is still `626171e`; no rebase is needed. A merge-tree dry run against
+Showdown `71f95d6` identifies one textual conflict plus semantic paint updates,
+including removed `theme.pale`. [Agent handoff](light-mode-handoff.md).
+
+Review pushes use `[skip ci]`: the only hosted workflow would otherwise create a
+Cloudflare Preview on every branch push. Local checks through the approved
+checkpoint pass; new preference probes/fixes remain in progress and are not yet
+claimed complete. No main merge or Cloudflare creation is authorized.
+
+## Styling accepted; separate Stats chart-alignment trial
+
+Zack approved light-mode styling through `d32fab3`, then requested aligned bottoms
+for Surprises × Teams and Pace × Over/Under. The team chart now reserves the
+scatter's 76px bottom gutter and 56px title offset, leaving its missing tick row
+empty. Both plot bottoms and x-axis titles align in both themes. Build/check and
+223 tests pass; both-theme dev/preview chart matrices pass at three widths with
+new real-browser alignment assertions. [Review/evidence](light-mode.md#accepted-styling-checkpoint-and-separate-chart-alignment-trial).
+
+## Light mode — glowing eyes, nav placement, sticky header edge
+
+Implemented the successive requests together: inline skull eyes share the bulb's
+pale-yellow glow in light mode; a smaller bulb sits beside About rather than on
+its own row; sticky light-table headers retain a painted bottom edge on scroll.
+Dark skull renders are pixel-identical to the old image at 18/20/32px. Header
+placement changes in both themes; dark palette/header borders stay unchanged.
+
+Check/build, 220 tests and 54-case dev/preview page matrices pass, including
+actual scrolled-edge pixel assertions, eye/nose/ARIA checks and navigation alignment.
+Dev smoke: 32 external images, zero problems; skulls are now separately checked
+inline SVGs. [Tour and evidence](light-mode.md#glowing-skull-eyes-quieter-navigation-toggle-and-sticky-header-edge).
+
+## Light mode — more legible eliminated emoji
+
+Added a light-only brightness/contrast filter to the shared eliminated emoji:
+slate skull/bones, stronger eye sockets, no asset/dimension/alt-text changes.
+Dark mode and other result emoji untouched. Check/build and 220 tests pass;
+expanded dev/preview matrices cover 54 page/theme/width cases, including an
+eliminated team page. Dev smoke reports 47 good images and zero problems.
+[Review and before/after evidence](light-mode.md#eliminated-emoji--stronger-light-mode-contrast).
+
+## Light mode — purple seasonal bars
+
+Per Zack, season bars now use link purple and table-stripe purple. Separate
+season token avoids changing positive green elsewhere; dark mode unchanged.
+Check/build, 220 tests and dev/preview light chart matrices pass. Actual SVG
+fills verified against both site tokens; both paints covered in the renderer
+test. The exact stripe shade's low contrast is recorded in the plan.
+[Review and evidence](light-mode.md#season-bars--link-purple-and-table-stripe-purple).
+
+## Light mode — lighter chart palette experiment
+
+Per Zack's next review: lighter base green/red, with the previous base colors
+used for pace strokes/focus dots and the contrasting seasonal bars. Dark mode
+and gold accents unchanged. Opaque bases still clear 3:1 against the plot.
+Check/build, 220 tests, dev/preview 48-page matrices and light chart matrices pass.
+Explicitly checked both positive and negative pace focus markers in built preview.
+[Palette and evidence](light-mode.md#chart-palette-experiment--lighter-bases-former-bases-as-contrast).
+
+## Light mode — styling feedback round
+
+Implemented Zack's five light-only refinements: all-cell borders, no Detroit
+halo, original gold zero line and scatter focus ring, lighter green scatter
+dots, and more saturated orange notices. Dark colors/halo/borders are unchanged.
+The new orange passes text contrast; the requested exact gold is an explicitly
+recorded 1.36:1 plot-background exception, not an accessibility pass.
+
+Check/build, 220 tests and dev/preview page matrices pass, including new
+border/filter assertions; light chart matrices pass in both runtimes. Refreshed
+built tour on 4344. [Details and evidence](light-mode.md#styling-feedback-round--implemented-ready-for-another-look).
+
+## Light mode — checkpoint 2, awaiting styling feedback
+
+Zack requested full surface coverage before collecting design notes. Replaced
+the palette bridge with semantic paints; completed four charts, live tooltip
+repainting, popovers, season controls and loading/error/404 styling. Deepened
+light links for striped-row contrast and corrected the 320px Pace-column overflow.
+
+Check/build and 220 tests pass. Dev smoke checks 47 images without problems.
+Both dev and built preview pass 48 page/theme/width checks and both-theme chart
+interaction matrices. Dark chart control comparisons show no mismatches at the
+standard 0.1 threshold, with small strict-pixel differences recorded explicitly.
+Review at http://localhost:4344/2025/CHA/ (dev still on 4341).
+See [the plan, evidence and decisions](light-mode.md). No merge/deployment.
+
+## Light mode — checkpoint 1, awaiting design review
+
+Isolated `feature/light-mode` from main at `626171e`. Recovered the historical
+palette from `origin/light-mode`, added an accessible persisted bulb toggle and
+first-paint theme selection. Dev tour runs at http://localhost:4341/2025/.
+Chromium toggle/reload/mobile smoke and Astro check pass; targeted lint passes.
+This is a palette/glow prototype, not a merge-ready feature. Plan, limitations
+and remaining checkpoints: [light-mode.md](light-mode.md).
+
 ## 2026-09-23 — CSS paints and native font recovery
 
 Zack authorized all three simplifications in the implementation guide. Chart

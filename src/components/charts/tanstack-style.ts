@@ -2,23 +2,27 @@ import { logoAlt } from "../logo-alt";
 
 // Keep paints connected to the site's CSS tokens, including future theme changes.
 export const theme = {
-  accent: "var(--color-indigo-400)",
-  background: "var(--color-slate-950)",
-  brightRed: "var(--color-pace-red)",
-  green: "var(--color-green-700)",
-  lime: "var(--color-lime-500)",
-  pale: "var(--color-lime-200)",
-  red: "var(--color-red-700)",
-  slate: "var(--color-slate-400)",
-  yellow: "var(--color-yellow-400)",
+  accent: "var(--chart-highlight)",
+  alternate: "var(--chart-alternate)",
+  axis: "var(--chart-axis)",
+  background: "var(--chart-surface)",
+  brightRed: "var(--chart-negative-line)",
+  green: "var(--chart-positive)",
+  grid: "var(--chart-grid)",
+  lime: "var(--chart-positive-line)",
+  red: "var(--chart-negative)",
+  season: "var(--chart-season)",
+  slate: "var(--chart-band)",
+  surpriseDot: "var(--chart-surprise-dot)",
+  yellow: "var(--chart-zero)",
 };
 export type Theme = typeof theme;
 export const chartTheme = (t: Theme) => ({
   background: t.background,
   focusRing: false as const,
-  foreground: t.lime,
-  grid: t.pale,
-  muted: t.lime,
+  foreground: t.axis,
+  grid: t.grid,
+  muted: t.axis,
   palette: [t.green, t.red],
 });
 export const axis = (text: string, offset: number) => ({
@@ -28,7 +32,7 @@ export const axis = (text: string, offset: number) => ({
   ticks: { padding: 12, size: 6 },
 });
 export const grid = (t: Theme) => ({
-  stroke: t.pale,
+  stroke: t.grid,
   strokeDasharray: "3 3",
   strokeOpacity: 1,
   strokeWidth: 1,

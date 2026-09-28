@@ -2,11 +2,20 @@
 import type { ImageMetadata } from "astro";
 import type { HTMLAttributes } from "astro/types";
 
+import Skull from "../assets/images/emoji/skull-and-crossbones.svg";
+
 type Props = Omit<HTMLAttributes<"img">, "src"> & {
   name: "celebration" | "disappointed" | "eliminated" | "surprise";
 };
 
-const { height, name, width, ...attrs } = Astro.props;
+const {
+  class: className,
+  height,
+  loading = "lazy",
+  name,
+  width,
+  ...attrs
+} = Astro.props;
 
 /*
 Note the below crashes if exported (fixable by writing type out on a separate line)
@@ -42,9 +51,9 @@ const emojiConf: Record<Props["name"], { alt: string; fileName: string }> = {
 };
 
 /*
-  Plain <img>, not Astro's <Image>; see logo.astro for why. Callers pass only a
-  width, which <Image> used to complete from the source's aspect ratio, so do
-  that here to keep the box identical and avoid layout shift.
+  Most emoji stay plain <img>; see logo.astro for why. The skull is inline so
+  its eyes can be styled independently. Callers pass only a width; complete
+  height from the same source metadata in either case to avoid layout shift.
 */
 const emoji = (
   (await import(`../assets/images/emoji/${emojiConf[name].fileName}.svg`)) as {
@@ -58,12 +67,51 @@ const resolvedHeight = Number(
 );
 ---
 
-<img
-  alt={emojiConf[name].alt}
-  decoding="async"
-  height={resolvedHeight}
-  loading="lazy"
-  src={emoji.src}
-  width={resolvedWidth}
-  {...attrs}
-/>
+{
+  name === "eliminated" ? (
+    <Skull
+      aria-label={emojiConf[name].alt}
+      class:list={["result-emoji-skull", className]}
+      data-result-emoji={name}
+      focusable="false"
+      height={resolvedHeight}
+      role="img"
+      width={resolvedWidth}
+      {...attrs}
+    />
+  ) : (
+    <img
+      alt={emojiConf[name].alt}
+      class={className}
+      data-result-emoji={name}
+      decoding="async"
+      height={resolvedHeight}
+      loading={loading}
+      src={emoji.src}
+      width={resolvedWidth}
+      {...attrs}
+    />
+  )
+}
+
+<style>
+  /* Inline only the skull so CSS can paint/glow its eyes independently.
+     Explicit image semantics retain the original accessible description. */
+  .result-emoji-skull {
+    max-width: 100%;
+    height: auto;
+  }
+  .result-emoji-skull :global(.skull-head) {
+    fill: var(--skull-head);
+  }
+  .result-emoji-skull :global(.skull-bones) {
+    fill: var(--skull-bones);
+  }
+  .result-emoji-skull :global(.skull-nose) {
+    fill: var(--skull-nose);
+  }
+  .result-emoji-skull :global(.skull-eye) {
+    fill: var(--skull-eyes);
+    filter: var(--skull-eye-glow);
+  }
+</style>

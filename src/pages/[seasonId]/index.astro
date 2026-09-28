@@ -199,19 +199,19 @@ const seasonAfter = adjacent(1);
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    border: 2px solid var(--color-indigo-500);
-    background-color: var(--color-slate-950);
+    border: 2px solid var(--button-border);
+    background-color: var(--button-surface);
     padding: 0.5rem 1rem;
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    color: var(--color-lime-500);
+    color: var(--button-ink);
     text-decoration: none;
   }
 
   .season-button:hover {
-    border-color: var(--color-slate-950);
-    background-color: var(--color-lime-500);
-    color: var(--color-slate-950);
+    border-color: var(--button-hover-border);
+    background-color: var(--button-hover-surface);
+    color: var(--button-hover-ink);
   }
 
   @media (min-width: 768px) {
@@ -230,7 +230,7 @@ const seasonAfter = adjacent(1);
     text-align: center;
     font-size: var(--text-2xl);
     line-height: var(--text-2xl--line-height);
-    color: var(--color-lime-400);
+    color: var(--ink-heading);
   }
 
   @media (min-width: 768px) {
@@ -304,7 +304,7 @@ const seasonAfter = adjacent(1);
     padding-inline: 1rem;
     font-size: var(--text-xl);
     line-height: var(--text-xl--line-height);
-    color: var(--color-yellow-200);
+    color: var(--ink-notice);
   }
 
   @media (min-width: 640px) {
@@ -318,7 +318,7 @@ const seasonAfter = adjacent(1);
     font-size: var(--text-2xl);
     line-height: var(--text-2xl--line-height);
     text-wrap: balance;
-    color: var(--color-yellow-400);
+    color: var(--ink-warning);
   }
 
   .shortened-reason {
@@ -342,6 +342,6 @@ const seasonAfter = adjacent(1);
   }
 
   .highlight {
-    color: var(--color-yellow-400);
+    color: var(--ink-warning);
   }
 </style>

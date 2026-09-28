@@ -669,20 +669,20 @@
           <div
             class="bar"
             role="img"
-            aria-label="25 of 46 items done, 1 in progress, 3 blocked, 17 not started"
+            aria-label="25 of 46 items done, 2 in progress, 3 blocked, 16 not started"
           >
             <span class="seg-done" style="flex: 25"></span>
-            <span class="seg-wip" style="flex: 1"></span>
+            <span class="seg-wip" style="flex: 2"></span>
             <span class="seg-blocked" style="flex: 3"></span>
-            <span class="seg-open" style="flex: 17"></span>
+            <span class="seg-open" style="flex: 16"></span>
           </div>
           <p class="tally">
             <span class="k-done"><b>25</b> done and verified</span>
-            <span class="k-wip"><b>1</b> in progress</span>
+            <span class="k-wip"><b>2</b> in progress</span>
             <span class="k-blocked"
               ><b>3</b> waiting on a decision or rollback window</span
             >
-            <span class="k-open"><b>17</b> not started</span>
+            <span class="k-open"><b>16</b> not started</span>
             <span>46 tracked</span>
           </p>
         </div>
@@ -1419,10 +1419,39 @@ mise run setup</code></pre>
             </div>
 
             <ul class="items">
-              <li class="item s-open">
-                <span class="marker">[ ]</span>
+              <li class="item s-wip">
+                <span class="marker">[~]</span>
                 <div>
                   <p class="item-title">Light mode</p>
+                  <p class="item-note">
+                    Published <code>feature/light-mode</code> and
+                    <a
+                      href="https://github.com/zemccartney/nba-surprise-teams/pull/18"
+                      >PR #18</a
+                    >
+                    for Zack's review and the Showdown agent's integration.
+                    Semantic paints cover pages, tables, popovers and all four
+                    charts. Styling and paired Stats plot/title alignment
+                    through
+                    <code>059af4a</code> are approved. Checkpoint 3 passes 180
+                    preference/accessibility/first-paint scenario runs across
+                    Chromium, Firefox and WebKit, dev and built preview. One
+                    session-storage event isolation bug is fixed; no new visual
+                    changes. Full build/check, 223 tests, both 54-case page
+                    matrices, chart matrices and dev smoke pass. Requested gold
+                    and alternate-bar contrast exceptions remain documented.
+                    <a href="light-mode-verification.md"
+                      >Verification and limits</a
+                    >;
+                    <a href="light-mode-handoff.md">Showdown theming handoff</a
+                    >; <a href="light-mode.md">Plan and decisions</a>;
+                    <a href="http://localhost:4344/2025/CHA/"
+                      >built local tour</a
+                    >
+                    (dev on 4341). Review pushes skip automatic Cloudflare
+                    publishing. Awaiting PR/everyday-browser review; not merged
+                    or deployed. Historical branch notes follow.
+                  </p>
                   <p class="item-note">
                     Partly done on the <code>light-mode</code> branch — four WIP
                     commits off an older <code>main</code> — which has the
