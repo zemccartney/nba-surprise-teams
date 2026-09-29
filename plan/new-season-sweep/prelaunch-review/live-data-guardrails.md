@@ -38,7 +38,7 @@ Worker test-runtime migration or deployment. The user-owned `scr.ts` is untouche
 5. `src/components/live-cache.ts` and both SSR islands: one shared HTTP freshness
    calculation, flooring seconds and clamping elapsed deadlines to zero rather
    than emitting a negative max-age. No expiry still means no calculated header.
-6. `scripts/check-nba-feed.ts` and `MAINTENANCE.md`: direct single-fetch/offline
+6. `scripts/check-nba-feed.ts` and `docs/MAINTENANCE.md`: direct single-fetch/offline
    analysis, before/during/after preseason instructions and the unresolved
    finality question. No Astro content, KV, polling or deployment in the script.
 

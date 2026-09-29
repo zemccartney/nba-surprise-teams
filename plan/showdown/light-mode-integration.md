@@ -108,4 +108,4 @@ node plan/baseline/showdown-theme.mjs http://127.0.0.1:4345 /tmp/showdown-theme-
 Local workerd NBA access still returns 403, while Node fetch works. Earlier
 schedule UI verification used normalized real-feed cache fixtures, not a claimed
 successful local upstream refresh. See `schedule-checkpoint.md` for evidence and
-`MAINTENANCE.md` for the hosted active-season follow-up.
+`docs/MAINTENANCE.md` for the hosted active-season follow-up.

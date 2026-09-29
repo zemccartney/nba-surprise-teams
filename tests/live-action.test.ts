@@ -1,3 +1,4 @@
+import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { LiveLoaderResponse } from "../src/loaders/live/utils";
@@ -60,7 +61,15 @@ const latest = {
   startDate: "2026-10-20",
 };
 
+const expectedRefreshErrors: string[] = [];
+const rejectRefresh = (error: Error) => {
+  expectedRefreshErrors.push(error.message);
+  mocks.loader.mockRejectedValue(error);
+};
+
 beforeEach(() => {
+  expectedRefreshErrors.length = 0;
+  vi.spyOn(console, "error").mockReturnValue(undefined);
   vi.useFakeTimers();
   vi.setSystemTime(new Date("2026-10-22T16:00:00Z"));
   vi.spyOn(console, "log").mockReturnValue(undefined);
@@ -71,7 +80,16 @@ beforeEach(() => {
   mocks.get.mockResolvedValue(null);
 });
 afterEach(() => {
-  vi.useRealTimers();
+  try {
+    // Capture expected failure-path logging without hiding unexpected errors.
+    assert.deepEqual(
+      vi.mocked(console.error).mock.calls,
+      expectedRefreshErrors.map((message) => ["Live refresh failed:", message]),
+    );
+  } finally {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  }
 });
 
 const expectNoLiveAccess = () => {
@@ -192,7 +210,7 @@ describe("schedule-aware live action", () => {
     mocks.get.mockResolvedValue(
       encode({ ...scheduled, expiresAt: Date.now() - 1 }),
     );
-    mocks.loader.mockRejectedValue(new Error("offline"));
+    rejectRefresh(new Error("offline"));
     await expect(
       run({ includeSchedule: true, seasonId: "2026" }),
     ).resolves.toEqual(scheduled);
@@ -208,7 +226,7 @@ describe("schedule-aware live action", () => {
         })),
       }),
     );
-    mocks.loader.mockRejectedValue(new Error("offline"));
+    rejectRefresh(new Error("offline"));
     await expect(
       run({ includeSchedule: true, seasonId: "2026" }),
     ).rejects.toMatchObject({ code: "INTERNAL_SERVER_ERROR" });
@@ -241,7 +259,7 @@ describe("validated KV freshness and fallback", () => {
     },
   ])("rejects $name as fallback", async ({ raw }) => {
     mocks.get.mockResolvedValue(raw);
-    mocks.loader.mockRejectedValue(new Error("Feed unavailable"));
+    rejectRefresh(new Error("Feed unavailable"));
     await expect(run({ seasonId: "2026" })).rejects.toMatchObject({
       code: "INTERNAL_SERVER_ERROR",
     });
@@ -306,7 +324,7 @@ describe("validated KV freshness and fallback", () => {
 
   it("serves valid stale backup without an expiry", async () => {
     mocks.get.mockResolvedValue(encode({ ...saved, expiresAt: 0 }));
-    mocks.loader.mockRejectedValue(new Error("Feed unavailable"));
+    rejectRefresh(new Error("Feed unavailable"));
     await expect(run({ seasonId: "2026" })).resolves.toEqual(saved);
     expect(mocks.put).not.toHaveBeenCalled();
   });
@@ -314,7 +332,7 @@ describe("validated KV freshness and fallback", () => {
   it("reports loader validation failures once", async () => {
     const error = new Error("NBA schedule season does not match 2026-27");
 
-    mocks.loader.mockRejectedValue(error);
+    rejectRefresh(error);
 
     await expect(run({ seasonId: "2026" })).rejects.toMatchObject({
       code: "INTERNAL_SERVER_ERROR",
@@ -329,7 +347,7 @@ describe("validated KV freshness and fallback", () => {
     const error = new Error("NBA schedule season does not match 2026-27");
 
     mocks.get.mockResolvedValue(encode({ ...saved, expiresAt: 0 }));
-    mocks.loader.mockRejectedValue(error);
+    rejectRefresh(error);
 
     await expect(run({ seasonId: "2026" })).resolves.toEqual(saved);
 

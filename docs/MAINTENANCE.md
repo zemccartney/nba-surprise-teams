@@ -1,7 +1,7 @@
 # About the Data: Guide to site maintenance
 
-For exact commands, recovery and refresh semantics, see [data/README.md](data/README.md).
-For the system anatomy, open [docs/data-system.html](docs/data-system.html).
+For exact commands, recovery and refresh semantics, see [data/README.md](../data/README.md).
+For the system anatomy, open [data-system.html](data-system.html).
 
 ## Intuition and Principles
 
@@ -126,7 +126,7 @@ received 403 from the Worker; the complete header set returned the validated
 Test from the deployed Worker too: a successful local fetch does not prove
 Cloudflare-origin access.
 
-1. Run [`scripts/check-nba-feed.ts`](scripts/check-nba-feed.ts) to fetch and
+1. Run [`scripts/check-nba-feed.ts`](../scripts/check-nba-feed.ts) to fetch and
    analyze the schedule directly, without Astro or KV. Supply the expected
    season, updating it each year:
 
@@ -165,11 +165,13 @@ Cloudflare-origin access.
    feed, it is Miami at Toronto on **October 3, 2026, 7 p.m. Eastern**; re-check
    rather than hardcoding this date in the diagnostic.
 3. Save observations before tipoff, while a game is underway, and after it ends.
-   **TEMP/TODO: resolve finality behavior.** Do scores update during play? Does
-   `gameStatus` change from 1 to 2 to 3, and does 3 correspond to Final on this
-   endpoint? The current loader treats positive scores for both teams as a
-   completed result; leave that behavior unchanged until these observations are
-   reviewed. Today's all-zero preseason schedule cannot answer this question.
+   **TODO: verify finality behavior against a real game.** Do scores update
+   during play? Does `gameStatus` change from 1 to 2 to 3, and does 3 correspond
+   to Final on this endpoint? Showdown's final-results-only requirement now uses
+   the conservative rule: status 3 AND positive scores for both teams. Other
+   statuses never enter standings; unexpected finality behavior delays results
+   rather than counting in-progress scores. The cache version was bumped.
+   Today's all-zero preseason schedule cannot verify these status transitions.
 4. Cross-check Cup championship identification. Our working prefix is `006`;
    the inspected entry has `gameLabel: Emirates NBA Cup`,
    `gameSubLabel: Championship`, `seriesText: Neutral Site`, and
@@ -181,9 +183,12 @@ Cloudflare-origin access.
    output; the site's existing internal `id` is unchanged.
 5. Separately inspect deployed server-island responses/cache headers at season
    start, then after games finish and cached data becomes stale. Preseason feed
-   inspection does not exercise this path: the current action returns empty
-   games **without expiresAt** before `season.startDate`. Its calculated cache
-   header is therefore absent then. Once active, compare cache duration with the
+   inspection does not exercise the results-only path: the action returns empty
+   games **without expiresAt** before `season.startDate`. Showdown opts into the
+   full schedule, which can be fetched preseason and uses a separate
+   `<seasonId>:schedule` KV key with a maximum six-hour freshness window while
+   fixtures remain unfinished. Completed-results consumers keep the existing
+   `<seasonId>` key. Once active, compare cache duration with the
    loader's expected completion of the earliest incomplete **candidate-team**
    game, not necessarily the league's opening game. Check that later requests
    actually refresh results; one correct header does not prove that transition.

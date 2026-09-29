@@ -155,7 +155,7 @@ exist.
 
 ## Maintenance
 
-see [MAINTENANCE](./MAINTENANCE.md)
+see [MAINTENANCE](./docs/MAINTENANCE.md)
 
 ## Styling
 
