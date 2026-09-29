@@ -52,6 +52,15 @@ try {
           const borders = await page.locator("th, td").evaluateAll((cells) =>
             cells.every((cell) => {
               const style = getComputedStyle(cell);
+              if (cell.closest("table").classList.contains("stickyHeader")) {
+                return (
+                  style.borderRightWidth === "2px" &&
+                  style.borderBottomWidth === "2px" &&
+                  style.borderLeftWidth === "0px" &&
+                  style.borderTopWidth ===
+                    (cell.closest("thead") ? "2px" : "0px")
+                );
+              }
               return [
                 style.borderTopWidth,
                 style.borderRightWidth,
@@ -199,6 +208,7 @@ try {
             .evaluateAll((cells) =>
               cells.map((cell) => ({
                 ...cell.getBoundingClientRect().toJSON(),
+                border: getComputedStyle(cell).borderBottomWidth,
                 shadow: getComputedStyle(cell).boxShadow,
               })),
             );
@@ -211,10 +221,11 @@ try {
               "Header sticks to the viewport top after scrolling",
             );
             if (theme === "light") {
-              assert.match(
-                header.shadow,
-                /inset/,
-                "Sticky cell carries its own bottom rule",
+              assert.equal(header.shadow, "none", "No duplicate shadow edge");
+              assert.equal(
+                header.border,
+                "2px",
+                "Sticky cell carries its own real bottom border",
               );
               const pixels = PNG.sync.read(screenshot);
               const x = Math.floor(header.x + header.width / 2);

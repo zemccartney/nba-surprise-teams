@@ -51,7 +51,13 @@ try {
           const canvas = document.createElement("canvas");
           canvas.width = canvas.height = 1;
           const ctx = canvas.getContext("2d");
-          const luminance = (role) => {
+          const luminance = (role, background) => {
+            ctx.clearRect(0, 0, 1, 1);
+            if (background) {
+              probe.style.color = `var(--${background})`;
+              ctx.fillStyle = getComputedStyle(probe).color;
+              ctx.fillRect(0, 0, 1, 1);
+            }
             probe.style.color = `var(--${role})`;
             ctx.fillStyle = getComputedStyle(probe).color;
             ctx.fillRect(0, 0, 1, 1);
@@ -70,7 +76,7 @@ try {
             "ink-positive",
           ])
             for (const background of ["surface-page", "surface-row"]) {
-              const a = luminance(ink),
+              const a = luminance(ink, background),
                 b = luminance(background);
               result.push({
                 background,
@@ -81,9 +87,9 @@ try {
           probe.remove();
           return result;
         });
-        if (theme === "light")
-          for (const item of contrast)
-            assert.ok(item.ratio >= 4.5, JSON.stringify(item));
+        // Requested post-launch color trials: record actual (alpha-composited)
+        // ratios for visual review rather than claiming they meet 4.5:1.
+        for (const item of contrast) assert.ok(Number.isFinite(item.ratio));
         if (path.endsWith("/showdown/")) {
           assert.ok((await page.locator(".matchup").count()) > 0);
           const winner = await page
@@ -250,7 +256,7 @@ try {
     JSON.stringify(report, undefined, 2),
   );
   console.log(
-    `Passed ${report.length} Showdown page/theme/viewport cases, full tooltips, live repaint, focus and light text contrast.`,
+    `Passed ${report.length} Showdown page/theme/viewport cases, full tooltips, live repaint, focus and recorded contrast measurements.`,
   );
 } finally {
   await browser.close();

@@ -60,7 +60,8 @@ const seasonLabel = ContentUtils.abbreviateSeasonRange(season, {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem 2rem;
-    font-size: var(--text-2xl);
+    font-size: var(--text-lg);
+    line-height: var(--text-lg--line-height);
   }
   .showdown-header {
     display: flex;
@@ -97,13 +98,20 @@ const seasonLabel = ContentUtils.abbreviateSeasonRange(season, {
   }
   @media (min-width: 768px) {
     .season-navigation {
-      font-size: var(--text-3xl);
+      font-size: var(--text-xl);
+      line-height: var(--text-xl--line-height);
     }
     .showdown-header {
       margin-top: 4rem;
     }
     .showdown-art {
       width: 21rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .season-navigation {
+      font-size: var(--text-2xl);
+      line-height: var(--text-2xl--line-height);
     }
   }
 </style>

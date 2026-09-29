@@ -103,10 +103,22 @@ const {
         top: 0;
         z-index: 10;
         background-color: var(--surface-table-head);
-        /* Collapsed table borders stay in the table's scrolling layer.
-           Paint an edge on the sticky cell itself so it travels with it. */
-        box-shadow: var(--table-sticky-edge);
       }
+    }
+  }
+
+  /* Separate borders travel with sticky cells, including on WebKit. Give each
+     shared edge a single owner: no collapsed border + inset-shadow double line. */
+  :global(:root[data-theme="light"]) .NBASurpriseTracker-Table.stickyHeader {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-left: 2px solid var(--ink-primary);
+
+    > :is(thead, tbody, tfoot) > :global(tr) > :global(:is(th, td)) {
+      border-width: 0 2px 2px 0;
+    }
+    > thead > :global(tr:first-child) > :global(:is(th, td)) {
+      border-top-width: 2px;
     }
   }
 

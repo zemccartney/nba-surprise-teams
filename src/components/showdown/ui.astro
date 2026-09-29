@@ -242,6 +242,16 @@ const formatDate = (date: string) =>
   a:hover .team-code {
     text-decoration: underline;
   }
+  :global(:root[data-theme="light"]) .opponent .team-code {
+    color: var(--ink-link);
+    text-decoration: underline;
+  }
+  :global(:root[data-theme="light"]) .opponent:hover .team-code {
+    color: var(--ink-link-hover);
+  }
+  :global(:root[data-theme="light"]) .opponent:active .team-code {
+    color: var(--ink-link-active);
+  }
   a:focus-visible {
     outline: 2px solid var(--ink-showdown);
     outline-offset: 5px;
@@ -280,6 +290,8 @@ const formatDate = (date: string) =>
     padding: 1.5rem 0.5rem 0.75rem;
   }
   .opponent {
+    justify-self: center;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;

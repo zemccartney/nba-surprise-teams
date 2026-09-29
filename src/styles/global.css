@@ -253,6 +253,7 @@ textarea {
   --ink-warning: var(--color-yellow-400);
   --ink-link: var(--color-indigo-400);
   --ink-link-hover: var(--color-indigo-100);
+  --ink-link-active: var(--ink-link-hover);
   --ink-showdown: var(--color-showdown-red);
   --ink-showdown-hover: var(--color-showdown-hover);
   --showdown-glow: color-mix(in srgb, var(--ink-showdown) 70%, transparent);
@@ -268,7 +269,6 @@ textarea {
     drop-shadow(1rem 1rem 1rem #016271);
   --table-shadow: var(--shadow-glow);
   --table-shadow-compact: var(--shadow-glow-sm);
-  --table-sticky-edge: none;
   --popover-surface: var(--color-blurple-glow);
   --popover-ink: var(--color-green-200);
   --popover-outline: none;
@@ -307,15 +307,16 @@ textarea {
   --surface-row: var(--color-indigo-300);
   --ink-primary: var(--color-slate-950);
   --ink-heading: var(--color-slate-950);
-  --ink-positive: #14532d;
+  --ink-positive: oklch(0.5766 0.2954 307.54);
   --ink-notice: oklch(48.5% 0.17 45);
   --ink-warning: var(--ink-notice);
   /* Slightly deeper than the WIP's indigo-700: links also need 4.5:1
      against the darker striped rows, not just against the page. */
   --ink-link: oklch(42% 0.21 277.023);
-  --ink-link-hover: oklch(35.9% 0.144 278.697);
-  --ink-showdown: #881337;
-  --ink-showdown-hover: #701a35;
+  --ink-link-hover: oklch(0.3115 0.192 270.82);
+  --ink-link-active: var(--ink-link-hover);
+  --ink-showdown: oklch(0.5338 0.2175 29.07);
+  --ink-showdown-hover: oklch(0.3952 0.1597 25.41 / 63.9%);
   --showdown-glow: color-mix(in srgb, var(--ink-showdown) 20%, transparent);
   --showdown-title-shadow: none;
   --rule: oklch(45% 0.07 275);
@@ -327,7 +328,6 @@ textarea {
   --skull-eye-glow: drop-shadow(0 0 1.2px var(--bulb-light));
   --table-shadow: none;
   --table-shadow-compact: none;
-  --table-sticky-edge: inset 0 -2px 0 var(--ink-primary);
   --popover-surface: oklch(97% 0.015 275);
   --popover-ink: var(--color-slate-950);
   --popover-outline: 2px solid var(--ink-link);
@@ -372,7 +372,6 @@ textarea {
 .showdown-link {
   color: var(--ink-showdown);
   text-decoration: underline;
-  text-underline-offset: 0.2em;
 }
 
 .showdown-link:hover {

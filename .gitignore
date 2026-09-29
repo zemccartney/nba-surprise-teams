@@ -29,12 +29,3 @@ worker-configuration.d.ts
 # baseline capture: keep summaries, skip bulky captures
 plan/baseline/runs/**/*.png
 plan/baseline/runs/**/html/
-
-# personal Claude Code permissions
-.claude/settings.local.json
-# generated nested worktrees (also excluded from parent lint)
-.claude/worktrees/
-
-# lefthook per-machine overrides
-lefthook-local.yml
-.lefthook-local.yml

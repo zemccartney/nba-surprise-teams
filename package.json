@@ -8,7 +8,7 @@
     "archive:diff": "git diff -- data/dump.sql",
     "archive:latest": "node data/cli.ts archive-nba --latest",
     "astro": "astro",
-    "audit": "pnpm audit",
+    "audit": "pnpm audit --prod --audit-level=high",
     "build": "wrangler types && pnpm run verify && astro build && node data/node/audit.ts",
     "cf:wip": "git commit -m \"[CF-Pages-Skip] WIP\" && git push",
     "check": "astro check && pnpm run fmt:check && pnpm run lint && pnpm run lint:workflows",

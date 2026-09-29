@@ -43,8 +43,23 @@ description = "Run every check, applying fixes where a fixer exists"
 run = "hk fix --all"
 
 [tasks.data]
-description = "Maintain tracker metadata and archives (see data/README.md)"
+description = "Generic dispatch for data commands; requires subcommand e.g. mise run data -- cmd (see data/README.md)"
 run = "node data/cli.ts"
+
+[tasks."data:migrate"]
+description = "Apply new migrations to existing db"
+run = "node data/cli.ts migrate"
+
+[tasks."data:reset"]
+description = "Hard reset to the canonical dump (throws away existing db)"
+run = '''
+# Permanently discard the working DB and SQLite sidecar files
+rm -f data/tracker.db data/tracker.db-wal data/tracker.db-shm \
+    data/tracker.db-journal data/tracker.db.revision
+
+# Recreate from committed data/dump.sql, including migrations and venue backfill
+mise run data:restore
+'''
 
 [tasks."data:restore"]
 description = "Restore canonical SQL; refuse an existing DB"

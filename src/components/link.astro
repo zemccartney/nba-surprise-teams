@@ -16,7 +16,13 @@ const { class: classStr, href, ...attrs } = Astro.props;
     &.active {
       pointer-events: none;
       cursor: default;
-      color: var(--ink-link-hover);
+      color: var(--ink-link-active);
+    }
+  }
+
+  :global(:root[data-theme="light"]) .NBASTT-Link {
+    &:active {
+      color: var(--ink-link-active);
     }
   }
 </style>

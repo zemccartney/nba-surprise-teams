@@ -6,6 +6,7 @@ local linters = new Mapping<String, Step> {
     ["audit"] = {
       // Advisory data can change without a lockfile edit: check every commit.
       // Network/registry failures deliberately block; do not ignore them.
+      // Hard-blocking only on prod-affecting, high vulnerabilities; ideally, we get ahead of others, but going to live low and moderate for now
       check = "pnpm run audit"
     }
     ["prettier"] = (Builtins.prettier) {
