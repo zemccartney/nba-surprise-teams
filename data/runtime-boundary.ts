@@ -96,8 +96,7 @@ export function sqliteBoundary(): Plugin {
         }
         if (kind === "CallExpression") {
           const callee = record.callee as
-            | undefined
-            | { name?: unknown; type?: unknown };
+            undefined | { name?: unknown; type?: unknown };
           const args = record.arguments as undefined | { value?: unknown }[];
           if (
             callee?.type === "Identifier" &&
