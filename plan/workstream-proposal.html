@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>After the sweep — a proposed workstream</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --paper: #faf8f3;
+        --panel: #ffffff;
+        --ink: #242b32;
+        --muted: #555f69;
+        --line: #c9d0d5;
+        --accent: #195970;
+        --tint: #edf4f4;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #171c22;
+          --panel: #202830;
+          --ink: #edf0f3;
+          --muted: #b8c3cd;
+          --line: #53616e;
+          --accent: #9bd5e7;
+          --tint: #223640;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          18px/1.65 system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 960px;
+        margin: auto;
+        padding: 48px 24px 80px;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+        text-wrap: balance;
+      }
+      h1 {
+        font-size: clamp(2.2rem, 6vw, 3.5rem);
+        max-width: 17ch;
+        margin: 12px 0 22px;
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 1.65rem;
+      }
+      h3 {
+        font-size: 1.1rem;
+      }
+      p,
+      ul,
+      ol {
+        margin: 12px 0;
+      }
+      li {
+        margin: 7px 0;
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+      }
+      a:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 5px;
+      }
+      code {
+        font:
+          0.88em/1.5 ui-monospace,
+          monospace;
+        overflow-wrap: anywhere;
+      }
+      .eyebrow,
+      .label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .lede {
+        font-size: 1.25rem;
+        max-width: 64ch;
+      }
+      .muted,
+      .meta {
+        color: var(--muted);
+      }
+      .meta {
+        font-size: 0.9rem;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 22px;
+        padding: 18px 0;
+        border-block: 1px solid var(--line);
+        margin: 28px 0;
+      }
+      section {
+        margin-top: 42px;
+        scroll-margin-top: 20px;
+      }
+      .callout {
+        padding: 18px 22px;
+        background: var(--tint);
+        border-left: 4px solid var(--accent);
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin: 20px 0;
+      }
+      .step {
+        padding: 20px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      .step h3 {
+        margin-top: 8px;
+      }
+      details {
+        margin: 14px 0;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        scroll-margin-top: 20px;
+      }
+      summary {
+        padding: 18px 20px;
+        cursor: pointer;
+        font-weight: 650;
+      }
+      summary small {
+        display: block;
+        font-weight: 400;
+        color: var(--muted);
+        margin: 5px 0 0 20px;
+      }
+      .body {
+        padding: 0 22px 22px;
+      }
+      .body > :first-child {
+        margin-top: 0;
+      }
+      dl {
+        display: grid;
+        grid-template-columns: 105px 1fr;
+        gap: 12px 20px;
+      }
+      dt {
+        font-weight: 700;
+      }
+      dd {
+        margin: 0;
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+      }
+      th,
+      td {
+        padding: 14px 12px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+      th {
+        font-size: 0.85rem;
+      }
+      blockquote {
+        margin: 20px 0;
+        padding-left: 20px;
+        border-left: 3px solid var(--line);
+      }
+      footer {
+        margin-top: 48px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      @media (max-width: 700px) {
+        main {
+          padding: 28px 18px 60px;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        dl {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+        dd {
+          margin-bottom: 12px;
+        }
+      }
+      @media print {
+        :root {
+          color-scheme: light;
+        }
+        main {
+          max-width: none;
+          padding: 0;
+        }
+        details {
+          break-inside: avoid;
+        }
+        nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">
+          Proposal · October 4, 2026 · not an adopted task board
+        </p>
+        <h1>The site is shipped. Now make it easier to own.</h1>
+        <p class="lede">
+          The new-season engineering milestone is effectively reached. The next
+          round is about confidence, a few targeted improvements, and being able
+          to pick the project back up without reconstructing everything.
+        </p>
+        <p>
+          This is a proposed sequence, not nine simultaneous commitments.
+          <strong
+            >Read the next three steps; open the other cards only when you need
+            them.</strong
+          >
+        </p>
+        <p class="meta">
+          The existing
+          <a href="new-season-sweep/status.html">sweep status</a> and
+          <a href="../10-3-prep.md">October prep notes</a> are unchanged.
+          Repository checkpoint: <code>91741d1</code>. Production health below
+          reflects prior verification and Zack’s report, not a new live audit.
+        </p>
+      </header>
+
+      <nav aria-label="Proposal sections">
+        <a href="#next">Next three steps</a>
+        <a href="#season">Season reminders</a>
+        <a href="#queue">The proposed queue</a>
+        <a href="#resume">Coming back tomorrow</a>
+        <a href="#migration">What happens to old status?</a>
+        <a href="workstream-review-reference.html">Preserved 1–8 review</a>
+      </nav>
+
+      <section id="next">
+        <h2>Keep the immediate plan this small</h2>
+        <div class="steps">
+          <article class="step">
+            <span class="label">1 · Finish what’s active</span>
+            <h3>Land the Open Graph image</h3>
+            <p>
+              You’re already working on it. Finish the image, deployed metadata
+              and asset checks. Don’t attach a new image platform to this task.
+            </p>
+            <a href="#og">Scope and finish line</a>
+          </article>
+          <article class="step">
+            <span class="label">2 · One orientation session</span>
+            <h3>Rebuild the map</h3>
+            <p>
+              Trace build-time data versus live requests, then the theme toggle.
+              One reading session, not a full architecture rewrite or an
+              obligation to understand every file.
+            </p>
+            <a href="#review">Reading plan</a>
+          </article>
+          <article class="step">
+            <span class="label">3 · Before-season opportunity</span>
+            <h3>Try a smaller font payload</h3>
+            <p>
+              One measured experiment, capped at two focused sessions. Compare
+              Iosevka delivery/build options or a lighter alternative font, with
+              Zack’s visual approval. Otherwise record the result and stop.
+            </p>
+            <a href="#fonts">Experiment and stop rule</a>
+          </article>
+        </div>
+        <div class="callout">
+          <strong>One implementation in progress.</strong> A reading session can
+          accompany it, but is optional—not a second project you owe progress
+          on. Time-sensitive season checks and real incidents can interrupt;
+          interesting new tooling cannot.
+        </div>
+        <p class="meta">
+          After those three: finish the SQLite/venue review → close Sentry →
+          security confidence pass → one maintenance batch → compact preflight
+          tooling → observability learning → evaluate a reusable
+          return-to-project system. This is a pull queue, not a deadline
+          calendar.
+        </p>
+      </section>
+
+      <section id="season">
+        <h2>Keep season obligations outside the project queue</h2>
+        <p>
+          These have external triggers. Waiting for one does not mean the rest
+          of the site is unfinished.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Trigger</th>
+                <th scope="col">Small action</th>
+                <th scope="col">Close when</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Today’s game</strong><br />October 4 ·
+                  <code>0012600066</code>
+                </td>
+                <td>
+                  Capture during play and after final. Pregame snapshot is
+                  already saved: status 1, GSW 0 / LAC 0.
+                </td>
+                <td>
+                  Compare the same game’s scores/status, record observations and
+                  uncertainty, retain useful fixtures. This tests the raw
+                  feed—not the hosted regular-season cache path.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Odds are published</strong></td>
+                <td>
+                  Enter actual candidates/odds using the
+                  <a href="../docs/MAINTENANCE.md">maintenance guide</a>. Until
+                  then, a twice-weekly check or publication notification is
+                  sufficient; no constant polling project.
+                </td>
+                <td>
+                  Dump/review/validate/deploy; verify homepage, team pages and
+                  candidate Showdown schedule. No invented placeholders.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Regular-season activation</strong></td>
+                <td>
+                  Observe hosted results and schedule behavior before/after a
+                  qualifying game, including expiry and refresh. Test forced
+                  failure in isolated preview/test KV, not by damaging
+                  production.
+                </td>
+                <td>
+                  Hosted evidence complements existing unit tests. Preseason
+                  snapshots alone cannot close this item.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Pages retirement</strong></td>
+                <td>
+                  Zack has decided to retire it; completion has not been
+                  confirmed here. Preserve Worker, production KV and legacy
+                  redirect. Check both hostnames afterward.
+                </td>
+                <td>
+                  Record deletion and successful checks once. It is no longer a
+                  waiting-for-October-3 blocker.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="meta">
+          Owner: Zack initiates account/data changes and observations; the
+          assistant can prepare commands and compare evidence. If season
+          activation arrives first, do it first. Neither fonts nor a finished
+          learning curriculum should delay published odds.
+        </p>
+      </section>
+
+      <section id="queue">
+        <h2>A queue with finish lines</h2>
+        <p>
+          <strong
+            >Timeboxes are spending limits, not duration estimates.</strong
+          >
+          At the limit, choose: ship, retain the working baseline, or create one
+          narrowly defined follow-up. Don’t quietly turn an investigation into a
+          new subsystem.
+        </p>
+
+        <details id="og">
+          <summary>
+            A · Open Graph — finish the active work<small
+              >Season-facing polish · Zack owns visual approval</small
+            >
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Outcome</dt>
+              <dd>
+                A shared link looks intentional, with one site-wide image.
+              </dd>
+              <dt>First action</dt>
+              <dd>
+                Continue the current implementation; this proposal does not
+                touch it. Check the built metadata/image together before
+                expanding scope.
+              </dd>
+              <dt>Done</dt>
+              <dd>
+                Approved image; correct absolute public image URL and social
+                metadata on representative routes; image returns successfully
+                with the right content type; crop/text remains readable in a
+                card preview. The design playground is not published. Document
+                any provider-cache limitation.
+              </dd>
+              <dt>Not included</dt>
+              <dd>
+                Per-team generators, a reusable image service, runtime sharp, or
+                a redesign of image infrastructure. Prefer the smallest
+                build-time/static solution that meets this site’s need.
+              </dd>
+              <dt>Leave behind</dt>
+              <dd>
+                One evidence link and the command/file used to regenerate the
+                image.
+              </dd>
+            </dl>
+          </div>
+        </details>
+
+        <details id="review">
+          <summary>
+            B · Understand what shipped — a guided review, not a rewrite<small
+              >Start after OG; complete the data sessions after the font
+              experiment</small
+            >
+          </summary>
+          <div class="body">
+            <p>
+              <strong>Three 60–90 minute reading sessions.</strong> Zack reads
+              and explains; the assistant supplies a small path through the
+              code, checks explanations, and records unresolved questions.
+              Shipped and personally reviewed are separate states.
+            </p>
+            <ol>
+              <li>
+                <strong>Map + theme.</strong> Start with
+                <a href="../docs/data-system.html#contexts"
+                  >runtime boundaries</a
+                >. Trace canonical SQL → local SQLite → build snapshots → static
+                output/Worker metadata, then request → action → KV/NBA → UI.
+                Read
+                <a href="../src/components/color-scheme-toggle.astro"
+                  >the toggle</a
+                >
+                and
+                <a href="new-season-sweep/light-mode.md">theme decisions</a>:
+                first paint, stored preference versus OS preference, storage
+                events, semantic colors and chart repainting. Predict a
+                preference change, then observe it.
+              </li>
+              <li>
+                <strong>SQLite and publishing.</strong> Follow one odds edit
+                through <a href="../data/README.md">the data workflow</a> and
+                its validation/dump/staged-data checks. Explain why no DB is
+                deployed and why deleting an open local DB is unsafe. Inspect
+                the snapshot/transaction tests rather than every SQL helper.
+              </li>
+              <li>
+                <strong>Venues + Showdown.</strong> Read
+                <a href="showdown/venue-backfill.md">the backfill evidence</a>
+                with the implementation/tests. Trace an ordinary paired-log
+                match and the conflicting Mexico City example. Check explicit
+                home/away metadata, unchanged IDs/scores, independent box-score
+                evidence, and transactional failure behavior. Then trace
+                archive/live dispatch and the separate schedule cache.
+              </li>
+            </ol>
+            <p>
+              <strong>Finish line:</strong> Zack can explain those boundaries
+              and one failure path in his own words; concrete defects are
+              separated from preferences and unanswered questions. Keep a short
+              review record: what was checked, what was learned, and at most
+              three next questions. Reuse the existing architecture guide
+              instead of writing a second book.
+            </p>
+            <p>
+              <strong>Stop rule:</strong> no opportunistic refactoring during
+              the reading session. A correctness/security defect may interrupt
+              the queue; moving Showdown’s dispatch into an
+              <code>index.astro</code> facade is a separate consistency
+              decision, not automatically a defect.
+            </p>
+          </div>
+        </details>
+
+        <details id="fonts">
+          <summary>
+            C · Iosevka — promote one bounded experiment before the season<small
+              >This changes the old plan’s “after season start” priority, not
+              its performance conclusions</small
+            >
+          </summary>
+          <div class="body">
+            <p>
+              I’m interpreting “font sizes” as
+              <strong>downloaded font-file payload</strong>, not CSS text size.
+              Historical measurements show two static weights, 400/700, totaling
+              about 1.88 MiB. That is a strong lead, not proof that fonts
+              explain every slow load.
+            </p>
+            <dl>
+              <dt>Session 1</dt>
+              <dd>
+                Reconfirm current transferred sizes and inspect font
+                tables/glyph requirements. Compare Fontsource delivery options,
+                Astro’s Fonts API, and a smaller build/subset or alternative
+                font; select one candidate and agree a byte budget. Capture the
+                current baseline before changing it.
+              </dd>
+              <dt>Session 2</dt>
+              <dd>
+                Compare the candidate under the same settings: font bytes,
+                repeated mobile FCP/LCP and layout stability, plus a warm
+                navigation. Check both weights, accented/historical names,
+                punctuation, math symbols, dynamic tooltips, delayed/failed
+                fonts, keyboard focus and both themes.
+              </dd>
+              <dt>Done</dt>
+              <dd>
+                Either ship a repeatable payload reduction with Zack’s visual
+                approval, no glyph/interaction regressions and reproducible,
+                licensed font assets, or record why the trial did not meet the
+                budget and keep the baseline. A different font is acceptable;
+                preserving Iosevka itself is not a requirement. Do not promise a
+                Lighthouse score in advance.
+              </dd>
+              <dt>Stop rule</dt>
+              <dd>
+                Two sessions. If font internals need deeper research, park that
+                research rather than consume the entire pre-season window.
+              </dd>
+            </dl>
+            <p>
+              <strong>Options explicitly in scope:</strong> try Fontsource
+              loading/delivery options and Astro’s Fonts API. The site already
+              imports Fontsource’s Iosevka Curly 400/700 CSS, so distinguish a
+              different delivery strategy from simply adopting Fontsource.
+              Measure the actual files each approach serves; an API or hosting
+              change alone does not guarantee smaller binaries. Zack is open to
+              switching away from Iosevka if its build remains
+              disproportionately large. Compare a lighter alternative for
+              appearance, readability, glyph coverage and layout—not just
+              download size.
+            </p>
+            <p>
+              Use the
+              <a href="performance/README.md">existing performance findings</a>:
+              files are already labelled Latin; a Fonts API migration alone does
+              not shrink them. CSS inlining caused reflow and preloading the
+              large bold face alone hurt first paint in the earlier experiment.
+              Don’t repeat those as presumed fixes.
+            </p>
+            <p>
+              Use a small existing measurement harness now. A general quality
+              platform is not a prerequisite for this experiment.
+            </p>
+          </div>
+        </details>
+
+        <details id="sentry">
+          <summary>
+            D · Sentry — close the integration chapter<small
+              >Two 90-minute sessions, then stop; closure does not require
+              upstream to respond</small
+            >
+          </summary>
+          <div class="body">
+            <p>
+              <strong>Reframe:</strong> we already have verified hosted capture,
+              release tagging and source mapping. The work is to confirm the
+              current contract, settle local-dev behavior, and stop carrying an
+              undefined “Sentry rework” task.
+            </p>
+            <ol>
+              <li>
+                <strong>Acceptance pass.</strong> Use
+                <a href="new-season-sweep/sentry-worker-entry.md"
+                  >Worker-entry evidence</a
+                >,
+                <a href="new-season-sweep/sentry-astro-middleware.md"
+                  >middleware evidence</a
+                >
+                and current tests. State who initializes each runtime, who
+                captures framework-handled errors, when maps upload/delete, and
+                whether local dev sends anything. In a controlled preview,
+                verify fresh browser/server events, release and mapped frames;
+                inspect duplicate capture and deployed map exposure. Remove any
+                temporary probes.
+              </li>
+              <li>
+                <strong>One upstream deliverable.</strong> Prioritize the
+                <a href="new-season-sweep/findings-sentry-upstream.md"
+                  >source-map lifecycle finding</a
+                >. Recheck relevant current releases in isolation, not by
+                upgrading this app blindly. File one bounded report if
+                reproducible; otherwise record the tested versions/result and
+                park it. The other docs/middleware/types reports are optional,
+                not three more completion gates.
+              </li>
+            </ol>
+            <p>
+              <strong>Done:</strong> one short operating recipe, tests guarding
+              the workaround, a recorded local-dev decision, and each remaining
+              finding labelled reported / fixed upstream / deferred with a
+              revisit trigger. Keep the working setup if the investigation runs
+              out of budget. A real capture regression becomes a specific repair
+              task, not permission for an unlimited rewrite.
+            </p>
+            <p>
+              <strong>Package/script recommendation:</strong> don’t publish a
+              compatibility package now. It would create another version matrix
+              and maintenance obligation. Prefer a recipe and the existing
+              narrow helpers/tests. Reconsider extraction only after a second
+              real site needs the same stable contract and there is a clear
+              reduction in maintenance, not merely repeated frustration.
+            </p>
+          </div>
+        </details>
+
+        <details id="security">
+          <summary>
+            E · Security confidence — a mental model and a quiet operating
+            policy<small
+              >Enable a notification path early; do the deeper review after
+              Sentry</small
+            >
+          </summary>
+          <div class="body">
+            <p>
+              <strong>Small early win:</strong> after OG, allow one short admin
+              slot to check whether repository vulnerability alerts are enabled
+              and routed somewhere Zack actually reads. Enable/configure them
+              only with approval. If that becomes involved, record the blocker
+              and return to the active task. Notification setup need not wait
+              for the full security curriculum.
+            </p>
+            <p>
+              <strong>October 4 follow-up — audit friction:</strong>
+              high-severity findings blocked committing unrelated work, so Zack
+              removed the pre-commit audit and postinstall audit hook. Saving a
+              commit must not depend on a clean advisory feed. Build/verify
+              still audits and can currently block deployment; the durable
+              deployment policy is not settled. Decide whether to block
+              releases, warn, or require explicit risk acceptance, and design a
+              documented, scoped, time-limited exception path for necessary
+              deployments. Keep findings visible and retain type, test and
+              artifact gates; do not make bypassing all verification the escape
+              hatch. Distinguish known findings from an unavailable audit
+              service.
+            </p>
+            <h3>Two learning/decision sessions, then a bounded CSP trial</h3>
+            <ol>
+              <li>
+                <strong>Draw the trust boundaries.</strong> Browser →
+                Worker/actions → NBA/KV; editor/DB → build → CI credentials →
+                artifact; browser/Worker → Sentry. Identify what can execute
+                during installation and which secrets each step receives. Narrow
+                job-wide deployment/upload secret exposure where practical.
+                Separate a package’s manifest category from code actually
+                shipped or executed.
+              </li>
+              <li>
+                <strong>Write a small policy.</strong> Decide advisory
+                notification, triage cadence, blocking severity/scope, exception
+                expiry and update ownership. Current
+                <code>pnpm run audit</code> is
+                <code>pnpm audit --prod --audit-level=high</code>;
+                <a href="../docs/dependency-security.md">the security guide</a>
+                still describes an all-dependency/all-severity gate. Reconcile
+                that mismatch; don’t silently change the chosen gate. Add
+                full-graph visibility so dev-tool risks are not invisible.
+              </li>
+              <li>
+                <strong>Learn and trial CSP together.</strong> Enumerate
+                scripts/styles/connections, including analytics, Sentry and
+                first-paint theme code. Understand Astro’s meta policy versus
+                HTTP headers and report-only limitations before choosing a
+                rollout. Test a built/hosted preview, not only dev. Ship a
+                tested policy, or leave a concrete compatibility blocker and
+                next action—not “learn security” indefinitely.
+              </li>
+            </ol>
+            <h3>A healthy dependency stance</h3>
+            <p>
+              <strong
+                >Minimize unnecessary dependencies, not updates at all
+                costs.</strong
+              >
+              Freezing indefinitely accumulates known vulnerabilities and makes
+              eventual upgrades larger. Unreviewed constant churn increases
+              exposure to new releases. Prefer a small justified dependency set,
+              frozen reproducible installs, the existing release
+              cooldown/provenance/build-script controls, small scheduled updates
+              and prompt triage of relevant security fixes. A cooldown exception
+              for an urgent fix should be deliberate and recorded.
+            </p>
+            <p>
+              Audit detects known advisories, not arbitrary malicious code.
+              Fewer dependencies is useful, but rewriting mature
+              security-sensitive code yourself is not automatically safer. Dev
+              tools matter because they execute on your machine and in CI; CSP
+              does not protect build credentials.
+            </p>
+            <p>
+              <strong>Automation proposal:</strong> choose one update
+              bot—Renovate or Dependabot—not both. Start with a weekly update
+              window, at most two open routine PRs, separated major upgrades,
+              and no initial automerge. Confirm vulnerability coverage for the
+              actual lockfile; use a scheduled full-graph audit report where
+              needed. Security notifications should not wait for routine
+              batching. New alerts should reach one inbox, not three dashboards.
+            </p>
+            <p>
+              <strong>Done:</strong> Zack can explain the main risks, an alert
+              route is tested, current policy is documented, exceptions name an
+              advisory/reason/review date, and CSP has a recorded outcome.
+              Existing build gates still block what the policy says they block;
+              an audit service outage is not a clean report.
+            </p>
+          </div>
+        </details>
+
+        <details id="maintenance">
+          <summary>
+            F · One maintenance batch — three tasks, no opportunistic
+            sweep<small
+              >Suggested budget: one half-day; split unfinished work rather than
+              stretching the batch</small
+            >
+          </summary>
+          <div class="body">
+            <ol>
+              <li>
+                <strong>Safer DB reset.</strong> Require stopped clients;
+                restore/validate a temporary DB before replacement; preserve the
+                old DB on failure; notify only after success. Test
+                missing/invalid dump and a successful reset. An open-file
+                warning is useful, but not a locking guarantee. The SQLite
+                review supplies the understanding first.
+              </li>
+              <li>
+                <strong>Check/script ownership.</strong> Make a small command
+                map. Package scripts own JS checks/build/test; mise owns pinned
+                environment and ergonomic orchestration; hk invokes shared
+                checks with intentional staged-file scope; CI invokes the
+                release gate. Preserve scoped checks where they serve a purpose.
+                Audit is already centralized—don’t redo that work. Reconcile the
+                remaining duplicated definitions and maintenance-guide wording
+                about season length/date validation.
+              </li>
+              <li>
+                <strong>Knip pilot.</strong> Run it, classify
+                framework/dynamic-entry false positives, and accept only
+                explained removals. Add a maintained check once its signal is
+                useful. Do not combine its first report with mass deletion or
+                major dependency upgrades.
+              </li>
+            </ol>
+            <p>
+              <strong>Done:</strong> these tasks have tested outcomes or
+              explicit small follow-ups, and commands are discoverable in one
+              place. “Review all Astro features” is not low-hanging fruit.
+              Targeted dependency updates belong to the security policy; feature
+              exploration stays parked unless it solves a chosen problem.
+            </p>
+          </div>
+        </details>
+
+        <details id="preflight">
+          <summary>
+            G · A small preflight, not another test-tool collection<small
+              >Two design/pilot sessions; approve a minimal implementation
+              before expanding it</small
+            >
+          </summary>
+          <div class="body">
+            <p>
+              <strong>Desired interface:</strong> one command pointed at a
+              candidate URL, one compact report, one explicitly approved
+              baseline. This is a proposed interface, not an existing command.
+              Reuse evidence from
+              <a href="baseline/README.md">the current harness</a>; don’t
+              migrate the entire directory first.
+            </p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Quality</th>
+                    <th scope="col">Small initial check</th>
+                    <th scope="col">Treatment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Correctness / deployment</td>
+                    <td>
+                      Keep existing unit, type, build and artifact gates. Hosted
+                      smoke checks routes, actions, assets, redirects and
+                      expected headers.
+                    </td>
+                    <td>
+                      Deterministic regressions block. Remote page checks do not
+                      replace dataset validation or bundle auditing.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Usability / accessibility</td>
+                    <td>
+                      Both themes, persisted/OS preference and first paint;
+                      keyboard toggle/table/chart paths; no overflow; delayed
+                      fonts; basic automated accessibility checks.
+                    </td>
+                    <td>
+                      Known required behavior blocks. A real-device sticky-table
+                      check and screen-reader/zoom review remain explicit manual
+                      checks, not claims made by a Lighthouse score.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Performance</td>
+                    <td>
+                      Font/JS/CSS transfer sizes plus three repeat Lighthouse
+                      runs under fixed mobile settings; report medians and
+                      spread for FCP/LCP/CLS/TBT.
+                    </td>
+                    <td>
+                      Warn first; choose budgets after measuring stable noise.
+                      Lighthouse TBT is not real-user INP.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Presentation / sharing</td>
+                    <td>
+                      A few representative screenshots; OG image/metadata; key
+                      layout and chart interactions.
+                    </td>
+                    <td>
+                      Human review for visual changes. Don’t automatically bless
+                      a new baseline.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              <strong>Sample:</strong> homepage, archive index, large season
+              table, team/pace page, Showdown and Stats. Use historic routes for
+              stable comparisons; test current-season states separately. No
+              all-URL × all-browser × all-theme performance matrix by default.
+            </p>
+            <p>
+              <strong>Comparison contract:</strong> record commit,
+              URL/environment, dataset or season state, browser/Lighthouse
+              versions, viewport, theme, throttling and cold/warm cache policy.
+              Capture production and candidate close together with comparable
+              settings. CDN/network differences and changing live scores are
+              confounders; don’t report them as proven code regressions. Use
+              controlled local comparisons when isolation matters.
+            </p>
+            <p>
+              <strong>Tool cleanup:</strong> inventory keep / archive / retire
+              with the behavior each retained check protects. Retire probes only
+              after checking references and mapping replacement coverage. Leave
+              bulky captures outside source control with a retention policy;
+              retain small summaries and reproducible fixtures. No new dashboard
+              framework or second sprawling test package.
+            </p>
+            <p>
+              <strong>Done:</strong> use the same minimal preflight on two
+              candidate deployments, get an understandable report, and
+              successfully demonstrate one intentional regression is caught.
+              Then promote only the reliable checks into CI. Automated quality
+              gates should reduce attention, not generate another inbox.
+            </p>
+          </div>
+        </details>
+
+        <details id="observability">
+          <summary>
+            H · Observability — learn what decisions the data supports<small
+              >After the confidence work; two guided sessions before adding
+              instrumentation</small
+            >
+          </summary>
+          <div class="body">
+            <p>
+              Start with existing Sentry and Cloudflare views. This is distinct
+              from fixing Sentry’s integration. We do not need to choose a new
+              platform or deploy OpenTelemetry to begin learning.
+            </p>
+            <ol>
+              <li>
+                <strong>Walk one incident.</strong> Find an error, connect it to
+                a release and request, inspect frequency and impact, and decide
+                whether to fix, roll back, monitor or ignore. If no real
+                incident is suitable, use a clearly identified controlled
+                preview example.
+              </li>
+              <li>
+                <strong>Walk a quiet week.</strong> What would reveal a broken
+                route, failing upstream requests, stale data or a slower
+                experience? What is not measured today? Compare Sentry’s
+                error/release view with Cloudflare’s request/status/latency
+                view. Instrument only a named decision that existing evidence
+                cannot support.
+              </li>
+            </ol>
+            <p>
+              <strong>Proposed routine:</strong> a short post-deploy smoke
+              check; a ten-minute weekly review of errors, failed requests,
+              freshness evidence and dependency alerts; explicit
+              season-transition checks. Only actionable
+              outage/security/freshness notifications should interrupt outside
+              that routine. Agree thresholds and an action before creating an
+              alert.
+            </p>
+            <p>
+              <strong>Done:</strong> a small “symptom → view → decision”
+              runbook, an agreed cadence, and at most one initial actionable
+              alert if it can be supported. Review privacy,
+              <code>sendDefaultPii</code>, sampling, retention and cost before
+              collecting more. A 200 response can still be stale; sampled events
+              and no alerts are not proof of complete coverage.
+            </p>
+          </div>
+        </details>
+
+        <details id="orientation">
+          <summary>
+            I · Returning after a long absence — trial a ritual before building
+            a system<small
+              >Use the tiny handoff below now; evaluate tooling last</small
+            >
+          </summary>
+          <div class="body">
+            <p>
+              The
+              <a href="https://github.com/DrCatHicks/learning-opportunities"
+                >learning-opportunities project</a
+              >
+              and its
+              <a
+                href="https://github.com/DrCatHicks/learning-opportunities/blob/main/orient/skills/orient/SKILL.md"
+                >orient skill</a
+              >
+              are a useful fit: selective reading, a concise repo map and a
+              couple of explanation exercises rather than exhaustive code
+              reading. They have been consulted for this proposal, not installed
+              or invoked.
+            </p>
+            <p>
+              <strong>Pilot:</strong> spend one session adapting a manual return
+              routine, then try it on three actual returns. Read the current
+              handoff and a small source artifact first. Explain the boundary in
+              your own words; use hints or open the code when needed. Later
+              retrieval questions should revisit material you have actually
+              learned—not quiz you on unfamiliar internals.
+            </p>
+            <ul>
+              <li>
+                After the SQLite lesson: what is canonical, what can be
+                discarded, and what reaches the Worker?
+              </li>
+              <li>
+                After the venue lesson: why can’t score-array order determine
+                home versus away?
+              </li>
+              <li>
+                After the theme lesson: which preference wins, and how do we
+                avoid the wrong first paint?
+              </li>
+            </ul>
+            <p>
+              The assistant asks one question, waits for an answer, then offers
+              feedback and a source link. No scores, streaks, daily nagging or
+              mandatory exam before coding. Record confidence gaps, not a grade.
+            </p>
+            <p>
+              <strong>Done:</strong> on a later return, Zack can find the next
+              action and rebuild the relevant mental model in roughly ten
+              minutes. Only then decide whether a skill, generated orientation
+              or recall tool would remove friction. Installation/agent
+              integration is a separate choice; this proposal adds no skill
+              files or automation.
+            </p>
+          </div>
+        </details>
+
+        <details id="parked">
+          <summary>
+            Deliberately parked — not debts to pay before enjoying the
+            site<small>Reopen only when a concrete need appears</small>
+          </summary>
+          <div class="body">
+            <ul>
+              <li>
+                <strong>Reusable image service:</strong> this site no longer
+                requires one. Revisit for a real second consumer/runtime image
+                requirement, not to finish OG.
+              </li>
+              <li>
+                <strong>Astro feature sweep:</strong> Fonts API only if it helps
+                the font task; route caching only if measured behavior needs
+                changing; codec settings/compressHTML only with evidence. Native
+                branch previews are already implemented, despite the old
+                exploratory card.
+              </li>
+              <li>
+                <strong>Dev/check initialization upstream repro:</strong> keep
+                the working sequential-sync workaround. Revisit if it recurs or
+                the relevant upstream release warrants a bounded retest.
+              </li>
+              <li>
+                <strong>Remaining Sentry upstream reports:</strong> not
+                prerequisites for site health, and not an obligation to become
+                upstream’s integration maintainer.
+              </li>
+              <li>
+                <strong
+                  >Floating navigation, custom dashboards, new telemetry stacks
+                  and a public Sentry package:</strong
+                >
+                useful ideas are allowed to remain ideas.
+              </li>
+            </ul>
+            <p>
+              If a timebox ends with “the working baseline is good enough,” that
+              is a valid result—not a failed task.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <section id="resume">
+        <h2>Make tomorrow’s first five minutes easy</h2>
+        <p>
+          Adopt this tiny habit before building any orientation tooling. One
+          workstream page should answer these questions without requiring a chat
+          transcript.
+        </p>
+        <div class="callout">
+          <dl>
+            <dt>Active</dt>
+            <dd>Exactly one card and its outcome.</dd>
+            <dt>Next action</dt>
+            <dd>
+              A concrete verb + file/command/question that fits one sitting. Not
+              “continue research.”
+            </dd>
+            <dt>Last result</dt>
+            <dd>
+              What changed or was learned, with a commit/test/evidence link and
+              date. Distinguish verified, inferred and not yet checked.
+            </dd>
+            <dt>Open question</dt>
+            <dd>The one thing preventing the next decision, or “none.”</dd>
+            <dt>Next in queue</dt>
+            <dd>One card, plus any time-sensitive season reminder.</dd>
+          </dl>
+        </div>
+        <p>
+          <strong>At the end of a session:</strong> spend three minutes updating
+          those fields, even if no code shipped. Record a rejected approach so
+          it is not rediscovered. Keep durable explanations in the existing
+          guides; link them rather than duplicating them here.
+        </p>
+        <p>
+          <strong>At the next start:</strong> inspect branch/worktree and recent
+          commits, read the handoff, optionally do one recall exercise, and take
+          the recorded next action. If the worktree or evidence changed,
+          reconcile that first. Don’t reopen the entire backlog.
+        </p>
+        <p>
+          <strong>If adopted:</strong> this proposal can become the single
+          current workstream page, with completed cards collapsed and short
+          outcome/evidence notes. Git preserves earlier handoffs. No separate
+          dashboard, task database, elaborate labels or duplicate running log is
+          required.
+        </p>
+        <blockquote>
+          <strong>Example handoff, not a claim about ongoing OG work:</strong
+          ><br />Active: font experiment. Last result: measured the two existing
+          faces; no changes shipped. Next: inspect the subset candidate’s glyph
+          coverage against historical names and chart symbols. Open question:
+          whether its layout tables preserve the accepted appearance. Evidence:
+          baseline report + candidate commit. Next in queue: SQLite review.
+        </blockquote>
+      </section>
+
+      <section id="migration">
+        <h2>What happens to the old status page?</h2>
+        <p>
+          <strong>Nothing yet.</strong> On approval, treat the sweep as a
+          completed milestone with some event-triggered follow-ups, not an
+          eternally half-finished project. Preserve its evidence; don’t copy
+          every historical checklist entry into a new backlog.
+        </p>
+        <p>
+          The full
+          <a href="workstream-review-reference.html"
+            >earlier 1–8 review is preserved separately</a
+          >, including its reasoning and original suggested order. The smaller
+          queue is a way to act on those ideas, not a replacement that discards
+          them.
+        </p>
+        <details>
+          <summary>
+            Proposed reconciliation map<small
+              >This is a map for a later edit—not an edit to the status
+              page</small
+            >
+          </summary>
+          <div class="body table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Old status / notes</th>
+                  <th scope="col">Proposed destination</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Foundations, Workers cutover, SQLite and TanStack</td>
+                  <td>
+                    Shipped milestone evidence. Learning and specific defects
+                    are separate work, not reopened migrations.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Light mode and Showdown “awaiting merge”</td>
+                  <td>
+                    Shipped: <code>e6731d6</code> / <code>5fe01d1</code>.
+                    Personal review remains card B. Old branch names, local
+                    server URLs and test counts are historical—not current
+                    instructions.
+                  </td>
+                </tr>
+                <tr>
+                  <td>OG image</td>
+                  <td>
+                    Card A, currently active per Zack. This proposal does not
+                    assert it has landed.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Odds, maintenance expectations and in-season cache checks
+                  </td>
+                  <td>
+                    The event-triggered season lane. Scope the pre-season bypass
+                    statement to results-only requests; Showdown can request
+                    schedules before the start date.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Iosevka / Fonts API / performance notes</td>
+                  <td>
+                    Card C promotes a bounded payload experiment. Broader
+                    performance infrastructure waits for G.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sentry rework / upstream findings / dev behavior</td>
+                  <td>
+                    Card D: close the supported integration contract; cap
+                    upstream work; do not conflate this with observability
+                    learning in H.
+                  </td>
+                </tr>
+                <tr>
+                  <td>CSP / dependency audit</td>
+                  <td>
+                    Card E. Old “all severities fail” / “no known findings”
+                    wording is not a current security guarantee. Reconcile
+                    policy against current scripts and a dated audit.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Safer reset / verification ownership / Knip</td>
+                  <td>
+                    Card F. Keep intentional staged-versus-whole-repository
+                    checks.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Review plan/ context and tooling / Lighthouse</td>
+                  <td>
+                    Card G: retain behavior coverage before retiring scripts. No
+                    cleanup or deletion authorized by this proposal.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Retained Pages / preview deployment exploration</td>
+                  <td>
+                    Pages: confirm execution once; window elapsed. Native
+                    previews: already shipped. Don’t carry obsolete exploration
+                    as new work.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Other Astro features / image service / dev-cache upstream
+                    repro / floating nav
+                  </td>
+                  <td>Parking lot with a trigger, not the active queue.</td>
+                </tr>
+                <tr>
+                  <td>Observability / Cat Hicks learning / recall idea</td>
+                  <td>
+                    H and I; small handoffs can begin immediately without
+                    implementing either system.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <h3>What “a good spot” looks like</h3>
+        <ul>
+          <li>
+            Season changes have a short runbook and reminders; no unknown
+            critical correctness/security problem is being hidden in “later.”
+          </li>
+          <li>
+            The key architecture and workarounds are understandable, with a
+            small evidence trail rather than a pile of unexplained generated
+            code.
+          </li>
+          <li>
+            Dependency alerts arrive without remembering to run an audit;
+            routine updates are small and reviewable.
+          </li>
+          <li>
+            Important regressions have a compact preflight, and its warnings
+            lead to decisions rather than noise.
+          </li>
+          <li>
+            A normal week needs a small maintenance check—not a new
+            infrastructure project. An empty active queue is a healthy outcome.
+          </li>
+        </ul>
+        <p>
+          <strong>The only decision needed now:</strong> accept or adjust the
+          first three steps. The later cards are proposals you can revise when
+          you reach them; you do not need to approve every tool and policy
+          today.
+        </p>
+      </section>
+
+      <footer>
+        <p>
+          Prepared from the current prep notes, sweep status, performance
+          findings, baseline README, Sentry upstream evidence, dependency
+          policy/scripts, and the linked orient resources. No status rewrite,
+          implementation changes, cleanup, account changes, new automation,
+          commit or deployment is part of this proposal.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

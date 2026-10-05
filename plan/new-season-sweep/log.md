@@ -1,5 +1,20 @@
 # New-season sweep: round log
 
+## October 4, 2026 — schedule-feed finality observations and naming cleanup
+
+Renamed `hasScore()` to `hasFinalResult()` and documented all three observed
+statuses in `NBA_GAME_STATUS`. The existing rule is unchanged: final status (3)
+AND positive scores for both teams. No cache-version bump. Historical entries
+below describing score-only finality reflect earlier implementation stages.
+
+The two October 4 snapshots show GSW–LAC and UTA–DEN changing from status 1 to
+status 2 / 2nd Qtr while scores remain 0–0; MIA–TOR is status 3 / Final with
+129–105 in both. Working assumption: schedule-feed scores populate at final.
+Still capture the same live games after completion. See
+[maintenance guidance](../../docs/MAINTENANCE.md) for snapshot paths and details.
+Tests cover zero/positive in-progress scores and final games with zero scores;
+positive in-progress scores remain a defensive synthetic case.
+
 ## Light mode — reconcile concurrent main documentation before final review
 
 Main advanced to `84dde84` while checkpoint 3 ran. Merged that documentation-only

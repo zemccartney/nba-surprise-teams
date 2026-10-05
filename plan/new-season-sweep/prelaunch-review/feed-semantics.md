@@ -1,5 +1,10 @@
 # Live feed: successful access and findings for discussion
 
+> Historical findings. As of October 4, 2026, the loader retains `gameStatus`
+> and `hasFinalResult()` requires final status (3) plus positive scores for both
+> teams. Observed in-progress scores remain zero. See
+> [current observations and remaining checks](../../../docs/MAINTENANCE.md).
+
 ## Access is unblocked locally
 
 After Zack successfully ran `scr.ts` with `Referer: https://www.nba.com/`, I

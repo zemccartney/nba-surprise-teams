@@ -1,5 +1,10 @@
 # Independent validation notes
 
+> Historical validation: the score-only completion behavior described below has
+> been replaced. `hasFinalResult()` requires status 3 plus positive scores for
+> both teams. Synthetic live-score fixtures are defensive cases, not observed
+> feed behavior. See [current feed guidance](../../../docs/MAINTENANCE.md).
+
 These checks were performed by the coordinating assistant after/beside the two
 independent reviews. They are distinct from reviewer source inspection and from
 the earlier approved visual walkthrough. Finding IDs refer to `README.md`.

@@ -1,5 +1,10 @@
 # Pre-launch review: full Foundations stack
 
+> Finality update (October 4, 2026): historical score-only findings below are
+> superseded by `hasFinalResult()` (status 3 AND positive scores for both teams).
+> Observed in-progress games still have zero scores; see
+> [current observations and remaining checks](../../../docs/MAINTENANCE.md).
+
 ## Latest: header-font preloads promoted
 
 Zack approved the built preview and requested the [two-font preload patch](header-font-preloads.md)

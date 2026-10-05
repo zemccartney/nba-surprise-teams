@@ -107,11 +107,39 @@ describe("Cup eligibility", () => {
   });
 });
 
-it("never includes in-progress scores in completed results", async () => {
-  feed([{ ...game("0022600085", 49), gameStatus: 2 }]);
+// Zero scores match observed live feed behavior; positive scores are defensive.
+it.each([0, 49])(
+  "excludes in-progress games with score %s from completed results",
+  async (score) => {
+    feed([{ ...game("0022600085", score), gameStatus: 2 }]);
+    const result = await loader();
+    expect(result.games).toHaveLength(0);
+  },
+);
+
+it.each([
+  [0, 0],
+  [0, 100],
+  [100, 0],
+])("excludes final games with scores %s–%s", async (away, home) => {
+  const final = game("0022600085");
+  final.awayTeam.score = away;
+  final.homeTeam.score = home;
+  feed([final]);
   const result = await loader();
   expect(result.games).toHaveLength(0);
+  expect(result.expiresAt).toBeGreaterThan(Date.now());
 });
+
+it.each(["awayTeam", "homeTeam"] as const)(
+  "rejects final games missing the %s score",
+  async (side) => {
+    const final = game("0022600085");
+    Reflect.deleteProperty(final[side], "score");
+    feed([final]);
+    await expect(loader()).rejects.toThrow();
+  },
+);
 
 it("optionally returns the whole scoreless schedule from the same request", async () => {
   const request = feed([

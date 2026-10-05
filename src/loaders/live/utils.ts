@@ -92,9 +92,19 @@ export const SeasonDataSchema = z.object({
   }),
 });
 
-// Positive scores can be published during play. Only NBA final status counts.
-export const hasScore = (game: z.infer<typeof GameResultSchema>) =>
-  game.gameStatus === 3 && game.homeTeam.score > 0 && game.awayTeam.score > 0;
+// Observed NBA schedule-feed status meanings, not an upstream specification.
+export const NBA_GAME_STATUS = {
+  FINAL: 3,
+  IN_PROGRESS: 2,
+  SCHEDULED: 1,
+} as const;
+
+// Observed schedule-feed scores remain zero during play and populate at final.
+// Require final status and positive scores independently before consuming a result.
+export const hasFinalResult = (game: z.infer<typeof GameResultSchema>) =>
+  game.gameStatus === NBA_GAME_STATUS.FINAL &&
+  game.homeTeam.score > 0 &&
+  game.awayTeam.score > 0;
 
 export const includesCandidateTeam = (
   game: z.infer<typeof GameResultSchema>,

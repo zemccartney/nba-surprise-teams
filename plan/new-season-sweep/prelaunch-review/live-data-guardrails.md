@@ -1,5 +1,10 @@
 # Live data guardrails and preseason diagnostic
 
+> Historical implementation notes: score-based finality below is superseded by
+> `hasFinalResult()` (status 3 AND positive scores for both teams). October 4
+> observations found status 2 games still at 0–0; see
+> [current observations and remaining checks](../../../docs/MAINTENANCE.md).
+
 **Follow-up:** [live-readability.md](live-readability.md) records the subsequent
 review changes. The files below were consolidated into `src/loaders/live/index.ts`
 and `utils.ts`; season checks now belong to the loader and unexpected cache

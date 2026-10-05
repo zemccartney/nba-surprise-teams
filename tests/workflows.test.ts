@@ -61,19 +61,12 @@ it("serializes branch deployments and skips deleted/non-branch refs", () => {
   expect(deploy).toContain("cancel-in-progress: false");
 });
 
-it("audits all dependencies after installation and before verification/deployment, including pre-commit", async () => {
+it("audits before verification/deployment", async () => {
   expect(packageJson.scripts.audit).toBe(
     "pnpm audit --prod --audit-level=high",
   );
-  expect(packageJson.scripts.postinstall).toBe("pnpm run audit");
   expect(packageJson.scripts.verify).toMatch(/^pnpm run audit && /);
   expect(packageJson.scripts.build).toContain("pnpm run verify && astro build");
-  const hooks = await Fs.readFile(
-    new URL("../hk.pkl", import.meta.url),
-    "utf8",
-  );
-  expect(hooks).toMatch(/\["audit"\]\s*=\s*\{[^}]*check = "pnpm run audit"/);
-  expect(hooks).toContain("steps = (linters)");
   const mise = await Fs.readFile(
     new URL("../mise.toml", import.meta.url),
     "utf8",

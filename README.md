@@ -47,6 +47,26 @@ Dump and review edits before building—preview intentionally ignores undumped e
 | `pnpm run deps`            | Interactive dependency update (`npm-check-updates`)                     |
 | `pnpm run archive:diff`    | Review canonical SQL changes (committed vs working tree)                |
 
+## Open Graph image
+
+The editable canvas is [scripts/og/index.html](scripts/og/index.html): plain HTML
+using the site's global CSS, Sixtyfour font and favicon SVG. It defaults to dark
+mode; change `data-theme` to `light` to experiment. The preview is local only,
+not an Astro route and not included in the site build.
+
+```sh
+mise x -- pnpm exec playwright install chromium # once, and after Playwright upgrades
+mise x -- pnpm run og:preview                   # open the printed localhost URL
+mise x -- pnpm run og:generate                  # writes public/og.png
+```
+
+Edit the HTML while the preview runs; Vite reloads it. Generation starts its own
+server, waits for fonts/images, captures the 1200 × 630 canvas, and stops. It
+prints metadata tags to paste into `src/layouts/layout.astro`; it never edits the
+template. Commit `public/og.png` along with your HTML changes. Regenerate after
+changing the design, shared tokens, font or favicon: generation is deliberately
+not part of the build, and CI does not need a browser installed.
+
 ## Dependencies and supply chain
 
 Normal installs run `pnpm audit` through `postinstall`. Verification/build and

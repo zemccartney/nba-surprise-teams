@@ -313,7 +313,7 @@ textarea {
   /* Slightly deeper than the WIP's indigo-700: links also need 4.5:1
      against the darker striped rows, not just against the page. */
   --ink-link: oklch(42% 0.21 277.023);
-  --ink-link-hover: oklch(0.3115 0.192 270.82);
+  --ink-link-hover: oklch(0.2206 0.1307 271.69);
   --ink-link-active: var(--ink-link-hover);
   --ink-showdown: oklch(0.5338 0.2175 29.07);
   --ink-showdown-hover: oklch(0.3952 0.1597 25.41 / 63.9%);

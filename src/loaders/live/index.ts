@@ -6,9 +6,10 @@ import * as ContentUtils from "../../content-utils";
 import * as Utils from "../../utils";
 import {
   CUP_CHAMPIONSHIP_PREFIX,
-  hasScore,
+  hasFinalResult,
   includesCandidateTeam,
   LiveLoaderResponseSchema,
+  NBA_GAME_STATUS,
   NBA_SCHEDULE_HEADERS,
   NBA_SCHEDULE_URL,
   SeasonDataSchema,
@@ -125,7 +126,7 @@ const loader = async (
     // Find next game day with an incomplete game featuring at least one surprise team i.e. next point
     // at which new, relevant data might be available
     return slate.games.some(
-      (game) => !hasScore(game) && includesCandidateTeam(game, TRICODES),
+      (game) => !hasFinalResult(game) && includesCandidateTeam(game, TRICODES),
     );
   });
 
@@ -135,7 +136,8 @@ const loader = async (
     const earliestUpcomingGameStartMs = Math.min(
       ...nextRelevantDate.games
         .filter(
-          (game) => !hasScore(game) && includesCandidateTeam(game, TRICODES),
+          (game) =>
+            !hasFinalResult(game) && includesCandidateTeam(game, TRICODES),
         )
         .map((game) => new Date(game.gameDateTimeUTC).getTime()),
     );
@@ -186,11 +188,11 @@ const loader = async (
           playedOn: gameYYYYMMDD,
           seasonId: season.id,
           ...(time.success && !game.gameTimeTBD && { startsAt: time.data }),
-          status: hasScore(game)
+          status: hasFinalResult(game)
             ? "final"
             : /postponed/i.test(game.gameStatusText ?? "")
               ? "postponed"
-              : game.gameStatus === 1
+              : game.gameStatus === NBA_GAME_STATUS.SCHEDULED
                 ? "scheduled"
                 : "pending",
           venue,
@@ -201,7 +203,7 @@ const loader = async (
       for (const game of slate.games) {
         const { awayTeam, homeTeam } = game;
 
-        if (hasScore(game) && includesCandidateTeam(game, TRICODES)) {
+        if (hasFinalResult(game) && includesCandidateTeam(game, TRICODES)) {
           relevantGames.push({
             id: ContentUtils.formatGameId({
               playedOn: gameYYYYMMDD,

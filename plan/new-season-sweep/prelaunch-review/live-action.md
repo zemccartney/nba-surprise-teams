@@ -1,5 +1,9 @@
 # D2: latest-season action boundary
 
+> Historical implementation notes: the score-only finality convention below is
+> superseded. `hasFinalResult()` now requires status 3 and positive scores for
+> both teams; see [current feed guidance](../../../docs/MAINTENANCE.md).
+
 Checkpoint `1fa273b` committed the approved data/chart/tooling work and deferred
 verification-definition consolidation. Its hooks passed 65 tests. Nothing was
 pushed. The work below is subsequent and remains uncommitted.

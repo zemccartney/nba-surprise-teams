@@ -165,13 +165,20 @@ Cloudflare-origin access.
    feed, it is Miami at Toronto on **October 3, 2026, 7 p.m. Eastern**; re-check
    rather than hardcoding this date in the diagnostic.
 3. Save observations before tipoff, while a game is underway, and after it ends.
-   **TODO: verify finality behavior against a real game.** Do scores update
-   during play? Does `gameStatus` change from 1 to 2 to 3, and does 3 correspond
-   to Final on this endpoint? Showdown's final-results-only requirement now uses
-   the conservative rule: status 3 AND positive scores for both teams. Other
-   statuses never enter standings; unexpected finality behavior delays results
-   rather than counting in-progress scores. The cache version was bumped.
-   Today's all-zero preseason schedule cannot verify these status transitions.
+   **Observed October 4, 2026:** `nba-feed-checks/20261004-184907.json`
+   has MIA–TOR (`0012600009`) at status 3 / Final, with scores 129–105.
+   In `nba-feed-checks/20261004-195417.json`, GSW–LAC (`0012600066`) and
+   UTA–DEN (`0012600067`) have changed from status 1 to status 2 / 2nd Qtr,
+   but both still have 0–0 scores. MIA–TOR remains final with the same scores.
+   Our working assumption is that this schedule feed publishes scores at final,
+   not during play; these observations do not guarantee future behavior.
+   `NBA_GAME_STATUS` documents scheduled (1), in-progress (2), and final (3).
+   `hasFinalResult()` requires status 3 AND positive scores for both teams:
+   status establishes finality; scores establish usable result data. Other
+   statuses and finals with zero scores never enter standings.
+   **Remaining check:** capture these same in-progress games after completion
+   to verify their transition to status 3 and populated scores. The diagnostic
+   warns about positive scores without status 3 and zero scores with status 3.
 4. Cross-check Cup championship identification. Our working prefix is `006`;
    the inspected entry has `gameLabel: Emirates NBA Cup`,
    `gameSubLabel: Championship`, `seriesText: Neutral Site`, and

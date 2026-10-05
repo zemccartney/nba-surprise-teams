@@ -1,3 +1,7 @@
+> Historical review: the score-only `hasScore()` behavior discussed below is
+> superseded by `hasFinalResult()` (status 3 AND positive scores for both teams).
+> See [current feed observations](../../../docs/MAINTENANCE.md).
+
 **Keep the Workers cutover gated.** I found defects in chart failure handling and deployment configuration, plus pre-existing live-data problems worth fixing before the upcoming season. The archive itself is complete.
 
 I reviewed this myself. No repository files were changed; I did not install dependencies, run builds/tests against the shared dependency tree, start servers, commit, or deploy.

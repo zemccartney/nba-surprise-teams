@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open Graph image preview</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <script type="module">
+      import "@fontsource-variable/sixtyfour/full.css";
+    </script>
+    <style>
+      body {
+        margin: 0;
+        background-color: unset;
+      }
+
+      /* This is the entire screenshot. Edit freely; keep the canvas dimensions. */
+      #og-image {
+        width: 1200px;
+        height: 630px;
+        display: flex;
+        align-items: center;
+        gap: 64px;
+        padding: 72px;
+        background: var(--surface-page);
+        color: var(--ink-heading);
+      }
+
+      #og-image img {
+        width: 240px;
+        height: 240px;
+        flex: none;
+      }
+
+      #og-image h1 {
+        margin: 0;
+        flex: 1;
+        font-family: var(--font-title);
+        font-size: 88px;
+        font-weight: 400;
+        line-height: 1.25;
+        letter-spacing: 0.4;
+        text-wrap: balance;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="og-image">
+      <img src="/favicon.svg" alt="" width="240" height="240" />
+      <h1>NBA Surprise Teams Tracker</h1>
+    </div>
+  </body>
+</html>

@@ -64,7 +64,8 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
   not a KV emulator.
 - `live-loader.test.ts`: actual loader over controlled NBA responses, request
   headers, provider IDs, Cup exclusion, normalized validation and refresh timing.
-  Finality remains score-based pending preseason observations.
+  Completed results require final status (3) and positive scores for both teams;
+  synthetic in-progress scores are excluded defensively, not as observed feed behavior.
 - `live-cache.test.ts`: the HTTP freshness calculation shared by both islands.
 - `feed-diagnostic.test.ts`: pure feed observations and real offline Node CLI
   checks. No network requests in tests; live diagnostics are manual.
