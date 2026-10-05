@@ -63,7 +63,7 @@ it("serializes branch deployments and skips deleted/non-branch refs", () => {
 
 it("audits before verification/deployment", async () => {
   expect(packageJson.scripts.audit).toBe(
-    "pnpm audit --prod --audit-level=high",
+    "pnpm audit --prod --audit-level=critical",
   );
   expect(packageJson.scripts.verify).toMatch(/^pnpm run audit && /);
   expect(packageJson.scripts.build).toContain("pnpm run verify && astro build");

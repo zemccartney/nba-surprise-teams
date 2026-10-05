@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>October prep — preserved review</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        max-width: 78ch;
+        margin: auto;
+        padding: 40px 24px 80px;
+        font:
+          18px/1.7 system-ui,
+          sans-serif;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.25;
+      }
+      h2 {
+        margin-top: 44px;
+      }
+      a {
+        color: light-dark(#195970, #9bd5e7);
+        text-underline-offset: 3px;
+      }
+      a:focus-visible {
+        outline: 3px solid currentColor;
+        outline-offset: 4px;
+      }
+      code {
+        font-size: 0.9em;
+        overflow-wrap: anywhere;
+      }
+      li {
+        margin: 8px 0;
+      }
+      .note,
+      blockquote {
+        border-left: 4px solid light-dark(#195970, #9bd5e7);
+        padding: 12px 20px;
+        margin: 24px 0;
+        background: light-dark(#edf4f4, #223640);
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        padding: 12px;
+        border-bottom: 1px solid light-dark(#c9d0d5, #53616e);
+      }
+      footer {
+        margin-top: 48px;
+        border-top: 1px solid light-dark(#c9d0d5, #53616e);
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <p>
+        <a href="workstream-proposal.html">← Back to the proposed workstream</a>
+      </p>
+      <h1>October prep: the original 1–8 review</h1>
+      <aside class="note" aria-label="Reference status">
+        <strong>Preserved reference, not the current task queue.</strong>
+        <p>
+          This retains the review reprinted after commit <code>91741d1</code>,
+          before the October 4 replanning conversation. Wording below reflects
+          that point in time. October 3 was missed; observations now concern the
+          October 4 GSW/LAC game. Zack has since decided to retire Pages, but
+          execution is not confirmed here. The
+          <a href="workstream-proposal.html">new proposal</a> changes sequencing
+          and scope without discarding these suggestions.
+        </p>
+      </aside>
+    </header>
+    <main>
+      <p>
+        Your direction is good. The biggest improvement is to
+        <strong
+          >separate time-sensitive observation, destructive cleanup, and
+          open-ended learning</strong
+        >. Don’t let tooling work consume the before/during/after-game
+        observation window.
+      </p>
+
+      <h2>
+        1. Maintenance guide: reconciliation resolved; some wording still needs
+        review
+      </h2>
+      <p>
+        The newer finality and schedule-cache documentation is now preserved.
+        Two remaining corrections:
+      </p>
+      <ul>
+        <li>
+          “82 games per candidate” should mean the season’s configured
+          <code>numGames</code>, accounting for shortened seasons.
+        </li>
+        <li>
+          The “build is a pure function” principle would be more precise as:
+        </li>
+      </ul>
+      <blockquote>
+        Published season state should be explicitly determined by canonical
+        data, not silently change with the clock. Date-based validation may
+        reject stale data, and live fetching/cache behavior intentionally uses
+        time.
+      </blockquote>
+      <p>
+        Also distinguish <strong>invalid missing data</strong> from legitimate
+        states: unpublished odds, no completed games, or an unavailable upstream
+        service.
+      </p>
+
+      <h2>2. Don’t make Pages deletion the first activity</h2>
+      <p>
+        The recorded rollback window ends
+        <strong>October 3 at 21:12 UTC—5:12 p.m. Eastern</strong>, not at the
+        beginning of October 3.
+      </p>
+      <p>
+        I’d retire Pages
+        <strong>after the game observation and healthy production checks</strong
+        >, possibly the following morning. There’s little benefit to removing a
+        fallback immediately before exercising a new operational condition.
+      </p>
+      <p>Before deletion:</p>
+      <ul>
+        <li>
+          Confirm the current domain associations and a known-good
+          <strong>Worker rollback version</strong>.
+        </li>
+        <li>
+          Check canonical pages, assets, an application action, and the legacy
+          hostname’s redirect—including path/query preservation.
+        </li>
+        <li>
+          Preserve the production KV namespace. It originated with Pages but is
+          now used by the Worker.
+        </li>
+        <li>Record what you deleted and repeat the checks afterward.</li>
+      </ul>
+      <p>
+        Visiting the direct Workers URL alone doesn’t establish that your public
+        domains are routed correctly.
+      </p>
+
+      <h2>3. Separate three different live-data questions</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Question</th>
+              <th scope="col">What exercises it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>What does the NBA feed report during a game?</td>
+              <td>Standalone diagnostic</td>
+            </tr>
+            <tr>
+              <td>Can Cloudflare reach and parse that feed?</td>
+              <td>Controlled hosted check</td>
+            </tr>
+            <tr>
+              <td>Does the application refresh and display correct data?</td>
+              <td>Action, KV, HTTP caching and UI</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>October 3 is particularly valuable for the first question.</p>
+      <p>
+        Our loader filters to the <strong>regular-season date window</strong>,
+        so the preseason game should
+        <strong>not appear in standings or the Showdown calendar</strong>, even
+        if its participants become candidates. An unchanged application isn’t
+        evidence of failed preseason observation.
+      </p>
+      <p>For the observation itself:</p>
+      <ul>
+        <li>Reconfirm the game/time.</li>
+        <li>
+          Save before, during, shortly after final, and—if necessary—later
+          snapshots.
+        </li>
+        <li>
+          Compare the <strong>same <code>nbaGameId</code></strong
+          >, scores, status and status text.
+        </li>
+        <li>Record fetch times and provider timestamps.</li>
+        <li>
+          Turn representative observations into offline regression fixtures
+          afterward.
+        </li>
+      </ul>
+      <p>A mise wrapper is reasonable, but not a prerequisite.</p>
+      <p>
+        Keep a <strong>separate opening-night task</strong> for actual
+        application cache transitions. One successful response or correct cache
+        header does not prove refresh behavior.
+      </p>
+
+      <h2>4. Pull a small amount of observability work forward</h2>
+      <p>“Learn observability” is too broad for that weekend. Start with:</p>
+      <blockquote>
+        Can I tell whether users are seeing correct, fresh data, and explain why
+        not?
+      </blockquote>
+      <p>You already have:</p>
+      <ul>
+        <li>Worker observability enabled.</li>
+        <li>Sentry browser and Worker integration.</li>
+        <li>Release association and source-map handling.</li>
+        <li>10% performance-trace sampling.</li>
+        <li>
+          Reporting of live refresh failures, including failures hidden from
+          users by successful stale fallback.
+        </li>
+      </ul>
+      <p>Before the game, locate those existing views. Useful questions:</p>
+      <ul>
+        <li>Are upstream requests succeeding, and how long do they take?</li>
+        <li>
+          Did a response come from fresh KV, an upstream refresh, or stale
+          fallback?
+        </li>
+        <li>How old is the served data?</li>
+        <li>Which release produced an error?</li>
+      </ul>
+      <p>
+        <strong>HTTP 200 is insufficient:</strong> stale fallback preserves
+        availability while freshness can degrade.
+      </p>
+      <p>
+        I’d defer an OpenTelemetry rollout. Also review privacy settings before
+        expanding instrumentation: the browser Sentry configuration currently
+        enables <code>sendDefaultPii</code>.
+      </p>
+
+      <h2>5. Lighthouse: sample page types, not every URL</h2>
+      <p>Start with representative workloads:</p>
+      <ul>
+        <li>Homepage.</li>
+        <li>Archive index.</li>
+        <li>Large season standings table.</li>
+        <li>Team-season page with pace chart.</li>
+        <li>Showdown.</li>
+        <li>Stats.</li>
+      </ul>
+      <p>
+        Use consistent throttling, several runs, and record the deployed commit,
+        theme and viewport. Save reports before choosing score thresholds.
+      </p>
+      <p>Keep two limitations in mind:</p>
+      <ul>
+        <li>
+          Initial-load audits won’t adequately exercise below-the-fold lazy
+          charts or tooltip interactions.
+        </li>
+        <li>Lab scores aren’t real-user performance.</li>
+      </ul>
+      <p>
+        Retain functional/browser checks, including an actual iPhone pass for
+        the sticky-header issue.
+      </p>
+
+      <h2>6. Improve reset, but keep the solution small</h2>
+      <p>
+        Deleting an open DB is unsafe because an existing connection may retain
+        the old file handle while new connections open a replacement at the same
+        pathname. SQLite locking does not prevent filesystem unlinking;
+        WAL/journal files complicate it further.
+      </p>
+      <p>A sensible reset process:</p>
+      <ol>
+        <li>Require the app and DB clients to be stopped.</li>
+        <li>Restore and validate the canonical dump into a temporary DB.</li>
+        <li>Only after success, replace the working DB.</li>
+        <li>Send the refresh notification afterward.</li>
+        <li>Optionally retain one backup.</li>
+      </ol>
+      <p>
+        That catches missing/unreadable dumps, malformed SQL, incompatible
+        schemas, validation failures and disk-space problems
+        <strong>before destroying the current workspace</strong>.
+      </p>
+      <p>
+        An open-file check is a useful warning, not a race-proof guarantee.
+        Explicitly treating reset as a maintenance operation matters more than
+        elaborate detection.
+      </p>
+
+      <h2>7. Dependency security: audit isn’t the entire defense</h2>
+      <p>For temporary exceptions, record:</p>
+      <ul>
+        <li>Advisory ID—not a blanket package exclusion.</li>
+        <li>Affected version and relevant execution path.</li>
+        <li>Why it is temporarily acceptable.</li>
+        <li>Review/expiry date and upstream fix to watch.</li>
+      </ul>
+      <p>
+        Keep a full-graph report visible even if your deployment-blocking policy
+        remains narrower.
+      </p>
+      <p>Two important additions:</p>
+      <ul>
+        <li>
+          <strong
+            >Malicious code or exfiltration may have no published
+            advisory.</strong
+          >
+          Auditing doesn’t replace provenance, dependency review and
+          least-privilege credentials.
+        </li>
+        <li>
+          Deployment/upload secrets are currently exposed at the workflow’s
+          <strong>job level</strong>, including installation steps. Narrowing
+          their availability is a concrete supply-chain hardening opportunity.
+        </li>
+      </ul>
+      <p>
+        For bundle inspection, use bundler/module or source-map information to
+        understand what ships, then investigate vulnerable paths. The existing
+        artifact audit checks things such as SQLite leakage and artifact
+        integrity;
+        <strong>it isn’t a bundled-code vulnerability scanner</strong>.
+      </p>
+
+      <h2>8. Quick answers to the learning/code-review items</h2>
+      <ul>
+        <li>
+          <strong>Is mise used in Actions?</strong> Yes.
+          <code>jdx/mise-action</code> installs the locked tools, then the
+          workflow invokes package scripts.
+        </li>
+        <li>
+          <strong>Package scripts versus mise?</strong> Consolidate
+          implementations and policy, not necessarily the interfaces. Thin
+          wrappers are fine.
+        </li>
+        <li>
+          <strong>Local Actions?</strong> <code>act</code> exists, but won’t
+          reproduce hosted permissions, secrets or network origin exactly. For
+          manually deploying through existing safeguards, the workflow already
+          supports remote manual dispatch through GitHub CLI.
+        </li>
+        <li>
+          <strong>Browser usage here?</strong> I used Playwright through Node
+          scripts in <code>plan/baseline/</code>, plus temporary Chrome DevTools
+          Protocol scripts—not Chrome DevTools MCP or Puppeteer.
+        </li>
+        <li>
+          <strong>Showdown component pattern?</strong> Your observation is fair:
+          archive/live dispatch lives in the route rather than an
+          <code>index.astro</code> facade like standings/team stats. Shared
+          presentation still exists. Worth reviewing for consistency, but not
+          inherently a correctness problem.
+        </li>
+        <li>
+          <strong>Venue backfill review?</strong> Focus on source disagreements,
+          stable IDs/scores, transactional writes and evidence for the
+          exceptional box-score fallback—not merely the SQL diff’s size.
+        </li>
+      </ul>
+      <p>A guided architecture tour could follow two concrete journeys:</p>
+      <ol>
+        <li><strong>Edit odds → dump → build → deploy.</strong></li>
+        <li>
+          <strong
+            >Page request → action → KV/upstream → rendered result.</strong
+          >
+        </li>
+      </ol>
+      <p>
+        That will probably teach you more than reviewing every file
+        sequentially.
+      </p>
+
+      <h2>Suggested order</h2>
+      <p>
+        <strong>Before tipoff:</strong> review the corrected guide, confirm
+        schedule/odds, locate observability, capture the “before” feed.
+      </p>
+      <p>
+        <strong>During/after the game:</strong> collect observations, compare
+        them, record conclusions and unresolved questions.
+      </p>
+      <p>
+        <strong>Afterward:</strong> retire Pages if the operational checks
+        support it.
+      </p>
+      <p>
+        <strong>Separate learning backlog:</strong> Lighthouse automation, safer
+        reset, architecture walkthrough, dependency policy and broader
+        observability.
+      </p>
+      <p>
+        The weekend’s achievable outcome is
+        <strong
+          >better evidence about the live-data contract and a usable operational
+          runbook</strong
+        >, not completion of every infrastructure-learning project.
+      </p>
+    </main>
+    <footer>
+      <a href="workstream-proposal.html"
+        >Return to the smaller proposed queue →</a
+      >
+    </footer>
+  </body>
+</html>

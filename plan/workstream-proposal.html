@@ -669,15 +669,16 @@
               <strong>October 4 follow-up — audit friction:</strong>
               high-severity findings blocked committing unrelated work, so Zack
               removed the pre-commit audit and postinstall audit hook. Saving a
-              commit must not depend on a clean advisory feed. Build/verify
-              still audits and can currently block deployment; the durable
-              deployment policy is not settled. Decide whether to block
-              releases, warn, or require explicit risk acceptance, and design a
-              documented, scoped, time-limited exception path for necessary
-              deployments. Keep findings visible and retain type, test and
-              artifact gates; do not make bypassing all verification the escape
-              hatch. Distinguish known findings from an unavailable audit
-              service.
+              commit must not depend on a clean advisory feed. As a temporary
+              release policy, build/verify now blocks only critical
+              production-dependency advisories (and audit-service errors), not
+              high findings. The durable deployment policy is not settled.
+              Decide whether to block releases, warn, or require explicit risk
+              acceptance, and design a documented, scoped, time-limited
+              exception path for necessary deployments. Keep findings visible
+              and retain type, test and artifact gates; do not make bypassing
+              all verification the escape hatch. Distinguish known findings from
+              an unavailable audit service.
             </p>
             <h3>Two learning/decision sessions, then a bounded CSP trial</h3>
             <ol>
@@ -695,7 +696,7 @@
                 notification, triage cadence, blocking severity/scope, exception
                 expiry and update ownership. Current
                 <code>pnpm run audit</code> is
-                <code>pnpm audit --prod --audit-level=high</code>;
+                <code>pnpm audit --prod --audit-level=critical</code>;
                 <a href="../docs/dependency-security.md">the security guide</a>
                 still describes an all-dependency/all-severity gate. Reconcile
                 that mismatch; don’t silently change the chosen gate. Add
