@@ -208,7 +208,7 @@ textarea {
   --color-yellow-400: oklch(85.2% 0.199 91.936);
 
   /* Fonts */
-  --font-mono: "Nanum Gothic Coding", monospace;
+  --font-mono: var(--font-nanum);
   --font-sans: "ChicagoKare-Regular", sans-serif;
   --font-title: "Sixtyfour Variable", monospace;
 

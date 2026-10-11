@@ -1,6 +1,7 @@
 # Post-season-start performance audit
 
-**Later font experiment:** see [Nanum integration and evidence](font-loading-result.md).
+**Later font experiment:** see [Nanum integration and evidence](font-loading-result.md)
+and the [accepted Astro Fonts API follow-up](astro-fonts-trial.md).
 The measurements and rejected experiments below remain historical evidence.
 
 **Deferred by Zack on 2026-09-24.** Schedule sustained, focused work after season

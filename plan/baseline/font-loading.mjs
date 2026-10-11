@@ -93,6 +93,7 @@ try {
                   result.loaded.some(
                     (f) =>
                       f.family.includes("Nanum Gothic Coding") &&
+                      !f.family.includes("fallback:") &&
                       f.weight === weight,
                   ),
                   `real ${weight} face loaded`,

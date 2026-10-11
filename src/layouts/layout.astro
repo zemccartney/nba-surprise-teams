@@ -1,8 +1,7 @@
 ---
-import "@fontsource/nanum-gothic-coding/latin-400.css";
-import "@fontsource/nanum-gothic-coding/latin-700.css";
-import "@fontsource-variable/sixtyfour/full.css";
 import sixtyfourLatinUrl from "@fontsource-variable/sixtyfour/files/sixtyfour-latin-full-normal.woff2?url";
+import "@fontsource-variable/sixtyfour/full.css";
+import { Font } from "astro:assets";
 
 import "../styles/global.css";
 
@@ -26,6 +25,7 @@ const pageUrl = new URL(
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <Font cssVariable="--font-nanum" preload={false} />
     <script is:inline>
       // Resolve before first paint. Preserve the original branch's storage key.
       let theme;

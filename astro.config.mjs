@@ -1,6 +1,6 @@
 import cloudflare from "@astrojs/cloudflare";
 import sentry from "@sentry/astro";
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, fontProviders } from "astro/config";
 import { loadEnv } from "vite";
 
 import trackerData from "./data/integration.ts";
@@ -58,6 +58,20 @@ export default defineConfig({
       }),
     },
   },
+  fonts: [
+    {
+      cssVariable: "--font-nanum",
+      display: "swap",
+      fallbacks: ["monospace"],
+      formats: ["woff2"],
+      name: "Nanum Gothic Coding",
+      optimizedFallbacks: true,
+      provider: fontProviders.fontsource(),
+      styles: ["normal"],
+      subsets: ["latin"],
+      weights: [400, 700],
+    },
+  ],
   integrations: [
     // Cleanup after all uploads but before trackerData seals the artifact list.
     cleanBuildSourcemapsIntegration(),
