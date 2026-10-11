@@ -19,6 +19,14 @@
   font-weight: normal;
   font-style: normal;
   text-align: left;
+  text-underline-offset: 0.15em;
+}
+
+/* Use the supplied regular/bold faces, not synthesized weights or styles. */
+.popover-body,
+.popover-trigger,
+.popover-close {
+  font-synthesis: none;
 }
 
 /* Hang the popover below its trigger. The popovertarget button is the implicit

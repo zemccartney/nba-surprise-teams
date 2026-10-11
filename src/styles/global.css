@@ -59,6 +59,7 @@ kbd,
 samp,
 pre {
   font-family: var(--font-mono), monospace;
+  font-synthesis: none;
   font-size: 1em;
 }
 
@@ -207,7 +208,7 @@ textarea {
   --color-yellow-400: oklch(85.2% 0.199 91.936);
 
   /* Fonts */
-  --font-mono: "Iosevka Curly", monospace;
+  --font-mono: "Nanum Gothic Coding", monospace;
   --font-sans: "ChicagoKare-Regular", sans-serif;
   --font-title: "Sixtyfour Variable", monospace;
 

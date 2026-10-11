@@ -1,5 +1,8 @@
 # Post-season-start performance audit
 
+**Later font experiment:** see [Nanum integration and evidence](font-loading-result.md).
+The measurements and rejected experiments below remain historical evidence.
+
 **Deferred by Zack on 2026-09-24.** Schedule sustained, focused work after season
 start. This supersedes the brief request to promote font work into Season prep.
 Performance is acceptable for cutover. No performance experiment was deployed:

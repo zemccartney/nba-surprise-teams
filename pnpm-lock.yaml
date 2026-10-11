@@ -122,7 +122,7 @@ importers:
       '@fontsource-variable/sixtyfour':
         specifier: ^5.3.0
         version: 5.3.0
-      '@fontsource/iosevka-curly':
+      '@fontsource/nanum-gothic-coding':
         specifier: ^5.3.0
         version: 5.3.0
       '@sentry/astro':
@@ -1060,8 +1060,8 @@ packages:
   '@fontsource-variable/sixtyfour@5.3.0':
     resolution: {integrity: sha512-9YgLl/OAWGs+mrhnr/Alqu5+Kv4Q0myBNS1yWDKgD9NBYdEp1Y6NgOvyHtSzKFOy5BczpAlfKZpYTq+dtX2tLA==}
 
-  '@fontsource/iosevka-curly@5.3.0':
-    resolution: {integrity: sha512-Pt+TryAn3nnSB790DlzIw/GP2SEsnrRZZPofcXhPlSfTVWh5VTX9kCYcVouIP3PO4CZUZTTydUazb48w6aVv/w==}
+  '@fontsource/nanum-gothic-coding@5.3.0':
+    resolution: {integrity: sha512-1xUOE+ro+F1J5lYw+0WwMbhesK85JCjbAP3/rOGHB3DbZI2/s0dR4WHSuTcag1uJAfT8ozH9B50L88tMn4eFkw==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -5690,7 +5690,7 @@ snapshots:
 
   '@fontsource-variable/sixtyfour@5.3.0': {}
 
-  '@fontsource/iosevka-curly@5.3.0': {}
+  '@fontsource/nanum-gothic-coding@5.3.0': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
