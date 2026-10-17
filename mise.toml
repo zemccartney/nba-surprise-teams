@@ -42,6 +42,22 @@ run = [
 description = "Run every check, applying fixes where a fixer exists"
 run = "hk fix --all"
 
+[tasks."kv:seed-preview"]
+description = "Copy the latest season's preview Showdown cache into local KV (run after pnpm start)"
+dir = "{{config_root}}"
+# Band-aid for local workerd's NBA fetching failures; remote KV is read-only.
+run = '''
+set -eu
+season=$(node data/cli.ts latest-season)
+snapshot=$(mktemp "${TMPDIR:-/tmp}/nba-preview-schedule.XXXXXX")
+trap 'rm -f "$snapshot"' EXIT
+# Preview source from wrangler.jsonc; local destination uses the base GAMES_KV binding.
+pnpm exec wrangler kv key get "${season}:schedule" \
+  --namespace-id 6a0d30705c634691873dd1dd122969e3 --remote > "$snapshot"
+pnpm exec wrangler kv key put "${season}:schedule" \
+  --binding GAMES_KV --local --persist-to .wrangler/state --path "$snapshot"
+'''
+
 [tasks.data]
 description = "Generic dispatch for data commands; requires subcommand e.g. mise run data -- cmd (see data/README.md)"
 run = "node data/cli.ts"

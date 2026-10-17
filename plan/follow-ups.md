@@ -1,5 +1,20 @@
 # Follow-up work
 
+## Floating navigation — idea
+
+Explore floating/persistent navigation on long pages, especially Archive and
+Showdown, to keep the color-mode toggle within easy reach. Preserved from the
+retired `10-3-prep.md`; no implementation decision yet.
+
+## Astro / Cloudflare maintenance burden — deferred architecture inquiry
+
+Season launch is complete; no significant refactor now. Resume with a separate
+**grilling session**, then a bounded architecture-alternatives investigation
+focused on explicit boundaries and low-effort maintenance—not an open-ended CDN
+403 chase. The immediate task is only a small local Showdown workaround.
+
+[Owner's full account, concern summary, evidence, and questions to revisit](astro-cloudflare-maintenance-follow-up.md).
+
 ## Dependency security checks — implemented
 
 `pnpm audit` now checks production, development and optional dependencies:
