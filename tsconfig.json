@@ -3,7 +3,7 @@
     "erasableSyntaxOnly": true,
     "noImplicitReturns": false
   },
-  "exclude": ["dist"],
+  "exclude": ["dist", ".cloudflare/output"],
   "extends": "astro/tsconfigs/strictest",
-  "include": [".astro/types.d.ts", "**/*"]
+  "include": [".astro/types.d.ts", ".cloudflare/types/index.d.ts", "**/*"]
 }

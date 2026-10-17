@@ -14,21 +14,25 @@ it("preserves the Pages referrer policy for static documents", () => {
 });
 
 const config = {
-  kv_namespaces: [
-    { binding: "GAMES_KV", id: "6061594acc5c4fb6b3846b0c78f9e5a3" },
-  ],
+  compatibilityDate: "2026-09-10",
+  domains: ["nbastt.grepco.net", "nba-surprise-teams.grepco.net"],
+  env: {
+    ASSETS: { type: "assets" },
+    GAMES_KV: { id: "6061594acc5c4fb6b3846b0c78f9e5a3", type: "kv" },
+  },
   name: "nba-surprise-teams",
-  routes: [
-    { custom_domain: true, pattern: "nbastt.grepco.net" },
-    { custom_domain: true, pattern: "nba-surprise-teams.grepco.net" },
-  ],
-  workers_dev: true,
+  previewUrls: true,
+  workersDev: true,
 };
+const context = { buildContext: { isPreview: false, mode: "production" } };
 
-it("requires production KV and exactly both approved custom domains", () => {
-  expect(() => assertProductionTarget(config)).not.toThrow();
+it("requires production KV and exactly both approved custom domains, independent of order", () => {
+  expect(() => assertProductionTarget(config, context)).not.toThrow();
   expect(() =>
-    assertProductionTarget({ ...config, routes: config.routes.toReversed() }),
+    assertProductionTarget(
+      { ...config, domains: config.domains.toReversed() },
+      context,
+    ),
   ).not.toThrow();
 });
 
@@ -36,36 +40,23 @@ it.each([
   undefined,
   {},
   { ...config, name: "nbastt-preview" },
-  { ...config, workers_dev: false },
-  { ...config, kv_namespaces: [] },
+  { ...config, workersDev: false },
+  { ...config, env: {} },
   {
     ...config,
-    kv_namespaces: [
-      { binding: "GAMES_KV", id: "6a0d30705c634691873dd1dd122969e3" },
-    ],
+    env: {
+      ...config.env,
+      GAMES_KV: { id: "6a0d30705c634691873dd1dd122969e3", type: "kv" },
+    },
   },
   { ...config, route: "nbastt.grepco.net/*" },
-  {
-    ...config,
-    routes: [{ custom_domain: true, pattern: "nbastt.grepco.net" }],
-  },
-  { ...config, routes: "invalid" },
-  { ...config, routes: undefined },
-  { ...config, routes: [] },
-  { ...config, routes: [config.routes[0], config.routes[0]] },
-  {
-    ...config,
-    routes: [
-      config.routes[0],
-      { custom_domain: true, pattern: "other.grepco.net" },
-    ],
-  },
-  {
-    ...config,
-    routes: config.routes.map((route) => ({ ...route, custom_domain: false })),
-  },
+  { ...config, domains: [config.domains[0]] },
+  { ...config, domains: "invalid" },
+  { ...config, domains: undefined },
+  { ...config, domains: [] },
+  { ...config, domains: [config.domains[0], config.domains[0]] },
+  { ...config, domains: [config.domains[0], "other.grepco.net"] },
+  { ...config, routes: [{ pattern: "example.com/*" }] },
 ])("rejects unsafe production configuration %#", (value) => {
-  expect(() => assertProductionTarget(value)).toThrow(
-    "Refusing production deployment",
-  );
+  expect(() => assertProductionTarget(value, context)).toThrow();
 });

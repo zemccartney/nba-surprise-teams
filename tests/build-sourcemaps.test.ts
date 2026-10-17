@@ -60,7 +60,7 @@ describe("build source map lifecycle", () => {
       readFileSync(new URL("../package.json", import.meta.url), "utf8"),
     ) as { scripts: { build: string } };
     expect(pkg.scripts.build).toContain(
-      "astro build && node data/node/audit.ts",
+      "astro build --timings && node data/node/audit.ts",
     );
     const config = readFileSync(
       new URL("../astro.config.mjs", import.meta.url),

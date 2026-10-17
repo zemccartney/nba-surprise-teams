@@ -26,8 +26,10 @@ export default function cleanBuildSourcemapsIntegration(): AstroIntegration {
         );
       },
       "astro:config:done": ({ config }) => {
-        // build:done's dir points at client assets, not the complete output.
-        output = fileURLToPath(config.outDir);
+        // Adapter 15 moves assets and bundles into cf Build Output before this hook.
+        output = fileURLToPath(
+          new URL(".cloudflare/output/v0/workers/default/", config.root),
+        );
       },
     },
     name: "clean-build-sourcemaps",

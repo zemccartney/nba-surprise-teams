@@ -46,7 +46,8 @@ const isAppRuntimePlugin = (plugin: unknown) =>
   plugin !== null &&
   "name" in plugin &&
   typeof plugin.name === "string" &&
-  (plugin.name.startsWith("vite-plugin-cloudflare:") ||
+  (plugin.name === "vite-plugin-cloudflare" ||
+    plugin.name.startsWith("vite-plugin-cloudflare:") ||
     plugin.name === "tracker-sqlite-boundary" ||
     plugin.name === "tracker-data");
 

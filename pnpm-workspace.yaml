@@ -8,6 +8,19 @@ engineStrict: true
 # Supply chain: ignore package versions published less than 3 days ago
 # (minutes). Matches the `--cooldown 3` in the `deps` script.
 minimumReleaseAge: 4320
+# Exact releases needed for the owner-approved Astro/cf migration and their
+# release-coupled dependencies; keep the general cooldown for everything else.
+minimumReleaseAgeExclude:
+  - astro@7.4.0
+  - "@astrojs/internal-helpers@0.13.0"
+  - "@astrojs/markdown-satteri@0.4.4"
+  - "@astrojs/prism@4.1.0"
+  - "@astrojs/telemetry@3.4.0"
+  - "@cloudflare/build-output-utils@0.9.3"
+  - "@cloudflare/config@0.27.0"
+  - "@cloudflare/runtime-types@0.1.12"
+  - cf@1.0.0-beta.18
+  - miniflare@5.20261012.1-beta
 
 # Narrow security overrides until upstream stops pinning affected versions.
 # Remove each when its parent resolves a patched version without the override.
@@ -57,3 +70,5 @@ peerDependencyRules:
     # The wrangler / @cloudflare/workers-types entry that was here is gone:
     # adapter 14 no longer depends on the types package, so nothing contradicts
     # wrangler's optional peer any more.
+patchedDependencies:
+  astro@7.4.0: patches/astro@7.4.0.patch

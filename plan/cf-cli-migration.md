@@ -1,0 +1,96 @@
+# Cloudflare CLI migration — implementation and verification
+
+## Approved scope
+
+Migrate this Astro project from Wrangler tooling to cf on
+`chore/cloudflare-cli-migration`. Owner approved Astro 7.4 and the necessary beta
+adapter/tooling, including release-age exceptions. Add build `--timings`.
+Preserve rendering, images, Sentry, SQL boundaries, production bindings/domains
+and isolated preview KV. No push/deploy without approval.
+
+## Implementation
+
+- [x] Astro 7.4.0 and adapter 15.0.0-beta.1, both exact pins; cf 1.0.0-beta.18
+      and the adapter's matching Vite plugin 2.0.0-beta.sha-52b0dc0e9.
+- [x] Direct Vite updated from 8.3.2 to 8.3.4 to match Astro's resolved Vite types.
+- [x] Exact release-age exclusions for Astro/cf and their release-coupled
+      dependencies; provenance and other supply-chain policies retained.
+- [x] Generated config consolidated into `cloudflare.config.ts`; `ctx.isPreview`
+      selects preview KV and **no production domains**. Removed Wrangler config
+      and direct dependency. Production Worker name, KV and both domains unchanged.
+- [x] CLI tasks use cf. Local state is `.cloudflare/state`; seed task explicitly
+      uses that path, not cf's user-global default. Startup resets only that state,
+      leaving generated types/build output alone. Old Wrangler state is not migrated.
+- [x] Build Output, audits, SVG optimization and source-map cleanup target
+      `.cloudflare/output/v0/workers/default/{assets,bundle}`. The hash inventory
+      remains outside deployable directories, alongside worker.config.json.
+- [x] CI builds preview with `CLOUDFLARE_PREVIEW_BUILD=true`, inspects generated
+      build context/bindings/domains, then uses cf's `--prebuilt --mode production`.
+      Only exact main selects production. Publishing still requires approval here.
+- [x] Existing Vitest runtime-plugin filter also excludes the newly introduced
+      top-level `vite-plugin-cloudflare`; unit tests remain Node-only.
+- [x] Deployment target, build-output audit, SVG-output and configuration tests
+      updated against real new formats; failure observed before fixes.
+- [x] Updated maintenance/development/data documentation.
+
+## Actual roadblock: Astro #18387
+
+Cold-start local dev returned 200 for its first island page, then 500 for the
+other page (`Could not find server component name`). Both Home→Showdown and
+Showdown→Home reproduced this. Built output worked.
+
+This matches [Astro #18387](https://github.com/withastro/astro/issues/18387),
+introduced in 7.3.6 and also reproduced upstream with the Node adapter. It is
+separate from both cf migration and the NBA CDN 403. The CSS walk consumes the
+manifest invalidation before the module runner sees it.
+
+A Node-prerender-only Vite warmup was tried and removed: it passed one request
+order but not the reverse. The branch instead backports the two runtime JS
+changes from pending [PR #18399](https://github.com/withastro/astro/pull/18399)
+using a checked-in, version-specific pnpm patch. See [patch rationale and
+removal instructions](../patches/README.md). No unreviewed experimental package
+URL or silent node_modules edit is used.
+
+Ruling: retain the minimal upstream dev-only patch for this migration candidate,
+rather than a flaky warmup or an application-level dependency workaround. Cost:
+one explicit temporary dependency patch until upstream publishes the fix.
+
+## Verification (2026-10-17)
+
+- `pnpm install --frozen-lockfile`: passes, including patch application policy.
+- Full production and preview `pnpm run build`: both pass, including types
+  (zero errors/warnings), formatting, lint, workflow lint, **274 tests / 36 files**,
+  build timings, and final audit of **423 artifacts**.
+- Actual production/preview Build Output passes its respective target guard.
+- `cf deploy --prebuilt --mode production --dry-run`: accepted production
+  output without uploading. `cf deploy --prebuilt --dry-run` correctly refused
+  preview-marked output and directed us to `cf previews deploy`.
+- New `pnpm run test:dev-islands`: patched cold starts pass both request orders.
+  It is separate from Vitest and must not run alongside dev/build/tests.
+- Browser checks on dev and built local preview: Home, 2026 season, 2026
+  Showdown and 2025 Showdown render; eager-loading all images confirms SVG/logo
+  responses. Dev also accepts `/2026` without the slash. No page errors observed
+  in the final dev check. Showdown used the previously downloaded KV snapshot;
+  these checks do not establish working local NBA access.
+- cf local KV put/read path works with `.cloudflare/state` and the base namespace
+  ID. No remote KV writes or deletions were performed.
+- Existing audit policy reports **14 production dependency vulnerabilities**
+  (9 moderate, 5 high), none critical; it passes its existing critical-only gate.
+  This migration does not change that policy or claim the advisories are resolved.
+
+## Remaining before production promotion
+
+- Publish this branch only with approval, then verify actual hosted Preview
+  resource isolation, canonical URLs, fresh schedule fetching and Sentry uploads.
+- Hosted source-map upload/mapping was not tested locally (no deliberate events
+  or uploads were sent). The wrapper/middleware and delayed cleanup are retained.
+- Recheck full output and guards in CI/Linux, not just this Mac.
+- Review the explicit Astro patch tradeoff before merge.
+
+## Review
+
+Self-review only (no subagent tool available). Confirmed generated preview uses
+only test KV and no domains; both build contexts are checked before publishing;
+CLI uses prebuilt output and explicit production mode; SQL stays Node-only;
+state resets do not delete builds/types; temporary warmup removed; only intended
+Astro runtime files remain in the patch. Hosted verification remains separate.

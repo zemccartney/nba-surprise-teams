@@ -10,7 +10,7 @@ local KV with a validated preview snapshot. No application-code change is needed
 This is development data, not proof that local upstream fetching works.
 
 1. Start `mise x -- pnpm start` and wait for it to be ready. **Start first:**
-   that command deletes `.wrangler`, including any previously seeded local KV.
+   that command deletes `.cloudflare/state`, including previously seeded local KV.
 2. Visit the preview Showdown page so its schedule key exists. In another terminal,
    from the repository root, run:
 
@@ -23,10 +23,12 @@ This is development data, not proof that local upstream fetching works.
 The task selects the latest season, downloads its `<season>:schedule` key to a
 temporary file, writes it into local KV, and removes the file. A failed download
 stops the task before the local write. Its source ID is the **preview** namespace
-in `wrangler.jsonc`; keep the task's ID in sync if bindings change. Do not replace it with the production namespace. Remote is
-read-only here; the write explicitly uses `--local` and the local binding's
-namespace identity. Do not use `--preview` for the local write. Preview branches
-share their remote cache. Normal Wrangler authentication is required for the read.
+in `cloudflare.config.ts`; keep the task's IDs in sync if bindings change. Remote
+is read-only here; the write explicitly uses `--local`, the base binding's namespace
+ID, and `--persist-to .cloudflare/state`. In cf, API commands are remote by default;
+there is no `--remote` flag needed. Without `--persist-to`, local API commands use
+cf's shared user-level state instead of this app's state. Preview branches share
+their remote cache. Normal cf authentication is required for the read.
 
 The application still validates the version envelope, season, and schedule schema.
 A missing, incompatible, or malformed snapshot will not fix the page. Preview and

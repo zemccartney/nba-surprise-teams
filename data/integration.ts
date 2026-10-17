@@ -155,8 +155,8 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
             });
           }
         };
-        walk(Path.join(output, "client"));
-        walk(Path.join(output, "server"));
+        walk(Path.join(output, "assets"));
+        walk(Path.join(output, "bundle"));
         writeFileSync(
           Path.join(output, "data-audit.json"),
           JSON.stringify(
@@ -176,7 +176,9 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
       },
       // Astro: consume resolved paths and let Astro manage generated virtual-module types.
       "astro:config:done": ({ config, injectTypes }) => {
-        output = fileURLToPath(config.outDir);
+        output = fileURLToPath(
+          new URL(".cloudflare/output/v0/workers/default/", config.root),
+        );
         const source = readFileSync(
           new URL("virtual.d.ts", import.meta.url),
           "utf8",

@@ -27,6 +27,18 @@ version in sync with `mise.toml`. `.node-version` retains the Node major for
 hosting tools that read it; `engines.node` restricts installs to Node 26.
 Never `npm install` here. The deploy workflow installs the locked mise tools.
 
+The project pins `cf` and the beta Cloudflare Vite plugin in `package.json`;
+use `mise x -- pnpm exec cf ...` rather than relying on a globally installed CLI.
+Astro 7.4 and adapter 15 beta read `cloudflare.config.ts`. Types are generated at
+`.cloudflare/types/index.d.ts`. The migration has exact release-age exceptions
+in `pnpm-workspace.yaml`; other supply-chain checks remain enabled. Astro is
+pinned at 7.4.0 with a small [upstream dev-island patch](../patches/README.md).
+Remove it when the upstream fix ships; `pnpm run test:dev-islands` checks both
+Home/Showdown discovery orders (run separately from dev/build/tests).
+
+`pnpm start` resets `.cloudflare/state` before dev. Existing `.wrangler/state`
+is not migrated; use `mise run kv:seed-preview` after startup when needed.
+
 ## Data and architecture
 
 Read [the data workflow](../data/README.md) and open [the visual architecture guide](data-system.html).
@@ -39,7 +51,7 @@ Dump and review edits before building—preview intentionally ignores undumped e
 | Command                    | Action                                                                  |
 | :------------------------- | :---------------------------------------------------------------------- |
 | `pnpm start`               | Dev server at `localhost:4321` plus a type-check watcher                |
-| `pnpm run build`           | `verify`, then build the production site to `./dist/`                   |
+| `pnpm run build`           | Verify, build with timings, and audit `.cloudflare/output/v0/`          |
 | `pnpm run verify`          | Dependency audit, types, format, lint and tests (also gates deployment) |
 | `pnpm run audit`           | Check all dependencies against current vulnerability advisories         |
 | `pnpm run preview`         | Preview the build locally, before deploying                             |
@@ -145,19 +157,15 @@ audit final deployable artifacts for SQL or historical-game leakage.
 `pnpm run lint:workflows` checks all workflows independently of staged files.
 
 CI verification runs at deployment time: `deploy.yml` runs the full build and
-whole-repository checks before either preview or production publishing. There
-is no separate every-push/PR verification workflow. `DEPLOY_ENABLED` is a
-**temporary cutover interlock**, to retire after migration; while it is unset,
-automatic deployment is skipped. An explicit `workflow_dispatch` with
-`preview_deploy=true` on a non-main branch can bootstrap/update only the isolated
-preview Worker, including full Linux verification, without opening the production
-gate. Preview builds set `CLOUDFLARE_ENV=preview`; a generated-config guard rejects
-wrong Worker names, production KV or domain routes before publishing.
-`scripts/deployment-target.ts` selects production only for case-sensitive
-`refs/heads/main`; other branch refs select preview and non-branch refs fail.
-Preview aliases are normalized, length-bounded and hashed from the original
-branch name, using the generated Worker name. Actual bindings and the Pages to
-Workers cutover still require explicit provisioning and coordination.
+whole-repository checks before preview or production publishing. There is no
+separate every-push/PR verification workflow. `scripts/deployment-target.ts`
+selects production only for case-sensitive `refs/heads/main`; other branches
+select preview and non-branch refs fail. Preview builds set
+`CLOUDFLARE_PREVIEW_BUILD=true`, making `ctx.isPreview` select only preview KV
+and no production domains. Both target guards inspect actual cf Build Output,
+including the recorded preview flag and mode, before `--prebuilt` publishing.
+Preview aliases are normalized, length-bounded and hashed from the branch name.
+There is no remaining cutover interlock: pushing a branch triggers publishing.
 
 ## Linting
 
@@ -249,27 +257,29 @@ Production at `https://nbastt.grepco.net` runs on Worker `nba-surprise-teams`.
 The legacy hostname keeps its existing 301 Bulk Redirect to canonical, preserving
 path/query. Pages is retained only for the seven-day rollback window; deletion
 requires approval. See [cutover evidence](../plan/new-season-sweep/production-domain-cutover.md).
-`wrangler.jsonc` is the build/deploy config; the adapter reads it during `astro build`.
+`cloudflare.config.ts` is the build/deploy config; the adapter reads it during
+`astro build --timings`. Wrangler is no longer a project dependency.
 
-- Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
+- Compatibility date and flags live in `cloudflare.config.ts`, not the dashboard.
   Review them semi-regularly:
   https://developers.cloudflare.com/workers/configuration/compatibility-flags/
 - The initial production Worker reuses the existing Pages production `GAMES_KV`
   namespace. Both custom-domain associations are declared in config and enforced
-  by the production target guard. Preserve the legacy Bulk Redirect. The `previews` block
-  selects the existing test KV namespace for native branch
-  Previews under that same Worker. Branches share preview KV, not production KV;
-  KV is not automatically cloned per branch. Local dev uses `.wrangler/state`.
-  `preview_urls: true` enables preview URLs. Source `workers_dev: true` prepares
+  by the production target guard. Preserve the legacy Bulk Redirect. `ctx.isPreview`
+  selects the existing test KV namespace for native branch Previews under that
+  same Worker, and omits production domains. Branches share preview KV, not
+  production KV; KV is not automatically cloned per branch. Local dev uses
+  `.cloudflare/state`. `previewUrls: true` enables preview URLs.
+  `workersDev: true` preserves
   the direct production verification URL, retained during the rollback window.
   Follow the [cutover/rollback checklist](../plan/new-season-sweep/production-cutover-checklist.md).
 - No `SESSION` namespace is provisioned, because `session: false` is set in
   `astro.config.mjs`. Remove that line if the site ever uses sessions.
-- `.github/workflows/deploy.yml` uses `wrangler preview` for branches and
-  `wrangler deploy` only for `main`. Preview names are DNS-safe branch slugs with
-  collision-resistant hashes. The workflow sets the preview origin before
-  building, verifies the generated `previews` bindings, and ignores dashboard
-  base configuration so only the reviewed binding settings apply.
+- `.github/workflows/deploy.yml` uses `cf previews deploy` for branches and
+  `cf deploy` only for `main`, both with `--prebuilt --mode production`.
+  Preview names are DNS-safe branch slugs with collision-resistant hashes.
+  The workflow sets the preview origin and build flag before building, then
+  verifies generated bindings, domains and build context before publication.
   Pushes publish automatically: only exact `main` deploys production; other
   branches publish native Previews. Manual retries use the same selection:
   `mise x -- gh workflow run deploy.yml --ref main`. Deleted/non-branch refs are
@@ -278,8 +288,9 @@ requires approval. See [cutover evidence](../plan/new-season-sweep/production-do
   disable the workflow (`mise x -- gh workflow disable deploy.yml`) and check for
   in-flight runs; recreating the old `DEPLOY_ENABLED` variable has no effect.
   It needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
-  and `SENTRY_AUTH_TOKEN` as repository secrets. Wrangler 4.137.0 is locked; native
-  Previews require 4.135.0+. See [migration evidence](../plan/new-season-sweep/native-previews.md).
+  and `SENTRY_AUTH_TOKEN` as repository secrets. See the
+  [cf migration record](../plan/cf-cli-migration.md) and the earlier
+  [native Preview cutover](../plan/new-season-sweep/native-previews.md).
 - Static routes prerender in Node, including dev. Islands/actions remain in
   workerd, and preview serves the built Worker/static assets. SQLite access is
   guarded at that environment boundary. Maintenance commands run directly in

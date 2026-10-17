@@ -9,8 +9,12 @@ import svgOptimizer from "../svg-optimizer/integration";
 it("optimizes emitted SVGs under a path containing spaces, Unicode and #", async () => {
   const root = await Fs.mkdtemp(Path.join(Os.tmpdir(), "nbastt-svg-test-"));
   try {
-    const directory = Path.join(root, "NBA Tracker #é");
-    await Fs.mkdir(directory);
+    const project = Path.join(root, "NBA Tracker #é");
+    const directory = Path.join(
+      project,
+      ".cloudflare/output/v0/workers/default/assets",
+    );
+    await Fs.mkdir(directory, { recursive: true });
     const file = Path.join(directory, "logo.svg");
     await Fs.writeFile(
       file,
@@ -22,7 +26,10 @@ it("optimizes emitted SVGs under a path containing spaces, Unicode and #", async
     if (!configure || !build) throw new Error("Missing optimizer hooks");
     // Supply just the framework fields consumed by these actual hooks.
     await configure({
-      config: { build: { client: pathToFileURL(`${directory}/`) } },
+      config: {
+        build: { client: pathToFileURL(`${project}/dist/client/`) },
+        root: pathToFileURL(`${project}/`),
+      },
     } as Parameters<typeof configure>[0]);
     await build({
       logger: { info: vi.fn(), warn: vi.fn() },

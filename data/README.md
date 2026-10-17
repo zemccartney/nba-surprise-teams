@@ -215,7 +215,8 @@ This is an architectural guardrail, not a sandbox against disguised imports.
 
 Final artifact auditing rejects DB/SQL files, SQL machinery, changed/unreported
 chunks and archived game identities in Worker code. The sealed inventory lives
-in `dist/data-audit.json`, outside deployable directories. Recheck with
+in `.cloudflare/output/v0/workers/default/data-audit.json`, beside (not inside)
+the deployable `assets/` and `bundle/` directories. Recheck with
 `mise x -- node data/node/audit.ts`. Rendered chart values in static HTML are
 intentional; a whole games database in the Worker is not.
 

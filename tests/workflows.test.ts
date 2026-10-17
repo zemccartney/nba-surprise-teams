@@ -19,11 +19,11 @@ it("keeps full verification before publishing after removing cutover controls", 
   expect(deploy).toContain('node scripts/deployment-target.ts "$GITHUB_REF"');
   const build = deploy.indexOf("pnpm run build");
   expect(build).toBeGreaterThan(-1);
-  expect(deploy.indexOf("pnpm exec wrangler deploy")).toBeGreaterThan(build);
-  expect(deploy.indexOf("pnpm exec wrangler preview --name")).toBeGreaterThan(
+  expect(deploy.indexOf("pnpm exec cf deploy --prebuilt")).toBeGreaterThan(
     build,
   );
-  expect(deploy).not.toContain("wrangler versions upload");
+  expect(deploy.indexOf("pnpm exec cf previews deploy")).toBeGreaterThan(build);
+  expect(deploy).not.toContain("wrangler");
 });
 
 it("guards native Preview resources independently of production", () => {
@@ -32,25 +32,21 @@ it("guards native Preview resources independently of production", () => {
   expect(deploy.indexOf("export PUBLIC_PREVIEW_ORIGIN=")).toBeLessThan(
     deploy.indexOf("pnpm run build"),
   );
-  const guard = deploy.indexOf(
-    "node scripts/assert-preview-target.ts dist/server/wrangler.json",
-  );
+  const guard = deploy.indexOf("node scripts/assert-preview-target.ts");
   expect(guard).toBeGreaterThan(deploy.indexOf("pnpm run build"));
-  expect(guard).toBeLessThan(
-    deploy.indexOf("pnpm exec wrangler preview --name"),
-  );
+  expect(guard).toBeLessThan(deploy.indexOf("pnpm exec cf previews deploy"));
   expect(deploy).toContain(
-    'pnpm exec wrangler preview --name "$PREVIEW_NAME" --ignore-base-config',
+    'pnpm exec cf previews deploy "$PREVIEW_NAME" --prebuilt',
   );
+  expect(deploy).toContain("export CLOUDFLARE_PREVIEW_BUILD=true");
+  expect(deploy).toContain("unset CLOUDFLARE_PREVIEW_BUILD");
 });
 
 it("guards production resources before publishing", () => {
   expect(deploy).toContain('if [[ "$PUBLIC_DEPLOY_ENV" == production ]]; then');
-  const guard = deploy.indexOf(
-    "node scripts/assert-production-target.ts dist/server/wrangler.json",
-  );
+  const guard = deploy.indexOf("node scripts/assert-production-target.ts");
   expect(guard).toBeGreaterThan(deploy.indexOf("pnpm run build"));
-  expect(guard).toBeLessThan(deploy.indexOf("pnpm exec wrangler deploy"));
+  expect(guard).toBeLessThan(deploy.indexOf("pnpm exec cf deploy --prebuilt"));
 });
 
 it("serializes branch deployments and skips deleted/non-branch refs", () => {
@@ -66,7 +62,9 @@ it("audits before verification/deployment", async () => {
     "pnpm audit --prod --audit-level=critical",
   );
   expect(packageJson.scripts.verify).toMatch(/^pnpm run audit && /);
-  expect(packageJson.scripts.build).toContain("pnpm run verify && astro build");
+  expect(packageJson.scripts.build).toContain(
+    "pnpm run verify && astro build --timings",
+  );
   const mise = await Fs.readFile(
     new URL("../mise.toml", import.meta.url),
     "utf8",

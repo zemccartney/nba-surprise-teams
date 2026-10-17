@@ -96,7 +96,11 @@ export default function svgOptimizerIntegration(): AstroIntegration {
         );
       },
       "astro:config:done": ({ config }) => {
-        clientDir = config.build.client;
+        // Adapter 15 moves client assets before the integration build:done hooks.
+        clientDir = new URL(
+          ".cloudflare/output/v0/workers/default/assets/",
+          config.root,
+        );
       },
     },
     name: "svg-optimizer",
