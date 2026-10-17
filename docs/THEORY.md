@@ -75,8 +75,8 @@ Pace is projected wins minus that target, not wins above the betting line.
    distinguish record shapes, relational guarantees, and business invariants.
 3. Trace either static (`data/dump.sql` → temporary SQLite → prerender → HTML)
    or dynamic (metadata + NBA → validated KV cache → deferred UI) data flow.
-4. Read [the visual system guide](docs/data-system.html) for the runtime map, then
-   [data/README.md](data/README.md) for editing and recovery commands.
+4. Read [the visual system guide](data-system.html) for the runtime map, then
+   [data/README.md](../data/README.md) for editing and recovery commands.
 
 **Red Flags:**
 

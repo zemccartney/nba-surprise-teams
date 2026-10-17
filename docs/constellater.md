@@ -158,4 +158,4 @@ reproducible local-data publishing without a deployed database.
 - [Live Content Collections: A Deep Dive](https://astro.build/blog/live-content-collections-deep-dive/) — historical experimental API discussion
 - [Current implementation](../data/integration.ts)
 - [Runtime boundary](../data/runtime-boundary.ts)
-- [Tracker system theory](../THEORY.md)
+- [Tracker system theory](THEORY.md)

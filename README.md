@@ -1,286 +1,33 @@
 # NBA Surprise Teams Tracker
 
-## Toolchain
+Tracks NBA teams that outperform their preseason betting expectations, with live
+season standings and historical results. In a standard 82-game season, teams with
+a preseason win total below 36 qualify by winning at least 10 games above their
+line, rounded up.
 
-[mise](https://mise.jdx.dev/) manages **Node 26.8.1, pnpm 12.3.4, hk
-1.56.1, zizmor 1.30.0 and Gum 2.0.0**, pinned in `mise.toml` with platform checksums in `mise.lock`.
-Gum renders the optional human-readable preseason feed report (`--pretty`);
-ordinary JSON output does not require invoking it.
-Install mise and trust this checkout after reviewing its config, then:
+**Live site:** [nbastt.grepco.net](https://nbastt.grepco.net)
+
+## Develop locally
+
+Install [mise](https://mise.jdx.dev/getting-started.html), then clone this repo and
+run these commands from its root after reviewing `mise.toml`:
 
 ```sh
 mise trust
 mise install --locked
 mise run setup
+mise run data:restore
+mise x -- pnpm start
 ```
 
-`setup` installs dependencies with the frozen lockfile, generates the ignored
-Worker type declarations, and installs hk's Git hooks. With `mise activate` configured in your shell, entering the repo also
-installs missing tools and refreshes the hooks. Noninteractive shells and
-agents should use `mise run <task>` or `mise x -- pnpm <command>`; no fnm or
-manual pnpm PATH prefix is needed. Project tools take precedence over inherited
-PATH additions such as `PNPM_HOME/bin`.
+Open [localhost:4321](http://localhost:4321). The dev server includes a type-check
+watcher. Run `data:restore` only once per checkout; it refuses to overwrite an
+existing database.
 
-`package.json` checks the exact pnpm version via `devEngines` with
-`onFail: "error"`; it does not request automatic version switching. Keep that
-version in sync with `mise.toml`. `.node-version` retains the Node major for
-hosting tools that read it; `engines.node` restricts installs to Node 26.
-Never `npm install` here. The deploy workflow installs the locked mise tools.
+mise manages the pinned toolchain; `setup` installs dependencies, generates Worker
+types, and installs Git hooks. Use pnpm, not npm, for this project.
 
-## Data and architecture
-
-Read [the data workflow](data/README.md) and open [the visual architecture guide](docs/data-system.html).
-Run `mise run data:restore` once before dev (it refuses an existing database).
-Dev reads the local DB; builds restore `data/dump.sql` into an isolated snapshot.
-Dump and review edits before building—preview intentionally ignores undumped edits.
-
-## Commands
-
-| Command                    | Action                                                                  |
-| :------------------------- | :---------------------------------------------------------------------- |
-| `pnpm start`               | Dev server at `localhost:4321` plus a type-check watcher                |
-| `pnpm run build`           | `verify`, then build the production site to `./dist/`                   |
-| `pnpm run verify`          | Dependency audit, types, format, lint and tests (also gates deployment) |
-| `pnpm run audit`           | Check all dependencies against current vulnerability advisories         |
-| `pnpm run preview`         | Preview the build locally, before deploying                             |
-| `pnpm run astro -- --help` | Astro CLI help                                                          |
-| `pnpm run deps`            | Interactive dependency update (`npm-check-updates`)                     |
-| `pnpm run archive:diff`    | Review canonical SQL changes (committed vs working tree)                |
-
-## Open Graph image
-
-The editable canvas is [scripts/og/index.html](scripts/og/index.html): plain HTML
-using the site's global CSS, Sixtyfour font and favicon SVG. It defaults to dark
-mode; change `data-theme` to `light` to experiment. The preview is local only,
-not an Astro route and not included in the site build.
-
-```sh
-mise x -- pnpm exec playwright install chromium # once, and after Playwright upgrades
-mise x -- pnpm run og:preview                   # open the printed localhost URL
-mise x -- pnpm run og:generate                  # writes public/og.png
-```
-
-Edit the HTML while the preview runs; Vite reloads it. Generation starts its own
-server, waits for fonts/images, captures the 1200 × 630 canvas, and stops. It
-prints metadata tags to paste into `src/layouts/layout.astro`; it never edits the
-template. Commit `public/og.png` along with your HTML changes. Regenerate after
-changing the design, shared tokens, font or favicon: generation is deliberately
-not part of the build, and CI does not need a browser installed.
-
-## Dependencies and supply chain
-
-Normal installs run `pnpm audit` through `postinstall`. Verification/build and
-pre-commit also audit, failing on vulnerabilities or registry errors. This needs
-network access and is advisory checking, not pre-download malware detection.
-See [dependency security operations](docs/dependency-security.md) for the policy,
-current targeted fixes, offline implications and override-removal guidance.
-
-pnpm's settings live in `pnpm-workspace.yaml` (pnpm ≥ 11 ignores everything but
-registry/auth in `.npmrc`). Each setting is commented there; the ones you'll
-meet day to day:
-
-- **`minimumReleaseAge`**: versions published less than 3 days ago don't
-  resolve. `pnpm run deps` uses the same cooldown. Waiting is the fix.
-- **`trustPolicy: no-downgrade`**: a version whose provenance is weaker than an
-  earlier release's is refused (`ERR_PNPM_TRUST_DOWNGRADE`). Versions older
-  than a year are exempt. Real backports trip this; after checking the
-  release, add the exact version to `trustPolicyExclude`.
-- **`allowBuilds`**: dependencies with install scripts must be listed
-  (`ERR_PNPM_IGNORED_BUILDS` names the newcomer). Read the script before
-  allowing it; `false` is right when the package ships its binary as an
-  optional dependency and the script is only a check or a fallback download.
-- **No hoisting.** Only packages listed in `package.json` are importable from
-  project code. `Cannot find module 'x'` for a package you never installed means
-  `x` must be declared (that's why `vite` is a devDependency: `astro.config.mjs`
-  uses its `loadEnv`) or imported through the package that owns it (`astro/zod`
-  rather than `zod`).
-- The lockfile is re-verified against these policies on every install,
-  including the Cloudflare build, so a violation fails loudly rather than
-  deploying.
-
-`plan/baseline/` is its own pnpm project (own `pnpm-workspace.yaml`) so the
-capture tooling's dependencies stay out of the site's lockfile and build.
-
-### Held back on purpose
-
-`pnpm run deps` will keep offering these; each moves with the thing named.
-
-- `prettier` (exact 3.6.2) and `prettier-plugin-astro` (0.14.1): 3.7+ with the
-  0.14 plugin reflows paragraphs in `.astro` files past `printWidth`, so the two
-  move together in one formatting commit, once plugin 1.0 clears the release
-  age. The plugin carries its own copy of the Astro compiler, so it is not
-  affected by Astro's move to the Rust one.
-- `@sentry/astro` and `@sentry/cloudflare` (10.22): from 10.40 the integration
-  wraps the Cloudflare worker entry itself, which collides with the manual
-  `wrapRequestHandler` in `src/middleware.ts`. Moves with the Sentry rework.
-- `typescript` (5.9): `astro check` supports 5 and 6, not 7. Astro's own
-  tooling can only rely on TypeScript 6, so 7 has no date.
-
-## Git hooks
-
-[hk](https://hk.jdx.dev/), configured in `hk.pkl`, installed by `mise run setup`
-or the mise enter hook. Pre-commit **auto-fixes and stages** Prettier and ESLint
-changes on selected files, checks selected workflows with zizmor, and runs
-whole-project `astro check` and tests. Zizmor uses offline, strict-collection
-mode: no credentials/network required, and malformed workflows fail.
-Unstaged changes are stashed with Git and restored afterward, including when a
-check fails. Review the resulting commit when using partial staging.
-
-- `mise run check`: read-only types, format, lint and tests across tracked files.
-- `mise run fix`: the same checks, applying available fixes.
-- `mise x -- hk run pre-commit`: exercise the staged-file hook manually.
-- `HK=0 git commit`: explicit hook bypass.
-
-Git hooks use `mise x`, so GUI Git clients must have the mise executable on
-PATH; shell activation alone does not guarantee that. `pnpm install` no longer
-installs hooks. When migrating an existing checkout, remove only old
-Lefthook-generated hooks from `.git/hooks` (including `prepare-commit-msg` if
-present), then run `mise x -- hk install --mise`; preserve unrelated hooks.
-
-The build retains `pnpm run verify`, which discovers files through the tools
-rather than hk's tracked-file list. Both run tests. System checks now read a
-fresh SQL restore on every run; duplicate IDs fail at the database boundary.
-No Astro content store is involved. Builds validate domain/schema invariants and
-audit final deployable artifacts for SQL or historical-game leakage.
-`pnpm run lint:workflows` checks all workflows independently of staged files.
-
-CI verification runs at deployment time: `deploy.yml` runs the full build and
-whole-repository checks before either preview or production publishing. There
-is no separate every-push/PR verification workflow. `DEPLOY_ENABLED` is a
-**temporary cutover interlock**, to retire after migration; while it is unset,
-automatic deployment is skipped. An explicit `workflow_dispatch` with
-`preview_deploy=true` on a non-main branch can bootstrap/update only the isolated
-preview Worker, including full Linux verification, without opening the production
-gate. Preview builds set `CLOUDFLARE_ENV=preview`; a generated-config guard rejects
-wrong Worker names, production KV or domain routes before publishing.
-`scripts/deployment-target.ts` selects production only for case-sensitive
-`refs/heads/main`; other branch refs select preview and non-branch refs fail.
-Preview aliases are normalized, length-bounded and hashed from the original
-branch name, using the generated Worker name. Actual bindings and the Pages to
-Workers cutover still require explicit provisioning and coordination.
-
-## Linting
-
-The ESLint config is TypeScript (`eslint.config.ts`), loaded through Node's own
-type stripping. ESLint 10 still gates that behind a feature flag, so every
-invocation carries `--flag unstable_native_nodejs_ts_config`: the `lint`
-scripts, `hk.pkl`, and `.vscode/settings.json` (`eslint.options.flags`).
-Without it ESLint fails with "The 'jiti' library is required for loading
-TypeScript configuration files". Rules that are turned off
-have the reason in a comment next to them in the config; that's the place to
-flip one. `import-x/no-extraneous-dependencies` is the rule that catches an
-import of a package that isn't declared in `package.json` (the "No hoisting"
-failure mode above), and `import-x/no-unresolved` catches a path that doesn't
-exist.
-
-## Maintenance
-
-see [MAINTENANCE](./docs/MAINTENANCE.md)
-
-## Styling
-
-Plain CSS, no framework. The conventions below are what the Tailwind removal
-settled on; the site should render exactly as it did under Tailwind 4.1.
-
-- **Base reset** lives at the top of `src/styles/global.css` and is derived from
-  Tailwind's preflight, because the markup assumes its semantics: headings and
-  links inherit size, weight, and color; lists are unstyled; padding and borders
-  are zeroed; images and SVGs are block-level. Don't swap it for another reset
-  without re-running the baseline comparison.
-- **Design tokens** are custom properties on `:root` in the same file: colors
-  (oklch, named after the Tailwind shades they replaced), fonts, shadows, and the
-  type scale. Add a token when a value is used in more than one component;
-  otherwise write the literal.
-- **Type scale is a pair.** `--text-2xl` always goes with
-  `--text-2xl--line-height`, because Tailwind's `text-*` utilities set both.
-  Setting only `font-size` falls back to the body's 1.5 line-height and makes
-  everything taller.
-- **Breakpoints** are the Tailwind defaults in px: 640, 768, 1024, 1280, 1536.
-  Media queries are `min-width` and live next to the rule they modify.
-- **Component styles are scoped** in each `.astro` file's `<style>` block, with
-  class names that read as what the element is (`.season-nav`, `.legend-cell`).
-  Nesting is fine for states and children in the same file.
-- **Styling a child component's internals** needs `:global()`. Astro scopes every
-  selector to the current file, and a child's elements carry the child's scope,
-  not yours. `.team-stats :global(.NBASurpriseTracker-Table > tbody th)` works;
-  the same selector without `:global()` silently matches nothing. When two files
-  target the same element with equal specificity, source order decides, so make
-  the override more specific rather than relying on order.
-- **Passing `class` to a component** only styles it if the component spreads its
-  rest props onto its root element, which is how Astro forwards the parent's
-  scope attribute. `link.astro`, `table.astro`, `typography.astro`, and
-  `crash.astro` do; check before relying on it.
-- **Popover and chart tooltip styles are global stylesheets**
-  (`src/components/popover.css`, `src/components/charts/charts.css`), imported
-  by the component. The popover is a native `[popover]` element in the top
-  layer, positioned with CSS anchor positioning; chart tooltips are DOM content
-  attached to TanStack's tooltip surface. Neither carries an Astro scoped-style
-  attribute.
-- **Charts use TanStack Charts 0.18.0**, pinned exactly and mounted through its
-  vanilla DOM host by ordinary Astro `<script>` tags—no React or `client:*`
-  hydration. Inline JSON carries the original domain rows. TanStack owns focus,
-  keyboard navigation and resize; our definitions retain domain descriptions,
-  image alternatives and design tokens. Renderer-neutral payload types live in
-  `src/components/charts/data.ts`. ECharts and the old custom controllers have
-  been removed after [application review](plan/tanstack-charts/application-review.md).
-  [Illustrated implementation guide](docs/tanstack-charts.html) explains the
-  styling, native font recovery, rendering flow and the applied simplifications.
-- **Regression check:** `plan/baseline/` captures screenshots and payload sizes
-  for a build and diffs two captures. Run it against a reference before and after
-  any styling change; see its README.
-
-## Additional Considerations
-
-### KV Cache Key
-
-Need to update our action's `SCHEMA_ID` if shape of data stored in KV ever changes
-
-### Icon sourcing
-
-- Emojis are from Twitter's emoji set
-  - Looked up and downloaded from https://twemoji-cheatsheet.vercel.app/
-  - recolored as needed
-- Hourglass icon from https://phosphoricons.com/
-
-### Cloudflare
-
-The build targets Workers: `@astrojs/cloudflare` 13 dropped Pages support.
-Production at `https://nbastt.grepco.net` runs on Worker `nba-surprise-teams`.
-The legacy hostname keeps its existing 301 Bulk Redirect to canonical, preserving
-path/query. Pages is retained only for the seven-day rollback window; deletion
-requires approval. See [cutover evidence](plan/new-season-sweep/production-domain-cutover.md).
-`wrangler.jsonc` is the build/deploy config; the adapter reads it during `astro build`.
-
-- Compatibility date and flags now live in `wrangler.jsonc`, not the dashboard.
-  Review them semi-regularly:
-  https://developers.cloudflare.com/workers/configuration/compatibility-flags/
-- The initial production Worker reuses the existing Pages production `GAMES_KV`
-  namespace. Both custom-domain associations are declared in config and enforced
-  by the production target guard. Preserve the legacy Bulk Redirect. The `previews` block
-  selects the existing test KV namespace for native branch
-  Previews under that same Worker. Branches share preview KV, not production KV;
-  KV is not automatically cloned per branch. Local dev uses `.wrangler/state`.
-  `preview_urls: true` enables preview URLs. Source `workers_dev: true` prepares
-  the direct production verification URL, retained during the rollback window.
-  Follow the [cutover/rollback checklist](plan/new-season-sweep/production-cutover-checklist.md).
-- No `SESSION` namespace is provisioned, because `session: false` is set in
-  `astro.config.mjs`. Remove that line if the site ever uses sessions.
-- `.github/workflows/deploy.yml` uses `wrangler preview` for branches and
-  `wrangler deploy` only for `main`. Preview names are DNS-safe branch slugs with
-  collision-resistant hashes. The workflow sets the preview origin before
-  building, verifies the generated `previews` bindings, and ignores dashboard
-  base configuration so only the reviewed binding settings apply.
-  Pushes publish automatically: only exact `main` deploys production; other
-  branches publish native Previews. Manual retries use the same selection:
-  `mise x -- gh workflow run deploy.yml --ref main`. Deleted/non-branch refs are
-  skipped; deployments are serialized per ref without cancelling in-flight work.
-  Temporary cutover gates/bootstrap inputs are removed. To pause publishing,
-  disable the workflow (`mise x -- gh workflow disable deploy.yml`) and check for
-  in-flight runs; recreating the old `DEPLOY_ENABLED` variable has no effect.
-  It needs `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `PUBLIC_SENTRY_DSN`
-  and `SENTRY_AUTH_TOKEN` as repository secrets. Wrangler 4.137.0 is locked; native
-  Previews require 4.135.0+. See [migration evidence](plan/new-season-sweep/native-previews.md).
-- Static routes prerender in Node, including dev. Islands/actions remain in
-  workerd, and preview serves the built Worker/static assets. SQLite access is
-  guarded at that environment boundary. Maintenance commands run directly in
-  Node; there is no injected archiver endpoint or dev-server dependency.
+For commands, tooling, styling, and deployment details, see the
+[development reference](docs/development.md). See the
+[data workflow](data/README.md) for editing season data and
+[system theory](docs/THEORY.md) for an architectural overview.
