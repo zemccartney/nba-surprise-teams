@@ -32,9 +32,8 @@ export default defineConfig({
     // remain in workerd, giving the data boundary a concrete environment.
     prerenderEnvironment: "node",
   }),
-  // The default, written down because it pairs with trailingSlash below: with
-  // "directory", Astro.url.pathname ends in "/" at build time as it does in dev
-  // (https://docs.astro.build/en/reference/configuration-reference/#effect-on-astrourl).
+  // Keep directory output and canonical trailing-slash links in production,
+  // while allowing either URL form in dev via trailingSlash below.
   build: {
     format: "directory",
   },
@@ -99,9 +98,7 @@ export default defineConfig({
   // Sessions are unused. Declaring that keeps the adapter from provisioning a
   // SESSION KV namespace on deploy and tree-shakes unstorage out of the worker.
   session: false,
-  // Cloudflare already 308s /about to /about/ for prerendered pages. Declaring it
-  // makes the dev server match (a request without the slash is a 404 there), so
-  // internal links are written with the slash and the nav highlight in
-  // subpage.astro compares equal paths.
-  trailingSlash: "always",
+  // Accept slashless URLs in dev; Cloudflare still canonicalizes directory
+  // pages in production. Internal links retain their trailing slash.
+  trailingSlash: "ignore",
 });

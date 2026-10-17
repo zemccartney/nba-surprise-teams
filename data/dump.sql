@@ -37278,7 +37278,7 @@ INSERT INTO "seasons" VALUES('2022','2022-10-18','2023-04-09','2022-09-30','Surp
 INSERT INTO "seasons" VALUES('2023','2023-10-24','2024-04-14','2023-10-13','Wemby and the Knicks with Shea Serrano and Jason Concepcion','https://podcasts.apple.com/us/podcast/wemby-and-the-knicks-with-shea-serrano-and-jason-concepcion/id1358187061?i=1000706552680',NULL,NULL);
 INSERT INTO "seasons" VALUES('2024','2024-10-22','2025-04-13','2024-09-20','Embiid Extension + Surprise Teams + Pelicans Preview','https://podcasts.apple.com/us/podcast/embiid-extension-surprise-teams-pelicans-preview/id1358187061?i=1000706552555',NULL,NULL);
 INSERT INTO "seasons" VALUES('2025','2025-10-21','2026-04-12','2025-09-27','Surprises Teams','https://podcasts.apple.com/us/podcast/the-athletic-nba-daily/id1358187061?i=1000728681443',NULL,NULL);
-INSERT INTO "seasons" VALUES('2026','2026-10-20','2027-04-11',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "seasons" VALUES('2026','2026-10-20','2027-04-11','2026-10-17','Who is the NBA Surprise Team?','https://podcasts.apple.com/us/podcast/who-is-the-nba-surprise-team-slam-n-jam/id1358187061?i=1000796781203',NULL,NULL);
 CREATE TABLE team_names (
   team_id TEXT NOT NULL REFERENCES teams(id),
   first_year INTEGER NOT NULL,
@@ -37564,6 +37564,15 @@ INSERT INTO "team_seasons" VALUES('2025','POR',69,265);
 INSERT INTO "team_seasons" VALUES('2025','SAC',71,266);
 INSERT INTO "team_seasons" VALUES('2025','UTA',37,267);
 INSERT INTO "team_seasons" VALUES('2025','WAS',43,268);
+INSERT INTO "team_seasons" VALUES('2026','BKN',49,270);
+INSERT INTO "team_seasons" VALUES('2026','CHI',59,275);
+INSERT INTO "team_seasons" VALUES('2026','DAL',67,276);
+INSERT INTO "team_seasons" VALUES('2026','LAC',57,273);
+INSERT INTO "team_seasons" VALUES('2026','MEM',59,274);
+INSERT INTO "team_seasons" VALUES('2026','MIL',51,271);
+INSERT INTO "team_seasons" VALUES('2026','NOP',57,272);
+INSERT INTO "team_seasons" VALUES('2026','SAC',41,269);
+INSERT INTO "team_seasons" VALUES('2026','WAS',69,277);
 CREATE TABLE teams (
   id TEXT PRIMARY KEY CHECK (id GLOB '[A-Z][A-Z][A-Z]'),
   name TEXT NOT NULL CHECK (length(name) > 0),

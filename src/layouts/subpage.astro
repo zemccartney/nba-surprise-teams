@@ -7,9 +7,8 @@ const { class: className, ...layoutProps } = Astro.props;
 ---
 
 <script>
-  // Both sides carry the trailing slash: links are written with it and
-  // trailingSlash: "always" (astro.config.mjs) means pages only exist at it.
-  const currentPath = globalThis.location.pathname;
+  // Links use trailing slashes; normalize slashless local URLs to match.
+  const currentPath = `${globalThis.location.pathname.replace(/\/$/, "")}/`;
   const navLink = document.querySelector(
     `nav .NBASTT-Link[href="${CSS.escape(currentPath)}"]`,
   );
