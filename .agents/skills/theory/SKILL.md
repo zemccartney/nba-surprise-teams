@@ -1,8 +1,14 @@
+---
+name: theory
+description: Generate or update the codebase mental-model documentation in docs/THEORY.md using Peter Naur's theory-building approach.
+disable-model-invocation: true
+---
+
 # Theory-Based Documentation Generation Prompt
 
 ## Objective
 
-Analyze this codebase and generate documentation, outputting in markdown to `THEORY.md`, that helps new programmers build an effective mental model (theory) of the system, following Peter Naur's "Programming as Theory Building" approach.
+Analyze this codebase and generate documentation, outputting in markdown to `docs/THEORY.md` at the repository root, that helps new programmers build an effective mental model (theory) of the system, following Peter Naur's "Programming as Theory Building" approach.
 
 ## Instructions
 
