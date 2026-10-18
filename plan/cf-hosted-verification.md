@@ -71,8 +71,13 @@ Probe removal does not prevent inspecting these events and their uploaded maps.
 
 - [x] Remove both diagnostic routes, helper and seven temporary tests.
 - [x] Delete the local bearer file. No remote secret/key cleanup is necessary.
-- [ ] Publish the cleanup and recheck normal pages, missing probe routes,
+- [x] Publish the cleanup and recheck normal pages, missing probe routes,
       preview bindings and unchanged active production version.
+      Cleanup commit `b3b3a76`, [CI 39097876783](https://github.com/zemccartney/nba-surprise-teams/actions/runs/39097876783),
+      Preview deployment `73fdde6a-c780-46d9-9553-19c84a5e81bd`: 279 tests and
+      all build gates pass. Both probe URLs serve the normal HTML 404 page;
+      normal browser smoke checks still pass. API inspection confirms preview
+      KV isolation and unchanged production version, KV and both custom domains.
 - [ ] Inspect the two Sentry event exports before considering production.
 
 CI also reports existing mise-action Node 20 deprecation and the upcoming

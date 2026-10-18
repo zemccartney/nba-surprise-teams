@@ -84,8 +84,9 @@ one explicit temporary dependency patch until upstream publishes the fix.
   hosted resource isolation, URL metadata, fresh NBA fetching and Sentry uploads.
 - Confirm the two received Sentry events map to original source lines. Local
   event-read credentials are unavailable; owner exports are needed.
-- Complete diagnostic cleanup and final hosted rechecks. See the
-  [hosted verification record](cf-hosted-verification.md).
+- Diagnostic cleanup and final hosted rechecks passed. See the
+  [hosted verification record](cf-hosted-verification.md) for event IDs and
+  evidence. Source mapping remains the only unverified hosted gate.
 - Review the explicit Astro patch tradeoff before merge.
 
 ## Requested follow-up pass
