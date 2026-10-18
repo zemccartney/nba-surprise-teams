@@ -67,6 +67,10 @@ describe("build source map lifecycle", () => {
       "utf8",
     );
     expect(config).toContain("filesToDeleteAfterUpload: []");
+    // Sentry otherwise defaults to Astro's stale dist/**/* path.
+    expect(config).toContain(
+      "assets: [`${workerOutputDirectory()}/{assets,bundle}/**/*`],",
+    );
     expect(config).toContain("cleanBuildSourcemapsIntegration(),");
     expect(config.indexOf("cleanBuildSourcemapsIntegration(),")).toBeLessThan(
       config.indexOf("trackerData(),"),

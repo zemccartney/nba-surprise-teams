@@ -2,6 +2,7 @@ import { catalog } from "virtual:tracker/catalog";
 import { describe, expect, it, vi } from "vitest";
 
 import {
+  getSeasonOverviewHref,
   getTeamHistory,
   projectedWins,
   resolveTeamName,
@@ -19,6 +20,18 @@ vi.mock(import("virtual:tracker/catalog"), async () => {
     startDate: "1998-01-01",
   });
   return { catalog: metadataCatalog(fixture), metadataHash: "synthetic" };
+});
+
+describe("season overview links", () => {
+  it("sends the latest season to Home and archived seasons to their detail pages", () => {
+    const latest = catalog.getLatestSeason();
+    expect(getSeasonOverviewHref(latest.id)).toBe("/");
+    const archived = catalog
+      .getSeasons()
+      .filter((season) => season.id !== latest.id);
+    for (const season of archived)
+      expect(getSeasonOverviewHref(season.id)).toBe(`/${season.id}/`);
+  });
 });
 
 describe("projected wins", () => {

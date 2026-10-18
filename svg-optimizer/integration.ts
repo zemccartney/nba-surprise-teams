@@ -2,8 +2,9 @@ import type { AstroIntegration } from "astro";
 
 import Fs from "node:fs/promises";
 import Path from "node:path";
-import { fileURLToPath } from "node:url";
 import { optimize } from "svgo";
+
+import { captureBuildOutput } from "../scripts/build-output.ts";
 
 /*
   Runs svgo over the SVGs Astro emits into the client build.
@@ -45,12 +46,12 @@ const collectSvgs = async (dir: string): Promise<string[]> => {
 };
 
 export default function svgOptimizerIntegration(): AstroIntegration {
-  let clientDir: URL;
+  const output = captureBuildOutput();
 
   return {
     hooks: {
       "astro:build:done": async ({ logger }) => {
-        const root = fileURLToPath(clientDir);
+        const root = output.clientDirectory();
         const files = await collectSvgs(root);
 
         let before = 0;
@@ -95,12 +96,8 @@ export default function svgOptimizerIntegration(): AstroIntegration {
           `Optimized ${rewritten}/${files.length} SVGs: ${formatKb(before)} to ${formatKb(after)} (saved ${formatKb(saved)}, ${((saved / before) * 100).toFixed(1)}%)`,
         );
       },
-      "astro:config:done": ({ config }) => {
-        // Adapter 15 moves client assets before the integration build:done hooks.
-        clientDir = new URL(
-          ".cloudflare/output/v0/workers/default/assets/",
-          config.root,
-        );
+      "astro:config:setup": ({ updateConfig }) => {
+        updateConfig({ vite: { plugins: [output.plugin] } });
       },
     },
     name: "svg-optimizer",

@@ -14,6 +14,7 @@ import { tmpdir } from "node:os";
 import Path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { captureBuildOutput } from "../scripts/build-output.ts";
 import { auditArtifacts } from "./node/audit.ts";
 import {
   readMetadata,
@@ -31,7 +32,7 @@ const hash = (text: string) => createHash("sha256").update(text).digest("hex");
 export default function trackerData(): AstroIntegration {
   let database = Path.join(here, "tracker.db");
   let buildDirectory: string | undefined;
-  let output = "";
+  const buildOutput = captureBuildOutput();
   const plugin: Plugin = {
     // Vite: DB writes are not reload signals; only explicit revision notifications are.
     config() {
@@ -130,6 +131,7 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
     hooks: {
       // Astro: seal and audit final deployable artifacts, then release the build snapshot.
       "astro:build:done": () => {
+        const output = buildOutput.workerDirectory();
         const files: { file: string; sha256: string }[] = [];
         const walk = (directory: string) => {
           const entries = readdirSync(directory, { withFileTypes: true });
@@ -174,11 +176,8 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
         if (buildDirectory)
           rmSync(buildDirectory, { force: true, recursive: true });
       },
-      // Astro: consume resolved paths and let Astro manage generated virtual-module types.
-      "astro:config:done": ({ config, injectTypes }) => {
-        output = fileURLToPath(
-          new URL(".cloudflare/output/v0/workers/default/", config.root),
-        );
+      // Astro: let the framework manage generated virtual-module types.
+      "astro:config:done": ({ injectTypes }) => {
         const source = readFileSync(
           new URL("virtual.d.ts", import.meta.url),
           "utf8",
@@ -215,7 +214,9 @@ export const metadataHash = ${JSON.stringify(hash(json))};`;
             rmSync(cleanupDirectory, { force: true, recursive: true }),
           );
         }
-        updateConfig({ vite: { plugins: [plugin, sqliteBoundary()] } });
+        updateConfig({
+          vite: { plugins: [buildOutput.plugin, plugin, sqliteBoundary()] },
+        });
       },
     },
     name: "tracker-data",

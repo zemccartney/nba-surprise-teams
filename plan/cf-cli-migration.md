@@ -87,6 +87,75 @@ one explicit temporary dependency patch until upstream publishes the fix.
 - Recheck full output and guards in CI/Linux, not just this Mac.
 - Review the explicit Astro patch tradeoff before merge.
 
+## Requested follow-up pass
+
+- [x] Latest-season Showdown returns to Home; archived seasons keep detail links.
+- [x] Integrations read final Vite output paths; standalone commands share cf layout.
+- [x] Put Astro patch monitoring at the top of follow-ups.
+- [x] Trace the Docker probe and verify static prerendering; document hosted checks.
+- [x] Run tests, types, production/preview builds and output guards. No deployment.
+      Both final builds pass: **279 tests / 37 files**, zero type errors/warnings,
+      343 prerendered pages, 423 audited artifacts. Both cold-start island orders
+      also pass. Generated HTML confirms 2026 Showdown links home while 2025
+      Showdown links to its season detail. Self-review only; no subagent available.
+
+### Output path follow-up
+
+`scripts/build-output.ts` retains the resolved Vite configuration and reads its
+client/SSR paths only when build hooks run, after Cloudflare's configResolved
+mutations. SVG optimization consumes the actual client directory; cleanup and
+auditing verify the expected sibling assets/bundle layout before touching files.
+Standalone deployment guards/audit share the cf v0 layout in that same module.
+
+Sentry's Astro integration independently defaults to `dist/**/*`, so it also
+needed an explicit upload glob targeting the shared cf worker directory.
+Its string-only glob setting is evaluated before Vite resolution. All environments
+scan both assets and bundle, with map deletion still delayed until all uploads
+finish. Configuration coverage passes; real upload/mapping remains a hosted gate.
+
+### Docker diagnostic
+
+An instrumented local build traced the stderr line to the beta Cloudflare Vite
+plugin's `buildAndWriteContainerOutput → cleanupPreviousBuildOutputImageTags`.
+It invokes `docker image ls --filter reference=cloudflare-build/<project-hash>/*`
+even with no configured containers. The listing failure is caught, but Docker's
+stderr is printed. This is upstream container cleanup, not containerized Astro
+rendering and not a Docker requirement for this project. No extra dependency
+patch or stderr suppression was added.
+
+### Static versus server output
+
+The actual build logs distinguish `output: "static"` from `mode: "server"`.
+Astro's adapter registration selects a server build; the timings footer labels
+that build mode as output. The installed adapter does not change the configured
+static prerender default. Both contexts emit **343 HTML pages** (including Home,
+season details, and Showdown) alongside the runtime Worker for islands/actions.
+The Cloudflare framework guide's blanket claim about forcing `output: server`
+does not describe this installed Astro 7.4 / adapter 15 configuration.
+
+### Hosted preview / Sentry checklist (requires approval)
+
+1. Commit the reviewed changes, then explicitly approve a branch push. Any branch
+   push triggers CI deployment; keep this off main. No production promotion yet.
+2. Let Linux CI install the patched frozen lockfile, build with the preview
+   context and Sentry secrets, pass the isolation guard, upload source maps,
+   and deploy the inspected prebuilt output as a native branch Preview.
+3. Inspect the actual hosted Preview bindings/domain configuration: preview KV
+   only, no production domains. Check preview canonical URLs, static pages,
+   images, latest/archived Showdown back links, and server-island loading.
+4. Verify a genuinely fresh NBA schedule fetch through the deployed loader, not
+   merely a previously seeded cache hit. Do not delete production KV keys.
+   If the UI cannot exercise a fresh fetch, agree on a scoped preview-only probe.
+5. Send clearly labelled browser and Worker test errors on Preview. Use a bundled
+   application frame for source-map proof; a browser-console throw alone only
+   proves ingestion. Check event environment/release/debug IDs, original source
+   file/line mapping, and absence of missing-sourcemap processing errors.
+   A deliberate Worker error may need a temporary authenticated preview-only
+   probe, following the existing hosted-cutover controls.
+6. Remove any temporary probe/secret/keys, republish Preview, verify cleanup,
+   and record event IDs and CI/deployment evidence. Only then discuss approval
+   for production promotion; successful uploads alone are not mapping proof.
+
 ## Review
 
 Self-review only (no subagent tool available). Confirmed generated preview uses

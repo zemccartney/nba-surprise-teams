@@ -1,5 +1,23 @@
 # Follow-up work
 
+## Monitor first: temporary Astro server-island patch
+
+Track [Astro #18387](https://github.com/withastro/astro/issues/18387) and
+[PR #18399](https://github.com/withastro/astro/pull/18399). We currently patch
+Astro 7.4.0 to prevent the second distinct server-island page from failing in dev.
+This is a real maintenance obligation, not a frictionless dependency upgrade.
+Once a published release includes the fix, remove the patch and rerun both
+cold-start request orders, the full test suite, and production/preview builds.
+See [patch rationale and removal steps](../patches/README.md).
+
+## Cloudflare beta Docker cleanup noise
+
+The Vite plugin lists old project-scoped Docker images during every build, even
+without containers. A stopped daemon prints stderr although the failure is
+caught and builds succeed. No Docker service is needed here. Recheck upstream
+when upgrading the plugin; do not add a second dependency patch just to silence
+it. [Trace and context](cf-cli-migration.md#docker-diagnostic).
+
 ## Floating navigation — idea
 
 Explore floating/persistent navigation on long pages, especially Archive and

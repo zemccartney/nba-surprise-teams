@@ -4,6 +4,7 @@ import { defineConfig, envField, fontProviders } from "astro/config";
 import { loadEnv } from "vite";
 
 import trackerData from "./data/integration.ts";
+import { workerOutputDirectory } from "./scripts/build-output.ts";
 import cleanBuildSourcemapsIntegration from "./scripts/clean-build-sourcemaps.ts";
 import svgOptimizer from "./svg-optimizer/integration.ts";
 
@@ -83,7 +84,10 @@ export default defineConfig({
             // withSentry initializes the Worker; src/middleware.ts adds Astro context.
             enabled: { client: true, server: false },
             sourcemaps: {
-              // All Vite environments scan dist; keep earlier maps for later uploads.
+              // Sentry's Astro default scans dist, not cf Build Output. Its glob
+              // option is evaluated before Vite resolves the final directories.
+              assets: [`${workerOutputDirectory()}/{assets,bundle}/**/*`],
+              // Keep earlier environments' maps until every upload completes.
               // The final Astro hook removes them before the artifact audit seal.
               filesToDeleteAfterUpload: [],
             },

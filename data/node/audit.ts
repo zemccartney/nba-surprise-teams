@@ -5,6 +5,8 @@ import { readdirSync, readFileSync } from "node:fs";
 import Path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { workerOutputDirectory } from "../../scripts/build-output.ts";
+
 const reportSchema = z.object({
   files: z.array(z.object({ file: z.string(), sha256: z.string().length(64) })),
   metadataHash: z.string().length(64),
@@ -64,5 +66,5 @@ if (
   Path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 )
   console.log(
-    `Artifact audit: ${auditArtifacts(Path.resolve(process.argv[2] ?? ".cloudflare/output/v0/workers/default"))} files; no deployable SQLite or archived game identities in Worker`,
+    `Artifact audit: ${auditArtifacts(Path.resolve(process.argv[2] ?? workerOutputDirectory()))} files; no deployable SQLite or archived game identities in Worker`,
   );

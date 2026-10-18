@@ -3,6 +3,11 @@ import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import Path from "node:path";
 
+import {
+  cloudflareOutputDirectory,
+  workerOutputDirectory,
+} from "./build-output.ts";
+
 const workerSchema = z
   .object({
     compatibilityDate: z.literal("2026-09-10"),
@@ -60,7 +65,7 @@ export function assertDeploymentOutput(
   );
 }
 
-export function readDeploymentOutput(directory = ".cloudflare/output/v0") {
+export function readDeploymentOutput(directory = cloudflareOutputDirectory) {
   assert.deepEqual(
     readdirSync(Path.join(directory, "workers")),
     ["default"],
@@ -72,7 +77,7 @@ export function readDeploymentOutput(directory = ".cloudflare/output/v0") {
     ),
     worker: JSON.parse(
       readFileSync(
-        Path.join(directory, "workers/default/worker.config.json"),
+        Path.join(workerOutputDirectory(directory), "worker.config.json"),
         "utf8",
       ),
     ),

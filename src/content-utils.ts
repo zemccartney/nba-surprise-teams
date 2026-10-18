@@ -17,6 +17,8 @@ export interface LoaderResponse {
 }
 
 export const getLatestSeason = () => catalog.getLatestSeason();
+export const getSeasonOverviewHref = (seasonId: string) =>
+  seasonId === getLatestSeason().id ? "/" : `/${seasonId}/`;
 export const sortSeasons = (
   seasons: Season[],
   { direction = "desc" }: { direction?: "asc" | "desc" } = {},
