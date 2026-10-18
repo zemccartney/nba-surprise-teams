@@ -162,6 +162,32 @@ and the global timeout. No application or deployment gate is bypassed.
    and record event IDs and CI/deployment evidence. Only then discuss approval
    for production promotion; successful uploads alone are not mapping proof.
 
+## Hosted execution log
+
+- `e95801e` / CI `39097244385`: Linux install, 279 tests, build, two Sentry
+  source-map uploads and delayed deletion of 83 maps all pass. Native Preview
+  deployed as `a8c0a450-7a74-4407-a441-447cc0ba94a7`.
+- API inspection confirms only preview KV `6a0d30705c634691873dd1dd122969e3`
+  and `PUBLIC_DEPLOY_ENV=preview`; Preview exposes only workers.dev URLs.
+  Production remains on `749faac0-00e2-4628-9b8d-4ccf2f48a8d5`, deployed before
+  this verification pass.
+- Hosted Chromium: Home, 2026 detail, 2026/2025 Showdown, all eager images,
+  islands and Home→Showdown→Back→Home pass without browser/HTTP errors.
+  The site's URL metadata uses `og:url`, not a canonical link element; all
+  four URLs point at this Preview. No new SEO behavior was introduced.
+- Temporary probe: two non-prerendered routes, preview-binding gate, two-hour
+  expiry and SHA-256 validation of a random 256-bit bearer. Only the hash is
+  committed; the token stays in a mode-0600 local temporary file. No extra
+  Cloudflare secret/binding or diagnostic KV key is needed. Seven gate tests
+  cover correct/wrong/missing tokens, non-preview environments and expiry.
+  Fresh NBA verification calls the real loader directly, bypassing KV without
+  clearing any season cache. Browser and Worker errors originate in bundled
+  source; Worker event request data is stripped. Remove all probe code/tests
+  and the local token after capture.
+- Sentry event read credentials are unavailable locally. Successful uploads and
+  ingestion will not be claimed as source-mapping proof; request exported events
+  from the owner if dashboard/API inspection cannot be performed.
+
 ## Review
 
 Self-review only (no subagent tool available). Confirmed generated preview uses
