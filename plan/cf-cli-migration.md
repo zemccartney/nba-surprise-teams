@@ -133,7 +133,13 @@ season details, and Showdown) alongside the runtime Worker for islands/actions.
 The Cloudflare framework guide's blanket claim about forcing `output: server`
 does not describe this installed Astro 7.4 / adapter 15 configuration.
 
-### Hosted preview / Sentry checklist (requires approval)
+### Hosted preview / Sentry checklist (approved for this branch)
+
+Owner approved this hosted verification pass. Initial commit `74a4334` was pushed.
+CI run `39097109237` stopped before deployment: the existing SQLite CLI test
+completed its assertions in 5.138 seconds but exceeded Vitest's five-second limit.
+Ruling: give only that subprocess-heavy test 15 seconds; preserve all assertions
+and the global timeout. No application or deployment gate is bypassed.
 
 1. Commit the reviewed changes, then explicitly approve a branch push. Any branch
    push triggers CI deployment; keep this off main. No production promotion yet.

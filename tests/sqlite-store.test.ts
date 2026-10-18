@@ -123,7 +123,8 @@ describe("SQLite operational contracts", () => {
     expect(stale.stderr).toContain("dump drift (check-staged)");
     git("add", "data/dump.sql");
     expect(cli("check-staged").status).toBe(0);
-  });
+    // Thirteen real Node CLI launches exceeded 5s on the Linux CI runner.
+  }, 15_000);
   it.each([
     [
       "unknown season",
