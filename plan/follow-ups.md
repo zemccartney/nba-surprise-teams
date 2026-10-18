@@ -10,6 +10,20 @@ Once a published release includes the fix, remove the patch and rerun both
 cold-start request orders, the full test suite, and production/preview builds.
 See [patch rationale and removal steps](../patches/README.md).
 
+## Astro browser source maps — revisit next project session
+
+Owner accepts deferring this quirk; **do not add another dependency patch**.
+Sentry resolves bundled browser errors to readable code in Astro's extracted
+`<script>` module, but not to the original `.astro` line number (the hosted probe
+reported extracted line 4 instead of authored line 39). Worker mapping is exact.
+The installed Astro script loader returns extracted code without an accompanying
+map back to its containing file; the version/regression boundary is unproven.
+
+When returning to the project, reproduce in a minimal Astro build, check upstream
+fixes/reports, and verify whether a separate `.ts` module avoids the missing
+mapping step. No application rewrite is needed now. See
+[processed Sentry evidence](cf-hosted-verification.md#sentry-evidence--receipt-and-symbolication-confirmed).
+
 ## Cloudflare beta Docker cleanup noise
 
 The Vite plugin lists old project-scoped Docker images during every build, even

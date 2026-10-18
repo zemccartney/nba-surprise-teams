@@ -43,12 +43,13 @@ was injected only into the diagnostic document request, not Sentry requests.
 [Diagnostic CI 39097666778](https://github.com/zemccartney/nba-surprise-teams/actions/runs/39097666778)
 passed 286 tests, uploaded maps twice and removed 92 maps after all uploads.
 
-## Sentry evidence — mapping still pending
+## Sentry evidence — receipt and symbolication confirmed
 
 Both probes report an enabled client, `environment=preview`, successful flush,
 and release `b4752d597b2defa525cc0827f2138b6e7277acab`, matching the CI upload.
-The browser's Sentry envelope responses were HTTP 200. Worker capture/flush
-is not independently confirmed receipt or symbolication.
+The owner confirmed both events in the dashboard and supplied their processed
+JSON exports. Both match the expected release/environment and have
+`symbolicated_in_app=true`; neither export reports processing errors.
 
 | Probe   | Event ID                           | Expected original application frame          |
 | ------- | ---------------------------------- | -------------------------------------------- |
@@ -60,12 +61,26 @@ Markers:
 - `NBASTT cf migration worker smoke 2026-10-18T04:38:12.202Z`
 - `NBASTT cf migration browser smoke 2026-10-18T04:38:14.038Z`
 
-**Required next:** inspect/export these two events from Sentry organization
-`grepco`, project `nba-surprise-team-tracker`. Confirm original application
-file/line mapping, debug-ID resolution, correct release/environment and no
-missing-sourcemap processing errors. Event-read credentials are unavailable
-locally; successful uploads and ingestion are not claimed as mapping proof.
-Probe removal does not prevent inspecting these events and their uploaded maps.
+**Processed export findings:**
+
+- Worker: all ten frames are symbolicated via debug IDs. The application error
+  resolves exactly to `src/pages/migration-check/worker.ts:52:36`, with the
+  expected `Sentry.captureException(new Error(marker))` source statement.
+- Browser: both frames are symbolicated via debug IDs. The application frame
+  identifies `src/pages/migration-check/browser.astro` and shows the correct
+  error statement with readable surrounding code. **Line-number caveat:** it
+  reports `4:46` in the extracted `?astro&type=script&index=0&lang.ts` module,
+  not line 39 of the original `.astro` file. This verifies usable source mapping,
+  but not original-file line-number fidelity for inline Astro scripts.
+- Both resolve using uploaded artifact bundle `542472131`; no network scraping
+  was needed. There are no reported missing-sourcemap processing errors.
+- These were explicitly captured, handled smoke errors; they do not newly prove
+  automatic capture of unhandled errors.
+
+Receipt and uploaded-map symbolication are verified. Original `.astro` browser
+line-number fidelity remains a known limitation to consider before promotion;
+this evidence does not establish when that limitation was introduced. Only this
+technical summary is retained, not the exports' IP addresses or other personal data.
 
 ## Cleanup / promotion gate
 
@@ -78,7 +93,20 @@ Probe removal does not prevent inspecting these events and their uploaded maps.
       all build gates pass. Both probe URLs serve the normal HTML 404 page;
       normal browser smoke checks still pass. API inspection confirms preview
       KV isolation and unchanged production version, KV and both custom domains.
-- [ ] Inspect the two Sentry event exports before considering production.
+- [x] Inspect both received Sentry event exports; findings and browser line-number
+      limitation are documented above.
+- [x] Owner accepted deferring the browser mapping quirk without another patch
+      and explicitly authorized production promotion after reviewing the beta
+      tooling, existing Astro patch and unchanged dependency-audit findings.
+
+## Production promotion — authorized
+
+Merge the reviewed branch through a PR; main CI must build fresh production
+output and pass production KV/domain guards before publication. After deploying,
+check both custom domains, live islands/images/navigation and actual Worker
+bindings. Do not reuse Preview artifacts. Rollback reference: Worker version
+`749faac0-00e2-4628-9b8d-4ccf2f48a8d5`, prior main commit `bad7a99`.
+Production deployment results will be reported from CI and hosted checks.
 
 CI also reports existing mise-action Node 20 deprecation and the upcoming
 ubuntu-latest image migration. Neither blocked this run; neither was silently

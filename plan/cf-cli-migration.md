@@ -82,12 +82,14 @@ one explicit temporary dependency patch until upstream publishes the fix.
 
 - Approved branch Preview publication and Linux CI checks have passed, including
   hosted resource isolation, URL metadata, fresh NBA fetching and Sentry uploads.
-- Confirm the two received Sentry events map to original source lines. Local
-  event-read credentials are unavailable; owner exports are needed.
+- Owner exports confirm both Sentry events received and symbolicated via debug
+  IDs with matching release/environment and no reported processing errors.
+  Worker maps exactly to the original source line; browser maps to the correct
+  extracted Astro script statement, but not its original `.astro` line number.
 - Diagnostic cleanup and final hosted rechecks passed. See the
   [hosted verification record](cf-hosted-verification.md) for event IDs and
-  evidence. Source mapping remains the only unverified hosted gate.
-- Review the explicit Astro patch tradeoff before merge.
+  evidence. Consider the browser line-number limitation and explicit Astro patch
+  tradeoff before approving merge/production promotion.
 
 ## Requested follow-up pass
 
