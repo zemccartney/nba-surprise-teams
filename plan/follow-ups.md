@@ -1,5 +1,52 @@
 # Follow-up work
 
+## Monitor first: temporary Astro server-island patch
+
+Track [Astro #18387](https://github.com/withastro/astro/issues/18387) and
+[PR #18399](https://github.com/withastro/astro/pull/18399). We currently patch
+Astro 7.4.0 to prevent the second distinct server-island page from failing in dev.
+This is a real maintenance obligation, not a frictionless dependency upgrade.
+Once a published release includes the fix, remove the patch and rerun both
+cold-start request orders, the full test suite, and production/preview builds.
+See [patch rationale and removal steps](../patches/README.md).
+
+## Astro browser source maps — revisit next project session
+
+Owner accepts deferring this quirk; **do not add another dependency patch**.
+Sentry resolves bundled browser errors to readable code in Astro's extracted
+`<script>` module, but not to the original `.astro` line number (the hosted probe
+reported extracted line 4 instead of authored line 39). Worker mapping is exact.
+The installed Astro script loader returns extracted code without an accompanying
+map back to its containing file; the version/regression boundary is unproven.
+
+When returning to the project, reproduce in a minimal Astro build, check upstream
+fixes/reports, and verify whether a separate `.ts` module avoids the missing
+mapping step. No application rewrite is needed now. See
+[processed Sentry evidence](cf-hosted-verification.md#sentry-evidence--receipt-and-symbolication-confirmed).
+
+## Cloudflare beta Docker cleanup noise
+
+The Vite plugin lists old project-scoped Docker images during every build, even
+without containers. A stopped daemon prints stderr although the failure is
+caught and builds succeed. No Docker service is needed here. Recheck upstream
+when upgrading the plugin; do not add a second dependency patch just to silence
+it. [Trace and context](cf-cli-migration.md#docker-diagnostic).
+
+## Floating navigation — idea
+
+Explore floating/persistent navigation on long pages, especially Archive and
+Showdown, to keep the color-mode toggle within easy reach. Preserved from the
+retired `10-3-prep.md`; no implementation decision yet.
+
+## Astro / Cloudflare maintenance burden — deferred architecture inquiry
+
+Season launch is complete; no significant refactor now. Resume with a separate
+**grilling session**, then a bounded architecture-alternatives investigation
+focused on explicit boundaries and low-effort maintenance—not an open-ended CDN
+403 chase. The immediate task is only a small local Showdown workaround.
+
+[Owner's full account, concern summary, evidence, and questions to revisit](astro-cloudflare-maintenance-follow-up.md).
+
 ## Dependency security checks — implemented
 
 `pnpm audit` now checks production, development and optional dependencies:

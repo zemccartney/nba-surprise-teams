@@ -56,9 +56,9 @@ it("pairs Worker initialization with the SDK's Astro middleware", () => {
     'export { onRequest } from "@sentry/astro/middleware"',
   );
   expect(middleware).not.toContain("wrapRequestHandler");
-  const wrangler = readFileSync(
-    new URL("../wrangler.jsonc", import.meta.url),
+  const cloudflare = readFileSync(
+    new URL("../cloudflare.config.ts", import.meta.url),
     "utf8",
   );
-  expect(wrangler).toContain('"main": "./sentry.server.config.ts"');
+  expect(cloudflare).toContain('entrypoint: "./sentry.server.config.ts"');
 });

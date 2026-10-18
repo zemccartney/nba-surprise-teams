@@ -79,6 +79,12 @@ string mocks rather than hiding incompatible framework types behind casts. Run t
 See [the test/tooling review](../plan/new-season-sweep/prelaunch-review/test-tooling-gates.md)
 for the fresh/stale/missing-game and watch-mode negative controls.
 
+`mise x -- pnpm run test:dev-islands` is a separate real-app dev regression for
+Astro #18387, not part of Vitest. It cold-starts twice and requests Home/2026
+Showdown in both orders. Run with the 2026 candidate data restored and no other
+dev/build/test process. It does not execute browser island fetches or contact NBA.
+See [the temporary upstream patch](../patches/README.md).
+
 Browser regressions remain in the standalone `plan/baseline` module. See its
 README for dev/preview commands. `tanstack-application.mjs` checks the current
 application, image alternatives, interaction, colors and resize persistence.

@@ -1,6 +1,6 @@
 // Adapter 14 dropped Astro.locals.runtime. Locals now carries only cfContext
 // (the ExecutionContext, used by the Sentry middleware); bindings come from
-// `cloudflare:workers`, typed by the generated worker-configuration.d.ts.
+// `cloudflare:workers`, typed by the generated .cloudflare/types/index.d.ts.
 // https://docs.astro.build/en/guides/integrations-guide/cloudflare/#typing
 
 type Runtime = import("@astrojs/cloudflare").Runtime;

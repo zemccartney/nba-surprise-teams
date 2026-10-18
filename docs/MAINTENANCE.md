@@ -3,6 +3,51 @@
 For exact commands, recovery and refresh semantics, see [data/README.md](../data/README.md).
 For the system anatomy, open [data-system.html](data-system.html).
 
+## Local Showdown workaround: copy preview KV
+
+If local workerd receives NBA CDN 403s while the deployed preview works, seed
+local KV with a validated preview snapshot. No application-code change is needed.
+This is development data, not proof that local upstream fetching works.
+
+1. Start `mise x -- pnpm start` and wait for it to be ready. **Start first:**
+   that command deletes `.cloudflare/state`, including previously seeded local KV.
+2. Visit the preview Showdown page so its schedule key exists. In another terminal,
+   from the repository root, run:
+
+   ```sh
+   mise run kv:seed-preview
+   ```
+
+3. Reload local `/2026/showdown/` (disable browser caching if necessary).
+
+The task selects the latest season, downloads its `<season>:schedule` key to a
+temporary file, writes it into local KV, and removes the file. A failed download
+stops the task before the local write. Its source ID is the **preview** namespace
+in `cloudflare.config.ts`; keep the task's IDs in sync if bindings change. Remote
+is read-only here; the write explicitly uses `--local`, the base binding's namespace
+ID, and `--persist-to .cloudflare/state`. In cf, API commands are remote by default;
+there is no `--remote` flag needed. Without `--persist-to`, local API commands use
+cf's shared user-level state instead of this app's state. Preview branches share
+their remote cache. Normal cf authentication is required for the read.
+
+The application still validates the version envelope, season, and schedule schema.
+A missing, incompatible, or malformed snapshot will not fix the page. Preview and
+local candidate lists and cache versions should match. Keep the downloaded JSON
+out of Git; it is disposable runtime data, not the canonical SQL dataset.
+
+Expiry is preserved. While fresh, the snapshot avoids an NBA request. Once stale,
+the app tries to refresh; if NBA access still fails, the existing outage fallback
+renders the cached schedule without a fresh HTTP lifetime. You may see 403 logs;
+recopy when you need updated data. Do not fake a future expiry to imply freshness.
+The results-only key (`2026`) is separate and is not populated by this operation.
+
+Verified 2026-10-17 against actual local Astro/workerd: a fresh preview copy
+rendered the standings and calendar with HTTP 200; an intentionally expired local
+copy also rendered successfully through the outage fallback. The original expiry
+was restored afterward. No remote KV entries were changed or deleted.
+See [the deferred architecture inquiry](../plan/astro-cloudflare-maintenance-follow-up.md)
+for the broader concern and investigation evidence.
+
 ## Intuition and Principles
 
 Intuition: We can favor self-reliance, thereby reducing complexity and surface area for errors, because the data at play is eventually static (games end, seasons end, results are final, historical facts). When there's no possibility of new data (out-of-season, but more commonly, in-season and we can tell by looking at the schedule that there haven't been new results since last poll), serve the system's records of data.

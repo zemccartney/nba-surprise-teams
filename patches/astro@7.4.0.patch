@@ -1,0 +1,34 @@
+diff --git a/dist/core/server-islands/vite-plugin-server-islands.js b/dist/core/server-islands/vite-plugin-server-islands.js
+index a8e32847a4e2402ffd640eb5682ea25d938ea3ae..6f14fcdd506c70af99e541b8f2c7d5cd04cbb4cf 100644
+--- a/dist/core/server-islands/vite-plugin-server-islands.js
++++ b/dist/core/server-islands/vite-plugin-server-islands.js
+@@ -1,7 +1,7 @@
+ import { ASTRO_VITE_ENVIRONMENT_NAMES } from "../constants.js";
+ import { AstroError, AstroErrorData } from "../errors/index.js";
+ export const SERVER_ISLAND_MANIFEST = "virtual:astro:server-island-manifest";
+-const RESOLVED_SERVER_ISLAND_MANIFEST = "\0" + SERVER_ISLAND_MANIFEST;
++export const RESOLVED_SERVER_ISLAND_MANIFEST = "\0" + SERVER_ISLAND_MANIFEST;
+ const serverIslandPlaceholderMap = "'$$server-islands-map$$'";
+ const serverIslandPlaceholderNameMap = "'$$server-islands-name-map$$'";
+ export const SERVER_ISLAND_MAP_MARKER = "$$server-islands-map$$";
+diff --git a/dist/vite-plugin-css/index.js b/dist/vite-plugin-css/index.js
+index fc32c5e84aabf5352ee7f1ba18a1c5be725e43fa..3ccd1f8f57b1a21407cf7c01409f4b96b8b143f0 100644
+--- a/dist/vite-plugin-css/index.js
++++ b/dist/vite-plugin-css/index.js
+@@ -1,5 +1,6 @@
+ import { prependForwardSlash } from "@astrojs/internal-helpers/path";
+ import { ASTRO_VITE_ENVIRONMENT_NAMES } from "../core/constants.js";
++import { RESOLVED_SERVER_ISLAND_MANIFEST } from "../core/server-islands/vite-plugin-server-islands.js";
+ import { wrapId } from "../core/util.js";
+ import { inlineRE, isBuildableCSSRequest, rawRE } from "../vite-plugin-astro-server/util.js";
+ import { getVirtualModulePageNameForComponent } from "../vite-plugin-pages/util.js";
+@@ -37,6 +38,9 @@ async function ensureModulesLoaded(env, mod, seen = new Set()) {
+ 		// page's module graph, fetching their CSS dependencies. This is the dev-mode
+ 		// counterpart of isBuildCssBoundary in plugin-css.ts. See #18060, #16116.
+ 		if (imp.id.startsWith(VIRTUAL_PAGE_RESOLVED_MODULE_ID)) continue;
++		// Leave manifest refresh to the module runner; this module contains no CSS.
++		// https://github.com/withastro/astro/pull/18399
++		if (imp.id === RESOLVED_SERVER_ISLAND_MANIFEST) continue;
+ 		// Skip virtual dev-css modules to prevent circular deadlocks with the Cloudflare adapter.
+ 		// The dev-css-all module statically imports all per-route dev-css:* modules, and those
+ 		// modules' load handlers may already be running (waiting on ensureModulesLoaded), causing

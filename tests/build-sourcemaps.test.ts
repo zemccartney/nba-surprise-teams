@@ -60,13 +60,17 @@ describe("build source map lifecycle", () => {
       readFileSync(new URL("../package.json", import.meta.url), "utf8"),
     ) as { scripts: { build: string } };
     expect(pkg.scripts.build).toContain(
-      "astro build && node data/node/audit.ts",
+      "astro build --timings && node data/node/audit.ts",
     );
     const config = readFileSync(
       new URL("../astro.config.mjs", import.meta.url),
       "utf8",
     );
     expect(config).toContain("filesToDeleteAfterUpload: []");
+    // Sentry otherwise defaults to Astro's stale dist/**/* path.
+    expect(config).toContain(
+      "assets: [`${workerOutputDirectory()}/{assets,bundle}/**/*`],",
+    );
     expect(config).toContain("cleanBuildSourcemapsIntegration(),");
     expect(config.indexOf("cleanBuildSourcemapsIntegration(),")).toBeLessThan(
       config.indexOf("trackerData(),"),

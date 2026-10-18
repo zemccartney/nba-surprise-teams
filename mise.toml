@@ -34,13 +34,30 @@ run = [
   "pnpm install --frozen-lockfile",
   # A no-op pnpm install can skip postinstall; setup still requests a fresh audit.
   "pnpm run audit",
-  "pnpm exec wrangler types",
+  "pnpm exec cf workers types",
   "hk install --mise",
 ]
 
 [tasks.fix]
 description = "Run every check, applying fixes where a fixer exists"
 run = "hk fix --all"
+
+[tasks."kv:seed-preview"]
+description = "Copy the latest season's preview Showdown cache into local KV (run after pnpm start)"
+dir = "{{config_root}}"
+# Band-aid for local workerd's NBA fetching failures; remote KV is read-only.
+run = '''
+set -eu
+season=$(node data/cli.ts latest-season)
+snapshot=$(mktemp "${TMPDIR:-/tmp}/nba-preview-schedule.XXXXXX")
+trap 'rm -f "$snapshot"' EXIT
+# Namespace IDs from cloudflare.config.ts; local writes must use the base binding's ID.
+pnpm exec cf kv keys get "${season}:schedule" \
+  --namespace-id 6a0d30705c634691873dd1dd122969e3 > "$snapshot"
+pnpm exec cf kv keys put "${season}:schedule" \
+  --namespace-id 6061594acc5c4fb6b3846b0c78f9e5a3 \
+  --local --persist-to .cloudflare/state --file "$snapshot"
+'''
 
 [tasks.data]
 description = "Generic dispatch for data commands; requires subcommand e.g. mise run data -- cmd (see data/README.md)"

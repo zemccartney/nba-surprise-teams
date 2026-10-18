@@ -1,73 +1,93 @@
 import { describe, expect, it } from "vitest";
 
 import { assertPreviewTarget } from "../scripts/assert-preview-target";
+import { assertProductionTarget } from "../scripts/assert-production-target";
 
-const previews = {
-  kv_namespaces: [
-    { binding: "GAMES_KV", id: "6a0d30705c634691873dd1dd122969e3" },
-  ],
-  vars: { PUBLIC_DEPLOY_ENV: "preview" },
-};
-const config = {
-  // Native Preview publishing must select previews, not these production settings.
-  kv_namespaces: [
-    { binding: "GAMES_KV", id: "6061594acc5c4fb6b3846b0c78f9e5a3" },
-  ],
+const preview = {
+  compatibilityDate: "2026-09-10",
+  domains: [],
+  env: {
+    ASSETS: { type: "assets" },
+    GAMES_KV: { id: "6a0d30705c634691873dd1dd122969e3", type: "kv" },
+    PUBLIC_DEPLOY_ENV: { type: "text", value: "preview" },
+  },
   name: "nba-surprise-teams",
-  previews,
+  previewUrls: true,
+  workersDev: true,
 };
+const production = {
+  ...preview,
+  domains: ["nbastt.grepco.net", "nba-surprise-teams.grepco.net"],
+  env: {
+    ASSETS: { type: "assets" },
+    GAMES_KV: { id: "6061594acc5c4fb6b3846b0c78f9e5a3", type: "kv" },
+  },
+};
+const context = { buildContext: { isPreview: true, mode: "production" } };
+const prodContext = { buildContext: { isPreview: false, mode: "production" } };
 
-describe("generated native Preview target guard", () => {
-  it("accepts preview KV independent of production bindings", () => {
-    expect(() => assertPreviewTarget(config)).not.toThrow();
+describe("cf Build Output target guards", () => {
+  it("accepts isolated preview and approved production output", () => {
+    expect(() => assertPreviewTarget(preview, context)).not.toThrow();
+    expect(() => assertProductionTarget(production, prodContext)).not.toThrow();
   });
+
   it.each([
     undefined,
     {},
-    { ...config, name: "nbastt-preview" },
-    { ...config, previews: undefined },
-    { ...config, previews: { ...previews, kv_namespaces: [] } },
+    production,
+    { ...preview, name: "other" },
+    { ...preview, domains: production.domains },
+    { ...preview, routes: ["example.com/*"] },
+    { ...preview, env: { ...preview.env, GAMES_KV: production.env.GAMES_KV } },
     {
-      ...config,
-      previews: { ...previews, kv_namespaces: config.kv_namespaces },
-    },
-    {
-      ...config,
-      previews: {
-        ...previews,
-        kv_namespaces: [...previews.kv_namespaces, ...previews.kv_namespaces],
+      ...preview,
+      env: {
+        ...preview.env,
+        SECRET: { service: "production", type: "service" },
       },
     },
     {
-      ...config,
-      previews: {
-        ...previews,
-        kv_namespaces: [
-          { ...previews.kv_namespaces[0], preview_id: "production" },
-        ],
+      ...preview,
+      env: {
+        ...preview.env,
+        PUBLIC_DEPLOY_ENV: { type: "text", value: "production" },
       },
     },
     {
-      ...config,
-      previews: { ...previews, vars: { PUBLIC_DEPLOY_ENV: "production" } },
-    },
-    { ...config, previews: { ...previews, vars: undefined } },
-    {
-      ...config,
-      previews: {
-        ...previews,
-        vars: { PUBLIC_DEPLOY_ENV: "preview", UNREVIEWED: "value" },
+      ...preview,
+      env: {
+        ...preview.env,
+        GAMES_KV: { ...preview.env.GAMES_KV, dev: { remote: true } },
       },
     },
-    { ...config, previews: { ...previews, routes: ["nbastt.grepco.net/*"] } },
+  ])("rejects unsafe preview output %#", (value) => {
+    expect(() => assertPreviewTarget(value, context)).toThrow();
+  });
+
+  it.each([
+    undefined,
+    {},
+    prodContext,
+    { buildContext: { isPreview: true, mode: "development" } },
+  ])("rejects wrong or missing preview build context %#", (value) => {
+    expect(() => assertPreviewTarget(preview, value)).toThrow();
+  });
+
+  it.each([
+    preview,
+    { ...production, domains: [production.domains[0], production.domains[0]] },
+    { ...production, domains: [] },
+    { ...production, workersDev: false },
     {
-      ...config,
-      previews: {
-        ...previews,
-        services: [{ binding: "PROD", service: "production" }],
-      },
+      ...production,
+      env: { ...production.env, GAMES_KV: preview.env.GAMES_KV },
     },
-  ])("rejects unsafe or incomplete Preview settings %#", (value) => {
-    expect(() => assertPreviewTarget(value)).toThrow("Refusing to publish");
+  ])("rejects unsafe production output %#", (value) => {
+    expect(() => assertProductionTarget(value, prodContext)).toThrow();
+  });
+
+  it("rejects preview-marked output for production even with production bindings", () => {
+    expect(() => assertProductionTarget(production, context)).toThrow();
   });
 });

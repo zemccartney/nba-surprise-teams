@@ -30,7 +30,9 @@ const seasonLabel = ContentUtils.abbreviateSeasonRange(season, {
 >
   <div class="showdown-page">
     <nav aria-label="Season" class="season-navigation">
-      <Link href={`/${season.id}/`}>Back to {seasonLabel} Season</Link>
+      <Link href={ContentUtils.getSeasonOverviewHref(season.id)}>
+        Back to {seasonLabel} Season
+      </Link>
     </nav>
     <header class="showdown-header">
       <div class="title-row">

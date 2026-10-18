@@ -5,6 +5,8 @@ import { readdirSync, readFileSync } from "node:fs";
 import Path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { workerOutputDirectory } from "../../scripts/build-output.ts";
+
 const reportSchema = z.object({
   files: z.array(z.object({ file: z.string(), sha256: z.string().length(64) })),
   metadataHash: z.string().length(64),
@@ -38,7 +40,7 @@ export function auditArtifacts(directory: string): number {
         ),
         `SQL machinery: ${filename}`,
       );
-      if (Path.relative(directory, filename).startsWith("server/"))
+      if (Path.relative(directory, filename).startsWith("bundle/"))
         assert.ok(
           !/\d{4}-\d{2}-\d{2}\/[A-Z]{3}__[A-Z]{3}/.test(code),
           `Archived game identity leaked into Worker: ${filename}`,
@@ -53,8 +55,8 @@ export function auditArtifacts(directory: string): number {
       count++;
     }
   };
-  walk(Path.join(directory, "client"));
-  walk(Path.join(directory, "server"));
+  walk(Path.join(directory, "assets"));
+  walk(Path.join(directory, "bundle"));
   assert.equal(expected.size, 0, "Missing audited artifacts");
   assert.ok(count > 0, "Empty build");
   return count;
@@ -64,5 +66,5 @@ if (
   Path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 )
   console.log(
-    `Artifact audit: ${auditArtifacts(Path.resolve(process.argv[2] ?? "dist"))} files; no deployable SQLite or archived game identities in Worker`,
+    `Artifact audit: ${auditArtifacts(Path.resolve(process.argv[2] ?? workerOutputDirectory()))} files; no deployable SQLite or archived game identities in Worker`,
   );

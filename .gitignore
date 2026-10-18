@@ -23,7 +23,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# local wrangler config
+# Cloudflare build output, generated types and local binding state
+.cloudflare/
+# Legacy Wrangler state (not migrated automatically)
 .wrangler/
 worker-configuration.d.ts
 # baseline capture: keep summaries, skip bulky captures
